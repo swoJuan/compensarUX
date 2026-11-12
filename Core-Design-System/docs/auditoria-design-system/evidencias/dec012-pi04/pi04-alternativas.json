@@ -1,0 +1,476 @@
+{
+ "B solo subtitulo (candidato)": {
+  "150": {
+   "minFit": 342,
+   "minEm": 14.25,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 20.9,
+     "ok": false,
+     "togIn": false,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      104,
+      104
+     ],
+     "logoW": 66,
+     "togW": 66,
+     "logoWs": 66,
+     "togWs": 66
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      104,
+      104
+     ],
+     "logoW": 66,
+     "togW": 75,
+     "logoWs": 66,
+     "togWs": 66
+    }
+   }
+  },
+  "200": {
+   "minFit": 454,
+   "minEm": 14.19,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 134.3,
+     "ok": false,
+     "togIn": false,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      138,
+      138
+     ],
+     "logoW": 88,
+     "togW": 88,
+     "logoWs": 88,
+     "togWs": 88
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 79.3,
+     "ok": false,
+     "togIn": false,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      138,
+      138
+     ],
+     "logoW": 88,
+     "togW": 88,
+     "logoWs": 88,
+     "togWs": 88
+    }
+   }
+  },
+  "normalIdentical": true
+ },
+ "A compactar espacios (padding/gap) y quitar la 3.a columna vacia": {
+  "150": {
+   "minFit": 294,
+   "minEm": 12.25,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      104,
+      194
+     ],
+     "logoW": 66,
+     "togW": 80,
+     "logoWs": 66,
+     "togWs": 202
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      104,
+      194
+     ],
+     "logoW": 66,
+     "togW": 135,
+     "logoWs": 66,
+     "togWs": 202
+    }
+   }
+  },
+  "200": {
+   "minFit": 390,
+   "minEm": 12.19,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 70.3,
+     "ok": false,
+     "togIn": false,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      138,
+      258
+     ],
+     "logoW": 88,
+     "togW": 88,
+     "logoWs": 88,
+     "togWs": 269
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 15.3,
+     "ok": false,
+     "togIn": false,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      138,
+      258
+     ],
+     "logoW": 88,
+     "togW": 88,
+     "logoWs": 88,
+     "togWs": 269
+    }
+   }
+  },
+  "normalIdentical": true
+ },
+ "C el boton de menu pasa a una 2.a fila (wrap)": {
+  "150": {
+   "minFit": 228,
+   "minEm": 9.5,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      194,
+      218
+     ],
+     "logoW": 66,
+     "togW": 66,
+     "logoWs": 66,
+     "togWs": 66
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      194,
+      218
+     ],
+     "logoW": 66,
+     "togW": 66,
+     "logoWs": 66,
+     "togWs": 66
+    }
+   }
+  },
+  "200": {
+   "minFit": 302,
+   "minEm": 9.44,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      258,
+      290
+     ],
+     "logoW": 88,
+     "togW": 88,
+     "logoWs": 88,
+     "togWs": 88
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      258,
+      290
+     ],
+     "logoW": 88,
+     "togW": 88,
+     "logoWs": 88,
+     "togWs": 88
+    }
+   }
+  },
+  "normalIdentical": true
+ },
+ "D nombre con elipsis (se trunca)": {
+  "150": {
+   "minFit": 180,
+   "minEm": 7.5,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      104,
+      104
+     ],
+     "logoW": 50,
+     "togW": 66,
+     "logoWs": 50,
+     "togWs": 66
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      104,
+      104
+     ],
+     "logoW": 66,
+     "togW": 75,
+     "logoWs": 66,
+     "togWs": 66
+    }
+   }
+  },
+  "200": {
+   "minFit": 186,
+   "minEm": 5.81,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      138,
+      138
+     ],
+     "logoW": 30,
+     "togW": 88,
+     "logoWs": 30,
+     "togWs": 88
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      138,
+      138
+     ],
+     "logoW": 49,
+     "togW": 88,
+     "logoWs": 49,
+     "togWs": 88
+    }
+   }
+  },
+  "normalIdentical": true
+ },
+ "E tope de logo y boton: min(2.75rem, 12vw)": {
+  "150": {
+   "minFit": 276,
+   "minEm": 11.5,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      76,
+      76
+     ],
+     "logoW": 38,
+     "togW": 48,
+     "logoWs": 38,
+     "togWs": 38
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      83,
+      83
+     ],
+     "logoW": 45,
+     "togW": 96,
+     "logoWs": 45,
+     "togWs": 45
+    }
+   }
+  },
+  "200": {
+   "minFit": 366,
+   "minEm": 11.44,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 35,
+     "ok": false,
+     "togIn": false,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      88,
+      88
+     ],
+     "logoW": 38,
+     "togW": 38,
+     "logoWs": 38,
+     "togWs": 38
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      95,
+      95
+     ],
+     "logoW": 45,
+     "togW": 45,
+     "logoWs": 45,
+     "togWs": 45
+    }
+   }
+  },
+  "normalIdentical": true
+ },
+ "F A + E": {
+  "150": {
+   "minFit": 212,
+   "minEm": 8.83,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      76,
+      139
+     ],
+     "logoW": 38,
+     "togW": 108,
+     "logoWs": 38,
+     "togWs": 174
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      83,
+      152
+     ],
+     "logoW": 45,
+     "togW": 156,
+     "logoWs": 45,
+     "togWs": 181
+    }
+   }
+  },
+  "200": {
+   "minFit": 282,
+   "minEm": 8.81,
+   "at": {
+    "320": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      88,
+      159
+     ],
+     "logoW": 38,
+     "togW": 50,
+     "logoWs": 38,
+     "togWs": 220
+    },
+    "375": {
+     "mode": "mobile",
+     "over": 0,
+     "ok": true,
+     "togIn": true,
+     "overlaps": 0,
+     "lines": 1,
+     "H": [
+      95,
+      172
+     ],
+     "logoW": 45,
+     "togW": 99,
+     "logoWs": 45,
+     "togWs": 226
+    }
+   }
+  },
+  "normalIdentical": true
+ }
+}

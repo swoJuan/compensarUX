@@ -1,0 +1,101 @@
+texto 100% (preferencia del navegador 16px)...
+texto 150% (preferencia del navegador 24px)...
+texto 200% (preferencia del navegador 32px)...
+zoom 200% real (texto normal)...
+
+=== EQUIVALENCIA a texto normal (DOM completo; exenciones documentadas en el script) ===
+ahora vs P3 sin B (antes): viewport/tema 16/16 identicos | zoom200 real 3/3 identicos
+ahora vs ANTERIOR A P3 (original): viewport/tema 16/16 identicos | zoom200 real 3/3 identicos
+
+=== PROBLEMAS (desborde/solape/fuera de viewport) por texto y ancho — ANTERIOR A P3 | P3 sin B | AHORA ===
+(si los 3 temas coinciden se imprime una sola fila)
+100%   320px (3 temas):
+        anterior a P3: v-zt:hdrOver,v-zt:beyond1
+        P3 sin B     : v-zt:hdrOver,v-zt:beyond1
+        AHORA        : v-zt:hdrOver,v-zt:beyond1
+100%   769px (1 temas):
+        anterior a P3: doc+163,v-dropdown-late:hdrOver,v-dropdown-late:dd+163.5
+        P3 sin B     : doc+163,v-dropdown-late:hdrOver,v-dropdown-late:dd+163.5
+        AHORA        : -
+100%   900px (3 temas):
+        anterior a P3: doc+32,v-dropdown-late:hdrOver,v-dropdown-late:dd+32.5
+        P3 sin B     : doc+32,v-dropdown-late:hdrOver,v-dropdown-late:dd+32.5
+        AHORA        : -
+150%   320px (3 temas):
+        anterior a P3: v-zt:hdrOver,v-zt:beyond1
+        P3 sin B     : doc+57,v-public:hdrOver,v-public:beyond1,v-dropdown:hdrOver,v-dropdown:beyond1,v-dropdown-late:hdrOver,v-dropdown-late:beyond1,v-mobile:hdrOver,v-mobile:beyond1,v-zt:hdrOver,v-zt:beyond2,s-hover:hdrOver,s-hover:beyond1,s-focus:hdrOver,s-focus:beyond1
+        AHORA        : doc+57,v-public:hdrOver,v-public:beyond1,v-dropdown:hdrOver,v-dropdown:beyond1,v-dropdown-late:hdrOver,v-dropdown-late:beyond1,v-mobile:hdrOver,v-mobile:beyond1,v-zt:hdrOver,v-zt:beyond2,s-hover:hdrOver,s-hover:beyond1,s-focus:hdrOver,s-focus:beyond1
+150%   900px (3 temas):
+        anterior a P3: doc+84,v-dropdown-late:hdrOver,v-dropdown-late:dd+84.5
+        P3 sin B     : doc+130,v-dropdown-late:hdrOver,v-dropdown-late:dd+130.2
+        AHORA        : -
+150%  1024px (3 temas):
+        anterior a P3: -
+        P3 sin B     : doc+6,v-dropdown-late:hdrOver,v-dropdown-late:dd+6.2
+        AHORA        : -
+200%   320px (3 temas):
+        anterior a P3: v-zt:hdrOver,v-zt:beyond1
+        P3 sin B     : doc+182,v-public:hdrOver,v-public:beyond2,v-dropdown:hdrOver,v-dropdown:beyond2,v-dropdown-late:hdrOver,v-dropdown-late:beyond2,v-mobile:hdrOver,v-mobile:beyond2,v-zt:hdrOver,v-zt:beyond2,s-hover:hdrOver,s-hover:beyond2,s-focus:hdrOver,s-focus:beyond2
+        AHORA        : doc+182,v-public:hdrOver,v-public:beyond2,v-dropdown:hdrOver,v-dropdown:beyond2,v-dropdown-late:hdrOver,v-dropdown-late:beyond2,v-mobile:hdrOver,v-mobile:beyond2,v-zt:hdrOver,v-zt:beyond2,s-hover:hdrOver,s-hover:beyond2,s-focus:hdrOver,s-focus:beyond2
+200%   900px (3 temas):
+        anterior a P3: doc+136,v-dropdown-late:hdrOver,v-dropdown-late:dd+136.5
+        P3 sin B     : doc+228,v-public:hdrOver,v-public:beyond1,v-dropdown:hdrOver,v-dropdown:beyond1,v-dropdown-late:hdrOver,v-dropdown-late:beyond1,v-dropdown-late:dd+228,v-mobile:hdrOver,v-mobile:beyond1,v-zt:hdrOver,s-hover:hdrOver,s-hover:beyond1,s-focus:hdrOver,s-focus:beyond1
+        AHORA        : -
+200%  1024px (3 temas):
+        anterior a P3: doc+12,v-dropdown-late:hdrOver,v-dropdown-late:dd+12.5
+        P3 sin B     : doc+104,v-public:hdrOver,v-public:beyond1,v-dropdown:hdrOver,v-dropdown:beyond1,v-dropdown-late:hdrOver,v-dropdown-late:beyond1,v-dropdown-late:dd+104,v-mobile:hdrOver,v-mobile:beyond1,s-hover:hdrOver,s-hover:beyond1,s-focus:hdrOver,s-focus:beyond1
+        AHORA        : -
+
+combinaciones con algun problema (de 50): anterior a P3=22 | P3 sin B=25 | AHORA=9
+
+=== MODO alrededor del breakpoint (v-public) ===
+100% w=768: anterior a P3=mobile | P3 sin B=mobile | AHORA=mobile
+100% w=769: anterior a P3=desktop | P3 sin B=desktop | AHORA=desktop
+150% w=1152: anterior a P3=desktop | P3 sin B=desktop | AHORA=mobile
+150% w=1153: anterior a P3=desktop | P3 sin B=desktop | AHORA=desktop
+200% w=1536: anterior a P3=desktop | P3 sin B=desktop | AHORA=mobile
+200% w=1537: anterior a P3=desktop | P3 sin B=desktop | AHORA=desktop
+
+=== DROPDOWN anclado al 3.er item: ancho y borde derecho (solo donde el header es de escritorio) ===
+100% 900|light      P3 sin B: w=720 right=932.5 FUERA(+32.5)     AHORA: w=686.5 right=899
+100% 900|dark       P3 sin B: w=720 right=932.5 FUERA(+32.5)     AHORA: w=686.5 right=899
+100% 1024|light     P3 sin B: w=720 right=932.5                  AHORA: w=720 right=932.5
+100% 1440|light     P3 sin B: w=720 right=932.5                  AHORA: w=720 right=932.5
+100% 769|light      P3 sin B: w=720 right=932.5 FUERA(+163.5)    AHORA: w=555.5 right=768
+150% 900|light      P3 sin B: w=720 right=1030.2 FUERA(+130.2)   AHORA: w=0 right=0
+150% 900|dark       P3 sin B: w=720 right=1030.2 FUERA(+130.2)   AHORA: w=0 right=0
+150% 1024|light     P3 sin B: w=720 right=1030.2 FUERA(+6.2)     AHORA: w=0 right=0
+150% 1024|dark      P3 sin B: w=720 right=1030.2 FUERA(+6.2)     AHORA: w=0 right=0
+150% 1440|light     P3 sin B: w=720 right=1030.2                 AHORA: w=1080 right=1390.2
+150% 1440|dark      P3 sin B: w=720 right=1030.2                 AHORA: w=1080 right=1390.2
+150% 1152|light     P3 sin B: w=720 right=1030.2                 AHORA: w=0 right=0
+150% 1153|light     P3 sin B: w=720 right=1030.2                 AHORA: w=841.8 right=1152
+200% 900|light      P3 sin B: w=720 right=1128 FUERA(+228)       AHORA: w=0 right=0
+200% 900|dark       P3 sin B: w=720 right=1128 FUERA(+228)       AHORA: w=0 right=0
+200% 1024|light     P3 sin B: w=720 right=1128 FUERA(+104)       AHORA: w=0 right=0
+200% 1024|dark      P3 sin B: w=720 right=1128 FUERA(+104)       AHORA: w=0 right=0
+200% 1440|light     P3 sin B: w=720 right=1128                   AHORA: w=0 right=0
+200% 1440|dark      P3 sin B: w=720 right=1128                   AHORA: w=0 right=0
+200% 1536|light     P3 sin B: w=720 right=1128                   AHORA: w=0 right=0
+200% 1537|light     P3 sin B: w=720 right=1128                   AHORA: w=1128 right=1536
+
+=== TECLADO (CSS nuevo): enfocables visibles vs alcanzados con Tab, mismo orden, todos en vista ===
+100% w=320   v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+100% w=768   v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+100% w=769   v-public: OK(10)                         v-mobile(drawer abierto): OK(15)
+100% w=900   v-public: OK(10)                         v-mobile(drawer abierto): OK(15)
+100% w=1024  v-public: OK(10)                         v-mobile(drawer abierto): OK(15)
+100% w=1440  v-public: OK(10)                         v-mobile(drawer abierto): OK(15)
+150% w=320   v-public: OK(2) [alguno fuera de vista]  v-mobile(drawer abierto): OK(6) [alguno fuera de vista]
+150% w=900   v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+150% w=1024  v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+150% w=1152  v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+150% w=1153  v-public: OK(10)                         v-mobile(drawer abierto): OK(15)
+150% w=1440  v-public: OK(10)                         v-mobile(drawer abierto): OK(15)
+200% w=320   v-public: OK(2) [alguno fuera de vista]  v-mobile(drawer abierto): OK(6) [alguno fuera de vista]
+200% w=900   v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+200% w=1024  v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+200% w=1440  v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+200% w=1536  v-public: OK(2)                          v-mobile(drawer abierto): OK(6)
+200% w=1537  v-public: OK(10)                         v-mobile(drawer abierto): OK(15)
+teclado: 32/36 combinaciones OK

@@ -1,0 +1,5 @@
+chip (AX): {"role":"button","name":"Ana Soto, abrir menú de usuario"} | texto visible del chip: "AS Ana Soto" | etiqueta visible: "Ana Soto"
+2.5.3 (nombre contiene la etiqueta visible): true | empieza por ella: true
+otros controles: {"toggle":{"role":"none"},"brand":{"role":"link","name":"Compensar home"},"search":{"role":"searchbox","name":"Buscar en Compensar"}}
+markup anterior (AX): {"role":"button","name":"Abrir menú de usuario"} | 2.5.3 anterior: false
+captura del chip identica byte a byte (nuevo vs anterior): true

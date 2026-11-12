@@ -1,0 +1,130 @@
+@use '../../core/abstracts' as *;
+
+/* ══════════════════════════════════════════════════════════
+   SHARED COMPONENT PATTERNS
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Subtítulo de sección ────────────────────────────── */
+.section-subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.section-sub {
+  font-family: var(--font-heading);
+  font-size: rem(18px);
+  font-weight: 700;
+  color: var(--ui-text);
+  letter-spacing: -.01em;
+  margin: 0;
+  padding: var(--space-24) 0 var(--space-8);
+}
+
+/* ── API Table ───────────────────────────────────────── */
+.mp-api-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: rem(13px);
+  border: rem(1px) solid var(--ui-border);
+  border-radius: rem(12px);
+  overflow: hidden;
+}
+
+.mp-api-table th {
+  background: var(--ui-surface-alt);
+  color: var(--ui-text-muted);
+  font-size: rem(11px);
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: rem(10px) rem(14px);
+  text-align: left;
+  border-bottom: rem(1px) solid var(--ui-border);
+}
+
+.mp-api-table td {
+  padding: rem(11px) rem(14px);
+  border-bottom: rem(1px) solid var(--ui-border);
+  color: var(--ui-text);
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.mp-api-table tr:last-child td { border-bottom: none; }
+
+.mp-api-table code {
+  font-family: var(--font-code);
+  font-size: rem(12px);
+  background: var(--ui-surface-alt);
+  border: rem(1px) solid var(--ui-border);
+  border-radius: rem(4px);
+  padding: rem(1px) rem(6px);
+  color: var(--ui-accent);
+}
+
+.mp-api-table td:nth-child(2) code { color: var(--base-blue-70); }
+.mp-api-table td:nth-child(3) code { color: var(--ui-text-muted); }
+
+// DEC-011 (responsive): sin esto las tablas de API fuerzan el ancho de la página en 320/375 px (el contenido de .main se recorta).
+// Se permite partir palabras y código largo; en pantallas amplias nada cambia.
+@media (max-width: 40em) {
+  .mp-api-table th,
+  .mp-api-table td,
+  .mp-api-table code {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+  .mp-api-table code {
+    white-space: normal;
+  }
+}
+
+/* ── Accesibilidad cards ─────────────────────────────── */
+.a11y-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-16);
+  margin-top: var(--space-16);
+}
+
+@media (max-width: rem(900px)) { .a11y-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: rem(540px)) { .a11y-grid { grid-template-columns: 1fr; } }
+
+.a11y-card {
+  background: $use-surface-theme-gray-5;
+  border: rem(1.5px) solid var(--ui-border);
+  border-radius: rem(14px);
+  padding: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.a11y-card__icon {
+  font-size: rem(24px);
+  line-height: 1;
+}
+
+.a11y-card__title {
+  font-size: rem(13px);
+  font-weight: 700;
+  color: var(--ui-text);
+  margin-top: var(--space-2);
+}
+
+.a11y-card__desc {
+  font-size: rem(12px);
+  color: var(--ui-text-muted);
+  line-height: 1.6;
+}
+
+.a11y-card__desc code {
+  font-family: var(--font-code);
+  font-size: rem(11px);
+  background: var(--ui-surface-alt);
+  border: rem(1px) solid var(--ui-border);
+  border-radius: rem(3px);
+  padding: rem(1px) rem(4px);
+  color: var(--ui-accent);
+}

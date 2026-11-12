@@ -1,0 +1,390 @@
+<article class="component-doc-page button-doc" data-component-doc="button">
+  <nav class="mp-breadcrumb component-doc-nav" aria-label="Breadcrumb">
+    <ol class="mp-breadcrumb__list">
+      <li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="#introduccion"><i class="icon icon-house mp-breadcrumb__home" aria-hidden="true"></i><span class="visually-hidden">Inicio</span></a></li>
+      <li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="#introduccion">Sistema de diseño</a></li>
+      <li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><a class="mp-breadcrumb__link" href="#">Componentes</a></li>
+      <li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Botón</span></li>
+    </ol>
+  </nav>
+
+  <section class="component-hero" aria-labelledby="button-title">
+    <h1 id="button-title" class="text-primary">Botón</h1>
+    <p class="text-secondary">Permite ejecutar acciones principales, secundarias o de apoyo dentro de la interfaz. Guía la interacción, la toma de decisiones y la jerarquía visual de cada pantalla.</p>
+    <div class="component-meta" aria-label="Metadatos del componente">
+      <span class="component-chip component-chip--success">Estado: estable</span>
+      <span class="component-chip">Versión 1.0</span>
+      <span class="component-chip">Web</span>
+      <span class="component-chip">Bootstrap compatible</span>
+      <span class="component-chip">Categoría: acción</span>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="button-summary">
+    <div class="component-section__header">
+      <h2 id="button-summary">1. Resumen</h2>
+    </div>
+    <div class="component-grid-2">
+      <div>
+        <h3 class="text-primary">Cuándo usarlo</h3>
+        <ul class="component-list">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Para ejecutar acciones principales del flujo.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Para confirmar, guardar o continuar una tarea.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Para navegar a la siguiente etapa con una acción explícita.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Para acciones de apoyo que no compitan con la acción primaria.</li>
+        </ul>
+      </div>
+      <div class="component-example-card component-example-card--split">
+        <div>
+          <h3 class="text-primary">Do</h3>
+          <p class="text-secondary">Usa jerarquía clara y etiquetas accionables.</p>
+          <div class="component-example-actions">
+            <button class="mp-btn mp-btn--secundario">Ejemplo</button>
+            <button class="mp-btn mp-btn--primario">Ver guía</button>
+          </div>
+        </div>
+        <span class="component-divider" aria-hidden="true"></span>
+        <div>
+          <h3 class="text-primary">Don't</h3>
+          <p class="text-secondary">No uses textos ambiguos ni jerarquías confusas.</p>
+          <div class="component-example-actions">
+            <button class="mp-btn mp-btn--secundario">Ejemplo</button>
+            <button class="mp-btn mp-btn--primario">Ver guía</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="button-anatomy">
+    <div class="component-section__header">
+      <h2 id="button-anatomy">2. Anatomía interactiva</h2>
+    </div>
+    <div class="segmented-control" role="group" aria-label="Variación anatómica">
+      <button type="button" class="mp-btn mp-btn--terciario" data-anatomy-option="text" aria-pressed="true" onclick="window.componentDocs?.renderAnatomy?.(this.closest('[data-component-doc=\'button\']'),'text')">Solo texto</button>
+      <button type="button" class="mp-btn mp-btn--terciario" data-anatomy-option="icon-left" aria-pressed="false" onclick="window.componentDocs?.renderAnatomy?.(this.closest('[data-component-doc=\'button\']'),'icon-left')">Icono + texto</button>
+      <button type="button" class="mp-btn mp-btn--terciario" data-anatomy-option="icon-right" aria-pressed="false" onclick="window.componentDocs?.renderAnatomy?.(this.closest('[data-component-doc=\'button\']'),'icon-right')">Texto + icono</button>
+      <button type="button" class="mp-btn mp-btn--terciario" data-anatomy-option="icon-both" aria-pressed="false" onclick="window.componentDocs?.renderAnatomy?.(this.closest('[data-component-doc=\'button\']'),'icon-both')">Icono + texto + icono</button>
+      <button type="button" class="mp-btn mp-btn--terciario" data-anatomy-option="icon-only" aria-pressed="false" onclick="window.componentDocs?.renderAnatomy?.(this.closest('[data-component-doc=\'button\']'),'icon-only')">Solo icono</button>
+    </div>
+
+    <div class="button-doc-stage" id="button-anatomy-stage">
+      <span class="button-doc-measure button-doc-measure--width" data-anatomy-width>108 px</span>
+      <span class="button-doc-measure button-doc-measure--height">48 px</span>
+      <div class="button-doc-guides" data-anatomy-guides aria-hidden="true"></div>
+      <div class="button-doc-callout button-doc-callout--container" data-callout="container">
+        <strong>Contenedor</strong>
+        <span>Fondo, borde y radio 24 px</span>
+      </div>
+      <div class="button-doc-callout button-doc-callout--icon" data-callout="icon">
+        <strong>Icono</strong>
+        <span>24 px en instancia Figma</span>
+      </div>
+      <div class="button-doc-callout button-doc-callout--text" data-callout="text">
+        <strong>Texto</strong>
+        <span>Roboto Bold 16 px</span>
+      </div>
+      <div class="button-doc-callout button-doc-callout--padding" data-callout="padding">
+        <strong>Padding</strong>
+        <span data-anatomy-padding>16 px vertical · 32 px horizontal</span>
+      </div>
+      <div class="button-doc-callout button-doc-callout--hit">
+        <strong>Área clicable</strong>
+        <span>Mínimo 44 x 44 px</span>
+      </div>
+      <div class="button-doc-stage__button-wrap" id="button-anatomy-preview">
+        <button class="mp-btn mp-btn--primario">Guardar</button>
+      </div>
+    </div>
+
+    <div class="button-doc-controls">
+      <label class="button-doc-toggle">
+        <input type="checkbox" data-anatomy-toggle="labels" checked>
+        Etiquetas
+      </label>
+      <label class="button-doc-toggle">
+        <input type="checkbox" data-anatomy-toggle="measures" checked>
+        Medidas
+      </label>
+      <label class="button-doc-toggle">
+        <input type="checkbox" data-anatomy-toggle="hit" checked>
+        Área clicable
+      </label>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="button-playground-title">
+    <div class="component-section__header">
+      <h2 id="button-playground-title">3. Variantes / Playground</h2>
+    </div>
+    <div class="button-playground">
+      <div class="button-playground__preview">
+        <h3 class="text-primary">Vista previa</h3>
+        <div class="button-preview-card" id="button-playground-preview">
+          <button class="mp-btn mp-btn--primario">Guardar</button>
+        </div>
+      </div>
+      <div class="button-playground__controls">
+        <div class="button-field">
+          <label for="button-variant">Variante</label>
+          <select class="mp-input-field mp-select" id="button-variant" data-button-control="variant">
+            <option value="primario">Primario</option>
+            <option value="secundario">Secundario</option>
+            <option value="terciario">Terciario</option>
+            <option value="especial">Especial</option>
+          </select>
+        </div>
+        <div class="button-field">
+          <label for="button-anatomy-select">Anatomía</label>
+          <select class="mp-input-field mp-select" id="button-anatomy-select" data-button-control="anatomy">
+            <option value="text">Solo texto</option>
+            <option value="icon-left">Icono + texto</option>
+            <option value="icon-right">Texto + icono</option>
+            <option value="icon-both">Icono + texto + icono</option>
+            <option value="icon-only">Solo icono</option>
+          </select>
+        </div>
+        <div class="button-field">
+          <label for="button-state">Estado</label>
+          <select class="mp-input-field mp-select" id="button-state" data-button-control="state">
+            <option value="default">Default</option>
+            <option value="hover">Hover</option>
+            <option value="focus">Focus</option>
+            <option value="active">Active</option>
+            <option value="disabled">Disabled</option>
+            <option value="loading">Loading</option>
+          </select>
+        </div>
+        <div class="button-field">
+          <label for="button-theme">Tema</label>
+          <select class="mp-input-field mp-select" id="button-theme" data-button-control="theme">
+            <option value="light">Claro</option>
+            <option value="dark">Dark</option>
+            <option value="high-contrast">High contrast</option>
+          </select>
+        </div>
+        <div class="button-field">
+          <label for="button-label">Contenido</label>
+          <input class="mp-input-field" id="button-label" type="text" value="Guardar" data-button-control="label">
+        </div>
+        <label class="button-doc-toggle">
+          <input type="checkbox" data-button-control="fullWidth">
+          Full width
+        </label>
+      </div>
+    </div>
+    <div class="button-code-panel">
+      <div class="button-code-tabs" role="tablist" aria-label="Código del botón">
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" aria-selected="true" data-code-tab="html">HTML</button>
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" aria-selected="false" data-code-tab="css">CSS</button>
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" aria-selected="false" data-code-tab="scss">Sass</button>
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left button-copy" data-copy-button-code>
+          <i class="icon icon-share icon-16" aria-hidden="true"></i>
+          Copiar código
+        </button>
+      </div>
+      <pre><code id="button-code-output">&lt;button class="mp-btn mp-btn--primario" type="button"&gt;
+  Guardar
+&lt;/button&gt;</code></pre>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="button-states">
+    <div class="component-section__header">
+      <h2 id="button-states">4. Estados</h2>
+    </div>
+    <div class="button-state-grid">
+      <div class="button-state-card"><span>Default</span><button class="mp-btn mp-btn--primario mp-btn--icon-left"><i class="icon icon-download icon-16" aria-hidden="true"></i>Guardar</button></div>
+      <div class="button-state-card"><span>Hover</span><button class="mp-btn mp-btn--primario mp-btn--icon-left mp-btn--is-hover"><i class="icon icon-download icon-16" aria-hidden="true"></i>Guardar</button></div>
+      <div class="button-state-card"><span>Focus</span><button class="mp-btn mp-btn--primario mp-btn--icon-left mp-btn--is-focus"><i class="icon icon-download icon-16" aria-hidden="true"></i>Guardar</button></div>
+      <div class="button-state-card"><span>Active</span><button class="mp-btn mp-btn--primario mp-btn--icon-left mp-btn--is-active"><i class="icon icon-download icon-16" aria-hidden="true"></i>Guardar</button></div>
+      <div class="button-state-card"><span>Disabled</span><button class="mp-btn mp-btn--primario mp-btn--icon-left" disabled><i class="icon icon-download icon-16" aria-hidden="true"></i>Guardar</button></div>
+      <div class="button-state-card"><span>Loading</span><button class="mp-btn mp-btn--primario mp-btn--icon-left mp-btn--loading" aria-busy="true"><i class="icon icon-spinner-gap icon-20" aria-hidden="true"></i>Guardando...</button></div>
+    </div>
+    <div class="button-text-link-zone">
+      <div class="component-section__header button-text-link-zone__header">
+        <h3 class="text-primary">Texto con enlace</h3>
+        <p class="text-secondary">Si no hay acción, usa texto plano. Si navega a otra vista o URL, usa un enlace <code>&lt;a&gt;</code> con los tokens existentes del sistema.</p>
+      </div>
+      <div class="button-text-link-grid">
+        <article class="button-text-link-card p-4">
+          <h4>Enlace con tag a</h4>
+          <p class="text-secondary">Usa el color de enlace existente: <code>--use-text-link</code>, expuesto como <code>--color-text-link</code> y utilidad <code>.mp-text-link</code>.</p>
+          <div class="button-text-link-samples">
+            <div class="button-text-link-sample">
+              <span class="button-text-link-label">Color</span>
+              <span class="button-text-link-token"><span class="button-text-link-swatch" aria-hidden="true"></span><code>--use-text-link</code></span>
+            </div>
+            <div class="button-text-link-sample">
+              <span class="button-text-link-label">Default</span>
+              <a href="#" class="mp-text-link" onclick="return false;">Ver términos y condiciones</a>
+            </div>
+            <div class="button-text-link-sample button-text-link-sample--hover">
+              <span class="button-text-link-label">Hover</span>
+              <a href="#" class="mp-text-link" onclick="return false;">Ver términos y condiciones</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="component-grid-2">
+    <section class="component-section" aria-labelledby="button-behavior">
+      <div class="component-section__header">
+        <h2 id="button-behavior">5. Comportamiento</h2>
+      </div>
+      <div class="button-behavior-grid">
+        <div class="button-behavior-item"><i class="icon icon-hand-pointing icon-20" aria-hidden="true"></i><h3 class="text-primary">Click</h3><p class="text-secondary">Ejecuta la acción asociada al hacer clic, Enter o Space.</p></div>
+        <div class="button-behavior-item"><i class="icon icon-spinner-gap icon-20" aria-hidden="true"></i><h3 class="text-primary">Loading</h3><p class="text-secondary">Muestra progreso y debe evitar doble activación.</p></div>
+        <div class="button-behavior-item"><i class="icon icon-warning-circle icon-20" aria-hidden="true"></i><h3 class="text-primary">Error</h3><p class="text-secondary">El feedback se comunica fuera del botón con mensaje contextual.</p></div>
+        <div class="button-behavior-item"><i class="icon icon-device-mobile icon-20" aria-hidden="true"></i><h3 class="text-primary">Responsive</h3><p class="text-secondary">Puede ocupar el ancho disponible cuando el flujo lo requiera.</p></div>
+      </div>
+    </section>
+
+    <section class="component-section" aria-labelledby="button-content">
+      <div class="component-section__header">
+        <h2 id="button-content">6. Guías de contenido</h2>
+      </div>
+      <div class="component-grid-2">
+        <div>
+          <h3 class="text-primary">Textos correctos</h3>
+          <p class="text-secondary">Usa verbos claros y directos.</p>
+          <div class="component-example-actions">
+            <span class="component-chip">Guardar</span>
+            <span class="component-chip">Enviar</span>
+            <span class="component-chip">Continuar</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-primary">Textos incorrectos</h3>
+          <p class="text-secondary">Evita palabras genéricas o confusas.</p>
+          <div class="component-example-actions">
+            <span class="component-chip">Hacer</span>
+            <span class="component-chip">Click aquí</span>
+            <span class="component-chip">Ir</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="component-grid-2">
+    <section class="component-section" aria-labelledby="button-a11y">
+      <div class="component-section__header">
+        <h2 id="button-a11y">7. Accesibilidad</h2>
+      </div>
+      <ul class="component-list">
+        <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Navegación por teclado con Tab; activación con Enter y Space.</li>
+        <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Focus visible en todos los estados.</li>
+        <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Contraste mínimo AA 4.5:1 para texto y controles.</li>
+        <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Botones solo icono requieren `aria-label` descriptivo.</li>
+        <li><i class="icon icon-check icon-16" aria-hidden="true"></i>No depender solo del color para comunicar estados.</li>
+      </ul>
+    </section>
+
+    <section class="component-section" aria-labelledby="button-responsive">
+      <div class="component-section__header">
+        <h2 id="button-responsive">8. Responsive</h2>
+      </div>
+      <div class="component-grid-3">
+        <div><h3 class="text-primary">Desktop</h3><p class="text-secondary">Usa ancho hug content salvo acciones principales en layouts amplios.</p></div>
+        <div><h3 class="text-primary">Tablet</h3><p class="text-secondary">Mantiene altura y padding; puede agruparse en filas flexibles.</p></div>
+        <div><h3 class="text-primary">Mobile</h3><p class="text-secondary">Puede usar full width para acciones críticas y conserva área táctil mínima.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <section class="component-section" aria-labelledby="button-tokens">
+    <div class="component-section__header">
+      <h2 id="button-tokens">9. Tokens usados</h2>
+    </div>
+    <div class="button-token-grid">
+      <div class="button-token-item"><code>--base-brand-80</code><span>#FF6600 · inicio del gradiente primario</span></div>
+      <div class="button-token-item"><code>--base-brand-90</code><span>#E63F0C · final del gradiente primario</span></div>
+      <div class="button-token-item"><code>--radius-md</code><span>24px · border-radius/md</span></div>
+      <div class="button-token-item"><code>--space-12</code><span>12px · padding vertical con iconos</span></div>
+      <div class="button-token-item"><code>--space-16</code><span>16px · gap e icon padding cercano</span></div>
+      <div class="button-token-item"><code>--space-32</code><span>32px · padding de solo texto y lado sin icono</span></div>
+      <div class="button-token-item"><code>--font-size-btn</code><span>16px · texto del botón</span></div>
+      <div class="button-token-item"><code>--font-weight-bold</code><span>700 · peso tipográfico</span></div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="button-code">
+    <div class="component-section__header">
+      <div>
+        <h2 id="button-code">10. Código</h2>
+        <p class="text-secondary">Descarga estilos planos del botón, unidos al core y listos para validar en dummy con tokens Figma.</p>
+      </div>
+      <div class="ct-downloads button-downloads" aria-label="Descargar estilos del botón">
+        <span class="ct-downloads-label"><i class="icon icon-download icon-16" aria-hidden="true"></i> Descargar</span>
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left ct-download-btn ct-download-btn--sm" data-button-download="css"><i class="icon icon-article icon-16" aria-hidden="true"></i> CSS</button>
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left ct-download-btn ct-download-btn--sm" data-button-download="scss"><i class="icon icon-article icon-16" aria-hidden="true"></i> Sass</button>
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left ct-download-btn ct-download-btn--sm" data-button-download="json"><i class="icon icon-article icon-16" aria-hidden="true"></i> JSON</button>
+      </div>
+    </div>
+    <div class="button-code-panel">
+      <div class="button-code-tabs" role="tablist" aria-label="Ejemplos de código">
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" aria-selected="true" data-static-code-tab="html">HTML base</button>
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" aria-selected="false" data-static-code-tab="variants">Variantes</button>
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" aria-selected="false" data-static-code-tab="accessible">Ejemplo accesible</button>
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left button-copy" data-copy-static-code>
+          <i class="icon icon-share icon-16" aria-hidden="true"></i>
+          Copiar
+        </button>
+      </div>
+      <pre><code id="button-static-code">&lt;button class="mp-btn mp-btn--primario" type="button"&gt;
+  Guardar
+&lt;/button&gt;</code></pre>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="button-qa">
+    <div class="component-section__header">
+      <h2 id="button-qa">11. Checklist QA</h2>
+    </div>
+    <div class="button-qa-grid">
+      <label class="button-qa-item"><input type="checkbox">Estados visibles correctamente.</label>
+      <label class="button-qa-item"><input type="checkbox">Focus visible con teclado.</label>
+      <label class="button-qa-item"><input type="checkbox">Activación con Enter y Space funciona.</label>
+      <label class="button-qa-item"><input type="checkbox">Contraste cumple AA.</label>
+      <label class="button-qa-item"><input type="checkbox">Responsive correcto en mobile y tablet.</label>
+      <label class="button-qa-item"><input type="checkbox">Texto no se trunca.</label>
+      <label class="button-qa-item"><input type="checkbox">Loading bloquea doble clic.</label>
+      <label class="button-qa-item"><input type="checkbox">Tokens aplicados correctamente.</label>
+      <label class="button-qa-item"><input type="checkbox">Iconos alineados y con tamaño correcto.</label>
+      <label class="button-qa-item"><input type="checkbox">Paddings coinciden por anatomía.</label>
+      <label class="button-qa-item"><input type="checkbox">`aria-label` presente en solo icono.</label>
+      <label class="button-qa-item"><input type="checkbox">Comportamiento coincide con documentación.</label>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="button-support">
+    <div class="component-section__header">
+      <h2 id="button-support">12. Issues / soporte / actualización</h2>
+    </div>
+    <div class="component-support">
+      <div class="component-support__item">
+        <i class="component-support__icon icon icon-question icon-20" aria-hidden="true"></i>
+        <div>
+          <h3 class="text-primary">¿Necesitas ayuda?</h3>
+          <p class="text-secondary">Usa el canal #diseno-sistema o escribe al equipo responsable.</p>
+        </div>
+      </div>
+      <span class="component-divider" aria-hidden="true"></span>
+      <div class="component-support__item">
+        <i class="component-support__icon icon icon-warning-octagon icon-20" aria-hidden="true"></i>
+        <div>
+          <h3 class="text-primary">¿Encontraste un problema?</h3>
+          <p class="text-secondary">Repórtalo para mejorar la documentación y el componente.</p>
+        </div>
+      </div>
+    </div>
+    <footer class="component-support__footer">
+      <span>Última actualización: 4 mayo 2026</span>
+      <span>Versión del componente: v1.0</span>
+      <span>Fuente: Figma Compensar v2</span>
+    </footer>
+  </section>
+</article>

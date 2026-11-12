@@ -1,0 +1,15 @@
+#!/bin/bash
+# Mini app: abre el Portal UX. Si ya está corriendo (npm run dev), solo abre el
+# navegador: el portal se mantiene sincronizado solo. Si no, lo inicia en Terminal.
+APP_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+PROYECTO="$APP_DIR"
+[ -f "$PROYECTO/Abrir portal.command" ] || PROYECTO="$HOME/Documents/Desarrollo/Compensar/Flujos/portal"
+if [ ! -f "$PROYECTO/Abrir portal.command" ]; then
+  osascript -e 'display alert "No encuentro el proyecto" message "Deja Portal UX.app dentro de la carpeta Flujos/portal."'
+  exit 1
+fi
+if curl -s -o /dev/null --max-time 1 "http://127.0.0.1:4173/estado.json"; then
+  open "http://127.0.0.1:4173/"
+else
+  open -a Terminal "$PROYECTO/Abrir portal.command"
+fi

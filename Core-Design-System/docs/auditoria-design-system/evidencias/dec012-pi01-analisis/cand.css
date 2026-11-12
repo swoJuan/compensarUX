@@ -1,0 +1,4 @@
+@media (min-width:48.01em){.mp-web-header--zt .mp-web-header__main{grid-template-columns:auto minmax(0,1fr) auto}}
+@media (max-width:48em){.mp-web-header--zt{grid-template-columns:minmax(0,1fr)}.mp-web-header__zt-content{overflow-wrap:anywhere}}
+@media (max-width:22em){.mp-web-header--zt .mp-web-header__main{display:flex;flex-wrap:wrap}}
+@media (max-width:16em){.mp-web-header--zt .mp-web-header__brand-service{display:none}}

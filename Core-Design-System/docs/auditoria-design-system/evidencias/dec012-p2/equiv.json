@@ -1,0 +1,79 @@
+{
+  "before": {
+    "al-icon": {
+      "width": "32px",
+      "height": "32px",
+      "fontSize": "32px"
+    },
+    "toast": {
+      "maxWidth": "350px"
+    },
+    "to-icon": {
+      "width": "32px",
+      "height": "32px"
+    },
+    "to-close": {
+      "width": "24px",
+      "height": "24px"
+    },
+    "chk-control": {
+      "width": "24px",
+      "height": "24px"
+    },
+    "sw-track": {
+      "height": "32px"
+    },
+    "modal-dialog": {
+      "maxWidth": "479px"
+    },
+    "mo-icon": {
+      "width": "64px",
+      "height": "64px"
+    },
+    "mo-title": {
+      "fontSize": "28px"
+    },
+    "mo-body": {
+      "fontSize": "18px"
+    }
+  },
+  "now": {
+    "al-icon": {
+      "width": "32px",
+      "height": "32px",
+      "fontSize": "32px"
+    },
+    "toast": {
+      "maxWidth": "350px"
+    },
+    "to-icon": {
+      "width": "32px",
+      "height": "32px"
+    },
+    "to-close": {
+      "width": "24px",
+      "height": "24px"
+    },
+    "chk-control": {
+      "width": "24px",
+      "height": "24px"
+    },
+    "sw-track": {
+      "height": "32px"
+    },
+    "modal-dialog": {
+      "maxWidth": "479px"
+    },
+    "mo-icon": {
+      "width": "64px",
+      "height": "64px"
+    },
+    "mo-title": {
+      "fontSize": "28px"
+    },
+    "mo-body": {
+      "fontSize": "18px"
+    }
+  },
+  "diffs": []
+}

@@ -1,0 +1,855 @@
+<section class="section" id="espaciado">
+  <div class="section-header">
+    <div class="section-eyebrow">1.4</div>
+    <h1 class="section-title">Espaciado</h1>
+    <p class="section-desc">Sistema espacial transversal basado en una unidad base de <strong>8px</strong>. Usar siempre los tokens — nunca valores sueltos. Alineado con la grilla de 8pt de Figma y listo para implementaciones web y app.</p>
+  </div>
+
+  <!-- Figma bar -->
+  <div class="ty-figma-bar">
+    <span class="material-symbols-rounded">tips_and_updates</span>
+    <span>Usar siempre <code>.p-16</code>, <code>.mb-24</code>, <code>var(--space-16)</code> — nunca valores hardcoded. Los tokens <span class="sp-badge-restricted">restringido</span> requieren justificación de diseño.</span>
+    <a class="ct-figma-link" href="https://www.figma.com/proto/1zVGMpzqBgiBUqhmfFEAoT/Compensar-v2---Sistema-de-dise%C3%B1o?node-id=3916-20393" target="_blank" rel="noopener">
+      <span class="material-symbols-rounded">open_in_new</span> Ver en Figma
+    </a>
+  </div>
+
+  <!-- Download bar -->
+  <div class="ct-downloads sp-downloads-bar">
+    <span class="ct-downloads-label"><span class="material-symbols-rounded">download</span> Descargar tokens</span>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="spDownloadCSS()"><span class="material-symbols-rounded">code</span> CSS</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="spDownloadSCSS()"><span class="material-symbols-rounded">code</span> SCSS</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="spDownloadJSON()"><span class="material-symbols-rounded">data_object</span> JSON</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="spCopyVars()"><span class="material-symbols-rounded">content_copy</span> Copiar variables</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="spDownloadMAUI()"><span class="material-symbols-rounded">smartphone</span> MAUI XAML</button>
+  </div>
+
+  <!-- Base unit card -->
+  <div class="sp-base-grid">
+    <div class="sp-base-card">
+      <div class="sp-base-num">8<span class="sp-base-unit">px</span></div>
+      <div class="sp-base-label">Unidad principal</div>
+      <p class="sp-base-desc">Todo el sistema de espaciado se construye a partir de 8px. Esto asegura alineación visual entre componentes y facilita la implementación en desarrollo.</p>
+    </div>
+    <div class="sp-base-info">
+      <div class="sp-base-info-row">
+        <span class="material-symbols-rounded sp-info-icon-sm">check_circle</span>
+        <span>Múltiplos de <strong>8px</strong>: 8, 16, 24, 32, 48, 64, 96, 128</span>
+      </div>
+      <div class="sp-base-info-row sp-restricted-row">
+        <span class="material-symbols-rounded sp-info-icon-sm">warning</span>
+        <span><strong>Uso restringido:</strong> 2px, 4px, 12px — solo cuando el diseño lo requiere explícitamente.</span>
+      </div>
+      <div class="sp-base-info-row">
+        <span class="material-symbols-rounded sp-info-icon-sm">straighten</span>
+        <span>Nunca usar valores fuera de la escala · Nunca decimales · Siempre múltiplos de 8</span>
+      </div>
+      <div class="sp-base-info-row">
+        <span class="material-symbols-rounded sp-info-icon-sm">grid_on</span>
+        <span>Transversal para Web y App · Alineado con grilla de 8pt Figma</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOKEN TABLE -->
+  <div class="sp-section-label"><span class="material-symbols-rounded">table_rows</span> Tokens de espaciado</div>
+  <div class="sp-table-wrap">
+    <table class="sp-table">
+      <thead>
+        <tr>
+          <th class="spc-th-vis">Visual</th>
+          <th class="spc-th-var">Variable CSS</th>
+          <th class="spc-th-rem">rem</th>
+          <th class="spc-th-cls">Clases</th>
+          <th class="spc-th-copy"></th>
+        </tr>
+      </thead>
+      <tbody id="sp-token-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- UTILITY CLASSES -->
+  <div class="sp-section-label"><span class="material-symbols-rounded">style</span> Clases utilitarias</div>
+  <div class="sp-util-tabs">
+    <button class="sp-util-tab active" onclick="spTab(this,'util-padding')"><span class="material-symbols-rounded">padding</span> Padding</button>
+    <button class="sp-util-tab" onclick="spTab(this,'util-margin')"><span class="material-symbols-rounded">margin</span> Margin</button>
+    <button class="sp-util-tab" onclick="spTab(this,'util-gap')"><span class="material-symbols-rounded">space_bar</span> Gap</button>
+    <button class="sp-util-tab" onclick="spTab(this,'util-stack')"><span class="material-symbols-rounded">view_agenda</span> Stack</button>
+  </div>
+  <div id="util-padding" class="sp-util-panel active"></div>
+  <div id="util-margin"  class="sp-util-panel"></div>
+  <div id="util-gap"     class="sp-util-panel"></div>
+  <div id="util-stack"   class="sp-util-panel"></div>
+
+  <!-- IMPLEMENTACIÓN TRANSVERSAL -->
+  <div class="sp-section-label"><span class="material-symbols-rounded">integration_instructions</span> Implementación transversal</div>
+  <div class="sp-bs-grid">
+    <div class="sp-bs-card">
+      <div class="sp-bs-card-head">Mapa <code>$spacers</code></div>
+      <div class="sp-code-block">
+        <button class="sp-code-copy" onclick="spCopyCode('sp-bs-code',this)"><span class="material-symbols-rounded">content_copy</span> Copiar</button>
+        <pre class="sp-code-pre" id="sp-bs-code">$space-8:   8px;
+$space-16: 16px;
+$space-24: 24px;
+$space-32: 32px;
+$space-48: 48px;
+$space-64: 64px;
+
+$spacers: (
+  0: 0,
+  1: $space-8,   // 8px
+  2: $space-16,  // 16px
+  3: $space-24,  // 24px
+  4: $space-32,  // 32px
+  5: $space-48,  // 48px
+  6: $space-64,  // 64px
+);</pre>
+      </div>
+    </div>
+    <div class="sp-bs-card">
+      <div class="sp-bs-card-head">Uso en Web / App</div>
+      <div class="sp-code-block">
+        <button class="sp-code-copy" onclick="spCopyCode('sp-bs-angular',this)"><span class="material-symbols-rounded">content_copy</span> Copiar</button>
+        <pre class="sp-code-pre" id="sp-bs-angular">// Bootstrap utility → token CSS
+// .p-3 = padding: 1rem = 16px ✗ (Bootstrap default)
+// .p-3 = padding: var(--space-24) = 24px ✓ (con $spacers override)
+
+// Angular component
+.cmp-card {
+  padding: var(--space-24);    // 24px
+  margin-bottom: var(--space-32); // 32px
+  gap: var(--space-16);        // 16px
+}
+
+.cmp-section {
+  padding-block: var(--space-64); // 64px
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- USO EN CÓDIGO -->
+  <div class="sp-section-label"><span class="material-symbols-rounded">code</span> Uso en código</div>
+  <div class="sp-code-tabs-bar">
+    <button class="sp-code-tab active" onclick="spCodeTab(this,'spc-html')"><span class="material-symbols-rounded">html</span> HTML + clases</button>
+    <button class="sp-code-tab" onclick="spCodeTab(this,'spc-css')"><span class="material-symbols-rounded">css</span> CSS vars</button>
+    <button class="sp-code-tab" onclick="spCodeTab(this,'spc-stack')"><span class="material-symbols-rounded">view_agenda</span> Stack pattern</button>
+  </div>
+  <div class="sp-code-block sp-code-block--tabs">
+    <button class="sp-code-copy" onclick="spCopyCode('spc-active',this)"><span class="material-symbols-rounded">content_copy</span> Copiar</button>
+    <pre class="sp-code-pre sp-code-active" id="spc-html">&lt;!-- Padding + Margin con clases utilitarias --&gt;
+&lt;div class="p-16 mb-24"&gt;
+  contenido con padding 16px y margin-bottom 24px
+&lt;/div&gt;
+
+&lt;!-- Card con padding y gap --&gt;
+&lt;div class="p-24 gap-16" style="display:flex"&gt;
+  &lt;img ...&gt;
+  &lt;p class="mb-0"&gt;Texto de la card&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Sección con padding vertical grande --&gt;
+&lt;section class="py-64 px-32"&gt;
+  &lt;h2 class="mb-16"&gt;Título&lt;/h2&gt;
+  &lt;p class="mb-24"&gt;Descripción&lt;/p&gt;
+&lt;/section&gt;</pre>
+    <pre class="sp-code-pre" id="spc-css">/* CSS custom properties — usar siempre var() */
+.card {
+  padding:       var(--space-24);  /* 24px */
+  margin-bottom: var(--space-32);  /* 32px */
+  gap:           var(--space-16);  /* 16px */
+}
+
+.section {
+  padding-block: var(--space-64);  /* 64px */
+}
+
+.list-item {
+  padding: var(--space-8) var(--space-16);  /* 8px 16px */
+  gap:     var(--space-8);                  /* 8px */
+}
+
+/* Nunca: padding: 24px; ✗ */
+/* Siempre: padding: var(--space-24); ✓ */</pre>
+    <pre class="sp-code-pre" id="spc-stack">/* Stack: separación vertical automática entre hermanos */
+.stack-8  > * + * { margin-top: var(--space-8);  }  /* 8px  */
+.stack-16 > * + * { margin-top: var(--space-16); }  /* 16px */
+.stack-24 > * + * { margin-top: var(--space-24); }  /* 24px */
+.stack-32 > * + * { margin-top: var(--space-32); }  /* 32px */
+.stack-48 > * + * { margin-top: var(--space-48); }  /* 48px */
+
+/* Uso: */
+&lt;div class="stack-16"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;  &lt;!-- margin-top: 16px automático --&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;</pre>
+  </div>
+
+  <!-- ACCESIBILIDAD -->
+  <div class="sp-access-block">
+    <div class="sp-access-icon"><span class="material-symbols-rounded">accessibility_new</span></div>
+    <div class="sp-access-content">
+      <div class="sp-access-title">Accesibilidad</div>
+      <div class="sp-access-grid">
+        <div>
+          <div class="sp-access-sub">Reglas generales</div>
+          <ul class="sp-access-list">
+            <li>Mantener separación clara entre elementos interactivos.</li>
+            <li>No compactar formularios extensos.</li>
+            <li>No usar espaciado como único indicador de jerarquía.</li>
+            <li>Respetar siempre múltiplos de 8px.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="sp-access-sub">Elementos interactivos</div>
+          <ul class="sp-access-list">
+            <li>Altura mínima táctil: <strong>44px</strong></li>
+            <li>Separación mínima entre botones: <strong>8px – 16px</strong></li>
+            <li>Evitar botones demasiado juntos sin separación clara.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="sp-access-sub">Padding mínimo recomendado</div>
+          <ul class="sp-access-list">
+            <li>Componentes interactivos: mínimo <strong>12px vertical</strong></li>
+            <li>Cards: mínimo <strong>16px / 24px</strong></li>
+            <li>Secciones principales: <strong>48px o superior</strong></li>
+          </ul>
+        </div>
+        <div>
+          <div class="sp-access-sub">Dark / High Contrast</div>
+          <ul class="sp-access-list">
+            <li>No reducir espaciado en modos alternativos.</li>
+            <li>Mantener separación clara para evitar bloques densos.</li>
+            <li>Priorizar aire visual en interfaces críticas.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<script>
+(function(){
+
+/* ─── Token data ─────────────────────────────────────── */
+let SP_TOKENS = [
+  { group:'Micro', token:'spacing/2px',  px:2,   var:'--space-2',   usage:'restricted',
+    classes:[], desc:'Separador fino, border-gap' },
+  { group:'Micro', token:'spacing/4px',  px:4,   var:'--space-4',   usage:'restricted',
+    classes:['.p-4'], desc:'Gap entre icono y texto — uso muy controlado' },
+  { group:'Micro', token:'spacing/8px',  px:8,   var:'--space-8',   usage:'standard',
+    classes:['.p-8','.mt-8','.mb-8','.gap-8','.stack-8'], desc:'Gap interno de componentes, separación entre labels' },
+  { group:'Excepción', token:'spacing/12px', px:12, var:'--space-12', usage:'restricted',
+    classes:[], desc:'Componentes compactos — requiere justificación' },
+  { group:'Pequeño',token:'spacing/16px', px:16,  var:'--space-16',  usage:'standard',
+    classes:['.p-16','.pt-16','.pb-16','.px-16','.py-16','.m-16','.mt-16','.mb-16','.mx-16','.gap-16','.stack-16'], desc:'Padding chips, gap entre ítems de lista, margin base' },
+  { group:'Pequeño',token:'spacing/24px', px:24,  var:'--space-24',  usage:'standard',
+    classes:['.p-24','.pt-24','.pb-24','.px-24','.py-24','.mt-24','.mb-24','.my-24','.gap-24','.stack-24'], desc:'Padding cards, gap entre secciones pequeñas' },
+  { group:'Mediano',token:'spacing/32px', px:32,  var:'--space-32',  usage:'standard',
+    classes:['.p-32','.px-32','.mb-32','.pb-32','.stack-32'], desc:'Margin-bottom entre bloques de contenido' },
+  { group:'Mediano',token:'spacing/48px', px:48,  var:'--space-48',  usage:'standard',
+    classes:['.p-48','.py-48','.stack-48'], desc:'Padding lateral en layouts compactos, gap entre secciones' },
+  { group:'Grande', token:'spacing/64px', px:64,  var:'--space-64',  usage:'standard',
+    classes:['.p-64','.py-64'], desc:'Padding vertical de secciones principales' },
+  { group:'Grande', token:'spacing/80px', px:80,  var:'--space-80',  usage:'standard',
+    classes:[], desc:'Espaciado entre módulos de hero' },
+  { group:'Grande', token:'spacing/96px', px:96,  var:'--space-96',  usage:'standard',
+    classes:[], desc:'Separación entre hero y contenido' },
+  { group:'Extra grande',token:'spacing/128px',px:128,var:'--space-128',usage:'standard',
+    classes:[], desc:'Padding de página, márgenes de layout extremos' },
+];
+const MAX_PX = 128;
+
+function spCopyText(text, el){
+  navigator.clipboard.writeText(text).then(()=>{
+    if(!el) return;
+    const ico = el.querySelector('.material-symbols-rounded');
+    if(ico){ const o=ico.textContent; ico.textContent='check'; setTimeout(()=>ico.textContent=o,1300); }
+    else { const o=el.textContent; el.textContent='✓'; setTimeout(()=>el.textContent=o,1300); }
+  });
+}
+window.spCopyText = spCopyText;
+
+/* ─── Render token table ──────────────────────────────── */
+function toRem(px) {
+  const r = px / 16;
+  return (Math.round(r * 1000) / 1000) + 'rem';
+}
+
+function renderTable(){
+  const tbody = document.getElementById('sp-token-tbody');
+  if(!tbody) return;
+  let html = '';
+  let lastGroup = '';
+  SP_TOKENS.forEach(t=>{
+    if(t.group !== lastGroup){
+      html += `<tr class="sp-group-row"><td colspan="5"><span class="sp-group-lbl">${t.group}</span></td></tr>`;
+      lastGroup = t.group;
+    }
+    const pct = Math.max((t.px/MAX_PX)*100, 1.5).toFixed(1);
+    const isR = t.usage === 'restricted';
+    const barCls = isR ? 'sp-bar-fill restricted' : 'sp-bar-fill';
+    const clsHtml = t.classes.length
+      ? t.classes.map(c=>`<code class="sp-cls-chip" onclick="spCopyText('${c}',this)">${c}</code>`).join('')
+      : '<span class="sp-empty-cell">—</span>';
+    html += `
+<tr class="sp-data-row${isR?' sp-restricted':''}">
+  <td>
+    <div class="sp-bar-cell">
+      <span class="sp-bar-px">${t.px}px</span>
+      <div class="sp-bar-wrap2"><div class="${barCls}" style="width:${pct}%"></div></div>
+    </div>
+  </td>
+  <td><code class="sp-var-chip" onclick="spCopyText('var(${t.var})',this)">${t.var}</code></td>
+  <td><strong class="sp-px-strong">${toRem(t.px)}</strong></td>
+  <td><div class="sp-cls-list">${clsHtml}</div></td>
+  <td><button class="sp-row-copy" onclick="spCopyText('var(${t.var})',this)" title="Copiar variable CSS"><span class="material-symbols-rounded">content_copy</span></button></td>
+</tr>`;
+  });
+  tbody.innerHTML = html;
+}
+
+function spAttachTokenClasses(tokens, utils){
+  const classMap = {};
+  ['padding','margin','gap','stack'].forEach(group => {
+    (utils[group] || []).forEach(u => {
+      const m = u.val.match(/--space-(\d+)/);
+      if (!m) return;
+      const key = Number.parseInt(m[1], 10);
+      if (!classMap[key]) classMap[key] = [];
+      classMap[key].push(u.cls);
+    });
+  });
+  return tokens.map(t => ({
+    ...t,
+    classes: Array.from(new Set(classMap[t.px] || t.classes || []))
+  }));
+}
+
+/* ─── Utility panels ──────────────────────────────────── */
+let UTIL_DATA = {
+  padding: [
+    { cls:'.p-8',   prop:'padding',         val:'var(--space-8)',  px:'8px'  },
+    { cls:'.p-16',  prop:'padding',         val:'var(--space-16)', px:'16px' },
+    { cls:'.p-24',  prop:'padding',         val:'var(--space-24)', px:'24px' },
+    { cls:'.p-32',  prop:'padding',         val:'var(--space-32)', px:'32px' },
+    { cls:'.p-48',  prop:'padding',         val:'var(--space-48)', px:'48px' },
+    { cls:'.p-64',  prop:'padding',         val:'var(--space-64)', px:'64px' },
+    { cls:'.pt-16', prop:'padding-top',     val:'var(--space-16)', px:'16px' },
+    { cls:'.pt-24', prop:'padding-top',     val:'var(--space-24)', px:'24px' },
+    { cls:'.pb-16', prop:'padding-bottom',  val:'var(--space-16)', px:'16px' },
+    { cls:'.pb-32', prop:'padding-bottom',  val:'var(--space-32)', px:'32px' },
+    { cls:'.px-16', prop:'padding-inline',  val:'var(--space-16)', px:'16px' },
+    { cls:'.px-24', prop:'padding-inline',  val:'var(--space-24)', px:'24px' },
+    { cls:'.px-32', prop:'padding-inline',  val:'var(--space-32)', px:'32px' },
+    { cls:'.py-16', prop:'padding-block',   val:'var(--space-16)', px:'16px' },
+    { cls:'.py-24', prop:'padding-block',   val:'var(--space-24)', px:'24px' },
+    { cls:'.py-64', prop:'padding-block',   val:'var(--space-64)', px:'64px' },
+  ],
+  margin: [
+    { cls:'.m-16',  prop:'margin',          val:'var(--space-16)', px:'16px' },
+    { cls:'.m-24',  prop:'margin',          val:'var(--space-24)', px:'24px' },
+    { cls:'.mt-8',  prop:'margin-top',      val:'var(--space-8)',  px:'8px'  },
+    { cls:'.mt-16', prop:'margin-top',      val:'var(--space-16)', px:'16px' },
+    { cls:'.mt-24', prop:'margin-top',      val:'var(--space-24)', px:'24px' },
+    { cls:'.mb-8',  prop:'margin-bottom',   val:'var(--space-8)',  px:'8px'  },
+    { cls:'.mb-16', prop:'margin-bottom',   val:'var(--space-16)', px:'16px' },
+    { cls:'.mb-24', prop:'margin-bottom',   val:'var(--space-24)', px:'24px' },
+    { cls:'.mb-32', prop:'margin-bottom',   val:'var(--space-32)', px:'32px' },
+    { cls:'.mx-16', prop:'margin-inline',   val:'var(--space-16)', px:'16px' },
+    { cls:'.my-24', prop:'margin-block',    val:'var(--space-24)', px:'24px' },
+  ],
+  gap: [
+    { cls:'.gap-8',  prop:'gap', val:'var(--space-8)',  px:'8px'  },
+    { cls:'.gap-16', prop:'gap', val:'var(--space-16)', px:'16px' },
+    { cls:'.gap-24', prop:'gap', val:'var(--space-24)', px:'24px' },
+    { cls:'.gap-32', prop:'gap', val:'var(--space-32)', px:'32px' },
+  ],
+};
+
+function renderUtilPanel(id, items){
+  const el = document.getElementById(id);
+  if(!el) return;
+  let html = '<div class="sp-util-grid">';
+  items.forEach(it=>{
+    html += `<div class="sp-util-item">
+      <span class="sp-util-class" onclick="spCopyText('${it.cls}',this)">${it.cls}</span>
+      <span class="sp-util-prop">${it.prop}: ${it.val};</span>
+      <span class="sp-util-val">/* ${it.px} */</span>
+    </div>`;
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderStackPanel(){
+  const el = document.getElementById('util-stack');
+  if(!el) return;
+  const stacks = (UTIL_DATA.stack || [])
+    .map(s => {
+      const n = (s.cls.match(/\.stack-(\d+)/) || [])[1];
+      return n ? { cls:`stack-${n}`, px:`${n}px`, label:`.stack-${n}`, n:Number.parseInt(n, 10) } : null;
+    })
+    .filter(Boolean)
+    .sort((a,b)=>a.n-b.n);
+  const visualStacks = stacks.filter(s=>s.n>0).slice(0,3);
+
+  let html = `<p class="sp-stack-intro">
+    Aplica <code>margin-top</code>
+    automáticamente a cada hijo excepto el primero. Ideal para listas, formularios y bloques de contenido vertical.
+  </p>`;
+  html += '<div class="sp-stack-demo-grid">';
+  visualStacks.forEach(s=>{
+    html += `<div class="sp-stack-demo">
+      <div class="sp-stack-demo-label">${s.label}</div>
+      <div class="${s.cls}">
+        <div class="sp-stack-item">Item 1</div>
+        <div class="sp-stack-gap-indicator"><div class="sp-stack-gap-line"></div><span>${s.px}</span><div class="sp-stack-gap-line"></div></div>
+        <div class="sp-stack-item">Item 2</div>
+        <div class="sp-stack-gap-indicator"><div class="sp-stack-gap-line"></div><span>${s.px}</span><div class="sp-stack-gap-line"></div></div>
+        <div class="sp-stack-item">Item 3</div>
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+  html += `<div class="sp-util-grid sp-util-grid--mt">`;
+  stacks.forEach(s=>{
+    html += `<div class="sp-util-item">
+      <span class="sp-util-class" onclick="spCopyText('.${s.cls}',this)">.${s.cls}</span>
+      <span class="sp-util-prop">> * + * { margin-top: var(--space-${s.n}); }</span>
+      <span class="sp-util-val">/* ${s.px} */</span>
+    </div>`;
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+/* ─── Tab switching ───────────────────────────────────── */
+function spTab(btn, panelId){
+  document.querySelectorAll('.sp-util-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.sp-util-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+window.spTab = spTab;
+
+function spCodeTab(btn, preId){
+  document.querySelectorAll('.sp-code-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.sp-code-pre').forEach(p=>p.classList.remove('sp-code-active'));
+  btn.classList.add('active');
+  document.getElementById(preId).classList.add('sp-code-active');
+}
+window.spCodeTab = spCodeTab;
+
+function spCopyCode(id, btn){
+  const el = id === 'spc-active'
+    ? document.querySelector('.sp-code-pre.sp-code-active')
+    : document.getElementById(id);
+  if(el) spCopyText(el.textContent, btn);
+}
+window.spCopyCode = spCopyCode;
+
+/* ─── Downloads ───────────────────────────────────────── */
+const SP_DIRECT_DOC = location.pathname.includes('/docs/');
+const CORE_SPACING_TOKENS_URL = SP_DIRECT_DOC ? '../../../core/abstracts/_tokens-spacing.scss' : 'core/abstracts/_tokens-spacing.scss';
+const CORE_SPACING_UTILS_URL = SP_DIRECT_DOC ? '../../../core/utils/_spacing.scss' : 'core/utils/_spacing.scss';
+
+async function spReadCoreSource(url){
+  try {
+    const res = await fetch(url);
+    return res.ok ? await res.text() : '';
+  } catch (_) {
+    return '';
+  }
+}
+
+function spParseTokensFromCore(tokensScss){
+  const list = [];
+  const re = /^\$spacing-(\d+)px:\s*([\d.]+)px;/gim;
+  let match;
+  while ((match = re.exec(tokensScss)) !== null) {
+    const px = Number.parseInt(match[1], 10);
+    list.push({
+      group: px <= 12 ? (px === 12 ? 'Excepción' : 'Micro') : px <= 24 ? 'Pequeño' : px <= 48 ? 'Mediano' : px <= 96 ? 'Grande' : 'Extra grande',
+      token: `spacing/${px}px`,
+      px,
+      var: `--space-${px}`,
+      usage: [2,4,12].includes(px) ? 'restricted' : 'standard',
+      classes: [],
+      desc: [2,4,12].includes(px) ? 'Uso restringido: requiere validación de diseño.' : 'Uso estándar del sistema de espaciado.'
+    });
+  }
+  return list.sort((a,b)=>a.px-b.px);
+}
+
+function spParseUtilitiesFromCore(utilsScss){
+  const out = { padding: [], margin: [], gap: [], stack: [] };
+  const spacesBlock = (utilsScss.match(/\$_spaces:\s*\(([\s\S]*?)\);/m) || [])[1] || '';
+  const nums = [];
+  spacesBlock.replace(/'([0-9]+)'\s*:\s*\$space-([0-9]+)/g, (_, key) => {
+    nums.push(Number.parseInt(key, 10));
+    return '';
+  });
+
+  const scales = Array.from(new Set(nums)).sort((a,b)=>a-b);
+  if (scales.length) {
+    scales.forEach(n => {
+      const v = `var(--space-${n})`;
+      out.padding.push({ cls:`.p-${n}`,  prop:'padding', val:v, px:`${n}px`, css:`padding: ${v};` });
+      out.padding.push({ cls:`.pt-${n}`, prop:'padding-top', val:v, px:`${n}px`, css:`padding-top: ${v};` });
+      out.padding.push({ cls:`.pr-${n}`, prop:'padding-right', val:v, px:`${n}px`, css:`padding-right: ${v};` });
+      out.padding.push({ cls:`.pb-${n}`, prop:'padding-bottom', val:v, px:`${n}px`, css:`padding-bottom: ${v};` });
+      out.padding.push({ cls:`.pl-${n}`, prop:'padding-left', val:v, px:`${n}px`, css:`padding-left: ${v};` });
+      out.padding.push({ cls:`.px-${n}`, prop:'padding-left, padding-right', val:`${v} | ${v}`, px:`${n}px`, css:`padding-left: ${v}; padding-right: ${v};` });
+      out.padding.push({ cls:`.py-${n}`, prop:'padding-top, padding-bottom', val:`${v} | ${v}`, px:`${n}px`, css:`padding-top: ${v}; padding-bottom: ${v};` });
+
+      out.margin.push({ cls:`.m-${n}`,  prop:'margin', val:v, px:`${n}px`, css:`margin: ${v};` });
+      out.margin.push({ cls:`.mt-${n}`, prop:'margin-top', val:v, px:`${n}px`, css:`margin-top: ${v};` });
+      out.margin.push({ cls:`.mr-${n}`, prop:'margin-right', val:v, px:`${n}px`, css:`margin-right: ${v};` });
+      out.margin.push({ cls:`.mb-${n}`, prop:'margin-bottom', val:v, px:`${n}px`, css:`margin-bottom: ${v};` });
+      out.margin.push({ cls:`.ml-${n}`, prop:'margin-left', val:v, px:`${n}px`, css:`margin-left: ${v};` });
+      out.margin.push({ cls:`.mx-${n}`, prop:'margin-left, margin-right', val:`${v} | ${v}`, px:`${n}px`, css:`margin-left: ${v}; margin-right: ${v};` });
+      out.margin.push({ cls:`.my-${n}`, prop:'margin-top, margin-bottom', val:`${v} | ${v}`, px:`${n}px`, css:`margin-top: ${v}; margin-bottom: ${v};` });
+
+      out.gap.push({ cls:`.gap-${n}`, prop:'gap', val:v, px:`${n}px`, css:`gap: ${v};` });
+      out.gap.push({ cls:`.gap-x-${n}`, prop:'column-gap', val:v, px:`${n}px`, css:`column-gap: ${v};` });
+      out.gap.push({ cls:`.gap-y-${n}`, prop:'row-gap', val:v, px:`${n}px`, css:`row-gap: ${v};` });
+
+      out.stack.push({ cls:`.stack-${n}`, prop:'> * + * { margin-top }', val:v, px:`${n}px` });
+    });
+
+    out.margin.push({ cls:'.mx-auto', prop:'margin-left, margin-right', val:'auto | auto', px:'auto', css:'margin-left: auto; margin-right: auto;' });
+    out.margin.push({ cls:'.ml-auto', prop:'margin-left', val:'auto', px:'auto', css:'margin-left: auto;' });
+    out.margin.push({ cls:'.mr-auto', prop:'margin-right', val:'auto', px:'auto', css:'margin-right: auto;' });
+    out.margin.push({ cls:'.mt-auto', prop:'margin-top', val:'auto', px:'auto', css:'margin-top: auto;' });
+    out.margin.push({ cls:'.mb-auto', prop:'margin-bottom', val:'auto', px:'auto', css:'margin-bottom: auto;' });
+  }
+
+  Object.keys(out).forEach(k => out[k].sort((a,b)=>a.cls.localeCompare(b.cls)));
+  return out;
+}
+
+function spBuildUtilitiesCss(utils){
+  const lines = [];
+  ['padding','margin','gap','stack'].forEach(group => {
+    if (!utils[group]?.length) return;
+    lines.push(`\n/* ${group.toUpperCase()} */`);
+    utils[group].forEach(u => {
+      if (group === 'stack') {
+        lines.push(`${u.cls} > * + * { margin-top: ${u.val}; }  /* ${u.px} */`);
+      } else {
+        lines.push(`${u.cls} { ${u.css || `${u.prop}: ${u.val};`} }  /* ${u.px} */`);
+      }
+    });
+  });
+  return lines.join('\n');
+}
+
+async function spHydrateFromCoreForUI(){
+  const [tokensScss, utilsScss] = await Promise.all([
+    spReadCoreSource(CORE_SPACING_TOKENS_URL),
+    spReadCoreSource(CORE_SPACING_UTILS_URL)
+  ]);
+  if (!tokensScss || !utilsScss) return;
+
+  const parsedTokens = spParseTokensFromCore(tokensScss);
+  const parsedUtils = spParseUtilitiesFromCore(utilsScss);
+  if (!parsedTokens.length) return;
+
+  SP_TOKENS = spAttachTokenClasses(parsedTokens, parsedUtils);
+  UTIL_DATA = parsedUtils;
+
+  const root = document.getElementById('espaciado');
+  if (root) {
+    SP_TOKENS.forEach(t => root.style.setProperty(`--space-${t.px}`, `${t.px}px`));
+  }
+}
+
+async function spDownloadCSS(){
+  const [tokensScss, utilsScss] = await Promise.all([
+    spReadCoreSource(CORE_SPACING_TOKENS_URL),
+    spReadCoreSource(CORE_SPACING_UTILS_URL)
+  ]);
+
+  let tokens = SP_TOKENS;
+  let utils = UTIL_DATA;
+  if (tokensScss) tokens = spParseTokensFromCore(tokensScss);
+  if (utilsScss) utils = spParseUtilitiesFromCore(utilsScss);
+
+  const d = new Date().toISOString().split('T')[0];
+  const lines = [
+`/* ════════════════════════════════════════════════════════════════════
+   SPACING TOKENS — Compensar Medicina Prepagada · Design System v2
+   ────────────────────────────────────────────────────────────────────
+   Fuente    : Figma · Compensar v2 – Sistema de diseño
+   Generado  : ${d}
+   Archivo   : spacing-tokens.css
+  Base      : 8px · transversal Web/App
+  Core      : core/abstracts/_tokens-spacing.scss
+          core/utils/_spacing.scss
+
+   CONTENIDO
+   ─────────
+   1. Custom properties :root  — --space-4 … --space-128
+   2. Clases de padding         — .p-8, .pt-16, .px-24 …
+   3. Clases de margin          — .m-8, .mt-16, .mx-24 …
+   4. Clases de gap             — .gap-8, .gap-16 …
+   5. Patrón stack              — .stack-{n} > * + * { margin-top }
+
+   REGLA DE USO
+   ────────────
+   ✓  padding: var(--space-16);
+   ✓  class="p-16 mb-24"
+   ✗  padding: 16px  ←  nunca valores hardcoded
+   ⚠  Tokens "USO RESTRINGIDO" requieren aprobación de diseño
+
+   INSTALACIÓN
+   ───────────
+   <link rel="stylesheet" href="spacing-tokens.css">
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────────────
+   1. CUSTOM PROPERTIES
+   ──────────────────────────────────────────────────────────────────── */
+:root {`];
+  tokens.forEach(t=>{
+    const r = t.usage === 'restricted' ? '  /* ⚠ USO RESTRINGIDO — requiere justificación de diseño */' : '';
+    lines.push(`  ${t.var}: ${t.px}px;${r}`);
+  });
+  lines.push(`}
+
+/* ─────────────────────────────────────────────────────────────────────
+   2. CLASES DE PADDING
+   Ej: <div class="p-16">  → padding: 16px
+       <div class="pt-8">  → padding-top: 8px
+   ──────────────────────────────────────────────────────────────────── */`);
+  lines.push(spBuildUtilitiesCss(utils));
+  lines.push('\n/* ── FIN: spacing-tokens.css ─── Compensar Medicina Prepagada ── */');
+  const blob = new Blob([lines.join('\n')],{type:'text/css'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='spacing-tokens.css'; a.click();
+}
+
+async function spDownloadSCSS(){
+  const [tokensScss, utilsScss] = await Promise.all([
+    spReadCoreSource(CORE_SPACING_TOKENS_URL),
+    spReadCoreSource(CORE_SPACING_UTILS_URL)
+  ]);
+
+  if (tokensScss && utilsScss) {
+    const compiled = [
+      '// Generated from core/abstracts/_tokens-spacing.scss + core/utils/_spacing.scss',
+      tokensScss.trim(),
+      '',
+      '// Utility classes source',
+      utilsScss.trim()
+    ].join('\n');
+    const blob = new Blob([compiled],{type:'text/plain'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='_spacing-tokens.scss'; a.click();
+    return;
+  }
+
+  const d = new Date().toISOString().split('T')[0];
+  const lines = [
+`// ════════════════════════════════════════════════════════════════════
+// SPACING TOKENS — Compensar Medicina Prepagada · Design System v2
+// ────────────────────────────────────────────────────────────────────
+// Fuente    : Figma · Compensar v2 – Sistema de diseño
+// Generado  : ${d}
+// Archivo   : _spacing-tokens.scss
+// Base      : 8px · transversal Web/App
+//
+// CONTENIDO
+// ─────────
+// 1. Variables Sass   ($space-16: 16px)
+// 2. Override $spacers (Web Bootstrap)
+// 3. CSS custom properties en :root
+// 4. Clases de utilidad (padding/margin/gap/stack)
+//
+// USO
+// ───
+// @use "spacing-tokens" as *;
+//
+// .mi-componente {
+//   padding: var(--space-16);
+// }
+//
+// REGLA
+// ─────
+// ✓  var(--space-16)  o  $space-16
+// ✗  padding: 16px  ←  nunca hardcoded
+// ⚠  Tokens "restringido" requieren aprobación de diseño
+// ════════════════════════════════════════════════════════════════════
+
+// ─────────────────────────────────────────────────────────────────────
+// 1. VARIABLES SASS
+// ─────────────────────────────────────────────────────────────────────`];
+  SP_TOKENS.forEach(t=>{
+    const r = t.usage==='restricted' ? '  // ⚠ USO RESTRINGIDO' : '';
+    lines.push(`$space-${t.px}: ${t.px}px;${r}`);
+  });
+  lines.push(`
+// ─────────────────────────────────────────────────────────────────────
+// 2. WEB BOOTSTRAP — OVERRIDE $spacers
+// Incluir ANTES de @import "bootstrap". Permite que Bootstrap genere
+// sus clases .p-1, .m-2, etc. con nuestros valores de 8pt.
+// ─────────────────────────────────────────────────────────────────────
+$spacers: (
+  0:  0,
+  1:  $space-8,    // 8px  → .p-1, .m-1
+  2:  $space-16,   // 16px → .p-2, .m-2
+  3:  $space-24,   // 24px → .p-3, .m-3
+  4:  $space-32,   // 32px → .p-4, .m-4
+  5:  $space-48,   // 48px → .p-5, .m-5
+  6:  $space-64,   // 64px → .p-6, .m-6
+) !default;
+
+// ─────────────────────────────────────────────────────────────────────
+// 3. CSS CUSTOM PROPERTIES
+// ─────────────────────────────────────────────────────────────────────
+:root {`);
+  SP_TOKENS.forEach(t=> lines.push(`  --space-${t.px}: #{$space-${t.px}};`));
+  lines.push(`}
+
+// ─────────────────────────────────────────────────────────────────────
+// 4. CLASES DE UTILIDAD
+// ─────────────────────────────────────────────────────────────────────`);
+  lines.push(...spBuildUtilitiesCss(UTIL_DATA).split('\n'));
+  lines.push('\n// ── FIN: _spacing-tokens.scss ─── Compensar Medicina Prepagada ──');
+  const blob = new Blob([lines.join('\n')],{type:'text/plain'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='_spacing-tokens.scss'; a.click();
+}
+
+async function spDownloadJSON(){
+  const [tokensScss, utilsScss] = await Promise.all([
+    spReadCoreSource(CORE_SPACING_TOKENS_URL),
+    spReadCoreSource(CORE_SPACING_UTILS_URL)
+  ]);
+
+  let tokens = SP_TOKENS;
+  let utils = UTIL_DATA;
+  if (tokensScss) tokens = spParseTokensFromCore(tokensScss);
+  if (utilsScss) utils = spParseUtilitiesFromCore(utilsScss);
+
+  const classMap = {};
+  ['padding','margin','gap','stack'].forEach(group => {
+    (utils[group] || []).forEach(u => {
+      const m = u.val.match(/--space-(\d+)/);
+      if (!m) return;
+      const key = Number.parseInt(m[1], 10);
+      if (!classMap[key]) classMap[key] = [];
+      classMap[key].push(u.cls);
+    });
+  });
+
+  const d = new Date().toISOString().split('T')[0];
+  const obj = {
+    metadata: {
+      title:       'Spacing Tokens — Compensar Medicina Prepagada',
+      version:     '2.0',
+      generatedAt: d,
+      source:      'Figma · Compensar v2 – Sistema de diseño',
+      baseUnit:    '8px',
+      coreSources: [
+        'core/abstracts/_tokens-spacing.scss',
+        'core/utils/_spacing.scss'
+      ],
+      description: 'Sistema espacial transversal de 8pt para Web y App. Los tokens "restringido" requieren aprobación de diseño.',
+      usage: {
+        css:    'padding: var(--space-16)',
+        html:   '<div class="p-16 gap-24">',
+        sass:   '$space-16 o clases .p-16/.mb-24',
+        rule:   'Nunca usar valores hardcoded (padding: 16px). Siempre token o clase utilitaria.'
+      }
+    },
+    tokens: tokens.map(t=>({
+      token:       t.token,
+      value:       t.px,
+      unit:        'px',
+      cssVariable: t.var,
+      sassVariable:'$space-' + t.px,
+      classes:     Array.from(new Set(classMap[t.px] || t.classes || [])),
+      usage:       t.usage,
+      restricted:  t.usage === 'restricted',
+      description: t.desc
+    })),
+    utilities: utils
+  };
+  const blob = new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='spacing-tokens.json'; a.click();
+}
+
+async function spCopyVars(){
+  const tokensScss = await spReadCoreSource(CORE_SPACING_TOKENS_URL);
+  const tokens = tokensScss ? spParseTokensFromCore(tokensScss) : SP_TOKENS;
+  const lines = [':root {'];
+  tokens.forEach(t=> lines.push(`  ${t.var}: ${t.px}px;`));
+  lines.push('}');
+  navigator.clipboard.writeText(lines.join('\n')).then(()=>{
+    const btn = document.querySelector('[onclick="spCopyVars()"]');
+    if(btn){ const o=btn.innerHTML; btn.innerHTML='<span class="material-symbols-rounded">check</span> ¡Copiado!'; setTimeout(()=>btn.innerHTML=o,1600); }
+  });
+}
+
+function spDownloadMAUI(){
+  const d = new Date().toISOString().split('T')[0];
+  const lines = [
+    '<?xml version="1.0" encoding="utf-8" ?>',
+    '<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"',
+    '                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">',
+    '',
+    `  <!-- Spacing tokens for .NET MAUI · ${d} -->`,
+    '  <!-- Source: core/abstracts/_tokens-spacing.scss + docs/transversales/fundamentos/spacing.html -->',
+    '  <!-- Nota: Los valores están en Thickness para márgenes/paddings en MAUI -->',
+    ''
+  ];
+
+  // Add spacing tokens
+  SP_TOKENS.forEach(function(t) {
+    var key = 'MpSpace' + (t.px === 2 ? '2' : t.px === 4 ? '4' : t.px === 8 ? '8' : t.px === 12 ? '12' : t.px === 16 ? '16' : t.px === 24 ? '24' : t.px === 32 ? '32' : t.px === 48 ? '48' : t.px === 64 ? '64' : t.px === 80 ? '80' : t.px === 96 ? '96' : t.px === 128 ? '128' : t.px);
+    // Use Thickness (uniform value)
+    lines.push(`  <x:Double x:Key="${key}">${t.px}</x:Double>`);
+  });
+
+  lines.push('');
+  lines.push('</ResourceDictionary>');
+
+  var content = lines.join('\n');
+  var blob = new Blob([content], { type: 'application/xml' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'Spacing.Maui.xaml';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+window.spDownloadCSS  = spDownloadCSS;
+window.spDownloadSCSS = spDownloadSCSS;
+window.spDownloadJSON = spDownloadJSON;
+window.spDownloadMAUI = spDownloadMAUI;
+window.spCopyVars     = spCopyVars;
+
+/* ─── Init ────────────────────────────────────────────── */
+async function spInit(){
+  renderTable();
+  renderUtilPanel('util-padding', UTIL_DATA.padding);
+  renderUtilPanel('util-margin',  UTIL_DATA.margin);
+  renderUtilPanel('util-gap',     UTIL_DATA.gap);
+  renderStackPanel();
+
+  await spHydrateFromCoreForUI();
+
+  renderTable();
+  renderUtilPanel('util-padding', UTIL_DATA.padding);
+  renderUtilPanel('util-margin',  UTIL_DATA.margin);
+  renderUtilPanel('util-gap',     UTIL_DATA.gap);
+  renderStackPanel();
+}
+
+spInit();
+
+})();
+</script>

@@ -1,0 +1,164 @@
+[
+  {
+    "section": "Tipografia (H4-H6, Display, Eyebrow)",
+    "hash": "tipografia",
+    "theme": "light",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": null
+  },
+  {
+    "section": "Tipografia (H4-H6, Display, Eyebrow)",
+    "hash": "tipografia",
+    "theme": "dark",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": null
+  },
+  {
+    "section": "Tipografia (H4-H6, Display, Eyebrow)",
+    "hash": "tipografia",
+    "theme": "high-contrast",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": null
+  },
+  {
+    "section": "Alertas",
+    "hash": "alertas",
+    "theme": "light",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": ".row"
+  },
+  {
+    "section": "Alertas",
+    "hash": "alertas",
+    "theme": "dark",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": ".row"
+  },
+  {
+    "section": "Alertas",
+    "hash": "alertas",
+    "theme": "high-contrast",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": ".row"
+  },
+  {
+    "section": "Toast",
+    "hash": "toast",
+    "theme": "light",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": "CODE"
+  },
+  {
+    "section": "Toast",
+    "hash": "toast",
+    "theme": "dark",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": "CODE"
+  },
+  {
+    "section": "Toast",
+    "hash": "toast",
+    "theme": "high-contrast",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": "CODE"
+  },
+  {
+    "section": "Tabs",
+    "hash": "tabs",
+    "theme": "light",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": null
+  },
+  {
+    "section": "Tabs",
+    "hash": "tabs",
+    "theme": "dark",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": null
+  },
+  {
+    "section": "Tabs",
+    "hash": "tabs",
+    "theme": "high-contrast",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": null
+  },
+  {
+    "section": "Pagination",
+    "hash": "paginacion",
+    "theme": "light",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": "CODE"
+  },
+  {
+    "section": "Pagination",
+    "hash": "paginacion",
+    "theme": "dark",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": "CODE"
+  },
+  {
+    "section": "Pagination",
+    "hash": "paginacion",
+    "theme": "high-contrast",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": "CODE"
+  },
+  {
+    "section": "Header",
+    "hash": "header",
+    "theme": "light",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": ".mp-breadcrumb"
+  },
+  {
+    "section": "Header",
+    "hash": "header",
+    "theme": "dark",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": ".mp-breadcrumb"
+  },
+  {
+    "section": "Header",
+    "hash": "header",
+    "theme": "high-contrast",
+    "docOverflow": false,
+    "docScrollW": 1280,
+    "docClientW": 1280,
+    "contentOverflowEl": ".mp-breadcrumb"
+  }
+]

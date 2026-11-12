@@ -1,0 +1,121 @@
+/* ============================================================
+ * person-summary.css — Componente transversal ZT "Person Summary"
+ * ------------------------------------------------------------
+ * Resumen compacto de identidad de una persona: avatar + eyebrow opcional +
+ * nombre completo + documento. Informativo (no interactivo). Reutilizable en
+ * afiliaciones, visitas, citas, resultados, autorizaciones, etc.
+ *
+ * NO es un formulario: presenta datos que ya conocemos sin parecer inputs.
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ * Token-first: solo tokens del sistema, sin hex ni medidas mágicas.
+ *
+ * Anatomía:
+ *   .zt-person                      contenedor (fila: avatar + texto)
+ *     .zt-person__avatar            círculo con icono de persona (decorativo)
+ *       .icon.icon-user…            font-icon del sistema
+ *     .zt-person__text              columna: eyebrow + nombre + documento
+ *       .zt-person__eyebrow         contexto opcional (Caption, mayúsculas)
+ *       .zt-person__name            nombre completo (elemento principal)
+ *       .zt-person__doc             documento (secundario)
+ *
+ * Variantes: .zt-person--default (formulario) · .zt-person--compact (sidebar).
+ * ============================================================ */
+
+.zt-person {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12, 0.75rem);
+  width: 100%;
+  padding: var(--space-16, 1rem);
+  background: var(--use-surface-violet, #efecf9);
+  border-radius: var(--radius-12, 0.75rem);
+}
+
+/* ── Avatar (decorativo): círculo violeta suave + icono violeta ── */
+.zt-person__avatar {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;                       /* 48px (default) */
+  height: 3rem;
+  border-radius: var(--radius-full, 48px);
+  background: var(--use-surface-white, #fff);
+}
+
+/* ── Texto (columna) ── */
+.zt-person__text {
+  min-width: 0;                      /* permite ellipsis/wrap sin overflow */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 0.125rem);
+}
+
+/* Eyebrow opcional: Caption en mayúsculas, tertiary. Oculto si va vacío. */
+.zt-person__eyebrow {
+  margin: 0;
+  font-size: var(--font-size-sm, 12px);
+  line-height: 1.3;
+  font-weight: var(--font-weight-semibold, 600);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--use-text-tertiary, #666);
+}
+.zt-person__eyebrow:empty { display: none; }
+
+/* Nombre: elemento principal (violeta de marca, 16px, medium). */
+.zt-person__name {
+  margin: 0;
+  font-size: var(--font-size-lg, 16px);
+  line-height: 1.3;
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--use-text-theme-violet, #4e3199);
+}
+
+/* Documento: secundario. */
+.zt-person__doc {
+  margin: 0;
+  font-size: var(--font-size-md, 14px);
+  line-height: 1.5;
+  color: var(--use-text-secondary, #333);
+}
+
+/* ═══════════════ VARIANTE DEFAULT (formulario) ═══════════════ */
+/* Fila avatar | datos; el nombre puede ir en una sola línea con ellipsis
+   cuando hay espacio, o hacer wrap en pantallas angostas (ver responsive). */
+.zt-person--default .zt-person__name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ═══════════════ VARIANTE COMPACT (sidebar ~280px) ═══════════════ */
+/* Más compacta: avatar 40px, padding menor, nombre con wrap (dos líneas si
+   hace falta) para caber en el ancho del panel de pasos. */
+.zt-person--compact {
+  padding: var(--space-12, 0.75rem);
+  gap: var(--space-10, 0.625rem);
+}
+.zt-person--compact .zt-person__avatar {
+  width: 2.5rem;                     /* 40px */
+  height: 2.5rem;
+}
+.zt-person--compact .zt-person__name {
+  font-size: var(--font-size-lg, 16px);
+  white-space: normal;               /* permite wrap; no cortar el nombre */
+  overflow-wrap: anywhere;
+}
+.zt-person--compact .zt-person__doc {
+  font-size: var(--font-size-md, 14px);
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+/* En pantallas angostas la variante default deja que el nombre haga wrap para
+   no provocar overflow horizontal (el documento nunca se corta). */
+@media (max-width: 680px) {
+  .zt-person--default .zt-person__name {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}

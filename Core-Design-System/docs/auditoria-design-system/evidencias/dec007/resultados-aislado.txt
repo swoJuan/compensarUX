@@ -1,0 +1,11 @@
+== DROPDOWN reutilizable (aislado) ==
+dropdown 100% 1280px: 117 OK, 0 fallos
+dropdown 100% 320px: 117 OK, 0 fallos
+dropdown 200% 1280px: 117 OK, 0 fallos
+dropdown 200% 320px: 117 OK, 0 fallos
+
+== TABS reutilizable (aislado) ==
+tabs 100% 1280px: 63 OK, 0 fallos
+tabs 100% 320px: 63 OK, 0 fallos
+tabs 200% 1280px: 63 OK, 0 fallos
+tabs 200% 320px: 63 OK, 0 fallos

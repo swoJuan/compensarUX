@@ -1,0 +1,38 @@
+{
+  "100": {
+    "conSubtitulo": {
+      "minFitPx": 236,
+      "minFitEm": 14.75,
+      "lastOverflowPx": 234
+    },
+    "sinSubtitulo": {
+      "minFitPx": 212,
+      "minFitEm": 13.25,
+      "lastOverflowPx": 210
+    }
+  },
+  "150": {
+    "conSubtitulo": {
+      "minFitPx": 354,
+      "minFitEm": 14.75,
+      "lastOverflowPx": 352
+    },
+    "sinSubtitulo": {
+      "minFitPx": 318,
+      "minFitEm": 13.25,
+      "lastOverflowPx": 316
+    }
+  },
+  "200": {
+    "conSubtitulo": {
+      "minFitPx": 470,
+      "minFitEm": 14.69,
+      "lastOverflowPx": 468
+    },
+    "sinSubtitulo": {
+      "minFitPx": 422,
+      "minFitEm": 13.19,
+      "lastOverflowPx": 420
+    }
+  }
+}

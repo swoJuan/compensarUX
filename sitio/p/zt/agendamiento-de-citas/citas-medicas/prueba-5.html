@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Compensar - Citas médicas</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="css/custom.css">
+<style>
+.appointment-start-title{padding:24px 20px 0;margin:0;font-size:28px;line-height:1.2;font-weight:900;color:#111}
+.appointment-start-title .orange{color:var(--color-primary,#ff6600)}
+.appointment-start-wrap{margin:42px 0 112px;padding:0 20px;text-align:center}
+.appointment-start-question{margin:0 0 26px;font-size:22px;line-height:1.25;font-weight:900;color:#222}
+.appointment-choice-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;align-items:stretch}
+.appointment-choice-card{min-height:56px;border:0;border-radius:8px;background:var(--white,#fff);box-shadow:0 4px 14px rgba(0,0,0,.14);padding:10px 14px;display:grid;grid-template-columns:28px 1fr 14px;align-items:center;gap:12px;text-decoration:none;color:#111;font-family:inherit;cursor:pointer;transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.appointment-choice-card:hover,.appointment-choice-card:focus-visible{background-color:var(--use-surface-orange,#fff2e3);transform:translateY(-2px);box-shadow:0 6px 16px rgba(255,102,0,.14);outline:none;text-decoration:none}
+.appointment-choice-card:hover *,.appointment-choice-card:focus-visible *{text-decoration:none}
+.appointment-choice-icon{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;color:var(--color-primary,#ff6600);font-size:28px}
+.appointment-choice-text{display:block;text-align:left;font-size:14px;line-height:1.2;font-weight:900;color:#111}
+.appointment-choice-arrow{color:#777;font-size:14px;justify-self:end}
+@media(max-width:900px){.appointment-start-wrap{margin:40px 0 80px}.appointment-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}}
+@media(max-width:520px){.appointment-start-wrap{margin:32px 0 64px;padding:0 16px}.appointment-start-question{font-size:20px}.appointment-choice-grid{grid-template-columns:1fr}.appointment-choice-card{min-height:56px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Menú"><span class="material-icons" aria-hidden="true">menu</span></button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración"><span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span></button>
+  </header>
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Familiar</div>
+      </div>
+      <div class="hd-avatar"><span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span></div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit" type="button"><span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>Salida</button>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="sidebar" data-active="agendamiento"></nav>
+    <main class="main">
+      <div class="screen active">
+        <div class="scroller">
+          <nav class="breadcrumb">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="prueba-5.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Agendamiento de citas</span>
+          </nav>
+          <h1 class="page-title appointment-start-title"><span class="orange">Citas</span> médicas</h1>
+          <section class="appointment-start-wrap" aria-labelledby="appointment-start-question">
+            <h2 class="appointment-start-question" id="appointment-start-question">¿Qué citas deseas agendar?</h2>
+            <div class="appointment-choice-grid">
+              <button class="appointment-choice-card" type="button">
+                <span class="appointment-choice-icon"><span class="icon icon-stethoscope icon-24" aria-hidden="true"></span></span>
+                <span class="appointment-choice-text">Medicina General<br>y especialidades</span>
+                <span class="appointment-choice-arrow icon icon-caret-right icon-16" aria-hidden="true"></span>
+              </button>
+              <button class="appointment-choice-card" type="button">
+                <span class="appointment-choice-icon"><span class="icon icon-dental-tooth icon-24" aria-hidden="true"></span></span>
+                <span class="appointment-choice-text">Odontología</span>
+                <span class="appointment-choice-arrow icon icon-caret-right icon-16" aria-hidden="true"></span>
+              </button>
+              <a class="appointment-choice-card" href="agendar-5.html" aria-label="Agendar laboratorios">
+                <span class="appointment-choice-icon"><span class="icon icon-labs icon-24" aria-hidden="true"></span></span>
+                <span class="appointment-choice-text">Laboratorios</span>
+                <span class="appointment-choice-arrow icon icon-caret-right icon-16" aria-hidden="true"></span>
+              </a>
+              <button class="appointment-choice-card" type="button">
+                <span class="appointment-choice-icon"><span class="icon icon-eye icon-24" aria-hidden="true"></span></span>
+                <span class="appointment-choice-text">Salud visual</span>
+                <span class="appointment-choice-arrow icon icon-caret-right icon-16" aria-hidden="true"></span>
+              </button>
+            </div>
+          </section>
+          <footer class="footer">
+            <div>
+              <div class="footer-col-title">Te puede interesar</div>
+              <a class="footer-link" href="javascript:void(0)">Derechos y deberes</a>
+              <a class="footer-link" href="javascript:void(0)">Notificaciones judiciales</a>
+              <a class="footer-link" href="javascript:void(0)">Políticas de privacidad y condiciones de uso</a>
+              <a class="footer-link" href="javascript:void(0)">Transparencia y acceso a la información pública</a>
+              <a class="footer-link" href="javascript:void(0)">Canal de denuncia</a>
+            </div>
+            <div>
+              <div class="footer-col-title">Conoce más</div>
+              <a class="footer-link" href="javascript:void(0)">Nuestra organización</a>
+              <a class="footer-link" href="javascript:void(0)">Radicar PQRS</a>
+              <a class="footer-link" href="javascript:void(0)">Consultar PQRS</a>
+              <a class="footer-link" href="javascript:void(0)">Proveedores</a>
+              <a class="footer-link" href="javascript:void(0)">Términos y condiciones</a>
+            </div>
+            <div>
+              <div class="footer-col-title">Síguenos</div>
+              <div class="footer-social" aria-label="Redes sociales">
+                <span class="icon icon-facebook-logo icon-20 gs-muted" aria-hidden="true"></span>
+                <span class="icon icon-x-logo icon-20 gs-muted" aria-hidden="true"></span>
+                <span class="icon icon-youtube-logo icon-20 gs-muted" aria-hidden="true"></span>
+                <span class="icon icon-linkedin-logo icon-20 gs-muted" aria-hidden="true"></span>
+                <span class="icon icon-instagram-logo icon-20 gs-muted" aria-hidden="true"></span>
+                <span class="icon icon-tiktok-logo icon-20 gs-muted" aria-hidden="true"></span>
+              </div>
+              <div class="footer-address"><strong>Caja de Compensación Familiar Sede Principal</strong><br>Av. 68 # 49A - 47, Bogotá D.C.<br>Bogotá 601 3077001, Línea nacional 01 8000 967070</div>
+            </div>
+          </footer>
+          <div class="footer-bottom">
+            <div class="footer-badge"><img src="../../../shared/assets/logo-supervigilado.svg" alt="" width="140"></div>
+            <div class="footer-badge"><img src="../../../shared/assets/logo-vigilado.svg" alt="" width="180"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+  <script src="../../shared/zt-sidebar.js"></script>
+</body>
+</html>

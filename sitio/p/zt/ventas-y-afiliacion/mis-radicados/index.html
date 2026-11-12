@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Mis radicados</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → componentes → custom de la pantalla -->
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="../../shared/components/dropdown.css">
+<link rel="stylesheet" href="../../shared/components/datepicker.css">
+<link rel="stylesheet" href="../../shared/components/modal.css">
+<link rel="stylesheet" href="css/mis-radicados.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Ideal</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal — "Ventas y Afiliación" activo -->
+    <nav class="sidebar" data-active="ventas"></nav>
+
+    <!-- MAIN (shell ZT) -->
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page rad-page">
+
+          <!-- Breadcrumb — Inicio / Ventas y afiliación / Mis radicados -->
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <a href="../index.html">Ventas y afiliación</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Mis radicados</span>
+          </nav>
+
+          <!-- Título + acción principal -->
+          <div class="rad-head">
+            <div>
+              <h1 class="page-title"><span class="orange">Mis </span><span class="dark">radicados</span></h1>
+              <p class="rad-desc">Consulta el estado de tus solicitudes y realiza seguimiento a cada trámite.</p>
+            </div>
+            <a class="mp-btn mp-btn--primario rad-new" href="../iniciar-afiliacion/index.html">
+              <span class="icon icon-user-plus icon-20 gs-inherit" aria-hidden="true"></span> Iniciar afiliación
+            </a>
+          </div>
+
+          <!-- Indicadores (también filtran el listado). Los pinta mis-radicados.js -->
+          <div class="rad-kpis" id="rad-kpis" role="group" aria-label="Resumen por estado. Selecciona uno para filtrar"></div>
+
+          <!-- Buscador y filtros -->
+          <form class="rad-filters" id="rad-filters" role="search" onsubmit="return false">
+            <div class="mp-input-group rad-f-search">
+              <label class="mp-input-label" for="rad-q">Buscar radicado</label>
+              <div class="mp-input-wrapper rad-search">
+                <input class="mp-input-field" id="rad-q" type="search" autocomplete="off"
+                       placeholder="Número de radicado, documento o nombre">
+                <span class="icon icon-magnifying-glass icon-24 gs-inherit rad-search__icon" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="mp-input-group rad-f-select">
+              <label class="mp-input-label" for="rad-estado">Estado</label>
+              <div class="mp-input-wrapper">
+                <select class="mp-input-field mp-select" id="rad-estado" data-zt-dropdown data-zt-dropdown-search="false">
+                  <option value="" selected>Todos</option>
+                  <option value="en_tramite">En trámite</option>
+                  <option value="pend_doc">Pendiente documentación</option>
+                  <option value="pend_pago">Pendiente de pago</option>
+                  <option value="aprobado">Aprobado</option>
+                  <option value="rechazado">Rechazado</option>
+                  <option value="finalizado">Finalizado</option>
+                </select>
+              </div>
+            </div>
+            <div class="mp-input-group rad-f-select">
+              <label class="mp-input-label" for="rad-tipo">Tipo de solicitud</label>
+              <div class="mp-input-wrapper">
+                <select class="mp-input-field mp-select" id="rad-tipo" data-zt-dropdown data-zt-dropdown-search="false">
+                  <option value="" selected>Todos</option>
+                  <option>Afiliación cotizante</option>
+                  <option>Afiliación beneficiario</option>
+                  <option>Inclusión de beneficiario</option>
+                  <option>Estudio de asegurabilidad</option>
+                  <option>Novedad</option>
+                </select>
+              </div>
+            </div>
+            <div class="mp-input-group rad-f-date">
+              <label class="mp-input-label" for="rad-fecha">Radicados desde</label>
+              <div class="mp-input-wrapper">
+                <input class="mp-input-field" id="rad-fecha" type="date" placeholder="DD/MM/AAAA" data-zt-datepicker>
+              </div>
+            </div>
+          </form>
+
+          <!-- Listado -->
+          <section class="rad-results" aria-labelledby="rad-count">
+            <div class="rad-results__bar">
+              <p class="rad-count" id="rad-count" aria-live="polite"></p>
+              <button type="button" class="rad-clear" id="rad-clear" hidden>
+                <span class="icon icon-x icon-16 gs-inherit" aria-hidden="true"></span> Limpiar filtros
+              </button>
+            </div>
+            <div class="rad-list" id="rad-list"></div>
+            <nav class="rad-pager" id="rad-pager" aria-label="Paginación del listado"></nav>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../../shared/zt-sidebar.js"></script>
+<script src="../../shared/afiliacion-mock.js"></script>
+<script src="../../shared/components/dropdown.js"></script>
+<script src="../../shared/components/datepicker.js"></script>
+<script src="../../shared/components/modal.js"></script>
+<script src="js/mis-radicados.js"></script>
+</body>
+</html>

@@ -1,0 +1,4530 @@
+{
+  "meta": {
+    "project": "Demo pruebas de usabilidad - Agendamiento de citas médicas",
+    "client": "Compensar Medicina Prepagada",
+    "version": "2.1.0",
+    "updatedAt": "2026-05-11",
+    "dateRange": {
+      "from": "2026-06-05",
+      "to": "2026-06-06"
+    },
+    "agendaHours": {
+      "from": "07:00",
+      "to": "18:00",
+      "slotDurationMinutes": 20
+    },
+    "notes": [
+      "Archivo único para cargar sedes, especialidades, médicos, contexto de usuario y resultados.",
+      "Las sedes y direcciones se basan en referencias públicas de Compensar; los médicos y horarios son ficticios para pruebas de usabilidad.",
+      "Regla aplicada: un mismo médico no aparece en dos sedes en la misma fecha y hora.",
+      "Regla activa: 4 especialidades médicas para el demo.",
+      "Todas las especialidades tienen múltiples horarios disponibles para el 5 y 6 de junio de 2026.",
+      "Todas las citas del demo están configuradas como modalidad presencial."
+    ]
+  },
+  "ui": {
+    "labels": {
+      "primaryDoctor": "Médico tratante",
+      "familyDoctor": "Médico familia",
+      "exclusiveCenter": "Sede exclusiva",
+      "modifySearch": "Modificar búsqueda",
+      "moreResults": "Más horarios disponibles"
+    },
+    "emptyStates": {
+      "noAvailability": {
+        "title": "No encontramos citas disponibles",
+        "description": "Intenta modificar la fecha, la sede o el médico para ver nuevas opciones."
+      },
+      "noPrimaryDoctor": {
+        "title": "Aún no tienes médico tratante para esta especialidad",
+        "description": "Puedes continuar buscando con otros médicos disponibles."
+      }
+    }
+  },
+  "userContext": {
+    "userId": "user-demo-001",
+    "name": "Paciente demo",
+    "defaultSearch": {
+      "specialtyId": "dermatologia",
+      "centerIds": [
+        "av68",
+        "sanroque",
+        "calle94"
+      ],
+      "date": "2026-06-05",
+      "modality": "Presencial"
+    },
+    "recentCenters": [
+      "av68",
+      "sanroque",
+      "calle26"
+    ],
+    "appointmentHistory": [
+      {
+        "specialtyId": "dermatologia",
+        "specialty": "Dermatología",
+        "doctorId": "doc-jhon-sarria",
+        "doctorName": "Dr. Jhon Sarria",
+        "centerId": "av68",
+        "centerName": "Sede Principal Compensar Avenida 68",
+        "date": "2026-05-20",
+        "isLastAppointment": true,
+        "relationshipLabel": "Médico tratante"
+      },
+      {
+        "specialtyId": "medicina_general",
+        "specialty": "Medicina general",
+        "doctorId": "doc-diana-cortes",
+        "doctorName": "Dra. Diana Cortés",
+        "centerId": "calle26",
+        "centerName": "Compensar Calle 26",
+        "date": "2026-04-18",
+        "isLastAppointment": true,
+        "relationshipLabel": "Médico tratante"
+      }
+    ]
+  },
+  "specialties": [
+    {
+      "id": "dermatologia",
+      "name": "Dermatología",
+      "hasAvailability": true,
+      "availableDates": [
+        "2026-06-05",
+        "2026-06-06"
+      ]
+    },
+    {
+      "id": "medicina_general",
+      "name": "Medicina general",
+      "hasAvailability": true,
+      "availableDates": [
+        "2026-06-05",
+        "2026-06-06"
+      ]
+    },
+    {
+      "id": "pediatria",
+      "name": "Pediatría",
+      "hasAvailability": true,
+      "availableDates": [
+        "2026-06-05",
+        "2026-06-06"
+      ]
+    },
+    {
+      "id": "oftalmologia",
+      "name": "Oftalmología",
+      "hasAvailability": true,
+      "availableDates": [
+        "2026-06-05",
+        "2026-06-06"
+      ]
+    }
+  ],
+  "modalities": [
+    "Presencial"
+  ],
+  "medicalCenters": [
+    {
+      "id": "av68",
+      "name": "Sede Principal Compensar Avenida 68",
+      "shortName": "Av. 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": true,
+      "isExclusive": false
+    },
+    {
+      "id": "calle94",
+      "name": "Compensar Calle 94",
+      "shortName": "Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": false,
+      "isExclusive": true
+    },
+    {
+      "id": "calle26",
+      "name": "Compensar Calle 26",
+      "shortName": "Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": true,
+      "isExclusive": false
+    },
+    {
+      "id": "sanroque",
+      "name": "Compensar San Roque",
+      "shortName": "San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "city": "Cajicá, Cundinamarca",
+      "isRecent": true,
+      "isExclusive": true
+    },
+    {
+      "id": "suba139",
+      "name": "Compensar Suba Calle 139",
+      "shortName": "Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": false,
+      "isExclusive": false
+    },
+    {
+      "id": "kennedy",
+      "name": "Unidad de Servicios de Salud Kennedy",
+      "shortName": "Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": false,
+      "isExclusive": false
+    },
+    {
+      "id": "primera_mayo",
+      "name": "Compensar Avenida Primera de Mayo",
+      "shortName": "Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": false,
+      "isExclusive": false
+    }
+  ],
+  "doctors": [
+    {
+      "id": "doc-jhon-sarria",
+      "name": "Dr. Jhon Sarria",
+      "gender": "M",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "av68",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": true,
+      "primaryForSpecialtyIds": [
+        "dermatologia"
+      ],
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-alejandra-sierra",
+      "name": "Dra. Alejandra Sierra",
+      "gender": "F",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "sanroque",
+        "calle94"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-victor-garcia",
+      "name": "Dr. Víctor García",
+      "gender": "M",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "calle26",
+        "av68",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-vanessa-martinez",
+      "name": "Dra. Vanessa Martínez",
+      "gender": "F",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "calle94",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-luciana-restrepo",
+      "name": "Dra. Luciana Restrepo",
+      "gender": "F",
+      "specialtyIds": [
+        "dermatologia",
+        "medicina_general"
+      ],
+      "centerIds": [
+        "suba139",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-camilo-torres",
+      "name": "Dr. Camilo Torres",
+      "gender": "M",
+      "specialtyIds": [
+        "medicina_general"
+      ],
+      "centerIds": [
+        "kennedy"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    },
+    {
+      "id": "doc-diana-cortes",
+      "name": "Dra. Diana Cortés",
+      "gender": "F",
+      "specialtyIds": [
+        "medicina_general"
+      ],
+      "centerIds": [
+        "calle26",
+        "primera_mayo"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-felipe-castaneda",
+      "name": "Dr. Felipe Castañeda",
+      "gender": "M",
+      "specialtyIds": [
+        "medicina_general",
+        "dermatologia"
+      ],
+      "centerIds": [
+        "av68"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    },
+    {
+      "id": "doc-paula-bernal",
+      "name": "Dra. Paula Bernal",
+      "gender": "F",
+      "specialtyIds": [
+        "pediatria"
+      ],
+      "centerIds": [
+        "av68",
+        "calle26"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-santiago-mora",
+      "name": "Dr. Santiago Mora",
+      "gender": "M",
+      "specialtyIds": [
+        "pediatria"
+      ],
+      "centerIds": [
+        "suba139"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    },
+    {
+      "id": "doc-laura-mendez",
+      "name": "Dra. Laura Méndez",
+      "gender": "F",
+      "specialtyIds": [
+        "pediatria"
+      ],
+      "centerIds": [
+        "kennedy",
+        "primera_mayo"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-marcela-tovar",
+      "name": "Dra. Marcela Tovar",
+      "gender": "F",
+      "specialtyIds": [
+        "oftalmologia"
+      ],
+      "centerIds": [
+        "calle94"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    },
+    {
+      "id": "doc-sandra-patino",
+      "name": "Dra. Sandra Patiño",
+      "gender": "F",
+      "specialtyIds": [
+        "oftalmologia"
+      ],
+      "centerIds": [
+        "calle26",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-andres-rivera",
+      "name": "Dr. Andrés Rivera",
+      "gender": "M",
+      "specialtyIds": [
+        "oftalmologia"
+      ],
+      "centerIds": [
+        "primera_mayo",
+        "kennedy"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-catalina-rojas",
+      "name": "Dra. Catalina Rojas",
+      "gender": "F",
+      "specialtyIds": [
+        "medicina_general"
+      ],
+      "centerIds": [
+        "av68"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    },
+    {
+      "id": "doc-sebastian-quintero",
+      "name": "Dr. Sebastián Quintero",
+      "gender": "M",
+      "specialtyIds": [
+        "medicina_general"
+      ],
+      "centerIds": [
+        "av68"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    },
+    {
+      "id": "doc-valentina-castro",
+      "name": "Dra. Valentina Castro",
+      "gender": "F",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "av68"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    },
+    {
+      "id": "doc-mateo-salcedo",
+      "name": "Dr. Mateo Salcedo",
+      "gender": "M",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "av68"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    }
+  ],
+  "availability": [
+    {
+      "id": "slot-20260605-0700-jhon-sarria-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:00",
+      "endTime": "07:20",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante"
+      ]
+    },
+    {
+      "id": "slot-20260605-0700-paula-bernal-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:00",
+      "endTime": "07:20",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0710-camilo-torres-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:10",
+      "endTime": "07:30",
+      "doctorId": "doc-camilo-torres",
+      "doctorName": "Dr. Camilo Torres",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0720-alejandra-sierra-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:20",
+      "endTime": "07:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-0720-marcela-tovar-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:20",
+      "endTime": "07:40",
+      "doctorId": "doc-marcela-tovar",
+      "doctorName": "Dra. Marcela Tovar",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-0730-diana-cortes-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:30",
+      "endTime": "07:50",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0740-victor-garcia-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:40",
+      "endTime": "08:00",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0740-santiago-mora-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:40",
+      "endTime": "08:00",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0750-luciana-restrepo-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "07:50",
+      "endTime": "08:10",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0800-vanessa-martinez-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-0800-sandra-patino-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0810-felipe-castaneda-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:10",
+      "endTime": "08:30",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0820-jhon-sarria-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:20",
+      "endTime": "08:40",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante",
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-0820-laura-mendez-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:20",
+      "endTime": "08:40",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0830-diana-cortes-primera_mayo",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:30",
+      "endTime": "08:50",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0840-luciana-restrepo-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:40",
+      "endTime": "09:00",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0840-andres-rivera-primera_mayo",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:40",
+      "endTime": "09:00",
+      "doctorId": "doc-andres-rivera",
+      "doctorName": "Dr. Andrés Rivera",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0900-alejandra-sierra-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:00",
+      "endTime": "09:20",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-0900-paula-bernal-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:00",
+      "endTime": "09:20",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0910-camilo-torres-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:10",
+      "endTime": "09:30",
+      "doctorId": "doc-camilo-torres",
+      "doctorName": "Dr. Camilo Torres",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0920-felipe-castaneda-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-0920-sandra-patino-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-0930-luciana-restrepo-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:30",
+      "endTime": "09:50",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-0940-victor-garcia-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:40",
+      "endTime": "10:00",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-0940-santiago-mora-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:40",
+      "endTime": "10:00",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1000-vanessa-martinez-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:00",
+      "endTime": "10:20",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1000-marcela-tovar-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:00",
+      "endTime": "10:20",
+      "doctorId": "doc-marcela-tovar",
+      "doctorName": "Dra. Marcela Tovar",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1010-diana-cortes-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:10",
+      "endTime": "10:30",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1020-jhon-sarria-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:20",
+      "endTime": "10:40",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante"
+      ]
+    },
+    {
+      "id": "slot-20260605-1020-laura-mendez-primera_mayo",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:20",
+      "endTime": "10:40",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1030-felipe-castaneda-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:30",
+      "endTime": "10:50",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1040-luciana-restrepo-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1040-andres-rivera-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-andres-rivera",
+      "doctorName": "Dr. Andrés Rivera",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1100-victor-garcia-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "11:00",
+      "endTime": "11:20",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1100-paula-bernal-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "11:00",
+      "endTime": "11:20",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1110-camilo-torres-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "11:10",
+      "endTime": "11:30",
+      "doctorId": "doc-camilo-torres",
+      "doctorName": "Dr. Camilo Torres",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1120-alejandra-sierra-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "11:20",
+      "endTime": "11:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1120-sandra-patino-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "11:20",
+      "endTime": "11:40",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1140-felipe-castaneda-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "11:40",
+      "endTime": "12:00",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1200-vanessa-martinez-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "12:00",
+      "endTime": "12:20",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1210-diana-cortes-primera_mayo",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "12:10",
+      "endTime": "12:30",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1400-jhon-sarria-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:00",
+      "endTime": "14:20",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante",
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1400-laura-mendez-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:00",
+      "endTime": "14:20",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1410-luciana-restrepo-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:10",
+      "endTime": "14:30",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1420-victor-garcia-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1420-marcela-tovar-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-marcela-tovar",
+      "doctorName": "Dra. Marcela Tovar",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1430-felipe-castaneda-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:30",
+      "endTime": "14:50",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1440-luciana-restrepo-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:40",
+      "endTime": "15:00",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1440-santiago-mora-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:40",
+      "endTime": "15:00",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1500-alejandra-sierra-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:00",
+      "endTime": "15:20",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1500-andres-rivera-primera_mayo",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:00",
+      "endTime": "15:20",
+      "doctorId": "doc-andres-rivera",
+      "doctorName": "Dr. Andrés Rivera",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1510-camilo-torres-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:10",
+      "endTime": "15:30",
+      "doctorId": "doc-camilo-torres",
+      "doctorName": "Dr. Camilo Torres",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1520-vanessa-martinez-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:20",
+      "endTime": "15:40",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1520-paula-bernal-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:20",
+      "endTime": "15:40",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1530-diana-cortes-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:30",
+      "endTime": "15:50",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1540-victor-garcia-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:40",
+      "endTime": "16:00",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1540-sandra-patino-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:40",
+      "endTime": "16:00",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1600-jhon-sarria-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "16:00",
+      "endTime": "16:20",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante"
+      ]
+    },
+    {
+      "id": "slot-20260605-1600-laura-mendez-primera_mayo",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "16:00",
+      "endTime": "16:20",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1610-luciana-restrepo-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "16:10",
+      "endTime": "16:30",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1620-felipe-castaneda-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "16:20",
+      "endTime": "16:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1620-marcela-tovar-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "16:20",
+      "endTime": "16:40",
+      "doctorId": "doc-marcela-tovar",
+      "doctorName": "Dra. Marcela Tovar",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1630-felipe-castaneda-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "16:30",
+      "endTime": "16:50",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1640-luciana-restrepo-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "16:40",
+      "endTime": "17:00",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1700-victor-garcia-sanroque",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "17:00",
+      "endTime": "17:20",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1700-andres-rivera-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "17:00",
+      "endTime": "17:20",
+      "doctorId": "doc-andres-rivera",
+      "doctorName": "Dr. Andrés Rivera",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1710-diana-cortes-primera_mayo",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "17:10",
+      "endTime": "17:30",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1720-alejandra-sierra-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "17:20",
+      "endTime": "17:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1720-santiago-mora-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "17:20",
+      "endTime": "17:40",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1740-vanessa-martinez-calle94",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "17:40",
+      "endTime": "18:00",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-0700-jhon-sarria-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:00",
+      "endTime": "07:20",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante"
+      ]
+    },
+    {
+      "id": "slot-20260606-0700-paula-bernal-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:00",
+      "endTime": "07:20",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0710-camilo-torres-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:10",
+      "endTime": "07:30",
+      "doctorId": "doc-camilo-torres",
+      "doctorName": "Dr. Camilo Torres",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0750-alejandra-sierra-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:50",
+      "endTime": "08:10",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-0720-marcela-tovar-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:20",
+      "endTime": "07:40",
+      "doctorId": "doc-marcela-tovar",
+      "doctorName": "Dra. Marcela Tovar",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-0730-diana-cortes-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:30",
+      "endTime": "07:50",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0750-victor-garcia-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:50",
+      "endTime": "08:10",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0740-santiago-mora-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:40",
+      "endTime": "08:00",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0750-luciana-restrepo-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "07:50",
+      "endTime": "08:10",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0830-vanessa-martinez-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "08:30",
+      "endTime": "08:50",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-0800-sandra-patino-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0810-felipe-castaneda-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "08:10",
+      "endTime": "08:30",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0850-jhon-sarria-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "08:50",
+      "endTime": "09:10",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante",
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-0820-laura-mendez-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "08:20",
+      "endTime": "08:40",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0830-diana-cortes-primera_mayo",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "08:30",
+      "endTime": "08:50",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0910-luciana-restrepo-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "09:10",
+      "endTime": "09:30",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0840-andres-rivera-primera_mayo",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "08:40",
+      "endTime": "09:00",
+      "doctorId": "doc-andres-rivera",
+      "doctorName": "Dr. Andrés Rivera",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1010-alejandra-sierra-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:10",
+      "endTime": "10:30",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-0900-paula-bernal-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "09:00",
+      "endTime": "09:20",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0910-camilo-torres-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "09:10",
+      "endTime": "09:30",
+      "doctorId": "doc-camilo-torres",
+      "doctorName": "Dr. Camilo Torres",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0920-felipe-castaneda-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-0920-sandra-patino-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-0930-luciana-restrepo-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "09:30",
+      "endTime": "09:50",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1010-victor-garcia-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:10",
+      "endTime": "10:30",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-0940-santiago-mora-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "09:40",
+      "endTime": "10:00",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1050-vanessa-martinez-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:50",
+      "endTime": "11:10",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1000-marcela-tovar-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:00",
+      "endTime": "10:20",
+      "doctorId": "doc-marcela-tovar",
+      "doctorName": "Dra. Marcela Tovar",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1010-diana-cortes-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:10",
+      "endTime": "10:30",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1020-jhon-sarria-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:20",
+      "endTime": "10:40",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante"
+      ]
+    },
+    {
+      "id": "slot-20260606-1020-laura-mendez-primera_mayo",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:20",
+      "endTime": "10:40",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1030-felipe-castaneda-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:30",
+      "endTime": "10:50",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1130-luciana-restrepo-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "11:30",
+      "endTime": "11:50",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1040-andres-rivera-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-andres-rivera",
+      "doctorName": "Dr. Andrés Rivera",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1230-victor-garcia-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "12:30",
+      "endTime": "12:50",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1100-paula-bernal-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "11:00",
+      "endTime": "11:20",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1110-camilo-torres-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "11:10",
+      "endTime": "11:30",
+      "doctorId": "doc-camilo-torres",
+      "doctorName": "Dr. Camilo Torres",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1350-alejandra-sierra-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "13:50",
+      "endTime": "14:10",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1120-sandra-patino-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "11:20",
+      "endTime": "11:40",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1140-felipe-castaneda-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "11:40",
+      "endTime": "12:00",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1330-vanessa-martinez-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "13:30",
+      "endTime": "13:50",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1210-diana-cortes-primera_mayo",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "12:10",
+      "endTime": "12:30",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1430-jhon-sarria-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "14:30",
+      "endTime": "14:50",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante",
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1400-laura-mendez-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "14:00",
+      "endTime": "14:20",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1410-luciana-restrepo-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "14:10",
+      "endTime": "14:30",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1420-victor-garcia-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1420-marcela-tovar-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-marcela-tovar",
+      "doctorName": "Dra. Marcela Tovar",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1430-felipe-castaneda-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "14:30",
+      "endTime": "14:50",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1510-luciana-restrepo-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "15:10",
+      "endTime": "15:30",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1440-santiago-mora-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "14:40",
+      "endTime": "15:00",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1610-alejandra-sierra-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:10",
+      "endTime": "16:30",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1500-andres-rivera-primera_mayo",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "15:00",
+      "endTime": "15:20",
+      "doctorId": "doc-andres-rivera",
+      "doctorName": "Dr. Andrés Rivera",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1510-camilo-torres-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "15:10",
+      "endTime": "15:30",
+      "doctorId": "doc-camilo-torres",
+      "doctorName": "Dr. Camilo Torres",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1550-vanessa-martinez-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "15:50",
+      "endTime": "16:10",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1520-paula-bernal-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "15:20",
+      "endTime": "15:40",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1530-diana-cortes-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "15:30",
+      "endTime": "15:50",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1630-victor-garcia-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:30",
+      "endTime": "16:50",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1540-sandra-patino-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "15:40",
+      "endTime": "16:00",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1600-jhon-sarria-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:00",
+      "endTime": "16:20",
+      "doctorId": "doc-jhon-sarria",
+      "doctorName": "Dr. Jhon Sarria",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Virtual",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Médico tratante"
+      ]
+    },
+    {
+      "id": "slot-20260606-1600-laura-mendez-primera_mayo",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:00",
+      "endTime": "16:20",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1610-luciana-restrepo-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:10",
+      "endTime": "16:30",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1620-felipe-castaneda-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:20",
+      "endTime": "16:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1620-marcela-tovar-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:20",
+      "endTime": "16:40",
+      "doctorId": "doc-marcela-tovar",
+      "doctorName": "Dra. Marcela Tovar",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1630-felipe-castaneda-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:30",
+      "endTime": "16:50",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1620-luciana-restrepo-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:20",
+      "endTime": "16:40",
+      "doctorId": "doc-luciana-restrepo",
+      "doctorName": "Dra. Luciana Restrepo",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1730-victor-garcia-sanroque",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "17:30",
+      "endTime": "17:50",
+      "doctorId": "doc-victor-garcia",
+      "doctorName": "Dr. Víctor García",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "sanroque",
+      "centerShortName": "San Roque",
+      "centerName": "Compensar San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1700-andres-rivera-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "17:00",
+      "endTime": "17:20",
+      "doctorId": "doc-andres-rivera",
+      "doctorName": "Dr. Andrés Rivera",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1710-diana-cortes-primera_mayo",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "17:10",
+      "endTime": "17:30",
+      "doctorId": "doc-diana-cortes",
+      "doctorName": "Dra. Diana Cortés",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1700-alejandra-sierra-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "17:00",
+      "endTime": "17:20",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260606-1720-santiago-mora-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "17:20",
+      "endTime": "17:40",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1750-vanessa-martinez-calle94",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "17:50",
+      "endTime": "18:10",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "slot-20260605-1240-sandra-patino-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "12:40",
+      "endTime": "13:00",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1340-sandra-patino-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "13:40",
+      "endTime": "14:00",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1240-sandra-patino-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "12:40",
+      "endTime": "13:00",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1340-sandra-patino-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "13:40",
+      "endTime": "14:00",
+      "doctorId": "doc-sandra-patino",
+      "doctorName": "Dra. Sandra Patiño",
+      "specialtyId": "oftalmologia",
+      "specialty": "Oftalmología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 50000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1220-paula-bernal-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "12:20",
+      "endTime": "12:40",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1620-paula-bernal-calle26",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "16:20",
+      "endTime": "16:40",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1200-laura-mendez-kennedy",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "12:00",
+      "endTime": "12:20",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1700-laura-mendez-primera_mayo",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "17:00",
+      "endTime": "17:20",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260605-1240-santiago-mora-suba139",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "12:40",
+      "endTime": "13:00",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1220-paula-bernal-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "12:20",
+      "endTime": "12:40",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1620-paula-bernal-calle26",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:20",
+      "endTime": "16:40",
+      "doctorId": "doc-paula-bernal",
+      "doctorName": "Dra. Paula Bernal",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1200-laura-mendez-kennedy",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "12:00",
+      "endTime": "12:20",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "kennedy",
+      "centerShortName": "Kennedy",
+      "centerName": "Unidad de Servicios de Salud Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1700-laura-mendez-primera_mayo",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "17:00",
+      "endTime": "17:20",
+      "doctorId": "doc-laura-mendez",
+      "doctorName": "Dra. Laura Méndez",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "primera_mayo",
+      "centerShortName": "Primera de Mayo",
+      "centerName": "Compensar Avenida Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "slot-20260606-1240-santiago-mora-suba139",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "12:40",
+      "endTime": "13:00",
+      "doctorId": "doc-santiago-mora",
+      "doctorName": "Dr. Santiago Mora",
+      "specialtyId": "pediatria",
+      "specialty": "Pediatría",
+      "centerId": "suba139",
+      "centerShortName": "Suba Calle 139",
+      "centerName": "Compensar Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "dayLabel": "Viernes",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260605-1010-catalina-rojas-av68",
+      "date": "2026-06-05",
+      "startTime": "10:10",
+      "endTime": "10:30",
+      "doctorId": "doc-catalina-rojas",
+      "doctorName": "Dra. Catalina Rojas"
+    },
+    {
+      "dayLabel": "Viernes",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260605-1130-catalina-rojas-av68",
+      "date": "2026-06-05",
+      "startTime": "11:30",
+      "endTime": "11:50",
+      "doctorId": "doc-catalina-rojas",
+      "doctorName": "Dra. Catalina Rojas"
+    },
+    {
+      "dayLabel": "Viernes",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260605-1420-sebastian-quintero-av68",
+      "date": "2026-06-05",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-sebastian-quintero",
+      "doctorName": "Dr. Sebastián Quintero"
+    },
+    {
+      "dayLabel": "Viernes",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260605-1630-sebastian-quintero-av68",
+      "date": "2026-06-05",
+      "startTime": "16:30",
+      "endTime": "16:50",
+      "doctorId": "doc-sebastian-quintero",
+      "doctorName": "Dr. Sebastián Quintero"
+    },
+    {
+      "dayLabel": "Sábado",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260606-0740-catalina-rojas-av68",
+      "date": "2026-06-06",
+      "startTime": "07:40",
+      "endTime": "08:00",
+      "doctorId": "doc-catalina-rojas",
+      "doctorName": "Dra. Catalina Rojas"
+    },
+    {
+      "dayLabel": "Sábado",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260606-0900-catalina-rojas-av68",
+      "date": "2026-06-06",
+      "startTime": "09:00",
+      "endTime": "09:20",
+      "doctorId": "doc-catalina-rojas",
+      "doctorName": "Dra. Catalina Rojas"
+    },
+    {
+      "dayLabel": "Sábado",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260606-1230-sebastian-quintero-av68",
+      "date": "2026-06-06",
+      "startTime": "12:30",
+      "endTime": "12:50",
+      "doctorId": "doc-sebastian-quintero",
+      "doctorName": "Dr. Sebastián Quintero"
+    },
+    {
+      "dayLabel": "Sábado",
+      "specialtyId": "medicina_general",
+      "specialty": "Medicina general",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 45000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260606-1540-sebastian-quintero-av68",
+      "date": "2026-06-06",
+      "startTime": "15:40",
+      "endTime": "16:00",
+      "doctorId": "doc-sebastian-quintero",
+      "doctorName": "Dr. Sebastián Quintero"
+    },
+    {
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260605-0820-valentina-castro-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:20",
+      "endTime": "08:40",
+      "doctorId": "doc-valentina-castro",
+      "doctorName": "Dra. Valentina Castro"
+    },
+    {
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260605-1220-valentina-castro-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "12:20",
+      "endTime": "12:40",
+      "doctorId": "doc-valentina-castro",
+      "doctorName": "Dra. Valentina Castro"
+    },
+    {
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260605-1520-mateo-salcedo-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "15:20",
+      "endTime": "15:40",
+      "doctorId": "doc-mateo-salcedo",
+      "doctorName": "Dr. Mateo Salcedo"
+    },
+    {
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260605-1740-mateo-salcedo-av68",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "17:40",
+      "endTime": "18:00",
+      "doctorId": "doc-mateo-salcedo",
+      "doctorName": "Dr. Mateo Salcedo"
+    },
+    {
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260606-0810-valentina-castro-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "08:10",
+      "endTime": "08:30",
+      "doctorId": "doc-valentina-castro",
+      "doctorName": "Dra. Valentina Castro"
+    },
+    {
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260606-1030-valentina-castro-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "10:30",
+      "endTime": "10:50",
+      "doctorId": "doc-valentina-castro",
+      "doctorName": "Dra. Valentina Castro"
+    },
+    {
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260606-1310-mateo-salcedo-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "13:10",
+      "endTime": "13:30",
+      "doctorId": "doc-mateo-salcedo",
+      "doctorName": "Dr. Mateo Salcedo"
+    },
+    {
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "av68",
+      "centerShortName": "Av. 68",
+      "centerName": "Sede Principal Compensar Avenida 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [],
+      "id": "slot-20260606-1650-mateo-salcedo-av68",
+      "date": "2026-06-06",
+      "dayLabel": "Sábado",
+      "startTime": "16:50",
+      "endTime": "17:10",
+      "doctorId": "doc-mateo-salcedo",
+      "doctorName": "Dr. Mateo Salcedo"
+    }
+  ]
+}

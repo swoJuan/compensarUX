@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar APP – Solicita tu historia clínica</title>
+<link rel="icon" href="../../zt/favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!-- Cascada APP: Design System → iconos → shell APP → custom del flujo -->
+<link rel="stylesheet" href="../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../shared/icons/icons.css">
+<link rel="stylesheet" href="../shared/app.css">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="app-viewer">
+
+  <!-- ═══ VISOR DEL TELÉFONO ═══ -->
+  <div class="app-stage" data-app-stage>
+    <div class="app-device">
+      <div class="app-screen" id="app-screen">
+
+        <div class="app-status" aria-hidden="true">
+          <span>9:41</span>
+          <span class="app-status__pills"><i></i><i></i><i></i></span>
+        </div>
+
+        <div class="app-views" id="app-views">
+
+          <!-- ═══════════ VISTA: SOLICITUD (Nueva solicitud / Mis solicitudes) ═══════════ -->
+          <section class="app-view" id="view-solicitud" aria-label="Solicita tu historia clínica">
+            <header class="app-bar">
+              <a class="app-iconbtn" href="../index.html" aria-label="Volver al inicio">
+                <span class="icon icon-arrow-left icon-24 gs-inherit" aria-hidden="true"></span>
+              </a>
+              <h1 class="app-bar__title">Solicita tu historia clínica</h1>
+              <a class="app-iconbtn" href="../index.html" aria-label="Ir al inicio">
+                <span class="icon icon-house icon-24 gs-inherit" aria-hidden="true"></span>
+              </a>
+            </header>
+
+            <div class="app-tabs" role="tablist" aria-label="Historia clínica">
+              <button class="app-tab" role="tab" id="tab-nueva" aria-controls="panel-nueva" aria-selected="true" type="button">Nueva solicitud</button>
+              <button class="app-tab" role="tab" id="tab-mis" aria-controls="panel-mis" aria-selected="false" tabindex="-1" type="button">Mis solicitudes</button>
+            </div>
+
+            <!-- ── Nueva solicitud ── -->
+            <div class="app-tabpanel" id="panel-nueva" role="tabpanel" aria-labelledby="tab-nueva">
+              <div class="app-content">
+                <div class="hc-head">
+                  <h2 class="app-h1">Solicita tu historia clínica</h2>
+                  <p class="app-lead">Solo se puede solicitar la historia clínica de IPS Compensar. Para otras IPS deberás realizarlo directamente con el prestador.</p>
+                </div>
+
+                <form class="app-card" id="hc-form" novalidate>
+                  <div class="app-fieldgroup">
+                    <span class="app-label" id="lbl-serv"><span class="app-star" aria-hidden="true">*</span>Servicios</span>
+                    <button type="button" class="app-field" id="fld-serv" aria-haspopup="dialog" aria-labelledby="lbl-serv fld-serv-val">
+                      <span class="app-field__value is-placeholder" id="fld-serv-val">Selecciona uno o varios</span>
+                      <span class="icon icon-caret-right icon-20 gs-inherit" aria-hidden="true"></span>
+                    </button>
+                  </div>
+
+                  <fieldset class="hc-period">
+                    <legend class="app-question">¿De qué periodo la necesitas?</legend>
+                    <div class="app-seg">
+                      <label class="app-seg__opt"><input type="radio" name="periodo" value="mes" checked><span>Por mes</span></label>
+                      <label class="app-seg__opt"><input type="radio" name="periodo" value="rango"><span>Rango</span></label>
+                      <label class="app-seg__opt"><input type="radio" name="periodo" value="anio"><span>Último año</span></label>
+                    </div>
+                  </fieldset>
+
+                  <!-- Por mes -->
+                  <div class="app-fieldgroup" id="grp-mes">
+                    <span class="app-label" id="lbl-mes"><span class="app-star" aria-hidden="true">*</span>Mes</span>
+                    <button type="button" class="app-field" id="fld-mes" aria-haspopup="dialog" aria-labelledby="lbl-mes fld-mes-val">
+                      <span class="app-field__value" id="fld-mes-val"></span>
+                      <span class="icon icon-caret-right icon-20 gs-inherit" aria-hidden="true"></span>
+                    </button>
+                  </div>
+
+                  <!-- Rango -->
+                  <div class="hc-range" id="grp-rango" hidden>
+                    <div class="app-fieldgroup">
+                      <span class="app-label" id="lbl-desde"><span class="app-star" aria-hidden="true">*</span>Desde</span>
+                      <button type="button" class="app-field" id="fld-desde" aria-haspopup="dialog" aria-labelledby="lbl-desde fld-desde-val" aria-describedby="rango-error">
+                        <span class="app-field__value is-placeholder" id="fld-desde-val">dd/mm/aaaa</span>
+                        <span class="icon icon-calendar-blank icon-20 gs-inherit" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                    <div class="app-fieldgroup">
+                      <span class="app-label" id="lbl-hasta"><span class="app-star" aria-hidden="true">*</span>Hasta</span>
+                      <button type="button" class="app-field" id="fld-hasta" aria-haspopup="dialog" aria-labelledby="lbl-hasta fld-hasta-val" aria-describedby="rango-error">
+                        <span class="app-field__value is-placeholder" id="fld-hasta-val">dd/mm/aaaa</span>
+                        <span class="icon icon-calendar-blank icon-20 gs-inherit" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                    <p class="hc-error" id="rango-error" role="alert" hidden>La fecha final no puede ser anterior a la fecha inicial.</p>
+                  </div>
+
+                  <!-- Último año -->
+                  <!-- Alerta info del Design System (mp-alert), solo descripción -->
+                  <div class="mp-alert mp-alert--info hc-anio" id="grp-anio" role="status" aria-live="polite" hidden>
+                    <i class="icon icon-info icon-32 mp-alert__icon" aria-hidden="true"></i>
+                    <div class="mp-alert__content">
+                      <p class="mp-alert__body" id="anio-note"></p>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="app-help">
+                  <span class="icon icon-question icon-20 gs-violet" aria-hidden="true"></span>
+                  <span>¿Necesitas ayuda?</span>
+                  <!-- [PENDIENTE] Destino de "Más información" no definido en Figma -->
+                  <button type="button" class="app-help__link" aria-disabled="true">Más información</button>
+                </div>
+              </div>
+
+              <div class="app-bottom">
+                <button type="submit" form="hc-form" class="mp-btn mp-btn--primario" id="btn-continuar" disabled>Continuar</button>
+              </div>
+            </div>
+
+            <!-- ── Mis solicitudes (lo pinta hc-app.js) ── -->
+            <div class="app-tabpanel" id="panel-mis" role="tabpanel" aria-labelledby="tab-mis" hidden>
+              <div class="app-content" id="mis-content"></div>
+            </div>
+          </section>
+
+          <!-- ═══════════ VISTA: SOLICITUD RADICADA ═══════════ -->
+          <section class="app-view" id="view-radicada" aria-labelledby="rad-title" hidden>
+            <div class="app-content hc-done" role="status" aria-live="polite">
+              <span class="hc-done__check" aria-hidden="true"><span class="icon icon-check icon-32 gs-inherit"></span></span>
+              <div class="hc-done__msg">
+                <h2 class="hc-done__title" id="rad-title">Tu solicitud fue radicada</h2>
+                <p class="hc-done__lead">Recibimos tu solicitud de historia clínica correctamente.</p>
+              </div>
+
+              <div class="hc-radicado">
+                <p class="hc-radicado__label">NÚMERO DE RADICADO</p>
+                <p class="hc-radicado__num" id="rad-num">123456789</p>
+                <p class="hc-radicado__hint">Guárdalo: lo necesitarás para consultar el estado de tu solicitud.</p>
+              </div>
+
+              <h3 class="hc-next__title"><span>¿Qué sigue?</span></h3>
+              <ul class="hc-next">
+                <li class="hc-next__card">
+                  <span class="hc-next__icon" aria-hidden="true"><span class="icon icon-clock icon-20 gs-violet"></span></span>
+                  <p class="hc-next__strong">3 días hábiles</p>
+                  <p class="hc-next__text">Tu historia estará lista para descargar.</p>
+                </li>
+                <li class="hc-next__card">
+                  <span class="hc-next__icon" aria-hidden="true"><span class="icon icon-calendar-blank icon-20 gs-violet"></span></span>
+                  <p class="hc-next__strong">30 días</p>
+                  <p class="hc-next__text">Para consultarla en “Mis solicitudes”.</p>
+                </li>
+              </ul>
+            </div>
+            <div class="app-bottom">
+              <button type="button" class="mp-btn mp-btn--primario" id="btn-ir-mis">Ir a Mis solicitudes</button>
+              <button type="button" class="app-textbtn" id="btn-otra">Hacer otra solicitud</button>
+            </div>
+          </section>
+        </div>
+
+        <!-- ═══════════ HOJA: SERVICIOS ═══════════ -->
+        <div class="app-sheet" id="sheet-serv" hidden>
+          <div class="app-sheet__backdrop" data-close></div>
+          <div class="app-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheet-serv-title">
+            <div class="app-sheet__handle" aria-hidden="true"></div>
+            <div class="app-sheet__header">
+              <h2 class="app-sheet__title" id="sheet-serv-title">Servicios</h2>
+              <button class="app-sheet__close" type="button" aria-label="Cerrar" data-close><span class="icon icon-x icon-24 gs-inherit" aria-hidden="true"></span></button>
+            </div>
+            <div class="app-sheet__body">
+              <div class="app-search">
+                <span class="icon icon-magnifying-glass icon-20 gs-inherit" aria-hidden="true"></span>
+                <input type="search" id="serv-search" placeholder="Buscar servicio" aria-label="Buscar servicio" autocomplete="off">
+              </div>
+              <div class="app-choicelist">
+                <label class="mp-choice mp-checkbox app-choicelist__all">
+                  <span class="mp-choice__field"><input class="mp-choice__input" type="checkbox" id="serv-all"><span class="mp-choice__control"></span></span>
+                  <span class="mp-choice__text"><span class="mp-choice__label">Seleccionar todos</span></span>
+                </label>
+                <div id="serv-list" role="group" aria-label="Lista de servicios"></div>
+                <p class="app-empty-search" id="serv-empty" hidden>No encontramos servicios con ese nombre.</p>
+              </div>
+            </div>
+            <div class="app-sheet__footer">
+              <button type="button" class="mp-btn mp-btn--primario" id="serv-apply">Aplicar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ HOJA: MES ═══════════ -->
+        <div class="app-sheet" id="sheet-mes" hidden>
+          <div class="app-sheet__backdrop" data-close></div>
+          <div class="app-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheet-mes-title">
+            <div class="app-sheet__handle" aria-hidden="true"></div>
+            <div class="app-sheet__header">
+              <h2 class="app-sheet__title" id="sheet-mes-title">Mes</h2>
+              <button class="app-sheet__close" type="button" aria-label="Cerrar" data-close><span class="icon icon-x icon-24 gs-inherit" aria-hidden="true"></span></button>
+            </div>
+            <div class="app-sheet__body app-choicelist" id="mes-list" role="radiogroup" aria-labelledby="sheet-mes-title"></div>
+            <div class="app-sheet__footer"></div>
+          </div>
+        </div>
+
+        <!-- ═══════════ HOJA: CALENDARIO (Desde / Hasta) ═══════════ -->
+        <div class="app-sheet" id="sheet-cal" hidden>
+          <div class="app-sheet__backdrop" data-close></div>
+          <div class="app-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="cal-title">
+            <div class="app-sheet__handle" aria-hidden="true"></div>
+            <div class="app-sheet__header">
+              <h2 class="app-sheet__title" id="cal-title">Fecha desde</h2>
+              <button class="app-sheet__close" type="button" aria-label="Cerrar" data-close><span class="icon icon-x icon-24 gs-inherit" aria-hidden="true"></span></button>
+            </div>
+            <div class="app-sheet__body">
+              <div class="hc-cal__nav">
+                <button type="button" class="hc-cal__arrow" id="cal-prev" aria-label="Mes anterior"><span class="icon icon-caret-left icon-20 gs-inherit" aria-hidden="true"></span></button>
+                <strong class="hc-cal__month" id="cal-month" aria-live="polite"></strong>
+                <button type="button" class="hc-cal__arrow" id="cal-next" aria-label="Mes siguiente"><span class="icon icon-caret-right icon-20 gs-inherit" aria-hidden="true"></span></button>
+              </div>
+              <div class="hc-cal__week" aria-hidden="true"><span>D</span><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span></div>
+              <div class="hc-cal__grid" id="cal-grid" role="grid" aria-labelledby="cal-month"></div>
+            </div>
+            <div class="app-sheet__footer">
+              <button type="button" class="mp-btn mp-btn--primario" id="cal-apply" disabled>Aplicar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ HOJA: CONFIRMAR ═══════════ -->
+        <div class="app-sheet" id="sheet-confirm" hidden>
+          <div class="app-sheet__backdrop" data-close></div>
+          <div class="app-sheet__panel hc-confirm" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+            <!-- Encabezado violeta (Figma App 02 · Modal): asa de arrastre, icono, título, ayuda y X flotante -->
+            <div class="hc-confirm__header app-sheet__drag">
+              <div class="hc-confirm__handle" aria-hidden="true"></div>
+              <div class="hc-confirm__icon" aria-hidden="true"><span class="icon icon-calendar-check icon-32 gs-violet"></span></div>
+              <h2 class="hc-confirm__title" id="confirm-title">Confirma tu selección</h2>
+              <p class="hc-confirm__intro">Revisa que la información sea correcta y si estás de acuerdo, presiona confirmar.</p>
+              <button class="hc-confirm__close" type="button" aria-label="Cerrar" data-close><span class="icon icon-x icon-24 gs-inherit" aria-hidden="true"></span></button>
+            </div>
+            <div class="hc-confirm__list" id="confirm-summary"></div>
+            <div class="hc-confirm__actions">
+              <button type="button" class="mp-btn mp-btn--primario" id="btn-enviar">Confirmar y enviar</button>
+              <button type="button" class="mp-btn mp-btn--secundario" data-close>Regresar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════ DIÁLOGO (errores / avisos) ═══════════ -->
+        <div class="app-dialog" id="dialog" hidden>
+          <div class="app-dialog__backdrop" data-close></div>
+          <div class="app-dialog__panel" role="alertdialog" aria-modal="true" aria-labelledby="dlg-title" aria-describedby="dlg-text">
+            <span class="app-dialog__icon" id="dlg-icon" aria-hidden="true"></span>
+            <h2 class="app-dialog__title" id="dlg-title"></h2>
+            <p class="app-dialog__text" id="dlg-text"></p>
+            <button type="button" class="mp-btn mp-btn--primario" id="dlg-primary"></button>
+            <button type="button" class="app-textbtn" id="dlg-secondary" data-close>Cerrar</button>
+          </div>
+        </div>
+
+        <div class="app-toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PANEL DE SIMULACIÓN (solo para validar; no es parte de la app) ═══ -->
+  <aside class="app-sim" aria-label="Simulación del prototipo">
+    <h2 class="app-sim__title">Simulación</h2>
+    <p class="app-sim__hint">Abre los mensajes directamente, o elige qué pasa al confirmar la solicitud y cómo se ve “Mis solicitudes”. Solo sirve para validar el prototipo.</p>
+    <fieldset>
+      <legend>Ver mensajes</legend>
+      <div class="app-sim__btns">
+        <button type="button" class="app-sim__btn" data-msg="dup">Solicitud duplicada</button>
+        <button type="button" class="app-sim__btn" data-msg="error">No fue posible realizar la solicitud</button>
+        <button type="button" class="app-sim__btn" data-msg="gestionada">Solicitud ya gestionada</button>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Resultado al confirmar</legend>
+      <label><input type="radio" name="sim-result" value="ok"> Solicitud radicada</label>
+      <label><input type="radio" name="sim-result" value="dup"> Solicitud duplicada</label>
+      <label><input type="radio" name="sim-result" value="error"> Error del servicio</label>
+      <label><input type="radio" name="sim-result" value="gestionada"> Ya gestionada</label>
+    </fieldset>
+    <fieldset>
+      <legend>Mis solicitudes</legend>
+      <label><input type="radio" name="sim-lista" value="datos"> Con solicitudes</label>
+      <label><input type="radio" name="sim-lista" value="vacio"> Sin solicitudes</label>
+    </fieldset>
+    <button type="button" class="app-sim__reset" id="sim-reset">Reiniciar prototipo</button>
+  </aside>
+</div>
+
+<script src="../shared/app-viewer.js"></script>
+<script src="js/hc-data.js"></script>
+<script src="js/hc-app.js"></script>
+</body>
+</html>

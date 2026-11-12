@@ -1,0 +1,114 @@
+/* ============================================================
+ * modal.css — Componente transversal ZT "Modal"
+ * ------------------------------------------------------------
+ * Diálogo modal centrado sobre OVERLAY oscuro (bloqueante), siguiendo el
+ * componente de modales del Design System (.mp-modal / .mp-modal__*).
+ *
+ * Este archivo NO redefine el modal del DS: aporta únicamente el
+ * "shell" de presentación que el DS delega al runtime (posicionamiento
+ * fixed, overlay y centrado), reutilizando los tokens del propio DS
+ * (--mp-modal-overlay, etc.). El contenido usa las clases .mp-modal__*
+ * del Design System (icon 64px, título 28px, body 18px, actions).
+ *
+ * Estructura:
+ *   .zt-modal (overlay fixed, oscuro)   ← backdrop del DS por token
+ *     └ .mp-modal (contenedor DS)
+ *         └ .mp-modal__dialog (max-width 479px, centrado)
+ *             └ .mp-modal__content (card: icon + título + body + actions)
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ * ============================================================ */
+
+/* Overlay oscuro que cubre toda la ventana (bloquea la interfaz).
+   Usa el token de overlay del propio modal del DS. */
+.zt-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;                                   /* mismo nivel que .modal del DS */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16, 1rem);
+  background: var(--mp-modal-overlay, rgba(17, 17, 17, 0.30));
+}
+.zt-modal.is-open { display: flex; }
+
+/* El contenedor DS dentro del overlay se comporta como bloque estático
+   (no usamos el runtime de Bootstrap; el overlay ya centra el diálogo). */
+.zt-modal .mp-modal {
+  position: static;
+  display: block;
+  width: 100%;
+  max-width: var(--mp-modal-width, 479px);
+}
+
+/* El diálogo hereda el ancho del contenedor (ya limitado arriba). */
+.zt-modal .mp-modal__dialog { width: 100%; margin: 0; }
+
+/* El contenido de éxito se apila verticalmente (icono → título → body → acciones).
+   El DS deja .mp-modal__content en flex-row por defecto; aquí lo apilamos para
+   el layout centrado tipo "resultado", como en los modales del proyecto. */
+.zt-modal .mp-modal__content {
+  flex-direction: column;
+}
+
+/* Acciones (los botones son del DS .mp-btn).
+   Desktop: dos acciones SIEMPRE en una sola línea, con el mismo peso visual. Cada botón
+   nunca baja de su contenido (max-content), así que el texto no se corta; con dos acciones
+   el padding lateral baja a 16px para que quepan etiquetas largas dentro de los 479px del
+   modal. Una sola acción conserva el ancho cómodo (200px mín.) y el padding del DS. */
+.zt-modal .mp-modal__actions { flex-wrap: nowrap; }
+.zt-modal .mp-modal__actions .mp-btn {
+  flex: 1 1 0;
+  min-width: max-content;
+  padding-inline: var(--space-16, 1rem);
+}
+.zt-modal .mp-modal__actions .mp-btn:only-child {
+  flex: 0 0 auto;
+  min-width: 200px;
+  padding-inline: var(--space-32, 2rem);
+}
+
+/* ── Tamaño grande (textos legales, declaraciones) ── */
+.zt-modal .mp-modal.zt-modal--lg { --mp-modal-width: 774px; max-width: 774px; }   /* variable del DS → también ensancha el diálogo */
+.zt-modal .zt-modal--lg .mp-modal__content { max-height: calc(100vh - 2 * var(--space-16, 1rem)); }
+/* Cuerpo con formato: se desplaza si es largo (título y acciones siempre visibles). */
+.zt-modal__rich {
+  width: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  font-size: var(--font-size-lg, 1rem);
+  line-height: 1.5;
+  color: var(--use-text-primary, #111);
+}
+.zt-modal__rich--left { text-align: left; }
+.zt-modal__rich:focus-visible { outline: 2px solid var(--use-focus-outline, #f60); outline-offset: 2px; border-radius: 4px; }
+.zt-modal__rich p { margin: 0 0 var(--space-12, 0.75rem); }
+.zt-modal__rich ul { margin: 0; padding-left: var(--space-24, 1.5rem); list-style: disc; }
+.zt-modal__rich li { margin-bottom: var(--space-12, 0.75rem); }
+.zt-modal__rich li:last-child { margin-bottom: 0; }
+
+/* ── Animación de entrada (sutil, respeta reduced-motion) ── */
+.zt-modal.is-open .mp-modal {
+  animation: zt-modal-in 160ms ease-out;
+}
+@keyframes zt-modal-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zt-modal.is-open .mp-modal { animation: none; }
+}
+
+/* ── Responsive ── */
+/* Mobile: las acciones se apilan a todo el ancho. */
+@media (max-width: 680px) {
+  .zt-modal .mp-modal__actions { flex-wrap: wrap; }
+  .zt-modal .mp-modal__actions .mp-btn,
+  .zt-modal .mp-modal__actions .mp-btn:only-child {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+    padding-inline: var(--space-32, 2rem);
+  }
+}

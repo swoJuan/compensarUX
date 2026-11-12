@@ -1,0 +1,4538 @@
+[
+ {
+  "mode": "light",
+  "name": "base/brand/40",
+  "css": "--base-brand-40",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "light",
+  "name": "base/brand/50",
+  "css": "--base-brand-50",
+  "figma": "rgb(255, 194, 153)",
+  "actual": "rgb(255, 194, 153)"
+ },
+ {
+  "mode": "light",
+  "name": "base/brand/60",
+  "css": "--base-brand-60",
+  "figma": "rgb(255, 163, 102)",
+  "actual": "rgb(255, 163, 102)"
+ },
+ {
+  "mode": "light",
+  "name": "base/brand/70",
+  "css": "--base-brand-70",
+  "figma": "rgb(255, 133, 51)",
+  "actual": "rgb(255, 133, 51)"
+ },
+ {
+  "mode": "light",
+  "name": "base/brand/80",
+  "css": "--base-brand-80",
+  "figma": "rgb(255, 102, 0)",
+  "actual": "rgb(255, 102, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "base/brand/90",
+  "css": "--base-brand-90",
+  "figma": "rgb(230, 63, 12)",
+  "actual": "rgb(230, 63, 12)"
+ },
+ {
+  "mode": "light",
+  "name": "base/brand/100",
+  "css": "--base-brand-100",
+  "figma": "rgb(204, 82, 0)",
+  "actual": "rgb(204, 82, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "base/brand/yellow",
+  "css": "--base-brand-yellow",
+  "figma": "rgb(255, 152, 13)",
+  "actual": "rgb(255, 152, 13)"
+ },
+ {
+  "mode": "light",
+  "name": "base/blue/30",
+  "css": "--base-blue-30",
+  "figma": "rgb(230, 241, 251)",
+  "actual": "rgb(230, 241, 251)"
+ },
+ {
+  "mode": "light",
+  "name": "base/blue/40",
+  "css": "--base-blue-40",
+  "figma": "rgb(212, 226, 250)",
+  "actual": "rgb(212, 226, 250)"
+ },
+ {
+  "mode": "light",
+  "name": "base/blue/50",
+  "css": "--base-blue-50",
+  "figma": "rgb(159, 190, 245)",
+  "actual": "rgb(159, 190, 245)"
+ },
+ {
+  "mode": "light",
+  "name": "base/blue/60",
+  "css": "--base-blue-60",
+  "figma": "rgb(92, 145, 242)",
+  "actual": "rgb(92, 145, 242)"
+ },
+ {
+  "mode": "light",
+  "name": "base/blue/70",
+  "css": "--base-blue-70",
+  "figma": "rgb(41, 111, 240)",
+  "actual": "rgb(41, 111, 240)"
+ },
+ {
+  "mode": "light",
+  "name": "base/blue/80",
+  "css": "--base-blue-80",
+  "figma": "rgb(31, 83, 181)",
+  "actual": "rgb(31, 83, 181)"
+ },
+ {
+  "mode": "light",
+  "name": "base/blue/90",
+  "css": "--base-blue-90",
+  "figma": "rgb(24, 66, 143)",
+  "actual": "rgb(24, 66, 143)"
+ },
+ {
+  "mode": "light",
+  "name": "base/blue/100",
+  "css": "--base-blue-100",
+  "figma": "rgb(45, 74, 103)",
+  "actual": "rgb(45, 74, 103)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/10",
+  "css": "--base-cyan-blue-10",
+  "figma": "rgb(238, 245, 252)",
+  "actual": "rgb(238, 245, 252)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/20",
+  "css": "--base-cyan-blue-20",
+  "figma": "rgb(214, 230, 247)",
+  "actual": "rgb(214, 230, 247)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/30",
+  "css": "--base-cyan-blue-30",
+  "figma": "rgb(178, 208, 238)",
+  "actual": "rgb(178, 208, 238)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/40",
+  "css": "--base-cyan-blue-40",
+  "figma": "rgb(140, 184, 224)",
+  "actual": "rgb(140, 184, 224)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/50",
+  "css": "--base-cyan-blue-50",
+  "figma": "rgb(108, 159, 208)",
+  "actual": "rgb(108, 159, 208)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/60",
+  "css": "--base-cyan-blue-60",
+  "figma": "rgb(82, 134, 188)",
+  "actual": "rgb(82, 134, 188)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/70",
+  "css": "--base-cyan-blue-70",
+  "figma": "rgb(74, 116, 165)",
+  "actual": "rgb(74, 116, 165)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/80",
+  "css": "--base-cyan-blue-80",
+  "figma": "rgb(60, 98, 140)",
+  "actual": "rgb(60, 98, 140)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/90",
+  "css": "--base-cyan-blue-90",
+  "figma": "rgb(45, 79, 115)",
+  "actual": "rgb(45, 79, 115)"
+ },
+ {
+  "mode": "light",
+  "name": "base/cyan blue/100",
+  "css": "--base-cyan-blue-100",
+  "figma": "rgb(31, 61, 90)",
+  "actual": "rgb(31, 61, 90)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-1/30",
+  "css": "--base-green-1-30",
+  "figma": "rgb(247, 250, 248)",
+  "actual": "rgb(247, 250, 248)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-1/40",
+  "css": "--base-green-1-40",
+  "figma": "rgb(230, 247, 232)",
+  "actual": "rgb(230, 247, 232)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-1/50",
+  "css": "--base-green-1-50",
+  "figma": "rgb(159, 224, 184)",
+  "actual": "rgb(159, 224, 184)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-1/60",
+  "css": "--base-green-1-60",
+  "figma": "rgb(68, 189, 117)",
+  "actual": "rgb(68, 189, 117)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-1/70",
+  "css": "--base-green-1-70",
+  "figma": "rgb(34, 161, 82)",
+  "actual": "rgb(34, 161, 82)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-1/80",
+  "css": "--base-green-1-80",
+  "figma": "rgb(11, 133, 61)",
+  "actual": "rgb(11, 133, 61)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-1/90",
+  "css": "--base-green-1-90",
+  "figma": "rgb(22, 105, 54)",
+  "actual": "rgb(22, 105, 54)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-1/100",
+  "css": "--base-green-1-100",
+  "figma": "rgb(13, 61, 31)",
+  "actual": "rgb(13, 61, 31)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/10",
+  "css": "--base-green-2-10",
+  "figma": "rgb(236, 247, 201)",
+  "actual": "rgb(236, 247, 201)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/20",
+  "css": "--base-green-2-20",
+  "figma": "rgb(216, 238, 156)",
+  "actual": "rgb(216, 238, 156)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/30",
+  "css": "--base-green-2-30",
+  "figma": "rgb(197, 226, 112)",
+  "actual": "rgb(197, 226, 112)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/40",
+  "css": "--base-green-2-40",
+  "figma": "rgb(177, 214, 69)",
+  "actual": "rgb(177, 214, 69)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/50",
+  "css": "--base-green-2-50",
+  "figma": "rgb(157, 199, 30)",
+  "actual": "rgb(157, 199, 30)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/60",
+  "css": "--base-green-2-60",
+  "figma": "rgb(149, 191, 27)",
+  "actual": "rgb(149, 191, 27)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/70",
+  "css": "--base-green-2-70",
+  "figma": "rgb(132, 173, 22)",
+  "actual": "rgb(132, 173, 22)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/80",
+  "css": "--base-green-2-80",
+  "figma": "rgb(106, 142, 17)",
+  "actual": "rgb(106, 142, 17)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/90",
+  "css": "--base-green-2-90",
+  "figma": "rgb(81, 109, 13)",
+  "actual": "rgb(81, 109, 13)"
+ },
+ {
+  "mode": "light",
+  "name": "base/green-2/100",
+  "css": "--base-green-2-100",
+  "figma": "rgb(63, 84, 10)",
+  "actual": "rgb(63, 84, 10)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/10",
+  "css": "--base-neutral-10",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/20",
+  "css": "--base-neutral-20",
+  "figma": "rgb(224, 224, 224)",
+  "actual": "rgb(224, 224, 224)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/30",
+  "css": "--base-neutral-30",
+  "figma": "rgb(204, 204, 204)",
+  "actual": "rgb(204, 204, 204)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/40",
+  "css": "--base-neutral-40",
+  "figma": "rgb(184, 184, 184)",
+  "actual": "rgb(184, 184, 184)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/50",
+  "css": "--base-neutral-50",
+  "figma": "rgb(164, 164, 164)",
+  "actual": "rgb(164, 164, 164)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/60",
+  "css": "--base-neutral-60",
+  "figma": "rgb(127, 127, 127)",
+  "actual": "rgb(127, 127, 127)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/70",
+  "css": "--base-neutral-70",
+  "figma": "rgb(102, 102, 102)",
+  "actual": "rgb(102, 102, 102)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/80",
+  "css": "--base-neutral-80",
+  "figma": "rgb(51, 51, 51)",
+  "actual": "rgb(51, 51, 51)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/90",
+  "css": "--base-neutral-90",
+  "figma": "rgb(41, 41, 41)",
+  "actual": "rgb(41, 41, 41)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/100 (Negro)",
+  "css": "--base-neutral-100-negro",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(17, 17, 17)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/white",
+  "css": "--base-neutral-white",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "light",
+  "name": "base/neutral/black",
+  "css": "--base-neutral-black",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/30",
+  "css": "--base-red-30",
+  "figma": "rgb(247, 238, 237)",
+  "actual": "rgb(247, 238, 237)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/40",
+  "css": "--base-red-40",
+  "figma": "rgb(242, 216, 213)",
+  "actual": "rgb(242, 216, 213)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/50",
+  "css": "--base-red-50",
+  "figma": "rgb(235, 173, 167)",
+  "actual": "rgb(235, 173, 167)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/60",
+  "css": "--base-red-60",
+  "figma": "rgb(219, 113, 101)",
+  "actual": "rgb(219, 113, 101)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/70",
+  "css": "--base-red-70",
+  "figma": "rgb(209, 68, 52)",
+  "actual": "rgb(209, 68, 52)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/75",
+  "css": "--base-red-75",
+  "figma": "rgb(187, 73, 69)",
+  "actual": "rgb(187, 73, 69)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/80",
+  "css": "--base-red-80",
+  "figma": "rgb(158, 51, 40)",
+  "actual": "rgb(158, 51, 40)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/90",
+  "css": "--base-red-90",
+  "figma": "rgb(125, 41, 31)",
+  "actual": "rgb(125, 41, 31)"
+ },
+ {
+  "mode": "light",
+  "name": "base/red/100",
+  "css": "--base-red-100",
+  "figma": "rgb(82, 26, 20)",
+  "actual": "rgb(82, 26, 20)"
+ },
+ {
+  "mode": "light",
+  "name": "base/orange/10",
+  "css": "--base-orange-10",
+  "figma": "rgb(255, 242, 227)",
+  "actual": "rgb(255, 242, 227)"
+ },
+ {
+  "mode": "light",
+  "name": "base/orange/20",
+  "css": "--base-orange-20",
+  "figma": "rgb(255, 229, 204)",
+  "actual": "rgb(255, 229, 204)"
+ },
+ {
+  "mode": "light",
+  "name": "base/orange/40",
+  "css": "--base-orange-40",
+  "figma": "rgb(255, 179, 128)",
+  "actual": "rgb(255, 179, 128)"
+ },
+ {
+  "mode": "light",
+  "name": "base/orange/60",
+  "css": "--base-orange-60",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "light",
+  "name": "base/orange/100",
+  "css": "--base-orange-100",
+  "figma": "rgb(107, 68, 0)",
+  "actual": "rgb(107, 68, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "base/yellow/30",
+  "css": "--base-yellow-30",
+  "figma": "rgb(255, 249, 239)",
+  "actual": "rgb(255, 249, 239)"
+ },
+ {
+  "mode": "light",
+  "name": "base/yellow/40",
+  "css": "--base-yellow-40",
+  "figma": "rgb(255, 242, 217)",
+  "actual": "rgb(255, 242, 217)"
+ },
+ {
+  "mode": "light",
+  "name": "base/yellow/50",
+  "css": "--base-yellow-50",
+  "figma": "rgb(252, 225, 172)",
+  "actual": "rgb(252, 225, 172)"
+ },
+ {
+  "mode": "light",
+  "name": "base/yellow/60",
+  "css": "--base-yellow-60",
+  "figma": "rgb(252, 206, 114)",
+  "actual": "rgb(252, 206, 114)"
+ },
+ {
+  "mode": "light",
+  "name": "base/yellow/70",
+  "css": "--base-yellow-70",
+  "figma": "rgb(255, 193, 84)",
+  "actual": "rgb(255, 193, 84)"
+ },
+ {
+  "mode": "light",
+  "name": "base/yellow/80",
+  "css": "--base-yellow-80",
+  "figma": "rgb(191, 144, 52)",
+  "actual": "rgb(191, 144, 52)"
+ },
+ {
+  "mode": "light",
+  "name": "base/yellow/90",
+  "css": "--base-yellow-90",
+  "figma": "rgb(150, 114, 41)",
+  "actual": "rgb(150, 114, 41)"
+ },
+ {
+  "mode": "light",
+  "name": "base/yellow/100",
+  "css": "--base-yellow-100",
+  "figma": "rgb(99, 74, 26)",
+  "actual": "rgb(99, 74, 26)"
+ },
+ {
+  "mode": "light",
+  "name": "product/medicina/Cyan",
+  "css": "--product-medicina-cyan",
+  "figma": "rgb(0, 226, 219)",
+  "actual": "rgb(0, 226, 219)"
+ },
+ {
+  "mode": "light",
+  "name": "product/medicina/Purple",
+  "css": "--product-medicina-purple",
+  "figma": "rgb(130, 104, 203)",
+  "actual": "rgb(130, 104, 203)"
+ },
+ {
+  "mode": "light",
+  "name": "product/medicina/Gray",
+  "css": "--product-medicina-gray",
+  "figma": "rgb(179, 172, 171)",
+  "actual": "rgb(179, 172, 171)"
+ },
+ {
+  "mode": "light",
+  "name": "product/accent/30",
+  "css": "--product-accent-30",
+  "figma": "rgb(242, 252, 255)",
+  "actual": "rgb(242, 252, 255)"
+ },
+ {
+  "mode": "light",
+  "name": "product/accent/40",
+  "css": "--product-accent-40",
+  "figma": "rgb(225, 247, 254)",
+  "actual": "rgb(225, 247, 254)"
+ },
+ {
+  "mode": "light",
+  "name": "product/accent/50",
+  "css": "--product-accent-50",
+  "figma": "rgb(179, 215, 224)",
+  "actual": "rgb(179, 215, 224)"
+ },
+ {
+  "mode": "light",
+  "name": "product/accent/60",
+  "css": "--product-accent-60",
+  "figma": "rgb(143, 197, 208)",
+  "actual": "rgb(143, 197, 208)"
+ },
+ {
+  "mode": "light",
+  "name": "product/accent/70",
+  "css": "--product-accent-70",
+  "figma": "rgb(107, 180, 192)",
+  "actual": "rgb(107, 180, 192)"
+ },
+ {
+  "mode": "light",
+  "name": "product/accent/80",
+  "css": "--product-accent-80",
+  "figma": "rgb(71, 164, 175)",
+  "actual": "rgb(71, 164, 175)"
+ },
+ {
+  "mode": "light",
+  "name": "product/accent/90",
+  "css": "--product-accent-90",
+  "figma": "rgb(36, 147, 157)",
+  "actual": "rgb(36, 147, 157)"
+ },
+ {
+  "mode": "light",
+  "name": "product/accent/100",
+  "css": "--product-accent-100",
+  "figma": "rgb(3, 131, 138)",
+  "actual": "rgb(3, 131, 138)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/5",
+  "css": "--product-gray-5",
+  "figma": "rgb(248, 247, 247)",
+  "actual": "rgb(248, 247, 247)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/10",
+  "css": "--product-gray-10",
+  "figma": "rgb(236, 234, 234)",
+  "actual": "rgb(236, 234, 234)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/20",
+  "css": "--product-gray-20",
+  "figma": "rgb(217, 213, 213)",
+  "actual": "rgb(217, 213, 213)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/30",
+  "css": "--product-gray-30",
+  "figma": "rgb(198, 193, 192)",
+  "actual": "rgb(198, 193, 192)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/40",
+  "css": "--product-gray-40",
+  "figma": "rgb(179, 172, 171)",
+  "actual": "rgb(179, 172, 171)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/50",
+  "css": "--product-gray-50",
+  "figma": "rgb(160, 151, 150)",
+  "actual": "rgb(160, 151, 150)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/60",
+  "css": "--product-gray-60",
+  "figma": "rgb(140, 130, 128)",
+  "actual": "rgb(140, 130, 128)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/70",
+  "css": "--product-gray-70",
+  "figma": "rgb(120, 110, 108)",
+  "actual": "rgb(120, 110, 108)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/80",
+  "css": "--product-gray-80",
+  "figma": "rgb(99, 90, 89)",
+  "actual": "rgb(99, 90, 89)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/90",
+  "css": "--product-gray-90",
+  "figma": "rgb(77, 71, 70)",
+  "actual": "rgb(77, 71, 70)"
+ },
+ {
+  "mode": "light",
+  "name": "product/gray/100",
+  "css": "--product-gray-100",
+  "figma": "rgb(56, 51, 51)",
+  "actual": "rgb(56, 51, 51)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/5",
+  "css": "--product-violet-5",
+  "figma": "rgb(239, 236, 249)",
+  "actual": "rgb(239, 236, 249)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/10",
+  "css": "--product-violet-10",
+  "figma": "rgb(224, 217, 243)",
+  "actual": "rgb(224, 217, 243)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/20",
+  "css": "--product-violet-20",
+  "figma": "rgb(193, 179, 231)",
+  "actual": "rgb(193, 179, 231)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/30",
+  "css": "--product-violet-30",
+  "figma": "rgb(162, 141, 218)",
+  "actual": "rgb(162, 141, 218)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/40",
+  "css": "--product-violet-40",
+  "figma": "rgb(131, 103, 206)",
+  "actual": "rgb(131, 103, 206)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/50",
+  "css": "--product-violet-50",
+  "figma": "rgb(109, 76, 197)",
+  "actual": "rgb(109, 76, 197)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/60",
+  "css": "--product-violet-60",
+  "figma": "rgb(91, 58, 180)",
+  "actual": "rgb(91, 58, 180)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/70",
+  "css": "--product-violet-70",
+  "figma": "rgb(78, 49, 153)",
+  "actual": "rgb(78, 49, 153)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/80",
+  "css": "--product-violet-80",
+  "figma": "rgb(64, 41, 126)",
+  "actual": "rgb(64, 41, 126)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/90",
+  "css": "--product-violet-90",
+  "figma": "rgb(50, 32, 100)",
+  "actual": "rgb(50, 32, 100)"
+ },
+ {
+  "mode": "light",
+  "name": "product/violet/100",
+  "css": "--product-violet-100",
+  "figma": "rgb(37, 23, 73)",
+  "actual": "rgb(37, 23, 73)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/5",
+  "css": "--product-teal-5",
+  "figma": "rgb(235, 255, 254)",
+  "actual": "rgb(235, 255, 254)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/10",
+  "css": "--product-teal-10",
+  "figma": "rgb(208, 255, 253)",
+  "actual": "rgb(208, 255, 253)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/20",
+  "css": "--product-teal-20",
+  "figma": "rgb(160, 255, 252)",
+  "actual": "rgb(160, 255, 252)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/30",
+  "css": "--product-teal-30",
+  "figma": "rgb(113, 255, 250)",
+  "actual": "rgb(113, 255, 250)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/40",
+  "css": "--product-teal-40",
+  "figma": "rgb(65, 255, 248)",
+  "actual": "rgb(65, 255, 248)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/50",
+  "css": "--product-teal-50",
+  "figma": "rgb(18, 255, 247)",
+  "actual": "rgb(18, 255, 247)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/60",
+  "css": "--product-teal-60",
+  "figma": "rgb(0, 225, 217)",
+  "actual": "rgb(0, 225, 217)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/70",
+  "css": "--product-teal-70",
+  "figma": "rgb(0, 192, 185)",
+  "actual": "rgb(0, 192, 185)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/80",
+  "css": "--product-teal-80",
+  "figma": "rgb(0, 159, 153)",
+  "actual": "rgb(0, 159, 153)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/90",
+  "css": "--product-teal-90",
+  "figma": "rgb(0, 125, 121)",
+  "actual": "rgb(0, 125, 121)"
+ },
+ {
+  "mode": "light",
+  "name": "product/teal/100",
+  "css": "--product-teal-100",
+  "figma": "rgb(0, 92, 89)",
+  "actual": "rgb(0, 92, 89)"
+ },
+ {
+  "mode": "light",
+  "name": "use/background/page",
+  "css": "--use-background-page",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "light",
+  "name": "use/primary/default",
+  "css": "--use-primary-default",
+  "figma": "rgb(255, 102, 0)",
+  "actual": "rgb(255, 102, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "use/primary/hover",
+  "css": "--use-primary-hover",
+  "figma": "rgb(230, 63, 12)",
+  "actual": "rgb(230, 63, 12)"
+ },
+ {
+  "mode": "light",
+  "name": "use/primary/active",
+  "css": "--use-primary-active",
+  "figma": "rgb(204, 82, 0)",
+  "actual": "rgb(204, 82, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "use/primary/default dark",
+  "css": "--use-primary-default-dark",
+  "figma": "rgb(255, 157, 92)",
+  "actual": "rgb(255, 157, 92)"
+ },
+ {
+  "mode": "light",
+  "name": "use/border/default",
+  "css": "--use-border-default",
+  "figma": "rgb(204, 204, 204)",
+  "actual": "rgb(204, 204, 204)"
+ },
+ {
+  "mode": "light",
+  "name": "use/border/strong",
+  "css": "--use-border-strong",
+  "figma": "rgb(102, 102, 102)",
+  "actual": "rgb(102, 102, 102)"
+ },
+ {
+  "mode": "light",
+  "name": "use/border/subtle",
+  "css": "--use-border-subtle",
+  "figma": "rgb(224, 224, 224)",
+  "actual": "rgb(224, 224, 224)"
+ },
+ {
+  "mode": "light",
+  "name": "use/border/hover",
+  "css": "--use-border-hover",
+  "figma": "rgb(230, 63, 12)",
+  "actual": "rgb(230, 63, 12)"
+ },
+ {
+  "mode": "light",
+  "name": "use/border/violet-dark",
+  "css": "--use-border-violet-dark",
+  "figma": "rgb(64, 41, 126)",
+  "actual": "rgb(64, 41, 126)"
+ },
+ {
+  "mode": "light",
+  "name": "use/border/violet",
+  "css": "--use-border-violet",
+  "figma": "rgb(224, 217, 243)",
+  "actual": "rgb(224, 217, 243)"
+ },
+ {
+  "mode": "light",
+  "name": "use/focus/border",
+  "css": "--use-focus-border",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "light",
+  "name": "use/focus/outline",
+  "css": "--use-focus-outline",
+  "figma": "rgb(255, 102, 0)",
+  "actual": "rgb(255, 102, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "use/focus/background",
+  "css": "--use-focus-background",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/primary",
+  "css": "--use-text-primary",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(17, 17, 17)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/secondary",
+  "css": "--use-text-secondary",
+  "figma": "rgb(51, 51, 51)",
+  "actual": "rgb(51, 51, 51)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/tertiary",
+  "css": "--use-text-tertiary",
+  "figma": "rgb(102, 102, 102)",
+  "actual": "rgb(102, 102, 102)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/inverse",
+  "css": "--use-text-inverse",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/link",
+  "css": "--use-text-link",
+  "figma": "rgb(255, 102, 0)",
+  "actual": "rgb(255, 102, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/theme/violet",
+  "css": "--use-text-theme-violet",
+  "figma": "rgb(78, 49, 153)",
+  "actual": "rgb(78, 49, 153)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/theme/yellow",
+  "css": "--use-text-theme-yellow",
+  "figma": "rgb(255, 193, 84)",
+  "actual": "rgb(255, 193, 84)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/theme/orange",
+  "css": "--use-text-theme-orange",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/theme/blue",
+  "css": "--use-text-theme-blue",
+  "figma": "rgb(31, 83, 181)",
+  "actual": "rgb(31, 83, 181)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/theme/red",
+  "css": "--use-text-theme-red",
+  "figma": "rgb(187, 73, 69)",
+  "actual": "rgb(187, 73, 69)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/theme/green-1",
+  "css": "--use-text-theme-green-1",
+  "figma": "rgb(11, 133, 61)",
+  "actual": "rgb(11, 133, 61)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/theme/green-2",
+  "css": "--use-text-theme-green-2",
+  "figma": "rgb(106, 142, 17)",
+  "actual": "rgb(106, 142, 17)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/on-dark/primary",
+  "css": "--use-text-on-dark-primary",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "light",
+  "name": "use/text/on-dark/secondary",
+  "css": "--use-text-on-dark-secondary",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "light",
+  "name": "use/tables/Head",
+  "css": "--use-tables-head",
+  "figma": "rgb(165, 215, 213)",
+  "actual": "rgb(165, 215, 213)"
+ },
+ {
+  "mode": "light",
+  "name": "use/tables/Filter",
+  "css": "--use-tables-filter",
+  "figma": "rgb(227, 231, 237)",
+  "actual": "rgb(227, 231, 237)"
+ },
+ {
+  "mode": "light",
+  "name": "use/tables/Stripes",
+  "css": "--use-tables-stripes",
+  "figma": "rgb(245, 245, 247)",
+  "actual": "rgb(245, 245, 247)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/success/bg",
+  "css": "--use-state-success-bg",
+  "figma": "rgb(230, 247, 232)",
+  "actual": "rgb(230, 247, 232)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/success/text",
+  "css": "--use-state-success-text",
+  "figma": "rgb(13, 61, 31)",
+  "actual": "rgb(13, 61, 31)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/success/border",
+  "css": "--use-state-success-border",
+  "figma": "rgb(68, 189, 117)",
+  "actual": "rgb(68, 189, 117)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/success/icon",
+  "css": "--use-state-success-icon",
+  "figma": "rgb(11, 133, 61)",
+  "actual": "rgb(11, 133, 61)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/error/bg",
+  "css": "--use-state-error-bg",
+  "figma": "rgb(247, 238, 237)",
+  "actual": "rgb(247, 238, 237)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/error/text",
+  "css": "--use-state-error-text",
+  "figma": "rgb(82, 26, 20)",
+  "actual": "rgb(82, 26, 20)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/error/text-error-field",
+  "css": "--use-state-error-text-error-field",
+  "figma": "rgb(158, 51, 40)",
+  "actual": "rgb(158, 51, 40)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/error/icon",
+  "css": "--use-state-error-icon",
+  "figma": "rgb(209, 68, 52)",
+  "actual": "rgb(209, 68, 52)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/error/border",
+  "css": "--use-state-error-border",
+  "figma": "rgb(219, 113, 101)",
+  "actual": "rgb(219, 113, 101)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/error/mandatory",
+  "css": "--use-state-error-mandatory",
+  "figma": "rgb(187, 73, 69)",
+  "actual": "rgb(187, 73, 69)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/warning/bg",
+  "css": "--use-state-warning-bg",
+  "figma": "rgb(255, 242, 217)",
+  "actual": "rgb(255, 242, 217)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/warning/text",
+  "css": "--use-state-warning-text",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(17, 17, 17)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/warning/border",
+  "css": "--use-state-warning-border",
+  "figma": "rgb(252, 206, 114)",
+  "actual": "rgb(252, 206, 114)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/warning/icon bg",
+  "css": "--use-state-warning-icon-bg",
+  "figma": "rgb(255, 193, 84)",
+  "actual": "rgb(255, 193, 84)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/warning/icon color",
+  "css": "--use-state-warning-icon-color",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(17, 17, 17)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/info/bg",
+  "css": "--use-state-info-bg",
+  "figma": "rgb(230, 241, 251)",
+  "actual": "rgb(230, 241, 251)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/info/text",
+  "css": "--use-state-info-text",
+  "figma": "rgb(45, 74, 103)",
+  "actual": "rgb(45, 74, 103)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/info/border",
+  "css": "--use-state-info-border",
+  "figma": "rgb(108, 159, 208)",
+  "actual": "rgb(108, 159, 208)"
+ },
+ {
+  "mode": "light",
+  "name": "use/state/info/icon",
+  "css": "--use-state-info-icon",
+  "figma": "rgb(82, 134, 188)",
+  "actual": "rgb(82, 134, 188)"
+ },
+ {
+  "mode": "light",
+  "name": "use/overlay/subtle",
+  "css": "--use-overlay-subtle",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "use/overlay/strong 2",
+  "css": "--use-overlay-strong-2",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "use/overlay/strong 3",
+  "css": "--use-overlay-strong-3",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/surface",
+  "css": "--use-surface-surface",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/subtle",
+  "css": "--use-surface-subtle",
+  "figma": "rgb(217, 213, 213)",
+  "actual": "rgb(217, 213, 213)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/orange",
+  "css": "--use-surface-orange",
+  "figma": "rgb(255, 242, 227)",
+  "actual": "rgb(255, 242, 227)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/cyan blue",
+  "css": "--use-surface-cyan-blue",
+  "figma": "rgb(238, 245, 252)",
+  "actual": "rgb(238, 245, 252)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/violet",
+  "css": "--use-surface-violet",
+  "figma": "rgb(239, 236, 249)",
+  "actual": "rgb(239, 236, 249)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/white",
+  "css": "--use-surface-white",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/green",
+  "css": "--use-surface-green",
+  "figma": "rgb(247, 250, 248)",
+  "actual": "rgb(247, 250, 248)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/green-2",
+  "css": "--use-surface-green-2",
+  "figma": "rgb(236, 247, 201)",
+  "actual": "rgb(236, 247, 201)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/blue-dark/30",
+  "css": "--use-surface-theme-blue-dark-30",
+  "figma": "rgb(230, 241, 251)",
+  "actual": "rgb(230, 241, 251)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/blue-dark/40",
+  "css": "--use-surface-theme-blue-dark-40",
+  "figma": "rgb(212, 226, 250)",
+  "actual": "rgb(212, 226, 250)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/blue-dark/50",
+  "css": "--use-surface-theme-blue-dark-50",
+  "figma": "rgb(159, 190, 245)",
+  "actual": "rgb(159, 190, 245)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/blue-dark/60",
+  "css": "--use-surface-theme-blue-dark-60",
+  "figma": "rgb(92, 145, 242)",
+  "actual": "rgb(92, 145, 242)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/blue-dark/90",
+  "css": "--use-surface-theme-blue-dark-90",
+  "figma": "rgb(24, 66, 143)",
+  "actual": "rgb(24, 66, 143)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/gray/5",
+  "css": "--use-surface-theme-gray-5",
+  "figma": "rgb(248, 247, 247)",
+  "actual": "rgb(248, 247, 247)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/gray/10",
+  "css": "--use-surface-theme-gray-10",
+  "figma": "rgb(236, 234, 234)",
+  "actual": "rgb(236, 234, 234)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/gray/20",
+  "css": "--use-surface-theme-gray-20",
+  "figma": "rgb(217, 213, 213)",
+  "actual": "rgb(217, 213, 213)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/green-1/30",
+  "css": "--use-surface-theme-green-1-30",
+  "figma": "rgb(247, 250, 248)",
+  "actual": "rgb(247, 250, 248)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/green-1/40",
+  "css": "--use-surface-theme-green-1-40",
+  "figma": "rgb(230, 247, 232)",
+  "actual": "rgb(230, 247, 232)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/green-1/50",
+  "css": "--use-surface-theme-green-1-50",
+  "figma": "rgb(159, 224, 184)",
+  "actual": "rgb(159, 224, 184)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/green-2/10",
+  "css": "--use-surface-theme-green-2-10",
+  "figma": "rgb(236, 247, 201)",
+  "actual": "rgb(236, 247, 201)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/green-2/20",
+  "css": "--use-surface-theme-green-2-20",
+  "figma": "rgb(216, 238, 156)",
+  "actual": "rgb(216, 238, 156)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/green-2/40",
+  "css": "--use-surface-theme-green-2-40",
+  "figma": "rgb(177, 214, 69)",
+  "actual": "rgb(177, 214, 69)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/green-2/60",
+  "css": "--use-surface-theme-green-2-60",
+  "figma": "rgb(149, 191, 27)",
+  "actual": "rgb(149, 191, 27)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/neutral/30",
+  "css": "--use-surface-theme-neutral-30",
+  "figma": "rgb(204, 204, 204)",
+  "actual": "rgb(204, 204, 204)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/orange/10",
+  "css": "--use-surface-theme-orange-10",
+  "figma": "rgb(255, 242, 227)",
+  "actual": "rgb(255, 242, 227)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/orange/20",
+  "css": "--use-surface-theme-orange-20",
+  "figma": "rgb(255, 229, 204)",
+  "actual": "rgb(255, 229, 204)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/orange/40",
+  "css": "--use-surface-theme-orange-40",
+  "figma": "rgb(255, 179, 128)",
+  "actual": "rgb(255, 179, 128)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/orange/60",
+  "css": "--use-surface-theme-orange-60",
+  "figma": "rgb(255, 179, 128)",
+  "actual": "rgb(255, 179, 128)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/red/30",
+  "css": "--use-surface-theme-red-30",
+  "figma": "rgb(247, 238, 237)",
+  "actual": "rgb(247, 238, 237)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/red/40",
+  "css": "--use-surface-theme-red-40",
+  "figma": "rgb(242, 216, 213)",
+  "actual": "rgb(242, 216, 213)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/red/50",
+  "css": "--use-surface-theme-red-50",
+  "figma": "rgb(235, 173, 167)",
+  "actual": "rgb(235, 173, 167)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/red/60",
+  "css": "--use-surface-theme-red-60",
+  "figma": "rgb(219, 113, 101)",
+  "actual": "rgb(219, 113, 101)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/violet/5",
+  "css": "--use-surface-theme-violet-5",
+  "figma": "rgb(239, 236, 249)",
+  "actual": "rgb(239, 236, 249)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/violet/10",
+  "css": "--use-surface-theme-violet-10",
+  "figma": "rgb(224, 217, 243)",
+  "actual": "rgb(224, 217, 243)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/violet/20",
+  "css": "--use-surface-theme-violet-20",
+  "figma": "rgb(193, 179, 231)",
+  "actual": "rgb(193, 179, 231)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/violet/60",
+  "css": "--use-surface-theme-violet-60",
+  "figma": "rgb(91, 58, 180)",
+  "actual": "rgb(91, 58, 180)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/violet/70",
+  "css": "--use-surface-theme-violet-70",
+  "figma": "rgb(78, 49, 153)",
+  "actual": "rgb(78, 49, 153)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/yellow/30",
+  "css": "--use-surface-theme-yellow-30",
+  "figma": "rgb(255, 249, 239)",
+  "actual": "rgb(255, 249, 239)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/yellow/50",
+  "css": "--use-surface-theme-yellow-50",
+  "figma": "rgb(252, 225, 172)",
+  "actual": "rgb(252, 225, 172)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/yellow/60",
+  "css": "--use-surface-theme-yellow-60",
+  "figma": "rgb(252, 206, 114)",
+  "actual": "rgb(252, 206, 114)"
+ },
+ {
+  "mode": "light",
+  "name": "use/surface/theme/yellow/70",
+  "css": "--use-surface-theme-yellow-70",
+  "figma": "rgb(255, 193, 84)",
+  "actual": "rgb(255, 193, 84)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/brand/40",
+  "css": "--base-brand-40",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/brand/50",
+  "css": "--base-brand-50",
+  "figma": "rgb(255, 194, 153)",
+  "actual": "rgb(255, 194, 153)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/brand/60",
+  "css": "--base-brand-60",
+  "figma": "rgb(255, 163, 102)",
+  "actual": "rgb(255, 163, 102)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/brand/70",
+  "css": "--base-brand-70",
+  "figma": "rgb(255, 133, 51)",
+  "actual": "rgb(255, 133, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/brand/80",
+  "css": "--base-brand-80",
+  "figma": "rgb(255, 157, 92)",
+  "actual": "rgb(255, 157, 92)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/brand/90",
+  "css": "--base-brand-90",
+  "figma": "rgb(230, 92, 0)",
+  "actual": "rgb(230, 92, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/brand/100",
+  "css": "--base-brand-100",
+  "figma": "rgb(204, 82, 0)",
+  "actual": "rgb(204, 82, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/brand/yellow",
+  "css": "--base-brand-yellow",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/blue/30",
+  "css": "--base-blue-30",
+  "figma": "rgb(237, 242, 250)",
+  "actual": "rgb(237, 242, 250)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/blue/40",
+  "css": "--base-blue-40",
+  "figma": "rgb(212, 226, 250)",
+  "actual": "rgb(212, 226, 250)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/blue/50",
+  "css": "--base-blue-50",
+  "figma": "rgb(159, 190, 245)",
+  "actual": "rgb(159, 190, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/blue/60",
+  "css": "--base-blue-60",
+  "figma": "rgb(92, 145, 242)",
+  "actual": "rgb(92, 145, 242)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/blue/70",
+  "css": "--base-blue-70",
+  "figma": "rgb(41, 111, 240)",
+  "actual": "rgb(41, 111, 240)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/blue/80",
+  "css": "--base-blue-80",
+  "figma": "rgb(31, 83, 181)",
+  "actual": "rgb(31, 83, 181)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/blue/90",
+  "css": "--base-blue-90",
+  "figma": "rgb(24, 66, 143)",
+  "actual": "rgb(24, 66, 143)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/blue/100",
+  "css": "--base-blue-100",
+  "figma": "rgb(16, 44, 94)",
+  "actual": "rgb(16, 44, 94)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/10",
+  "css": "--base-cyan-blue-10",
+  "figma": "rgb(238, 245, 252)",
+  "actual": "rgb(238, 245, 252)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/20",
+  "css": "--base-cyan-blue-20",
+  "figma": "rgb(214, 230, 247)",
+  "actual": "rgb(214, 230, 247)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/30",
+  "css": "--base-cyan-blue-30",
+  "figma": "rgb(178, 208, 238)",
+  "actual": "rgb(178, 208, 238)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/40",
+  "css": "--base-cyan-blue-40",
+  "figma": "rgb(140, 184, 224)",
+  "actual": "rgb(140, 184, 224)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/50",
+  "css": "--base-cyan-blue-50",
+  "figma": "rgb(108, 159, 208)",
+  "actual": "rgb(108, 159, 208)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/60",
+  "css": "--base-cyan-blue-60",
+  "figma": "rgb(82, 134, 188)",
+  "actual": "rgb(82, 134, 188)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/70",
+  "css": "--base-cyan-blue-70",
+  "figma": "rgb(74, 116, 165)",
+  "actual": "rgb(74, 116, 165)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/80",
+  "css": "--base-cyan-blue-80",
+  "figma": "rgb(60, 98, 140)",
+  "actual": "rgb(60, 98, 140)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/90",
+  "css": "--base-cyan-blue-90",
+  "figma": "rgb(45, 79, 115)",
+  "actual": "rgb(45, 79, 115)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/cyan blue/100",
+  "css": "--base-cyan-blue-100",
+  "figma": "rgb(31, 61, 90)",
+  "actual": "rgb(31, 61, 90)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-1/30",
+  "css": "--base-green-1-30",
+  "figma": "rgb(247, 250, 248)",
+  "actual": "rgb(247, 250, 248)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-1/40",
+  "css": "--base-green-1-40",
+  "figma": "rgb(230, 247, 232)",
+  "actual": "rgb(230, 247, 232)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-1/50",
+  "css": "--base-green-1-50",
+  "figma": "rgb(159, 224, 184)",
+  "actual": "rgb(159, 224, 184)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-1/60",
+  "css": "--base-green-1-60",
+  "figma": "rgb(68, 189, 117)",
+  "actual": "rgb(68, 189, 117)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-1/70",
+  "css": "--base-green-1-70",
+  "figma": "rgb(34, 161, 82)",
+  "actual": "rgb(34, 161, 82)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-1/80",
+  "css": "--base-green-1-80",
+  "figma": "rgb(11, 133, 61)",
+  "actual": "rgb(11, 133, 61)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-1/90",
+  "css": "--base-green-1-90",
+  "figma": "rgb(22, 105, 54)",
+  "actual": "rgb(22, 105, 54)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-1/100",
+  "css": "--base-green-1-100",
+  "figma": "rgb(13, 61, 31)",
+  "actual": "rgb(13, 61, 31)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/10",
+  "css": "--base-green-2-10",
+  "figma": "rgb(236, 247, 201)",
+  "actual": "rgb(236, 247, 201)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/20",
+  "css": "--base-green-2-20",
+  "figma": "rgb(216, 238, 156)",
+  "actual": "rgb(216, 238, 156)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/30",
+  "css": "--base-green-2-30",
+  "figma": "rgb(197, 226, 112)",
+  "actual": "rgb(197, 226, 112)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/40",
+  "css": "--base-green-2-40",
+  "figma": "rgb(177, 214, 69)",
+  "actual": "rgb(177, 214, 69)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/50",
+  "css": "--base-green-2-50",
+  "figma": "rgb(157, 199, 30)",
+  "actual": "rgb(157, 199, 30)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/60",
+  "css": "--base-green-2-60",
+  "figma": "rgb(149, 191, 27)",
+  "actual": "rgb(149, 191, 27)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/70",
+  "css": "--base-green-2-70",
+  "figma": "rgb(132, 173, 22)",
+  "actual": "rgb(132, 173, 22)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/80",
+  "css": "--base-green-2-80",
+  "figma": "rgb(106, 142, 17)",
+  "actual": "rgb(106, 142, 17)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/90",
+  "css": "--base-green-2-90",
+  "figma": "rgb(81, 109, 13)",
+  "actual": "rgb(81, 109, 13)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/green-2/100",
+  "css": "--base-green-2-100",
+  "figma": "rgb(63, 84, 10)",
+  "actual": "rgb(63, 84, 10)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/10",
+  "css": "--base-neutral-10",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/20",
+  "css": "--base-neutral-20",
+  "figma": "rgb(224, 224, 224)",
+  "actual": "rgb(224, 224, 224)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/30",
+  "css": "--base-neutral-30",
+  "figma": "rgb(204, 204, 204)",
+  "actual": "rgb(204, 204, 204)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/40",
+  "css": "--base-neutral-40",
+  "figma": "rgb(184, 184, 184)",
+  "actual": "rgb(184, 184, 184)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/50",
+  "css": "--base-neutral-50",
+  "figma": "rgb(164, 164, 164)",
+  "actual": "rgb(164, 164, 164)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/60",
+  "css": "--base-neutral-60",
+  "figma": "rgb(127, 127, 127)",
+  "actual": "rgb(127, 127, 127)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/70",
+  "css": "--base-neutral-70",
+  "figma": "rgb(102, 102, 102)",
+  "actual": "rgb(102, 102, 102)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/80",
+  "css": "--base-neutral-80",
+  "figma": "rgb(51, 51, 51)",
+  "actual": "rgb(51, 51, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/90",
+  "css": "--base-neutral-90",
+  "figma": "rgb(41, 41, 41)",
+  "actual": "rgb(41, 41, 41)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/100 (Negro)",
+  "css": "--base-neutral-100-negro",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(17, 17, 17)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/white",
+  "css": "--base-neutral-white",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/neutral/black",
+  "css": "--base-neutral-black",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/30",
+  "css": "--base-red-30",
+  "figma": "rgb(247, 238, 237)",
+  "actual": "rgb(247, 238, 237)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/40",
+  "css": "--base-red-40",
+  "figma": "rgb(242, 216, 213)",
+  "actual": "rgb(242, 216, 213)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/50",
+  "css": "--base-red-50",
+  "figma": "rgb(235, 173, 167)",
+  "actual": "rgb(235, 173, 167)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/60",
+  "css": "--base-red-60",
+  "figma": "rgb(219, 113, 101)",
+  "actual": "rgb(219, 113, 101)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/70",
+  "css": "--base-red-70",
+  "figma": "rgb(209, 68, 52)",
+  "actual": "rgb(209, 68, 52)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/75",
+  "css": "--base-red-75",
+  "figma": "rgb(187, 73, 69)",
+  "actual": "rgb(187, 73, 69)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/80",
+  "css": "--base-red-80",
+  "figma": "rgb(158, 51, 40)",
+  "actual": "rgb(158, 51, 40)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/90",
+  "css": "--base-red-90",
+  "figma": "rgb(125, 41, 31)",
+  "actual": "rgb(125, 41, 31)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/red/100",
+  "css": "--base-red-100",
+  "figma": "rgb(82, 26, 20)",
+  "actual": "rgb(82, 26, 20)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/orange/10",
+  "css": "--base-orange-10",
+  "figma": "rgb(255, 242, 227)",
+  "actual": "rgb(255, 242, 227)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/orange/20",
+  "css": "--base-orange-20",
+  "figma": "rgb(255, 229, 204)",
+  "actual": "rgb(255, 229, 204)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/orange/40",
+  "css": "--base-orange-40",
+  "figma": "rgb(255, 179, 128)",
+  "actual": "rgb(255, 179, 128)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/orange/60",
+  "css": "--base-orange-60",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/orange/100",
+  "css": "--base-orange-100",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/yellow/30",
+  "css": "--base-yellow-30",
+  "figma": "rgb(255, 249, 239)",
+  "actual": "rgb(255, 249, 239)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/yellow/40",
+  "css": "--base-yellow-40",
+  "figma": "rgb(255, 242, 217)",
+  "actual": "rgb(255, 242, 217)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/yellow/50",
+  "css": "--base-yellow-50",
+  "figma": "rgb(252, 225, 172)",
+  "actual": "rgb(252, 225, 172)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/yellow/60",
+  "css": "--base-yellow-60",
+  "figma": "rgb(252, 206, 114)",
+  "actual": "rgb(252, 206, 114)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/yellow/70",
+  "css": "--base-yellow-70",
+  "figma": "rgb(252, 191, 68)",
+  "actual": "rgb(252, 191, 68)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/yellow/80",
+  "css": "--base-yellow-80",
+  "figma": "rgb(191, 144, 52)",
+  "actual": "rgb(191, 144, 52)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/yellow/90",
+  "css": "--base-yellow-90",
+  "figma": "rgb(150, 114, 41)",
+  "actual": "rgb(150, 114, 41)"
+ },
+ {
+  "mode": "dark",
+  "name": "base/yellow/100",
+  "css": "--base-yellow-100",
+  "figma": "rgb(99, 74, 26)",
+  "actual": "rgb(99, 74, 26)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/medicina/Cyan",
+  "css": "--product-medicina-cyan",
+  "figma": "rgb(0, 226, 219)",
+  "actual": "rgb(0, 226, 219)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/medicina/Purple",
+  "css": "--product-medicina-purple",
+  "figma": "rgb(130, 104, 203)",
+  "actual": "rgb(130, 104, 203)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/medicina/Gray",
+  "css": "--product-medicina-gray",
+  "figma": "rgb(179, 172, 171)",
+  "actual": "rgb(179, 172, 171)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/accent/30",
+  "css": "--product-accent-30",
+  "figma": "rgb(242, 252, 255)",
+  "actual": "rgb(242, 252, 255)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/accent/40",
+  "css": "--product-accent-40",
+  "figma": "rgb(225, 247, 254)",
+  "actual": "rgb(225, 247, 254)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/accent/50",
+  "css": "--product-accent-50",
+  "figma": "rgb(179, 215, 224)",
+  "actual": "rgb(179, 215, 224)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/accent/60",
+  "css": "--product-accent-60",
+  "figma": "rgb(143, 197, 208)",
+  "actual": "rgb(143, 197, 208)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/accent/70",
+  "css": "--product-accent-70",
+  "figma": "rgb(107, 180, 192)",
+  "actual": "rgb(107, 180, 192)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/accent/80",
+  "css": "--product-accent-80",
+  "figma": "rgb(71, 164, 175)",
+  "actual": "rgb(71, 164, 175)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/accent/90",
+  "css": "--product-accent-90",
+  "figma": "rgb(36, 147, 157)",
+  "actual": "rgb(36, 147, 157)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/accent/100",
+  "css": "--product-accent-100",
+  "figma": "rgb(3, 131, 138)",
+  "actual": "rgb(3, 131, 138)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/5",
+  "css": "--product-gray-5",
+  "figma": "rgb(248, 247, 247)",
+  "actual": "rgb(248, 247, 247)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/10",
+  "css": "--product-gray-10",
+  "figma": "rgb(236, 234, 234)",
+  "actual": "rgb(236, 234, 234)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/20",
+  "css": "--product-gray-20",
+  "figma": "rgb(217, 213, 213)",
+  "actual": "rgb(217, 213, 213)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/30",
+  "css": "--product-gray-30",
+  "figma": "rgb(198, 193, 192)",
+  "actual": "rgb(198, 193, 192)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/40",
+  "css": "--product-gray-40",
+  "figma": "rgb(179, 172, 171)",
+  "actual": "rgb(179, 172, 171)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/50",
+  "css": "--product-gray-50",
+  "figma": "rgb(160, 151, 150)",
+  "actual": "rgb(160, 151, 150)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/60",
+  "css": "--product-gray-60",
+  "figma": "rgb(140, 130, 128)",
+  "actual": "rgb(140, 130, 128)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/70",
+  "css": "--product-gray-70",
+  "figma": "rgb(120, 110, 108)",
+  "actual": "rgb(120, 110, 108)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/80",
+  "css": "--product-gray-80",
+  "figma": "rgb(99, 90, 89)",
+  "actual": "rgb(99, 90, 89)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/90",
+  "css": "--product-gray-90",
+  "figma": "rgb(77, 71, 70)",
+  "actual": "rgb(77, 71, 70)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/gray/100",
+  "css": "--product-gray-100",
+  "figma": "rgb(56, 51, 51)",
+  "actual": "rgb(56, 51, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/5",
+  "css": "--product-violet-5",
+  "figma": "rgb(239, 236, 249)",
+  "actual": "rgb(239, 236, 249)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/10",
+  "css": "--product-violet-10",
+  "figma": "rgb(224, 217, 243)",
+  "actual": "rgb(224, 217, 243)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/20",
+  "css": "--product-violet-20",
+  "figma": "rgb(193, 179, 231)",
+  "actual": "rgb(193, 179, 231)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/30",
+  "css": "--product-violet-30",
+  "figma": "rgb(162, 141, 218)",
+  "actual": "rgb(162, 141, 218)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/40",
+  "css": "--product-violet-40",
+  "figma": "rgb(131, 103, 206)",
+  "actual": "rgb(131, 103, 206)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/50",
+  "css": "--product-violet-50",
+  "figma": "rgb(109, 76, 197)",
+  "actual": "rgb(109, 76, 197)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/60",
+  "css": "--product-violet-60",
+  "figma": "rgb(91, 58, 180)",
+  "actual": "rgb(91, 58, 180)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/70",
+  "css": "--product-violet-70",
+  "figma": "rgb(78, 49, 153)",
+  "actual": "rgb(78, 49, 153)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/80",
+  "css": "--product-violet-80",
+  "figma": "rgb(64, 41, 126)",
+  "actual": "rgb(64, 41, 126)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/90",
+  "css": "--product-violet-90",
+  "figma": "rgb(50, 32, 100)",
+  "actual": "rgb(50, 32, 100)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/violet/100",
+  "css": "--product-violet-100",
+  "figma": "rgb(37, 23, 73)",
+  "actual": "rgb(37, 23, 73)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/5",
+  "css": "--product-teal-5",
+  "figma": "rgb(235, 255, 254)",
+  "actual": "rgb(235, 255, 254)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/10",
+  "css": "--product-teal-10",
+  "figma": "rgb(208, 255, 253)",
+  "actual": "rgb(208, 255, 253)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/20",
+  "css": "--product-teal-20",
+  "figma": "rgb(160, 255, 252)",
+  "actual": "rgb(160, 255, 252)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/30",
+  "css": "--product-teal-30",
+  "figma": "rgb(113, 255, 250)",
+  "actual": "rgb(113, 255, 250)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/40",
+  "css": "--product-teal-40",
+  "figma": "rgb(65, 255, 248)",
+  "actual": "rgb(65, 255, 248)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/50",
+  "css": "--product-teal-50",
+  "figma": "rgb(18, 255, 247)",
+  "actual": "rgb(18, 255, 247)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/60",
+  "css": "--product-teal-60",
+  "figma": "rgb(0, 225, 217)",
+  "actual": "rgb(0, 225, 217)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/70",
+  "css": "--product-teal-70",
+  "figma": "rgb(0, 192, 185)",
+  "actual": "rgb(0, 192, 185)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/80",
+  "css": "--product-teal-80",
+  "figma": "rgb(0, 159, 153)",
+  "actual": "rgb(0, 159, 153)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/90",
+  "css": "--product-teal-90",
+  "figma": "rgb(0, 125, 121)",
+  "actual": "rgb(0, 125, 121)"
+ },
+ {
+  "mode": "dark",
+  "name": "product/teal/100",
+  "css": "--product-teal-100",
+  "figma": "rgb(0, 92, 89)",
+  "actual": "rgb(0, 92, 89)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/background/page",
+  "css": "--use-background-page",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(41, 41, 41)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/primary/default",
+  "css": "--use-primary-default",
+  "figma": "rgb(255, 157, 92)",
+  "actual": "rgb(255, 157, 92)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/primary/hover",
+  "css": "--use-primary-hover",
+  "figma": "rgb(230, 92, 0)",
+  "actual": "rgb(230, 92, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/primary/active",
+  "css": "--use-primary-active",
+  "figma": "rgb(204, 82, 0)",
+  "actual": "rgb(204, 82, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/primary/default dark",
+  "css": "--use-primary-default-dark",
+  "figma": "rgb(255, 157, 92)",
+  "actual": "rgb(255, 157, 92)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/border/default",
+  "css": "--use-border-default",
+  "figma": "rgb(51, 51, 51)",
+  "actual": "rgb(127, 127, 127)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/border/strong",
+  "css": "--use-border-strong",
+  "figma": "rgb(224, 224, 224)",
+  "actual": "rgb(184, 184, 184)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/border/subtle",
+  "css": "--use-border-subtle",
+  "figma": "rgb(127, 127, 127)",
+  "actual": "rgb(102, 102, 102)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/border/hover",
+  "css": "--use-border-hover",
+  "figma": "rgb(204, 82, 0)",
+  "actual": "rgb(230, 92, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/border/violet-dark",
+  "css": "--use-border-violet-dark",
+  "figma": "rgb(224, 217, 243)",
+  "actual": "rgb(64, 41, 126)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/border/violet",
+  "css": "--use-border-violet",
+  "figma": "rgb(50, 32, 100)",
+  "actual": "rgb(224, 217, 243)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/focus/border",
+  "css": "--use-focus-border",
+  "figma": "rgb(255, 157, 92)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/focus/outline",
+  "css": "--use-focus-outline",
+  "figma": "rgb(255, 157, 92)",
+  "actual": "rgb(255, 157, 92)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/focus/background",
+  "css": "--use-focus-background",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/primary",
+  "css": "--use-text-primary",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/secondary",
+  "css": "--use-text-secondary",
+  "figma": "rgb(224, 224, 224)",
+  "actual": "rgb(224, 224, 224)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/tertiary",
+  "css": "--use-text-tertiary",
+  "figma": "rgb(164, 164, 164)",
+  "actual": "rgb(164, 164, 164)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/inverse",
+  "css": "--use-text-inverse",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(17, 17, 17)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/link",
+  "css": "--use-text-link",
+  "figma": "rgb(255, 157, 92)",
+  "actual": "rgb(255, 157, 92)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/theme/violet",
+  "css": "--use-text-theme-violet",
+  "figma": "rgb(162, 141, 218)",
+  "actual": "rgb(162, 141, 218)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/theme/yellow",
+  "css": "--use-text-theme-yellow",
+  "figma": "rgb(255, 249, 239)",
+  "actual": "rgb(255, 249, 239)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/theme/orange",
+  "css": "--use-text-theme-orange",
+  "figma": "rgb(255, 242, 227)",
+  "actual": "rgb(255, 242, 227)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/theme/blue",
+  "css": "--use-text-theme-blue",
+  "figma": "rgb(237, 242, 250)",
+  "actual": "rgb(230, 241, 251)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/theme/red",
+  "css": "--use-text-theme-red",
+  "figma": "rgb(247, 238, 237)",
+  "actual": "rgb(247, 238, 237)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/theme/green-1",
+  "css": "--use-text-theme-green-1",
+  "figma": "rgb(247, 250, 248)",
+  "actual": "rgb(247, 250, 248)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/theme/green-2",
+  "css": "--use-text-theme-green-2",
+  "figma": "rgb(236, 247, 201)",
+  "actual": "rgb(236, 247, 201)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/on-dark/primary",
+  "css": "--use-text-on-dark-primary",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/text/on-dark/secondary",
+  "css": "--use-text-on-dark-secondary",
+  "figma": "rgb(224, 224, 224)",
+  "actual": "rgb(224, 224, 224)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/tables/Head",
+  "css": "--use-tables-head",
+  "figma": "rgb(165, 215, 213)",
+  "actual": "rgb(165, 215, 213)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/tables/Filter",
+  "css": "--use-tables-filter",
+  "figma": "rgb(227, 231, 237)",
+  "actual": "rgb(227, 231, 237)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/tables/Stripes",
+  "css": "--use-tables-stripes",
+  "figma": "rgb(245, 245, 247)",
+  "actual": "rgb(245, 245, 247)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/success/bg",
+  "css": "--use-state-success-bg",
+  "figma": "rgb(11, 133, 61)",
+  "actual": "rgb(11, 133, 61)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/success/text",
+  "css": "--use-state-success-text",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/success/border",
+  "css": "--use-state-success-border",
+  "figma": "rgb(34, 161, 82)",
+  "actual": "rgb(34, 161, 82)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/success/icon",
+  "css": "--use-state-success-icon",
+  "figma": "rgb(230, 247, 232)",
+  "actual": "rgb(230, 247, 232)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/error/bg",
+  "css": "--use-state-error-bg",
+  "figma": "rgb(125, 41, 31)",
+  "actual": "rgb(125, 41, 31)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/error/text",
+  "css": "--use-state-error-text",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/error/text-error-field",
+  "css": "--use-state-error-text-error-field",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/error/icon",
+  "css": "--use-state-error-icon",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/error/border",
+  "css": "--use-state-error-border",
+  "figma": "rgb(209, 68, 52)",
+  "actual": "rgb(209, 68, 52)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/error/mandatory",
+  "css": "--use-state-error-mandatory",
+  "figma": "rgb(209, 68, 52)",
+  "actual": "rgb(209, 68, 52)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/warning/bg",
+  "css": "--use-state-warning-bg",
+  "figma": "rgb(150, 114, 41)",
+  "actual": "rgb(150, 114, 41)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/warning/text",
+  "css": "--use-state-warning-text",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/warning/border",
+  "css": "--use-state-warning-border",
+  "figma": "rgb(252, 191, 68)",
+  "actual": "rgb(255, 193, 84)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/warning/icon bg",
+  "css": "--use-state-warning-icon-bg",
+  "figma": "rgb(252, 191, 68)",
+  "actual": "rgb(252, 191, 68)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/warning/icon color",
+  "css": "--use-state-warning-icon-color",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(17, 17, 17)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/info/bg",
+  "css": "--use-state-info-bg",
+  "figma": "rgb(24, 66, 143)",
+  "actual": "rgb(24, 66, 143)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/info/text",
+  "css": "--use-state-info-text",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/info/border",
+  "css": "--use-state-info-border",
+  "figma": "rgb(41, 111, 240)",
+  "actual": "rgb(41, 111, 240)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/state/info/icon",
+  "css": "--use-state-info-icon",
+  "figma": "rgb(41, 111, 240)",
+  "actual": "rgb(41, 111, 240)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/overlay/subtle",
+  "css": "--use-overlay-subtle",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/overlay/strong 2",
+  "css": "--use-overlay-strong-2",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/overlay/strong 3",
+  "css": "--use-overlay-strong-3",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/surface",
+  "css": "--use-surface-surface",
+  "figma": "rgb(102, 102, 102)",
+  "actual": "rgb(51, 51, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/subtle",
+  "css": "--use-surface-subtle",
+  "figma": "rgb(99, 90, 89)",
+  "actual": "rgb(77, 71, 70)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/orange",
+  "css": "--use-surface-orange",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/cyan blue",
+  "css": "--use-surface-cyan-blue",
+  "figma": "rgb(60, 98, 140)",
+  "actual": "rgb(60, 98, 140)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/violet",
+  "css": "--use-surface-violet",
+  "figma": "rgb(64, 41, 126)",
+  "actual": "rgb(64, 41, 126)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/white",
+  "css": "--use-surface-white",
+  "figma": "rgb(41, 41, 41)",
+  "actual": "rgb(41, 41, 41)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/green",
+  "css": "--use-surface-green",
+  "figma": "rgb(22, 105, 54)",
+  "actual": "rgb(22, 105, 54)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/green-2",
+  "css": "--use-surface-green-2",
+  "figma": "rgb(22, 105, 54)",
+  "actual": "rgb(22, 105, 54)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/blue-dark/30",
+  "css": "--use-surface-theme-blue-dark-30",
+  "figma": "rgb(31, 83, 181)",
+  "actual": "rgb(31, 83, 181)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/blue-dark/40",
+  "css": "--use-surface-theme-blue-dark-40",
+  "figma": "rgb(159, 190, 245)",
+  "actual": "rgb(159, 190, 245)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/blue-dark/50",
+  "css": "--use-surface-theme-blue-dark-50",
+  "figma": "rgb(92, 145, 242)",
+  "actual": "rgb(92, 145, 242)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/blue-dark/60",
+  "css": "--use-surface-theme-blue-dark-60",
+  "figma": "rgb(92, 145, 242)",
+  "actual": "rgb(92, 145, 242)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/blue-dark/90",
+  "css": "--use-surface-theme-blue-dark-90",
+  "figma": "rgb(237, 242, 250)",
+  "actual": "rgb(237, 242, 250)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/gray/5",
+  "css": "--use-surface-theme-gray-5",
+  "figma": "rgb(77, 71, 70)",
+  "actual": "rgb(77, 71, 70)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/gray/10",
+  "css": "--use-surface-theme-gray-10",
+  "figma": "rgb(99, 90, 89)",
+  "actual": "rgb(99, 90, 89)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/gray/20",
+  "css": "--use-surface-theme-gray-20",
+  "figma": "rgb(120, 110, 108)",
+  "actual": "rgb(120, 110, 108)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/green-1/30",
+  "css": "--use-surface-theme-green-1-30",
+  "figma": "rgb(11, 133, 61)",
+  "actual": "rgb(11, 133, 61)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/green-1/40",
+  "css": "--use-surface-theme-green-1-40",
+  "figma": "rgb(159, 224, 184)",
+  "actual": "rgb(159, 224, 184)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/green-1/50",
+  "css": "--use-surface-theme-green-1-50",
+  "figma": "rgb(68, 189, 117)",
+  "actual": "rgb(68, 189, 117)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/green-2/10",
+  "css": "--use-surface-theme-green-2-10",
+  "figma": "rgb(63, 84, 10)",
+  "actual": "rgb(63, 84, 10)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/green-2/20",
+  "css": "--use-surface-theme-green-2-20",
+  "figma": "rgb(149, 191, 27)",
+  "actual": "rgb(149, 191, 27)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/green-2/40",
+  "css": "--use-surface-theme-green-2-40",
+  "figma": "rgb(149, 191, 27)",
+  "actual": "rgb(149, 191, 27)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/green-2/60",
+  "css": "--use-surface-theme-green-2-60",
+  "figma": "rgb(216, 238, 156)",
+  "actual": "rgb(216, 238, 156)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/neutral/30",
+  "css": "--use-surface-theme-neutral-30",
+  "figma": "rgb(102, 102, 102)",
+  "actual": "rgb(102, 102, 102)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/orange/10",
+  "css": "--use-surface-theme-orange-10",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/orange/20",
+  "css": "--use-surface-theme-orange-20",
+  "figma": "rgb(255, 179, 128)",
+  "actual": "rgb(255, 179, 128)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/orange/40",
+  "css": "--use-surface-theme-orange-40",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/orange/60",
+  "css": "--use-surface-theme-orange-60",
+  "figma": "rgb(255, 242, 227)",
+  "actual": "rgb(255, 242, 227)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/red/30",
+  "css": "--use-surface-theme-red-30",
+  "figma": "rgb(158, 51, 40)",
+  "actual": "rgb(158, 51, 40)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/red/40",
+  "css": "--use-surface-theme-red-40",
+  "figma": "rgb(235, 173, 167)",
+  "actual": "rgb(235, 173, 167)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/red/50",
+  "css": "--use-surface-theme-red-50",
+  "figma": "rgb(219, 113, 101)",
+  "actual": "rgb(219, 113, 101)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/red/60",
+  "css": "--use-surface-theme-red-60",
+  "figma": "rgb(219, 113, 101)",
+  "actual": "rgb(219, 113, 101)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/violet/5",
+  "css": "--use-surface-theme-violet-5",
+  "figma": "rgb(50, 32, 100)",
+  "actual": "rgb(50, 32, 100)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/violet/10",
+  "css": "--use-surface-theme-violet-10",
+  "figma": "rgb(64, 41, 126)",
+  "actual": "rgb(64, 41, 126)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/violet/20",
+  "css": "--use-surface-theme-violet-20",
+  "figma": "rgb(78, 49, 153)",
+  "actual": "rgb(78, 49, 153)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/violet/60",
+  "css": "--use-surface-theme-violet-60",
+  "figma": "rgb(224, 217, 243)",
+  "actual": "rgb(224, 217, 243)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/violet/70",
+  "css": "--use-surface-theme-violet-70",
+  "figma": "rgb(193, 179, 231)",
+  "actual": "rgb(193, 179, 231)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/yellow/30",
+  "css": "--use-surface-theme-yellow-30",
+  "figma": "rgb(150, 114, 41)",
+  "actual": "rgb(150, 114, 41)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/yellow/50",
+  "css": "--use-surface-theme-yellow-50",
+  "figma": "rgb(252, 206, 114)",
+  "actual": "rgb(252, 206, 114)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/yellow/60",
+  "css": "--use-surface-theme-yellow-60",
+  "figma": "rgb(252, 191, 68)",
+  "actual": "rgb(252, 191, 68)"
+ },
+ {
+  "mode": "dark",
+  "name": "use/surface/theme/yellow/70",
+  "css": "--use-surface-theme-yellow-70",
+  "figma": "rgb(252, 191, 68)",
+  "actual": "rgb(252, 191, 68)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/brand/40",
+  "css": "--base-brand-40",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/brand/50",
+  "css": "--base-brand-50",
+  "figma": "rgb(255, 194, 153)",
+  "actual": "rgb(255, 194, 153)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/brand/60",
+  "css": "--base-brand-60",
+  "figma": "rgb(255, 163, 102)",
+  "actual": "rgb(255, 163, 102)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/brand/70",
+  "css": "--base-brand-70",
+  "figma": "rgb(255, 133, 51)",
+  "actual": "rgb(255, 133, 51)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/brand/80",
+  "css": "--base-brand-80",
+  "figma": "rgb(255, 255, 0)",
+  "actual": "rgb(255, 255, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/brand/90",
+  "css": "--base-brand-90",
+  "figma": "rgb(230, 230, 0)",
+  "actual": "rgb(230, 230, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/brand/100",
+  "css": "--base-brand-100",
+  "figma": "rgb(204, 204, 0)",
+  "actual": "rgb(204, 204, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/brand/yellow",
+  "css": "--base-brand-yellow",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/blue/30",
+  "css": "--base-blue-30",
+  "figma": "rgb(237, 242, 250)",
+  "actual": "rgb(237, 242, 250)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/blue/40",
+  "css": "--base-blue-40",
+  "figma": "rgb(212, 226, 250)",
+  "actual": "rgb(212, 226, 250)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/blue/50",
+  "css": "--base-blue-50",
+  "figma": "rgb(159, 190, 245)",
+  "actual": "rgb(159, 190, 245)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/blue/60",
+  "css": "--base-blue-60",
+  "figma": "rgb(92, 145, 242)",
+  "actual": "rgb(92, 145, 242)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/blue/70",
+  "css": "--base-blue-70",
+  "figma": "rgb(41, 111, 240)",
+  "actual": "rgb(41, 111, 240)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/blue/80",
+  "css": "--base-blue-80",
+  "figma": "rgb(31, 83, 181)",
+  "actual": "rgb(31, 83, 181)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/blue/90",
+  "css": "--base-blue-90",
+  "figma": "rgb(24, 66, 143)",
+  "actual": "rgb(24, 66, 143)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/blue/100",
+  "css": "--base-blue-100",
+  "figma": "rgb(16, 44, 94)",
+  "actual": "rgb(16, 44, 94)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/10",
+  "css": "--base-cyan-blue-10",
+  "figma": "rgb(238, 245, 252)",
+  "actual": "rgb(238, 245, 252)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/20",
+  "css": "--base-cyan-blue-20",
+  "figma": "rgb(214, 230, 247)",
+  "actual": "rgb(214, 230, 247)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/30",
+  "css": "--base-cyan-blue-30",
+  "figma": "rgb(178, 208, 238)",
+  "actual": "rgb(178, 208, 238)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/40",
+  "css": "--base-cyan-blue-40",
+  "figma": "rgb(140, 184, 224)",
+  "actual": "rgb(140, 184, 224)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/50",
+  "css": "--base-cyan-blue-50",
+  "figma": "rgb(108, 159, 208)",
+  "actual": "rgb(108, 159, 208)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/60",
+  "css": "--base-cyan-blue-60",
+  "figma": "rgb(82, 134, 188)",
+  "actual": "rgb(82, 134, 188)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/70",
+  "css": "--base-cyan-blue-70",
+  "figma": "rgb(74, 116, 165)",
+  "actual": "rgb(74, 116, 165)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/80",
+  "css": "--base-cyan-blue-80",
+  "figma": "rgb(60, 98, 140)",
+  "actual": "rgb(60, 98, 140)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/90",
+  "css": "--base-cyan-blue-90",
+  "figma": "rgb(45, 79, 115)",
+  "actual": "rgb(45, 79, 115)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/cyan blue/100",
+  "css": "--base-cyan-blue-100",
+  "figma": "rgb(31, 61, 90)",
+  "actual": "rgb(31, 61, 90)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-1/30",
+  "css": "--base-green-1-30",
+  "figma": "rgb(247, 250, 248)",
+  "actual": "rgb(247, 250, 248)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-1/40",
+  "css": "--base-green-1-40",
+  "figma": "rgb(206, 240, 219)",
+  "actual": "rgb(206, 240, 219)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-1/50",
+  "css": "--base-green-1-50",
+  "figma": "rgb(159, 224, 184)",
+  "actual": "rgb(159, 224, 184)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-1/60",
+  "css": "--base-green-1-60",
+  "figma": "rgb(68, 189, 117)",
+  "actual": "rgb(68, 189, 117)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-1/70",
+  "css": "--base-green-1-70",
+  "figma": "rgb(34, 161, 82)",
+  "actual": "rgb(34, 161, 82)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-1/80",
+  "css": "--base-green-1-80",
+  "figma": "rgb(11, 133, 61)",
+  "actual": "rgb(11, 133, 61)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-1/90",
+  "css": "--base-green-1-90",
+  "figma": "rgb(22, 105, 54)",
+  "actual": "rgb(22, 105, 54)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-1/100",
+  "css": "--base-green-1-100",
+  "figma": "rgb(13, 61, 31)",
+  "actual": "rgb(13, 61, 31)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/10",
+  "css": "--base-green-2-10",
+  "figma": "rgb(236, 247, 201)",
+  "actual": "rgb(236, 247, 201)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/20",
+  "css": "--base-green-2-20",
+  "figma": "rgb(216, 238, 156)",
+  "actual": "rgb(216, 238, 156)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/30",
+  "css": "--base-green-2-30",
+  "figma": "rgb(197, 226, 112)",
+  "actual": "rgb(197, 226, 112)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/40",
+  "css": "--base-green-2-40",
+  "figma": "rgb(177, 214, 69)",
+  "actual": "rgb(177, 214, 69)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/50",
+  "css": "--base-green-2-50",
+  "figma": "rgb(157, 199, 30)",
+  "actual": "rgb(157, 199, 30)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/60",
+  "css": "--base-green-2-60",
+  "figma": "rgb(149, 191, 27)",
+  "actual": "rgb(149, 191, 27)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/70",
+  "css": "--base-green-2-70",
+  "figma": "rgb(132, 173, 22)",
+  "actual": "rgb(132, 173, 22)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/80",
+  "css": "--base-green-2-80",
+  "figma": "rgb(106, 142, 17)",
+  "actual": "rgb(106, 142, 17)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/90",
+  "css": "--base-green-2-90",
+  "figma": "rgb(81, 109, 13)",
+  "actual": "rgb(81, 109, 13)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/green-2/100",
+  "css": "--base-green-2-100",
+  "figma": "rgb(63, 84, 10)",
+  "actual": "rgb(63, 84, 10)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/10",
+  "css": "--base-neutral-10",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/20",
+  "css": "--base-neutral-20",
+  "figma": "rgb(224, 224, 224)",
+  "actual": "rgb(224, 224, 224)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/30",
+  "css": "--base-neutral-30",
+  "figma": "rgb(204, 204, 204)",
+  "actual": "rgb(204, 204, 204)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/40",
+  "css": "--base-neutral-40",
+  "figma": "rgb(184, 184, 184)",
+  "actual": "rgb(184, 184, 184)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/50",
+  "css": "--base-neutral-50",
+  "figma": "rgb(164, 164, 164)",
+  "actual": "rgb(164, 164, 164)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/60",
+  "css": "--base-neutral-60",
+  "figma": "rgb(127, 127, 127)",
+  "actual": "rgb(127, 127, 127)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/70",
+  "css": "--base-neutral-70",
+  "figma": "rgb(102, 102, 102)",
+  "actual": "rgb(102, 102, 102)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/80",
+  "css": "--base-neutral-80",
+  "figma": "rgb(51, 51, 51)",
+  "actual": "rgb(51, 51, 51)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/90",
+  "css": "--base-neutral-90",
+  "figma": "rgb(41, 41, 41)",
+  "actual": "rgb(41, 41, 41)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/100 (Negro)",
+  "css": "--base-neutral-100-negro",
+  "figma": "rgb(17, 17, 17)",
+  "actual": "rgb(17, 17, 17)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/white",
+  "css": "--base-neutral-white",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/neutral/black",
+  "css": "--base-neutral-black",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/30",
+  "css": "--base-red-30",
+  "figma": "rgb(247, 238, 237)",
+  "actual": "rgb(247, 238, 237)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/40",
+  "css": "--base-red-40",
+  "figma": "rgb(242, 216, 213)",
+  "actual": "rgb(242, 216, 213)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/50",
+  "css": "--base-red-50",
+  "figma": "rgb(235, 173, 167)",
+  "actual": "rgb(235, 173, 167)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/60",
+  "css": "--base-red-60",
+  "figma": "rgb(219, 113, 101)",
+  "actual": "rgb(219, 113, 101)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/70",
+  "css": "--base-red-70",
+  "figma": "rgb(209, 68, 52)",
+  "actual": "rgb(209, 68, 52)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/75",
+  "css": "--base-red-75",
+  "figma": "rgb(187, 73, 69)",
+  "actual": "rgb(187, 73, 69)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/80",
+  "css": "--base-red-80",
+  "figma": "rgb(158, 51, 40)",
+  "actual": "rgb(158, 51, 40)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/90",
+  "css": "--base-red-90",
+  "figma": "rgb(125, 41, 31)",
+  "actual": "rgb(125, 41, 31)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/red/100",
+  "css": "--base-red-100",
+  "figma": "rgb(82, 26, 20)",
+  "actual": "rgb(82, 26, 20)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/orange/10",
+  "css": "--base-orange-10",
+  "figma": "rgb(255, 242, 227)",
+  "actual": "rgb(255, 242, 227)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/orange/20",
+  "css": "--base-orange-20",
+  "figma": "rgb(255, 229, 204)",
+  "actual": "rgb(255, 229, 204)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/orange/40",
+  "css": "--base-orange-40",
+  "figma": "rgb(255, 179, 128)",
+  "actual": "rgb(255, 179, 128)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/orange/60",
+  "css": "--base-orange-60",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/orange/100",
+  "css": "--base-orange-100",
+  "figma": "rgb(204, 122, 51)",
+  "actual": "rgb(204, 122, 51)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/yellow/30",
+  "css": "--base-yellow-30",
+  "figma": "rgb(255, 249, 239)",
+  "actual": "rgb(255, 249, 239)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/yellow/40",
+  "css": "--base-yellow-40",
+  "figma": "rgb(255, 242, 217)",
+  "actual": "rgb(255, 242, 217)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/yellow/50",
+  "css": "--base-yellow-50",
+  "figma": "rgb(252, 225, 172)",
+  "actual": "rgb(252, 225, 172)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/yellow/60",
+  "css": "--base-yellow-60",
+  "figma": "rgb(252, 206, 114)",
+  "actual": "rgb(252, 206, 114)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/yellow/70",
+  "css": "--base-yellow-70",
+  "figma": "rgb(252, 191, 68)",
+  "actual": "rgb(252, 191, 68)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/yellow/80",
+  "css": "--base-yellow-80",
+  "figma": "rgb(191, 144, 52)",
+  "actual": "rgb(191, 144, 52)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/yellow/90",
+  "css": "--base-yellow-90",
+  "figma": "rgb(150, 114, 41)",
+  "actual": "rgb(150, 114, 41)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "base/yellow/100",
+  "css": "--base-yellow-100",
+  "figma": "rgb(99, 74, 26)",
+  "actual": "rgb(99, 74, 26)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/medicina/Cyan",
+  "css": "--product-medicina-cyan",
+  "figma": "rgb(0, 226, 219)",
+  "actual": "rgb(0, 226, 219)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/medicina/Purple",
+  "css": "--product-medicina-purple",
+  "figma": "rgb(130, 104, 203)",
+  "actual": "rgb(130, 104, 203)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/medicina/Gray",
+  "css": "--product-medicina-gray",
+  "figma": "rgb(179, 172, 171)",
+  "actual": "rgb(179, 172, 171)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/accent/30",
+  "css": "--product-accent-30",
+  "figma": "rgb(242, 252, 255)",
+  "actual": "rgb(242, 252, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/accent/40",
+  "css": "--product-accent-40",
+  "figma": "rgb(225, 247, 254)",
+  "actual": "rgb(225, 247, 254)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/accent/50",
+  "css": "--product-accent-50",
+  "figma": "rgb(179, 215, 224)",
+  "actual": "rgb(179, 215, 224)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/accent/60",
+  "css": "--product-accent-60",
+  "figma": "rgb(143, 197, 208)",
+  "actual": "rgb(143, 197, 208)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/accent/70",
+  "css": "--product-accent-70",
+  "figma": "rgb(107, 180, 192)",
+  "actual": "rgb(107, 180, 192)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/accent/80",
+  "css": "--product-accent-80",
+  "figma": "rgb(71, 164, 175)",
+  "actual": "rgb(71, 164, 175)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/accent/90",
+  "css": "--product-accent-90",
+  "figma": "rgb(36, 147, 157)",
+  "actual": "rgb(36, 147, 157)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/accent/100",
+  "css": "--product-accent-100",
+  "figma": "rgb(3, 131, 138)",
+  "actual": "rgb(3, 131, 138)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/5",
+  "css": "--product-gray-5",
+  "figma": "rgb(248, 247, 247)",
+  "actual": "rgb(248, 247, 247)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/10",
+  "css": "--product-gray-10",
+  "figma": "rgb(236, 234, 234)",
+  "actual": "rgb(236, 234, 234)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/20",
+  "css": "--product-gray-20",
+  "figma": "rgb(217, 213, 213)",
+  "actual": "rgb(217, 213, 213)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/30",
+  "css": "--product-gray-30",
+  "figma": "rgb(198, 193, 192)",
+  "actual": "rgb(198, 193, 192)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/40",
+  "css": "--product-gray-40",
+  "figma": "rgb(179, 172, 171)",
+  "actual": "rgb(179, 172, 171)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/50",
+  "css": "--product-gray-50",
+  "figma": "rgb(160, 151, 150)",
+  "actual": "rgb(160, 151, 150)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/60",
+  "css": "--product-gray-60",
+  "figma": "rgb(140, 130, 128)",
+  "actual": "rgb(140, 130, 128)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/70",
+  "css": "--product-gray-70",
+  "figma": "rgb(120, 110, 108)",
+  "actual": "rgb(120, 110, 108)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/80",
+  "css": "--product-gray-80",
+  "figma": "rgb(99, 90, 89)",
+  "actual": "rgb(99, 90, 89)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/90",
+  "css": "--product-gray-90",
+  "figma": "rgb(77, 71, 70)",
+  "actual": "rgb(77, 71, 70)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/gray/100",
+  "css": "--product-gray-100",
+  "figma": "rgb(56, 51, 51)",
+  "actual": "rgb(56, 51, 51)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/5",
+  "css": "--product-violet-5",
+  "figma": "rgb(239, 236, 249)",
+  "actual": "rgb(239, 236, 249)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/10",
+  "css": "--product-violet-10",
+  "figma": "rgb(224, 217, 243)",
+  "actual": "rgb(224, 217, 243)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/20",
+  "css": "--product-violet-20",
+  "figma": "rgb(193, 179, 231)",
+  "actual": "rgb(193, 179, 231)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/30",
+  "css": "--product-violet-30",
+  "figma": "rgb(162, 141, 218)",
+  "actual": "rgb(162, 141, 218)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/40",
+  "css": "--product-violet-40",
+  "figma": "rgb(131, 103, 206)",
+  "actual": "rgb(131, 103, 206)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/50",
+  "css": "--product-violet-50",
+  "figma": "rgb(109, 76, 197)",
+  "actual": "rgb(109, 76, 197)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/60",
+  "css": "--product-violet-60",
+  "figma": "rgb(91, 58, 180)",
+  "actual": "rgb(91, 58, 180)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/70",
+  "css": "--product-violet-70",
+  "figma": "rgb(78, 49, 153)",
+  "actual": "rgb(78, 49, 153)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/80",
+  "css": "--product-violet-80",
+  "figma": "rgb(64, 41, 126)",
+  "actual": "rgb(64, 41, 126)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/90",
+  "css": "--product-violet-90",
+  "figma": "rgb(50, 32, 100)",
+  "actual": "rgb(50, 32, 100)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/violet/100",
+  "css": "--product-violet-100",
+  "figma": "rgb(37, 23, 73)",
+  "actual": "rgb(37, 23, 73)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/5",
+  "css": "--product-teal-5",
+  "figma": "rgb(235, 255, 254)",
+  "actual": "rgb(235, 255, 254)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/10",
+  "css": "--product-teal-10",
+  "figma": "rgb(208, 255, 253)",
+  "actual": "rgb(208, 255, 253)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/20",
+  "css": "--product-teal-20",
+  "figma": "rgb(160, 255, 252)",
+  "actual": "rgb(160, 255, 252)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/30",
+  "css": "--product-teal-30",
+  "figma": "rgb(113, 255, 250)",
+  "actual": "rgb(113, 255, 250)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/40",
+  "css": "--product-teal-40",
+  "figma": "rgb(65, 255, 248)",
+  "actual": "rgb(65, 255, 248)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/50",
+  "css": "--product-teal-50",
+  "figma": "rgb(18, 255, 247)",
+  "actual": "rgb(18, 255, 247)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/60",
+  "css": "--product-teal-60",
+  "figma": "rgb(0, 225, 217)",
+  "actual": "rgb(0, 225, 217)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/70",
+  "css": "--product-teal-70",
+  "figma": "rgb(0, 192, 185)",
+  "actual": "rgb(0, 192, 185)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/80",
+  "css": "--product-teal-80",
+  "figma": "rgb(0, 159, 153)",
+  "actual": "rgb(0, 159, 153)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/90",
+  "css": "--product-teal-90",
+  "figma": "rgb(0, 125, 121)",
+  "actual": "rgb(0, 125, 121)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "product/teal/100",
+  "css": "--product-teal-100",
+  "figma": "rgb(0, 92, 89)",
+  "actual": "rgb(0, 92, 89)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/background/page",
+  "css": "--use-background-page",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/primary/default",
+  "css": "--use-primary-default",
+  "figma": "rgb(255, 255, 0)",
+  "actual": "rgb(255, 255, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/primary/hover",
+  "css": "--use-primary-hover",
+  "figma": "rgb(230, 230, 0)",
+  "actual": "rgb(230, 230, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/primary/active",
+  "css": "--use-primary-active",
+  "figma": "rgb(204, 204, 0)",
+  "actual": "rgb(204, 204, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/primary/default dark",
+  "css": "--use-primary-default-dark",
+  "figma": "rgb(255, 255, 0)",
+  "actual": "rgb(255, 157, 92)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/border/default",
+  "css": "--use-border-default",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/border/strong",
+  "css": "--use-border-strong",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/border/subtle",
+  "css": "--use-border-subtle",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(184, 184, 184)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/border/hover",
+  "css": "--use-border-hover",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(230, 230, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/border/violet-dark",
+  "css": "--use-border-violet-dark",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(64, 41, 126)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/border/violet",
+  "css": "--use-border-violet",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(224, 217, 243)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/focus/border",
+  "css": "--use-focus-border",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 230, 214)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/focus/outline",
+  "css": "--use-focus-outline",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/focus/background",
+  "css": "--use-focus-background",
+  "figma": "rgb(255, 230, 214)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/primary",
+  "css": "--use-text-primary",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/secondary",
+  "css": "--use-text-secondary",
+  "figma": "rgb(245, 245, 245)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/tertiary",
+  "css": "--use-text-tertiary",
+  "figma": "rgb(224, 224, 224)",
+  "actual": "rgb(224, 224, 224)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/inverse",
+  "css": "--use-text-inverse",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/link",
+  "css": "--use-text-link",
+  "figma": "rgb(255, 255, 0)",
+  "actual": "rgb(255, 255, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/theme/violet",
+  "css": "--use-text-theme-violet",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/theme/yellow",
+  "css": "--use-text-theme-yellow",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/theme/orange",
+  "css": "--use-text-theme-orange",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/theme/blue",
+  "css": "--use-text-theme-blue",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/theme/red",
+  "css": "--use-text-theme-red",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/theme/green-1",
+  "css": "--use-text-theme-green-1",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/theme/green-2",
+  "css": "--use-text-theme-green-2",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/on-dark/primary",
+  "css": "--use-text-on-dark-primary",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/text/on-dark/secondary",
+  "css": "--use-text-on-dark-secondary",
+  "figma": "rgb(164, 164, 164)",
+  "actual": "rgb(245, 245, 245)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/tables/Head",
+  "css": "--use-tables-head",
+  "figma": "rgb(165, 215, 213)",
+  "actual": "rgb(165, 215, 213)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/tables/Filter",
+  "css": "--use-tables-filter",
+  "figma": "rgb(227, 231, 237)",
+  "actual": "rgb(227, 231, 237)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/tables/Stripes",
+  "css": "--use-tables-stripes",
+  "figma": "rgb(245, 245, 247)",
+  "actual": "rgb(245, 245, 247)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/success/bg",
+  "css": "--use-state-success-bg",
+  "figma": "rgb(13, 61, 31)",
+  "actual": "rgb(13, 61, 31)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/success/text",
+  "css": "--use-state-success-text",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/success/border",
+  "css": "--use-state-success-border",
+  "figma": "rgb(34, 161, 82)",
+  "actual": "rgb(34, 161, 82)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/success/icon",
+  "css": "--use-state-success-icon",
+  "figma": "rgb(206, 240, 219)",
+  "actual": "rgb(230, 247, 232)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/error/bg",
+  "css": "--use-state-error-bg",
+  "figma": "rgb(82, 26, 20)",
+  "actual": "rgb(82, 26, 20)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/error/text",
+  "css": "--use-state-error-text",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/error/text-error-field",
+  "css": "--use-state-error-text-error-field",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/error/icon",
+  "css": "--use-state-error-icon",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/error/border",
+  "css": "--use-state-error-border",
+  "figma": "rgb(209, 68, 52)",
+  "actual": "rgb(209, 68, 52)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/error/mandatory",
+  "css": "--use-state-error-mandatory",
+  "figma": "rgb(209, 68, 52)",
+  "actual": "rgb(209, 68, 52)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/warning/bg",
+  "css": "--use-state-warning-bg",
+  "figma": "rgb(99, 74, 26)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/warning/text",
+  "css": "--use-state-warning-text",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/warning/border",
+  "css": "--use-state-warning-border",
+  "figma": "rgb(252, 191, 68)",
+  "actual": "rgb(255, 255, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/warning/icon bg",
+  "css": "--use-state-warning-icon-bg",
+  "figma": "rgb(252, 191, 68)",
+  "actual": "rgb(252, 191, 68)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/warning/icon color",
+  "css": "--use-state-warning-icon-color",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/info/bg",
+  "css": "--use-state-info-bg",
+  "figma": "rgb(16, 44, 94)",
+  "actual": "rgb(45, 74, 103)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/info/text",
+  "css": "--use-state-info-text",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/info/border",
+  "css": "--use-state-info-border",
+  "figma": "rgb(41, 111, 240)",
+  "actual": "rgb(41, 111, 240)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/state/info/icon",
+  "css": "--use-state-info-icon",
+  "figma": "rgb(41, 111, 240)",
+  "actual": "rgb(41, 111, 240)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/overlay/subtle",
+  "css": "--use-overlay-subtle",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/overlay/strong 2",
+  "css": "--use-overlay-strong-2",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/overlay/strong 3",
+  "css": "--use-overlay-strong-3",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/surface",
+  "css": "--use-surface-surface",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/subtle",
+  "css": "--use-surface-subtle",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(41, 41, 41)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/orange",
+  "css": "--use-surface-orange",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/cyan blue",
+  "css": "--use-surface-cyan-blue",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/violet",
+  "css": "--use-surface-violet",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/white",
+  "css": "--use-surface-white",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/green",
+  "css": "--use-surface-green",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/green-2",
+  "css": "--use-surface-green-2",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/blue-dark/30",
+  "css": "--use-surface-theme-blue-dark-30",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/blue-dark/40",
+  "css": "--use-surface-theme-blue-dark-40",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/blue-dark/50",
+  "css": "--use-surface-theme-blue-dark-50",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/blue-dark/60",
+  "css": "--use-surface-theme-blue-dark-60",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/blue-dark/90",
+  "css": "--use-surface-theme-blue-dark-90",
+  "figma": "rgb(255, 255, 255)",
+  "actual": "rgb(255, 255, 255)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/gray/5",
+  "css": "--use-surface-theme-gray-5",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/gray/10",
+  "css": "--use-surface-theme-gray-10",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/gray/20",
+  "css": "--use-surface-theme-gray-20",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/green-1/30",
+  "css": "--use-surface-theme-green-1-30",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/green-1/40",
+  "css": "--use-surface-theme-green-1-40",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/green-1/50",
+  "css": "--use-surface-theme-green-1-50",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/green-2/10",
+  "css": "--use-surface-theme-green-2-10",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/green-2/20",
+  "css": "--use-surface-theme-green-2-20",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/green-2/40",
+  "css": "--use-surface-theme-green-2-40",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/green-2/60",
+  "css": "--use-surface-theme-green-2-60",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/neutral/30",
+  "css": "--use-surface-theme-neutral-30",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/orange/10",
+  "css": "--use-surface-theme-orange-10",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/orange/20",
+  "css": "--use-surface-theme-orange-20",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/orange/40",
+  "css": "--use-surface-theme-orange-40",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/orange/60",
+  "css": "--use-surface-theme-orange-60",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/red/30",
+  "css": "--use-surface-theme-red-30",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/red/40",
+  "css": "--use-surface-theme-red-40",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/red/50",
+  "css": "--use-surface-theme-red-50",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/red/60",
+  "css": "--use-surface-theme-red-60",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/violet/5",
+  "css": "--use-surface-theme-violet-5",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/violet/10",
+  "css": "--use-surface-theme-violet-10",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/violet/20",
+  "css": "--use-surface-theme-violet-20",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/violet/60",
+  "css": "--use-surface-theme-violet-60",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/violet/70",
+  "css": "--use-surface-theme-violet-70",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/yellow/30",
+  "css": "--use-surface-theme-yellow-30",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/yellow/50",
+  "css": "--use-surface-theme-yellow-50",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/yellow/60",
+  "css": "--use-surface-theme-yellow-60",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ },
+ {
+  "mode": "highContrast",
+  "name": "use/surface/theme/yellow/70",
+  "css": "--use-surface-theme-yellow-70",
+  "figma": "rgb(0, 0, 0)",
+  "actual": "rgb(0, 0, 0)"
+ }
+]

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Iniciar afiliación</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → componente transversal → custom del flujo -->
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="../../shared/components/dropdown.css">
+<link rel="stylesheet" href="../../shared/components/alert.css">
+<link rel="stylesheet" href="../../shared/components/modal.css">
+<link rel="stylesheet" href="css/afiliacion.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) — selector de persona + Plan Ideal ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+
+      <!-- Selector de persona/afiliado (lo cablea zt-sidebar.js → wirePersonSelector) -->
+      <div class="hd-person" data-person-selector>
+        <button class="hd-person__trigger" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu">
+          <span class="hd-person__info">
+            <span class="hd-person__name" data-person-name>Margarita López Arenas</span>
+            <span class="hd-person__plan" data-person-plan>Plan Ideal</span>
+          </span>
+          <span class="hd-person__caret icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+        </button>
+
+        <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
+          <p class="person-menu__label" id="person-menu-label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Margarita López Arenas" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Margarita López Arenas</span>
+              <span class="person-opt__role">Contratante</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+          <button class="person-opt" type="button" role="menuitemradio" aria-checked="false" data-person="Luis Orejuela" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Luis Orejuela</span>
+              <span class="person-opt__role">Beneficiario · Menor de edad</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+          <button class="person-opt" type="button" role="menuitemradio" aria-checked="false" data-person="Ana Orejuela" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Ana Orejuela</span>
+              <span class="person-opt__role">Beneficiaria · Menor de edad</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal — "Ventas y Afiliación" activo -->
+    <nav class="sidebar" data-active="ventas"></nav>
+
+    <!-- MAIN (shell ZT) -->
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page">
+
+          <!-- Breadcrumb (shell ZT) — Inicio / Ventas y afiliación / Iniciar afiliación -->
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <a href="../index.html">Ventas y afiliación</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Iniciar afiliación</span>
+          </nav>
+
+          <!-- Título (shell ZT) — H2 40px: "Iniciar" naranja + "afiliación" primary -->
+          <h1 class="page-title">
+            <span class="orange">Iniciar </span><span class="dark">afiliación</span>
+          </h1>
+
+          <!-- ═══ CARD / HERO CENTRADA ═══ -->
+          <section class="afi-panel" id="afi-panel" aria-labelledby="afi-title">
+            <!-- Afiliación en curso guardada (borrador) → "Retomar". Lo pinta afiliacion.js -->
+            <div class="afi-resume" id="afi-resume" hidden></div>
+
+            <form class="afi-card" id="afi-form" novalidate>
+
+              <!-- Icono + título + descripción -->
+              <div class="afi-card__head">
+                <span class="afi-card__icon icon icon-user-plus icon-40" id="afi-icon" aria-hidden="true"></span>
+                <h2 class="afi-card__title" id="afi-title">Iniciar afiliación</h2>
+                <p class="afi-card__desc" id="afi-desc">
+                  Ingresa el número de documento del candidato para comenzar el proceso.
+                </p>
+              </div>
+
+              <!-- ALERTA CONTEXTUAL INLINE (componente transversal Alert) — la renderiza
+                   afiliacion.js SOLO en estado NO VIABLE. Va entre la descripción y los
+                   campos (orden Figma: icono → título → descripción → alerta → campos).
+                   Región anunciable (aria-live). No es modal ni overlay. -->
+              <div class="afi-alert" id="afi-alert" aria-live="polite"></div>
+
+              <!-- Campos -->
+              <div class="afi-card__fields">
+
+                <!-- Tipo de documento (DS: .mp-input-group + .mp-select) -->
+                <div class="mp-input-group">
+                  <label class="mp-input-label" for="afi-tipo">
+                    Tipo de documento <span class="mp-input-required" aria-hidden="true">*</span>
+                  </label>
+                  <div class="mp-input-wrapper">
+                    <!-- data-zt-dropdown → mejorado por el componente transversal Dropdown List
+                         (visual = Dropdown Menu del DS; semántica = select/listbox). Sin buscador (lista corta). -->
+                    <select class="mp-input-field mp-select" id="afi-tipo" name="tipo" required
+                            aria-required="true" data-zt-dropdown data-zt-dropdown-search="false">
+                      <option value="" selected disabled>Seleccionar</option>
+                      <option value="CC">Cédula de ciudadanía</option>
+                      <option value="TI">Tarjeta de identidad</option>
+                      <option value="CE">Cédula de extranjería</option>
+                      <option value="PA">Pasaporte</option>
+                      <option value="PPT">Permiso por Protección Temporal</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Número de documento (DS: .mp-input-group + .mp-input-field) -->
+                <div class="mp-input-group">
+                  <label class="mp-input-label" for="afi-numero">
+                    Número de documento <span class="mp-input-required" aria-hidden="true">*</span>
+                  </label>
+                  <div class="mp-input-wrapper">
+                    <input class="mp-input-field" id="afi-numero" name="numero" type="text"
+                           inputmode="numeric" autocomplete="off" required aria-required="true"
+                           aria-describedby="afi-numero-hint" placeholder="Escriba el número de documento"
+                           maxlength="15">
+                  </div>
+                  <p class="mp-hint" id="afi-numero-hint">Sin puntos ni espacios</p>
+                </div>
+
+              </div>
+
+              <!-- Resultado VIABLE (inline, sin modal): persona + acciones. Lo pinta afiliacion.js -->
+              <div class="afi-viable" id="afi-viable" hidden></div>
+
+              <!-- Botón (Continuar / Consultar) — DS: .mp-btn--primario -->
+              <button class="mp-btn mp-btn--primario afi-submit" id="afi-submit" type="submit" disabled>
+                <span class="afi-submit__label" id="afi-submit-label">Continuar</span>
+                <span class="afi-submit__spinner icon icon-spinner-gap icon-20 gs-inherit" aria-hidden="true"></span>
+              </button>
+
+              <!-- Desenlaces de la consulta de viabilidad:
+                   VIABLE     → modal de éxito sobre overlay oscuro (componente ZT Modal).
+                   NO VIABLE  → alerta warning inline dentro de la card (#afi-alert). -->
+
+            </form>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../../shared/zt-sidebar.js"></script>
+<script src="../../shared/afiliacion-mock.js"></script>
+<script src="../../shared/components/dropdown.js"></script>
+<script src="../../shared/components/alert.js"></script>
+<script src="../../shared/components/modal.js"></script>
+<script src="js/afiliacion.js"></script>
+<!-- ⚠️ Solo prototipo: navegación entre pasos sin validar (quitar para producción) -->
+<script src="js/demo-nav.js"></script>
+</body>
+</html>

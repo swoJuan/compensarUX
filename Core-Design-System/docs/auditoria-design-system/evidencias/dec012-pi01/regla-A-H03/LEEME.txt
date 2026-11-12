@@ -1,0 +1,7 @@
+Regla A (grid de escritorio del Header ZT, solucion provisional) y H-03 (nombre accesible del chip).
+Los scripts se ejecutaron desde /tmp/pw (Playwright fuera del repo) con harness en una carpeta temporal del repo (_dec012-pi01b/: harness-zt.html, header-harness.html, pi04.js), servida con `python3 -m http.server 8000` en la raiz.
+CSS comparados: original anterior a P3 (md5 3e64781602215d198bca6efa4c0901f7), estado previo a la regla A (md5 914335a3e4d0cd95c968c4f3aa49271d) y actual (core.css).
+zt.js: Header ZT con el markup real de build() (web-header-docs.js), 6 anchos x 100/150/200 % x 3 temas + Tab.
+a11y.js: nombre accesible del chip (arbol de accesibilidad de Chromium via CDP), WCAG 2.5.3 y comparacion de captura nuevo vs anterior.
+real2.js: portal real (drupal.html con core.css + portal.css + icons.css), markup real del Header inyectado.
+pi04-publico.js: regresion del Header publico (--live).

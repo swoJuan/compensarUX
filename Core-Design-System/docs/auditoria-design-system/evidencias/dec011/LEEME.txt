@@ -1,0 +1,20 @@
+DEC-011 · documentación sincronizada con el Core (10 nov 2026). Base de comparación: 08cc680.
+Requisitos fuera del repo: /tmp/qa con `npm i playwright axe-core` (PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1) y /tmp/qa/fixture.js (ver evidencias/dec004-006-008-b).
+Servidor del árbol actual:  python3 -m http.server 8000   (raíz del repo)
+Servidor de HEAD (axe-compare):  git archive HEAD | tar -x -C /tmp/ds-head ; python3 -m http.server 8001   (en /tmp/ds-head)
+exports-check.js   Visor (pestañas CSS/Sass) y descargas reales de 17 páginas = CSS generado desde core/ (149 comprobaciones).
+export-equiv.js    CSS descargable (sin core.css) vs core.css: valores computados de las propiedades que declara el export, 3 temas.
+dec011-pages.js    Alert y Toast en el portal real (contraste, cuerpo 16px) y página Header (imágenes locales, componente, ids, drawer, Escape).
+axe-compare.js     axe HEAD vs actual por ruta × tema × ancho.   axe-detail.js  detalle de violaciones de una ruta.
+main-overflow.js   Contenido recortado por .main (overflow-x:hidden) en todas las páginas de componente a 1280/375/320.
+over-bisect.js / over-find.js  localizan el elemento que desborda.   res-sweep.js  recursos rotos e imágenes caídas en las 84 rutas.
+main-overflow-antes.json / -final.json  medición antes y después.
+Generador:  scripts/generate-docs-css.mjs  (--check para CI).
+cascade-f1.js      F-1: color real de <i class="icon icon-info"> en Alert/Toast en 3 estructuras de marcado, 3 temas y los 4 tipos; con CSS=ruta se prueba otro CSS.
+f1f2.js            F-1 (72 combinaciones: icono correcto y >=3:1) y F-2 (CTA del Header: color y contraste en normal/hover/foco por tema). 168 comprobaciones.
+--- Estabilización v2.3.0 (informe 28) ---
+responsive-8.js    Desborde de .main en 8 páginas x 1280/768/375/320 con fuentes cargadas; imprime el elemento culpable. 32/32.
+axe-rules-diff.js  axe por regla, HEAD (:8001) vs actual (:8000), Light 1280 y Dark 375.
+inpage-v230.js     Comprobaciones dentro de la página (pestañas de código, progressbar, Tables, Accordion, desborde).
+functional-v230.js Las anteriores en Chromium, 13 rutas x 3 anchos. 168/168.
+firefox-v230.js    Las mismas en Firefox por Marionette (anchos emulados con iframe). 168/168 en Firefox 121.

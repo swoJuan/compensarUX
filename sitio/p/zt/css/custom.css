@@ -1,0 +1,187 @@
+/* ============================================================
+ * custom.css — Estilos ESPECÍFICOS del Home ZT
+ * ------------------------------------------------------------
+ * Cascada: core.css (DS) → ../shared/zt.css (shell ZT) → ESTE archivo
+ * Valores tomados del frame Figma "01 Home" (node 160:6029/160:6031),
+ * mapeados a tokens del Design System / ZT. Sin valores arbitrarios.
+ *
+ * Tokens usados (existentes):
+ *   spacing: --space-8/12/16/24/32/48  · --space-20 (ZT)
+ *   radius:  --radius-md (24px) · --radius-12 (ZT, 12px) · --radius-pill
+ *   size:    --font-size-2xl (24) · --font-size-xl (18) · --font-size-lg (16) · --font-size-h2 (40, ZT)
+ *   weight:  --font-weight-bold / --font-weight-regular
+ *   color:   --color-primary · --color-text-primary/secondary · --use-text-tertiary
+ *            --use-surface-white · --use-surface-theme-gray-5 · --use-border-default
+ *            --use-surface-violet · --use-border-violet-dark · --use-text-theme-violet
+ * ============================================================ */
+
+/* Contenedor del contenido — Figma: padding 32px, gaps entre bloques */
+.home-wrap {
+  padding: var(--space-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  max-width: 1139px;   /* ancho del frame de contenido en Figma */
+}
+
+/* ═══════════════ BIENVENIDA ═══════════════ */
+.home-welcome { display: flex; flex-direction: column; gap: var(--space-8); }
+/* Título = heading/h2: 40px, bold, lh 1.2 */
+.home-title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2; margin: 0;
+  color: var(--color-text-primary);
+}
+.home-title__hi   { color: var(--color-primary); }
+.home-title__name { color: var(--color-text-primary); }
+/* Descripción = body/2XL: 24px, regular, lh 1.3 */
+.home-desc {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3; margin: 0;
+  color: var(--color-text-secondary);
+}
+.home-desc strong { font-weight: var(--font-weight-bold); }
+
+/* ═══════════════ CARDS DE SERVICIOS (grid 3 col) ═══════════════ */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-20);          /* Spacing/spacing-5 = 20px */
+}
+.home-card {
+  display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-12);
+  min-height: 114px;             /* altura de card en Figma */
+  background: var(--use-surface-white);
+  border: 2px solid transparent; /* reservado para el borde del hover (sin salto de layout) */
+  border-radius: var(--radius-md);/* radius/radius-9 = 24px */
+  /* padding 16/24 menos 2px del borde para conservar tamaño visual */
+  padding: calc(var(--space-16) - 2px) calc(var(--space-24) - 2px);
+  text-decoration: none;
+  transition: background-color .2s ease-in-out, border-color .2s ease-in-out, color .2s ease-in-out;
+  cursor: pointer;
+}
+/* Hover (Figma 166:4801): borde violet-dark, fondo surface violet,
+   título → text violet, texto de apoyo → text-secondary */
+.home-card, .home-card:hover, .home-card:focus { text-decoration: none; }
+.home-card:hover {
+  background: var(--use-surface-violet);
+  border-color: var(--use-border-violet-dark);
+}
+.home-card:hover .home-card__title { color: var(--use-text-theme-violet); }
+.home-card:hover .home-card__desc  { color: var(--color-text-secondary); }
+.home-card:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.home-card[aria-disabled="true"] { cursor: default; }
+
+.home-card__head { display: flex; align-items: center; gap: var(--space-12); }
+.home-card__icon { flex-shrink: 0; transition: color .2s ease-in-out; }   /* icon 32px vía .icon-32 */
+/* Título = body/XL bold: 18px, lh 1.3 */
+.home-card__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color .2s ease-in-out;
+}
+/* Descripción = body/L: 16px, regular, lh 1.3 */
+.home-card__desc {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3; margin: 0;
+  color: var(--use-text-tertiary);
+  transition: color .2s ease-in-out;
+}
+
+/* ═══════════════ LA MEJOR ATENCIÓN MÉDICA ═══════════════ */
+.home-atencion { display: flex; flex-direction: column; gap: var(--space-16); }
+/* Título = heading/h5: 24px, bold, lh 1.3 */
+.home-atencion__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3; margin: 0;
+  color: var(--color-text-secondary);
+}
+.home-atencion__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-20);
+}
+
+/* Card horizontal: imagen izquierda + contenido derecha (Figma) */
+.home-hcard {
+  display: flex; align-items: stretch;
+  background: var(--use-surface-white);
+  border: 1px solid var(--use-border-default);
+  border-radius: var(--radius-12);   /* 12px */
+  overflow: hidden;
+}
+.home-hcard__media { flex: 1 0 0; min-width: 0; }
+.home-hcard__media img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover;
+}
+.home-hcard__body {
+  flex: 1 0 0; min-width: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--space-8);
+  padding: var(--space-16) var(--space-24);
+}
+/* Título = body/XL bold: 18px, lh 1.3 */
+.home-hcard__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3; margin: 0;
+  color: var(--color-text-primary);
+}
+/* Descripción = body/L: 16px, lh 1.3 */
+.home-hcard__desc {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3; margin: 0;
+  color: var(--use-text-tertiary);
+}
+.home-hcard .mp-btn { align-self: flex-start; margin-top: var(--space-4); }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+/* Tablet: cards en 2 columnas */
+@media (max-width: 1024px) {
+  .home-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* Mobile: una sola columna, sin scroll horizontal */
+@media (max-width: 680px) {
+  .home-wrap { padding: var(--space-20); gap: var(--space-24); }
+  .home-title { font-size: var(--font-size-3xl); }   /* 28px en mobile */
+  .home-desc { font-size: var(--font-size-lg); }
+  .home-cards { grid-template-columns: 1fr; }
+  .home-atencion__row { grid-template-columns: 1fr; }
+  /* Card horizontal → apilada en mobile */
+  .home-hcard { flex-direction: column; }
+  .home-hcard__media { width: 100%; min-height: 160px; }
+}
+
+/* ═══════════════ FOOTER ═══════════════ */
+/* NOTA: footer estándar de Compensar. Es TRANSVERSAL (igual en agendamiento).
+   Candidato a promover a zt/shared — pendiente de aprobación. */
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border-subtle);
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-40);
+  padding: var(--space-32) var(--space-32) var(--space-48); margin-top: auto;
+}
+.footer-col-title {
+  font-size: var(--font-size-lg); font-weight: var(--font-weight-bold);
+  color: var(--text); margin-bottom: var(--space-10);
+}
+.footer-link {
+  display: block; font-size: var(--font-size-lg); color: var(--text-3);
+  margin-bottom: var(--space-4);
+}
+.footer-link:hover { color: var(--brand); }
+.footer-link:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.footer-social { display: flex; gap: var(--space-16); font-size: var(--font-size-2xl); margin-bottom: var(--space-12); }
+.footer-address { font-size: var(--font-size-lg); color: var(--text-3); line-height: 1.6; }
+
+@media (max-width: 680px) {
+  .footer { grid-template-columns: 1fr; gap: var(--space-24); padding: var(--space-24) var(--space-20) var(--space-40); }
+}

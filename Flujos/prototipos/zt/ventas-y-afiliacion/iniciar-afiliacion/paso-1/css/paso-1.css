@@ -1,0 +1,199 @@
+/* ============================================================
+ * paso-1.css — Estilos del PASO 1 "Datos generales" (Proceso de afiliación)
+ * ------------------------------------------------------------
+ * Nivel 4 de la cascada:
+ *   Design System (vendor/core.css) → shell ZT (zt.css) → componentes
+ *   transversales (stepper, dropdown, alert) → ESTE archivo.
+ *
+ * Aquí SOLO vive lo que NO cubren el DS ni los componentes:
+ *   - layout de 2 columnas (panel de pasos + card del paso)
+ *   - resumen del candidato (cabecera del panel)
+ *   - composición interna de la card (badge, filas de campos, CTA)
+ *   - variante readonly de los campos de documento
+ * Los componentes (inputs, radios, dropdown, alert, botones, stepper)
+ * son del DS (.mp-*) o transversales ZT (.zt-*). Aquí NO se redefinen.
+ * Token-first: sin hex ni medidas mágicas fuera del sistema.
+ * ============================================================ */
+
+/* ═══════════════ LAYOUT DEL PROCESO ═══════════════ */
+/* Figma: panel 280px + card 800px, gap 10px, alineados arriba. */
+.pa-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12, 0.75rem);
+  width: 100%;
+  margin-top: var(--space-24);
+}
+
+/* Panel izquierdo (resumen del candidato + stepper). Contenedor transparente:
+   el resumen (Person Summary compact) es su propia card violeta y el stepper va
+   debajo, separados por un gap. */
+.pa-side {
+  flex: 0 0 280px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12, 0.75rem);
+}
+
+/* ═══════════════ CARD DEL PASO ═══════════════ */
+/* Figma: white, border subtle, radius 12, pt 28 / pb 32 / px 24, gap 28. */
+.pa-card {
+  flex: 1 1 800px;
+  max-width: 800px;
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-12, 0.75rem);
+  padding: 28px var(--space-24) var(--space-32);
+}
+.pa-card > form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Encabezado: badge PASO 1 DE 8 + título */
+.pa-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+.pa-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-radius: 4px;              /* Figma badge = 4px (no existe token 4px en el DS) */
+  background: var(--use-surface-violet, #efecf9);
+  color: var(--use-text-theme-violet, #4e3199);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.pa-card__title {
+  margin: 0;
+  font-size: 24px;                 /* heading/h5 */
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+
+/* ═══════════════ FILAS DE CAMPOS ═══════════════ */
+/* Dos columnas iguales (Figma gap 24). Colapsan a una en pantallas angostas. */
+.pa-row {
+  display: flex;
+  gap: var(--space-24);
+  width: 100%;
+}
+.pa-row > .mp-input-group { flex: 1 1 0; min-width: 0; }
+.pa-row[hidden] { display: none; }
+
+/* Campo Novedades condicional (full width). Oculto → sin caja ni gap. */
+.pa-novelty { width: 100%; }
+.pa-novelty[hidden] { display: none; }
+
+/* Bloque contextual "Datos de la empresa" (mismo patrón visual que los bloques
+   condicionales del Paso 3): superficie gris suave, border subtle, radius 8. */
+.pa-context {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  width: 100%;
+  padding: var(--space-24);
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-xs, 0.5rem);
+}
+.pa-context[hidden] { display: none; }
+.pa-context__title {
+  margin: 0;
+  font-size: var(--font-size-lg, 1rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+.pa-field .mp-input-error { margin: 0; }
+/* Si el campo muestra error, se oculta la ayuda (un solo mensaje bajo el campo). */
+.pa-context .mp-input-group:has(.mp-input-error:not([hidden])) .mp-hint { display: none; }
+
+/* Grupos de radios (Modalidad, Transacción, ¿Cómo se afilia?) */
+.pa-field {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.pa-field > .mp-input-label { padding: 0; }
+.pa-radios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+}
+/* Qué implica la opción elegida en el resto del proceso */
+.pa-choice-hint {
+  margin: 0;
+  display: flex;
+  gap: var(--space-8);
+  align-items: flex-start;
+  padding: var(--space-8) var(--space-12);
+  border-radius: var(--radius-xs, 0.5rem);
+  background: var(--use-surface-violet, #efecf9);
+  font-size: var(--font-size-md, 0.875rem);
+  line-height: 1.4;
+  color: var(--use-text-secondary, #333);
+}
+.pa-choice-hint:empty { display: none; }
+.pa-choice-hint .icon { flex: 0 0 auto; color: var(--use-text-theme-violet, #4e3199); margin-top: 1px; }
+.pa-choice-hint.is-warning { background: var(--use-surface-theme-orange-10, #fff1e8); }
+.pa-choice-hint.is-warning .icon { color: var(--base-orange-100, #b34700); }
+/* Opción no disponible por otra elección (p. ej. Colectivo → solo empresa) */
+.pa-radios .mp-choice:has(input:disabled) { opacity: .5; cursor: not-allowed; }
+
+/* ═══════════════ CAMPOS READ ONLY (documento) ═══════════════ */
+/* Tipo y Número de documento vienen de la consulta previa: no editables.
+   El tratamiento visual del estado readonly/disabled (superficie use/surface/surface,
+   borde use/border/default, texto use/text/tertiary, sin hover/foco de edición y sin
+   caret) lo aplica el componente transversal Text Field del DS a través de
+   `.mp-input-field[readonly]`. Aquí NO se redefine para evitar divergencias. */
+
+/* Tipo de documento muestra caret como en Figma, pero NO abre nada (solo lectura).
+   La variante con caret vive en el componente transversal readonly-field.css. */
+
+/* ═══════════════ ALERTA INFO ═══════════════ */
+.pa-alert:empty { display: none; }
+
+/* ═══════════════ CTA ═══════════════ */
+/* Atrás (izquierda) + Guardar y continuar (derecha). */
+.pa-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+  margin-top: var(--space-4);
+}
+.pa-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+/* Tablet/mobile: el panel deja de ser una columna de 280px; el resumen y el
+   stepper (que ya colapsa a horizontal por su CSS) van arriba y la card debajo. */
+@media (max-width: 900px) {
+  .pa-layout { flex-direction: column; }
+  .pa-side { flex: 1 1 auto; width: 100%; }
+  .pa-card { flex: 1 1 auto; max-width: 100%; width: 100%; }
+}
+
+/* Mobile: las filas de 2 columnas colapsan a una; sin overflow horizontal. */
+@media (max-width: 680px) {
+  .pa-row { flex-direction: column; gap: var(--space-16); }
+  .pa-radios { gap: var(--space-12); }
+  .pa-context { padding: var(--space-16); }
+  .pa-cta { flex-direction: column-reverse; align-items: stretch; }
+  .pa-cta .mp-btn { width: 100%; justify-content: center; }
+}

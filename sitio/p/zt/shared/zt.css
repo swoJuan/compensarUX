@@ -1,0 +1,393 @@
+/* ============================================================
+ * zt.css — Shell transversal de la plataforma ZT (Zona Transaccional)
+ * ------------------------------------------------------------
+ * Nivel 3 de la cascada:
+ *   Design System (vendor/core.css) → shared global → ESTE archivo (ZT) → custom del flujo
+ *
+ * Contiene SOLO lo transversal de ZT (reutilizable por todos los flujos):
+ * tokens de flujo, reset base, app shell, header mobile/desktop, sidebar,
+ * navegación lateral, layout, main, screens, breadcrumb y page-title,
+ * más su comportamiento responsive.
+ *
+ * NO contiene estilos específicos de un flujo (citas, laboratorio, etc.).
+ * Esos viven en <flujo>/css/custom.css.
+ *
+ * Requiere: shared/vendor/core.css (tokens del Design System) cargado antes.
+ * ============================================================ */
+
+/* ═══════════════ TOKENS DE FLUJO — usan core.css ═══════════════ */
+:root {
+  /* Colores → variables de core.css (con fallback para cuando el token no resuelva) */
+  --brand:       var(--color-primary, #ff6600);
+  --brand-hover: var(--color-primary-hover, #e63f0c);
+  --brand-light: var(--color-primary-surface, #fff3ee);
+  --blue:        var(--base-blue-70, #296ff0);
+  --blue-dark:   var(--base-blue-80, #1f53b5);
+  --blue-light:  var(--color-info-bg, #e8f0fe);
+  --text:        var(--color-text-primary, #1a1a1a);
+  --text-2:      var(--color-text-secondary, #444444);
+  --text-3:      var(--color-text-muted, #767676);
+  --border:      var(--color-border, #e0e0e0);
+  --bg:          var(--color-surface-page, #f8f7f7);
+  --white:       var(--color-surface-default, #ffffff);
+  --green:       var(--color-success, #1b7e3e);
+  --green-light: var(--color-success-bg, #e6f4ec);
+  /* Sombras → tokens de core.css */
+  --shadow:    var(--shadow-sm, 0px 1px 4px rgba(0,0,0,0.10));
+  --shadow-md: var(--shadow-2, 0px 2px 8px rgba(0,0,0,0.12));
+  /* Layout */
+  --sidebar-w: 227px;
+  --sidebar-w-collapsed: 72px;
+
+  /* Tokens complementarios ZT (no existen en core.css; escala Figma) */
+  --space-20: 1.25rem;      /* Spacing/spacing-5 = 20px */
+  --radius-12: 0.75rem;     /* radio de cards horizontales = 12px */
+  --font-size-h2: 2.5rem;   /* heading/h2 = 40px */
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+html { height:100%; }
+body { font-family:'Roboto',sans-serif; background:var(--bg); min-height:100%; color:var(--text); }
+button { font-family:'Roboto',sans-serif; cursor:pointer; }
+a { text-decoration:none; color:inherit; }
+
+/* ═══════════════ APP SHELL ═══════════════ */
+.app { display:flex; flex-direction:column; min-height:100vh; }
+
+/* ═══════════════ HEADER MOBILE ═══════════════ */
+.header-mobile {
+  background:var(--white); border-bottom:1px solid var(--color-border-subtle);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 16px; position:sticky; top:0; z-index:50;
+}
+.header-logo { display:flex; align-items:center; gap:var(--space-10); }
+.logo-mark {
+  width:32px; height:32px; position:relative; flex-shrink:0;
+}
+.logo-mark::before,
+.logo-mark::after {
+  content:''; position:absolute; background:var(--brand); border-radius:3px;
+}
+.logo-mark::before { width:14px; height:32px; left:9px; top:0; }
+.logo-mark::after  { width:32px; height:14px; left:0; top:9px; }
+.logo-words strong { display:block; font-size:13px; font-weight:700; color:var(--text); line-height:1.1; }
+.logo-words span   { font-size:10px; color:var(--text-3); }
+.icon-btn {
+  width:38px; height:38px; border:none; background:none; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; color:var(--text);
+}
+.icon-btn:active { background:var(--bg); }
+.brand-logo { display:block; object-fit:contain; }
+.brand-logo-mobile { width:148px; height:22px; }
+.brand-logo-desktop { width:270px; height:54px; }
+.icon.gs-muted   { color:var(--text-3); }
+.icon.gs-info    { color:var(--blue); }
+.icon.gs-success { color:var(--green); }
+.icon.gs-primary { color:var(--brand); }
+.icon.gs-inverse { color:var(--white); }
+.icon.gs-inherit { color:currentColor; }
+.icon.gs-violet  { color:#4e3199; }
+
+/* ═══════════════ HEADER DESKTOP ═══════════════ */
+.header-desktop {
+  display:none; background:var(--white);
+  box-shadow:0px 0px 5px rgba(0,0,0,0.25);
+  align-items:center; justify-content:space-between;
+  padding:0 24px; height:88px; position:sticky; top:0; z-index:50;
+}
+.hd-logo { display:flex; align-items:center; gap:var(--space-12); }
+.hd-divider { width:1px; height:57px; background:var(--border); margin:0 16px; }
+.hd-user { display:flex; align-items:center; gap:var(--space-12); }
+.hd-user-info { text-align:right; }
+.hd-user-name { font-size:18px; font-weight:700; color:#4a4a4a; line-height:1.3; }
+.hd-user-plan { font-size:16px; color:#777; line-height:1.3; }
+.hd-avatar {
+  width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; color:#4a4a4a;
+}
+.hd-exit {
+  display:flex; align-items:center; gap:var(--space-8); padding:8px 12px;
+  border:none; background:none;
+  font-size:18px; font-weight:700; color:#4d4d4d; transition:color .2s;
+}
+.hd-exit:hover { color:var(--brand); }
+
+/* ═══════════════ SELECTOR DE PERSONA / AFILIADO ═══════════════ */
+/* Trigger (bloque nombre + plan + flecha, dentro del header) */
+.hd-person { position:relative; }
+.hd-person__trigger {
+  display:flex; align-items:center; gap:8px;
+  padding:4px 8px; border:none; background:none; cursor:pointer;
+  border-radius:8px; transition:background .15s;
+}
+.hd-person__trigger:hover { background:var(--use-surface-theme-gray-5, #f8f7f7); }
+.hd-person__trigger:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
+.hd-person__info { display:flex; flex-direction:column; align-items:flex-end; text-align:right; }
+.hd-person__name { font-size:18px; font-weight:700; color:#4a4a4a; line-height:1.3; }
+.hd-person__plan { font-size:14px; color:#777; line-height:1.3; }
+.hd-person__caret {
+  transition:transform .2s ease-in-out; flex-shrink:0;
+}
+.hd-person__trigger[aria-expanded="true"] .hd-person__caret { transform:rotate(180deg); }
+
+/* Dropdown (menú de personas) */
+.person-menu {
+  position:absolute; top:calc(100% + 8px); right:0; z-index:200;
+  width:300px; background:var(--use-surface-white, #fff);
+  border-radius:12px; overflow:hidden;
+  box-shadow:2px 5px 16px rgba(0,0,0,.15);      /* shadow 1 Figma */
+  padding:4px 0;
+  opacity:0; transform:translateY(-4px); pointer-events:none;
+  transition:opacity .18s ease-in-out, transform .18s ease-in-out;
+}
+.person-menu.is-open {
+  opacity:1; transform:translateY(0); pointer-events:auto;
+}
+.person-menu[hidden] { display:none; }
+.person-menu__label {
+  padding:12px 16px 4px; font-size:13px; font-weight:500; color:var(--text-3, #767676);
+  letter-spacing:.02em; margin:0;
+}
+/* Opción de persona (fila) */
+.person-opt {
+  display:flex; align-items:center; gap:16px;
+  padding:8px; width:100%; border:none; background:none; cursor:pointer;
+  text-align:left; transition:background .12s;
+}
+.person-opt:hover { background:var(--use-surface-theme-gray-5, #f8f7f7); }
+.person-opt:focus-visible { outline:2px solid var(--brand); outline-offset:-2px; }
+.person-opt + .person-opt { border-top:1px solid var(--use-border-subtle, #e0e0e0); }
+/* Avatar (Figma: 48px, bg violeta, radius 8, icono 24px morado) */
+.person-opt__avatar {
+  width:44px; height:44px; flex-shrink:0;
+  background:#f7f1fd;                            /* complementarios/violeta */
+  border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+}
+.person-opt__text { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.person-opt__name {
+  font-size:16px; font-weight:700; color:#333; line-height:1.35;
+  letter-spacing:.01em;
+}
+.person-opt__role {
+  font-size:13px; font-weight:400; color:var(--text-3, #767676); line-height:1.3;
+}
+/* Check (visible solo en la opción seleccionada) */
+.person-opt__check {
+  flex-shrink:0; opacity:0; color:var(--brand, #ff6600);
+  transition:opacity .15s;
+}
+.person-opt.is-selected { background:var(--use-surface-violet, #efecf9); }
+.person-opt.is-selected .person-opt__check { opacity:1; }
+.person-opt.is-selected:hover { background:var(--use-surface-violet, #efecf9); }
+
+/* Responsive: en mobile el dropdown se mantiene posicionado */
+@media (max-width: 767.98px) {
+  .person-menu { right:auto; left:0; width:calc(100vw - 32px); max-width:320px; }
+}
+
+/* La "Action Card" (card de navegación/acción transversal) vive en
+   shared/components/action-card.css como parte del catálogo de componentes ZT. */
+
+/* ═══════════════ LAYOUT DE PÁGINA DE MÓDULO (transversal) ═══════════════ */
+/* Contenedor único para el contenido de cualquier módulo ZT.
+   Alinea breadcrumb, page-title y contenido sobre el mismo eje X. */
+.zt-page {
+  width: 100%;
+  padding: 0 var(--space-24) var(--space-48); /* inline 24px; el top lo da el breadcrumb del shell */
+  display: flex; flex-direction: column;
+}
+/* Sección: pregunta centrada + grid de acciones */
+.zt-page__section {
+  display: flex; flex-direction: column; gap: var(--space-32);
+  padding-top: var(--space-32);
+}
+/* Pregunta = heading/h5: 24px bold, lh 1.3, centrada */
+.zt-page__question {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3; margin: 0; text-align: center;
+  color: var(--color-text-secondary);
+}
+/* Grid de Action Cards — máx 4 columnas iguales; el ancho lo da el grid */
+.zt-action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-32);
+  align-items: stretch;                        /* cards de igual alto por fila */
+}
+.zt-action-grid > .zt-action-card { height: 100%; }
+
+/* Dentro de .zt-page el padding horizontal lo da el contenedor:
+   breadcrumb y page-title se alinean al MISMO eje (sin padding lateral propio). */
+.zt-page > .breadcrumb { padding-left: 0; padding-right: 0; }
+.zt-page > .page-title { padding-left: 0; padding-right: 0; }
+
+@media (max-width: 1024px) {
+  .zt-action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-20); }
+}
+@media (max-width: 680px) {
+  .zt-page { padding: 0 var(--space-20) var(--space-40); }
+  .zt-page__section { gap: var(--space-24); padding-top: var(--space-24); }
+  .zt-action-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════ LAYOUT BODY ═══════════════ */
+.layout { display:flex; flex:1; }
+
+/* ═══════════════ SIDEBAR ═══════════════ */
+.sidebar {
+  display:none; width:var(--sidebar-w); flex-shrink:0;
+  background:var(--white); box-shadow:2px 0px 4px rgba(0,0,0,0.24);
+  flex-direction:column; min-height:100%;
+  position:sticky; top:88px; height:calc(100vh - 88px); overflow-y:auto; overflow-x:hidden;
+  transition: width .25s ease-in-out;
+}
+.sidebar-menu-label {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 24px; min-height:56px; font-size:18px; font-weight:700; color:#4a4a4a;
+  white-space:nowrap;
+}
+.sidebar-menu-label > span {
+  transition: opacity .2s ease-in-out;
+}
+/* Botón de contraer/cerrar el sidebar (icono superior derecho) */
+.sidebar-toggle {
+  display:flex; align-items:center; justify-content:center;
+  width:32px; height:32px; border:none; background:none; border-radius:8px;
+  color:#4a4a4a; cursor:pointer; flex-shrink:0; transition:background .15s;
+}
+.sidebar-toggle:hover { background:var(--bg); }
+.sidebar-toggle:focus-visible { outline:2px solid var(--brand); outline-offset:2px; }
+
+/* ── Estado COLAPSADO: solo iconos ── */
+.sidebar--collapsed { width: var(--sidebar-w-collapsed, 72px); }
+/* ocultar el texto "Menú" y centrar el botón de contraer */
+.sidebar--collapsed .sidebar-menu-label {
+  justify-content:center; padding-left:0; padding-right:0;
+}
+.sidebar--collapsed .sidebar-menu-label > span { opacity:0; width:0; overflow:hidden; }
+/* ocultar labels de las opciones, centrar iconos */
+.sidebar--collapsed .nav-item {
+  justify-content:center; gap:0; padding-left:0; padding-right:0;
+}
+.sidebar--collapsed .nav-item__label {
+  opacity:0; width:0; overflow:hidden; white-space:nowrap;
+}
+
+/* Opción de navegación — soporta 1 o 2 líneas, fila completa clicable */
+.nav-item {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:12px 16px 12px 20px; min-height:48px;
+  font-size:16px; font-weight:400; color:#4a4a4a; line-height:1.25;
+  position:relative; border:none; border-left:4px solid transparent; background:none;
+  cursor:pointer; width:100%; text-align:left; text-decoration:none;
+  transition: background-color .2s ease-in-out, color .2s ease-in-out, border-left-color .2s ease-in-out;
+}
+.nav-item:hover, .nav-item:focus { text-decoration:none; }
+.nav-item:hover {
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  color: var(--text);
+  border-left: 4px solid var(--use-text-theme-violet, #4e3199);
+}
+.nav-item:focus-visible { outline:2px solid var(--brand); outline-offset:-2px; }
+.nav-item.active {
+  color:#4a4a4a; background:#f2f2f2; font-weight:700;
+  border-left:4px solid #8367ce;
+}
+/* Icono alineado con la primera línea del bloque de texto */
+.nav-icon {
+  width:24px; height:24px; flex-shrink:0; font-size:20px;
+  display:flex; align-items:center; justify-content:center;
+  line-height:1;
+}
+/* Etiqueta de texto de cada opción — se oculta al colapsar */
+.nav-item__label {
+  transition: opacity .2s ease-in-out;
+}
+
+/* Respeta reduced-motion en el shell del sidebar */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .sidebar-menu-label > span, .nav-item, .nav-item__label { transition: none; }
+}
+/* El icono hereda el tratamiento (peso/color) de la fila activa vía currentColor */
+.nav-item.active .nav-icon { color:#4a4a4a; }
+
+/* ═══════════════ MAIN CONTENT ═══════════════ */
+.main { flex:1; min-width:0;  background-color: var(--color-surface);}
+
+/* ═══════════════ SCREENS ═══════════════ */
+.screen { display:none; flex-direction:column; min-height:calc(100vh - 56px); }
+.screen.active { display:flex; }
+
+/* ═══════════════ BREADCRUMB ═══════════════ */
+.breadcrumb {
+  display:flex; align-items:center; gap:4px; padding:20px 20px 0; flex-wrap:wrap;
+}
+.breadcrumb a, .breadcrumb span { font-size:16px; color:var(--text-3); }
+.breadcrumb a:hover { color:var(--brand); }
+.breadcrumb .sep { color:#333; }
+.breadcrumb .bc-muted { color:#666; font-size:16px; }
+.breadcrumb .current { color:#4e3199; font-weight:700; font-size:16px; }
+.breadcrumb .bc-home { color:#333; display:flex; align-items:center; font-size:20px; }
+
+/* ═══════════════ PAGE TITLE ═══════════════ */
+.page-title {
+  padding:6px 20px 0; line-height:1.2;
+  font-size:28px; font-weight:700;
+}
+.page-title .orange { color:var(--brand); }
+.page-title .dark   { color:var(--text); }
+
+/* ═══════════════ DESKTOP BREAKPOINT — shell ═══════════════ */
+@media (min-width: 768px) {
+  body { background:var(--bg); }
+
+  .header-mobile  { display:none; }
+  .header-desktop { display:flex; }
+
+  .sidebar {
+    display:flex;
+    top:88px;
+    height:calc(100vh - 88px);
+  }
+
+  .screen { min-height:calc(100vh - 88px); }
+
+  .breadcrumb { padding:22px 32px 0; gap:16px; }
+  .page-title { padding:8px 32px 0; font-size:40px; }
+}
+
+/* ═══════════════ SIDEBAR MÓVIL (drawer) ═══════════════ */
+/* Backdrop del drawer (oculto por defecto) */
+.sidebar-backdrop {
+  display:none;
+  position:fixed; inset:0; z-index:59;
+  background:rgba(17,17,17,.4);
+  opacity:0; transition:opacity .25s ease-in-out;
+}
+
+@media (max-width: 767.98px) {
+  /* El sidebar se convierte en panel deslizable fuera de pantalla */
+  .sidebar {
+    display:flex;                 /* se muestra pero fuera de viewport */
+    position:fixed; top:0; left:0; z-index:60;
+    width:var(--sidebar-w); height:100vh; max-width:85vw;
+    transform:translateX(-100%);
+    transition:transform .25s ease-in-out;
+    box-shadow:2px 0 12px rgba(0,0,0,.28);
+  }
+  .sidebar.is-open { transform:translateX(0); }
+
+  /* En móvil no se colapsa a solo-iconos: siempre contenido completo dentro del drawer */
+  .sidebar--collapsed { width:var(--sidebar-w); }
+  .sidebar--collapsed .nav-item { justify-content:flex-start; gap:16px; padding:12px 16px 12px 20px; }
+  .sidebar--collapsed .nav-item__label { opacity:1; width:auto; }
+  .sidebar--collapsed .sidebar-menu-label { justify-content:space-between; padding:16px 24px; }
+  .sidebar--collapsed .sidebar-menu-label > span { opacity:1; width:auto; }
+
+  /* Backdrop visible cuando el drawer está abierto */
+  .sidebar-backdrop.is-open { display:block; opacity:1; }
+
+  /* Evita scroll del fondo cuando el drawer está abierto */
+  body.zt-menu-open { overflow:hidden; }
+}

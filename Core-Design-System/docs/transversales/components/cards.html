@@ -1,0 +1,521 @@
+<article class="component-doc-page cards-doc" data-component-doc="cards">
+  <nav class="mp-breadcrumb component-doc-nav" aria-label="Breadcrumb">
+    <ol class="mp-breadcrumb__list">
+      <li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="#introduccion"><i class="icon icon-house mp-breadcrumb__home" aria-hidden="true"></i><span class="visually-hidden">Inicio</span></a></li>
+      <li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="#introduccion">Sistema de diseño</a></li>
+      <li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><a class="mp-breadcrumb__link" href="#">Componentes</a></li>
+      <li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Cards</span></li>
+    </ol>
+  </nav>
+
+  <section class="component-hero" aria-labelledby="cards-title">
+    <h1 id="cards-title" class="text-primary">Cards</h1>
+    <p class="text-secondary">Contenedores que agrupan información relacionada dentro de una interfaz. Organizan contenido, facilitan la lectura y permiten acciones dentro de un mismo bloque.</p>
+    <div class="component-meta" aria-label="Metadatos del componente">
+      <span class="component-chip component-chip--success">Estado: estable</span>
+      <span class="component-chip">Versión 1.0</span>
+      <span class="component-chip">Web</span>
+      <span class="component-chip">Bootstrap compatible</span>
+      <span class="component-chip">Categoría: contenido</span>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-summary">
+    <div class="component-section__header">
+      <h2 id="cards-summary">1. Resumen</h2>
+    </div>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-12 col-lg-6">
+        <h3 class="text-primary">Cuándo usarlo</h3>
+        <ul class="component-list">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Para mostrar información agrupada y fácil de escanear.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Para resultados de búsqueda, servicios, beneficios o contenido resumido.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Para agrupar contenido con una acción principal clara.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Para construir vistas modulares en grillas responsive.</li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card component-example-card--split h-100">
+          <div>
+            <h3 class="text-primary">Do</h3>
+            <p class="text-secondary">Usa una jerarquía simple: imagen opcional, título, texto breve y acción principal.</p>
+            <div class="component-example-actions">
+              <article class="mp-card mp-card--raised cards-doc-mini-card">
+                <img class="mp-card__media" src="https://picsum.photos/id/1011/800/450" alt="Persona caminando al aire libre">
+                <div class="mp-card__content">
+                  <h3 class="mp-card__title">Programa bienestar</h3>
+                  <p class="mp-card__body">Resumen corto del beneficio principal.</p>
+                  <footer class="mp-card__footer">
+                    <button type="button" class="mp-btn mp-btn--primario">Conocer más</button>
+                  </footer>
+                </div>
+              </article>
+            </div>
+          </div>
+          <span class="component-divider" aria-hidden="true"></span>
+          <div>
+            <h3 class="text-primary">Don't</h3>
+            <p class="text-secondary">No mezcles múltiples prioridades ni conviertas la card en una página completa.</p>
+            <div class="component-example-actions">
+              <article class="mp-card cards-doc-mini-card">
+                <div class="mp-card__content">
+                  <h3 class="mp-card__title">Demasiada información</h3>
+                  <p class="mp-card__body">Texto extenso, varias acciones principales, estados mezclados y contenido sin jerarquía reducen la claridad.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-anatomy">
+    <div class="component-section__header">
+      <div>
+        <h2 id="cards-anatomy">2. Anatomía interactiva</h2>
+        <p class="text-secondary">La estructura usa el componente productivo <code>mp-card</code>, clases Bootstrap para layout y tokens semánticos del sistema.</p>
+      </div>
+    </div>
+
+    <div class="segmented-control" role="group" aria-label="Variación anatómica de card">
+      <button type="button" class="mp-btn mp-btn--terciario" data-card-anatomy="vertical" aria-pressed="true">Vertical</button>
+      <button type="button" class="mp-btn mp-btn--terciario" data-card-anatomy="compact" aria-pressed="false">Compacta</button>
+      <button type="button" class="mp-btn mp-btn--terciario" data-card-anatomy="horizontal" aria-pressed="false">Horizontal</button>
+    </div>
+
+    <div class="cards-anatomy-stage" aria-label="Anatomía de card">
+      <span class="cards-anatomy-measure cards-anatomy-measure--width" data-card-anatomy-width>398 px</span>
+      <span class="cards-anatomy-measure cards-anatomy-measure--height" data-card-anatomy-height>536 px</span>
+      <span class="cards-anatomy-measure cards-anatomy-measure--padding" data-card-anatomy-padding>Padding 24 px</span>
+      <span class="cards-anatomy-measure cards-anatomy-measure--gap">Gap 16 px</span>
+
+      <div class="cards-doc-callout cards-doc-callout--container">
+        <strong>Contenedor</strong>
+        <span>Fondo, borde, radio 24 px y sombra se resuelven por tokens.</span>
+      </div>
+      <div class="cards-doc-callout cards-doc-callout--media">
+        <strong>Imagen</strong>
+        <span>Opcional. Usa imagen real con ratio 16:9 y no cambia por modo de color.</span>
+      </div>
+      <div class="cards-doc-callout cards-doc-callout--title">
+        <strong>Título</strong>
+        <span>Texto principal de la card. Debe ser corto y escaneable.</span>
+      </div>
+      <div class="cards-doc-callout cards-doc-callout--body">
+        <strong>Contenido</strong>
+        <span>Descripción breve, máximo 2 o 3 líneas.</span>
+      </div>
+      <div class="cards-doc-callout cards-doc-callout--actions">
+        <strong>Acciones</strong>
+        <span>Máximo una acción primaria dentro de la card.</span>
+      </div>
+
+      <div class="cards-anatomy-preview" id="cards-anatomy-preview"></div>
+    </div>
+
+    <div class="cards-doc-controls">
+      <label class="button-doc-toggle">
+        <input type="checkbox" data-card-toggle="labels" checked>
+        Etiquetas
+      </label>
+      <label class="button-doc-toggle">
+        <input type="checkbox" data-card-toggle="measures" checked>
+        Medidas
+      </label>
+      <label class="button-doc-toggle">
+        <input type="checkbox" data-card-toggle="image" checked>
+        Imagen
+      </label>
+      <label class="button-doc-toggle">
+        <input type="checkbox" data-card-toggle="actions" checked>
+        Acciones
+      </label>
+    </div>
+
+    <div class="row g-3 mt-3">
+      <div class="col-12 col-md-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Contenedor</h3>
+          <ul class="component-list">
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Ancho base 398 px.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Padding 24 px en card vertical.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Borde 1 px y radio 24 px.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>En alto contraste conserva borde blanco sólido.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Contenido</h3>
+          <ul class="component-list">
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Título, subtítulo, cuerpo y footer son opcionales según el caso.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>La imagen mantiene su apariencia en todos los temas.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Las acciones usan el componente botón del sistema.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-playground-title">
+    <div class="component-section__header">
+      <h2 id="cards-playground-title">3. Variantes / Playground</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-12 col-lg-7">
+        <h3 class="text-primary">Vista previa</h3>
+        <div class="cards-preview-card" id="cards-playground-preview" role="region" aria-label="Vista previa de cards"></div>
+      </div>
+      <div class="col-12 col-lg-5">
+        <h3 class="text-primary">Controles</h3>
+        <div class="row g-3">
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="cards-variant">Variante</label>
+            <select class="mp-input-field mp-select" id="cards-variant" data-card-control="variant">
+              <option value="vertical">Vertical</option>
+              <option value="raised">Elevada</option>
+              <option value="interactive">Interactiva</option>
+              <option value="compact">Compacta</option>
+              <option value="horizontal">Horizontal</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="cards-state">Estado</label>
+            <select class="mp-input-field mp-select" id="cards-state" data-card-control="state">
+              <option value="default">Default</option>
+              <option value="hover">Hover</option>
+              <option value="focus">Focus</option>
+              <option value="active">Active</option>
+              <option value="disabled">Disabled</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="cards-theme">Tema</label>
+            <select class="mp-input-field mp-select" id="cards-theme" data-card-control="theme">
+              <option value="light">Light</option>
+              <option value="dark">Modo oscuro</option>
+              <option value="high-contrast">Alto contraste</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="cards-image-choice">Imagen</label>
+            <select class="mp-input-field mp-select" id="cards-image-choice" data-card-control="imageChoice">
+              <option value="wellness">Bienestar</option>
+              <option value="family">Familia</option>
+              <option value="service">Servicio</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="mp-input-label" for="cards-title-input">Título</label>
+            <input class="mp-input-field" id="cards-title-input" type="text" value="Programa bienestar" data-card-control="title">
+          </div>
+          <div class="col-12">
+            <label class="mp-input-label" for="cards-subtitle-input">Subtítulo</label>
+            <input class="mp-input-field" id="cards-subtitle-input" type="text" value="Beneficio destacado" data-card-control="subtitle">
+          </div>
+          <div class="col-12">
+            <label class="mp-input-label" for="cards-body-input">Contenido</label>
+            <textarea class="mp-input-field mp-textarea" id="cards-body-input" data-card-control="body">Encuentra servicios, orientación y acompañamiento para cuidar tu bienestar y el de tu familia.</textarea>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="cards-action-a">Acción secundaria</label>
+            <input class="mp-input-field" id="cards-action-a" type="text" value="Guardar" data-card-control="actionA">
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="cards-action-b">Acción primaria</label>
+            <input class="mp-input-field" id="cards-action-b" type="text" value="Conocer más" data-card-control="actionB">
+          </div>
+          <div class="col-12">
+            <label class="button-doc-toggle">
+              <input type="checkbox" data-card-control="image" checked>
+              Incluir imagen
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-code-panel mt-3">
+      <div class="button-code-tabs" role="tablist" aria-label="Código de cards">
+        <button type="button" class="mp-btn mp-btn--terciario active" role="tab" aria-selected="true" data-card-code-tab="html">HTML</button>
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" aria-selected="false" data-card-code-tab="css">CSS</button>
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" aria-selected="false" data-card-code-tab="scss">Sass</button>
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left button-copy" data-copy-cards-code>
+          <i class="icon icon-share icon-16" aria-hidden="true"></i>
+          Copiar código
+        </button>
+      </div>
+      <pre><code id="cards-code-output"></code></pre>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-states">
+    <div class="component-section__header">
+      <h2 id="cards-states">4. Estados</h2>
+    </div>
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-xl-3">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Default</h3>
+          <div class="cards-doc-sample" data-card-state-demo="default"></div>
+          <p class="text-secondary">Card disponible sin énfasis de interacción.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-3">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Hover</h3>
+          <div class="cards-doc-sample" data-card-state-demo="hover"></div>
+          <p class="text-secondary">Indica que la card o su acción puede ejecutarse.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-3">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Focus</h3>
+          <div class="cards-doc-sample" data-card-state-demo="focus"></div>
+          <p class="text-secondary">El foco debe ser visible cuando la card es interactiva.</p>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-xl-3">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Disabled</h3>
+          <div class="cards-doc-sample" data-card-state-demo="disabled"></div>
+          <p class="text-secondary">Reduce énfasis y bloquea interacción.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-variants">
+    <div class="component-section__header">
+      <h2 id="cards-variants">5. Variantes</h2>
+    </div>
+    <div class="row g-3">
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Vertical</h3>
+          <div class="cards-doc-sample" data-card-variant-demo="vertical"></div>
+          <p class="text-secondary">Uso principal para contenido resumido con media opcional.</p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Horizontal</h3>
+          <div class="cards-doc-sample" data-card-variant-demo="horizontal"></div>
+          <p class="text-secondary">Útil cuando la imagen acompaña una pieza de contenido más breve.</p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Compacta</h3>
+          <div class="cards-doc-sample" data-card-variant-demo="compact"></div>
+          <p class="text-secondary">Para listados densos o agrupaciones con menos contenido.</p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Interactiva</h3>
+          <div class="cards-doc-sample" data-card-variant-demo="interactive"></div>
+          <p class="text-secondary">Debe tener foco visible y una acción claramente definida.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-responsive">
+    <div class="component-section__header">
+      <h2 id="cards-responsive">6. Responsive</h2>
+    </div>
+    <div class="row g-4 align-items-center">
+      <div class="col-12 col-lg-4">
+        <p class="text-secondary">En pantallas pequeñas, la card se ajusta al ancho disponible y la variante horizontal se apila para conservar legibilidad.</p>
+        <ul class="component-list mt-3">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Usa grillas Bootstrap para distribuir cards.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Evita alturas fijas cuando el contenido sea variable.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Mantén el orden: imagen, contenido y acciones.</li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-8">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <div class="cards-responsive-frame cards-responsive-frame--mobile">
+              <div data-card-responsive-demo="mobile"></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="cards-responsive-frame">
+              <div data-card-responsive-demo="desktop"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-color-modes">
+    <div class="component-section__header">
+      <h2 id="cards-color-modes">7. Modos de color</h2>
+    </div>
+    <div class="row g-3">
+      <div class="col-12 col-lg-4">
+        <div class="cards-mode-box h-100" data-theme="light">
+          <h3 class="text-primary">Light</h3>
+          <p class="text-secondary">Modo principal del sistema.</p>
+          <div data-card-mode-demo="light"></div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="cards-mode-box h-100" data-theme="dark">
+          <h3 class="text-primary">Modo oscuro</h3>
+          <p class="text-secondary">Modo alternativo para entornos de baja iluminación.</p>
+          <div data-card-mode-demo="dark"></div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="cards-mode-box h-100" data-theme="high-contrast">
+          <h3 class="text-primary">High Contrast</h3>
+          <p class="text-secondary">Modo enfocado en accesibilidad.</p>
+          <div data-card-mode-demo="high-contrast"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-code">
+    <div class="component-section__header">
+      <h2 id="cards-code">8. Código</h2>
+    </div>
+    <div class="button-code-panel">
+      <div class="button-code-tabs" role="tablist" aria-label="Código base de cards">
+        <button type="button" class="mp-btn mp-btn--terciario active" role="tab" data-card-static-code-tab="html" aria-selected="true">HTML</button>
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" data-card-static-code-tab="angular" aria-selected="false">Angular</button>
+        <button type="button" class="mp-btn mp-btn--terciario" role="tab" data-card-static-code-tab="drupal" aria-selected="false">Drupal</button>
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left button-copy" data-copy-cards-static-code>
+          <i class="icon icon-share icon-16" aria-hidden="true"></i>
+          Copiar código
+        </button>
+      </div>
+      <pre id="cards-code-html" class="active"><code>&lt;article class="mp-card mp-card--raised"&gt;
+  &lt;img class="mp-card__media"
+       src="https://picsum.photos/id/1011/800/450"
+       alt="Persona caminando al aire libre"&gt;
+  &lt;div class="mp-card__content"&gt;
+    &lt;header class="mp-card__header"&gt;
+      &lt;div&gt;
+        &lt;h3 class="mp-card__title"&gt;Programa bienestar&lt;/h3&gt;
+        &lt;p class="mp-card__subtitle"&gt;Beneficio destacado&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+    &lt;p class="mp-card__body"&gt;Encuentra servicios y acompañamiento para cuidar tu bienestar.&lt;/p&gt;
+    &lt;footer class="mp-card__footer"&gt;
+      &lt;button type="button" class="mp-btn mp-btn--primario"&gt;Conocer más&lt;/button&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+      <pre id="cards-code-angular"><code>&lt;mp-card
+  variant="raised"
+  imageSrc="https://picsum.photos/id/1011/800/450"
+  imageAlt="Persona caminando al aire libre"
+  title="Programa bienestar"
+  subtitle="Beneficio destacado"
+  actionLabel="Conocer más"
+  (action)="openProgram()"&gt;
+  Encuentra servicios y acompañamiento para cuidar tu bienestar.
+&lt;/mp-card&gt;</code></pre>
+      <pre id="cards-code-drupal"><code>{# Variables: card #}
+&lt;article class="mp-card {{ card.variant ? 'mp-card--' ~ card.variant }}"&gt;
+  {% if card.image %}
+    &lt;img class="mp-card__media" src="{{ card.image.src }}" alt="{{ card.image.alt }}"&gt;
+  {% endif %}
+  &lt;div class="mp-card__content"&gt;
+    &lt;h3 class="mp-card__title"&gt;{{ card.title }}&lt;/h3&gt;
+    &lt;p class="mp-card__body"&gt;{{ card.body }}&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-api">
+    <div class="component-section__header">
+      <h2 id="cards-api">9. API del componente</h2>
+    </div>
+    <table class="mp-api-table">
+      <thead>
+        <tr>
+          <th>Propiedad</th>
+          <th>Tipo</th>
+          <th>Default</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>variant</code></td>
+          <td><code>vertical | raised | compact | horizontal | interactive</code></td>
+          <td><code>vertical</code></td>
+          <td>Define presentación y comportamiento visual.</td>
+        </tr>
+        <tr>
+          <td><code>imageSrc</code></td>
+          <td><code>string</code></td>
+          <td>-</td>
+          <td>Imagen real opcional. No recibe filtros por tema.</td>
+        </tr>
+        <tr>
+          <td><code>title</code></td>
+          <td><code>string</code></td>
+          <td>-</td>
+          <td>Título principal de la card.</td>
+        </tr>
+        <tr>
+          <td><code>disabled</code></td>
+          <td><code>boolean</code></td>
+          <td><code>false</code></td>
+          <td>Reduce énfasis y desactiva interacción cuando aplica.</td>
+        </tr>
+        <tr>
+          <td><code>action</code></td>
+          <td><code>EventEmitter | callback</code></td>
+          <td>-</td>
+          <td>Evento de la acción principal o de la card interactiva.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="component-section" aria-labelledby="cards-accessibility">
+    <div class="component-section__header">
+      <h2 id="cards-accessibility">10. Accesibilidad</h2>
+    </div>
+    <div class="row g-3">
+      <div class="col-12 col-md-6 col-xl-3">
+        <div class="a11y-card h-100">
+          <i class="icon icon-eye icon-24 a11y-card__icon" aria-hidden="true"></i>
+          <div class="a11y-card__title text-primary">Contraste</div>
+          <div class="a11y-card__desc text-secondary">Texto, borde y acciones deben mantener contraste AA; en alto contraste el contenedor usa borde blanco sólido.</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-xl-3">
+        <div class="a11y-card h-100">
+          <i class="icon icon-keyboard icon-24 a11y-card__icon" aria-hidden="true"></i>
+          <div class="a11y-card__title text-primary">Foco visible</div>
+          <div class="a11y-card__desc text-secondary">Si la card es interactiva, debe poder enfocarse y mostrar un indicador visible.</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-xl-3">
+        <div class="a11y-card h-100">
+          <i class="icon icon-image icon-24 a11y-card__icon" aria-hidden="true"></i>
+          <div class="a11y-card__title text-primary">Texto alternativo</div>
+          <div class="a11y-card__desc text-secondary">Las imágenes informativas requieren <code>alt</code>; las decorativas deben usar alt vacío.</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-xl-3">
+        <div class="a11y-card h-100">
+          <i class="icon icon-check-square icon-24 a11y-card__icon" aria-hidden="true"></i>
+          <div class="a11y-card__title text-primary">Acción clara</div>
+          <div class="a11y-card__desc text-secondary">Evita múltiples acciones principales y no dependas solo del hover para revelar interacción.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>

@@ -1,0 +1,26 @@
+// ============================================================
+//  core/components/web/_index.scss
+//  Web-specific components
+// ============================================================
+
+@forward 'buttons';
+@forward 'inputs';
+@forward 'dropdown';
+@forward 'selection-controls';
+@forward 'alerts';
+@forward 'toasts';
+@forward 'modals';
+@forward 'cards';
+@forward 'pagination';
+@forward 'tables';
+@forward 'badges';
+@forward 'avatar';
+@forward 'header';
+@forward 'tabs';
+@forward 'empty-state';
+@forward 'loading';
+@forward 'breadcrumb';
+@forward 'accordion';
+@forward 'stepper';
+
+@forward 'sidebar';

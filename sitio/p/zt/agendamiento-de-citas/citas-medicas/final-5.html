@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Compensar - Confirmación de agenda</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="css/custom.css">
+<style>
+.lab-confirm-title{font-size:32px;line-height:1.2;margin:24px 32px 18px;font-weight:900}.lab-confirm-title .orange{color:var(--color-primary,#ff6600)}
+.lab-confirm-wrap{width:min(100%,680px);margin:0 auto 56px;display:flex;flex-direction:column;gap:24px}.lab-success{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}.lab-success-icon{width:56px;height:56px;border-radius:50%;background:#9dc71e;color:#fff;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(157,199,30,.24)}.lab-success-title{margin:0;font-size:22px;font-weight:900;color:#111}
+.lab-card{background:#fff;border:1px solid #e0e0e0;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04)}.lab-card-head{background:#e6f1fb;padding:20px 24px;font-size:18px;font-weight:900;color:#111}.lab-summary-auth{display:flex;justify-content:space-between;gap:16px;background:#f7f7f7;padding:14px 24px;border-bottom:1px solid #e0e0e0;color:#666;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}.lab-summary-body{padding:24px;display:flex;flex-direction:column;gap:22px}.lab-summary-row{display:grid;grid-template-columns:32px 1fr;gap:14px;align-items:start}.lab-summary-icon{width:28px;height:28px;border-radius:8px;background:#e6f1fb;color:#296ff0;display:inline-flex;align-items:center;justify-content:center;margin-top:2px}.lab-summary-label,.lab-exam-label{margin:0 0 4px;color:#666;font-size:12px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}.lab-summary-value{margin:0;color:#111;font-size:18px;font-weight:900;line-height:1.25}.lab-map-link{display:inline-block;margin-top:8px;color:var(--color-primary,#ff6600);font-size:14px;text-decoration:underline}
+.lab-bono{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:4px;padding:18px 20px;background:#fff2e3;border-radius:10px}.lab-bono-price{margin:6px 0 0;font-size:22px;font-weight:900;color:#111}.lab-card-actions{display:flex;justify-content:center;padding:0 24px 24px}.lab-exam-list{padding:22px 24px 24px;display:flex;flex-direction:column;gap:10px}.lab-exam-group{border:1px solid #e0e0e0;border-radius:10px;background:#fff;overflow:hidden}.lab-exam-group.is-open .lab-exam-content{display:block}.lab-exam-toggle{width:100%;border:0;background:#fff;padding:16px;display:grid;grid-template-columns:36px 1fr 20px;gap:14px;align-items:center;text-align:left;cursor:pointer;font-family:inherit}.lab-exam-icon{width:32px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;background:#fff2e3;color:#ff6600}.lab-exam-title{margin:0 0 3px;font-size:16px;font-weight:900;color:#111}.lab-exam-desc{margin:0;font-size:14px;color:#666;line-height:1.35}.lab-exam-content{display:none;padding:0 24px 20px 60px}.lab-exam-info{display:grid;grid-template-columns:40px 1fr;gap:14px;padding:18px;background:#f7f7f7;border-radius:10px;margin:0 0 14px}.lab-exam-info-icon{width:36px;height:36px;border-radius:8px;background:var(--blue-light,#e8f0fe);color:var(--blue-dark,#1f53b5);display:inline-flex;align-items:center;justify-content:center;font-size:20px}.lab-exam-items{display:flex;flex-direction:column}.lab-exam-item{padding:13px 0;border-bottom:1px solid #eee}.lab-exam-item:last-child{border-bottom:0}.lab-exam-item strong{display:block;color:#111;font-size:15px;margin-bottom:4px}.lab-empty-pill{justify-self:end;background:#e6f1fb;color:#2d4a67;font-size:12px;padding:6px 12px;border-radius:16px;white-space:nowrap}.lab-final-home{align-self:center;border:0;background:transparent;color:var(--color-primary,#ff6600);font-weight:900;cursor:pointer;font-size:16px;padding:12px}
+.rec-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.35);display:flex;justify-content:flex-end;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .24s ease}.rec-overlay.is-open{opacity:1;visibility:visible;pointer-events:auto}.rec-panel{width:min(100%,520px);background:#fff;min-height:100vh;border-radius:12px 0 0 12px;box-shadow:-8px 0 24px rgba(0,0,0,.18);overflow:auto;transform:translateX(100%);transition:transform .28s ease}.rec-overlay.is-open .rec-panel{transform:translateX(0)}.rec-head{background:#fff2e3;padding:24px 24px 22px;position:relative}.rec-icon{width:56px;height:56px;border-radius:50%;background:#ff6600;color:#fff;display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px}.rec-icon .icon{color:#fff;font-size:26px;font-weight:900}.rec-icon .icon-info{color:#fff!important}.rec-title{font-size:24px;font-weight:900;color:#111;margin:0 0 12px}.rec-sub{font-size:16px;line-height:1.45;color:#333;margin:0}.rec-close{position:absolute;right:20px;top:20px;width:40px;height:40px;border:0;background:transparent;cursor:pointer;color:#111}.rec-body{padding:22px 24px 32px}.rec-list{display:flex;flex-direction:column;gap:22px;margin:0 0 24px}.rec-item{display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:start;color:#333;font-size:16px;line-height:1.35}.rec-item .icon{font-size:22px;color:#333}.rec-note{font-size:16px;line-height:1.35;color:#333;margin:28px 0 32px}.rec-actions{display:flex;justify-content:center}.rec-actions .btn-primary{min-width:96px}
+@media(max-width:900px){.lab-confirm-title{margin:20px 16px 18px}.lab-confirm-wrap{padding:0 16px}.lab-bono{align-items:flex-start;flex-direction:column}.lab-exam-content{padding:0 16px 18px}.lab-exam-toggle{grid-template-columns:32px 1fr 20px}.rec-panel{border-radius:0}}
+/* ── Categorías inactivas (sin exámenes) ── */
+.lab-exam-group--inactive{border-color:#ebebeb;background:#fafafa;}
+.lab-exam-group--inactive .lab-exam-toggle{background:#fafafa;cursor:pointer;}
+.lab-exam-group--inactive .lab-exam-toggle:hover{background:#f3f3f3;}
+.lab-exam-group--inactive .lab-exam-icon{background:#f0f0f0!important;color:#bbb!important;}
+.lab-exam-group--inactive .lab-exam-title{color:#aaa;font-weight:700;}
+.lab-exam-group--inactive .lab-exam-desc{color:#c0c0c0;}
+.lab-exam-group--inactive .lab-empty-pill{background:#efefef;color:#aaa;border-radius:16px;}
+.lab-exam-group--inactive .lab-exam-toggle{grid-template-columns:36px 1fr auto;}
+.lab-exam-group--inactive .lab-exam-content{padding:0 20px 16px 60px;}
+.lab-exam-group--inactive .lab-exam-info{background:#f5f5f5;border:none;}
+.lab-exam-group--inactive .lab-exam-info .lab-exam-title{color:#aaa;}
+.lab-exam-group--inactive .lab-exam-info .lab-exam-desc{color:#bbb;}
+.lab-exam-group--inactive .lab-exam-info-icon{background:#d0d0d0;color:#fff;}
+.lab-exam-group--inactive .lab-map-link{color:#aaa;font-size:13px;}
+/* Separador visual entre activos e inactivos */
+.lab-inactive-divider{height:1px;background:#e8e8e8;margin:8px 0 4px;}
+/* ── TABS ── */
+.cfm-tabs{display:flex;justify-content:center;gap:24px;margin:0 auto 20px;padding:0;width:fit-content;}
+.cfm-tab{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border:0;border-radius:12px;background:var(--white,#fff);font-family:'Roboto',sans-serif;font-size:16px;font-weight:600;color:var(--text,#111);cursor:pointer;transition:background .15s,color .15s;white-space:nowrap;}
+.cfm-tab:not(.cfm-tab--active):hover{background:var(--bg,#f7f7f7);}
+.cfm-tab--active{background:var(--brand,#ff6600);color:var(--white,#fff);font-weight:700;}
+.cfm-tab .icon{font-size:16px;}
+.cfm-tab--active .icon{color:var(--white,#fff)!important;}
+.cfm-tab-panel--hidden{display:none;}
+/* Mensaje de tranquilidad */
+.cfm-notice{display:flex;align-items:flex-start;gap:10px;background:#fff8f3;border:1px solid #ffd6b3;border-radius:10px;padding:14px 16px;font-size:14px;color:#555;line-height:1.55;margin:0;}
+.cfm-notice .icon{color:#ff6600;flex-shrink:0;margin-top:1px;}
+</style>
+<script>
+(function (m, a, z, e) {
+  var s, t, u, v;
+  try {
+    t = m.sessionStorage.getItem('maze-us');
+  } catch (err) {}
+
+  if (!t) {
+    t = new Date().getTime();
+    try {
+      m.sessionStorage.setItem('maze-us', t);
+    } catch (err) {}
+  }
+
+  u = document.currentScript || (function () {
+    var w = document.getElementsByTagName('script');
+    return w[w.length - 1];
+  })();
+  v = u && u.nonce;
+
+  s = a.createElement('script');
+  s.src = z + '?apiKey=' + e;
+  s.async = true;
+  if (v) s.setAttribute('nonce', v);
+  a.getElementsByTagName('head')[0].appendChild(s);
+  m.mazeUniversalSnippetApiKey = e;
+})(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '91229964-c105-482c-bdda-48610b6c5d69');
+</script>
+</head>
+<body>
+<div class="app">
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Menú"><span class="material-icons" aria-hidden="true">menu</span></button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración"><span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span></button>
+  </header>
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada" id="brand-home-link">
+    <div class="hd-user">
+      <div class="hd-user-info"><div class="hd-user-name">Margarita López Arenas</div><div class="hd-user-plan">Plan Familiar</div></div>
+      <div class="hd-avatar"><span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span></div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit" type="button"><span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span> Salida</button>
+    </div>
+  </header>
+  <div class="layout">
+    <nav class="sidebar" data-active="agendamiento"></nav>
+    <main class="main">
+      <div class="screen active">
+        <div class="scroller">
+          <nav class="breadcrumb">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="javascript:void(0)" id="link-home">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="bc-muted">Laboratorios clínicos</span>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Agenda</span>
+          </nav>
+          <h1 class="lab-confirm-title"><span class="orange">Cita</span> confirmada</h1>
+          <div class="lab-confirm-wrap">
+            <div class="lab-success">
+              <span class="lab-success-icon"><span class="icon icon-check icon-24" aria-hidden="true"></span></span>
+              <h2 class="lab-success-title">Cita agendada con éxito</h2>
+            </div>
+            <!-- ── TABS NAV ── -->
+            <div class="cfm-tabs" role="tablist" aria-label="Secciones de la cita">
+              <button class="cfm-tab cfm-tab--active" role="tab" aria-selected="true" aria-controls="tab-confirmacion" id="tab-btn-confirmacion" type="button" onclick="switchTab('confirmacion')"><span class="icon icon-check-circle icon-16" aria-hidden="true"></span>Confirmación</button>
+              <button class="cfm-tab" role="tab" aria-selected="false" aria-controls="tab-recomendaciones" id="tab-btn-recomendaciones" type="button" onclick="switchTab('recomendaciones')"><span class="icon icon-list-bullets icon-16" aria-hidden="true"></span>Recomendaciones</button>
+            </div>
+            <!-- ── TAB 1: CONFIRMACIÓN ── -->
+            <div class="cfm-tab-panel" id="tab-confirmacion" role="tabpanel" aria-labelledby="tab-btn-confirmacion">
+            <section class="lab-card" aria-labelledby="lab-summary-title">
+              <div class="lab-card-head" id="lab-summary-title">Resumen de la cita</div>
+              <div class="lab-summary-auth"><span>Número de autorización</span><strong id="cfm-auth-num">-</strong></div>
+              <div class="lab-summary-body">
+                <div class="lab-summary-row"><span class="lab-summary-icon"><span class="icon icon-calendar-check icon-16" aria-hidden="true"></span></span><div><p class="lab-summary-label">Fecha y hora</p><p class="lab-summary-value" id="cfm-fecha">-</p></div></div>
+                <div class="lab-summary-row"><span class="lab-summary-icon"><span class="icon icon-heartbeat icon-16" aria-hidden="true"></span></span><div><p class="lab-summary-label">Centro médico</p><p class="lab-summary-value" id="cfm-center-name">-</p></div></div>
+                <div class="lab-summary-row"><span class="lab-summary-icon"><span class="icon icon-building icon-16" aria-hidden="true"></span></span><div><p class="lab-summary-label">Dirección</p><p class="lab-summary-value" id="cfm-loc-addr">-</p><a href="javascript:void(0)" class="lab-map-link">Consultar en el mapa</a></div></div>
+                <div class="lab-bono"><div><p class="lab-summary-label">Valor del bono</p><p class="lab-exam-desc">Puedes pagar ahora o el día de tu cita</p><p class="lab-bono-price" id="cfm-price">$60.999</p></div><button class="btn-primary" type="button">Pagar</button></div>
+              </div>
+              <div class="lab-card-actions"><button class="btn-outline cfm-download" type="button"><span class="icon icon-download-simple icon-16" aria-hidden="true"></span>Descargar comprobante</button></div>
+            </section>
+            <p class="cfm-notice"><span class="icon icon-info icon-16" aria-hidden="true"></span>Tu cita quedó agendada. Revisa las recomendaciones antes de asistir para evitar reprocesos o cambios en la toma de tus exámenes.</p>
+            </div><!-- /tab-confirmacion -->
+            <!-- ── TAB 2: RECOMENDACIONES ── -->
+            <div class="cfm-tab-panel cfm-tab-panel--hidden" id="tab-recomendaciones" role="tabpanel" aria-labelledby="tab-btn-recomendaciones">
+            <section class="lab-card" aria-labelledby="lab-exams-title">
+              <div class="lab-card-head" id="lab-exams-title">Recomendaciones para los exámenes agendados</div>
+              <div class="lab-exam-list">
+                <article class="lab-exam-group is-open" data-cat="ayuno">
+                  <button class="lab-exam-toggle" type="button" onclick="toggleLabExamGroup(this)"><span class="lab-exam-icon"><span class="icon icon-labs icon-20" aria-hidden="true"></span></span><span><p class="lab-exam-title">Exámenes con ayuno (4)</p><p class="lab-exam-desc">Debes realizarlos después de varias horas sin comer.</p></span><span class="icon icon-caret-up icon-16" aria-hidden="true"></span></button>
+                  <div class="lab-exam-content">
+                    <div class="lab-exam-info"><span class="lab-exam-info-icon icon icon-info" aria-hidden="true"></span><div><p class="lab-exam-title">Exámenes que requieren ayuno previo</p><p class="lab-exam-desc">Incluye exámenes que deben realizarse después de varias horas sin consumir alimentos.</p><a href="javascript:void(0)" class="lab-map-link" onclick="openRecommendationsOverlay(event)">Leer recomendaciones</a></div></div>
+                    <div class="lab-exam-items"><div class="lab-exam-item"><strong>Glucosa en ayunas</strong><p class="lab-exam-desc">Mide el nivel de azúcar en la sangre después de un periodo sin comer.</p></div><div class="lab-exam-item"><strong>Colesterol total</strong><p class="lab-exam-desc">Mide la cantidad total de colesterol en la sangre.</p></div><div class="lab-exam-item"><strong>Triglicéridos</strong><p class="lab-exam-desc">Mide el nivel de grasas en la sangre.</p></div><div class="lab-exam-item"><strong>Perfil lipídico</strong><p class="lab-exam-desc">Evalúa diferentes tipos de grasas en la sangre.</p></div></div>
+                  </div>
+                </article>
+                <article class="lab-exam-group" data-cat="horario"><button class="lab-exam-toggle" type="button" onclick="toggleLabExamGroup(this)"><span class="lab-exam-icon"><span class="icon icon-clock icon-20" aria-hidden="true"></span></span><span><p class="lab-exam-title">Exámenes con horario especial (4)</p><p class="lab-exam-desc">Deben realizarse en una hora o franja específica.</p></span><span class="icon icon-caret-right icon-16" aria-hidden="true"></span></button><div class="lab-exam-content"><div class="lab-exam-items"><div class="lab-exam-item"><strong>Cortisol a.m.</strong><p class="lab-exam-desc">Debe tomarse en la franja indicada por el laboratorio.</p></div><div class="lab-exam-item"><strong>Prolactina</strong><p class="lab-exam-desc">Requiere reposo previo y toma en horario específico.</p></div><div class="lab-exam-item"><strong>Curva de glucosa</strong><p class="lab-exam-desc">Requiere disponibilidad durante varias tomas.</p></div><div class="lab-exam-item"><strong>Insulina basal</strong><p class="lab-exam-desc">Debe tomarse siguiendo la preparación indicada.</p></div></div></div></article>
+                <article class="lab-exam-group" data-cat="toma"><button class="lab-exam-toggle" type="button" onclick="toggleLabExamGroup(this)"><span class="lab-exam-icon"><span class="icon icon-dropper icon-20" aria-hidden="true"></span></span><span><p class="lab-exam-title">Exámenes con toma especial (2)</p><p class="lab-exam-desc">Requieren una muestra o preparación diferente.</p></span><span class="icon icon-caret-right icon-16" aria-hidden="true"></span></button><div class="lab-exam-content"><div class="lab-exam-items"><div class="lab-exam-item"><strong>Parcial de orina</strong><p class="lab-exam-desc">Analiza características físicas y químicas de la muestra.</p></div><div class="lab-exam-item"><strong>Microalbuminuria</strong><p class="lab-exam-desc">Detecta pequeñas cantidades de proteína en orina.</p></div></div></div></article>
+                <article class="lab-exam-group" data-cat="genetico"><button class="lab-exam-toggle" type="button"><span class="lab-exam-icon"><span class="icon icon-dna icon-20" aria-hidden="true"></span></span><span><p class="lab-exam-title">Exámenes genéticos</p><p class="lab-exam-desc">Analizan información genética o molecular.</p></span><span class="lab-empty-pill">No tienes exámenes</span></button></article>
+                <article class="lab-exam-group" data-cat="coordinacion"><button class="lab-exam-toggle" type="button" onclick="toggleLabExamGroup(this)"><span class="lab-exam-icon"><span class="icon icon-article icon-20" aria-hidden="true"></span></span><span><p class="lab-exam-title">Exámenes con coordinación previa (1)</p><p class="lab-exam-desc">Requieren validación o programación especial.</p></span><span class="icon icon-caret-right icon-16" aria-hidden="true"></span></button><div class="lab-exam-content"><div class="lab-exam-items"><div class="lab-exam-item"><strong>Prueba funcional</strong><p class="lab-exam-desc">El laboratorio confirma indicaciones antes de la toma.</p></div></div></div></article>
+                <article class="lab-exam-group" data-cat="sin-sangre"><button class="lab-exam-toggle" type="button" onclick="toggleLabExamGroup(this)"><span class="lab-exam-icon"><span class="icon icon-flask icon-20" aria-hidden="true"></span></span><span><p class="lab-exam-title">Exámenes sin toma de sangre (2)</p><p class="lab-exam-desc">La muestra no se toma por sangre.</p></span><span class="icon icon-caret-right icon-16" aria-hidden="true"></span></button><div class="lab-exam-content"><div class="lab-exam-items"><div class="lab-exam-item"><strong>Coprológico</strong><p class="lab-exam-desc">Requiere entrega de muestra.</p></div><div class="lab-exam-item"><strong>Uroanálisis</strong><p class="lab-exam-desc">Se realiza con muestra de orina.</p></div></div></div></article>
+                <article class="lab-exam-group" data-cat="sin-ayuno"><button class="lab-exam-toggle" type="button" onclick="toggleLabExamGroup(this)"><span class="lab-exam-icon"><span class="icon icon-cookie icon-20" aria-hidden="true"></span></span><span><p class="lab-exam-title">Exámenes sin ayuno (3)</p><p class="lab-exam-desc">No requieren ayuno previo.</p></span><span class="icon icon-caret-right icon-16" aria-hidden="true"></span></button><div class="lab-exam-content"><div class="lab-exam-items"><div class="lab-exam-item"><strong>Hemograma completo</strong><p class="lab-exam-desc">Analiza componentes principales de la sangre.</p></div><div class="lab-exam-item"><strong>Creatinina</strong><p class="lab-exam-desc">Evalúa función renal.</p></div><div class="lab-exam-item"><strong>Vitamina D</strong><p class="lab-exam-desc">Evalúa niveles de vitamina D.</p></div></div></div></article>
+              </div>
+            </section>
+            </div><!-- /tab-recomendaciones -->
+            <button class="lab-final-home" type="button" id="btn-volver-home">Volver al inicio</button>
+          </div>
+          <footer class="footer">
+            <div><div class="footer-col-title">Te puede interesar</div><a class="footer-link" href="javascript:void(0)">Derechos y deberes</a><a class="footer-link" href="javascript:void(0)">Notificaciones judiciales</a><a class="footer-link" href="javascript:void(0)">Políticas de privacidad y condiciones de uso</a><a class="footer-link" href="javascript:void(0)">Transparencia y acceso a la información pública</a><a class="footer-link" href="javascript:void(0)">Canal de denuncia</a></div>
+            <div><div class="footer-col-title">Conoce más</div><a class="footer-link" href="javascript:void(0)">Nuestra organización</a><a class="footer-link" href="javascript:void(0)">Radicar PQRS</a><a class="footer-link" href="javascript:void(0)">Consultar PQRS</a><a class="footer-link" href="javascript:void(0)">Proveedores</a><a class="footer-link" href="javascript:void(0)">Términos y condiciones</a></div>
+            <div><div class="footer-col-title">Síguenos</div><div class="footer-social" aria-label="Redes sociales"><span class="icon icon-facebook-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-x-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-youtube-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-linkedin-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-instagram-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-tiktok-logo icon-20 gs-muted" aria-hidden="true"></span></div><div class="footer-address"><strong>Caja de Compensación Familiar Sede Principal</strong><br>Av. 68 # 49A - 47, Bogotá D.C.<br>Bogotá 601 3077001, Línea nacional 01 8000 967070</div></div>
+          </footer>
+          <div class="footer-bottom"><div class="footer-badge"><img src="../../../shared/assets/logo-supervigilado.svg" alt="" width="140"></div><div class="footer-badge"><img src="../../../shared/assets/logo-vigilado.svg" alt="" width="180"></div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<div class="rec-overlay" id="recommendations-overlay" role="dialog" aria-modal="true" aria-labelledby="rec-title" onclick="closeRecommendationsOverlay(event)">
+  <aside class="rec-panel">
+    <div class="rec-head">
+      <span class="rec-icon"><span class="icon icon-info icon-24" aria-hidden="true"></span></span>
+      <button class="rec-close" type="button" onclick="closeRecommendationsOverlay()" aria-label="Cerrar"><span class="icon icon-x icon-24" aria-hidden="true"></span></button>
+      <h2 class="rec-title" id="rec-title">Recomendaciones</h2>
+      <p class="rec-sub">Para que tus resultados sean más precisos, ten en cuenta estas recomendaciones antes de asistir a tu cita.</p>
+    </div>
+    <div class="rec-body">
+      <div class="rec-list">
+        <div class="rec-item"><span class="icon icon-clock icon-20" aria-hidden="true"></span><span>Realiza un ayuno de 8 a 12 horas.</span></div>
+        <div class="rec-item"><span class="icon icon-drop-half icon-20" aria-hidden="true"></span><span>Puedes tomar agua, salvo indicación médica diferente.</span></div>
+        <div class="rec-item"><span class="icon icon-dropper icon-20" aria-hidden="true"></span><span>Evita café, jugos, gaseosas, bebidas energizantes y alcohol.</span></div>
+        <div class="rec-item"><span class="icon icon-flask icon-20" aria-hidden="true"></span><span>No hagas ejercicio intenso antes del examen.</span></div>
+        <div class="rec-item"><span class="icon icon-tag icon-20" aria-hidden="true"></span><span>No suspendas medicamentos sin indicación médica.</span></div>
+        <div class="rec-item"><span class="icon icon-article icon-20" aria-hidden="true"></span><span>Lleva tu documento, orden médica y autorizaciones si aplican.</span></div>
+        <div class="rec-item"><span class="icon icon-article icon-20" aria-hidden="true"></span><span>Lleva tu documento, orden médica y autorizaciones si aplican.</span></div>
+      </div>
+      <p class="rec-note">Si tienes dudas, consulta con tu médico o comunícate con nuestros canales de atención.</p>
+      <div class="rec-actions"><button class="btn-primary" type="button" onclick="closeRecommendationsOverlay()">Cerrar</button></div>
+    </div>
+  </aside>
+</div>
+<div class="mp-modal-wrap" id="final-task-modal" role="dialog" aria-modal="true" aria-labelledby="final-task-title" onclick="closeFinalTaskModal(event)">
+  <div class="mp-modal mp-modal--success">
+    <div class="mp-modal__content" style="flex-direction:column; text-align:center;">
+      <button class="mp-modal__close" type="button" aria-label="Cerrar" onclick="closeFinalTaskModal()">
+        <span class="icon icon-x icon-24" aria-hidden="true"></span>
+      </button>
+      <span class="mp-modal__icon" aria-hidden="true">
+        <span class="icon icon-check icon-24"></span>
+      </span>
+      <h2 class="mp-modal__title" id="final-task-title">Tarea completada</h2>
+      <p class="mp-modal__body">Has llegado al final de esta tarea. Para continuar con la prueba, haz clic en Finalizar tarea en la ventana de Maze.</p>
+      <p class="mp-modal__body"><strong>¿Dónde está?</strong><br>Lo encontrarás en la barra de Maze, junto al prototipo.</p>
+      <img src="assets/finalizar-tarea.png" alt="Indicación para finalizar tarea en Maze" style="width:100%; max-width:360px; height:auto; border-radius:12px;">
+      <div class="mp-modal__actions">
+        <button class="btn-primary" type="button" onclick="closeFinalTaskModal()">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function hydrateConfirmation(){
+  var defaults={authNum:'-',fechaHora:'-',centerName:'-',centerAddr:'-',bono:'$60.999'};
+  var data=defaults;
+  try{var raw=sessionStorage.getItem('compensarConfirmacionLab');if(raw)data=Object.assign({},defaults,JSON.parse(raw));}catch(error){data=defaults;}
+  function setText(id,value){var el=document.getElementById(id);if(el)el.textContent=value;}
+  setText('cfm-auth-num',data.authNum);
+  setText('cfm-fecha',data.fechaHora);
+  setText('cfm-center-name',data.centerName);
+  setText('cfm-loc-addr',data.centerAddr||'-');
+  setText('cfm-price',data.bono||'$60.999');
+})();
+function switchTab(name) {
+  document.querySelectorAll('.cfm-tab').forEach(function(t) {
+    var active = t.id === 'tab-btn-' + name;
+    t.classList.toggle('cfm-tab--active', active);
+    t.setAttribute('aria-selected', String(active));
+  });
+  document.querySelectorAll('.cfm-tab-panel').forEach(function(p) {
+    p.classList.toggle('cfm-tab-panel--hidden', p.id !== 'tab-' + name);
+  });
+}
+function toggleLabExamGroup(btn){
+  var group=btn&&btn.closest('.lab-exam-group');
+  if(!group)return;
+  var isOpen=group.classList.toggle('is-open');
+  var icon=btn.querySelector('.icon-caret-right,.icon-caret-up');
+  if(icon){icon.classList.toggle('icon-caret-up',isOpen);icon.classList.toggle('icon-caret-right',!isOpen);}
+}
+function openRecommendationsOverlay(event){
+  if(event)event.preventDefault();
+  var overlay=document.getElementById('recommendations-overlay');
+  if(overlay)overlay.classList.add('is-open');
+  document.body.style.overflow='hidden';
+}
+function closeRecommendationsOverlay(event){
+  if(event&&event.target.id!=='recommendations-overlay')return;
+  var overlay=document.getElementById('recommendations-overlay');
+  if(overlay)overlay.classList.remove('is-open');
+  document.body.style.overflow='';
+}
+(function setupRoutes(){
+  var home='prueba-5.html';
+  try{home=sessionStorage.getItem('compensarHomeRoute')||home;}catch(error){}
+  var linkHome=document.getElementById('link-home');
+  var btn=document.getElementById('btn-volver-home');
+  var nav=document.getElementById('nav-home-btn');
+  var logo=document.getElementById('brand-home-link');
+  if(linkHome)linkHome.href=home;
+  [btn,nav,logo].forEach(function(el){if(el)el.addEventListener('click',function(){window.location.href=home;});});
+})();
+
+function openFinalTaskModal(){
+  var modal=document.getElementById('final-task-modal');
+  if(!modal)return;
+  modal.classList.add('is-open');
+  document.body.style.overflow='hidden';
+}
+function closeFinalTaskModal(event){
+  if(event&&event.target&&event.target.id!=='final-task-modal')return;
+  var modal=document.getElementById('final-task-modal');
+  if(!modal)return;
+  modal.classList.remove('is-open');
+  document.body.style.overflow='';
+}
+var finalTaskInactivityTimer=null;
+var finalTaskInactivityEvents=['mousemove','mousedown','keydown','scroll','touchstart'];
+function resetFinalTaskInactivityTimer(){
+  if(finalTaskInactivityTimer){
+    window.clearTimeout(finalTaskInactivityTimer);
+  }
+  finalTaskInactivityTimer=window.setTimeout(function(){
+    openFinalTaskModal();
+  },30000);
+}
+function setupFinalTaskInactivityModal(){
+  finalTaskInactivityEvents.forEach(function(eventName){
+    window.addEventListener(eventName,resetFinalTaskInactivityTimer);
+  });
+  resetFinalTaskInactivityTimer();
+}
+window.addEventListener('load',function(){
+  window.setTimeout(openFinalTaskModal,5000);
+  setupFinalTaskInactivityModal();
+});
+
+/* ─── HIDRATAR EXÁMENES DESDE SESSIONSTORAGE ─── */
+(function hydrateExams() {
+  var raw = null;
+  try { raw = sessionStorage.getItem('compensarExamenesData'); } catch(e) {}
+  if (!raw) return;
+  var allExams = [];
+  try { allExams = JSON.parse(raw); } catch(e) { return; }
+  if (!allExams || !allExams.length) return;
+
+  /* Deduplicar por nombre (case-insensitive) */
+  var seen = {};
+  var unique = allExams.filter(function(e) {
+    var key = (e.name || '').toLowerCase().trim();
+    if (!key || seen[key]) return false;
+    seen[key] = true;
+    return true;
+  });
+
+  /* Agrupar por categoría */
+  var groups = {};
+  unique.forEach(function(e) {
+    var cat = e.cat || 'sin-ayuno';
+    if (!groups[cat]) groups[cat] = [];
+    groups[cat].push(e);
+  });
+
+  var CAT_TITLES = {
+    'ayuno':        'Exámenes con ayuno',
+    'horario':      'Exámenes con horario especial',
+    'toma':         'Exámenes con toma especial',
+    'genetico':     'Exámenes genéticos',
+    'coordinacion': 'Exámenes con coordinación previa',
+    'sin-sangre':   'Exámenes sin toma de sangre',
+    'sin-ayuno':    'Exámenes sin ayuno'
+  };
+
+  /* Descripción corta visible en el encabezado de cada categoría */
+  var CAT_DESC = {
+    'ayuno':        'Exámenes que deben realizarse después de varias horas sin consumir alimentos para obtener resultados confiables.',
+    'horario':      'Exámenes que deben tomarse en una hora o franja específica del día, ya que algunos valores pueden variar según el horario.',
+    'toma':         'Exámenes que requieren una muestra, recipiente o preparación diferente a una toma de sangre común.',
+    'genetico':     'Estudios que analizan información genética, molecular o hereditaria y pueden requerir condiciones especiales.',
+    'coordinacion': 'Exámenes que necesitan validación, autorización o programación especial antes de realizar la toma.',
+    'sin-sangre':   'Exámenes cuya muestra no se obtiene por punción sanguínea, como muestras de orina, materia fecal u otro tipo de muestra.',
+    'sin-ayuno':    'Exámenes que puedes realizar sin estar en ayunas, salvo que el personal médico indique algo diferente.'
+  };
+
+  /* Texto de enlace específico por categoría */
+  var CAT_LINKS = {
+    'ayuno':        'Ver recomendaciones de ayuno',
+    'horario':      'Ver horarios recomendados',
+    'toma':         'Ver indicaciones para la muestra',
+    'genetico':     'Ver recomendaciones para estudios genéticos',
+    'coordinacion': 'Ver pasos antes de asistir',
+    'sin-sangre':   'Ver cómo preparar la muestra',
+    'sin-ayuno':    'Ver recomendaciones generales'
+  };
+
+  /* Recomendaciones desplegadas dentro del acordeón activo */
+  var CAT_RECS = {
+    'ayuno':        { title: 'Exámenes que requieren ayuno previo',       desc: 'Ayuna entre 8 y 12 horas antes de tu cita. Puedes tomar agua. Evita café, jugos, bebidas energizantes y alcohol. No hagas ejercicio intenso el día anterior.' },
+    'horario':      { title: 'Exámenes con franja horaria específica',    desc: 'Estos exámenes deben realizarse en un horario determinado, generalmente en la mañana. Consulta la indicación exacta de tu orden médica antes de asistir.' },
+    'toma':         { title: 'Exámenes con recolección especial',         desc: 'Cada examen requiere preparación y recolección diferente. Sigue las instrucciones del laboratorio para garantizar que la muestra sea válida.' },
+    'genetico':     { title: 'Exámenes genéticos',                        desc: 'Estos estudios analizan material genético o molecular. Consulta con tu médico la preparación específica requerida según el tipo de análisis.' },
+    'coordinacion': { title: 'Exámenes con programación previa',          desc: 'El laboratorio coordinará contigo los detalles antes de la toma. Mantén disponible tu número de contacto.' },
+    'sin-sangre':   { title: 'Exámenes sin extracción de sangre',         desc: 'La muestra no se obtiene por punción sanguínea. Recibirás instrucciones específicas para la recolección según el tipo de examen.' },
+    'sin-ayuno':    { title: 'Exámenes sin requerimiento de ayuno',       desc: 'No necesitas preparación especial. Puedes comer con normalidad y asistir en el horario habitual del laboratorio.' }
+  };
+
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  var list = document.querySelector('.lab-exam-list');
+  if (!list) return;
+
+  var activeGroups   = [];
+  var inactiveGroups = [];
+
+  document.querySelectorAll('.lab-exam-group[data-cat]').forEach(function(group) {
+    var cat      = group.dataset.cat;
+    var exams    = groups[cat] || [];
+    var btn      = group.querySelector('.lab-exam-toggle');
+    if (!btn) return;
+
+    var titleEl  = btn.querySelector('.lab-exam-title');
+    var descEl   = btn.querySelector('.lab-exam-desc');
+    var lastChild= btn.lastElementChild;
+    var content  = group.querySelector('.lab-exam-content');
+    var catTitle = CAT_TITLES[cat]  || cat;
+    var catDesc  = CAT_DESC[cat]    || '';
+    var rec      = CAT_RECS[cat];
+
+    /* Actualizar descripción corta en el encabezado */
+    if (descEl) descEl.textContent = catDesc;
+
+    /* ── CATEGORÍA INACTIVA ── */
+    if (exams.length === 0) {
+      group.classList.remove('is-open');
+      group.classList.add('lab-exam-group--inactive');
+
+      if (titleEl) titleEl.textContent = catTitle;
+
+      /* Tercer elemento del toggle: píldora "No tienes exámenes" */
+      if (lastChild) {
+        lastChild.className = 'lab-empty-pill';
+        lastChild.textContent = 'No tienes exámenes';
+        lastChild.removeAttribute('aria-hidden');
+      }
+
+      /* Expandible: muestra descripción + "Ver recomendaciones" */
+      btn.setAttribute('onclick', 'toggleLabExamGroup(this)');
+
+      var linkText = CAT_LINKS[cat] || 'Ver recomendaciones';
+      var inactiveHtml = '<div class="lab-exam-info">'
+        + '<span class="lab-exam-info-icon icon icon-info" aria-hidden="true"></span>'
+        + '<div>'
+        + '<p class="lab-exam-title">' + esc(rec ? rec.title : catTitle) + '</p>'
+        + '<p class="lab-exam-desc">' + esc(catDesc) + '</p>'
+        + '<a href="javascript:void(0)" class="lab-map-link" onclick="openRecommendationsOverlay(event)">' + esc(linkText) + '</a>'
+        + '</div>'
+        + '</div>';
+
+      if (!content) {
+        content = document.createElement('div');
+        content.className = 'lab-exam-content';
+        group.appendChild(content);
+      } else {
+        content.style.display = '';
+      }
+      content.innerHTML = inactiveHtml;
+
+      inactiveGroups.push(group);
+
+    /* ── CATEGORÍA ACTIVA ── */
+    } else {
+      group.classList.remove('lab-exam-group--inactive');
+
+      if (titleEl) titleEl.textContent = catTitle + ' (' + exams.length + ')';
+
+      /* Tercer elemento: caret */
+      if (lastChild) {
+        lastChild.className = 'icon icon-caret-right icon-16';
+        lastChild.textContent = '';
+        lastChild.setAttribute('aria-hidden', 'true');
+      }
+
+      btn.setAttribute('onclick', 'toggleLabExamGroup(this)');
+
+      /* Tarjeta informativa con recomendación */
+      var activeLinkText = CAT_LINKS[cat] || 'Ver recomendaciones';
+      var recHtml = '';
+      if (rec) {
+        recHtml = '<div class="lab-exam-info"><span class="lab-exam-info-icon icon icon-info" aria-hidden="true"></span><div>'
+          + '<p class="lab-exam-title">' + esc(rec.title) + '</p>'
+          + '<p class="lab-exam-desc">' + esc(rec.desc) + '</p>'
+          + '<a href="javascript:void(0)" class="lab-map-link" onclick="openRecommendationsOverlay(event)">' + esc(activeLinkText) + '</a>'
+          + '</div></div>';
+      }
+
+      /* Lista de exámenes */
+      var itemsHtml = '<div class="lab-exam-items">'
+        + exams.map(function(e) {
+            return '<div class="lab-exam-item"><strong>' + esc(e.name) + '</strong>'
+              + (e.desc ? '<p class="lab-exam-desc">' + esc(e.desc) + '</p>' : '')
+              + '</div>';
+          }).join('')
+        + '</div>';
+
+      if (!content) {
+        content = document.createElement('div');
+        content.className = 'lab-exam-content';
+        group.appendChild(content);
+      } else {
+        content.style.display = '';
+      }
+      content.innerHTML = recHtml + itemsHtml;
+
+      /* Abrir la primera categoría con exámenes (ayuno o la primera activa) */
+      if (activeGroups.length === 0) {
+        group.classList.add('is-open');
+        lastChild = btn.lastElementChild;
+        if (lastChild) { lastChild.className = 'icon icon-caret-up icon-16'; }
+      } else {
+        group.classList.remove('is-open');
+      }
+
+      activeGroups.push(group);
+    }
+  });
+
+  /* ── RE-ORDENAR: activos primero, inactivos al final ── */
+  if (activeGroups.length > 0 && inactiveGroups.length > 0) {
+    activeGroups.forEach(function(g) { list.appendChild(g); });
+
+    /* Separador visual */
+    var divider = document.createElement('div');
+    divider.className = 'lab-inactive-divider';
+    list.appendChild(divider);
+
+    inactiveGroups.forEach(function(g) { list.appendChild(g); });
+  } else {
+    activeGroups.concat(inactiveGroups).forEach(function(g) { list.appendChild(g); });
+  }
+}());
+</script>
+  <script src="../../shared/zt-sidebar.js"></script>
+</body>
+</html>

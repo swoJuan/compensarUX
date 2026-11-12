@@ -1,0 +1,13 @@
+Como reproducir (los scripts se ejecutaron desde una carpeta temporal _dec012-p3b/ dentro del repo; adapte las rutas)
+
+1) Servidor local en la raiz del repo:           python3 -m http.server 8000
+2) Playwright FUERA del repo (no toca package.json):  mkdir /tmp/pw && cd /tmp/pw && npm i playwright && npx playwright install chromium
+3) CSS "P3 sin B"  : copia de css/core.css antes de aplicar la opcion B       -> /tmp/core.p3final.before.css
+4) CSS "anterior a P3" (reconstruido; hash esperado 3e64781602215d198bca6efa4c0901f7):
+     cp -r core /tmp/core-preP3
+     para cada archivo en: components/web/_header.scss _sidebar.scss _avatar.scss _badges.scss base/_icons.scss
+         git show HEAD:core/<archivo> > /tmp/core-preP3/<archivo>
+     sed -i '' 's/font-weight: 800;/font-weight: 700;/g' /tmp/core-preP3/components/web/_header.scss      # DEC-005, no es parte de P3
+     npx sass /tmp/core-preP3/core.scss:/tmp/core.preP3.css --style=compressed --no-source-map --load-path=node_modules --quiet-deps --silence-deprecation=import,global-builtin,color-functions,if-function
+5) node validate.js            (usa el tamano de fuente REAL del navegador via Preferences del perfil + channel 'chromium';
+                                 el headless-shell ignora esa preferencia)

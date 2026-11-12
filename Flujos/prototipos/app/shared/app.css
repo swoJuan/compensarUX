@@ -1,0 +1,303 @@
+/* ============================================================
+ * app.css — Shell transversal de la APP Medicina Prepagada (prototipos móviles)
+ * ------------------------------------------------------------
+ * Nivel 3 de la cascada (equivalente a zt.css / drupal.css):
+ *   Design System (vendor/core.css) → iconos → ESTE archivo (APP) → custom del flujo
+ *
+ * Contiene SOLO lo transversal de la app:
+ *   - Visor de teléfono (marco del dispositivo + panel de simulación)
+ *   - Barra de estado, app bar, pestañas
+ *   - Bottom sheet, diálogo centrado, toast
+ *   - Campos tipo botón, control segmentado, aviso, tarjeta
+ * Los botones, badges, checkboxes y radios son del Design System (.mp-*).
+ * Prefijo propio: .app-*
+ * ============================================================ */
+
+:root {
+  --app-orange:   var(--use-primary-default, #ff6600);
+  --app-bg:       var(--use-surface-theme-gray-5, #f5f5f5);
+  --app-white:    var(--use-surface-white, #fff);
+  --app-text:     var(--use-text-primary, #111);
+  --app-text-2:   var(--use-text-secondary, #333);
+  --app-text-3:   var(--use-text-tertiary, #666);
+  --app-border:   var(--use-border-default, #ccc);
+  --app-border-s: var(--use-border-subtle, #e0e0e0);
+  --app-violet:   var(--use-text-theme-violet, #4e3199);
+  --app-violet-bg: var(--use-surface-violet, #efecf9);
+  --app-info-bg:  var(--use-state-info-bg, #e6f1fb);
+  --app-info-tx:  var(--use-state-info-text, #2d4a67);
+  --app-w: 390px;
+  --app-h: 844px;
+  --app-bezel: 10px;
+  --app-ease: .28s cubic-bezier(.4, 0, .2, 1);
+  /* Bottom sheet: entra con desaceleración suave (estilo iOS) y sale más corto */
+  --app-sheet-in:  .46s;
+  --app-sheet-out: .34s;
+  --app-sheet-ease-in:  cubic-bezier(.32, .72, 0, 1);
+  --app-sheet-ease-out: cubic-bezier(.4, 0, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: 'Roboto', sans-serif; color: var(--app-text); background: #e8e5ef; }
+button { font-family: inherit; }
+.app-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ═══════════════ VISOR (marco del teléfono) ═══════════════ */
+.app-viewer {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  gap: 48px; padding: 16px 24px;
+}
+.app-stage {
+  flex: none; position: relative;
+  width: calc((var(--app-w) + 2 * var(--app-bezel)) * var(--app-scale, 1));
+  height: calc((var(--app-h) + 2 * var(--app-bezel)) * var(--app-scale, 1));
+}
+.app-device {
+  position: absolute; top: 0; left: 0;
+  width: calc(var(--app-w) + 2 * var(--app-bezel));
+  height: calc(var(--app-h) + 2 * var(--app-bezel));
+  padding: var(--app-bezel);
+  background: #17171a; border-radius: 58px;
+  box-shadow: 0 24px 60px rgba(40, 20, 80, .28), inset 0 0 0 2px #3a3a40;
+  transform: scale(var(--app-scale, 1)); transform-origin: 0 0;
+}
+.app-screen {
+  position: relative; isolation: isolate;
+  width: var(--app-w); height: var(--app-h);
+  display: flex; flex-direction: column;
+  /* clip (y no solo hidden): impide que un foco() sobre un elemento aún fuera de pantalla desplace la pantalla */
+  border-radius: 48px; overflow: hidden; overflow: clip;
+  background: var(--app-bg);
+}
+.app-status {
+  flex: none; height: 47px; padding: 0 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--app-bg);
+  font-size: 16px; font-weight: 700; color: #111; user-select: none;
+}
+.app-status__pills { display: flex; gap: 6px; }
+.app-status__pills i { display: block; height: 14px; border-radius: 7px; background: #111; }
+.app-status__pills i:nth-child(1) { width: 22px; }
+.app-status__pills i:nth-child(2) { width: 16px; }
+.app-status__pills i:nth-child(3) { width: 28px; }
+.app-views { position: relative; flex: 1 1 auto; min-height: 0; }
+.app-view {
+  position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden;
+  display: flex; flex-direction: column;
+  background: var(--app-bg);
+  scrollbar-width: none;
+}
+.app-view::-webkit-scrollbar { display: none; }
+.app-view[hidden], .app-tabpanel[hidden], .app-sheet[hidden], .app-dialog[hidden] { display: none; }
+
+/* Panel de simulación (fuera del teléfono) */
+.app-sim {
+  flex: none; width: 300px; padding: 20px;
+  background: #fff; border-radius: 16px; box-shadow: 0 6px 24px rgba(40, 20, 80, .12);
+  font-size: 14px; color: var(--app-text-2);
+}
+.app-sim__title { margin: 0 0 4px; font-size: 16px; font-weight: 700; color: var(--app-text); }
+.app-sim__hint { margin: 0 0 16px; line-height: 1.4; color: var(--app-text-3); }
+.app-sim fieldset { border: 0; margin: 0 0 16px; padding: 0; }
+.app-sim legend { padding: 0; margin-bottom: 8px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--app-text-2); }
+.app-sim label { display: flex; align-items: center; gap: 8px; min-height: 36px; cursor: pointer; }
+.app-sim input { accent-color: var(--app-orange); width: 18px; height: 18px; }
+.app-sim__btns { display: flex; flex-direction: column; gap: 8px; }
+.app-sim__btn {
+  min-height: 40px; padding: 8px 14px; border: 1px solid var(--app-border); border-radius: 12px;
+  background: #fff; color: var(--app-text); font: inherit; font-size: 14px; text-align: left; cursor: pointer;
+}
+.app-sim__btn:hover { border-color: var(--app-orange); background: var(--use-surface-theme-orange-10, #fff1e8); }
+.app-sim__btn:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 2px; }
+.app-sim__reset {
+  width: 100%; min-height: 40px; border: 1px solid var(--app-orange); border-radius: 20px;
+  background: #fff; color: var(--app-orange); font-weight: 700; font-size: 14px; cursor: pointer;
+}
+.app-sim__reset:hover { background: var(--use-surface-theme-orange-10, #fff1e8); }
+@media (max-width: 900px) { .app-sim { display: none; } }
+
+/* En un teléfono real no se dibuja el marco: la app ocupa toda la pantalla */
+@media (max-width: 480px) {
+  .app-viewer { padding: 0; display: block; min-height: 100dvh; }
+  .app-stage { width: 100%; height: 100dvh; }
+  .app-device { position: static; width: 100%; height: 100%; padding: 0; border-radius: 0; box-shadow: none; transform: none; background: none; }
+  .app-screen { width: 100%; height: 100%; border-radius: 0; }
+  .app-status { display: none; }
+}
+
+/* ═══════════════ APP BAR + PESTAÑAS ═══════════════ */
+.app-bar {
+  flex: none; height: 64px; padding: 0 12px;
+  display: flex; align-items: center; gap: 4px;
+  background: var(--app-orange); color: #fff;
+}
+.app-bar__title { flex: 1; margin: 0 0 0 4px; font-size: 18px; font-weight: 400; line-height: 1.2; color: inherit; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app-iconbtn {
+  flex: none; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%; background: none; color: inherit; cursor: pointer; text-decoration: none;
+}
+.app-iconbtn:hover { background: rgba(255, 255, 255, .16); }
+.app-iconbtn:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+
+.app-tabs { flex: none; display: flex; background: #fff; border-bottom: 1px solid var(--app-border-s); }
+.app-tab {
+  position: relative; flex: 1; height: 48px; border: 0; background: none;
+  font-size: 14px; font-weight: 500; letter-spacing: .1px; color: var(--app-text-2); cursor: pointer;
+}
+.app-tab[aria-selected="true"] { color: var(--app-orange); }
+.app-tab[aria-selected="true"]::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 0; height: 3px; border-radius: 100px 100px 0 0; background: var(--app-orange); }
+.app-tab:focus-visible { outline: 2px solid var(--app-orange); outline-offset: -3px; }
+.app-tabpanel { flex: 1 1 auto; display: flex; flex-direction: column; }
+
+/* ═══════════════ CONTENIDO ═══════════════ */
+.app-content { flex: 1 1 auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; }
+.app-h1 { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.3; }
+.app-lead { margin: 6px 0 0; font-size: 14px; line-height: 1.5; color: var(--app-text-2); }
+.app-card { padding: 20px 16px; background: #fff; border-radius: 16px; display: flex; flex-direction: column; gap: 20px; }
+
+.app-alert {
+  display: flex; gap: 10px; align-items: flex-start; padding: 14px 16px;
+  border-radius: 12px; background: var(--app-info-bg); color: var(--app-info-tx);
+  font-size: 14px; line-height: 1.4;
+}
+.app-alert .icon { flex: none; margin-top: 1px; }
+.app-alert p { margin: 0; }
+
+.app-fieldgroup { display: flex; flex-direction: column; gap: 6px; }
+.app-label { font-size: 14px; line-height: 1.5; color: var(--app-text); }
+.app-star { color: var(--use-state-error-icon, #d13c34); margin-right: 2px; }
+.app-field {
+  width: 100%; min-height: 48px; padding: 14px 14px 14px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  border: 1px solid var(--app-border-s); border-radius: 12px; background: #fff;
+  font-size: 16px; color: var(--app-text); text-align: left; cursor: pointer;
+}
+.app-field__value { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app-field__value.is-placeholder { color: var(--app-text-3); }
+.app-field:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 1px; }
+.app-field .icon { flex: none; color: var(--app-text); }
+
+.app-question { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.3; }
+.app-seg {
+  display: flex; padding: 4px; gap: 0; border: 1px solid var(--app-border-s); border-radius: 999px; background: #fff;
+}
+.app-seg__opt { position: relative; flex: 1; }
+.app-seg__opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.app-seg__opt span {
+  display: flex; align-items: center; justify-content: center; padding: 10px 0; border-radius: 999px;
+  font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--app-text-2); white-space: nowrap; pointer-events: none;
+}
+.app-seg__opt input:checked + span { background: var(--app-orange); color: #fff; }
+.app-seg__opt input:focus-visible + span { outline: 2px solid var(--app-violet); outline-offset: 2px; }
+
+.app-note {
+  display: flex; gap: 10px; align-items: flex-start; margin: 0; padding: 12px 14px; border-radius: 8px;
+  background: var(--app-bg); font-size: 14px; line-height: 1.4; color: var(--app-text);
+}
+.app-note .icon { flex: none; margin-top: 1px; color: var(--app-text-2); }
+
+.app-help { display: flex; align-items: center; gap: 8px; padding: 0 0 0 4px; font-size: 14px; line-height: 1.5; color: var(--app-text-2); }
+.app-help__link {
+  padding: 8px 0; border: 0; background: none; font: inherit; font-size: 16px; font-weight: 700; line-height: 1.3;
+  color: var(--app-orange); text-decoration: underline; cursor: pointer;
+}
+.app-help__link[aria-disabled="true"] { cursor: default; opacity: 1; }   /* pendiente de destino; el DS atenúa [aria-disabled] */
+.app-help__link:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 2px; border-radius: 4px; }
+
+/* Barra inferior fija (CTA) */
+.app-bottom {
+  position: sticky; bottom: 0; flex: none; margin-top: auto;
+  padding: 12px 20px 34px; background: #fff; box-shadow: 0 -4px 16px rgba(0, 0, 0, .06);
+  display: flex; flex-direction: column; gap: 4px; align-items: stretch;
+}
+.app-bottom .mp-btn, .app-sheet__footer .mp-btn, .app-dialog__panel .mp-btn { width: 100%; justify-content: center; }
+.app-textbtn {
+  min-height: 44px; border: 0; background: none; font: inherit; font-size: 16px; font-weight: 700;
+  color: var(--app-orange); cursor: pointer; border-radius: 22px;
+}
+.app-textbtn:hover { background: var(--use-surface-theme-orange-10, #fff1e8); }
+.app-textbtn:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 2px; }
+
+/* ═══════════════ BOTTOM SHEET ═══════════════ */
+.app-sheet { position: absolute; inset: 0; z-index: 40; visibility: hidden; pointer-events: none; transition: visibility 0s linear var(--app-sheet-out); }
+.app-sheet.is-open { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+.app-sheet__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, .5); opacity: 0; transition: opacity var(--app-sheet-out) ease; }
+.app-sheet.is-open .app-sheet__backdrop { opacity: 1; transition-duration: var(--app-sheet-in); }
+.app-sheet__panel {
+  position: absolute; left: 0; right: 0; bottom: 0; max-height: 92%;
+  display: flex; flex-direction: column; background: #fff; border-radius: 24px 24px 0 0;
+  transform: translateY(100%); will-change: transform;
+  transition: transform var(--app-sheet-out) var(--app-sheet-ease-out);   /* cierre: baja */
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, .12);
+}
+.app-sheet.is-open .app-sheet__panel { transform: translateY(0); transition: transform var(--app-sheet-in) var(--app-sheet-ease-in); }   /* apertura: sube */
+.app-sheet.is-dragging .app-sheet__panel, .app-sheet.is-dragging .app-sheet__backdrop { transition: none; }
+
+/* Zona de arrastre (asa + encabezado): deslizar hacia abajo cierra la hoja */
+.app-sheet__handle { flex: none; position: relative; height: 24px; cursor: grab; touch-action: none; }
+.app-sheet__handle::before { content: ""; position: absolute; top: 10px; left: 50%; width: 40px; height: 4px; margin-left: -20px; border-radius: 2px; background: var(--app-border); }
+.app-sheet.is-dragging .app-sheet__handle { cursor: grabbing; }
+.app-sheet__header { flex: none; touch-action: none; display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 8px 20px; }
+.app-sheet__title { margin: 0; font-size: 18px; font-weight: 700; }
+.app-sheet__close { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 50%; background: none; cursor: pointer; color: var(--app-text); }
+.app-sheet__close:hover { background: var(--app-bg); }
+.app-sheet__close:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 1px; }
+.app-sheet__body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 4px 20px 8px; }
+.app-sheet__footer { flex: none; padding: 12px 20px 34px; display: flex; flex-direction: column; gap: 10px; }
+.app-sheet__intro { margin: 0 0 16px; font-size: 14px; line-height: 1.4; color: var(--app-text-2); }
+
+.app-search { position: relative; margin-bottom: 12px; }
+.app-search input {
+  width: 100%; height: 44px; padding: 0 16px 0 44px; border: 0; border-radius: 12px;
+  background: var(--app-bg); font: inherit; font-size: 16px; color: var(--app-text);
+}
+.app-search input::placeholder { color: var(--app-text-3); }
+.app-search input:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 1px; }
+.app-search .icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--app-text-2); pointer-events: none; }
+
+.app-choicelist { display: flex; flex-direction: column; }
+.app-choicelist, .app-choicelist > div { display: flex; flex-direction: column; }
+.app-choicelist .mp-choice { min-height: 46px; align-items: center; }
+.app-choicelist .mp-choice__text { padding-top: 0; align-self: center; padding-left: 8px; }
+.app-choicelist .mp-choice__label { font-size: 16px; line-height: 1.3; color: var(--app-text); }
+.app-choicelist__all { border-bottom: 1px solid var(--app-border-s); margin-bottom: 4px; }
+.app-choicelist__all .mp-choice__label { font-weight: 700; }
+.app-choicelist .mp-choice[hidden] { display: none; }
+.app-empty-search { margin: 12px 0; font-size: 14px; color: var(--app-text-3); }
+.app-choicelist .mp-checkbox .mp-choice__input:indeterminate + .mp-choice__control::before { border-color: var(--mp-choice-color); background: var(--mp-choice-color); }
+.app-choicelist .mp-checkbox .mp-choice__input:indeterminate + .mp-choice__control::after {
+  content: ""; position: absolute; width: 10px; height: 2px; margin: 0; background: var(--use-text-on-dark-primary, #fff); border: 0; transform: none;
+}
+
+/* ═══════════════ DIÁLOGO CENTRADO — Figma App 09 (error / aviso) ═══════════════ */
+.app-dialog { position: absolute; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 24px; visibility: hidden; pointer-events: none; transition: visibility 0s linear .2s; }
+.app-dialog.is-open { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+.app-dialog__backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, .45); opacity: 0; transition: opacity .2s; }
+.app-dialog.is-open .app-dialog__backdrop { opacity: 1; }
+.app-dialog__panel {
+  position: relative; width: 100%; padding: 24px 20px 20px; border-radius: 20px; background: #fff;
+  display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+  opacity: 0; transform: scale(.96); transition: opacity .2s, transform .2s;
+}
+.app-dialog.is-open .app-dialog__panel { opacity: 1; transform: none; }
+/* Icono de 64px con aro de 5px (el aro es parte de los 64px) */
+.app-dialog__icon { flex: none; width: 64px; height: 64px; display: inline-flex; align-items: center; justify-content: center; border: 5px solid; border-radius: 48px; color: #fff; }
+.app-dialog__icon--error { background: var(--use-state-error-border, #db7165); border-color: var(--use-state-error-bg, #f7eeed); }
+.app-dialog__icon--warning { background: var(--use-state-warning-icon-bg, #ffc154); border-color: var(--use-state-warning-bg, #fff2d9); color: #111; }
+.app-dialog__title { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--app-text); }
+.app-dialog__text { margin: 0 0 12px; font-size: 14px; line-height: 1.5; color: var(--app-text-2); }   /* 10 de gap + 12 = 22 hasta el botón (Figma: gap 10 + separador 2 + gap 10) */
+.app-dialog__panel .app-textbtn { width: 100%; }
+
+/* ═══════════════ TOAST ═══════════════ */
+.app-toast {
+  position: absolute; left: 50%; bottom: 96px; z-index: 70; max-width: calc(100% - 40px);
+  padding: 12px 18px; border-radius: 24px; background: #17171a; color: #fff; font-size: 14px;
+  transform: translate(-50%, 12px); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+}
+.app-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .app-sheet, .app-sheet__backdrop, .app-sheet__panel, .app-sheet.is-open .app-sheet__backdrop, .app-sheet.is-open .app-sheet__panel,
+  .app-dialog, .app-dialog__backdrop, .app-dialog__panel, .app-toast { transition: none; }
+}

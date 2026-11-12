@@ -1,0 +1,8 @@
+# Local only
+Nara/
+Abrir Compensar.command
+_respaldo-repos/
+
+# macOS
+.DS_Store
+**/.DS_Store

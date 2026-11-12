@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>seed Paso 4</title></head><body>
+<!-- Semilla de prototipo para abrir el Paso 4 (Estados de salud) directamente:
+     candidato viable + Pasos 1 y 2 (con OTP) completos + Paso 3 con el
+     contratante como beneficiario y dos beneficiarios (una mujer, un hombre). -->
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script>
+  var num = '222';
+  var p = ZTAfiliacion.personaMock(num);
+  ZTAfiliacion.saveCandidate({
+    documentType:'CC', documentNumber:num, name: ZTAfiliacion.nombreMock(num),
+    firstName:p.firstName, secondName:p.secondName, firstSurname:p.firstSurname, secondSurname:p.secondSurname,
+    viable:true
+  });
+  ZTAfiliacion.saveStep1({ modality:'individual', transactionType:'new', noveltyType:null,
+    companyName:'Empresa Demo S.A.S.', nit:'900123456', plan:'ideal', startDate:'2026-10-01', completed:true });
+  ZTAfiliacion.saveStep2({ birthDate:'1990-05-10', age:36, gender:'mujer', sex:'femenino',
+    maritalStatus:'casado', eps:'compensar', ethnicGroup:'ninguno', nationality:'colombiana', birthCountry:'colombia',
+    phone:'3001234567', email:'usuario@email.com', address:'Calle 10 # 20-30', department:'valle', city:'cali',
+    completed:true, otpVerified:true });
+  var benefBase = { status:'complete', eps:'compensar', phone:'3007654321', email:'familia@email.com',
+    sameAddressAsContractor:true, address:'Calle 10 # 20-30', department:'valle', city:'cali',
+    comesFromComplementaryPlan:false, complementaryPlanWeeks:null, validatesOtherPrepaidSeniority:false };
+  ZTAfiliacion.saveStep3({ completed:true, contractorIsBeneficiary:true, beneficiaries:[
+    Object.assign({}, benefBase, { id:'bseed1', documentType:'TI', documentNumber:'1010101010',
+      firstName:'Sofía', secondName:'', firstSurname:'Castro', secondSurname:'Ríos', birthDate:'2012-03-15', age:14,
+      gender:'mujer', identificationSex:'femenino', relationship:'hijo' }),
+    Object.assign({}, benefBase, { id:'bseed2', documentType:'CC', documentNumber:'80808080',
+      firstName:'Andrés', secondName:'Felipe', firstSurname:'Gómez', secondSurname:'', birthDate:'1988-11-02', age:37,
+      gender:'hombre', identificationSex:'masculino', relationship:'conyuge' })
+  ]});
+  ZTAfiliacion.clearStep4();
+  location.replace('index.html');
+</script></body></html>

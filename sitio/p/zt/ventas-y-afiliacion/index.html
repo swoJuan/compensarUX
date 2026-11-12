@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Ventas y Afiliación</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT -->
+<link rel="stylesheet" href="../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../shared/icons/icons.css">
+<link rel="stylesheet" href="../shared/zt.css">
+<link rel="stylesheet" href="../shared/components/action-card.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Ideal</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal — "Ventas y Afiliación" activo -->
+    <nav class="sidebar" data-active="ventas"></nav>
+
+    <!-- MAIN (shell ZT) -->
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page">
+
+          <!-- Breadcrumb (shell ZT) — Inicio / Ventas y Afiliación -->
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Ventas y Afiliación</span>
+          </nav>
+
+          <!-- Título (shell ZT) -->
+          <h1 class="page-title">
+            <span class="orange">Ventas </span><span class="dark">y afiliación</span>
+          </h1>
+
+          <!-- ¿Qué deseas realizar hoy? + acciones -->
+          <section class="zt-page__section" aria-labelledby="va-acciones-title">
+            <h2 class="zt-page__question" id="va-acciones-title">¿Qué deseas realizar hoy?</h2>
+
+            <div class="zt-action-grid">
+              <!-- Action Card (componente transversal) — sin descripción en esta pantalla -->
+              <!-- Destino: flujo Iniciar afiliación -->
+              <a class="zt-action-card" href="iniciar-afiliacion/index.html">
+                <span class="zt-action-card__icon icon icon-user-plus icon-40" aria-hidden="true"></span>
+                <span class="zt-action-card__text">
+                  <span class="zt-action-card__title">Iniciar afiliación</span>
+                </span>
+                <span class="zt-action-card__caret icon icon-caret-right icon-24 gs-inherit" aria-hidden="true"></span>
+              </a>
+              <!-- Destino: listado de radicados (seguimiento de solicitudes) -->
+              <a class="zt-action-card" href="mis-radicados/index.html">
+                <span class="zt-action-card__icon icon icon-receipt icon-40" aria-hidden="true"></span>
+                <span class="zt-action-card__text">
+                  <span class="zt-action-card__title">Mis radicados</span>
+                </span>
+                <span class="zt-action-card__caret icon icon-caret-right icon-24 gs-inherit" aria-hidden="true"></span>
+              </a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../shared/zt-sidebar.js"></script>
+</body>
+</html>

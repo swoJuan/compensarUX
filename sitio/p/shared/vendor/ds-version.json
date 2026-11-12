@@ -1,0 +1,52 @@
+{
+  "$comentario": "Generado por ds-sync.mjs. No editar a mano: indica qué versión del sistema de diseño usan los prototipos.",
+  "ds": {
+    "tag": "v2.4.0",
+    "ref": "v2.4.0",
+    "commit": "27767a7ebccc0ef3509319dcda615a5f9c047633",
+    "fecha": "2026-11-11T21:29:14+00:00"
+  },
+  "sincronizado": "2026-11-11T21:36:49.257Z",
+  "archivos": [
+    {
+      "origen": "css/core.css",
+      "destino": "shared/vendor/core.css",
+      "sha256": "7764c194647d99ea38c8754c1dc0f4939ae603e563473e7b197897f782feea3a"
+    },
+    {
+      "origen": "css/portal.css",
+      "destino": "shared/vendor/portal.css",
+      "sha256": "8019f83aab47de9fae0008e9e9f9d50dbcbd59ee70334bf22e5a87f9103648b8"
+    },
+    {
+      "origen": "icons/icons.css",
+      "destino": "shared/icons/icons.css",
+      "sha256": "4ec3280bf7d8fcdb1af168efc2bcf9439f4b0cfeb2222e55928001bd29c896c5"
+    },
+    {
+      "origen": "js/mp-tabs.js",
+      "destino": "shared/vendor/mp-tabs.js",
+      "sha256": "6f4a14c2e13ea4eb3b339c0aebaee2ce1f7648e31c98a6f7ebd31f6210e9e505"
+    },
+    {
+      "origen": "icons/fonts/compensar-icons.otf",
+      "destino": "shared/icons/fonts/compensar-icons.otf",
+      "sha256": "a8ea81641aa571258bf07e7ca7140592dc2bbba6c5d2d97bbcdf84e2450ed913"
+    },
+    {
+      "origen": "icons/fonts/compensar-icons.ttf",
+      "destino": "shared/icons/fonts/compensar-icons.ttf",
+      "sha256": "17be1f7275be7b87586502cee47c43caae0365b08ecaac829c0c9aab1df92885"
+    },
+    {
+      "origen": "icons/fonts/compensar-icons.woff",
+      "destino": "shared/icons/fonts/compensar-icons.woff",
+      "sha256": "3e6c290019c1a20f1f51b3b98608b848ada7b658c6e49b7147bbd21ce0111a63"
+    },
+    {
+      "origen": "icons/fonts/compensar-icons.woff2",
+      "destino": "shared/icons/fonts/compensar-icons.woff2",
+      "sha256": "6ccdcd166154e6fb6570d866535af3f7a1b24caecfaf03e877baf1426e9d03aa"
+    }
+  ]
+}

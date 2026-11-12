@@ -1,0 +1,27 @@
+/* ============================================================
+ * custom.css — Estilos ESPECÍFICOS del flujo Laboratorio (ZT)
+ * ------------------------------------------------------------
+ * Cascada: core.css (DS) → ../shared/zt.css (shell ZT) → ESTE archivo
+ *
+ * Aquí solo va lo propio del flujo de laboratorio.
+ * El shell (header, sidebar, layout, breadcrumb, page-title) vive en
+ * ../../shared/zt.css y NO debe redefinirse aquí.
+ * ============================================================ */
+
+/* Contenedor de scroll del contenido del flujo (igual patrón que otros flujos ZT) */
+.scroller { padding-bottom: 40px; }
+
+/* Intro base de la primera pantalla — se ampliará al construir el flujo */
+.lab-intro {
+  padding: 12px 20px 0;
+}
+.lab-intro__text {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.5;
+  max-width: 640px;
+}
+
+@media (min-width: 768px) {
+  .lab-intro { padding: 12px 32px 0; }
+}

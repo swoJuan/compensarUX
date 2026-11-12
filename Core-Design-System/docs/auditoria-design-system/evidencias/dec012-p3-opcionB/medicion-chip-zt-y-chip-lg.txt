@@ -1,0 +1,14 @@
+ZT (1280px, texto 100%): {
+ "declaredCols": [
+  "auto auto minmax(0px, 1fr) auto"
+ ],
+ "resolvedCols": "158.531px 208px 815.469px 0px",
+ "children": [
+  "mobile-toggle: display=none w=0",
+  "brand: display=flex w=159",
+  "search: display=block w=208",
+  "mp-user-chip: display=flex w=815"
+ ]
+}
+Chips: c-sm: font-size=14px min-height=25px | c-md: font-size=14px min-height=29px | c-lg: font-size=14px min-height=34px
+Aliases: {"fsMd":"0.875rem","fsSm":"0.75rem","bodyL":"1rem"}

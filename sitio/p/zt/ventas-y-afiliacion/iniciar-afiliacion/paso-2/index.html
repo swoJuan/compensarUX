@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Proceso de afiliación · Paso 2</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → componentes transversales → custom del flujo -->
+<link rel="stylesheet" href="../../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../../shared/zt.css">
+<link rel="stylesheet" href="../../../shared/components/stepper.css">
+<link rel="stylesheet" href="../../../shared/components/dropdown.css">
+<link rel="stylesheet" href="../../../shared/components/datepicker.css">
+<link rel="stylesheet" href="../../../shared/components/form-error.css">
+<link rel="stylesheet" href="../../../shared/components/person-summary.css">
+<link rel="stylesheet" href="css/paso-2.css">
+<link rel="stylesheet" href="../css/proceso-layout.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) — selector de persona + Plan Ideal ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-person" data-person-selector>
+        <button class="hd-person__trigger" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu">
+          <span class="hd-person__info">
+            <span class="hd-person__name" data-person-name>Margarita López Arenas</span>
+            <span class="hd-person__plan" data-person-plan>Plan Ideal</span>
+          </span>
+          <span class="hd-person__caret icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+        </button>
+        <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
+          <p class="person-menu__label" id="person-menu-label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Margarita López Arenas" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Margarita López Arenas</span>
+              <span class="person-opt__role">Contratante</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal — "Ventas y Afiliación" activo -->
+    <nav class="sidebar" data-active="ventas"></nav>
+
+    <!-- MAIN (shell ZT) -->
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page">
+
+          <!-- Breadcrumb — Inicio / Ventas y afiliación / Iniciar afiliación -->
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../../../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <a href="../../index.html">Ventas y afiliación</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Iniciar afiliación</span>
+          </nav>
+
+          <!-- Título — "Proceso" naranja + "de afiliación" primary (H2 40px) -->
+          <h1 class="page-title">
+            <span class="orange">Proceso </span><span class="dark">de afiliación</span>
+          </h1>
+
+          <!-- ═══ LAYOUT DEL PROCESO: panel de pasos + card del paso actual ═══ -->
+          <div class="pa-layout">
+
+            <!-- PANEL IZQUIERDO: resumen del candidato + stepper -->
+            <aside class="pa-side" aria-label="Progreso del proceso de afiliación">
+              <!-- Resumen del candidato (Person Summary variante compact). Mismo
+                   componente y MISMO objeto candidato que el resumen del formulario.
+                   Lo renderiza paso-2.js desde la consulta de viabilidad persistida. -->
+              <div id="pa-cand-summary"></div>
+              <!-- Stepper transversal (lo renderiza paso-2.js con current = 2) -->
+              <div id="pa-stepper"></div>
+            </aside>
+
+            <!-- CARD DERECHA: Paso 2 — Datos del contratante -->
+            <section class="pa-card" aria-labelledby="pa-card-title">
+              <form id="pa-form" novalidate>
+
+                <!-- Encabezado de la card: badge + título.
+                     NOTA: el Figma interno muestra "PASO 1 DE 8" por inconsistencia del
+                     archivo; esta pantalla es el segundo paso → "PASO 2 DE 8". -->
+                <header class="pa-card__head">
+                  <span class="pa-badge">PASO 2 DE 8</span>
+                  <h2 class="pa-card__title" id="pa-card-title">Datos del contratante</h2>
+                </header>
+
+                <!-- (Se retiró el resumen "Persona a afiliar" dentro de la card: ya lo
+                     muestra el panel izquierdo.) -->
+
+                <!-- ══════════ SECCIÓN A — DATOS PERSONALES Y NACIMIENTO ══════════ -->
+                <!-- Sin divisor superior (pa-section--first): respira tras el resumen. -->
+                <section class="pa-section pa-section--first" aria-labelledby="pa-sec-a">
+                  <h3 class="pa-section__title" id="pa-sec-a">A. Datos personales y nacimiento</h3>
+
+                  <!-- DATOS DEL DOCUMENTO (NO editables) — vienen de la consulta del
+                       documento. Se presentan como INFORMACIÓN (etiqueta/valor), no como
+                       campos deshabilitados: sin bordes, carets ni grises de "inactivo".
+                       Los pinta paso-2.js. -->
+                  <div class="pa-facts" aria-labelledby="pa-facts-title">
+                    <p class="pa-facts__title" id="pa-facts-title">
+                      <span class="icon icon-lock-simple icon-16 gs-inherit" aria-hidden="true"></span>
+                      Datos del documento · no editables
+                    </p>
+                    <dl class="pa-facts__list" id="pa-facts"></dl>
+                  </div>
+
+                  <!-- CAMPOS A DILIGENCIAR -->
+                  <div class="pa-row">
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-eps">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Nombre EPS
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <select class="mp-input-field mp-select" id="pa-eps" name="eps" required
+                                aria-required="true" data-zt-dropdown
+                                aria-describedby="pa-eps-error">
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="nueva-eps">Nueva EPS</option>
+                          <option value="sura">Sura EPS</option>
+                          <option value="sanitas">Sanitas</option>
+                          <option value="salud-total">Salud Total</option>
+                          <option value="compensar">Compensar EPS</option>
+                          <option value="famisanar">Famisanar</option>
+                        </select>
+                      </div>
+                      <p class="mp-input-error" id="pa-eps-error" role="alert" hidden>Selecciona una opción.</p>
+                    </div>
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-etnico">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Grupo étnico
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <select class="mp-input-field mp-select" id="pa-etnico" name="ethnicGroup" required
+                                aria-required="true" data-zt-dropdown data-zt-dropdown-search="false"
+                                aria-describedby="pa-etnico-error">
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="ninguno">Ninguno</option>
+                          <option value="indigena">Indígena</option>
+                          <option value="afro">Negro, afrocolombiano, raizal o palenquero</option>
+                          <option value="rrom">Rrom</option>
+                          <option value="otro">Otro</option>
+                        </select>
+                      </div>
+                      <p class="mp-input-error" id="pa-etnico-error" role="alert" hidden>Selecciona una opción.</p>
+                    </div>
+                  </div>
+
+                  <!-- País de nacimiento (solo en su fila, según Figma) -->
+                  <div class="pa-row">
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-pais">
+                        <span class="mp-input-required" aria-hidden="true">*</span> País de nacimiento
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <select class="mp-input-field mp-select" id="pa-pais" name="birthCountry" required
+                                aria-required="true" data-zt-dropdown data-zt-dropdown-search="false"
+                                aria-describedby="pa-pais-error">
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="colombia">Colombia</option>
+                          <option value="venezuela">Venezuela</option>
+                          <option value="ecuador">Ecuador</option>
+                          <option value="peru">Perú</option>
+                          <option value="estados-unidos">Estados Unidos</option>
+                          <option value="espana">España</option>
+                          <option value="otro">Otro</option>
+                        </select>
+                      </div>
+                      <p class="mp-input-error" id="pa-pais-error" role="alert" hidden>Selecciona una opción.</p>
+                    </div>
+                    <!-- Segunda columna vacía para preservar la grilla 2col -->
+                    <div class="mp-input-group pa-col-spacer" aria-hidden="true"></div>
+                  </div>
+                </section>
+
+                <!-- ══════════ SECCIÓN B — DATOS DE CONTACTO ══════════ -->
+                <section class="pa-section" aria-labelledby="pa-sec-b">
+                  <h3 class="pa-section__title" id="pa-sec-b">B. Datos de contacto</h3>
+
+                  <!-- Celular + correo. Sin campos "Confirmar": los verifica el código
+                       de validación (OTP) que se envía justo después. -->
+                  <div class="pa-row">
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-celular">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Número de celular
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <input class="mp-input-field" id="pa-celular" name="phone" type="text"
+                               inputmode="numeric" autocomplete="off" placeholder="Escribir" maxlength="10"
+                               aria-describedby="pa-celular-error">
+                      </div>
+                      <p class="mp-input-error" id="pa-celular-error" role="alert" hidden>Este campo es obligatorio.</p>
+                    </div>
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-correo">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Correo electrónico
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <input class="mp-input-field" id="pa-correo" name="email" type="email"
+                               autocomplete="off" placeholder="Escribir"
+                               aria-describedby="pa-correo-hint pa-correo-error">
+                      </div>
+                      <p class="mp-hint" id="pa-correo-hint">Se usará para enviar la firma y el link de pago</p>
+                      <p class="mp-input-error" id="pa-correo-error" role="alert" hidden>Ingresa un correo electrónico válido.</p>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- ══════════ SECCIÓN C — DATOS DE RESIDENCIA ══════════ -->
+                <section class="pa-section" aria-labelledby="pa-sec-c">
+                  <h3 class="pa-section__title" id="pa-sec-c">C. Datos de residencia</h3>
+
+                  <!-- Dirección (ancho completo) -->
+                  <div class="pa-row">
+                    <div class="mp-input-group pa-col-full">
+                      <label class="mp-input-label" for="pa-direccion">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Dirección
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <input class="mp-input-field" id="pa-direccion" name="address" type="text"
+                               autocomplete="off" placeholder="Escribir"
+                               aria-describedby="pa-direccion-error">
+                      </div>
+                      <p class="mp-input-error" id="pa-direccion-error" role="alert" hidden>Este campo es obligatorio.</p>
+                    </div>
+                  </div>
+
+                  <!-- Departamento + Ciudad (dependiente del departamento) -->
+                  <div class="pa-row">
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-departamento">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Departamento de residencia
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <select class="mp-input-field mp-select" id="pa-departamento" name="department" required
+                                aria-required="true" data-zt-dropdown data-zt-dropdown-search="false"
+                                aria-describedby="pa-departamento-error">
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="valle">Valle del Cauca</option>
+                          <option value="cundinamarca">Cundinamarca</option>
+                          <option value="antioquia">Antioquia</option>
+                          <option value="atlantico">Atlántico</option>
+                          <option value="santander">Santander</option>
+                          <option value="bolivar">Bolívar</option>
+                        </select>
+                      </div>
+                      <p class="mp-input-error" id="pa-departamento-error" role="alert" hidden>Selecciona una opción.</p>
+                    </div>
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-ciudad">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Ciudad de residencia
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <select class="mp-input-field mp-select" id="pa-ciudad" name="city" required
+                                aria-required="true" data-zt-dropdown data-zt-dropdown-search="false"
+                                aria-describedby="pa-ciudad-error">
+                          <option value="" selected disabled>Seleccionar</option>
+                        </select>
+                      </div>
+                      <p class="mp-input-error" id="pa-ciudad-error" role="alert" hidden>Selecciona una opción.</p>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- CTA: Atrás + Guardar y continuar -->
+                <div class="pa-cta">
+                  <button class="mp-btn mp-btn--secundario pa-back" id="pa-back" type="button">
+                    <span class="icon icon-caret-left icon-20 gs-inherit" aria-hidden="true"></span>
+                    Atrás
+                  </button>
+                  <button class="mp-btn mp-btn--primario pa-next" id="pa-next" type="submit">
+                    Guardar y continuar
+                  </button>
+                </div>
+
+              </form>
+            </section>
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../../../shared/zt-sidebar.js"></script>
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script src="../../../shared/components/stepper.js"></script>
+<script src="../../../shared/components/dropdown.js"></script>
+<script src="../../../shared/components/datepicker.js"></script>
+<script src="../../../shared/components/person-summary.js"></script>
+<script src="js/paso-2.js"></script>
+<!-- ⚠️ Solo prototipo: navegación entre pasos sin validar (quitar para producción) -->
+<script src="../js/demo-nav.js"></script>
+</body>
+</html>

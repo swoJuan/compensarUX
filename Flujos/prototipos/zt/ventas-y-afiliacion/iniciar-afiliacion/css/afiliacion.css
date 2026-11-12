@@ -1,0 +1,169 @@
+/* ============================================================
+ * afiliacion.css — Estilos específicos del flujo "Iniciar afiliación"
+ * ------------------------------------------------------------
+ * Nivel 4 de la cascada:
+ *   Design System (vendor/core.css) → shell ZT (zt.css) → ESTE archivo
+ *
+ * Regla: aquí SOLO vive lo que NO cubren el DS ni el shell ZT:
+ *   - layout de la card/hero centrada del flujo
+ *   - composición del panel (card centrada)
+ *   - ubicación/spacing de la alerta warning inline (host .afi-alert)
+ *   - estado loading del botón (spinner)
+ *
+ * Desenlaces de la consulta de viabilidad:
+ *   - VIABLE    → modal de éxito sobre overlay oscuro (componente ZT Modal).
+ *   - NO VIABLE → alerta warning inline dentro de la card (componente ZT Alert).
+ * Los componentes (inputs, select, alert, modal, button) son del Design
+ * System (.mp-*) o transversales ZT (.zt-*). Aquí NO se redefinen sus estilos.
+ * Todo token-first: sin hex ni medidas mágicas fuera del sistema.
+ * ============================================================ */
+
+/* ═══════════════ PANEL + CARD (hero centrada) ═══════════════ */
+.afi-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+  width: 100%;
+  padding-top: var(--space-24);   /* aire bajo el título (antes lo daban los tabs) */
+}
+
+/* Card central — Figma: 540px, padding 32, gap 24, radius 12, fondo white.
+   Responsive: width 100% + max-width para no romper en mobile. */
+.afi-card {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  padding: var(--space-32);
+  background: var(--color-surface-default);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-12);
+  box-shadow: var(--shadow);
+}
+
+/* Encabezado de la card: icono + título + descripción, centrados */
+.afi-card__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-12);
+}
+
+/* Icono en badge circular violeta suave. */
+.afi-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--color-surface-violet);
+  color: var(--use-text-theme-violet, #4e3199);
+}
+
+/* Título de la card = heading/h4 (28px bold) */
+.afi-card__title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+/* Descripción = body L (16px, lh 1.3), texto secundario */
+.afi-card__desc {
+  margin: 0;
+  font-size: 16px;
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.3;
+  color: var(--color-text-secondary);
+  max-width: 42ch;
+}
+
+/* Campos apilados */
+.afi-card__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+/* ═══════════════ BOTÓN SUBMIT ═══════════════ */
+/* .mp-btn--primario es del DS; aquí solo: ancho completo + spinner de carga */
+.afi-submit {
+  width: 100%;
+}
+.afi-submit__spinner {
+  display: none;
+  font-size: 20px;
+  line-height: 1;
+  animation: afi-spin .9s linear infinite;
+}
+/* Estado de carga: oculta la etiqueta, muestra el spinner */
+.afi-submit.is-loading {
+  pointer-events: none;
+}
+.afi-submit.is-loading .afi-submit__label { display: none; }
+.afi-submit.is-loading .afi-submit__spinner { display: inline-block; }
+
+@keyframes afi-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .afi-submit__spinner { animation: none; }
+}
+
+/* ═══════════════ ALERTA CONTEXTUAL INLINE ═══════════════ */
+/* La alerta es el componente transversal .zt-alert (alert.css). Va entre la
+   descripción y los campos. Vacío → sin caja ni gap (no rompe el layout). */
+.afi-alert:empty { display: none; }
+
+/* ═══════════════ AFILIACIÓN EN CURSO (retomar) ═══════════════ */
+.afi-resume {
+  width: 100%;
+  max-width: 540px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  padding: var(--space-16) var(--space-20, 1.25rem);
+  border-radius: var(--radius-12);
+  background: var(--color-surface-violet);
+  border: 1px solid var(--use-border-theme-violet, #d6cdf2);
+}
+.afi-resume[hidden] { display: none; }
+.afi-resume__icon { flex: 0 0 auto; color: var(--use-text-theme-violet, #4e3199); margin-top: 2px; }
+.afi-resume__body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+.afi-resume__title { margin: 0; font-weight: var(--font-weight-bold, 700); color: var(--color-text-primary); }
+.afi-resume__text { margin: 0; font-size: var(--font-size-md, 0.875rem); line-height: 1.4; color: var(--color-text-secondary); }
+.afi-resume__actions { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-16); align-items: center; margin-top: var(--space-8); }
+.afi-resume__actions .mp-btn { min-height: 0; padding: var(--space-8) var(--space-20, 1.25rem); }
+.afi-link {
+  border: 0; background: none; padding: 0; font: inherit; cursor: pointer;
+  font-weight: var(--font-weight-bold, 700); color: var(--use-primary-default, #f60);
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.afi-link:focus-visible { outline: 2px solid var(--use-focus-outline, #f60); outline-offset: 2px; border-radius: 2px; }
+
+/* ═══════════════ RESULTADO VIABLE (inline) ═══════════════ */
+.afi-viable { display: flex; flex-direction: column; gap: var(--space-16); }
+.afi-viable[hidden] { display: none; }
+.afi-viable__person {
+  display: flex; align-items: center; gap: var(--space-12);
+  padding: var(--space-16); border-radius: var(--radius-xs, 0.5rem);
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+}
+.afi-viable__person .icon { color: var(--use-text-theme-violet, #4e3199); }
+.afi-viable__name { display: block; font-weight: var(--font-weight-bold, 700); color: var(--color-text-primary); }
+.afi-viable__doc { display: block; font-size: var(--font-size-md, 0.875rem); color: var(--color-text-secondary); }
+.afi-viable__note { margin: 0; font-size: var(--font-size-md, 0.875rem); color: var(--color-text-secondary); }
+.afi-viable__actions { display: flex; flex-direction: column; gap: var(--space-12); align-items: center; }
+.afi-viable__actions .mp-btn { width: 100%; }
+/* Con resultado viable se ocultan los campos y el botón de consulta */
+.afi-card.is-viable .afi-card__fields,
+.afi-card.is-viable .afi-submit { display: none; }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 680px) {
+  .afi-card { padding: var(--space-24); }
+  .afi-panel { padding-top: var(--space-20); }
+}

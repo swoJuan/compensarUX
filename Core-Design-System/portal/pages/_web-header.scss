@@ -1,0 +1,278 @@
+@use '../../core/abstracts' as *;
+
+.web-header-doc {
+  display: grid;
+  gap: var(--space-24);
+
+  .component-hero,
+  .component-section {
+    margin-bottom: 0;
+  }
+}
+
+.web-header-summary {
+  align-items: stretch;
+}
+
+.web-header-anatomy-stage,
+.web-header-preview-panel {
+  display: grid;
+  place-items: center;
+  min-height: rem(360px);
+  padding: var(--space-32);
+  border: 1px solid var(--use-border-subtle);
+  border-radius: var(--radius-xs);
+  background: var(--use-surface-theme-gray-5);
+  overflow: hidden;
+}
+
+.web-header-anatomy-stage {
+  position: relative;
+  margin-top: var(--space-8);
+  background:
+    linear-gradient(var(--use-border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--use-border-subtle) 1px, transparent 1px),
+    var(--use-surface-white);
+  background-size: rem(16px) rem(16px);
+}
+
+.web-header-anatomy-preview {
+  width: min(100%, rem(920px));
+  position: relative;
+  z-index: 2;
+}
+
+.web-header-anatomy-preview .mp-web-header {
+  box-shadow: var(--shadow-1);
+}
+
+.web-header-measure,
+.web-header-callout {
+  position: absolute;
+  z-index: 3;
+}
+
+.web-header-measure {
+  display: inline-flex;
+  align-items: center;
+  min-height: rem(22px);
+  padding: 0 var(--space-8);
+  border-radius: rem(4px);
+  background: var(--use-primary-default);
+  color: var(--use-text-on-dark-primary);
+  font-size: rem(11px);
+  font-weight: 800;
+}
+
+.web-header-measure--height {
+  top: calc(50% - #{rem(118px)});
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.web-header-measure--gap {
+  top: calc(50% + #{rem(20px)});
+  left: calc(50% + #{rem(140px)});
+}
+
+.web-header-callout {
+  width: rem(220px);
+  display: grid;
+  gap: rem(4px);
+  padding: var(--space-12);
+  border: 1px solid var(--use-border-subtle);
+  border-radius: var(--radius-xs);
+  background: var(--use-surface-white);
+  box-shadow: var(--shadow-1);
+
+  strong {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+}
+
+.web-header-callout--brand {
+  top: var(--space-24);
+  left: var(--space-24);
+}
+
+.web-header-callout--search {
+  top: var(--space-24);
+  right: var(--space-24);
+}
+
+.web-header-callout--nav {
+  bottom: var(--space-24);
+  left: var(--space-24);
+}
+
+.web-header-callout--cta {
+  right: var(--space-24);
+  bottom: var(--space-24);
+}
+
+.web-header-preview-panel {
+  place-items: stretch;
+  min-height: rem(420px);
+}
+
+.web-header-preview-panel .mp-web-header {
+  align-self: start;
+}
+
+.web-header-control-panel {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.web-header-variant-grid,
+.web-header-state-grid {
+  display: grid;
+  gap: var(--space-16);
+}
+
+// El header responde al ancho del viewport (media query), no al de su contenedor: las variantes van una por fila para verse a su ancho real.
+.web-header-variant-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.web-header-state-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 56.25em) {
+  .web-header-state-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.web-header-variant-card,
+.web-header-state-card {
+  overflow-x: auto;
+}
+
+.web-header-variant-card,
+.web-header-state-card {
+  display: grid;
+  gap: var(--space-12);
+  min-height: rem(220px);
+  padding: var(--space-16);
+  border: 1px solid var(--use-border-subtle);
+  border-radius: var(--radius-xs);
+  background: var(--use-surface-white);
+}
+
+.web-header-variant-card .mp-web-header,
+.web-header-state-card .mp-web-header {
+  transform-origin: top left;
+}
+
+.web-header-state-card .mp-web-header {
+  font-size: 14px;
+}
+
+.web-header-state-card .mp-web-header__main {
+  grid-template-columns: auto 1fr auto;
+}
+
+.web-header-state-card .mp-web-header__search,
+.web-header-state-card .mp-web-header__utility {
+  display: none;
+}
+
+.web-header-guideline-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-16);
+}
+
+.web-header-guideline-item {
+  display: grid;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  border: 1px solid var(--use-border-subtle);
+  border-radius: var(--radius-xs);
+  background: var(--use-surface-white);
+}
+
+// ── Screenshots ──────────────────────────────────────────
+.wh-screenshot-block {
+  margin: 0;
+}
+
+.wh-screenshot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: rem(1px) solid var(--use-border-subtle);
+  border-radius: rem(8px);
+  background: var(--use-surface-theme-gray-5);
+}
+
+.wh-screenshot--wide {
+  margin-bottom: var(--space-16);
+}
+
+.wh-screenshot-caption {
+  margin-top: var(--space-8);
+  font-size: rem(13px);
+  font-style: italic;
+  color: var(--use-text-secondary);
+  text-align: right;
+}
+
+// ── Accesibilidad ─────────────────────────────────────────
+.wh-a11y-section {
+  // DEC-011: el fondo era un azul claro fijo; en Dark y Alto contraste el texto pasa a claro y quedaba ilegible. Se usa el par semántico Info.
+  background: var(--use-state-info-bg, #e6f1fb);
+  color: var(--use-state-info-text, #2d4a67);
+  border-color: transparent;
+}
+
+.wh-a11y-section code {
+  background: transparent;
+  color: inherit;   // el rosa de Bootstrap (#d63384) daba 3,93:1 sobre este fondo
+  font-weight: 600;
+}
+
+.wh-a11y-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  margin-bottom: var(--space-16);
+}
+
+.wh-a11y-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(44px);
+  height: rem(44px);
+  border-radius: 50%;
+  background: var(--use-surface-white);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 1100px) {
+  .web-header-variant-grid,
+  .web-header-state-grid,
+  .web-header-guideline-list {
+    grid-template-columns: 1fr;
+  }
+
+  .web-header-callout {
+    position: static;
+    width: auto;
+  }
+
+  .web-header-anatomy-stage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  .web-header-measure {
+    display: none;
+  }
+}

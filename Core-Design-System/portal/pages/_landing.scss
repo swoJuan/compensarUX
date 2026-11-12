@@ -1,0 +1,290 @@
+// ============================================================
+//  portal/pages/_landing.scss
+//  Landing page styles used by index.html
+// ============================================================
+
+@use '../../core/abstracts' as *;
+
+/* ── Portal layout ─────────────────────────────────── */
+.portal-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--ui-bg);
+  padding: rem(72px) rem(24px);
+  gap: rem(64px);
+}
+
+/* ── Header del portal ─────────────────────────────── */
+.portal-header {
+  text-align: center;
+}
+.portal-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(16px);
+  margin-bottom: rem(24px);
+}
+.portal-logo-mark {
+  width: rem(48px);
+  height: rem(48px);
+  background: var(--use-primary-default);
+  border-radius: rem(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--use-text-on-dark-primary);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: rem(24px);
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--use-primary-default) 18%, transparent);
+  flex-shrink: 0;
+}
+.portal-logo-text {
+  text-align: left;
+}
+.portal-logo-name {
+  font-family: var(--font-heading);
+  font-size: rem(24px);
+  font-weight: 800;
+  color: var(--ui-text);
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+.portal-logo-sub {
+  font-size: rem(14px);
+  color: var(--ui-text-muted);
+  font-weight: 400;
+  margin-top: rem(8px);
+}
+.portal-title {
+  font-family: var(--font-heading);
+  font-size: rem(40px);
+  font-weight: 800;
+  color: var(--ui-text);
+  letter-spacing: 0;
+  line-height: 1.08;
+  margin-bottom: rem(16px);
+}
+.portal-subtitle {
+  font-size: rem(16px);
+  color: var(--ui-text-muted);
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Cards de selección ────────────────────────────── */
+.portal-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: rem(24px);
+  width: 100%;
+  max-width: 720px;
+}
+
+.portal-card {
+  display: flex;
+  flex-direction: column;
+  min-height: rem(288px);
+  padding: rem(32px);
+  background: var(--use-surface-theme-gray-5);
+  border: 1px solid var(--ui-border);
+  border-radius: rem(16px);
+  text-decoration: none;
+  color: var(--ui-text);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.portal-card:hover {
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--ui-text) 6%, transparent);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+.portal-card:active {
+  transform: translateY(-1px);
+}
+
+/* Drupal card — acento naranja */
+.portal-card--drupal {
+  border-color: color-mix(in srgb, var(--base-brand-80) 25%, var(--ui-border));
+}
+.portal-card--drupal:hover {
+  border-color: var(--base-brand-80);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--base-brand-80) 10%, transparent);
+}
+
+/* App card — acento turquesa */
+.portal-card--app {
+  border-color: color-mix(in srgb, var(--product-accent-100) 25%, var(--ui-border));
+}
+.portal-card--app:hover {
+  border-color: var(--product-accent-100);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--product-accent-100) 10%, transparent);
+}
+
+/* Decoración de fondo */
+.portal-card::before {
+  content: '';
+  position: absolute;
+  top: rem(-40px);
+  right: rem(-40px);
+  width: rem(120px);
+  height: rem(120px);
+  border-radius: 50%;
+  opacity: 0.07;
+}
+.portal-card--drupal::before {
+  background: var(--base-brand-80);
+}
+.portal-card--app::before {
+  background: var(--product-accent-100);
+}
+
+.portal-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: rem(24px);
+  font-size: rem(24px);
+  flex-shrink: 0;
+}
+.portal-card--drupal .portal-card-icon {
+  background: color-mix(in srgb, var(--base-brand-80) 12%, transparent);
+  color: var(--base-brand-80);
+}
+.portal-card--app .portal-card-icon {
+  background: color-mix(in srgb, var(--product-accent-100) 12%, transparent);
+  color: var(--product-accent-100);
+}
+
+.portal-card-name {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ui-text);
+  margin-bottom: rem(8px);
+  letter-spacing: 0;
+}
+.portal-card-desc {
+  font-size: rem(14px);
+  color: var(--ui-text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+
+.portal-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: rem(16px);
+  padding-top: rem(16px);
+  border-top: 1px solid var(--ui-border);
+}
+.portal-card-tags {
+  display: flex;
+  gap: rem(8px);
+  flex-wrap: wrap;
+}
+.portal-tag {
+  font-size: rem(14px);
+  font-weight: 700;
+  padding: rem(16px) rem(16px);
+  border-radius: rem(20px);
+  background: var(--ui-surface-alt);
+  color: var(--ui-text-muted);
+  border: 1px solid var(--ui-border);
+}
+.portal-card--drupal .portal-tag {
+  background: var(--ui-tag-bg);
+  color: var(--ui-tag-text);
+  border-color: transparent;
+}
+.portal-card--app .portal-tag {
+  background: var(--product-accent-40);
+  color: var(--product-accent-100);
+  border-color: transparent;
+}
+
+.portal-card-access {
+  align-self: flex-start;
+}
+
+.portal-card-arrow {
+  font-size: rem(20px);
+  color: currentColor;
+  transition: color 0.2s, transform 0.2s;
+}
+.portal-card:hover .portal-card-arrow {
+  transform: translateX(3px);
+}
+
+/* ── Footer del portal ─────────────────────────────── */
+.portal-footer {
+  text-align: center;
+  font-size: rem(14px);
+  color: var(--ui-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+.portal-footer-dot {
+  opacity: 0.35;
+}
+
+/* ── Theme switcher flotante ───────────────────────── */
+.portal-theme {
+  position: fixed;
+  top: var(--space-8);
+  right: rem(24px);
+  display: flex;
+  background: var(--use-surface-theme-gray-5);
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--ui-text) 8%, transparent);
+}
+.portal-theme button {
+  border: none;
+  background: transparent;
+  padding: rem(16px) rem(16px);
+  font-size: rem(14px);
+  font-family: var(--font-body);
+  cursor: pointer;
+  color: var(--ui-text-muted);
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+.portal-theme button:hover {
+  color: var(--ui-text);
+  background: var(--ui-surface-alt);
+}
+.portal-theme button.active {
+  background: var(--ui-accent);
+  color: var(--use-text-on-dark-primary);
+}
+[data-theme='high-contrast'] .portal-theme button.active {
+  color: var(--ui-bg);
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 580px) {
+  .portal-cards {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+  }
+  .portal-title {
+    font-size: rem(24px);
+  }
+  .portal-page {
+    justify-content: flex-start;
+    padding-top: rem(96px);
+  }
+}

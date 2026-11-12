@@ -1,0 +1,32 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>seed Paso 8</title></head><body>
+<!-- Semilla de prototipo para abrir el Paso 8 (Soportes) con la familia del
+     Figma: contratante + cónyuge (convalida antigüedad) + hija de 12 años. -->
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script>
+  var num = '222';
+  var p = ZTAfiliacion.personaMock(num);
+  ZTAfiliacion.saveCandidate({ documentType:'CC', documentNumber:num, name: ZTAfiliacion.nombreMock(num),
+    firstName:p.firstName, secondName:p.secondName, firstSurname:p.firstSurname, secondSurname:p.secondSurname, viable:true });
+  // ?empresa=1 → contratante afiliado a través de empresa (habilita "Factura empresa").
+  var emp = /[?&]empresa=1/.test(location.search);
+  ZTAfiliacion.saveStep1({ modality:'familiar', transactionType:'new', noveltyType:null, affiliationChannel: emp ? 'company' : 'independent',
+    companyName: emp ? 'Soluciones Andinas S.A.S.' : null, nit: emp ? '900123456' : null, plan:'ideal', startDate:'2026-10-01', completed:true });
+  ZTAfiliacion.saveStep2({ birthDate:'1978-04-12', age:48, gender:'mujer', sex:'femenino', maritalStatus:'casado',
+    nationality:'colombiana', eps:'compensar', ethnicGroup:'ninguno', birthCountry:'colombia',
+    phone:'3001234567', email:'usuario@email.com', address:'Calle 10 # 20-30', department:'valle', city:'cali',
+    completed:true, otpVerified:true });
+  var y = new Date().getFullYear();
+  ZTAfiliacion.saveStep3({ completed:true, contractorIsBeneficiary:true, beneficiaries:[
+    { id:'b1', documentConsulted:true, firstName:'Juan', firstSurname:'Ríos', birthDate:'1990-02-10', identificationSex:'masculino', relationship:'conyuge', validatesOtherPrepaidSeniority:true, previousPrepaidEntity:'colsanitas', status:'complete' },
+    { id:'b2', documentConsulted:true, firstName:'Sofía', firstSurname:'Ríos', birthDate:(y-12)+'-01-05', identificationSex:'femenino', relationship:'hijo', status:'complete' }
+  ]});
+  var dc = { status:'complete', weight:'68', height:'165' };
+  ZTAfiliacion.saveStep4({ completed:true, currentPersonId:'contratante', declarations:{ contratante:dc, b1:dc, b2:dc } });
+  ZTAfiliacion.saveStep5({ completed:true, checked:{} });
+  ZTAfiliacion.saveStep6({ completed:true, personType:'natural', values:{ activity:'independiente' }, partners:[] });
+  ZTAfiliacion.saveStep7({ completed:true, modality:'mensual', payMode:'same', same:null, per:{},
+    accepted:{ veracidad:true, crediticia:true },
+    totals:{ pleno:920500, neto:874475, modality:874475, enrollment:150000, iva:0, total:1024475 } });
+  ZTAfiliacion.clearStep8();
+  location.replace('index.html');
+</script></body></html>

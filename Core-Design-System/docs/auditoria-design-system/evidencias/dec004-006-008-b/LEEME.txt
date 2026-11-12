@@ -1,0 +1,11 @@
+DEC-004 / DEC-006 / DEC-008 · lote con valores APROBADOS en Figma (9 nov 2026). Base de comparacion: arbol de trabajo previo (css/core.css antes de este lote).
+Requisitos fuera del repo: /tmp/qa con `npm i playwright axe-core` (PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1) y Chromium en ~/Library/Caches/ms-playwright/chromium-1254.
+Los scripts leen /tmp/qa/base/core.css (copia del CSS previo) y /tmp/qa/fixture.js; rutas absolutas del repo en fixture.js. El portal (sweep2) necesita `python3 -m http.server 8000` en la raiz.
+dec006.js    Tokens y componentes (Badge, Chip, Alert, Toast, modal) en Light/Dark/HC, con y sin la inyeccion de tokens del portal. 314 comprobaciones.
+dec004.js    Focus por teclado real: Checkbox, Radio, Switch, opcion Dropdown, Tabs; disabled sin foco; Buttons/Input/trigger identicos a la base. 105.
+ddcontrast.js Contraste del indicador de la opcion de Dropdown contra su fondo real.
+dec008.js    Dimensiones reales del DOM y zonas clicables con eventos reales (100/200 % de texto x 1280/375/320 px x 3 temas). 1083.
+forced2.js   forced-colors: el foco del tab sigue visible.   cssdiff.js  Reglas de core.css que cambian frente a la base.
+sweep2.js    Portal real, 84 rutas x 2 anchos, base vs nuevo: errores JS, desborde, peticiones fallidas.
+patch-tokens.mjs  Aplico los cambios de tokens a tokens/compensar.tokens.json, js/tokens.js y js/ds-bundle.js (una sola vez; ya aplicado).
+shot-*.png   Capturas representativas por tema.

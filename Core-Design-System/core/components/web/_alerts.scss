@@ -1,0 +1,153 @@
+// ============================================================
+//  mp-alert
+//  Componente transversal de alerta contextual.
+//  Fuente Figma: 1zVGMpzqBgiBUqhmfFEAoT / 4574:1918
+// ============================================================
+
+@use '../../abstracts' as *;   // DEC-012: acceso a rem() y tokens (patrón de _tabs/_inputs)
+
+.mp-alert {
+  --mp-alert-bg: var(--use-state-info-bg, #e6f1fb);
+  --mp-alert-border: var(--use-state-info-border, #6c9fd0);
+  --mp-alert-title: var(--use-state-info-text, #2d4a67);
+  --mp-alert-body: var(--use-state-info-text, #2d4a67);
+  --mp-alert-icon: var(--mp-alert-title);
+  --mp-alert-gap: var(--space-8);   // DEC-012: 8px → token spacing (0.5rem)
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--mp-alert-gap);
+  width: 100%;
+  min-height: rem(78px);   // DEC-012: 78px → 4.875rem (sin token; Figma 78)
+  padding: var(--space-16);
+  border: 1px solid var(--mp-alert-border);
+  border-radius: rem(12px);   // DEC-012: 12px → 0.75rem (mismo valor; radius fuera de escala se trata en DEC-008)
+  background: var(--mp-alert-bg);
+  color: var(--mp-alert-body);
+  font-family: var(--font-body, Roboto, Arial, sans-serif);
+  overflow: hidden;
+}
+
+.mp-alert__icon {
+  flex: 0 0 rem(32px);   // DEC-012: 32px → 2rem (icono, Figma 32)
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(32px);
+  height: rem(32px);
+  color: var(--mp-alert-icon);
+}
+
+.mp-alert__icon .material-symbols-rounded,
+.mp-alert__icon.material-symbols-rounded {
+  font-size: rem(32px);   // DEC-012: 32px → 2rem
+  line-height: 1;
+}
+
+// F-1 (DEC-011): el sistema de iconos define `.icon-info { color: … !important }` y el glifo "info" se llama igual, así que ese color ganaba a
+// --mp-alert-icon: en Dark y Alto contraste el icono Info quedaba azul sobre azul (2,09:1 y 3,00:1; WCAG 1.4.11). Aquí el icono de la alerta
+// lo decide el componente. Se usa var(--mp-alert-icon) y NO `currentColor`: la clase puede ir en el propio <i class="icon … mp-alert__icon">, y
+// ahí `currentColor` tomaría el color heredado del padre y rompería los iconos de Warning y Error (que usan otro token).
+.mp-alert__icon.icon,
+.mp-alert__icon .icon {
+  color: var(--mp-alert-icon) !important;
+}
+
+.mp-alert__content {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.mp-alert__title {
+  margin: 0;
+  color: var(--mp-alert-title);
+  // DEC-005/DS-11: Figma título de alerta = 16px (body/L). Antes --font-size-md resolvía a 14px.
+  font-size: var(--body---l);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.3;
+}
+
+.mp-alert__body {
+  margin: 0;
+  color: var(--mp-alert-body);
+  // DEC-005/DS-11: Figma cuerpo de alerta = 16px (body/L). Antes --font-size-sm resolvía a 12px.
+  font-size: var(--body---l);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.5;
+}
+
+.mp-alert__close {
+  flex: 0 0 auto;
+  margin-top: rem(-8px);   // DEC-012: -8px → -0.5rem
+  margin-right: rem(-8px);
+  margin-left: auto;
+}
+
+.mp-alert--info,
+.alert-info {
+  --mp-alert-bg: var(--use-state-info-bg, #e6f1fb);
+  --mp-alert-border: var(--use-state-info-border, #6c9fd0);
+  --mp-alert-title: var(--use-state-info-text, #2d4a67);
+  --mp-alert-body: var(--use-state-info-text, #2d4a67);
+  --mp-alert-icon: var(--mp-alert-title);
+  --mp-alert-gap: var(--space-8);   // DEC-012: 8px → token
+}
+
+.mp-alert--success,
+.alert-success {
+  --mp-alert-bg: var(--use-state-success-bg, #e6f7e8);
+  --mp-alert-border: var(--use-state-success-border, #44bd75);
+  --mp-alert-title: var(--use-state-success-text, #0d3d1f);
+  --mp-alert-body: var(--use-state-success-text, #0d3d1f);
+  --mp-alert-icon: var(--mp-alert-title);
+  --mp-alert-gap: var(--space-16);   // DEC-012: 16px → token
+}
+
+.mp-alert--warning,
+.alert-warning {
+  --mp-alert-bg: var(--use-state-warning-bg, #fff2d9);
+  --mp-alert-border: var(--use-state-warning-border, #fcce72);
+  --mp-alert-title: var(--use-state-warning-text, #111111);
+  --mp-alert-body: var(--use-state-warning-text, #111111);
+  --mp-alert-icon: var(--use-state-warning-icon-bg, #967229);   // DEC-006: pictograma Warning (Light #967229, Dark/HC #FCBF44)
+  --mp-alert-gap: var(--space-16);   // DEC-012: 16px → token
+}
+
+.mp-alert--error,
+.alert-error,
+.alert-danger {
+  --mp-alert-bg: var(--use-state-error-bg, #f7eeed);
+  --mp-alert-border: var(--use-state-error-border, #db7165);
+  --mp-alert-title: var(--use-state-error-text, #521a14);
+  --mp-alert-body: var(--use-state-error-text, #521a14);
+  --mp-alert-icon: var(--use-state-error-icon, #d14434);   // Figma 2271:27183: icono enlazado a use/state/error/icon
+  --mp-alert-gap: var(--space-8);   // DEC-012: 8px → token
+}
+
+.mp-alert--dismissible {
+  padding-right: var(--space-12);
+}
+
+.mp-alert--is-focus,
+.mp-alert:focus-within {
+  outline: var(--color-focus-ring-width, 3px) solid var(--use-focus-outline, #006fff);
+  outline-offset: var(--color-focus-ring-width, 3px);
+}
+
+.alert {
+  @extend .mp-alert;
+}
+
+.alert-title {
+  @extend .mp-alert__title;
+}
+
+.alert-body {
+  @extend .mp-alert__body;
+}
+
+// DEC-006: Dark y High Contrast salen de los tokens de estado (use/state/*/bg|border|text|icon), que ya traen el valor de
+// cada tema en core/base/_theme.scss (Figma 2271:27183, variantes Dark 5967:* y HC 5967:*). Se retiraron los hex fijos que
+// duplicaban el sistema y mantenían Success Dark #0B853D y Warning Dark #967229 en lugar de los valores aprobados
+// (#166936 y #634A1A). Los pares texto/fondo se resuelven por tema sin reglas adicionales.

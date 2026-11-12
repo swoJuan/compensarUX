@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Proceso de afiliación · Paso 3</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → componentes transversales → custom del flujo -->
+<link rel="stylesheet" href="../../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../../shared/zt.css">
+<link rel="stylesheet" href="../../../shared/components/stepper.css">
+<link rel="stylesheet" href="../../../shared/components/dropdown.css">
+<link rel="stylesheet" href="../../../shared/components/datepicker.css">
+<link rel="stylesheet" href="../../../shared/components/radio.css">
+<link rel="stylesheet" href="../../../shared/components/form-error.css">
+<link rel="stylesheet" href="../../../shared/components/person-summary.css">
+<link rel="stylesheet" href="../../../shared/components/switch.css">
+<link rel="stylesheet" href="../../../shared/components/benef-card.css">
+<link rel="stylesheet" href="../../../shared/components/alert.css">
+<link rel="stylesheet" href="../../../shared/components/modal.css">
+<link rel="stylesheet" href="css/paso-3.css">
+<link rel="stylesheet" href="../css/proceso-layout.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) — selector de persona + Plan Ideal ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-person" data-person-selector>
+        <button class="hd-person__trigger" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu">
+          <span class="hd-person__info">
+            <span class="hd-person__name" data-person-name>Margarita López Arenas</span>
+            <span class="hd-person__plan" data-person-plan>Plan Ideal</span>
+          </span>
+          <span class="hd-person__caret icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+        </button>
+        <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
+          <p class="person-menu__label" id="person-menu-label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Margarita López Arenas" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Margarita López Arenas</span>
+              <span class="person-opt__role">Contratante</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal — "Ventas y Afiliación" activo -->
+    <nav class="sidebar" data-active="ventas"></nav>
+
+    <!-- MAIN (shell ZT) -->
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page">
+
+          <!-- Breadcrumb — Inicio / Ventas y afiliación / Iniciar afiliación -->
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../../../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <a href="../../index.html">Ventas y afiliación</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Iniciar afiliación</span>
+          </nav>
+
+          <!-- Título — "Proceso" naranja + "de afiliación" primary (H2 40px) -->
+          <h1 class="page-title">
+            <span class="orange">Proceso </span><span class="dark">de afiliación</span>
+          </h1>
+
+          <!-- ═══ LAYOUT DEL PROCESO: panel de pasos + card del paso actual ═══ -->
+          <div class="pa-layout">
+
+            <!-- PANEL IZQUIERDO: resumen del candidato + stepper -->
+            <aside class="pa-side" aria-label="Progreso del proceso de afiliación">
+              <div id="pa-cand-summary"></div>
+              <div id="pa-stepper"></div>
+            </aside>
+
+            <!-- CARD DERECHA: Paso 3 — Beneficiarios -->
+            <section class="pa-card" aria-labelledby="pa-card-title">
+
+              <!-- Encabezado de la card: badge PASO 3 DE 8 + título + descripción -->
+              <header class="pa-card__head">
+                <span class="pa-badge">PASO 3 DE 8</span>
+                <h2 class="pa-card__title" id="pa-card-title">Beneficiarios</h2>
+                <p class="pa-card__desc" id="p3-intro">
+                  Agrega uno o varios beneficiarios al contrato. Cada beneficiario debe pasar
+                  por la declaración de asegurabilidad en el Paso 4.
+                </p>
+              </header>
+
+              <!-- ¿El contratante es beneficiario del plan? (Switch transversal) -->
+              <div id="p3-contractor-switch" class="p3-switch"></div>
+
+              <!-- Regla del flujo según el Paso 1 (Individual / Familiar / Inclusión) -->
+              <div id="p3-flow-note" class="p3-flow-note" aria-live="polite"></div>
+
+              <!-- Antigüedad del CONTRATANTE (solo si es beneficiario). Lo pinta paso-3.js -->
+              <div id="p3-contractor-seniority"></div>
+
+              <!-- Lista de beneficiarios (cards colapsadas/expandidas) -->
+              <div id="p3-list" class="p3-list"></div>
+
+              <!-- Contenedor "+ Agregar beneficiario" (borde dashed) -->
+              <div class="p3-add">
+                <button class="mp-btn mp-btn--secundario p3-add__btn" id="p3-add-btn" type="button">
+                  + Agregar beneficiario
+                </button>
+              </div>
+
+              <!-- Aviso contextual de validación al intentar continuar (Alert transversal) -->
+              <div id="p3-alert" aria-live="polite"></div>
+
+              <!-- CTA: Atrás + Guardar y continuar -->
+              <div class="pa-cta">
+                <button class="mp-btn mp-btn--secundario pa-back" id="p3-back" type="button">
+                  <span class="icon icon-caret-left icon-20 gs-inherit" aria-hidden="true"></span>
+                  Atrás
+                </button>
+                <button class="mp-btn mp-btn--primario pa-next" id="p3-next" type="button">
+                  Guardar y continuar
+                </button>
+              </div>
+
+            </section>
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     TEMPLATE del formulario de UN beneficiario (secciones A–E).
+     paso-3.js clona este contenido por beneficiario y sustituye "__ID__"
+     en los `id`, `name`, `for` y `aria-*` para que cada card sea única.
+     ══════════════════════════════════════════════════════════════════ -->
+<template id="benef-form-tpl">
+  <form class="benef-form" novalidate>
+
+    <!-- ══════════ A — IDENTIFICACIÓN (documento primero) ══════════
+         1) El asesor elige tipo + número y presiona "Consultar".
+         2) Los datos personales llegan de la consulta (MOCK) y se muestran como
+            información NO editable; el resto del formulario aparece después.
+         Los datos consultados viven en inputs hidden (misma fuente de verdad del
+         modelo/validación que antes). -->
+    <section class="pa-section pa-section--first" aria-labelledby="b__ID__-sec-a">
+      <h3 class="pa-section__title mb-3" id="b__ID__-sec-a">A. Identificación</h3>
+
+      <!-- Entrada del documento (visible hasta consultar) -->
+      <div data-block="doc-entry">
+        <div class="pa-row mb-3 p3-doc-row">
+        <div class="mp-input-group">
+          <label class="mp-input-label" for="b__ID__-tipo-doc">
+            <span class="mp-input-required" aria-hidden="true">*</span> Tipo de documento
+          </label>
+          <div class="mp-input-wrapper">
+            <select class="mp-input-field mp-select" id="b__ID__-tipo-doc" name="documentType" required
+                    aria-required="true" data-zt-dropdown data-zt-dropdown-search="false"
+                    aria-describedby="b__ID__-tipo-doc-error">
+              <option value="" selected disabled>Seleccionar</option>
+              <option value="CC">Cédula de ciudadanía</option>
+              <option value="TI">Tarjeta de identidad</option>
+              <option value="RC">Registro civil</option>
+              <option value="CE">Cédula de extranjería</option>
+              <option value="PA">Pasaporte</option>
+              <option value="PPT">Permiso por Protección Temporal</option>
+            </select>
+          </div>
+          <p class="mp-input-error" id="b__ID__-tipo-doc-error" role="alert" hidden>Selecciona una opción.</p>
+        </div>
+        <div class="mp-input-group">
+          <label class="mp-input-label" for="b__ID__-num-doc">
+            <span class="mp-input-required" aria-hidden="true">*</span> Número de documento
+          </label>
+          <div class="p3-doc-query">
+            <div class="mp-input-wrapper">
+              <input class="mp-input-field" id="b__ID__-num-doc" name="documentNumber" type="text"
+                     inputmode="numeric" autocomplete="off" placeholder="Escribir" maxlength="15"
+                     aria-describedby="b__ID__-num-doc-hint b__ID__-num-doc-error">
+            </div>
+            <button class="mp-btn mp-btn--secundario p3-doc-query__btn" type="button" data-action="consult">
+              <span class="p3-doc-query__label">Consultar</span>
+              <span class="p3-doc-query__spinner icon icon-spinner-gap icon-20 gs-inherit" aria-hidden="true"></span>
+            </button>
+          </div>
+          <p class="mp-hint" id="b__ID__-num-doc-hint">Traemos nombre, fecha de nacimiento y sexo del documento.</p>
+          <p class="mp-input-error" id="b__ID__-num-doc-error" role="alert" hidden>Este campo es obligatorio.</p>
+        </div>
+        </div>
+      </div>
+
+      <!-- Resultado de la consulta: datos NO editables (etiqueta/valor) -->
+      <div class="p3-facts" data-block="doc-facts" hidden>
+        <div class="p3-facts__head">
+          <p class="p3-facts__title">
+            <span class="icon icon-lock-simple icon-16 gs-inherit" aria-hidden="true"></span>
+            Datos del documento · no editables
+          </p>
+          <button class="p3-link-btn" type="button" data-action="change-doc">Cambiar documento</button>
+        </div>
+        <dl class="p3-facts__list" data-facts></dl>
+      </div>
+
+      <!-- Datos traídos por la consulta (fuente de verdad para modelo/validación) -->
+      <input type="hidden" name="firstName">
+      <input type="hidden" name="secondName">
+      <input type="hidden" name="firstSurname">
+      <input type="hidden" name="secondSurname">
+      <input type="hidden" name="birthDate">
+      <input type="hidden" name="age">
+      <input type="hidden" name="gender">
+      <input type="hidden" name="identificationSex">
+    </section>
+
+    <!-- Todo lo demás aparece SOLO tras consultar el documento -->
+    <div class="p3-after-consult" data-block="after-consult" hidden>
+
+    <!-- ══════════ B — DATOS DEL BENEFICIARIO (diligenciables) ══════════ -->
+    <section class="pa-section" aria-labelledby="b__ID__-sec-b">
+      <h3 class="pa-section__title mb-3" id="b__ID__-sec-b">B. Datos del beneficiario</h3>
+
+      <div class="pa-row mb-3">
+        <div class="mp-input-group">
+          <label class="mp-input-label" for="b__ID__-parentesco">
+            <span class="mp-input-required" aria-hidden="true">*</span> Parentesco con el contratante
+          </label>
+          <div class="mp-input-wrapper">
+            <select class="mp-input-field mp-select" id="b__ID__-parentesco" name="relationship" required
+                    aria-required="true" data-zt-dropdown data-zt-dropdown-search="false"
+                    aria-describedby="b__ID__-parentesco-error">
+              <option value="" selected disabled>Seleccionar</option>
+              <option value="conyuge">Cónyuge</option>
+              <option value="hijo">Hijo(a)</option>
+              <option value="padre">Padre</option>
+              <option value="madre">Madre</option>
+              <option value="hermano">Hermano(a)</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <p class="mp-input-error" id="b__ID__-parentesco-error" role="alert" hidden>Selecciona una opción.</p>
+        </div>
+        <div class="mp-input-group">
+          <label class="mp-input-label" for="b__ID__-eps">
+            <span class="mp-input-required" aria-hidden="true">*</span> Nombre EPS
+          </label>
+          <div class="mp-input-wrapper">
+            <select class="mp-input-field mp-select" id="b__ID__-eps" name="eps" required
+                    aria-required="true" data-zt-dropdown aria-describedby="b__ID__-eps-error">
+              <option value="" selected disabled>Seleccionar</option>
+              <option value="nueva-eps">Nueva EPS</option>
+              <option value="sura">Sura EPS</option>
+              <option value="sanitas">Sanitas</option>
+              <option value="salud-total">Salud Total</option>
+              <option value="compensar">Compensar EPS</option>
+              <option value="famisanar">Famisanar</option>
+            </select>
+          </div>
+          <p class="mp-input-error" id="b__ID__-eps-error" role="alert" hidden>Selecciona una opción.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ C — DATOS DE CONTACTO ══════════ -->
+    <section class="pa-section" aria-labelledby="b__ID__-sec-c">
+      <h3 class="pa-section__title mb-3" id="b__ID__-sec-c">C. Datos de contacto</h3>
+
+      <div class="pa-row mb-3">
+        <div class="mp-input-group">
+          <label class="mp-input-label" for="b__ID__-celular">
+            <span class="mp-input-required" aria-hidden="true">*</span> Número de celular
+          </label>
+          <div class="mp-input-wrapper">
+            <input class="mp-input-field" id="b__ID__-celular" name="phone" type="text"
+                   inputmode="numeric" autocomplete="off" placeholder="Escribir" maxlength="10"
+                   aria-describedby="b__ID__-celular-error">
+          </div>
+          <p class="mp-input-error" id="b__ID__-celular-error" role="alert" hidden>Este campo es obligatorio.</p>
+        </div>
+        <div class="mp-input-group">
+          <label class="mp-input-label" for="b__ID__-correo">
+            <span class="mp-input-required" aria-hidden="true">*</span> Correo electrónico
+          </label>
+          <div class="mp-input-wrapper">
+            <input class="mp-input-field" id="b__ID__-correo" name="email" type="email"
+                   autocomplete="off" placeholder="Escribir" aria-describedby="b__ID__-correo-error">
+          </div>
+          <p class="mp-input-error" id="b__ID__-correo-error" role="alert" hidden>Ingresa un correo electrónico válido.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ D — DATOS DE RESIDENCIA ══════════ -->
+    <section class="pa-section" aria-labelledby="b__ID__-sec-d">
+      <h3 class="pa-section__title mb-3" id="b__ID__-sec-d">D. Datos de residencia</h3>
+
+      <fieldset class="p3-fieldset mb-3">
+        <legend class="mp-input-label">¿Usa la misma dirección del contratante?</legend>
+        <div class="p3-radios" role="radiogroup" aria-label="¿Usa la misma dirección del contratante?">
+          <label class="mp-choice mp-radio">
+            <span class="mp-choice__field">
+              <input class="mp-choice__input" type="radio" name="sameAddress__ID__" value="si">
+              <span class="mp-choice__control"></span>
+            </span>
+            <span class="mp-choice__text"><span class="mp-choice__label">Sí</span></span>
+          </label>
+          <label class="mp-choice mp-radio">
+            <span class="mp-choice__field">
+              <input class="mp-choice__input" type="radio" name="sameAddress__ID__" value="no">
+              <span class="mp-choice__control"></span>
+            </span>
+            <span class="mp-choice__text"><span class="mp-choice__label">No</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Bloque contextual: solo visible cuando elige "No" -->
+      <div class="p3-context mb-3" data-block="address" hidden>
+        <p class="p3-context__title">Dirección del beneficiario</p>
+        <div class="pa-row mb-3">
+          <div class="mp-input-group p3-col-full">
+            <div class="mp-input-wrapper">
+              <input class="mp-input-field" id="b__ID__-direccion" name="address" type="text"
+                     autocomplete="off" placeholder="Escribir" aria-label="Dirección del beneficiario"
+                     aria-describedby="b__ID__-direccion-error">
+            </div>
+            <p class="mp-input-error" id="b__ID__-direccion-error" role="alert" hidden>Este campo es obligatorio.</p>
+          </div>
+        </div>
+        <div class="pa-row mb-3">
+          <div class="mp-input-group">
+            <label class="mp-input-label" for="b__ID__-departamento">
+              <span class="mp-input-required" aria-hidden="true">*</span> Departamento de residencia
+            </label>
+            <div class="mp-input-wrapper">
+              <select class="mp-input-field mp-select" id="b__ID__-departamento" name="department"
+                      data-zt-dropdown data-zt-dropdown-search="false"
+                      aria-describedby="b__ID__-departamento-error">
+                <option value="" selected disabled>Seleccionar</option>
+                <option value="valle">Valle del Cauca</option>
+                <option value="cundinamarca">Cundinamarca</option>
+                <option value="antioquia">Antioquia</option>
+                <option value="atlantico">Atlántico</option>
+                <option value="santander">Santander</option>
+                <option value="bolivar">Bolívar</option>
+              </select>
+            </div>
+            <p class="mp-input-error" id="b__ID__-departamento-error" role="alert" hidden>Selecciona una opción.</p>
+          </div>
+          <div class="mp-input-group">
+            <label class="mp-input-label" for="b__ID__-ciudad">
+              <span class="mp-input-required" aria-hidden="true">*</span> Ciudad de residencia
+            </label>
+            <div class="mp-input-wrapper">
+              <select class="mp-input-field mp-select" id="b__ID__-ciudad" name="city"
+                      data-zt-dropdown data-zt-dropdown-search="false"
+                      aria-describedby="b__ID__-ciudad-error">
+                <option value="" selected disabled>Seleccionar</option>
+              </select>
+            </div>
+            <p class="mp-input-error" id="b__ID__-ciudad-error" role="alert" hidden>Selecciona una opción.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════ E — CONDICIONES ADICIONALES ══════════ -->
+    <section class="pa-section" aria-labelledby="b__ID__-sec-e">
+      <h3 class="pa-section__title mb-3" id="b__ID__-sec-e">E. Condiciones adicionales</h3>
+
+      <!-- Plan complementario Compensar -->
+      <fieldset class="p3-fieldset mb-3">
+        <legend class="mp-input-label">¿El beneficiario viene de plan complementario especial Compensar?</legend>
+        <div class="p3-radios" role="radiogroup" aria-label="¿Viene de plan complementario especial Compensar?">
+          <label class="mp-choice mp-radio">
+            <span class="mp-choice__field">
+              <input class="mp-choice__input" type="radio" name="fromPlan__ID__" value="si">
+              <span class="mp-choice__control"></span>
+            </span>
+            <span class="mp-choice__text"><span class="mp-choice__label">Sí</span></span>
+          </label>
+          <label class="mp-choice mp-radio">
+            <span class="mp-choice__field">
+              <input class="mp-choice__input" type="radio" name="fromPlan__ID__" value="no">
+              <span class="mp-choice__control"></span>
+            </span>
+            <span class="mp-choice__text"><span class="mp-choice__label">No</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="p3-context mb-3" data-block="plan" hidden>
+        <div class="pa-row mb-3">
+          <div class="mp-input-group p3-col-full">
+            <label class="mp-input-label" for="b__ID__-plan-semanas">Cantidad de semanas</label>
+            <div class="mp-input-wrapper">
+              <input class="mp-input-field pa-readonly" id="b__ID__-plan-semanas" name="complementaryPlanWeeks"
+                     type="text" readonly aria-readonly="true" tabindex="-1" value="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Convalidación de antigüedad de otra medicina prepagada -->
+      <fieldset class="p3-fieldset mb-3">
+        <legend class="mp-input-label">¿Convalida antigüedad de otra medicina prepagada?</legend>
+        <div class="p3-radios" role="radiogroup" aria-label="¿Convalida antigüedad de otra medicina prepagada?">
+          <label class="mp-choice mp-radio">
+            <span class="mp-choice__field">
+              <input class="mp-choice__input" type="radio" name="seniority__ID__" value="si">
+              <span class="mp-choice__control"></span>
+            </span>
+            <span class="mp-choice__text"><span class="mp-choice__label">Sí</span></span>
+          </label>
+          <label class="mp-choice mp-radio">
+            <span class="mp-choice__field">
+              <input class="mp-choice__input" type="radio" name="seniority__ID__" value="no">
+              <span class="mp-choice__control"></span>
+            </span>
+            <span class="mp-choice__text"><span class="mp-choice__label">No</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="p3-context" data-block="seniority" hidden>
+        <div class="pa-row mb-3">
+          <div class="mp-input-group p3-col-full">
+            <label class="mp-input-label" for="b__ID__-entidad">
+              <span class="mp-input-required" aria-hidden="true">*</span> Entidad anterior de Medicina Prepagada
+            </label>
+            <div class="mp-input-wrapper">
+              <select class="mp-input-field mp-select" id="b__ID__-entidad" name="previousPrepaidEntity"
+                      data-zt-dropdown aria-describedby="b__ID__-entidad-error">
+                <option value="" selected disabled>Seleccionar</option>
+                <option value="colsanitas">Colsanitas</option>
+                <option value="colmedica">Colmédica</option>
+                <option value="medplus">MedPlus</option>
+                <option value="coomeva">Coomeva Medicina Prepagada</option>
+                <option value="sura">Sura</option>
+                <option value="otra">Otra</option>
+              </select>
+            </div>
+            <p class="mp-input-error" id="b__ID__-entidad-error" role="alert" hidden>Selecciona una opción.</p>
+          </div>
+        </div>
+        <div class="pa-row mb-3">
+          <div class="mp-input-group">
+            <label class="mp-input-label" for="b__ID__-fecha-inicio">
+              <span class="mp-input-required" aria-hidden="true">*</span> Fecha inicio
+            </label>
+            <div class="mp-input-wrapper">
+              <input class="mp-input-field" id="b__ID__-fecha-inicio" name="seniorityStartDate" type="date"
+                     placeholder="dd/mm/aaaa" data-zt-datepicker aria-describedby="b__ID__-fecha-inicio-error">
+            </div>
+            <p class="mp-input-error" id="b__ID__-fecha-inicio-error" role="alert" hidden>Este campo es obligatorio.</p>
+          </div>
+          <div class="mp-input-group">
+            <label class="mp-input-label" for="b__ID__-fecha-fin">
+              <span class="mp-input-required" aria-hidden="true">*</span> Fecha fin
+            </label>
+            <div class="mp-input-wrapper">
+              <input class="mp-input-field" id="b__ID__-fecha-fin" name="seniorityEndDate" type="date"
+                     placeholder="dd/mm/aaaa" data-zt-datepicker aria-describedby="b__ID__-fecha-fin-error">
+            </div>
+            <p class="mp-input-error" id="b__ID__-fecha-fin-error" role="alert" hidden>Este campo es obligatorio.</p>
+          </div>
+        </div>
+        <div class="pa-row mb-3">
+          <div class="mp-input-group p3-col-full">
+            <label class="mp-input-label" for="b__ID__-seniority-semanas">Cantidad de semanas</label>
+            <div class="mp-input-wrapper">
+              <input class="mp-input-field pa-readonly" id="b__ID__-seniority-semanas" name="seniorityWeeks"
+                     type="text" readonly aria-readonly="true" tabindex="-1" value="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div>
+  </form>
+</template>
+
+<script src="../../../shared/zt-sidebar.js"></script>
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script src="../../../shared/components/stepper.js"></script>
+<script src="../../../shared/components/dropdown.js"></script>
+<script src="../../../shared/components/datepicker.js"></script>
+<script src="../../../shared/components/person-summary.js"></script>
+<script src="../../../shared/components/switch.js"></script>
+<script src="../../../shared/components/benef-card.js"></script>
+<script src="../../../shared/components/alert.js"></script>
+<script src="../../../shared/components/modal.js"></script>
+<script src="js/paso-3.js"></script>
+<!-- ⚠️ Solo prototipo: navegación entre pasos sin validar (quitar para producción) -->
+<script src="../js/demo-nav.js"></script>
+</body>
+</html>

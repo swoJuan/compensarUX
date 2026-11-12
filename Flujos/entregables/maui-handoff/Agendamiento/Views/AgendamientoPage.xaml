@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Pantalla: "1-medicina prepagada - home"  ·  Agendamiento > Nueva cita
+  Figma: APP-Medicina-Prepagada · node 7249:26353 (frame 390 x 844)
+  Requiere Resources/Styles/CompensarTokens.xaml registrado en App.xaml.
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Compensar.MedicinaPrepagada.ViewModels"
+             x:Class="Compensar.MedicinaPrepagada.Views.AgendamientoPage"
+             x:DataType="vm:AgendamientoViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource UseSurfaceWhite}">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <!-- ===== header Autorizaciones (7249:26397): fondo primary, pt16 pb12, gap 8 ===== -->
+        <Grid Grid.Row="0"
+              BackgroundColor="{StaticResource UsePrimaryDefault}"
+              Padding="7,16,7,12"
+              ColumnDefinitions="38,*,38"
+              ColumnSpacing="8">
+            <ImageButton Grid.Column="0" Source="ic_back.png"
+                         WidthRequest="38" HeightRequest="38" Padding="7"
+                         BackgroundColor="Transparent"
+                         Command="{Binding BackCommand}"
+                         SemanticProperties.Description="Volver" />
+            <Label Grid.Column="1" Text="Agendamiento"
+                   FontFamily="RobotoRegular" FontSize="18"
+                   TextColor="White" VerticalOptions="Center"
+                   SemanticProperties.HeadingLevel="Level1" />
+            <ImageButton Grid.Column="2" Source="ic_home.png"
+                         WidthRequest="38" HeightRequest="38" Padding="9,11"
+                         BackgroundColor="Transparent"
+                         Command="{Binding HomeCommand}"
+                         SemanticProperties.Description="Ir al inicio" />
+        </Grid>
+
+        <!-- ===== topBar / appTabs (7249:26355): alto 48, borde inferior subtle ===== -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" HeightRequest="49">
+            <BoxView Grid.ColumnSpan="2" HeightRequest="1" VerticalOptions="End"
+                     Color="{StaticResource UseBorderSubtle}" />
+
+            <!-- Tab activo: Nueva cita -->
+            <Grid Grid.Column="0" Padding="16,0">
+                <Grid HorizontalOptions="Center">
+                    <Label Text="Nueva cita" Style="{StaticResource M3TitleSmall}"
+                           TextColor="{StaticResource UsePrimaryDefault}"
+                           VerticalOptions="Center" />
+                    <!-- Indicator: 3px, esquinas superiores redondeadas, inset 2px -->
+                    <Border HeightRequest="3" Margin="2,0,2,1" VerticalOptions="End"
+                            StrokeThickness="0" BackgroundColor="{StaticResource UsePrimaryDefault}"
+                            StrokeShape="RoundRectangle 100,100,0,0" />
+                </Grid>
+            </Grid>
+
+            <!-- Tab inactivo: Mis citas -->
+            <Grid Grid.Column="1" Padding="16,0">
+                <Label Text="Mis citas" Style="{StaticResource M3TitleSmall}"
+                       VerticalOptions="Center" HorizontalOptions="Center" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToMisCitasCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Grid>
+
+        <!-- ===== bloqueCitas-2 (7249:26358): px 23, py 32, gap 24 ===== -->
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Padding="23,32" Spacing="24">
+
+                <Label Text="Agenda tu cita médica"
+                       Style="{StaticResource HeadingH4}"
+                       HorizontalTextAlignment="Center"
+                       SemanticProperties.HeadingLevel="Level2" />
+
+                <!-- text field: especialidad (obligatorio) -->
+                <VerticalStackLayout Spacing="8">
+                    <HorizontalStackLayout Spacing="4">
+                        <Label Text="*" Style="{StaticResource ComunLabel}"
+                               TextColor="{StaticResource UseStateErrorMandatory}" />
+                        <Label Text="¿Qué especialidad necesitas?" Style="{StaticResource ComunLabel}" />
+                    </HorizontalStackLayout>
+                    <Border Style="{StaticResource MpSelectField}"
+                            SemanticProperties.Description="Especialidad, obligatorio">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                            <Label Text="{Binding EspecialidadTexto}"
+                                   Style="{StaticResource ComunPlaceholder}"
+                                   VerticalOptions="Center" />
+                            <Path Grid.Column="1" Style="{StaticResource CaretDown}" />
+                        </Grid>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SeleccionarEspecialidadCommand}" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </VerticalStackLayout>
+
+                <!-- Radio: tipo de prestador (gap 16 entre opciones) -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+                    <RadioButton Grid.Column="0" GroupName="Prestador"
+                                 ControlTemplate="{StaticResource MpRadioVerticalTemplate}"
+                                 IsChecked="{Binding EsCentroPropio}">
+                        <RadioButton.Content>
+                            <Label Text="Centros médicos propios" Style="{StaticResource BodyL}"
+                                   HorizontalTextAlignment="Center" />
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Grid.Column="1" GroupName="Prestador"
+                                 ControlTemplate="{StaticResource MpRadioVerticalTemplate}">
+                        <RadioButton.Content>
+                            <Label Text="Otros prestadores" Style="{StaticResource BodyL}"
+                                   HorizontalTextAlignment="Center" />
+                        </RadioButton.Content>
+                    </RadioButton>
+                </Grid>
+
+                <!-- text field: centros médicos (multiselección, máx. 3) -->
+                <Border Style="{StaticResource MpSelectField}"
+                        IsVisible="{Binding EsCentroPropio}"
+                        SemanticProperties.Description="Centros médicos, hasta 3">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                        <Label Text="{Binding CentrosTexto}"
+                               Style="{StaticResource ComunPlaceholder}"
+                               VerticalOptions="Center" />
+                        <Path Grid.Column="1" Style="{StaticResource CaretDown}" />
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SeleccionarCentrosCommand}" />
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <!-- Separador punteado a todo el ancho (Line 4, 7249:26394) -->
+                <Line X1="0" Y1="0" X2="440" Y2="0" Margin="-23,0"
+                      Stroke="{StaticResource UseBorderSubtle}" StrokeThickness="1"
+                      StrokeDashArray="4,4" HorizontalOptions="Fill" />
+
+                <!-- row: tabCitas Presencial / Virtual (gap 16) -->
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+                    <RadioButton Grid.Column="0" GroupName="Modalidad"
+                                 ControlTemplate="{StaticResource MpTabCitasTemplate}"
+                                 IsChecked="{Binding EsPresencial}">
+                        <RadioButton.Content>
+                            <VerticalStackLayout Spacing="8">
+                                <Image Source="ic_building.png" WidthRequest="32" HeightRequest="32" />
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="Presencial" Style="{StaticResource BodyL}" HorizontalTextAlignment="Center" />
+                                    <Label Text="En centro médico" Style="{StaticResource BodyM}" HorizontalTextAlignment="Center" />
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Grid.Column="1" GroupName="Modalidad"
+                                 ControlTemplate="{StaticResource MpTabCitasTemplate}">
+                        <RadioButton.Content>
+                            <VerticalStackLayout Spacing="8">
+                                <Image Source="ic_device_mobile.png" WidthRequest="32" HeightRequest="32" />
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="Virtual" Style="{StaticResource BodyL}" HorizontalTextAlignment="Center" />
+                                    <Label Text="Por videollamada" Style="{StaticResource BodyM}"
+                                           TextColor="{StaticResource UseTextTertiary}" HorizontalTextAlignment="Center" />
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                </Grid>
+
+                <!-- action / mp-button: py16 contenedor; botón px32 py16, r24, gradiente -->
+                <Grid Padding="0,16">
+                    <Border HorizontalOptions="Center" Padding="32,16"
+                            StrokeThickness="0" StrokeShape="RoundRectangle 24"
+                            Background="{StaticResource GradientBoton}"
+                            SemanticProperties.Description="Buscar citas">
+                        <Label Text="Buscar" Style="{StaticResource ComunBoton}" />
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BuscarCommand}" />
+                        </Border.GestureRecognizers>
+                    </Border>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

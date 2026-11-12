@@ -1,0 +1,23 @@
+@use '../../core/abstracts' as *;
+
+/* Scrollbar global */
+::-webkit-scrollbar { width: rem(5px); height: rem(5px); }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--ui-border);
+  border-radius: rem(3px);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--ui-text-muted); }
+
+/* Focus ring accesible */
+:focus-visible {
+  outline: rem(2px) solid var(--ui-accent);
+  outline-offset: rem(2px);
+  border-radius: rem(4px);
+}
+
+/* Selección de texto */
+::selection {
+  background: color-mix(in srgb, var(--ui-accent) 20%, transparent);
+  color: var(--ui-text);
+}

@@ -1,0 +1,12 @@
+DEC-004 / DEC-006 / DEC-008 - evidencias. Base de comparacion: 6ea295b (v2.2.1 + DEC-007).
+Requisitos: servidor `python3 -m http.server 8000` en la raiz (arbol nuevo) y 8001 sobre `git worktree add --detach /tmp/ds-base 6ea295b` (base).
+Playwright y axe-core fuera del repo (/tmp/dec008: npm i playwright axe-core).
+gap2.js            Brecha de tokens: valor de Figma resuelto POR MODO (cadena de alias dentro del export) frente al color computado de css/core.css.
+comp.js            Arnes de consumidor (SOLO css/core.css): axe color-contrast de badges, chips, alertas, toasts, tabs, avatares, user-chip, checkbox, switch, helper.
+forced.js          forced-colors: ¿se distingue cada par de estados? (switch, checkbox, radio, tab, chip, paginacion, stepper).
+focus.js           Foco por teclado: cada control enfocable con Tab cambia pixeles (17 controles x 3 temas).
+focus-contrast.js  Contraste del indicador de foco frente al fondo (1.4.11, >=3:1).
+geo.js             Geometria antes/despues: etiqueta del checkbox y radio de la paginacion (100/200 %, 1280/320 px).
+hc-check.js        Tilde del checkbox en High Contrast.   contrast.js  axe color-contrast en las 84 rutas del portal.
+visual.js          Portal real pixel a pixel (base vs nuevo).   styldiff.js  Estilos computados de cada elemento que difirio.
+Generador: scripts/sync-theme-modes.mjs (idempotente; --check no escribe).

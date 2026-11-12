@@ -1,0 +1,15 @@
+Header (harness real, web-header-docs.js build()) - desbordamiento horizontal del documento
+Comparacion: CSS anterior a P3 vs CSS final de P3 (con el dropdown revertido a px)
+ancho | texto | ANTES de P3 | DESPUES de P3
+  769 |  100% | ok              | ok
+  769 |  150% | desborda +4px   | desborda +18px   <-- cambia
+  769 |  200% | desborda +16px  | desborda +274px   <-- cambia
+  900 |  100% | ok              | ok
+  900 |  150% | ok              | ok
+  900 |  200% | ok              | desborda +143px   <-- cambia
+ 1024 |  100% | ok              | ok
+ 1024 |  150% | ok              | ok
+ 1024 |  200% | ok              | desborda +19px   <-- cambia
+ 1280 |  100% | ok              | ok
+ 1280 |  150% | ok              | ok
+ 1280 |  200% | ok              | ok

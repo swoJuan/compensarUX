@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Solicitud radicada</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → custom del flujo -->
+<link rel="stylesheet" href="../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../shared/icons/icons.css">
+<link rel="stylesheet" href="../shared/zt.css">
+<link rel="stylesheet" href="../shared/components/modal.css">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Familiar</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" data-active="historia"></nav>
+
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page hc-page">
+
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Historia clínica</span>
+          </nav>
+
+          <h1 class="page-title">
+            <span class="orange">Solicita </span><span class="dark">tu historia clínica</span>
+          </h1>
+
+          <!-- Resultado: solicitud radicada -->
+          <section class="hc-card hc-card--done" aria-labelledby="hc-done-title" role="status" aria-live="polite">
+            <span class="hc-done__check" aria-hidden="true">
+              <span class="icon icon-check icon-32 gs-inherit"></span>
+            </span>
+            <h2 class="hc-card__title" id="hc-done-title">Tu solicitud fue radicada</h2>
+            <p class="hc-card__desc">Recibimos tu solicitud de historia clínica correctamente.</p>
+
+            <div class="hc-radicado">
+              <p class="hc-radicado__label">NÚMERO DE RADICADO</p>
+              <p class="hc-radicado__num" id="hc-radicado-num">123456789</p>
+              <p class="hc-radicado__hint">Guárdalo: lo necesitarás para consultar el estado de tu solicitud.</p>
+            </div>
+
+            <div class="hc-next">
+              <h3 class="hc-next__title"><span>¿Qué sigue?</span></h3>
+              <ul class="hc-next__list">
+                <li class="hc-next__item">
+                  <span class="hc-next__icon" aria-hidden="true"><span class="icon icon-clock icon-20 gs-violet"></span></span>
+                  <div>
+                    <p class="hc-next__strong">3 días hábiles</p>
+                    <p class="hc-next__text">Tu historia clínica estará lista para descargar.</p>
+                  </div>
+                </li>
+                <li class="hc-next__item">
+                  <span class="hc-next__icon" aria-hidden="true"><span class="icon icon-calendar icon-20 gs-violet"></span></span>
+                  <div>
+                    <p class="hc-next__strong">30 días</p>
+                    <p class="hc-next__text">Para consultarla en “Mis solicitudes” una vez esté disponible.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="hc-done__actions">
+              <a class="mp-btn mp-btn--terciario" href="index.html">Nueva solicitud</a>
+              <a class="mp-btn mp-btn--secundario" href="mis-solicitudes.html">Ir a Mis solicitudes</a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../shared/zt-sidebar.js"></script>
+<script src="../shared/components/modal.js"></script>
+<script src="js/hc-mock.js"></script>
+<script src="js/mensajes.js"></script>
+<script src="js/radicada.js"></script>
+<script src="js/simulador.js"></script>
+</body>
+</html>

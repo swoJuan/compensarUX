@@ -1,0 +1,1426 @@
+{
+  "fecha": "2026-11-11T21:16:05.527Z",
+  "candidato": "v2.3.0",
+  "umbral": 0.5,
+  "paginas": 40,
+  "resultado": "revisar",
+  "filas": [
+    {
+      "vista": "escritorio",
+      "pagina": "app/historia-clinica/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "app/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "drupal/navegacion/menu-1.html",
+      "pct": 0.02,
+      "errores": [],
+      "alto": [
+        3852,
+        3852
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "drupal/navegacion/menu-2.html",
+      "pct": 0.02,
+      "errores": [],
+      "alto": [
+        3852,
+        3852
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "drupal/navegacion/menu-3.html",
+      "pct": 0.02,
+      "errores": [],
+      "alto": [
+        3852,
+        3852
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        958,
+        958
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agendar-5-cargando.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1044,
+        1044
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agendar-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1433,
+        1433
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-1.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1177,
+        1177
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1177,
+        1177
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1177,
+        1177
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-4.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1081,
+        1081
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1514,
+        1514
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1068,
+        1068
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1068,
+        1068
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1068,
+        1068
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-4.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1068,
+        1068
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-5-cargando.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1044,
+        1044
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/agendamiento-de-citas/laboratorio/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/historia-clinica/index.html",
+      "pct": 0.11,
+      "errores": [],
+      "alto": [
+        1111,
+        1111
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/historia-clinica/mis-solicitudes.html",
+      "pct": 0.1,
+      "errores": [],
+      "alto": [
+        1225,
+        1225
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/historia-clinica/radicada.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1203,
+        1203
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        900,
+        900
+      ]
+    },
+    {
+      "vista": "escritorio",
+      "pagina": "zt/ventas-y-afiliacion/mis-radicados/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1170,
+        1170
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "app/historia-clinica/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        844,
+        844
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "app/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        844,
+        844
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "drupal/navegacion/menu-1.html",
+      "pct": 0.05,
+      "errores": [],
+      "alto": [
+        5000,
+        5000
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "drupal/navegacion/menu-2.html",
+      "pct": 0.05,
+      "errores": [],
+      "alto": [
+        5000,
+        5000
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "drupal/navegacion/menu-3.html",
+      "pct": 0.05,
+      "errores": [],
+      "alto": [
+        5000,
+        5000
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        882,
+        882
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1430,
+        1430
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1009,
+        1009
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1250,
+        1250
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agendar-5-cargando.html",
+      "pct": 0.01,
+      "errores": [],
+      "alto": [
+        1041,
+        1041
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agendar-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        2814,
+        2814
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-1.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1803,
+        1803
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1803,
+        1803
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1803,
+        1803
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-4.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1638,
+        1638
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        2024,
+        2024
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1486,
+        1486
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1486,
+        1486
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1486,
+        1486
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-4.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1486,
+        1486
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-5-cargando.html",
+      "pct": 0.07,
+      "errores": [],
+      "alto": [
+        1041,
+        1041
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1349,
+        1349
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/agendamiento-de-citas/laboratorio/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/historia-clinica/index.html",
+      "pct": 0.05,
+      "errores": [],
+      "alto": [
+        1293,
+        1293
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/historia-clinica/mis-solicitudes.html",
+      "pct": 0.27,
+      "errores": [],
+      "alto": [
+        1604,
+        1604
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/historia-clinica/radicada.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        927,
+        927
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        2677,
+        2677
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        851,
+        851
+      ]
+    },
+    {
+      "vista": "movil",
+      "pagina": "zt/ventas-y-afiliacion/mis-radicados/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        2014,
+        2014
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "app/historia-clinica/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        640,
+        640
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "app/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        640,
+        640
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "drupal/navegacion/menu-1.html",
+      "pct": 0.06,
+      "errores": [],
+      "alto": [
+        5000,
+        5000
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "drupal/navegacion/menu-2.html",
+      "pct": 0.06,
+      "errores": [],
+      "alto": [
+        5000,
+        5000
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "drupal/navegacion/menu-3.html",
+      "pct": 0.06,
+      "errores": [],
+      "alto": [
+        5000,
+        5000
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1021,
+        1021
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1569,
+        1569
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1192,
+        1192
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1348,
+        1348
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agendar-5-cargando.html",
+      "pct": 0.07,
+      "errores": [],
+      "alto": [
+        1215,
+        1215
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/agendar-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        3155,
+        3155
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-1.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1869,
+        1869
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1869,
+        1869
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1869,
+        1869
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-4.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1704,
+        1704
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/final-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        2127,
+        2127
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1574,
+        1574
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1574,
+        1574
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-3.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1574,
+        1574
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-4.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1574,
+        1574
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-5-cargando.html",
+      "pct": 0.01,
+      "errores": [],
+      "alto": [
+        1215,
+        1215
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/citas-medicas/prueba-5.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1391,
+        1391
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        693,
+        693
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/agendamiento-de-citas/laboratorio/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        647,
+        647
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/historia-clinica/index.html",
+      "pct": 2.9,
+      "errores": [],
+      "alto": [
+        1371,
+        1419
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/historia-clinica/mis-solicitudes.html",
+      "pct": 4.37,
+      "errores": [],
+      "alto": [
+        1759,
+        1807
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/historia-clinica/radicada.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        1007,
+        1007
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        2844,
+        2844
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        647,
+        647
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        820,
+        820
+      ]
+    },
+    {
+      "vista": "movil-320",
+      "pagina": "zt/ventas-y-afiliacion/mis-radicados/index.html",
+      "pct": 0,
+      "errores": [],
+      "alto": [
+        2060,
+        2060
+      ]
+    }
+  ],
+  "estilos": [
+    {
+      "cambio": "mp-alert.mp-alert--info.hc-anio · color: rgb(11, 57, 84) → rgb(45, 74, 103)",
+      "paginas": [
+        "app/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "icon.icon-info.icon-32 · color: rgb(82, 134, 188) → rgb(45, 74, 103)",
+      "paginas": [
+        "app/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "icon.icon-info.icon-32 · border-top-color: rgb(82, 134, 188) → rgb(45, 74, 103)",
+      "paginas": [
+        "app/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "mp-alert__content · color: rgb(11, 57, 84) → rgb(45, 74, 103)",
+      "paginas": [
+        "app/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "mp-alert__content · border-top-color: rgb(11, 57, 84) → rgb(45, 74, 103)",
+      "paginas": [
+        "app/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "mp-alert__body · color: rgb(11, 57, 84) → rgb(45, 74, 103)",
+      "paginas": [
+        "app/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "mp-alert__body · border-top-color: rgb(11, 57, 84) → rgb(45, 74, 103)",
+      "paginas": [
+        "app/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "mp-web-header__nav-item · position: relative → static",
+      "paginas": [
+        "drupal/navegacion/menu-1.html",
+        "drupal/navegacion/menu-2.html",
+        "drupal/navegacion/menu-3.html"
+      ]
+    },
+    {
+      "cambio": "mp-card__title · font-weight: 500 → 700",
+      "paginas": [
+        "drupal/navegacion/menu-1.html",
+        "drupal/navegacion/menu-2.html",
+        "drupal/navegacion/menu-3.html"
+      ]
+    },
+    {
+      "cambio": "icon.icon-warning.icon-24 · color: rgb(82, 26, 20) → rgb(209, 68, 52)",
+      "paginas": [
+        "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+        "zt/agendamiento-de-citas/citas-medicas/agendar-5.html",
+        "zt/agendamiento-de-citas/citas-medicas/index.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-3.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-4.html"
+      ]
+    },
+    {
+      "cambio": "icon.icon-warning.icon-24 · border-top-color: rgb(82, 26, 20) → rgb(209, 68, 52)",
+      "paginas": [
+        "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+        "zt/agendamiento-de-citas/citas-medicas/agendar-5.html",
+        "zt/agendamiento-de-citas/citas-medicas/index.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-3.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-4.html"
+      ]
+    },
+    {
+      "cambio": "mp-badge.mp-badge--violet.mp-badge--sm · color: rgb(78, 49, 153) → rgb(17, 17, 17)",
+      "paginas": [
+        "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+        "zt/agendamiento-de-citas/citas-medicas/index.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-3.html"
+      ]
+    },
+    {
+      "cambio": "icon.icon-warning.icon-20 · color: rgb(82, 26, 20) → rgb(209, 68, 52)",
+      "paginas": [
+        "zt/agendamiento-de-citas/citas-medicas/agendar-5.html"
+      ]
+    },
+    {
+      "cambio": "icon.icon-warning.icon-20 · border-top-color: rgb(82, 26, 20) → rgb(209, 68, 52)",
+      "paginas": [
+        "zt/agendamiento-de-citas/citas-medicas/agendar-5.html"
+      ]
+    },
+    {
+      "cambio": "mp-badge.mp-badge--violet · color: rgb(78, 49, 153) → rgb(17, 17, 17)",
+      "paginas": [
+        "zt/agendamiento-de-citas/citas-medicas/index.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-3.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab.is-active · font-size: 14px → 16px",
+      "paginas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab.is-active · line-height: 14px → 16px",
+      "paginas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab.is-active · padding-top: 12px → 0px",
+      "paginas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab.is-active · position: static → relative",
+      "paginas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab.is-active · width: 132.75px → 147.531px",
+      "paginas": [
+        "zt/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab · font-size: 14px → 16px",
+      "paginas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab · line-height: 14px → 16px",
+      "paginas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab · padding-top: 12px → 0px",
+      "paginas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab · position: static → relative",
+      "paginas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab · width: 129.641px → 143.984px",
+      "paginas": [
+        "zt/historia-clinica/index.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab · width: 132.75px → 147.531px",
+      "paginas": [
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-tab.is-active · width: 129.641px → 143.984px",
+      "paginas": [
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-badge.mp-badge--error · color: rgb(187, 73, 69) → rgb(158, 51, 40)",
+      "paginas": [
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-badge__label · color: rgb(187, 73, 69) → rgb(158, 51, 40)",
+      "paginas": [
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    },
+    {
+      "cambio": "mp-badge__label · border-top-color: rgb(187, 73, 69) → rgb(158, 51, 40)",
+      "paginas": [
+        "zt/historia-clinica/mis-solicitudes.html"
+      ]
+    }
+  ]
+}

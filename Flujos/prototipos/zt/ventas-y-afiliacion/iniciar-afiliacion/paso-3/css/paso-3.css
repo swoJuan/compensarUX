@@ -1,0 +1,335 @@
+/* ============================================================
+ * paso-3.css — Estilos del PASO 3 "Beneficiarios" (Proceso de afiliación)
+ * ------------------------------------------------------------
+ * Nivel 4 de la cascada:
+ *   Design System (vendor/core.css) → shell ZT (zt.css) → componentes
+ *   transversales (stepper, dropdown, datepicker, radio, form-error,
+ *   person-summary, switch, benef-card, alert, modal) → ESTE archivo.
+ *
+ * Comparte con los Pasos 1 y 2 la composición del proceso (layout 2 columnas,
+ * resumen del candidato, card, secciones, filas 2col, CTA) — misma estructura
+ * visual del Figma. Los `.pa-*` se redefinen aquí (paso-2.css NO se enlaza en
+ * esta pantalla) para mantener idéntico el shell del proceso.
+ * Token-first: sin hex ni medidas mágicas.
+ * ============================================================ */
+
+/* ═══════════════ LAYOUT DEL PROCESO ═══════════════ */
+.pa-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12, 0.75rem);
+  width: 100%;
+  margin-top: var(--space-24);
+}
+.pa-side {
+  flex: 0 0 280px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12, 0.75rem);
+}
+
+/* ═══════════════ CARD DEL PASO ═══════════════ */
+.pa-card {
+  flex: 1 1 800px;
+  max-width: 800px;
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-12, 0.75rem);
+  padding: 28px var(--space-24) var(--space-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+/* Encabezado: badge PASO 3 DE 8 + título + descripción */
+.pa-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+.pa-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-radius: 4px;                 /* Figma badge = 4px (no hay token 4px en el DS) */
+  background: var(--use-surface-violet, #efecf9);
+  color: var(--use-text-theme-violet, #4e3199);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.pa-card__title {
+  margin: 0;
+  font-size: 24px;                    /* heading/h5 */
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+.pa-card__desc {
+  margin: var(--space-4) 0 0;
+  font-size: var(--font-size-lg, 1rem);   /* Body L 16px */
+  line-height: 1.3;
+  color: var(--use-text-secondary, #333);
+}
+
+/* ═══════════════ SWITCH DEL CONTRATANTE ═══════════════ */
+/* Fila del switch: separada del encabezado por el gap del card. La fila la
+   dibuja el componente transversal Switch (.zt-switch-row). */
+.p3-switch { width: 100%; }
+
+/* Regla del flujo (viene del Paso 1) */
+.p3-flow-note:empty { display: none; }
+.p3-flow-note {
+  display: flex; gap: var(--space-8); align-items: flex-start;
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-xs, 0.5rem);
+  background: var(--use-surface-violet, #efecf9);
+  font-size: var(--font-size-md, 0.875rem); line-height: 1.4;
+  color: var(--use-text-secondary, #333);
+}
+.p3-flow-note .icon { flex: 0 0 auto; color: var(--use-text-theme-violet, #4e3199); margin-top: 1px; }
+.p3-flow-note a { color: var(--use-primary-default, #f60); font-weight: var(--font-weight-bold, 700); }
+
+/* Antigüedad del contratante: fila compacta bajo el switch */
+#p3-contractor-seniority:empty { display: none; }
+.p3-cs { display: flex; flex-direction: column; gap: var(--space-12); padding: var(--space-16) 0 0; border-top: 1px solid var(--use-border-subtle, #e0e0e0); }
+.p3-cs__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-8) var(--space-24); }
+.p3-cs__q { margin: 0; font-size: var(--font-size-lg, 1rem); color: var(--use-text-primary, #111); }
+
+/* ═══════════════ LISTA DE BENEFICIARIOS ═══════════════ */
+.p3-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+.p3-list:empty { display: none; }
+
+/* ═══════════════ CONTENEDOR "+ AGREGAR BENEFICIARIO" ═══════════════ */
+/* Figma: borde dashed subtle, radius 10px, padding vertical 16px, centrado.
+   El botón es el Button transversal secundario/outline naranja del DS. */
+.p3-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-16) var(--space-16);
+  border: 1px dashed var(--use-border-subtle, #e0e0e0);
+  border-radius: 10px;
+}
+.p3-add__btn { white-space: nowrap; }
+
+/* ═══════════════ SECCIONES A–E (dentro de cada beneficiario) ═══════════════ */
+/* Spacing vertical con la escala Bootstrap del proyecto: entre bloques/campos
+   `mb-3` (16px) en el markup; entre secciones grandes `mb-4` (24px). Aquí NO se
+   usa `gap` para no duplicar el margen; el divisor superior separa secciones. */
+.pa-section {
+  display: block;
+  padding-top: var(--space-24);
+  border-top: 1px solid var(--use-border-subtle, #e0e0e0);
+  margin-bottom: var(--space-24);   /* = mb-4: separación entre secciones grandes */
+}
+.pa-section--first {
+  padding-top: 0;
+  border-top: 0;
+}
+/* La última sección del formulario del beneficiario no añade margen inferior:
+   el padding 24px del acordeón ya cierra el bloque. */
+.benef-form .pa-section:last-child { margin-bottom: 0; }
+/* El último elemento de cada sección no añade margen extra antes del divisor
+   (gana a la utilidad `mb-*` del markup, que usa !important). */
+.pa-section > *:last-child { margin-bottom: 0 !important; }
+/* Título de sección: sin margen propio (la separación con el contenido la da
+   `mb-3` en el markup del título). */
+.pa-section__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+
+/* ═══════════════ FILAS DE CAMPOS (2 columnas) ═══════════════ */
+.pa-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24);
+  width: 100%;
+  align-items: start;
+}
+.pa-row > .mp-input-group { min-width: 0; }
+.pa-row .mp-input-field,
+.pa-row .zt-datefield,
+.pa-row .zt-datefield__trigger { width: 100%; }
+
+/* Campo que ocupa el ancho completo de la fila (Dirección, semanas, entidad). */
+.p3-col-full { grid-column: 1 / -1; }
+
+/* ═══════════════ FIELDSET DE RADIOS (residencia / condiciones) ═══════════════ */
+/* fieldset sin borde nativo: usamos la legend como label y una fila de radios. */
+.p3-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+.p3-fieldset > .mp-input-label { display: block; }
+/* Fila de opciones (radio transversal ya centra control + label). */
+.p3-radios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+}
+
+/* ═══════════════ BLOQUE CONTEXTUAL (dirección / plan / antigüedad) ═══════════════ */
+/* Figma: surface gray/5, border subtle, radius 8, padding 24. Aparece solo
+   cuando la respuesta lo requiere (data-block visible por JS). */
+/* Bloque contextual: padding 24px (transversal, no se comprime en mobile), border
+   subtle, radius 8. Spacing interno con `mb-3` en el markup (sin `gap` para no
+   duplicar). El último campo del bloque no añade margen extra. */
+.p3-context {
+  display: block;
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-xs, 0.5rem);
+  padding: var(--space-24);
+}
+.p3-context > *:last-child { margin-bottom: 0 !important; }
+.p3-context__title {
+  margin: 0 0 var(--space-16);   /* = mb-3: separación título → primer campo */
+  font-size: var(--font-size-lg, 1rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+
+/* ═══════════════ DOCUMENTO PRIMERO (A. Identificación) ═══════════════ */
+/* Número de documento + botón "Consultar" en la misma línea. */
+.p3-doc-query {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-8);
+}
+.p3-doc-query > .mp-input-wrapper { flex: 1 1 auto; min-width: 0; }
+.p3-doc-query__btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  min-width: 120px;                   /* no "salta" al mostrar el spinner */
+}
+.p3-doc-query__spinner { display: none; animation: p3-spin .9s linear infinite; }
+.p3-doc-query__btn.is-loading .p3-doc-query__label { display: none; }
+.p3-doc-query__btn.is-loading .p3-doc-query__spinner { display: inline-block; }
+@keyframes p3-spin { to { transform: rotate(360deg); } }
+/* Si el campo muestra error, se oculta la ayuda (un solo mensaje bajo el campo). */
+.mp-input-group:has(.mp-input-error:not([hidden])) .mp-hint { display: none; }
+
+/* Datos del documento consultado: INFORMACIÓN (etiqueta/valor), no inputs.
+   Mismo patrón visual que el Paso 2 (.pa-facts). */
+.p3-facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-16) var(--space-20, 1.25rem);
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  border-radius: var(--radius-xs, 0.5rem);
+}
+.p3-facts[hidden] { display: none; }
+.p3-facts__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+.p3-facts__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: 0;
+  font-size: var(--font-size-sm, 0.75rem);
+  font-weight: var(--font-weight-semibold, 600);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--use-text-tertiary, #666);
+}
+.p3-facts__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-16) var(--space-24);
+  margin: 0;
+}
+.p3-facts__item { min-width: 0; }
+.p3-facts__item--wide { grid-column: span 2; }
+.p3-facts__item dt {
+  margin: 0 0 2px;
+  font-size: var(--font-size-md, 0.875rem);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.3;
+  color: var(--use-text-tertiary, #666);
+}
+.p3-facts__item dd {
+  margin: 0;
+  font-size: var(--font-size-lg, 1rem);
+  font-weight: var(--font-weight-medium, 500);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+  overflow-wrap: break-word;          /* corta solo en espacios (no parte el número) */
+}
+/* "Cambiar documento": acción secundaria tipo enlace (naranja). */
+.p3-link-btn {
+  border: 0;
+  background: transparent;
+  padding: var(--space-4) 0;
+  font: inherit;
+  font-size: var(--font-size-md, 0.875rem);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--use-primary-default, #f60);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.p3-link-btn:hover { text-decoration: underline; }
+.p3-link-btn:focus-visible { outline: 2px solid var(--use-focus-outline, #f60); outline-offset: 2px; border-radius: 4px; }
+
+/* Bloque B–E: aparece solo tras consultar. */
+.p3-after-consult[hidden] { display: none; }
+
+/* ═══════════════ CTA ═══════════════ */
+.pa-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+  margin-top: var(--space-4);
+}
+.pa-back { display: inline-flex; align-items: center; gap: var(--space-4); }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 900px) {
+  .pa-layout { flex-direction: column; }
+  .pa-side { flex: 1 1 auto; width: 100%; }
+  .pa-card { flex: 1 1 auto; max-width: 100%; width: 100%; }
+}
+
+@media (max-width: 680px) {
+  /* Campos a una columna; el bloque contextual conserva su padding 24px. */
+  .pa-row { grid-template-columns: 1fr; gap: var(--space-16); }
+  .pa-cta { flex-direction: column-reverse; align-items: stretch; }
+  .pa-cta .mp-btn { width: 100%; justify-content: center; }
+  .p3-add__btn { width: 100%; }
+  .p3-facts__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .p3-facts__item--doc { grid-column: span 2; }
+  .p3-doc-query__btn { min-width: 0; padding-left: var(--space-16); padding-right: var(--space-16); }
+}
+
+/* ═══════════════ MOVIMIENTO REDUCIDO ═══════════════ */
+/* Respeta a usuarios sensibles al movimiento (el scroll suave se maneja en JS
+   con matchMedia; esto cubre cualquier transición/animación del paso). */
+@media (prefers-reduced-motion: reduce) {
+  .zt-page *, .p3-list *, .p3-context { transition: none !important; animation: none !important; }
+}

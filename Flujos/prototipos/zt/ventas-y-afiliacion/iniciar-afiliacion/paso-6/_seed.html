@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>seed Paso 6</title></head><body>
+<!-- Semilla de prototipo para abrir el Paso 6 (Sarlaft) directamente.
+     ?e=empleado | independiente | juridica  → prepara cada escenario del Figma. -->
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script>
+  var e = (location.search.match(/e=([a-z]+)/) || [])[1] || 'empleado';
+  var num = '222';
+  var p = ZTAfiliacion.personaMock(num);
+  ZTAfiliacion.saveCandidate({ documentType:'CC', documentNumber:num, name: ZTAfiliacion.nombreMock(num),
+    firstName:p.firstName, secondName:p.secondName, firstSurname:p.firstSurname, secondSurname:p.secondSurname, viable:true });
+  var company = e === 'juridica';
+  ZTAfiliacion.saveStep1({ modality: company ? 'colectivo' : 'individual', transactionType:'new', noveltyType:null,
+    affiliationChannel: company ? 'company' : 'independent',
+    companyName: company ? 'Empresa Demo S.A.S.' : null, nit: company ? '900123456' : null,
+    plan:'ideal', startDate:'2026-10-01', completed:true });
+  var d = ZTAfiliacion.datosDocumentoMock(num);
+  ZTAfiliacion.saveStep2({ birthDate:d.birthDate, age: new Date().getFullYear() - +d.birthDate.slice(0,4), gender:d.gender, sex:d.sex,
+    maritalStatus:d.maritalStatus, nationality:d.nationality, eps:'compensar', ethnicGroup:'ninguno', birthCountry:'colombia',
+    phone:'3001234567', email:'usuario@email.com', address:'Calle 10 # 20-30', department:'valle', city:'cali',
+    completed:true, otpVerified:true });
+  ZTAfiliacion.saveStep3({ completed:true, contractorIsBeneficiary:true, beneficiaries:[] });
+  ZTAfiliacion.saveStep4({ completed:true, currentPersonId:'contratante', declarations:{} });
+  ZTAfiliacion.saveStep5({ completed:true, checked:{} });
+  ZTAfiliacion.saveStep6({ completed:false, personType: company ? 'juridica' : 'natural',
+    values: e === 'juridica' ? {} : { activity: e }, partners: [] });
+  location.replace('index.html');
+</script></body></html>

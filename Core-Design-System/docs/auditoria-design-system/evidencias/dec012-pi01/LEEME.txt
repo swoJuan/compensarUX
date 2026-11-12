@@ -1,0 +1,8 @@
+PI-01 (Header ZT) - reglas B y C + subtitulo oculto a 16em. Regla A (escritorio) PENDIENTE de confirmacion en Figma.
+Requisitos: servidor `python3 -m http.server 8000` en la raiz del repo; Playwright fuera del repo (/tmp/pw: npm i playwright && npx playwright install chromium).
+CSS "anterior a P3": reconstruido como en dec012-p3-opcionB/scripts/LEEME.txt (md5 3e64781602215d198bca6efa4c0901f7) -> /tmp/core.preP3.css
+CSS "estado previo a PI-01" (PI-04): compilar core/ sin las reglas B y C del Header ZT -> /tmp/core.curB.css
+zt.js            Header ZT en harness (preexistente/previo/actual) x 6 anchos x 100/150/200 % x 3 temas + Tab. Genera zt-live3.json
+pi04-publico.js  Header publico (6 casos) con --live; requiere header-harness.html dentro de una carpeta del repo (se uso _dec012-pi01/)
+real2.js         Portal real (drupal.html: core.css + portal.css + icons.css): inyecta el markup real del Header (publico y ZT), 3 temas del portal, 3 anchos x 3 textos; icono pintado = captura con/sin glifo
+Tamano de texto real: Preferences del perfil (default_font_size 16/24/32) con channel 'chromium'.

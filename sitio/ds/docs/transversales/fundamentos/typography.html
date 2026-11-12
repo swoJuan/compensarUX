@@ -1,0 +1,1076 @@
+<section class="section" id="tipografia">
+  <div class="section-header">
+    <div class="section-eyebrow">1.3</div>
+    <h1 class="section-title">Tipografía</h1>
+    <p class="section-desc">El sistema usa exclusivamente <strong>Roboto</strong> en todos los contextos. Base tipográfica: <strong>1rem = 16px</strong>. Cada estilo expone tres variables semánticas (<code>--mp-*-size</code>, <code>--mp-*-lh</code>, <code>--mp-*-weight</code>) y una clase CSS (<code>.mp-*</code>) lista para producción.</p>
+  </div>
+
+  <div class="ty-figma-bar">
+    <span class="material-symbols-rounded">tips_and_updates</span>
+    <span>Nunca uses valores hardcoded. Usa <code>.mp-h1</code>, <code>.mp-body-l</code>, etc., o las variables <code>var(--mp-h1-size)</code>.</span>
+    <a class="ct-figma-link" href="https://www.figma.com/proto/1zVGMpzqBgiBUqhmfFEAoT/Compensar-v2---Sistema-de-dise%C3%B1o?node-id=3916-20388&page-id=3909%3A20350" target="_blank" rel="noopener">
+      <span class="material-symbols-rounded">open_in_new</span> Ver en Figma
+    </a>
+  </div>
+
+  <!-- DESCARGAS -->
+  <div class="ct-downloads ty-downloads">
+    <span class="ct-downloads-label"><span class="material-symbols-rounded">download</span> Descargar tokens</span>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="tyDownloadMAUI()"><span class="material-symbols-rounded">smartphone</span> MAUI XAML</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="tyDownloadCSS()"><span class="material-symbols-rounded">code</span> CSS vars</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="tyDownloadSCSS()"><span class="material-symbols-rounded">code</span> SCSS</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="tyDownloadJSON()"><span class="material-symbols-rounded">data_object</span> JSON</button>
+  </div>
+  <p class="ct-download-note">Descarga generada en vivo desde <code>core/abstracts/_tokens-typography.scss</code>, <code>core/base/_typography.scss</code> y <code>core/utils/_typography.scss</code>.</p>
+
+  <!-- TOGGLE DESKTOP / APP -->
+  <div class="ty-toggle-bar">
+    <span class="ty-toggle-label"><span class="material-symbols-rounded">devices</span> Vista previa</span>
+    <div class="ty-toggle-btns">
+      <button id="ty-btn-desk" class="ty-toggle-btn active" onclick="tySetMode('desktop')">
+        <span class="material-symbols-rounded">desktop_mac</span> Desktop
+      </button>
+      <button id="ty-btn-app" class="ty-toggle-btn" onclick="tySetMode('app')">
+        <span class="material-symbols-rounded">smartphone</span> App
+      </button>
+    </div>
+    <span class="ty-toggle-hint" id="ty-mode-hint">Mostrando tamaños desktop</span>
+  </div>
+
+  <!-- 1 · FAMILIA -->
+  <div class="ty-section-label"><span class="material-symbols-rounded">font_download</span> Familia — Roboto</div>
+  <div class="ty-font-card-single mb-5">
+    <div class="ty-font-card-head">
+      <div>
+        <div class="ty-font-name">Roboto</div>
+        <div class="ty-font-role">Todas las vistas — titulares, cuerpo, labels y UI</div>
+      </div>
+      <div class="ty-font-actions">
+        <button class="ty-token-copy" onclick="tyCopy('var(--font-body)',this)"><code>--font-body</code><span class="material-symbols-rounded">content_copy</span></button>
+        <button class="ty-token-copy" onclick="tyCopy('var(--font-heading)',this)"><code>--font-heading</code><span class="material-symbols-rounded">content_copy</span></button>
+        <a class="ty-gfonts-link" href="https://fonts.google.com/specimen/Roboto" target="_blank" rel="noopener"><span class="material-symbols-rounded">open_in_new</span></a>
+      </div>
+    </div>
+    <div class="ty-alphabet">
+      Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz &nbsp;&middot;&nbsp; 0 1 2 3 4 5 6 7 8 9 &nbsp;&middot;&nbsp; ! @ # $ % &amp; ( )
+    </div>
+    <div class="ty-weights-grid">
+      <div class="ty-w-row"><span class="ty-w-label">100</span><span class="ty-w-name">Thin</span><span class="ty-w-sample ty-w-sample--100">Compensar Medicina Prepagada</span></div>
+      <div class="ty-w-row"><span class="ty-w-label">300</span><span class="ty-w-name">Light</span><span class="ty-w-sample ty-w-sample--300">Compensar Medicina Prepagada</span></div>
+      <div class="ty-w-row"><span class="ty-w-label">400</span><span class="ty-w-name">Regular</span><span class="ty-w-sample ty-w-sample--400">Compensar Medicina Prepagada</span></div>
+      <div class="ty-w-row"><span class="ty-w-label">500</span><span class="ty-w-name">Medium</span><span class="ty-w-sample ty-w-sample--500">Compensar Medicina Prepagada</span></div>
+      <div class="ty-w-row"><span class="ty-w-label">700</span><span class="ty-w-name">Bold</span><span class="ty-w-sample ty-w-sample--700">Compensar Medicina Prepagada</span></div>
+      <div class="ty-w-row"><span class="ty-w-label">900</span><span class="ty-w-name">Black</span><span class="ty-w-sample ty-w-sample--900">Compensar Medicina Prepagada</span></div>
+    </div>
+  </div>
+
+  <!-- 2 · ESCALA -->
+  <div class="ty-section-label ty-section-label--tight"><span class="material-symbols-rounded">format_size</span> Escala tipográfica &middot; base 1rem = 16px</div>
+  <div id="ty-scale-root" class="mb-5"></div>
+
+  <!-- 3 · UTILIDADES -->
+  <h3 class="ty-util-main-title">Utilidades tipográficas (qué hace cada clase)</h3>
+  <p class="ty-util-desc">Guía rápida y visual. Cada tarjeta te dice para qué sirve la clase y muestra una vista previa real. Fuente viva: <code>core/utils/_typography.scss</code>.</p>
+
+  <div class="ty-util-tabs">
+    <button class="ty-util-tab active" onclick="tyUtilTab(this,'ty-util-type')">
+      <span class="material-symbols-rounded">format_size</span>
+      Alineación y formato
+      <span class="ty-util-tab-count" id="ty-util-type-count">0</span>
+    </button>
+    <button class="ty-util-tab" onclick="tyUtilTab(this,'ty-util-color')">
+      <span class="material-symbols-rounded">palette</span>
+      Color
+      <span class="ty-util-tab-count" id="ty-util-color-count">0</span>
+    </button>
+    <button class="ty-util-tab" onclick="tyUtilTab(this,'ty-util-behavior')">
+      <span class="material-symbols-rounded">tune</span>
+      Texto largo
+      <span class="ty-util-tab-count" id="ty-util-behavior-count">0</span>
+    </button>
+  </div>
+
+  <div class="ty-util-panel active" id="ty-util-type">
+    <div class="ty-util-panel-head">
+      <h4>Alineación y formato <code>.u-text-left .u-fs-* .u-fw-* ...</code></h4>
+      <p>Ejemplo directo: <code>.u-text-left</code> alinea el texto a la izquierda.</p>
+    </div>
+    <div class="ty-util-grid" id="ty-util-type-grid"></div>
+  </div>
+
+  <div class="ty-util-panel" id="ty-util-color">
+    <div class="ty-util-panel-head">
+      <h4>Color de texto <code>.u-text-*</code></h4>
+      <p>Cada tarjeta muestra el nombre de la clase y su color aplicado en vista previa.</p>
+    </div>
+    <div class="ty-util-grid" id="ty-util-color-grid"></div>
+  </div>
+
+  <div class="ty-util-panel" id="ty-util-behavior">
+    <div class="ty-util-panel-head">
+      <h4>Comportamiento <code>.u-truncate .u-line-clamp-* ...</code></h4>
+      <p>Utilidades para textos largos: recorte con puntos, saltos de línea y quiebre de palabras.</p>
+    </div>
+    <div class="ty-util-grid" id="ty-util-behavior-grid"></div>
+  </div>
+
+  <div class="ty-standard-wrap">
+    <div class="ty-standard-head">
+      <h4>Estandar recomendado (uso diario)</h4>
+      <p>Si no sabes que clase usar, empieza con esta tabla. Estas combinaciones cubren la mayoria de pantallas sin romper consistencia.</p>
+    </div>
+
+    <div class="ty-standard-table-wrap">
+      <table class="ty-standard-table">
+        <thead>
+          <tr>
+            <th>Caso</th>
+            <th>Clases ideales</th>
+            <th>Ejemplo rapido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parrafo principal</td>
+            <td><code>.u-fs-md .u-lh-relaxed .u-text-primary</code></td>
+            <td><code>&lt;p class="u-fs-md u-lh-relaxed u-text-primary"&gt;...&lt;/p&gt;</code></td>
+          </tr>
+          <tr>
+            <td>Texto secundario / apoyo</td>
+            <td><code>.u-fs-sm .u-text-muted</code></td>
+            <td><code>&lt;p class="u-fs-sm u-text-muted"&gt;...&lt;/p&gt;</code></td>
+          </tr>
+          <tr>
+            <td>Titulo de card o bloque</td>
+            <td><code>.u-fw-bold .u-text-primary</code></td>
+            <td><code>&lt;h3 class="u-fw-bold u-text-primary"&gt;...&lt;/h3&gt;</code></td>
+          </tr>
+          <tr>
+            <td>Label de formulario</td>
+            <td><code>.u-uppercase .u-fw-bold .u-fs-sm</code></td>
+            <td><code>&lt;label class="u-uppercase u-fw-bold u-fs-sm"&gt;...&lt;/label&gt;</code></td>
+          </tr>
+          <tr>
+            <td>Enlace dentro de texto</td>
+            <td><code>.u-text-link</code></td>
+            <td><code>&lt;a class="u-text-link" href="#"&gt;...&lt;/a&gt;</code></td>
+          </tr>
+          <tr>
+            <td>Titulo largo en listado</td>
+            <td><code>.u-line-clamp-2</code></td>
+            <td><code>&lt;h4 class="u-line-clamp-2"&gt;...&lt;/h4&gt;</code></td>
+          </tr>
+          <tr>
+            <td>Texto de una linea en tabla</td>
+            <td><code>.u-truncate</code></td>
+            <td><code>&lt;span class="u-truncate"&gt;...&lt;/span&gt;</code></td>
+          </tr>
+          <tr>
+            <td>Contenido con palabras largas</td>
+            <td><code>.u-break-word</code></td>
+            <td><code>&lt;p class="u-break-word"&gt;...&lt;/p&gt;</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</section>
+
+<script>
+(function(){
+
+/* ── Data ────────────────────────────────────────────── */
+const CATS = [
+  {
+    id:'display-desktop', title:'Display — Desktop',
+    desc:'Heroes, banners y portadas en pantallas grandes.',
+    items:[
+      { name:'Display L', cls:'mp-display-l', token:'--display---display--l',
+        desk:{rem:'3.5rem',px:56}, mob:{rem:'2.25rem',px:36},
+        clamp:'clamp(2.25rem, 3vw + 1rem, 3.5rem)',
+        w:900, wn:'Black', lh:1.1, color:'--use-text-heading',
+        preview:'Compensar Medicina Prepagada', html:'<h1 class="mp-display-l">Título principal</h1>' },
+      { name:'Display M', cls:'mp-display-m', token:'--display---display--m',
+        desk:{rem:'3rem',px:48}, mob:{rem:'2rem',px:32},
+        clamp:'clamp(2rem, 2.5vw + 1rem, 3rem)',
+        w:900, wn:'Black', lh:1.2, color:'--use-text-heading',
+        preview:'Cobertura médica completa', html:'<h1 class="mp-display-m">Título hero</h1>' },
+    ]
+  },
+  {
+    id:'display-mobile', title:'Display — App',
+    desc:'Tamaños de display adaptados para pantallas de app (iOS/Android).',
+    items:[
+      { name:'Display XL app.', cls:'mp-display-xl-mob', token:'--display--mobile---display--x-l',
+        desk:{rem:'2.5rem',px:40}, mob:{rem:'2.5rem',px:40},
+        clamp:'2.5rem',
+        w:700, wn:'Bold', lh:1.1, color:'--use-text-heading',
+        preview:'Compensar', html:'<h1 class="mp-display-xl-mob">Compensar</h1>' },
+      { name:'Display L app.', cls:'mp-display-l-mob', token:'--display--mobile---display--l',
+        desk:{rem:'2.25rem',px:36}, mob:{rem:'2.25rem',px:36},
+        clamp:'2.25rem',
+        w:700, wn:'Bold', lh:1.1, color:'--use-text-heading',
+        preview:'Medicina Prepagada', html:'<h1 class="mp-display-l-mob">Medicina Prepagada</h1>' },
+      { name:'Display M app.', cls:'mp-display-m-mob', token:'--display--mobile---display--m',
+        desk:{rem:'2rem',px:32}, mob:{rem:'2rem',px:32},
+        clamp:'2rem',
+        w:700, wn:'Bold', lh:1.1, color:'--use-text-heading',
+        preview:'Planes de salud', html:'<h1 class="mp-display-m-mob">Planes de salud</h1>' },
+    ]
+  },
+  {
+    id:'headings', title:'Headings H1–H6',
+    desc:'Jerarquía de títulos de contenido. En app mantiene legibilidad UX: H1 32px, H2 28px, H3 24px, H4 20px, H5 18px, H6 16px.',
+    items:[
+      { name:'H1', cls:'mp-h1', token:'--heading--h1',
+        desk:{rem:'3rem',px:48}, mob:{rem:'2rem',px:32},
+        clamp:'clamp(2rem, 4vw, 3rem)',
+        w:700, wn:'Bold', lh:1.2, color:'--use-text-heading',
+        preview:'Accede a tu plan de salud', html:'<h1 class="mp-h1">Accede a tu plan</h1>' },
+      { name:'H2', cls:'mp-h2', token:'--heading--h2',
+        desk:{rem:'2.5rem',px:40}, mob:{rem:'1.75rem',px:28},
+        clamp:'clamp(1.75rem, 3.5vw, 2.5rem)',
+        w:700, wn:'Bold', lh:1.2, color:'--use-text-h2',
+        preview:'Medicina Prepagada', html:'<h2 class="mp-h2">Medicina Prepagada</h2>' },
+      { name:'H3', cls:'mp-h3', token:'--heading--h3',
+        desk:{rem:'2.25rem',px:36}, mob:{rem:'1.5rem',px:24},
+        clamp:'clamp(1.5rem, 3vw, 2.25rem)',
+        w:700, wn:'Bold', lh:1.2, color:'--use-text-h3-h5',
+        preview:'Coberturas y beneficios', html:'<h3 class="mp-h3">Coberturas y beneficios</h3>' },
+      { name:'H4', cls:'mp-h4', token:'--heading--h4',
+        desk:{rem:'1.75rem',px:28}, mob:{rem:'1.25rem',px:20},
+        clamp:'clamp(1.25rem, 2.5vw, 1.75rem)',
+        w:500, wn:'Medium', lh:1.2, color:'--use-text-h3-h5',
+        preview:'Servicios especializados', html:'<h4 class="mp-h4">Servicios especializados</h4>' },
+      { name:'H5', cls:'mp-h5', token:'--heading--h5',
+        desk:{rem:'1.5rem',px:24}, mob:{rem:'1.125rem',px:18},
+        clamp:'clamp(1.125rem, 2vw, 1.5rem)',
+        w:500, wn:'Medium', lh:1.3, color:'--use-text-h3-h5',
+        preview:'Atención al afiliado', html:'<h5 class="mp-h5">Atención al afiliado</h5>' },
+      { name:'H6', cls:'mp-h6', token:'--heading--h6',
+        desk:{rem:'1.125rem',px:18}, mob:{rem:'1rem',px:16},
+        clamp:'clamp(1rem, 1.5vw, 1.125rem)',
+        w:500, wn:'Medium', lh:1.3, color:'--use-text-h3-h5',
+        preview:'Contacto y soporte', html:'<h6 class="mp-h6">Contacto y soporte</h6>' },
+    ]
+  },
+  {
+    id:'titles', title:'Titles / Párrafos',
+    desc:'Eyebrow, textos introductorios y subtítulos de sección.',
+    items:[
+      { name:'Eyebrow', cls:'mp-eyebrow', token:'--title--eyebrow',
+        desk:{rem:'1.125rem',px:18}, mob:{rem:'1.125rem',px:18},
+        clamp:'1.125rem',
+        w:500, wn:'Medium', lh:1.3, color:'--use-text-eyebrow',
+        extra:'letter-spacing:0.1em;text-transform:uppercase;',
+        preview:'FUNDAMENTOS · TIPOGRAFÍA', html:'<p class="mp-eyebrow">SECCIÓN · SUBSECCIÓN</p>' },
+      { name:'Párrafo XL', cls:'mp-parrafo-xl', token:'--title---paragraph--x-l',
+        desk:{rem:'1.125rem',px:18}, mob:{rem:'1.125rem',px:18},
+        clamp:'1.125rem',
+        w:400, wn:'Regular', lh:1.5, color:'--use-text-primary',
+        preview:'Accede a la red de especialistas con cobertura completa.', html:'<p class="mp-parrafo-xl">Texto introductorio destacado.</p>' },
+      { name:'Párrafo L', cls:'mp-parrafo-l', token:'--title---paragraph--l',
+        desk:{rem:'1rem',px:16}, mob:{rem:'1rem',px:16},
+        clamp:'1rem',
+        w:400, wn:'Regular', lh:1.5, color:'--use-text-primary',
+        preview:'Tu salud es nuestra prioridad en cada consulta médica.', html:'<p class="mp-parrafo-l">Párrafo de cuerpo estándar.</p>' },
+    ]
+  },
+  {
+    id:'body', title:'Body',
+    desc:'Escala de texto de cuerpo. Base: --mp-body-l-size = 1rem (16px).',
+    items:[
+      { name:'Body 2XL', cls:'mp-body-2xl', token:'--body--2-x-l',
+        desk:{rem:'1.5rem',px:24}, mob:{rem:'1.25rem',px:20},
+        clamp:'clamp(1.25rem, 2vw, 1.5rem)',
+        w:400, wn:'Regular', lh:1.3, color:'--use-text-primary',
+        preview:'Consultas, hospitalizaciones y cirugías cubiertas.', html:'<p class="mp-body-2xl">Texto de cuerpo grande.</p>' },
+      { name:'Body XL', cls:'mp-body-xl', token:'--body---x-l',
+        desk:{rem:'1.125rem',px:18}, mob:{rem:'1rem',px:16},
+        clamp:'clamp(1rem, 1.5vw, 1.125rem)',
+        w:400, wn:'Regular', lh:1.3, color:'--use-text-primary',
+        preview:'Planes de medicina prepagada para ti y tu familia.', html:'<p class="mp-body-xl">Texto de cuerpo grande.</p>' },
+      { name:'Body L (base)', cls:'mp-body-l', token:'--body---l',
+        desk:{rem:'1rem',px:16}, mob:{rem:'1rem',px:16},
+        clamp:'1rem',
+        w:400, wn:'Regular', lh:1.3, color:'--use-text-primary',
+        preview:'Última actualización: abril 2026.', html:'<p class="mp-body-l">Texto base del sistema.</p>' },
+      { name:'Body M', cls:'mp-body-m', token:'--body---m',
+        desk:{rem:'0.875rem',px:14}, mob:{rem:'0.875rem',px:14},
+        clamp:'0.875rem',
+        w:400, wn:'Regular', lh:1.5, color:'--use-text-primary',
+        preview:'* Aplica términos y condiciones del contrato de medicina prepagada.', html:'<p class="mp-body-m">Texto secundario o nota.</p>' },
+      { name:'Body S', cls:'mp-body-s', token:'--body---s',
+        desk:{rem:'0.75rem',px:12}, mob:{rem:'0.75rem',px:12},
+        clamp:'0.75rem',
+        w:400, wn:'Regular', lh:1.3, color:'--use-text-primary',
+        preview:'Información adicional del plan contratado.', html:'<p class="mp-body-s">Texto pequeño / caption.</p>' },
+      { name:'Body XS', cls:'mp-body-xs', token:'--body---x-s',
+        desk:{rem:'0.625rem',px:10}, mob:{rem:'0.625rem',px:10},
+        clamp:'0.625rem',
+        w:400, wn:'Regular', lh:1.3, color:'--use-text-primary',
+        preview:'Nota legal al pie de página.', html:'<p class="mp-body-xs">Microcopy / legal.</p>' },
+    ]
+  },
+  {
+    id:'ui', title:'Común / UI',
+    desc:'Botones, labels, hints y placeholders para formularios.',
+    items:[
+      { name:'Botón', cls:'mp-btn', token:'--comun---boton',
+        desk:{rem:'1rem',px:16}, mob:{rem:'1rem',px:16},
+        clamp:'1rem',
+        w:500, wn:'Medium', lh:1.0, color:'--use-text-primary',
+        preview:'Contratar plan', html:'<button class="mp-btn">Contratar plan</button>' },
+      { name:'Label', cls:'mp-label', token:'--comun---label',
+        desk:{rem:'1rem',px:16}, mob:{rem:'1rem',px:16},
+        clamp:'1rem',
+        w:700, wn:'Bold', lh:1.0, color:'--use-text-label',
+        extra:'letter-spacing:0.08em;text-transform:uppercase;',
+        preview:'SELECCIONA TU PLAN', html:'<label class="mp-label">SELECCIONA TU PLAN</label>' },
+      { name:'Hint', cls:'mp-hint', token:'--comun---hint',
+        desk:{rem:'0.875rem',px:14}, mob:{rem:'0.875rem',px:14},
+        clamp:'0.875rem',
+        w:400, wn:'Regular', lh:1.0, color:'--use-text-primary',
+        preview:'Mínimo 8 caracteres', html:'<span class="mp-hint">Mínimo 8 caracteres</span>' },
+      { name:'Placeholder', cls:'mp-placeholder', token:'--comun---placeholder',
+        desk:{rem:'1rem',px:16}, mob:{rem:'1rem',px:16},
+        clamp:'1rem',
+        w:400, wn:'Regular', lh:1.0, color:'--use-text-primary',
+        preview:'Ingresa tu nombre completo', html:'<input placeholder="Ingresa tu nombre" class="mp-placeholder">' },
+    ]
+  },
+];
+
+let tyMode = 'desktop';
+
+function tyCopy(text, el){
+  navigator.clipboard.writeText(text).then(()=>{
+    if(!el) return;
+    const orig = el.textContent;
+    el.textContent = '✓';
+    setTimeout(()=>{ el.textContent = orig; }, 1200);
+  });
+}
+window.tyCopy = tyCopy;
+
+function tySetMode(mode){
+  tyMode = mode;
+  document.getElementById('ty-btn-desk').classList.toggle('active', mode==='desktop');
+  document.getElementById('ty-btn-app').classList.toggle('active', mode==='app');
+  document.getElementById('ty-mode-hint').textContent =
+    mode==='desktop' ? 'Mostrando tamaños desktop' : 'Mostrando tamaños app';
+  document.querySelectorAll('[data-ty-desk][data-ty-mob]').forEach(el=>{
+    const size = mode==='desktop' ? el.dataset.tyDesk : el.dataset.tyMob;
+    el.style.fontSize = size;
+    el.closest('.ty-row')?.querySelector('.ty-size-desk')?.classList.toggle('active', mode==='desktop');
+    el.closest('.ty-row')?.querySelector('.ty-size-mob')?.classList.toggle('active', mode==='app');
+  });
+}
+window.tySetMode = tySetMode;
+
+function makeCSSText(item){
+  const extra = item.extra ? '\n  ' + item.extra.replace(/;/g,';\n  ').trim() : '';
+  return `.${item.cls} {\n  font-size: var(--${item.cls.replace(/-/g,'-').split('').join('')}-size); /* ${item.desk.rem} / ${item.desk.px}px */\n  font-weight: var(--${item.cls}-weight); /* ${item.w} ${item.wn} */\n  line-height: var(--${item.cls}-lh); /* ${item.lh} */\n  font-family: var(--font-body);${extra}\n  color: var(${item.color});\n}`;
+}
+
+function makeClampCSS(item){
+  return `.${item.cls} {\n  /* Responsive con clamp() */\n  font-size: ${item.clamp};\n  font-weight: ${item.w};\n  line-height: ${item.lh};\n  font-family: var(--font-body);\n  color: var(${item.color});\n}`;
+}
+
+function escape(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function renderItem(item){
+  const clsId = item.cls.replace(/-/g,'_');
+  const cssSnippet = `.${item.cls} {\n  font-size: var(--${item.cls}-size); /* ${item.desk.rem} / ${item.desk.px}px */\n  font-weight: var(--${item.cls}-weight); /* ${item.w} */\n  line-height: var(--${item.cls}-lh); /* ${item.lh} */\n  font-family: var(--font-body);\n${item.extra ? '  '+item.extra.replace(/;(\s*)/g,';\n  ').trim()+'\n' : ''}  color: var(${item.color});\n}`;
+  const clampSnippet = `.${item.cls} {\n  font-size: ${item.clamp};\n  font-weight: ${item.w};\n  line-height: ${item.lh};\n  font-family: var(--font-body);\n  color: var(${item.color});\n}`;
+
+  return `
+<div class="ty-row" id="tr-${clsId}">
+  <div class="ty-row-main">
+    <div class="ty-preview-wrap">
+      <span class="ty-preview-text ${item.cls}" data-ty-desk="${item.desk.rem}" data-ty-mob="${item.mob.rem}">${item.preview}</span>
+    </div>
+    <div class="ty-meta">
+      <div class="ty-row-name">${item.name}</div>
+      <div class="ty-specs">
+        <div class="ty-spec-row">
+          <span class="ty-spec-lbl">Tamaño desk</span>
+          <span class="ty-spec-val accent ty-size-desk active">${item.desk.rem}</span>
+          <span class="ty-spec-sep">/</span>
+          <span class="ty-spec-val ty-spec-val--muted">${item.desk.px}px</span>
+        </div>
+        ${item.desk.rem !== item.mob.rem ? `<div class="ty-spec-row">
+          <span class="ty-spec-lbl">Tamaño app</span>
+          <span class="ty-spec-val ty-size-mob ty-spec-val--mobile">${item.mob.rem}</span>
+          <span class="ty-spec-sep">/</span>
+          <span class="ty-spec-val ty-spec-val--muted">${item.mob.px}px</span>
+        </div>` : ''}
+        <div class="ty-spec-row">
+          <span class="ty-spec-lbl">Grosor</span>
+          <span class="ty-spec-val">${item.w} ${item.wn}</span>
+        </div>
+        <div class="ty-spec-row">
+          <span class="ty-spec-lbl">Line height</span>
+          <span class="ty-spec-val">${item.lh}</span>
+        </div>
+      </div>
+
+      <div class="ty-tokens-block">
+        <div class="ty-token-line">
+          <span class="ty-token-lbl">Figma</span>
+          <code class="ty-chip" onclick="tyCopy('${item.token}',this)">${item.token}</code>
+        </div>
+        <div class="ty-token-line">
+          <span class="ty-token-lbl">Size</span>
+          <code class="ty-chip" onclick="tyCopy('var(--${item.cls}-size)',this)">--${item.cls}-size</code>
+          <button class="ty-chip-copy" onclick="tyCopy('var(--${item.cls}-size)',this)"><span class="material-symbols-rounded">content_copy</span></button>
+        </div>
+        <div class="ty-token-line">
+          <span class="ty-token-lbl">Weight</span>
+          <code class="ty-chip" onclick="tyCopy('var(--${item.cls}-weight)',this)">--${item.cls}-weight</code>
+          <button class="ty-chip-copy" onclick="tyCopy('var(--${item.cls}-weight)',this)"><span class="material-symbols-rounded">content_copy</span></button>
+        </div>
+        <div class="ty-token-line">
+          <span class="ty-token-lbl">LH</span>
+          <code class="ty-chip" onclick="tyCopy('var(--${item.cls}-lh)',this)">--${item.cls}-lh</code>
+          <button class="ty-chip-copy" onclick="tyCopy('var(--${item.cls}-lh)',this)"><span class="material-symbols-rounded">content_copy</span></button>
+        </div>
+        <div class="ty-token-line">
+          <span class="ty-token-lbl">Clase</span>
+          <code class="ty-chip cls" onclick="tyCopy('.${item.cls}',this)">.${item.cls}</code>
+          <button class="ty-chip-copy" onclick="tyCopy('.${item.cls}',this)"><span class="material-symbols-rounded">content_copy</span></button>
+        </div>
+        ${item.clamp !== item.desk.rem ? `<div class="ty-token-line">
+          <span class="ty-token-lbl">clamp()</span>
+          <code class="ty-chip clamp" onclick="tyCopy('${item.clamp}',this)">${item.clamp}</code>
+          <button class="ty-chip-copy" onclick="tyCopy('${item.clamp}',this)"><span class="material-symbols-rounded">content_copy</span></button>
+        </div>` : ''}
+      </div>
+
+      <button class="ty-code-toggle" id="code-tog-${clsId}" onclick="tyToggleCode('${clsId}')">
+        <span class="material-symbols-rounded arrow">chevron_right</span>
+        <span class="material-symbols-rounded">code</span> Ver código
+      </button>
+      <div class="ty-code-panel" id="code-pan-${clsId}">
+        <div class="ty-code-block">
+          <span class="ty-code-lang">HTML</span>
+          <button class="ty-code-copy" onclick="tyCopy(${JSON.stringify(item.html)},this)"><span class="material-symbols-rounded">content_copy</span> Copiar</button>
+          <pre class="ty-code-pre">${escape(item.html)}</pre>
+        </div>
+        <div class="ty-code-block">
+          <span class="ty-code-lang">CSS vars</span>
+          <button class="ty-code-copy" onclick="tyCopy(${JSON.stringify(cssSnippet)},this)"><span class="material-symbols-rounded">content_copy</span> Copiar</button>
+          <pre class="ty-code-pre">${escape(cssSnippet)}</pre>
+        </div>
+        ${item.desk.rem !== item.mob.rem ? `<div class="ty-code-block">
+          <span class="ty-code-lang">CSS clamp()</span>
+          <button class="ty-code-copy" onclick="tyCopy(${JSON.stringify(clampSnippet)},this)"><span class="material-symbols-rounded">content_copy</span> Copiar</button>
+          <pre class="ty-code-pre">${escape(clampSnippet)}</pre>
+        </div>` : ''}
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+function tyToggleCode(id){
+  const tog = document.getElementById('code-tog-'+id);
+  const pan = document.getElementById('code-pan-'+id);
+  tog.classList.toggle('open');
+  pan.classList.toggle('open');
+}
+window.tyToggleCode = tyToggleCode;
+
+function renderAll(){
+  const root = document.getElementById('ty-scale-root');
+  if(!root) return;
+  let html = '<div class="ty-scale-wrapper">';
+  CATS.forEach(cat=>{
+    html += `<div class="ty-cat-group">
+      <div class="ty-cat-header">
+        <span class="ty-cat-title">${cat.title}</span>
+        <span class="ty-cat-desc">${cat.desc}</span>
+      </div>`;
+    cat.items.forEach(item=>{ html += renderItem(item); });
+    html += '</div>';
+  });
+  html += '</div>';
+  root.innerHTML = html;
+}
+
+renderAll();
+
+/* ── Download helpers ────────────────────────────────── */
+const TY_DIRECT_DOC = location.pathname.includes('/docs/');
+const CORE_TYPO_TOKENS_URL = TY_DIRECT_DOC ? '../../../core/abstracts/_tokens-typography.scss' : 'core/abstracts/_tokens-typography.scss';
+const CORE_TYPO_CLASSES_URL = TY_DIRECT_DOC ? '../../../core/base/_typography.scss' : 'core/base/_typography.scss';
+const CORE_TYPO_UTILS_URL = TY_DIRECT_DOC ? '../../../core/utils/_typography.scss' : 'core/utils/_typography.scss';
+
+const TY_SASS_SIZE_MAP = {
+  'mp-display-l': 'fs-display-l',
+  'mp-display-m': 'fs-display-m',
+  'mp-display-xl-mob': 'fs-display-mob-xl',
+  'mp-display-l-mob': 'fs-display-mob-l',
+  'mp-display-m-mob': 'fs-display-mob-m',
+  'mp-h1': 'fs-h1',
+  'mp-h2': 'fs-h2',
+  'mp-h3': 'fs-h3',
+  'mp-h4': 'fs-h4',
+  'mp-h5': 'fs-h5',
+  'mp-h6': 'fs-h6',
+  'mp-eyebrow': 'fs-eyebrow',
+  'mp-parrafo-xl': 'fs-paragraph-xl',
+  'mp-parrafo-l': 'fs-paragraph-l',
+  'mp-body-2xl': 'fs-body-2xl',
+  'mp-body-xl': 'fs-body-xl',
+  'mp-body-l': 'fs-body-l',
+  'mp-body-m': 'fs-body-m',
+  'mp-body-s': 'fs-body-s',
+  'mp-body-xs': 'fs-body-xs',
+  'mp-btn': 'fs-button',
+  'mp-label': 'fs-label',
+  'mp-hint': 'fs-hint',
+  'mp-placeholder': 'fs-placeholder'
+};
+
+async function tyReadCoreSource(url){
+  try {
+    const res = await fetch(url);
+    return res.ok ? await res.text() : '';
+  } catch (_) {
+    return '';
+  }
+}
+
+function tyParseSassVars(source){
+  const vars = {};
+  source.replace(/^\$([a-z0-9-]+):\s*([^;]+);/gim, (_, name, value)=>{
+    vars[name] = value.trim();
+    return '';
+  });
+  return vars;
+}
+
+function tyRemToPx(value){
+  const rem = Number.parseFloat(String(value).replace('rem',''));
+  return Number.isFinite(rem) ? Math.round(rem * 16) : null;
+}
+
+async function tyGetLiveCats(){
+  const [tokensSource, classesSource] = await Promise.all([
+    tyReadCoreSource(CORE_TYPO_TOKENS_URL),
+    tyReadCoreSource(CORE_TYPO_CLASSES_URL)
+  ]);
+  const sassVars = tyParseSassVars(tokensSource);
+
+  const cats = CATS.map(cat => ({
+    ...cat,
+    items: cat.items.map(item => {
+      const sassName = TY_SASS_SIZE_MAP[item.cls];
+      const size = sassVars[sassName];
+      const px = size ? tyRemToPx(size) : null;
+
+      return {
+        ...item,
+        source: {
+          tokens: CORE_TYPO_TOKENS_URL,
+          classes: CORE_TYPO_CLASSES_URL,
+          live: Boolean(size && classesSource.includes(`.${item.cls}`))
+        },
+        desk: size && px ? { rem: size, px } : item.desk
+      };
+    })
+  }));
+
+  return cats;
+}
+
+function tyClassifyUtility(className, props, body) {
+  const propNames = props.map(p => p.name);
+  const hasColor = propNames.includes('color');
+  const hasTypo = propNames.some(name => [
+    'text-align',
+    'text-transform',
+    'font-weight',
+    'font-size',
+    'line-height',
+    'letter-spacing',
+    'font-style',
+    'text-decoration'
+  ].includes(name));
+
+  if (hasColor || className.startsWith('u-text-')) return 'color';
+  if (hasTypo) return 'type';
+  if (className.startsWith('u-fs-') || className.startsWith('u-fw-') || className.startsWith('u-lh-') || className.startsWith('u-ls-')) return 'type';
+  if (body.includes('@include')) return 'behavior';
+  return 'behavior';
+}
+
+function tyParseUtilitiesFromScss(utilsScss) {
+  const re = /\.([a-z0-9-]+)\s*\{([\s\S]*?)\}/gim;
+  const out = { type: [], color: [], behavior: [] };
+  let match;
+
+  while ((match = re.exec(utilsScss)) !== null) {
+    const className = match[1].trim();
+    const body = match[2].trim();
+    const props = [];
+
+    body.replace(/([a-z-]+)\s*:\s*([^;]+);/gim, (_, name, value) => {
+      props.push({ name: name.trim(), value: value.trim() });
+      return '';
+    });
+
+    const tokenMatch = body.match(/var\((--[^)]+)\)/);
+    const group = tyClassifyUtility(className, props, body);
+    const property = props.length ? props.map(p => p.name).join(', ') : (body.includes('@include') ? 'mixin' : 'regla');
+    const value = props.length ? props.map(p => p.value).join(' | ') : body.replace(/\s+/g, ' ').trim();
+
+    out[group].push({
+      cls: `.${className}`,
+      token: tokenMatch ? tokenMatch[1] : '—',
+      property,
+      value
+    });
+  }
+
+  Object.keys(out).forEach(key => {
+    out[key].sort((a, b) => a.cls.localeCompare(b.cls));
+  });
+
+  return out;
+}
+
+function tyUtilityMeaning(className) {
+  const cls = className.replace(/^\./, '');
+  if (cls === 'u-text-left') return `${cls} alinea el texto a la izquierda.`;
+  if (cls === 'u-text-center') return `${cls} centra el texto.`;
+  if (cls === 'u-text-right') return `${cls} alinea el texto a la derecha.`;
+  if (/^u-text-(sm|md|lg)-(left|center|right)$/.test(cls)) {
+    const parts = cls.split('-');
+    return `${cls} alinea el texto en breakpoint ${parts[2]} (${parts[3]}).`;
+  }
+  if (/^u-fs-/.test(cls)) return `${cls} define tamaño de fuente.`;
+  if (/^u-fw-/.test(cls)) return `${cls} define peso tipográfico.`;
+  if (/^u-lh-/.test(cls)) return `${cls} define interlineado.`;
+  if (/^u-ls-/.test(cls)) return `${cls} define espaciado entre letras.`;
+  if (cls === 'u-uppercase') return `${cls} convierte el texto a mayúsculas.`;
+  if (cls === 'u-lowercase') return `${cls} convierte el texto a minúsculas.`;
+  if (cls === 'u-capitalize') return `${cls} pone iniciales en mayúscula.`;
+  if (cls === 'u-normal-case') return `${cls} mantiene capitalización normal.`;
+  if (/^u-text-/.test(cls)) return `${cls} aplica color de texto semántico.`;
+  if (cls === 'u-truncate') return `${cls} recorta texto en una línea con puntos suspensivos.`;
+  if (/^u-line-clamp-/.test(cls)) return `${cls} limita el texto a un número de líneas.`;
+  if (/^u-whitespace-/.test(cls)) return `${cls} controla el manejo de espacios y saltos.`;
+  if (/^u-break-/.test(cls)) return `${cls} controla el quiebre de palabras.`;
+  if (cls === 'u-underline') return `${cls} subraya el texto.`;
+  if (cls === 'u-line-through') return `${cls} tacha el texto.`;
+  if (cls === 'u-no-underline') return `${cls} quita subrayado.`;
+  if (cls === 'u-italic') return `${cls} aplica estilo itálico.`;
+  if (cls === 'u-not-italic') return `${cls} quita estilo itálico.`;
+  return `${cls} aplica una utilidad tipográfica.`;
+}
+
+function tyUtilityPreviewText(group, cls) {
+  if (group === 'behavior') return 'Texto de ejemplo largo para ver cómo se comporta esta utilidad en contenedores reales de interfaz.';
+  if (group === 'color') return 'Texto de ejemplo con color aplicado';
+  if (cls === '.u-uppercase') return 'Texto de ejemplo';
+  return 'Texto de ejemplo de tipografía';
+}
+
+function tyCopyUtilityClass(cls) {
+  navigator.clipboard.writeText(cls).then(() => {
+    if (typeof showToast === 'function') {
+      showToast('Clase copiada: ' + cls);
+    }
+  });
+}
+
+function tyRenderUtilityGrid(gridId, items, emptyText, group) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+
+  if (!items.length) {
+    grid.innerHTML = `<div class="ty-util-empty">
+      <span class="material-symbols-rounded">info</span>
+      <strong>No hay utilidades en esta categoria</strong>
+      <p>${emptyText}</p>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = items.map(item => {
+    const utilityClass = item.cls.replace(/^\./, '');
+    const previewText = tyUtilityPreviewText(group, item.cls);
+    const meaning = tyUtilityMeaning(item.cls);
+    const previewClass = group === 'color' ? ' ty-util-preview--color' : '';
+
+    return `
+    <button type="button" class="ty-util-card" onclick="tyCopyUtilityClass('${escape(item.cls)}')" title="Copiar ${escape(item.cls)}">
+      <span class="ty-util-card-copy material-symbols-rounded">content_copy</span>
+      <span class="ty-util-class">${escape(item.cls)}</span>
+      <span class="ty-util-meaning">${escape(meaning)}</span>
+      <span class="ty-util-preview${previewClass} ${escape(utilityClass)}">${escape(previewText)}</span>
+    </button>
+  `;
+  }).join('');
+}
+
+async function tyRenderUtilitiesFromSource() {
+  try {
+    const utilsScss = await tyReadCoreSource(CORE_TYPO_UTILS_URL);
+    const parsed = tyParseUtilitiesFromScss(utilsScss || '');
+
+    const setCount = (id, count) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = String(count);
+    };
+
+    setCount('ty-util-type-count', parsed.type.length);
+    setCount('ty-util-color-count', parsed.color.length);
+    setCount('ty-util-behavior-count', parsed.behavior.length);
+
+    tyRenderUtilityGrid('ty-util-type-grid', parsed.type, 'Define clases en core/utils/_typography.scss para verlas aqui.', 'type');
+    tyRenderUtilityGrid('ty-util-color-grid', parsed.color, 'Define clases de color con var(--...) en core/utils/_typography.scss.', 'color');
+    tyRenderUtilityGrid('ty-util-behavior-grid', parsed.behavior, 'Agrega reglas de truncado, whitespace o word-break en core/utils/_typography.scss.', 'behavior');
+  } catch (error) {
+    console.warn('Typography utilities rendering skipped:', error);
+  }
+}
+
+window.tyUtilTab = function(btn, panelId) {
+  document.querySelectorAll('.ty-util-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.ty-util-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById(panelId);
+  if (panel) panel.classList.add('active');
+};
+
+window.tyCopyUtilityClass = tyCopyUtilityClass;
+
+function tyDownloadFile(filename, content, type){
+  const blob = new Blob([content],{type});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function tyToMauiKey(cls){
+  return cls
+    .replace(/^mp-/, 'Mp-')
+    .split('-')
+    .map(part => part ? part.charAt(0).toUpperCase() + part.slice(1) : '')
+    .join('');
+}
+
+async function tyDownloadMAUI(){
+  const cats = await tyGetLiveCats();
+  const d = new Date().toISOString().split('T')[0];
+  const lines = [
+    '<?xml version="1.0" encoding="utf-8" ?>',
+    '<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"',
+    '                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"',
+    '                    xmlns:sys="clr-namespace:System;assembly=netstandard">',
+    `  <!-- Typography tokens for .NET MAUI · ${d} -->`,
+    '  <!-- Source: core/abstracts/_tokens-typography.scss + docs/transversales/fundamentos/typography.html -->',
+    '  <x:String x:Key="MpFontFamilyBody">Roboto</x:String>',
+    '  <x:String x:Key="MpFontFamilyHeading">Roboto</x:String>',
+    ''
+  ];
+
+  cats.forEach(cat => {
+    lines.push(`  <!-- ${cat.title} -->`);
+    cat.items.forEach(it => {
+      const key = tyToMauiKey(it.cls);
+      lines.push(`  <x:Double x:Key="${key}Size">${it.mob.px}</x:Double>`);
+      lines.push(`  <x:Double x:Key="${key}LineHeight">${it.lh}</x:Double>`);
+      lines.push(`  <sys:Int32 x:Key="${key}Weight">${it.w}</sys:Int32>`);
+      lines.push(`  <Style x:Key="${key}Style" TargetType="Label">`);
+      lines.push(`    <Setter Property="FontFamily" Value="{StaticResource MpFontFamilyBody}" />`);
+      lines.push(`    <Setter Property="FontSize" Value="{StaticResource ${key}Size}" />`);
+      lines.push(`    <Setter Property="LineHeight" Value="{StaticResource ${key}LineHeight}" />`);
+      if (it.w >= 700) {
+        lines.push('    <Setter Property="FontAttributes" Value="Bold" />');
+      }
+      lines.push('  </Style>');
+      lines.push('');
+    });
+  });
+
+  lines.push('</ResourceDictionary>');
+  tyDownloadFile('Typography.Maui.xaml', lines.join('\n'), 'application/xml');
+}
+
+function tyBuildUtilitiesCss(utilsScss){
+  const re = /\.([a-z0-9-]+)\s*\{([\s\S]*?)\}/gim;
+  const lines = [];
+  let match;
+
+  while ((match = re.exec(utilsScss)) !== null) {
+    const className = match[1].trim();
+    const body = match[2].trim();
+    const props = [];
+
+    body.replace(/([a-z-]+)\s*:\s*([^;]+);/gim, (_, name, value) => {
+      props.push({ name: name.trim(), value: value.trim() });
+      return '';
+    });
+
+    if (!props.length) continue;
+
+    lines.push(`.${className} {`);
+    props.forEach(prop => lines.push(`  ${prop.name}: ${prop.value};`));
+    lines.push('}');
+  }
+
+  return lines.join('\n');
+}
+
+async function tyDownloadCSS(){
+  const [cats, utilsScss] = await Promise.all([
+    tyGetLiveCats(),
+    tyReadCoreSource(CORE_TYPO_UTILS_URL)
+  ]);
+  const d = new Date().toISOString().split('T')[0];
+  let lines = [
+`/* ════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY TOKENS — Compensar Medicina Prepagada · Design System v2
+   ────────────────────────────────────────────────────────────────────
+   Fuente    : Figma · Compensar v2 – Sistema de diseño
+   Generado  : ${d}
+   Archivo   : typography-tokens.css
+   Fuente    : Roboto (Google Fonts)
+   Base rem  : 1rem = 16px
+   Core      : core/abstracts/_tokens-typography.scss
+               core/base/_typography.scss
+               core/utils/_typography.scss
+
+   CONTENIDO
+   ─────────
+   1. Custom properties :root  — --mp-h1-size, --mp-h1-lh, --mp-h1-weight…
+   2. Clases utilitarias .mp-* — .mp-h1, .mp-body-l, .mp-eyebrow…
+   3. Clamp responsive         — font-size: clamp(min, fluid, max)
+  4. Utilidades .u-*       — core/utils/_typography.scss
+  5. Fuente: @import Google Fonts
+
+   REGLA DE USO
+   ────────────
+   ✓  <h1 class="mp-h1">Título</h1>
+   ✓  font-size: var(--mp-h1-size);
+   ✗  Nunca font-size: 32px (valor hardcoded)
+
+   INSTALACIÓN
+   ───────────
+   1. Importar Roboto:
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+   2. Importar tokens:
+      <link rel="stylesheet" href="typography-tokens.css">
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ─── Google Fonts ──────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+
+/* ─────────────────────────────────────────────────────────────────────
+   1. CUSTOM PROPERTIES
+   Cada estilo expone 3 variables: -size, -lh (line-height), -weight.
+   ──────────────────────────────────────────────────────────────────── */
+:root {
+  --font-body: 'Roboto', sans-serif;
+  --font-code: 'Roboto Mono', monospace;
+`];
+  cats.forEach(cat=>{
+    lines.push(`\n  /* ── ${cat.title} */`);
+    cat.items.forEach(it=>{
+      lines.push(`  ${it.token}: ${it.desk.rem};`);
+      lines.push(`  --${it.cls}-size:   ${it.desk.rem};   /* ${it.desk.px}px */`);
+      lines.push(`  --${it.cls}-lh:     ${it.lh};`);
+      lines.push(`  --${it.cls}-weight: ${it.w};             /* ${it.wn} */`);
+    });
+  });
+  lines.push(
+`}
+
+/* ─────────────────────────────────────────────────────────────────────
+   2. CLASES .mp-*
+   Uso: <h2 class="mp-h2">Encabezado</h2>
+   Cada clase aplica las 3 propiedades tipográficas del token.
+   ──────────────────────────────────────────────────────────────────── */`);
+  cats.forEach(cat=>{
+    lines.push(`\n/* ── ${cat.title} */`);
+    cat.items.forEach(it=>{
+      const extra = it.extra ? '\n  ' + it.extra.replace(/;(\s*)/g,';\n  ').trim() : '';
+      const clamp = it.clamp ? `\n  /* Responsive clamp: ${it.clamp} */\n  font-size: ${it.clamp};` : '';
+      lines.push(`.${it.cls} {\n  font-size:   var(--${it.cls}-size);  /* ${it.desk.px}px desktop */${clamp}\n  font-weight: var(--${it.cls}-weight);\n  line-height: var(--${it.cls}-lh);\n  font-family: var(--font-body);${extra}\n}`);
+    });
+  });
+
+  if (utilsScss) {
+    const utilitiesCss = tyBuildUtilitiesCss(utilsScss);
+    if (utilitiesCss) {
+      lines.push(
+`\n/* ─────────────────────────────────────────────────────────────────────
+   3. UTILIDADES TIPOGRÁFICAS (.u-*)
+   Generadas desde core/utils/_typography.scss
+   Nota: reglas basadas en mixins (truncate/line-clamp responsive) se
+   conservan en la descarga SCSS para uso completo de Sass.
+   ──────────────────────────────────────────────────────────────────── */`);
+      lines.push(utilitiesCss);
+    }
+  }
+
+  lines.push('\n/* ── FIN: typography-tokens.css ─── Compensar Medicina Prepagada ── */');
+  tyDownloadFile('typography-tokens.css', lines.join('\n'), 'text/css');
+}
+
+async function tyDownloadSCSS(){
+  const [cats, utilsScss] = await Promise.all([
+    tyGetLiveCats(),
+    tyReadCoreSource(CORE_TYPO_UTILS_URL)
+  ]);
+  const d = new Date().toISOString().split('T')[0];
+  let lines = [
+`// ════════════════════════════════════════════════════════════════════
+// TYPOGRAPHY TOKENS — Compensar Medicina Prepagada · Design System v2
+// ────────────────────────────────────────────────────────────────────
+// Fuente    : Figma · Compensar v2 – Sistema de diseño
+// Generado  : ${d}
+// Archivo   : _typography-tokens.scss
+// Fuente    : Roboto (Google Fonts)
+// Base rem  : 1rem = 16px
+// Core      : core/abstracts/_tokens-typography.scss
+//             core/base/_typography.scss
+//             core/utils/_typography.scss
+//
+// CONTENIDO
+// ─────────
+// 1. Variables Sass por estilo ($mp-h1-size, $mp-h1-lh, $mp-h1-weight)
+// 2. Clases CSS listas (.mp-*)
+// 3. Utilidades .u-* (source core)
+//
+// REGLA
+// ─────
+// ✓ Usa estas clases o variables
+// ✗ Evita valores hardcoded
+// ════════════════════════════════════════════════════════════════════
+
+$font-body: 'Roboto', sans-serif;
+$font-code: 'Roboto Mono', monospace;
+`];
+  lines.push('// ─────────────────────────────────────────────────────────────────────');
+  lines.push('// 1. VARIABLES SASS');
+  lines.push('// ─────────────────────────────────────────────────────────────────────');
+  cats.forEach(cat=>{
+    lines.push(`\n// ── ${cat.title}`);
+    cat.items.forEach(it=>{
+      lines.push(`// Figma token: ${it.token}`);
+      lines.push(`$${it.cls}-size:   ${it.desk.rem};    // ${it.desk.px}px desktop | móvil: ${it.mob.px}px`);
+      lines.push(`$${it.cls}-lh:     ${it.lh};`);
+      lines.push(`$${it.cls}-weight: ${it.w};            // ${it.wn}`);
+    });
+  });
+  lines.push('\n// ─────────────────────────────────────────────────────────────────────');
+  lines.push('// 2. CLASES .mp-* (LISTAS PARA USAR)');
+  lines.push('// ─────────────────────────────────────────────────────────────────────');
+  cats.forEach(cat=>{
+    lines.push(`\n// ── ${cat.title}`);
+    cat.items.forEach(it=>{
+      lines.push(`.${it.cls} {`);
+      lines.push(`  font-size:   $${it.cls}-size;`);
+      lines.push(`  font-weight: $${it.cls}-weight;`);
+      lines.push(`  line-height: $${it.cls}-lh;`);
+      lines.push(`  font-family: $font-body;`);
+      if (it.extra) {
+        it.extra.split(';').map(v => v.trim()).filter(Boolean).forEach(rule => {
+          lines.push(`  ${rule};`);
+        });
+      }
+      lines.push(`}`);
+    });
+  });
+
+  if (utilsScss) {
+    lines.push('\n// ─────────────────────────────────────────────────────────────────────');
+    lines.push('// 3. UTILIDADES .u-* (SOURCE)');
+    lines.push('// ─────────────────────────────────────────────────────────────────────');
+    lines.push(utilsScss.trim());
+  }
+
+  lines.push('\n// ── FIN: _typography-tokens.scss ─── Compensar Medicina Prepagada ──');
+  tyDownloadFile('_typography-tokens.scss', lines.join('\n'), 'text/plain');
+}
+
+async function tyDownloadJSON(){
+  const [cats, utilsScss] = await Promise.all([
+    tyGetLiveCats(),
+    tyReadCoreSource(CORE_TYPO_UTILS_URL)
+  ]);
+  const d = new Date().toISOString().split('T')[0];
+  const categories = {};
+  cats.forEach(cat=>{
+    categories[cat.title] = cat.items.map(it=>({
+      token:         it.cls,
+      cssClass:      '.' + it.cls,
+      figmaToken:    it.token,
+      desktop: {
+        fontSize:    it.desk.rem,
+        fontSizePx:  it.desk.px
+      },
+      mobile: {
+        fontSize:    it.mob.rem,
+        fontSizePx:  it.mob.px
+      },
+      clamp:         it.clamp || null,
+      lineHeight:    it.lh,
+      fontWeight:    it.w,
+      fontWeightName: it.wn,
+      cssVariables: {
+        size:   '--' + it.cls + '-size',
+        lh:     '--' + it.cls + '-lh',
+        weight: '--' + it.cls + '-weight'
+      }
+    }));
+  });
+  const out = {
+    metadata: {
+      title:       'Typography Tokens — Compensar Medicina Prepagada',
+      version:     '2.0',
+      generatedAt: d,
+      source:      'Figma · Compensar v2 – Sistema de diseño',
+      coreSources: [
+        'core/abstracts/_tokens-typography.scss',
+        'core/base/_typography.scss',
+        'core/utils/_typography.scss'
+      ],
+      fontFamily:  'Roboto (Google Fonts)',
+      baseRem:     '1rem = 16px',
+      description: 'Escala tipográfica completa del Design System. Cada token expone size, line-height y font-weight.',
+      usage: {
+        html:    '<h1 class="mp-h1">Título</h1>',
+        css:     'font-size: var(--mp-h1-size);',
+        sass:    '@include mp-h1;',
+        rule:    'Nunca usar valores hardcoded (font-size: 32px). Siempre token o clase .mp-*.'
+      }
+    },
+    categories,
+    utilities: utilsScss
+      ? tyParseUtilitiesFromScss(utilsScss)
+      : { type: [], color: [], behavior: [] }
+  };
+  tyDownloadFile('typography-tokens.json', JSON.stringify(out,null,2), 'application/json');
+}
+window.tyDownloadCSS = tyDownloadCSS;
+window.tyDownloadSCSS = tyDownloadSCSS;
+window.tyDownloadJSON = tyDownloadJSON;
+window.tyDownloadMAUI = tyDownloadMAUI;
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', tyRenderUtilitiesFromSource);
+} else {
+  tyRenderUtilitiesFromSource();
+}
+
+})();
+</script>

@@ -1,0 +1,10 @@
+DEC-007 - evidencias (Dropdown y Tabs: teclado, ARIA y foco). Base de comparacion: v2.2.1.
+Requisitos: servidor `python3 -m http.server 8000` en la raiz del repo (arbol nuevo) y, para comparar, otro en 8001 sobre un
+`git worktree add --detach /tmp/ds-base v2.2.1`. Playwright y axe-core fuera del repo (/tmp/dec007: npm i playwright axe-core).
+dd.js / tabs.js     Modulos reutilizables en harness AISLADO (solo core.css + js/mp-dropdown.js | js/mp-tabs.js, sin scripts de documentacion).
+                    Uso: node dd.js --text=100|200 --w=1280|320  (tamano de texto real del navegador, 3 temas, axe incluido).
+portal.js           Paginas reales del portal (Web y App): base v2.2.1 frente a arbol nuevo; --theme=light|dark|high-contrast.
+portal-resp.js      Portal real a 320 px con texto 100/200 %.
+sweep.js            Barrido de las 84 rutas de drupal.html y app.html: errores JS, desborde, tablists y dropdowns.
+visual2.js          Sin cambios visuales en reposo: capturas pixel a pixel con cada elemento anclado a la misma posicion.
+resultados-*.txt    Salidas de la corrida final.

@@ -1,0 +1,272 @@
+{
+  "shots": [
+    "p3-avatar-light.png",
+    "p3-avatar-dark.png",
+    "p3-avatar-high-contrast.png",
+    "p3-badges-light.png",
+    "p3-badges-dark.png",
+    "p3-badges-high-contrast.png",
+    "p3-iconos-intro-light.png",
+    "p3-iconos-intro-dark.png",
+    "p3-iconos-intro-high-contrast.png",
+    "p3-sidebar-light.png",
+    "p3-sidebar-dark.png",
+    "p3-sidebar-high-contrast.png"
+  ],
+  "zoom200P2": [
+    {
+      "s": "alertas",
+      "t": "light",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "alertas",
+      "t": "dark",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "alertas",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "toast",
+      "t": "light",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "toast",
+      "t": "dark",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "toast",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "seleccion",
+      "t": "light",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "seleccion",
+      "t": "dark",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "seleccion",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "modales",
+      "t": "light",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "modales",
+      "t": "dark",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "modales",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "tabs",
+      "t": "light",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "tabs",
+      "t": "dark",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "tabs",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "paginacion",
+      "t": "light",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "paginacion",
+      "t": "dark",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    },
+    {
+      "s": "paginacion",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 640,
+      "cw": 640
+    }
+  ],
+  "width320P2": [
+    {
+      "s": "alertas",
+      "t": "light",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "alertas",
+      "t": "dark",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "alertas",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "toast",
+      "t": "light",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "toast",
+      "t": "dark",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "toast",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "seleccion",
+      "t": "light",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "seleccion",
+      "t": "dark",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "seleccion",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "modales",
+      "t": "light",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "modales",
+      "t": "dark",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "modales",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "tabs",
+      "t": "light",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "tabs",
+      "t": "dark",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "tabs",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "paginacion",
+      "t": "light",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "paginacion",
+      "t": "dark",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    },
+    {
+      "s": "paginacion",
+      "t": "high-contrast",
+      "ov": false,
+      "sw": 320,
+      "cw": 320
+    }
+  ]
+}

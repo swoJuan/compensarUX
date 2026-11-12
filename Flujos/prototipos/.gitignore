@@ -1,0 +1,10 @@
+# Dependencias
+node_modules/
+
+# Sistema
+.DS_Store
+.fuse_hidden*
+
+# Logs
+*.log
+npm-debug.log*

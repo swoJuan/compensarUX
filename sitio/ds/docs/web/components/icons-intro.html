@@ -1,0 +1,283 @@
+<section class="section" id="iconos-intro">
+
+<div class="section-header">
+  <div class="section-eyebrow">1.8.1</div>
+  <h1 class="section-title">Sistema de iconos</h1>
+  <p class="section-desc">Una guía para elegir, usar e implementar iconos de forma consistente en las interfaces de Compensar. La iconografía debe ayudar a reconocer acciones, estados y categorías sin reemplazar el contenido principal.</p>
+</div>
+
+<div class="ic-hero">
+  <div class="ic-hero-content">
+    <span class="ic-hero-kicker">Iconografía oficial</span>
+    <h2 class="ic-hero-title">Iconos claros, consistentes y listos para desarrollo</h2>
+    <p class="ic-hero-copy">El sistema usa una fuente de iconos propia para mantener consistencia visual, rendimiento y facilidad de implementación. Cada icono debe conservar el mismo lenguaje outline, alinearse a la grilla y usarse solo cuando aporte comprensión.</p>
+    <div class="ic-hero-actions">
+      <a class="ic-hero-link" href="#iconos-libreria">
+        <span class="material-symbols-rounded">grid_view</span>
+        Ver librería
+      </a>
+      <a class="ic-hero-link ic-hero-link--secondary" href="https://www.figma.com/proto/1zVGMpzqBgiBUqhmfFEAoT/Compensar-v2---Sistema-de-dise%C3%B1o?node-id=3916-20454" target="_blank" rel="noopener">
+        <span class="material-symbols-rounded">open_in_new</span>
+        Ver en Figma
+      </a>
+    </div>
+  </div>
+  <div class="ic-hero-panel" aria-label="Vista previa de iconos del sistema">
+    <div class="ic-hero-grid">
+      <span class="icon icon-house icon-24" aria-hidden="true"></span>
+      <span class="icon icon-user-circle icon-24" aria-hidden="true"></span>
+      <span class="icon icon-lock icon-24" aria-hidden="true"></span>
+      <span class="icon icon-heart icon-24" aria-hidden="true"></span>
+      <span class="icon icon-calendar icon-24" aria-hidden="true"></span>
+      <span class="icon icon-article icon-24" aria-hidden="true"></span>
+      <span class="icon icon-bell-ringing icon-24" aria-hidden="true"></span>
+      <span class="icon icon-magnifying-glass icon-24" aria-hidden="true"></span>
+      <span class="icon icon-warning icon-24" aria-hidden="true"></span>
+      <span class="icon icon-map-pin icon-24" aria-hidden="true"></span>
+      <span class="icon icon-globe icon-24" aria-hidden="true"></span>
+      <span class="icon icon-key icon-24" aria-hidden="true"></span>
+    </div>
+    <div class="ic-hero-code">
+      <code>&lt;i class="icon icon-name icon-24" aria-hidden="true"&gt;&lt;/i&gt;</code>
+    </div>
+  </div>
+</div>
+
+<div class="ic-principles-row">
+  <div class="ic-principle-card">
+    <span class="material-symbols-rounded">route</span>
+    <strong>Primero librería oficial</strong>
+    <p>Antes de buscar alternativas, valida si el icono existe en el set Compensar.</p>
+  </div>
+  <div class="ic-principle-card">
+    <span class="material-symbols-rounded">straighten</span>
+    <strong>Tamaño base 1.5rem</strong>
+    <p>Usa 1.5rem (24px) para acciones principales; 1.25rem (20px) y 1rem (16px) solo para contextos compactos.</p>
+  </div>
+  <div class="ic-principle-card">
+    <span class="material-symbols-rounded">accessibility_new</span>
+    <strong>Accesibilidad siempre</strong>
+    <p>Los iconos decorativos usan <code>aria-hidden</code>; los interactivos necesitan texto o <code>aria-label</code>.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     1 · ESTILO BASE
+════════════════════════════════════════════════════════ -->
+<div class="ic-section-label"><span class="material-symbols-rounded">style</span> Estilo base</div>
+<div class="ic-two-col">
+  <div>
+    <p class="ic-body">El sistema utiliza principalmente iconos en estilo <strong>outline</strong>.</p>
+    <p class="ic-body">Este estilo se caracteriza por:</p>
+    <ul class="ic-list">
+      <li>Trazos limpios</li>
+      <li>Formas simples</li>
+      <li>Buena legibilidad en tamaños pequeños</li>
+      <li>Coherencia visual con interfaces modernas</li>
+    </ul>
+    <p class="ic-body">Todos los iconos del sistema <strong>deben respetar el mismo estilo visual</strong> para evitar inconsistencias dentro de la interfaz.</p>
+    <div class="mp-alert mp-alert--warning" role="status">
+      <i class="icon icon-warning icon-32 mp-alert__icon" aria-hidden="true"></i>
+      <div class="mp-alert__content">
+        <p class="mp-alert__title">Reglas</p>
+        <div class="mp-alert__body">
+          <ul class="ic-alert-list">
+            <li>No usar valores arbitrarios.</li>
+            <li>No usar decimales.</li>
+            <li>Todo tamaño debe respetar la escala rem del sistema, equivalente a múltiplos de 8px.</li>
+            <li>Evitar usar margin para alinear elementos internos de un componente.</li>
+            <li>No ajustar espaciado visualmente para compensar errores de layout.</li>
+            <li>Priorizar siempre la consistencia del sistema.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ic-preview-grid" id="ic-style-preview"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     2 · ORDEN DE USO
+════════════════════════════════════════════════════════ -->
+<div class="ic-section-label"><span class="material-symbols-rounded">format_list_numbered</span> Orden de uso de iconos</div>
+<p class="ic-body ic-body--spaced">Para mantener consistencia dentro del sistema, se debe seguir el siguiente orden de prioridad al seleccionar iconos.</p>
+
+<div class="ic-order-grid">
+  <div class="ic-order-card ic-order-card--1">
+    <div class="ic-order-num">1</div>
+    <div class="ic-order-body">
+      <div class="ic-order-title">Iconografía oficial del producto</div>
+      <p class="ic-order-desc">La primera opción siempre debe ser la librería de iconos <strong>proporcionada por el equipo de Compensar</strong>. Estos iconos siguen el estilo visual oficial del sistema (outline) y representan la base de la iconografía del producto. Siempre que exista un icono dentro de esta librería, debe utilizarse antes de buscar alternativas.</p>
+      <div class="ic-order-badge">
+        <span class="material-symbols-rounded">check_circle</span> Esta librería · 1025 iconos
+      </div>
+    </div>
+  </div>
+
+  <div class="ic-order-card ic-order-card--2">
+    <div class="ic-order-num">2</div>
+    <div class="ic-order-body">
+      <div class="ic-order-title">Google Material Symbols</div>
+      <p class="ic-order-desc">Si el icono requerido no existe en la librería principal, se puede utilizar Google Material Symbols. Estos iconos deben configurarse para mantener un estilo visual similar al del sistema.</p>
+      <div class="ic-order-config">
+        <strong>Configuración recomendada:</strong>
+        <ul class="ic-list">
+          <li>Estilo <strong>Outlined</strong></li>
+          <li>Tamaño base <strong>1.5rem (24px)</strong></li>
+          <li>Grosor de trazo consistente</li>
+          <li>Sin rellenos sólidos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="ic-order-card ic-order-card--3">
+    <div class="ic-order-num">3</div>
+    <div class="ic-order-body">
+      <div class="ic-order-title">Font Awesome</div>
+      <p class="ic-order-desc">En casos donde el icono no esté disponible ni en la librería principal ni en Google Material Icons, <strong>se permite el uso de Font Awesome</strong>. Debe priorizarse siempre la variante que más se acerque al estilo outline del sistema. Evitar iconos con estilos demasiado pesados o visualmente diferentes al resto del sistema.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Iconos personalizados -->
+<div class="ic-section-label ic-section-label--compact"><span class="material-symbols-rounded">draw</span> Iconos personalizados</div>
+<div class="ic-two-col">
+  <div>
+    <p class="ic-body">Algunos iconos específicos del producto han sido diseñados de forma personalizada.</p>
+    <p class="ic-body">Estos iconos deben:</p>
+    <ul class="ic-list">
+      <li>Seguir el mismo estilo outline del sistema</li>
+      <li>Respetar proporciones y grosor de trazo</li>
+      <li>Mantener consistencia con la librería base</li>
+    </ul>
+    <p class="ic-body">Para facilitar su implementación en desarrollo, estos iconos deben convertirse a font icon. Esto permite:</p>
+    <ul class="ic-list">
+      <li>Mejor integración con el sistema</li>
+      <li>Reutilización en diferentes componentes</li>
+      <li>Control mediante CSS</li>
+      <li>Mejor rendimiento que múltiples SVG independientes</li>
+    </ul>
+  </div>
+  <div class="mp-alert mp-alert--warning ic-alert--self-start" role="status">
+    <i class="icon icon-warning icon-32 mp-alert__icon" aria-hidden="true"></i>
+    <div class="mp-alert__content">
+      <p class="mp-alert__title">Reglas</p>
+      <div class="mp-alert__body">
+        <ul class="ic-alert-list">
+          <li>Utilizar siempre iconos de la librería principal cuando existan.</li>
+          <li>Evitar mezclar estilos diferentes dentro de una misma interfaz.</li>
+          <li>No modificar manualmente el grosor de los iconos.</li>
+          <li>Mantener proporciones y alineación dentro del grid del icono.</li>
+          <li>Usar iconos solo cuando aporten valor a la comprensión de la acción.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     3 · TAMAÑOS
+════════════════════════════════════════════════════════ -->
+<div class="ic-section-label"><span class="material-symbols-rounded">straighten</span> Tamaños recomendados</div>
+<div class="ic-sizes-grid">
+  <div class="ic-sizes-col">
+    <h3 class="ic-sizes-title">Tamaños recomendados</h3>
+    <div class="ic-sizes-preview">
+      <div class="ic-size-demo"><span class="icon icon-16">&#xf3b2;</span><span class="ic-size-label">1rem · 16px</span></div>
+      <div class="ic-size-demo"><span class="icon icon-20">&#xf3b2;</span><span class="ic-size-label">1.25rem · 20px</span></div>
+      <div class="ic-size-demo"><span class="icon icon-24">&#xf3b2;</span><span class="ic-size-label">1.5rem · 24px</span></div>
+    </div>
+    <table class="ic-sizes-table">
+      <thead><tr><th>Tamaño</th><th>Uso</th></tr></thead>
+      <tbody>
+        <tr><td>Icono estándar UI</td><td><strong>1.5rem (24px)</strong></td></tr>
+        <tr><td>Icono compacto</td><td><strong>1.25rem (20px)</strong></td></tr>
+        <tr><td>Icono pequeño</td><td><strong>1rem (16px)</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="ic-body ic-body--small">Evitar tamaños intermedios que rompan la consistencia visual.</p>
+    <div class="mp-alert mp-alert--warning ic-alert--mt-4" role="status">
+      <i class="icon icon-warning icon-32 mp-alert__icon" aria-hidden="true"></i>
+      <div class="mp-alert__content">
+        <p class="mp-alert__title">Reglas</p>
+        <p class="mp-alert__body ic-alert-text-small">
+          El tamaño visual del icono puede ser 1rem (16px), 1.25rem (20px) o 1.5rem (24px).<br>
+          Cuando el icono sea interactivo, el área clicable mínima debe ser 2.75rem × 2.75rem (44px × 44px).<br>
+          El icono debe centrarse dentro del contenedor interactivo.<br>
+          No usar iconos clicables sin área táctil suficiente.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="ic-sizes-col">
+    <h3 class="ic-sizes-title">Tamaño mínimo para iconos interactivos</h3>
+    <p class="ic-body">El icono no necesita medir 2.75rem (44px). Lo importante es que el contenedor clicable sí respete esa medida mínima.</p>
+    <div class="ic-touch-demo">
+      <div class="ic-touch-target">
+        <span class="icon icon-24">&#xf3b2;</span>
+        <span class="ic-size-label ic-size-label--offset">1.5rem · 24px</span>
+      </div>
+      <div class="ic-touch-box">
+        <span class="ic-touch-label">Área clicable 2.75rem × 2.75rem (44×44px)</span>
+      </div>
+    </div>
+    <table class="ic-sizes-table">
+      <thead><tr><th>Tamaño</th><th>Uso</th></tr></thead>
+      <tbody>
+        <tr><td>Icono</td><td><strong>1.25rem – 1.5rem (20px – 24px)</strong></td></tr>
+        <tr><td>Área clicable</td><td><strong>2.75rem (44px)</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+</section>
+
+
+<script>
+function normStr(s){ return s.toLowerCase().replace(/[áàä]/g,'a').replace(/[éèë]/g,'e').replace(/[íìï]/g,'i').replace(/[óòö]/g,'o').replace(/[úùü]/g,'u').replace(/ñ/g,'n'); }
+
+const SAMPLE_ICONS = [
+  {n:"WarningOctagon",c:"icon-warning-octagon",u:"f398"},
+  {n:"WarningCircle",c:"icon-warning-circle",u:"f399"},
+  {n:"Warning",c:"icon-warning",u:"f39a"},
+  {n:"Wall",c:"icon-wall",u:"f39b"},
+  {n:"Vault",c:"icon-vault",u:"f39c"},
+  {n:"ShieldWarning",c:"icon-shield-warning",u:"f39d"},
+  {n:"ShieldStar",c:"icon-shield-star",u:"f39e"},
+  {n:"ShieldSlash",c:"icon-shield-slash",u:"f39f"},
+  {n:"ShieldPlus",c:"icon-shield-plus",u:"f3a0"},
+  {n:"ShieldChevron",c:"icon-shield-chevron",u:"f3a1"},
+  {n:"ShieldCheckered",c:"icon-shield-checkered",u:"f3a2"},
+  {n:"ShieldCheck",c:"icon-shield-check",u:"f3a3"},
+  {n:"Shield",c:"icon-shield",u:"f3a4"},
+  {n:"Question",c:"icon-question",u:"f3a5"},
+  {n:"ProhibitInset",c:"icon-prohibit-inset",u:"f3a6"},
+  {n:"Prohibit",c:"icon-prohibit",u:"f3a7"},
+  {n:"Password",c:"icon-password",u:"f3a8"},
+  {n:"LockSimpleOpen",c:"icon-lock-simple-open",u:"f3a9"}
+];
+
+function renderStylePreview(){
+  const el = document.getElementById('ic-style-preview');
+  if(!el) return;
+
+  // Use icon classes from the installed font set to avoid missing-unicode placeholders.
+  const previewIcons = SAMPLE_ICONS.slice(0, 12);
+  previewIcons.forEach(icon => {
+    const d = document.createElement('div');
+    d.className = 'ic-preview-item';
+    d.innerHTML = `<span class="icon ${icon.c} icon-24" aria-hidden="true"></span>`;
+    el.appendChild(d);
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', renderStylePreview);
+} else {
+  renderStylePreview();
+}
+</script>

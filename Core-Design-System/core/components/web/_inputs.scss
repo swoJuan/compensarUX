@@ -1,0 +1,602 @@
+// ============================================================
+//  _inputs.scss
+//  Consume SOLO tokens semánticos. Nunca colores base directos.
+//  Fuente de verdad: Figma Compensar v2 — nodo 4517:7746
+//  Medidas clave (Figma):
+//    height 56px · radius 16px · border 1px
+//    font-size 16px (body/L Roboto) · padding 16px
+//    icon 24px · gap icon→texto 10px · icon-padding 50px
+//  Estados (Figma):
+//    default:  use-border-subtle  (#e0e0e0)
+//    hover:    use-border-hover   (naranja brand = use-primary-hover)
+//    active:   use-border-strong  (#666)
+//    focus:    use-primary-default + ring 3px
+//    error:    use-state-error-icon + ring 3px
+// ============================================================
+
+@use '../../abstracts/mixins'          as *;
+@use '../../abstracts/functions'       as *;
+@use '../../abstracts/tokens-spacing'  as *;
+@use '../../abstracts/tokens-radius'   as *;
+@use '../../abstracts/tokens-typography' as *;
+
+// ────────────────────────────────────────────────────────────
+// Legacy field API (Bootstrap-compatible)
+// ────────────────────────────────────────────────────────────
+
+// ── Field wrapper ─────────────────────────────────────────
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  margin-bottom: $space-16;
+}
+
+// ── Label ────────────────────────────────────────────────
+.field-label {
+  @include ty-label;
+  color: var(--color-text-secondary);
+
+  .required { color: var(--color-error-field); margin-left: rem(2px); }   // DEC-012: 2px → 0.125rem
+}
+
+// ── Base input / select / textarea ───────────────────────
+.input,
+.select,
+.textarea {
+  @include ty-body-l;
+  @include focus-visible-ring(var(--color-primary));
+  width: 100%;
+  padding: $space-12 $space-16;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1.5px solid var(--color-border);
+  border-radius: $radius-xs;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  appearance: none;
+
+  &::placeholder { color: var(--color-text-disabled); }
+
+  &:hover:not(:disabled):not(:focus) { border-color: var(--color-border-strong); }
+
+  &:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-subtle);
+    outline: none;
+  }
+
+  &:disabled {
+    background: var(--color-surface-alt);
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+// ── Con icono ────────────────────────────────────────────
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .icon {
+    position: absolute;
+    font-size: rem(20px);   // DEC-012: 20px → 1.25rem
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+  }
+
+  &.icon-left  { .icon { left: $space-12; }  .input { padding-left: 2.5rem; } }
+  &.icon-right { .icon { right: $space-12; } .input { padding-right: 2.5rem; } }
+}
+
+// ── Estados ──────────────────────────────────────────────
+.field-success {
+  .input, .select, .textarea {
+    border-color: var(--color-success-border);
+    &:focus { box-shadow: 0 0 0 3px var(--color-success-bg); }
+  }
+}
+
+.field-error {
+  .input, .select, .textarea {
+    border-color: var(--color-error-border);
+    &:focus { box-shadow: 0 0 0 3px var(--color-error-bg); }
+  }
+}
+
+// ── Hint / error message ─────────────────────────────────
+.field-hint      { @include ty-hint; color: var(--color-text-tertiary); }
+.field-error-msg { @include ty-hint; color: var(--color-error-field); display: flex; align-items: center; gap: $space-4; }
+
+// ── Textarea ─────────────────────────────────────────────
+.textarea {
+  min-height: rem(120px);   // DEC-012: 120px → 7.5rem
+  resize: vertical;
+  line-height: $lh-body;
+}
+
+// ── Select con flecha custom ─────────────────────────────
+.select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $space-12 center;
+  padding-right: $space-32;
+}
+
+// ── Checkbox / Radio ─────────────────────────────────────
+.check-wrap,
+.radio-wrap {
+  display: flex;
+  align-items: center;
+  gap: $space-8;
+  cursor: pointer;
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    width: rem(18px); height: rem(18px);   // DEC-012: 18px → 1.125rem
+    flex-shrink: 0;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+  }
+
+  span { @include ty-body-l; color: var(--color-text-primary); }
+}
+
+// ── Toggle switch ────────────────────────────────────────
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-8;
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    appearance: none;
+    width: rem(44px); height: rem(24px);   // DEC-012: 44px/24px → 2.75rem/1.5rem
+    background: var(--color-border);
+    border-radius: $radius-full;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: rem(3px); left: rem(3px);   // DEC-012: 3px → 0.1875rem (posición del knob)
+      width: rem(18px); height: rem(18px);   // DEC-012: 18px → 1.125rem
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    }
+
+    &:checked {
+      background: var(--color-primary);
+      &::after { transform: translateX(rem(20px)); }   // DEC-012: 20px → 1.25rem (desplazamiento proporcional al control)
+    }
+  }
+}
+
+// ────────────────────────────────────────────────────────────
+// mp-input — Design System input component
+// Source of truth for documentation and Angular-friendly HTML.
+// Figma: nodo 4517:7746 / 4527:13712 (text field instances)
+// ────────────────────────────────────────────────────────────
+
+// ── Grupo completo (label + wrapper + helper) ─────────────
+.mp-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: $space-8;
+  width: 100%;
+}
+
+// ── Label ────────────────────────────────────────────────
+// Figma: Roboto Regular 16px · lh 1 · ls 0.012em · color use/text/primary
+.mp-input-label {
+  font-family: var(--font-body);
+  font-size: rem(16px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.012em;
+  color: var(--use-text-primary);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: rem(4px);
+
+  .mp-input-required {
+    // Figma: use/state/error/mandatory #bb4945
+    color: var(--use-state-error-mandatory, var(--use-state-error-icon));
+    letter-spacing: 0.02em;
+  }
+}
+
+// DEC-003 #8: label atenuado cuando el campo del grupo está deshabilitado
+// (Figma: use/text/tertiary). Se usa :has() sobre el grupo y una clase de
+// respaldo (.is-disabled) para navegadores sin :has().
+.mp-input-group:has(.mp-input-field:disabled) .mp-input-label,
+.mp-input-group.is-disabled .mp-input-label {
+  color: var(--use-text-tertiary);
+}
+
+// ── Wrapper relativo para iconos ──────────────────────────
+.mp-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+// ── Campo base ────────────────────────────────────────────
+// Figma: height 56px · padding 16px · radius 16px · border 1px
+//        font 16px Roboto Regular · bg use/surface/white
+.mp-input-field {
+  --mp-inp-border: var(--use-border-subtle);
+
+  // DEC-003 · tokens locales de foco (preparados para DEC-004).
+  // Patrón oficial de Figma (4527:13793): borde use/border/hover + anillo use/focus/border.
+  --mp-inp-focus-border: var(--use-border-hover);
+  --mp-inp-focus-ring: var(--use-focus-border);
+  --mp-inp-focus-ring-width: #{rem(4px)};
+
+  width: 100%;
+  height: rem(56px);
+  padding: 0 rem(16px);
+  font-family: var(--font-body);
+  font-size: rem(16px);
+  font-weight: 400;
+  letter-spacing: 0.012em;
+  line-height: 1;
+  color: var(--use-text-primary);
+  background: var(--use-surface-white);
+  border: rem(1px) solid var(--mp-inp-border);
+  border-radius: rem(16px);
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s, background 0.15s;
+  appearance: none;
+  -webkit-appearance: none;
+
+  &::placeholder {
+    color: var(--use-text-tertiary);
+    opacity: 1;
+  }
+
+  // Hover: borde naranja brand (Figma: use/border/hover = use-primary-hover)
+  &:hover:not(:disabled):not([readonly]):not(.is-readonly):not(.error):not(:focus),
+  &.is-hover-demo:not(:disabled):not([readonly]):not(.is-readonly):not(.error):not(:focus) {
+    --mp-inp-border: var(--use-border-hover);
+  }
+
+  // Active mousedown: borde gris fuerte (Figma: use/border/strong)
+  &:active:not(:disabled):not([readonly]):not(.is-readonly):not(.error) {
+    --mp-inp-border: var(--use-border-strong);
+  }
+
+  // Focus: patrón Figma (borde use/border/hover + anillo use/focus/border de 4 px).
+  // DEC-003 #3: readonly conserva su propio foco; aquí solo el campo editable.
+  &:focus:not(:disabled):not([readonly]):not(.is-readonly),
+  &.is-focus-demo:not(:disabled):not([readonly]):not(.is-readonly) {
+    --mp-inp-border: var(--mp-inp-focus-border);
+    border-color: var(--mp-inp-border);
+    box-shadow: 0 0 0 var(--mp-inp-focus-ring-width) var(--mp-inp-focus-ring);
+  }
+
+  // Error (Figma 4527:13796): borde use/state/error/border, sin halo.
+  &.error {
+    --mp-inp-border: var(--use-state-error-border);
+    border-color: var(--mp-inp-border);
+    box-shadow: none;
+  }
+
+  // Error + Focus (DEC-003 #3): se conserva el borde de error y se añade un
+  // contorno de foco visible, sin sustituir la señal de error.
+  &.error:focus:not(:disabled):not([readonly]):not(.is-readonly),
+  &.error.is-focus-demo:not(:disabled):not([readonly]):not(.is-readonly) {
+    --mp-inp-border: var(--use-state-error-border);
+    border-color: var(--mp-inp-border);
+    box-shadow: 0 0 0 var(--mp-inp-focus-ring-width) var(--mp-inp-focus-ring);
+  }
+
+  // Success (border only, helper comunica el estado)
+  &.success:not(:focus):not(.error) {
+    --mp-inp-border: var(--use-state-success-border);
+  }
+
+  // Disabled / Readonly (campos no editables)
+  // Figma: bg use/surface/surface · border use/border/default · texto use/text/tertiary
+  // Solo cambia el tratamiento visual del estado: NO altera height, padding,
+  // border-radius, alineación ni tamaño de texto.
+  &:disabled,
+  &[readonly],
+  &.is-readonly {
+    background: var(--use-surface-surface);
+    color: var(--use-text-tertiary);
+    --mp-inp-border: var(--use-border-default);
+    border-color: var(--mp-inp-border);
+    box-shadow: none;
+  }
+
+  // DEC-003 #1 (DS-18): la regla global [disabled]{opacity:.5} se mantiene para
+  // el resto de controles, pero el campo de input va a opacidad 100 % para
+  // respetar Figma (colores de disabled al tono pleno). cursor: not-allowed.
+  &:disabled {
+    opacity: 1;
+    cursor: not-allowed;
+  }
+
+  // DEC-003 #5: readonly no imita a disabled en el cursor (es seleccionable).
+  &[readonly],
+  &.is-readonly {
+    cursor: default;
+  }
+
+  // Readonly no es :disabled, así que el hover/active editable seguiría
+  // aplicando. Se neutraliza para no mostrar el borde de edición.
+  &[readonly]:hover,
+  &[readonly]:active,
+  &.is-readonly:hover,
+  &.is-readonly:active {
+    --mp-inp-border: var(--use-border-default);
+    border-color: var(--mp-inp-border);
+    background: var(--use-surface-surface);
+    box-shadow: none;
+  }
+
+  // Accesibilidad (WCAG 2.4.7): un campo de solo lectura puede recibir foco con
+  // teclado; se conserva un indicador de foco visible (no el ring de edición).
+  &[readonly]:focus-visible,
+  &.is-readonly:focus-visible {
+    outline: rem(2px) solid var(--use-focus-outline);
+    outline-offset: rem(2px);
+  }
+
+  // Filled: borde un tono más visible para indicar contenido
+  &.filled:not(:focus):not(.error):not(:disabled):not([readonly]):not(.is-readonly) {
+    --mp-inp-border: var(--use-border-default);
+  }
+}
+
+// ── Con ícono izquierdo ───────────────────────────────────
+// padding-left = 16 (pad) + 24 (icon) + 10 (gap) = 50px
+.mp-input-field.has-icon-left {
+  padding-left: rem(50px);
+}
+
+// ── Con ícono derecho ─────────────────────────────────────
+// padding-right = 16 (pad) + 24 (icon) + 10 (gap) = 50px
+.mp-input-field.has-icon-right {
+  padding-right: rem(50px);
+}
+
+// ── Ícono decorativo / interactivo ───────────────────────
+// Figma: 24px · color use/text/tertiary · izq 12px · der 12px
+.mp-input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--use-text-tertiary);
+  font-size: rem(24px);
+  line-height: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.mp-input-icon--left  { left:  rem(12px); }
+.mp-input-icon--right { right: rem(12px); }
+
+.mp-input-icon--right.interactive {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: color 0.15s;
+
+  &:hover { color: var(--use-text-primary); }
+
+  &:focus-visible {
+    outline: rem(3px) solid var(--use-focus-outline);
+    outline-offset: rem(2px);
+    border-radius: rem(4px);
+  }
+}
+
+// ── Textarea ─────────────────────────────────────────────
+// Figma: min-height 112px · padding 8px 16px · resize vertical
+.mp-input-field.mp-textarea,
+.mp-input-field.mp-input-field--textarea {
+  height: auto;
+  min-height: rem(112px);
+  padding: $space-8 rem(16px);
+  resize: vertical;
+  line-height: 1.6;
+}
+
+// ── Select ───────────────────────────────────────────────
+// Usa flecha nativa del navegador/Bootstrap (sin estilos custom)
+.mp-input-field.mp-select {
+  padding-right: rem(40px);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: var(--bs-form-select-bg-img, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"));
+  background-repeat: no-repeat;
+  background-position: right rem(12px) center;
+  background-size: rem(16px) rem(16px);
+}
+
+// ── Helper / error / success text ─────────────────────────
+// Figma: Roboto Regular 14px · ls 0.012em · color use/text/primary (default)
+// DEC-003 #4: el texto de apoyo normal usa use/text/primary (token semántico,
+// no un valor fijo), por lo que cambia con el tema.
+.mp-input-helper {
+  font-family: var(--font-body);
+  font-size: rem(14px);
+  font-weight: 400;
+  letter-spacing: 0.012em;
+  line-height: 1.45;
+  color: var(--use-text-primary);
+  display: flex;
+  align-items: flex-start;
+  gap: rem(4px);
+  // Reflow (WCAG 1.4.10): un token largo sin espacios (p. ej. un correo en el mensaje)
+  // no debe desbordar a 320 px con texto ampliado. Solo actúa si el texto no cabe.
+  overflow-wrap: anywhere;
+}
+
+// DEC-003 #2: mensaje de error con el token oficial de Figma
+// (use/state/error/text-error-field) + peso 400. La señal no cromática
+// (icono de 16 px) acompaña al texto en el markup.
+.mp-input-helper.error {
+  color: var(--use-state-error-text-error-field);
+  font-weight: 400;
+}
+
+.mp-input-helper.success {
+  color: var(--use-state-success-text);
+}
+
+// ────────────────────────────────────────────────────────────
+// Modos de color
+// ────────────────────────────────────────────────────────────
+
+[data-theme='dark'] {
+  .mp-input-field {
+    background: var(--base-neutral-100-negro);
+    color: var(--base-neutral-white);
+    --mp-inp-border: var(--base-neutral-70);
+  }
+
+  .mp-input-field.mp-textarea,
+  .mp-input-field.mp-input-field--textarea {
+    padding: $space-8 rem(16px);
+  }
+
+  .mp-input-field::placeholder {
+    color: var(--base-neutral-40);
+  }
+
+  .mp-input-field.mp-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23dee2e6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right rem(12px) center;
+    background-size: rem(16px) rem(16px);
+  }
+
+  // Foco: mismo patrón de tokens que en Light (el token de foco ya cambia por tema).
+  .mp-input-field:focus:not(:disabled):not([readonly]):not(.is-readonly),
+  .mp-input-field.is-focus-demo:not(:disabled):not([readonly]):not(.is-readonly) {
+    --mp-inp-border: var(--mp-inp-focus-border);
+    border-color: var(--mp-inp-border);
+    box-shadow: 0 0 0 var(--mp-inp-focus-ring-width) var(--mp-inp-focus-ring);
+  }
+
+  .mp-input-field:disabled,
+  .mp-input-field[readonly],
+  .mp-input-field.is-readonly {
+    background: var(--use-surface-surface);
+    color: var(--use-text-tertiary);
+    --mp-inp-border: var(--use-border-default);
+    border-color: var(--mp-inp-border);
+    box-shadow: none;
+  }
+
+  // DEC-003 #2 (DS-05): Error visible en Dark. El borde usa el token de borde
+  // de error (no el de icono, que en Dark es claro) para diferenciarse del normal.
+  // La regla va al final del bloque de tema para no ser pisada (DEC-003 cascada).
+  .mp-input-field.error {
+    --mp-inp-border: var(--use-state-error-border);
+    border-color: var(--mp-inp-border);
+    box-shadow: none;
+  }
+
+  .mp-input-field.error:focus:not(:disabled):not([readonly]):not(.is-readonly),
+  .mp-input-field.error.is-focus-demo:not(:disabled):not([readonly]):not(.is-readonly) {
+    border-color: var(--use-state-error-border);
+    box-shadow: 0 0 0 var(--mp-inp-focus-ring-width) var(--mp-inp-focus-ring);
+  }
+
+  .mp-input-label {
+    color: var(--use-text-primary);
+  }
+
+  // El texto de apoyo hereda use/text/primary del bloque base (DEC-003 #4);
+  // en error usa el token semántico del tema.
+  .mp-input-helper.error {
+    color: var(--use-state-error-text-error-field);
+  }
+}
+
+[data-theme='high-contrast'] {
+  .mp-input-field {
+    border-width: rem(2px);
+    border-color: var(--base-neutral-white);
+    background: var(--base-neutral-black);
+    color: var(--base-neutral-white);
+  }
+
+  .mp-input-field.mp-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right rem(12px) center;
+    background-size: rem(16px) rem(16px);
+  }
+
+  .mp-input-field:focus:not(:disabled):not([readonly]):not(.is-readonly),
+  .mp-input-field.is-focus-demo:not(:disabled):not([readonly]):not(.is-readonly) {
+    outline: rem(3px) solid var(--use-focus-outline);
+    outline-offset: rem(2px);
+    box-shadow: none;
+    border-color: var(--base-neutral-white);
+  }
+
+  .mp-input-field:hover:not(:disabled):not([readonly]):not(.is-readonly):not(.error):not(:focus) {
+    border-color: var(--use-primary-default, #ffff00);
+  }
+
+  // DEC-003 #5: campos no editables con borde punteado en alto contraste.
+  .mp-input-field:disabled,
+  .mp-input-field[readonly],
+  .mp-input-field.is-readonly {
+    border-style: dashed;
+  }
+
+  .mp-input-label {
+    color: var(--base-neutral-white);
+  }
+
+  .mp-input-required {
+    color: var(--use-state-error-mandatory) !important;
+  }
+
+  .mp-input-icon {
+    color: var(--base-neutral-white);
+  }
+
+  // DEC-003 #2 (DS-05): Error en alto contraste. El borde de error usa su token
+  // (rojo `#d14434`, 4,59:1 sobre negro) para diferenciarse del borde blanco normal;
+  // la señal no cromática (icono + mensaje) acompaña. Al final del bloque para no pisarse.
+  .mp-input-field.error {
+    border-style: solid;
+    border-color: var(--use-state-error-border);
+    box-shadow: none;
+  }
+
+  // Nota: la regla base de foco usa una cadena :not() que eleva su especificidad;
+  // se replica aquí para que el borde de error gane por orden de origen.
+  .mp-input-field.error:focus:not(:disabled):not([readonly]):not(.is-readonly),
+  .mp-input-field.error.is-focus-demo:not(:disabled):not([readonly]):not(.is-readonly) {
+    outline: rem(3px) solid var(--use-focus-outline);
+    outline-offset: rem(2px);
+    border-color: var(--use-state-error-border);
+    box-shadow: none;
+  }
+
+  .mp-input-helper.error { color: var(--use-state-error-text-error-field); }
+}

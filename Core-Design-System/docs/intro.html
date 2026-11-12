@@ -1,0 +1,774 @@
+<section class="section" id="introduccion">
+  <div class="intro-hero">
+    <div class="intro-hero-content">
+      <div class="intro-version-badge">
+        <i class="icon icon-star icon-16" aria-hidden="true"></i>
+        v1.0 — Liberado Abril 2026
+      </div>
+      <h1 class="intro-title mp-h1">Sistema de Diseño<br>Compensar</h1>
+      <p class="intro-subtitle mp-h6">Medicina Prepagada</p>
+      <p class="intro-desc mp-body-l">
+        Guía de referencia unificada para equipos de diseño y desarrollo. Contiene los tokens, componentes y patrones que dan forma a las experiencias digitales de Compensar.
+      </p>
+      <div class="intro-tech-badges">
+        <span class="intro-tech">
+          <i class="icon icon-globe icon-16" aria-hidden="true"></i>
+          Portal Público · Drupal
+        </span>
+        <span class="intro-tech">
+          <i class="icon icon-lightning icon-16" aria-hidden="true"></i>
+          Zona Transaccional · Angular
+        </span>
+        <span class="intro-tech">
+          <i class="icon icon-palette icon-16" aria-hidden="true"></i>
+          CSS Custom Properties
+        </span>
+      </div>
+    </div>
+    <div class="intro-hero-visual" aria-hidden="true">
+      <div class="intro-visual-ring ring-1"></div>
+      <div class="intro-visual-ring ring-2"></div>
+      <div class="intro-visual-ring ring-3"></div>
+      <i class="icon icon-grid-four icon-32 intro-visual-icon" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <!-- Objetivo -->
+  <div class="intro-objective">
+    <div class="intro-objective-icon">
+      <i class="icon icon-target icon-20" aria-hidden="true"></i>
+    </div>
+    <div>
+      <h2 class="intro-objective-title mp-h5">Objetivo del sistema</h2>
+      <p class="intro-objective-text mp-body-m">
+        Este sistema de diseño centraliza las decisiones visuales y de interacción de los productos digitales de Compensar Medicina Prepagada. Su propósito es garantizar coherencia, accesibilidad y eficiencia en la implementación, tanto en el <strong>Portal Público</strong> construido con Drupal como en la <strong>Zona Transaccional</strong> desarrollada en Angular. Ambas plataformas consumen los mismos tokens y componentes base.
+      </p>
+    </div>
+  </div>
+
+  <!-- ¿Qué vas a encontrar? -->
+  <div class="intro-cards-title mp-h6">
+    <i class="icon icon-compass icon-16" aria-hidden="true"></i>
+    ¿Qué vas a encontrar aquí?
+  </div>
+  <div class="intro-cards">
+    <div class="intro-card">
+      <i class="icon icon-palette icon-24 intro-card-icon" aria-hidden="true"></i>
+      <h3 class="mp-h6">Tokens de diseño</h3>
+      <p class="mp-body-m">Colores, tipografía, espaciado y sombras definidos como CSS Custom Properties, sincronizados con Figma.</p>
+    </div>
+    <div class="intro-card">
+      <i class="icon icon-ruler icon-24 intro-card-icon" aria-hidden="true"></i>
+      <h3 class="mp-h6">Tipografía & Espaciado</h3>
+      <p class="mp-body-m">Escala tipográfica con Montserrat y Roboto. Grilla de 8 puntos para márgenes, paddings y gaps.</p>
+    </div>
+    <div class="intro-card">
+      <i class="icon icon-squares-four icon-24 intro-card-icon" aria-hidden="true"></i>
+      <h3 class="mp-h6">Componentes</h3>
+      <p class="mp-body-m">Botones, inputs, badges y más. Cada componente incluye preview en vivo y sus estados documentados.</p>
+    </div>
+    <div class="intro-card">
+      <i class="icon icon-article icon-24 intro-card-icon" aria-hidden="true"></i>
+      <h3 class="mp-h6">Código listo para usar</h3>
+      <p class="mp-body-m">Snippets en CSS/Twig para Drupal y en SCSS/HTML/TS para Angular. Con botón de copia directo.</p>
+    </div>
+    <div class="intro-card">
+      <i class="icon icon-circle-half icon-24 intro-card-icon" aria-hidden="true"></i>
+      <h3 class="mp-h6">Light · Dark · Alto contraste</h3>
+      <p class="mp-body-m">Todos los componentes se pueden previsualizar en los tres modos desde el toggle en el header.</p>
+    </div>
+    <div class="intro-card">
+      <i class="icon icon-target icon-24 intro-card-icon" aria-hidden="true"></i>
+      <h3 class="mp-h6">Fuente única de verdad</h3>
+      <p class="mp-body-m">Sincronizado con Figma. Cualquier actualización al sistema se refleja aquí primero.</p>
+    </div>
+  </div>
+
+  <!-- ── Descargas ──────────────────────────────────────────── -->
+  <div class="intro-dl-title mp-h6">
+    <i class="icon icon-download icon-16" aria-hidden="true"></i>
+    Descargas
+  </div>
+
+  <div class="intro-dl-grid">
+
+    <!-- Card 1: themes.css -->
+    <div class="intro-dl-card">
+      <div class="intro-dl-card__top">
+        <div class="intro-dl-card__icon-wrap intro-dl-card__icon-wrap--tokens">
+          <i class="icon icon-palette icon-24" aria-hidden="true"></i>
+        </div>
+        <div class="intro-dl-card__meta">
+          <h3 class="intro-dl-card__name mp-h6">tokens.css</h3>
+          <span class="intro-dl-card__size">~19 KB</span>
+        </div>
+      </div>
+      <p class="intro-dl-card__desc mp-body-s">
+        Solo las variables CSS (custom properties). Incluye los tres temas: <strong>Light</strong>, <strong>Dark</strong> y <strong>Alto contraste</strong>. Ideal para integrar el sistema de tokens en un proyecto que ya tiene sus propios componentes.
+      </p>
+      <div class="intro-dl-card__tags">
+        <span class="intro-dl-tag intro-dl-tag--light">☀ Light</span>
+        <span class="intro-dl-tag intro-dl-tag--dark">🌙 Dark</span>
+        <span class="intro-dl-tag intro-dl-tag--hc">◑ High contrast</span>
+      </div>
+      <div class="intro-dl-card__footer">
+        <a class="mp-btn mp-btn--primario mp-btn--icon-left btn-block" href="css/themes.css" download="compensar-tokens.css">
+          <i class="icon icon-download icon-20" aria-hidden="true"></i>
+          Descargar tokens.css
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2: core.css -->
+    <div class="intro-dl-card">
+      <div class="intro-dl-card__top">
+        <div class="intro-dl-card__icon-wrap intro-dl-card__icon-wrap--core">
+          <i class="icon icon-stack icon-24" aria-hidden="true"></i>
+        </div>
+        <div class="intro-dl-card__meta">
+          <h3 class="intro-dl-card__name mp-h6">core.css</h3>
+          <span class="intro-dl-card__size">~372 KB</span>
+        </div>
+      </div>
+      <p class="intro-dl-card__desc mp-body-s">
+        El sistema completo: tokens, componentes (.mp-accordion, .mp-button…), utilidades y Bootstrap overrides. Incluye todos los temas. Requiere solo este archivo para una integración completa.
+      </p>
+      <div class="intro-dl-card__tags">
+        <span class="intro-dl-tag">Tokens</span>
+        <span class="intro-dl-tag">Componentes</span>
+        <span class="intro-dl-tag">Bootstrap</span>
+        <span class="intro-dl-tag">Utilidades</span>
+      </div>
+      <div class="intro-dl-card__footer">
+        <a class="mp-btn mp-btn--primario mp-btn--icon-left btn-block" href="css/core.css" download="compensar-core.css">
+          <i class="icon icon-download icon-20" aria-hidden="true"></i>
+          Descargar core.css
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3: Uso CDN / link -->
+    <div class="intro-dl-card intro-dl-card--code">
+      <div class="intro-dl-card__top">
+        <div class="intro-dl-card__icon-wrap intro-dl-card__icon-wrap--code">
+          <i class="icon icon-code icon-24" aria-hidden="true"></i>
+        </div>
+        <div class="intro-dl-card__meta">
+          <h3 class="intro-dl-card__name mp-h6">Integración</h3>
+          <span class="intro-dl-card__size">Guía rápida</span>
+        </div>
+      </div>
+      <p class="intro-dl-card__desc mp-body-s">Agrega el archivo descargado a tu proyecto e inicializa el tema con el atributo <code>data-theme</code>:</p>
+      <pre class="intro-dl-code"><code>&lt;!-- En tu &lt;head&gt; --&gt;
+&lt;link rel="stylesheet" href="compensar-core.css"&gt;
+
+&lt;!-- En &lt;html&gt; o cualquier contenedor --&gt;
+&lt;html data-theme="light"&gt;
+&lt;!-- "dark" | "high-contrast" --&gt;</code></pre>
+      <div class="intro-dl-card__footer">
+        <button class="mp-btn mp-btn--secundario mp-btn--icon-left btn-block" onclick="introCopySnippet(this)">
+          <i class="icon icon-copy icon-20" aria-hidden="true"></i>
+          Copiar snippet
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <!-- /Descargas -->
+
+  <!-- Cómo usar -->
+  <div class="intro-how">
+    <div class="intro-how-title mp-h6">
+      <i class="icon icon-question icon-20" aria-hidden="true"></i>
+      ¿Cómo usar este documento?
+    </div>
+    <div class="intro-how-steps">
+      <div class="intro-step">
+        <div class="intro-step-num">01</div>
+        <div>
+          <strong>Importa los tokens</strong>
+          <p class="mp-body-m">Incluye <code>core.css</code> en tu proyecto antes de los estilos propios de tu producto.</p>
+        </div>
+      </div>
+      <div class="intro-step">
+        <div class="intro-step-num">02</div>
+        <div>
+          <strong>Consulta el componente</strong>
+          <p class="mp-body-m">Busca el componente en el sidebar, revisa el preview y copia el código de tu tecnología.</p>
+        </div>
+      </div>
+      <div class="intro-step">
+        <div class="intro-step-num">03</div>
+        <div>
+          <strong>Usa siempre tokens</strong>
+          <p class="mp-body-m">Nunca uses valores hex directos. Usa <code>var(--use-primary-default)</code> para que los modos funcionen solos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ——— INTRO HERO ————————————————————————————————————————— */
+.intro-hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-8);
+  align-items: center;
+  background: var(--use-surface-theme-gray-5);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+  overflow: hidden;
+  position: relative;
+}
+
+.intro-version-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  background: var(--ui-tag-bg);
+  color: var(--ui-accent);
+  font-weight: 700;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+}
+
+.intro-version-badge .icon { color: var(--ui-accent); }
+
+.intro-title {
+  color: var(--ui-text);
+  line-height: 1.1;
+  margin-bottom: var(--space-2);
+}
+
+.intro-subtitle {
+  color: var(--ui-accent);
+  margin-bottom: var(--space-4);
+}
+
+.intro-desc {
+  color: var(--ui-text-muted);
+  max-width: 520px;
+  margin-bottom: var(--space-24);
+}
+
+.intro-tech-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.intro-tech {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  background: var(--ui-surface-alt);
+  border: 1px solid var(--ui-border);
+  color: var(--ui-text);
+  font-weight: 600;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-xs);
+}
+
+.intro-tech .icon { color: var(--ui-accent); }
+
+/* — Visual decoration */
+.intro-hero-visual {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+}
+
+.intro-visual-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid var(--base-brand-80);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: .15;
+}
+
+.ring-1 { width: 80px; height: 80px; opacity: .35; }
+.ring-2 { width: 120px; height: 120px; opacity: .2; }
+.ring-3 { width: 160px; height: 160px; opacity: .1; }
+
+.intro-visual-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: var(--base-brand-80);
+  opacity: .6;
+}
+
+/* ——— OBJECTIVE ————————————————————————————————————————— */
+.intro-objective {
+  display: flex;
+  gap: var(--space-24);
+  background: var(--use-surface-theme-gray-5);
+  border: 1px solid var(--ui-border);
+  border-left: 4px solid var(--base-brand-80);
+  border-radius: var(--radius-xs);
+  padding: var(--space-24) var(--space-32);
+  margin-bottom: var(--space-8);
+  align-items: flex-start;
+}
+
+.intro-objective-icon {
+  width: var(--space-40); height: var(--space-40);
+  background: var(--ui-tag-bg);
+  border-radius: var(--radius-xs);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.intro-objective-icon .icon { color: var(--ui-accent); }
+
+.intro-objective-title {
+  color: var(--ui-text);
+  margin-bottom: var(--space-2);
+}
+
+.intro-objective-text {
+  color: var(--ui-text-muted);
+}
+
+.intro-objective-text strong { color: var(--ui-text); }
+
+/* ——— CARDS ————————————————————————————————————————————— */
+.intro-cards-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.intro-cards-title .icon { color: var(--ui-accent); }
+
+.intro-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.intro-card {
+  background: var(--use-surface-theme-gray-5);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-xs);
+  padding: var(--space-24);
+  transition: box-shadow .15s, transform .15s;
+}
+
+.intro-card:hover { box-shadow: var(--elevation-2); transform: translateY(-2px); }
+
+.intro-card-icon {
+  color: var(--ui-accent);
+  margin-bottom: var(--space-8);
+  display: block;
+}
+
+.intro-card h3 {
+  color: var(--ui-text);
+  margin-bottom: var(--space-2);
+}
+
+.intro-card p {
+  color: var(--ui-text-muted);
+}
+
+/* ——— HOW TO USE ————————————————————————————————————————— */
+.intro-how {
+  background: var(--use-surface-theme-gray-5);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-xs);
+  padding: var(--space-32);
+}
+
+.intro-how-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  color: var(--ui-text);
+  margin-bottom: var(--space-24);
+}
+
+.intro-how-title .icon { color: var(--ui-accent); }
+
+.intro-how-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.intro-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.intro-step-num {
+  color: var(--ui-accent);
+  opacity: .5;
+  flex-shrink: 0;
+  width: var(--space-40);
+}
+
+.intro-step strong {
+  display: block;
+  color: var(--ui-text);
+  margin-bottom: var(--space-8);
+}
+
+.intro-step p {
+  color: var(--ui-text-muted);
+}
+
+.intro-step code {
+  font-family: var(--font-code);
+  background: var(--ui-surface-alt);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-none);
+  color: var(--ui-accent);
+}
+
+/* ——— PORTAL POLISH OVERRIDES ——————————————————————————— */
+.intro-hero {
+  max-width: 1100px;
+  min-height: 444px;
+  gap: var(--space-56);
+  border-radius: var(--radius-sm);
+  padding: var(--space-64);
+  margin-bottom: var(--space-64);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--ui-text) 5%, transparent);
+}
+
+.intro-version-badge {
+  padding: var(--space-8) var(--space-16);
+  margin-bottom: var(--space-16);
+}
+
+.intro-title {
+  max-width: 560px;
+  line-height: 1.04;
+  letter-spacing: 0;
+  margin-bottom: var(--space-8);
+}
+
+.intro-subtitle {
+  color: var(--use-primary-default);
+  margin-bottom: var(--space-24);
+}
+
+.intro-desc {
+  max-width: 570px;
+  margin-bottom: var(--space-32);
+}
+
+.intro-tech-badges {
+  gap: var(--space-8);
+}
+
+.intro-tech {
+  min-height: 34px;
+  border-radius: var(--radius-xs);
+  padding: 0 var(--space-16);
+}
+
+.intro-hero-visual {
+  width: 180px;
+  height: 180px;
+  margin-right: var(--space-16);
+}
+
+.ring-1 { width: 92px; height: 92px; }
+.ring-2 { width: 136px; height: 136px; }
+.ring-3 { width: 180px; height: 180px; }
+
+.intro-visual-icon {
+  font-size: 50px;
+}
+
+.intro-objective {
+  max-width: 1100px;
+  gap: var(--space-24);
+  border-left-width: 4px;
+  border-radius: var(--radius-xs);
+  padding: var(--space-24) var(--space-32);
+  margin-bottom: var(--space-64);
+}
+
+.intro-objective-icon {
+  width: var(--space-40);
+  height: var(--space-40);
+  border-radius: var(--radius-xs);
+}
+
+.intro-objective-title {
+  margin-bottom: var(--space-8);
+}
+
+
+
+.intro-cards-title {
+  max-width: 1100px;
+  margin-bottom: var(--space-16);
+}
+
+.intro-cards {
+  max-width: 1100px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-16);
+  margin-bottom: var(--space-64);
+}
+
+.intro-card {
+  min-height: 176px;
+  border-radius: var(--radius-xs);
+  padding: var(--space-24);
+}
+
+.intro-card-icon {
+  margin-bottom: var(--space-16);
+}
+
+.intro-card h3 {
+  margin-bottom: var(--space-8);
+}
+
+
+
+.intro-how {
+  max-width: 1100px;
+  border-radius: var(--radius-xs);
+  padding: var(--space-32);
+}
+
+@media (max-width: 1180px) {
+  .intro-hero,
+  .intro-objective,
+  .intro-cards,
+  .intro-cards-title,
+  .intro-how {
+    max-width: none;
+  }
+
+  .intro-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .intro-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: var(--space-32) var(--space-24);
+    gap: var(--space-32);
+  }
+
+  .intro-hero-visual {
+    justify-self: center;
+    margin-right: 0;
+  }
+
+  .intro-objective {
+    padding: var(--space-24);
+  }
+
+  .intro-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ——— DESCARGAS ————————————————————————————————————————————— */
+.intro-dl-title {
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+  margin-bottom: var(--space-16);
+}
+
+.intro-dl-title .icon { color: var(--ui-accent); }
+
+.intro-dl-grid {
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-16);
+  margin-bottom: var(--space-64);
+}
+
+.intro-dl-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  background: var(--use-surface-theme-gray-5);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--radius-xs);
+  padding: var(--space-24);
+}
+
+.intro-dl-card__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.intro-dl-card__icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.intro-dl-card__icon-wrap--tokens {
+  background: color-mix(in srgb, var(--use-primary-default) 12%, transparent);
+  color: var(--use-primary-default);
+}
+
+.intro-dl-card__icon-wrap--core {
+  background: color-mix(in srgb, var(--base-brand-80) 15%, transparent);
+  color: var(--base-brand-80);
+}
+
+.intro-dl-card__icon-wrap--code {
+  background: color-mix(in srgb, var(--ui-text) 8%, transparent);
+  color: var(--ui-text-muted);
+}
+
+.intro-dl-card__icon-wrap .icon { color: inherit; }
+
+.intro-dl-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.intro-dl-card__name {
+  color: var(--ui-text);
+  margin: 0;
+  font-family: var(--font-code, 'Roboto Mono', monospace);
+  font-size: 15px;
+}
+
+.intro-dl-card__size {
+  font-size: 12px;
+  color: var(--ui-text-muted);
+  font-weight: 500;
+}
+
+.intro-dl-card__desc {
+  color: var(--ui-text-muted);
+  flex: 1;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.intro-dl-card__desc strong { color: var(--ui-text); }
+
+.intro-dl-card__desc code {
+  font-family: var(--font-code, 'Roboto Mono', monospace);
+  font-size: 12px;
+  background: var(--ui-surface-alt);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--ui-accent);
+}
+
+.intro-dl-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.intro-dl-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-alt);
+  color: var(--ui-text-muted);
+}
+
+.intro-dl-tag--light {
+  background: #fffbf5;
+  border-color: #ffd6a0;
+  color: #b85c00;
+}
+
+.intro-dl-tag--dark {
+  background: #1f1f2e;
+  border-color: #44447a;
+  color: #aaaaee;
+}
+
+.intro-dl-tag--hc {
+  background: #000;
+  border-color: #fff;
+  color: #fff;
+}
+
+.intro-dl-card__footer {
+  margin-top: auto;
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--ui-border);
+}
+
+.intro-dl-code {
+  background: var(--ui-text);
+  color: var(--ui-bg);
+  border-radius: var(--radius-xs);
+  padding: var(--space-16);
+  font-size: 12px;
+  font-family: var(--font-code, 'Roboto Mono', monospace);
+  line-height: 1.7;
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre;
+  flex: 1;
+}
+
+@media (max-width: 1180px) {
+  .intro-dl-grid, .intro-dl-title { max-width: none; }
+  .intro-dl-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .intro-dl-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+function introCopySnippet(btn) {
+  var snippet = '<link rel="stylesheet" href="compensar-core.css">\n\n<html data-theme="light">\n<!-- "dark" | "high-contrast" -->';
+  navigator.clipboard.writeText(snippet).then(function() {
+    var orig = btn.innerHTML;
+    btn.innerHTML = '<i class="icon icon-check icon-20" aria-hidden="true"></i> ¡Copiado!';
+    btn.classList.remove('mp-btn--secundario');
+    btn.classList.add('mp-btn--primario');
+    setTimeout(function() {
+      btn.innerHTML = orig;
+      btn.classList.remove('mp-btn--primario');
+      btn.classList.add('mp-btn--secundario');
+    }, 2000);
+  });
+}
+</script>

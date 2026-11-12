@@ -1,0 +1,151 @@
+[
+  {
+    "test": "theme",
+    "section": "alertas",
+    "theme": "light",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "alertas",
+    "theme": "dark",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "alertas",
+    "theme": "high-contrast",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "toast",
+    "theme": "light",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "toast",
+    "theme": "dark",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "toast",
+    "theme": "high-contrast",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "seleccion",
+    "theme": "light",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "seleccion",
+    "theme": "dark",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "seleccion",
+    "theme": "high-contrast",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "modales",
+    "theme": "light",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "modales",
+    "theme": "dark",
+    "overflow": false
+  },
+  {
+    "test": "theme",
+    "section": "modales",
+    "theme": "high-contrast",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 320,
+    "section": "alertas",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 320,
+    "section": "toast",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 320,
+    "section": "seleccion",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 320,
+    "section": "modales",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 768,
+    "section": "alertas",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 768,
+    "section": "toast",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 768,
+    "section": "seleccion",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 768,
+    "section": "modales",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 1440,
+    "section": "alertas",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 1440,
+    "section": "toast",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 1440,
+    "section": "seleccion",
+    "overflow": false
+  },
+  {
+    "test": "responsive",
+    "width": 1440,
+    "section": "modales",
+    "overflow": false
+  },
+  {
+    "test": "zoom200",
+    "section": "modales",
+    "overflow": false
+  }
+]

@@ -1,0 +1,215 @@
+/* ============================================================
+ * paso-2.css — Estilos del PASO 2 "Datos del contratante" (Proceso de afiliación)
+ * ------------------------------------------------------------
+ * Nivel 4 de la cascada:
+ *   Design System (vendor/core.css) → shell ZT (zt.css) → componentes
+ *   transversales (stepper, dropdown, form-error) → ESTE archivo.
+ *
+ * Comparte con el Paso 1 la composición del proceso (layout 2 columnas,
+ * resumen del candidato, card, readonly, CTA) — misma estructura visual del
+ * Figma para ambos pasos. Aquí se suma lo propio del Paso 2:
+ *   - secciones A/B/C/D con título y divisor
+ *   - grilla de campos en 2 columnas con celda "spacer" para filas impares
+ * Los componentes (inputs, dropdown, stepper, errores, botones) son del DS
+ * (.mp-*) o transversales ZT (.zt-*). Token-first: sin hex ni medidas mágicas.
+ * ============================================================ */
+
+/* ═══════════════ LAYOUT DEL PROCESO ═══════════════ */
+/* Figma: panel 280px + card 800px, alineados arriba. */
+.pa-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12, 0.75rem);
+  width: 100%;
+  margin-top: var(--space-24);
+}
+
+/* Panel izquierdo (resumen del candidato + stepper). Contenedor transparente:
+   el resumen (Person Summary compact) es su propia card violeta y el stepper va
+   debajo, separados por un gap. */
+.pa-side {
+  flex: 0 0 280px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12, 0.75rem);
+}
+
+/* ═══════════════ CARD DEL PASO ═══════════════ */
+/* Figma: white, border subtle, radius 12, padding 24, gap 24. */
+.pa-card {
+  flex: 1 1 800px;
+  max-width: 800px;
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-12, 0.75rem);
+  padding: 28px var(--space-24) var(--space-32);
+}
+.pa-card > form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+/* Encabezado: badge PASO 2 DE 8 + título */
+.pa-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+.pa-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-radius: 4px;              /* Figma badge = 4px (no hay token 4px en el DS) */
+  background: var(--use-surface-violet, #efecf9);
+  color: var(--use-text-theme-violet, #4e3199);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.pa-card__title {
+  margin: 0;
+  font-size: 24px;                 /* heading/h5 */
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+
+/* ═══════════════ SECCIONES A/B/C ═══════════════ */
+/* Cada sección: título 18px bold + divisor superior sutil (Figma), que ayuda a
+   la lectura entre secciones. */
+.pa-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  padding-top: var(--space-24);
+  border-top: 1px solid var(--use-border-subtle, #e0e0e0);
+}
+/* Primera sección (tras el Person Summary): SIN divisor ni padding superior.
+   La separación con el resumen la da el `gap` del form (token del sistema),
+   de modo que el paso respira sin una línea extra. */
+.pa-section--first {
+  padding-top: 0;
+  border-top: 0;
+}
+.pa-section__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+
+/* ═══════════════ FILAS DE CAMPOS (2 columnas) ═══════════════ */
+/* Dos columnas EXACTAMENTE iguales (grid minmax(0,1fr) — no shrink por contenido).
+   Cada campo ocupa el 100% de su columna. Colapsan a una en pantallas angostas. */
+.pa-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24);
+  width: 100%;
+  align-items: start;              /* mensajes de error no descuadran la fila */
+}
+.pa-row > .mp-input-group { min-width: 0; }
+
+/* El campo y el trigger del Date Field ocupan todo el ancho de su columna. */
+.pa-row .mp-input-field,
+.pa-row .zt-datefield,
+.pa-row .zt-datefield__trigger { width: 100%; }
+
+/* Celda vacía que preserva la grilla 2col en filas impares (p. ej. País). */
+.pa-col-spacer { visibility: hidden; }
+
+/* ═══════════════ DATOS DEL DOCUMENTO (no editables) ═══════════════ */
+/* Se presentan como INFORMACIÓN (etiqueta arriba, valor abajo), no como inputs
+   deshabilitados: sin bordes por campo, sin carets, sin gris de "inactivo".
+   Un solo contenedor suave agrupa los 6 datos en 3 columnas → menos ruido. */
+.pa-facts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  margin-bottom: var(--space-24);
+  padding: var(--space-16) var(--space-20, 1.25rem);
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  border-radius: var(--radius-xs, 0.5rem);
+}
+.pa-facts__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: 0;
+  font-size: var(--font-size-sm, 0.75rem);
+  font-weight: var(--font-weight-semibold, 600);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--use-text-tertiary, #666);
+}
+.pa-facts__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-16) var(--space-24);
+  margin: 0;
+}
+.pa-facts__item { min-width: 0; }
+.pa-facts__item dt {
+  margin: 0 0 2px;
+  font-size: var(--font-size-md, 0.875rem);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.3;
+  color: var(--use-text-tertiary, #666);
+}
+.pa-facts__item dd {
+  margin: 0;
+  font-size: var(--font-size-lg, 1rem);
+  font-weight: var(--font-weight-medium, 500);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+  overflow-wrap: anywhere;
+}
+
+/* ═══════════════ CAMPOS READ ONLY (identificación + edad) ═══════════════ */
+/* Datos que vienen del candidato / se calculan: no editables. Los colores del
+   estado readonly (superficie, texto, borde, sin hover/foco de edición) los
+   aplica el Design System vía `.mp-input-field[readonly]` — los MISMOS colores
+   que usa el Paso 1. La variante con caret (`.pa-readonly--select`) vive en el
+   componente transversal readonly-field.css. Aquí NO se redefinen para que todos
+   los campos readonly del flujo compartan el mismo tratamiento. */
+
+/* ═══════════════ CTA ═══════════════ */
+/* Atrás (izquierda) + Guardar y continuar (derecha). */
+.pa-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+  margin-top: var(--space-4);
+}
+.pa-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+/* Tablet: el panel deja de ser columna fija; resumen + stepper arriba, card abajo. */
+@media (max-width: 900px) {
+  .pa-layout { flex-direction: column; }
+  .pa-side { flex: 1 1 auto; width: 100%; }
+  .pa-card { flex: 1 1 auto; max-width: 100%; width: 100%; }
+}
+
+/* Mobile: filas de 2 columnas colapsan a una; confirmaciones quedan debajo de
+   su campo; sin overflow horizontal. La celda spacer se oculta por completo. */
+@media (max-width: 680px) {
+  .pa-row { grid-template-columns: 1fr; gap: var(--space-16); }
+  .pa-col-spacer { display: none; }
+  .pa-facts__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pa-cta { flex-direction: column-reverse; align-items: stretch; }
+  .pa-cta .mp-btn { width: 100%; justify-content: center; }
+}
+
+/* Campo que ocupa toda la fila (p. ej. Dirección, sin "Confirmar dirección") */
+.pa-row > .pa-col-full { grid-column: 1 / -1; }

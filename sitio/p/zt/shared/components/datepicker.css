@@ -1,0 +1,312 @@
+/* ============================================================
+ * datepicker.css — Componente transversal ZT "Date Picker / Calendar"
+ * ------------------------------------------------------------
+ * Calendario reutilizable para TODOS los campos de fecha de ZT.
+ * Visual = Figma "mp_modal" (node 199:10483). Semántica = date picker
+ * accesible (role=dialog + grid de fechas con role=grid/gridcell).
+ *
+ * Cascada: Design System (core.css) → zt.css → ESTE archivo → CSS del flujo.
+ * No hardcodea valores que ya existan como token del sistema.
+ *
+ * ESTRUCTURA
+ *   .zt-datefield            posicionador del campo (trigger + popover)
+ *     .zt-datefield__trigger  campo con apariencia .mp-input-field + icono
+ *   .zt-datepicker           contenedor del calendario (modal/popover)
+ *     .zt-datepicker__head    título "Seleccione una fecha" + cerrar (X 32px)
+ *     .zt-datepicker__nav     < mes año >
+ *     .zt-datepicker__weekdays D L M M J V S
+ *     .zt-datepicker__grid     grid 7 columnas de días (40×40)
+ *     .zt-datepicker__footer   botón "Aplicar" (DS .mp-btn--primario)
+ * ============================================================ */
+
+/* ─────────── CAMPO (trigger) ───────────
+ * Reutiliza la apariencia del campo del DS (.mp-input-field). El icono de
+ * calendario es parte del trigger; toda el área abre el Date Picker. */
+/* El Date Field ocupa el ancho de su contenedor (grid/formulario) por defecto.
+   No impone ancho fijo: se adapta al padre. */
+.zt-datefield { position: relative; width: 100%; }
+
+.zt-datefield__trigger {
+  /* Hereda el look de .mp-input-field (se añade en el markup). Solo ajustamos
+     el layout para alojar el icono a la derecha sin recortar el texto. */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  background: var(--use-surface-white, #fff);
+}
+.zt-datefield__trigger:disabled { cursor: not-allowed; }
+
+.zt-datefield__value { flex: 1 0 0; min-width: 0; }
+.zt-datefield__value.is-placeholder { color: var(--use-text-tertiary, #a4a4a4); }
+
+.zt-datefield__icon {
+  flex-shrink: 0;
+  color: var(--use-text-secondary, #7f7f7f);
+  pointer-events: none;
+}
+
+/* Campo readonly (p. ej. fecha de vigencia): apariencia de campo pero sin
+   interacción de calendario. Mantiene el estilo del sistema (.mp-input-field /
+   .pa-readonly del flujo) y oculta el icono para no sugerir apertura. */
+.zt-datefield--readonly .zt-datefield__trigger { cursor: default; }
+.zt-datefield--readonly .zt-datefield__icon { display: none; }
+
+/* Estado de error (patrón Form Error): borde de error en el trigger. */
+.zt-datefield.error .zt-datefield__trigger {
+  border-color: var(--use-state-error-border, #d92d20);
+}
+
+/* ─────────── OVERLAY (modal en mobile / bloqueo de fondo) ───────────
+ * En desktop el calendario se ancla al campo (popover). En pantallas
+ * estrechas se centra como modal sobre un overlay para no salir del viewport. */
+.zt-datepicker-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;                 /* se activa solo en modo modal */
+  background: var(--mp-modal-overlay, rgba(17, 17, 17, .30));
+}
+.zt-datepicker-overlay.is-modal { display: block; }
+
+/* ─────────── CONTENEDOR DEL CALENDARIO ───────────
+ * Figma: bg white, border 1px default, radius 12, padding 24, gap 24,
+ * shadow 1 (2px 5px 16px rgba(0,0,0,.15)). */
+.zt-datepicker {
+  position: fixed;               /* popover: posicionado por JS respecto al viewport */
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-24, 1.5rem);
+  /* Ancho controlado: no hereda el 100% del formulario ni crece con el padre.
+     376 = 24 (pad) + 7×40 (celdas) + 6×8 (gap) + 24 (pad) → la grilla cabe sin
+     desborde horizontal. */
+  width: 376px;
+  max-width: calc(100vw - 32px); /* margen seguro a los bordes (16px por lado) */
+  padding: var(--space-24, 1.5rem);
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-default, #7f7f7f);
+  border-radius: var(--radius-12, .75rem);
+  box-shadow: 2px 5px 16px rgba(0, 0, 0, .15);   /* shadow 1 (Figma) */
+  overflow: hidden;              /* el scroll, si hace falta, va en el cuerpo */
+}
+.zt-datepicker[hidden] { display: none; }
+
+/* Si el JS aplica un max-height (viewport justo), el cuerpo hace scroll y el
+   pie "Aplicar" queda visible (no se empuja fuera del viewport). */
+.zt-datepicker__body {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;            /* nunca scroll horizontal dentro del calendario */
+  overscroll-behavior: contain;
+}
+
+/* Modo modal (mobile / sin espacio arriba-abajo): centrado en el viewport. */
+.zt-datepicker.is-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -50%);
+  width: min(336px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+}
+
+/* ─────────── CABECERA ───────────
+ * "Seleccione una fecha" (Roboto Bold 18px, text primary) + X (32×32). */
+.zt-datepicker__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: 100%;
+  flex-shrink: 0;                /* la cabecera no se comprime si el cuerpo scrollea */
+}
+.zt-datepicker__title {
+  flex: 1 0 0;
+  min-width: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--font-size-xl, 1.125rem);         /* 18px */
+  font-weight: var(--font-weight-bold, 700);
+  line-height: var(--line-height-normal, 1.3);
+  color: var(--use-text-primary, #111);
+}
+.zt-datepicker__close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full, 999px);
+  background: transparent;
+  color: var(--use-text-primary, #111);
+  cursor: pointer;
+}
+.zt-datepicker__close:hover { background: var(--use-surface-theme-orange-20, #fff2e8); }
+.zt-datepicker__close:focus-visible {
+  outline: 2px solid var(--use-focus-outline, #ff6600);
+  outline-offset: 2px;
+}
+
+/* ─────────── NAVEGACIÓN DEL MES ───────────
+ * < Enero 2026 > — chevrons 20px, mes/año Roboto Regular 18px text primary. */
+.zt-datepicker__nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.zt-datepicker__navbtn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full, 999px);
+  background: transparent;
+  color: var(--use-text-primary, #111);
+  cursor: pointer;
+}
+.zt-datepicker__navbtn:hover { background: var(--use-surface-theme-orange-20, #fff2e8); }
+.zt-datepicker__navbtn:focus-visible {
+  outline: 2px solid var(--use-focus-outline, #ff6600);
+  outline-offset: 2px;
+}
+.zt-datepicker__month {
+  flex: 1 0 0;
+  min-width: 0;
+  padding: var(--space-8) var(--space-4);
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--font-size-xl, 1.125rem);         /* 18px */
+  font-weight: var(--font-weight-regular, 400);
+  line-height: var(--line-height-normal, 1.3);
+  color: var(--use-text-primary, #111);
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* ─────────── DÍAS DE LA SEMANA ───────────
+ * D L M M J V S — Roboto Regular 16px text secondary, alineados a la grilla. */
+.zt-datepicker__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 40px);
+  column-gap: var(--space-8, 8px);
+  justify-content: center;
+  width: 100%;
+}
+.zt-datepicker__weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--font-size-lg, 1rem);             /* 16px */
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1;
+  letter-spacing: .012em;
+  color: var(--use-text-secondary, #7f7f7f);
+  text-align: center;
+}
+
+/* ─────────── GRID DE FECHAS ───────────
+ * 7 columnas, cada celda 40×40. CSS Grid (no posiciones absolutas). */
+.zt-datepicker__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 40px);
+  column-gap: var(--space-8, 8px);
+  row-gap: var(--space-8, 8px);
+  justify-content: center;
+  width: 100%;
+}
+
+/* Celda de día — 40×40, número centrado, círculo (radius full). */
+.zt-datepicker__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-full, 999px);
+  background: transparent;
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--font-size-xl, 1.125rem);         /* 18px */
+  font-weight: var(--font-weight-regular, 400);
+  line-height: var(--line-height-normal, 1.3);
+  color: var(--use-text-primary, #111);             /* DEFAULT: día del mes actual */
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Días fuera del mes (mes anterior/siguiente): tratamiento secundario/terciario. */
+.zt-datepicker__day--outside { color: var(--use-text-tertiary, #a4a4a4); }
+
+/* HOVER sutil (sin competir con selected). */
+.zt-datepicker__day:not(.is-selected):not(:disabled):hover {
+  background: var(--use-surface-theme-orange-20, #fff2e8);
+}
+
+/* FOCUS visible (teclado). */
+.zt-datepicker__day:focus-visible {
+  outline: 2px solid var(--use-focus-outline, #ff6600);
+  outline-offset: -2px;
+}
+
+/* SELECCIONADA — círculo naranja 40px, texto blanco. Siempre más fuerte que hover. */
+.zt-datepicker__day.is-selected,
+.zt-datepicker__day.is-selected:hover {
+  background: var(--use-primary-default, #ff6600);
+  color: var(--use-text-on-dark-primary, #fff);
+  font-weight: var(--font-weight-bold, 700);
+}
+
+/* DISABLED — no clicable, sin hover, color terciario/disabled. */
+.zt-datepicker__day:disabled {
+  color: var(--base-neutral-50, #a4a4a4);
+  cursor: not-allowed;
+  background: transparent;
+}
+.zt-datepicker__day--outside:disabled { color: var(--base-neutral-50, #a4a4a4); }
+
+/* ─────────── PIE (botón Aplicar) ───────────
+ * Reutiliza el botón primario del DS (.mp-btn--primario). Solo centramos. */
+.zt-datepicker__footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-shrink: 0;                /* "Aplicar" siempre visible (no se empuja fuera) */
+}
+.zt-datepicker__apply { min-width: 160px; }
+
+/* ─────────── RESPONSIVE ───────────
+ * En pantallas estrechas (≤600px) el JS activa el modo modal (centrado +
+ * overlay). El calendario ocupa el ancho disponible con margen seguro y hace
+ * scroll interno solo si realmente hace falta; sin scroll horizontal. */
+@media (max-width: 600px) {
+  .zt-datepicker.is-modal {
+    width: calc(100vw - 32px);
+    max-height: calc(100vh - 32px);
+  }
+  /* La grilla usa 7 columnas fijas de 40px + gap 16 en desktop. En pantallas
+     muy angostas pasamos a 7 columnas flexibles (1fr) con gap menor para que
+     quepan sin overflow horizontal; la celda circular se centra en su columna. */
+  .zt-datepicker { padding: var(--space-16, 1rem); }
+  .zt-datepicker__weekdays,
+  .zt-datepicker__grid {
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: var(--space-4, 4px);
+    width: 100%;
+  }
+  .zt-datepicker__day,
+  .zt-datepicker__weekday { margin: 0 auto; }   /* centra el círculo 40px en su celda */
+}

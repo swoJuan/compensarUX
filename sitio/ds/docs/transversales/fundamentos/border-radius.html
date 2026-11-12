@@ -1,0 +1,567 @@
+<section class="section" id="border-radius">
+  <div class="section-header">
+    <div class="section-eyebrow">Fundamentos</div>
+    <h1 class="section-title">Border radius</h1>
+    <p class="section-desc">Define el nivel de redondeo aplicado a los componentes del sistema. El uso consistente del radio ayuda a mantener coherencia visual, identidad de producto y uniformidad entre superficies y componentes.</p>
+    <p class="section-desc"><strong>El objetivo es:</strong> Coherencia visual, identidad y consistencia entre superficies</p>
+  </div>
+
+  <!-- ── Fila 1: Escala + Uso ──────────────────────────────── -->
+
+  <!-- DESCARGAS -->
+  <div class="ct-downloads">
+    <span class="ct-downloads-label"><span class="material-symbols-rounded">download</span> Descargar tokens</span>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="brDownloadCSS()"><span class="material-symbols-rounded">code</span> CSS</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="brDownloadSCSS()"><span class="material-symbols-rounded">code</span> SCSS</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="brDownloadJSON()"><span class="material-symbols-rounded">data_object</span> JSON</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="brCopyVars()"><span class="material-symbols-rounded">content_copy</span> Copiar variables</button>
+    <button class="mp-btn mp-btn--terciario mp-btn--icon-left" onclick="brDownloadMAUI()"><span class="material-symbols-rounded">smartphone</span> MAUI XAML</button>
+  </div>
+
+  <div class="br-two-col">
+
+    <!-- Escala recomendada -->
+    <div class="br-col">
+      <h2 class="br-subtitle">Escala recomendada</h2>
+      <p class="br-body">El sistema utiliza una escala simple de radios para evitar variaciones arbitrarias entre componentes.</p>
+
+      <div class="br-scale-table">
+        <div class="br-scale-header">
+          <span>border-radius</span>
+        </div>
+
+        <!-- radius-xs -->
+        <div class="br-scale-row" onclick="brCopy('--radius-xs', this)">
+          <div class="br-scale-cell-l">
+            <div class="br-preview br-preview--xs"></div>
+            <span class="br-token-name">radius-xs</span>
+          </div>
+          <div class="br-scale-cell-r">
+            <span class="br-px-val">0.5rem</span>
+            <button class="br-copy-btn" title="Copiar token">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- radius-sm -->
+        <div class="br-scale-row" onclick="brCopy('--radius-sm', this)">
+          <div class="br-scale-cell-l">
+            <div class="br-preview br-preview--sm"></div>
+            <span class="br-token-name">radius-sm</span>
+          </div>
+          <div class="br-scale-cell-r">
+            <span class="br-px-val">1rem</span>
+            <button class="br-copy-btn" title="Copiar token">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- radius-md -->
+        <div class="br-scale-row" onclick="brCopy('--radius-md', this)">
+          <div class="br-scale-cell-l">
+            <div class="br-preview br-preview--md"></div>
+            <span class="br-token-name">radius-md</span>
+          </div>
+          <div class="br-scale-cell-r">
+            <span class="br-px-val">1.5rem</span>
+            <button class="br-copy-btn" title="Copiar token">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- radius-lg -->
+        <div class="br-scale-row" onclick="brCopy('--radius-lg', this)">
+          <div class="br-scale-cell-l">
+            <div class="br-preview br-preview--lg"></div>
+            <span class="br-token-name">radius-lg</span>
+          </div>
+          <div class="br-scale-cell-r">
+            <span class="br-px-val">2rem</span>
+            <button class="br-copy-btn" title="Copiar token">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="br-body">Esta escala cubre la mayoría de los casos de uso dentro del sistema. Evitar valores intermedios fuera de esta escala.</p>
+    </div>
+
+    <!-- Uso recomendado -->
+    <div class="br-col">
+      <h2 class="br-subtitle">Uso recomendado</h2>
+      <p class="br-body">Cada nivel de radio corresponde a un tipo de componente específico.</p>
+      <h3 class="br-h3">Recomendaciones</h3>
+
+      <div class="br-use-table">
+        <div class="br-use-header">
+          <span class="br-use-th">Radio</span>
+          <span class="br-use-th">Uso</span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-px">0.5rem <small>(8px)</small></span>
+          <span class="br-use-desc">elementos pequeños, inputs compactos</span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-px">1rem <small>(16px)</small></span>
+          <span class="br-use-desc">botones, inputs, controles de formulario</span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-px">1.5rem <small>(24px)</small></span>
+          <span class="br-use-desc">cards, modales, contenedores principales</span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-px">2rem <small>(32px)</small></span>
+          <span class="br-use-desc">superficies grandes o componentes destacados</span>
+        </div>
+      </div>
+
+      <p class="br-body">Esto mantiene coherencia entre los distintos tipos de superficies.</p>
+    </div>
+  </div>
+
+  <div class="br-separator"></div>
+
+  <!-- ── Fila 2: Componentes comunes + Demo visual ─────────── -->
+  <div class="br-two-col">
+
+    <!-- Componentes comunes -->
+    <div class="br-col">
+      <h2 class="br-subtitle">Componentes comunes</h2>
+      <p class="br-body">Ejemplos de aplicación dentro del sistema:</p>
+
+      <div class="br-use-table">
+        <div class="br-use-header">
+          <span class="br-use-th">Componente</span>
+          <span class="br-use-th">Radio recomendado</span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-desc">Inputs</span>
+          <span class="br-use-px">1rem <small>(16px)</small></span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-desc">Botones</span>
+          <span class="br-use-px">1rem <small>(16px)</small></span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-desc">Cards</span>
+          <span class="br-use-px">1.5rem <small>(24px)</small></span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-desc">Modales</span>
+          <span class="br-use-px">1.5rem <small>(24px)</small></span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-desc">Chips</span>
+          <span class="br-use-px">2rem <small>(32px)</small></span>
+        </div>
+        <div class="br-use-row">
+          <span class="br-use-desc">Badges</span>
+          <span class="br-use-px">2rem <small>(32px)</small></span>
+        </div>
+      </div>
+
+      <p class="br-body">Esto mantiene coherencia entre los distintos tipos de superficies.</p>
+    </div>
+
+    <!-- Demo visual -->
+    <div class="br-col br-demo-col">
+
+      <!-- Input demo -->
+      <div class="br-demo-block">
+        <div class="br-demo-label-row">
+          <span class="br-mandatory">*</span>
+          <span class="br-field-label">Label</span>
+        </div>
+        <div class="br-input-demo">
+          <span class="br-placeholder">Placeholder</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <span class="br-support-text">Texto de apoyo</span>
+      </div>
+
+      <!-- Card demo -->
+      <div class="br-card-demo">
+        <div class="br-card-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.7"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="br-card-content">
+          <p class="br-card-title">Title Card</p>
+          <p class="br-card-body">In the quaint village of Eldoria, lived a baker named Elara. Her pastries were spaced with precision, each layer a testament to the perfect 8px unit.</p>
+        </div>
+      </div>
+
+      <!-- Chip demo -->
+      <div class="br-chip-demo">
+        <span class="br-chip">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Badge / Etiquetas de estado
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Reglas (alert warning) ────────────────────────────── -->
+  <div class="mp-alert mp-alert--warning" role="status">
+    <i class="icon icon-warning icon-32 mp-alert__icon" aria-hidden="true"></i>
+    <div class="mp-alert__content">
+      <p class="mp-alert__title">Reglas</p>
+      <div class="mp-alert__body">
+        <ul class="br-alert-list">
+          <li>No usar valores de radio arbitrarios.</li>
+          <li>Mantener consistencia dentro de un mismo componente.</li>
+          <li>Evitar radios diferentes dentro de un mismo bloque visual.</li>
+          <li>Priorizar radios moderados para interfaces transaccionales.</li>
+          <li>Mantener consistencia entre estados (default, hover, focus).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="br-separator"></div>
+
+  <!-- ── Accesibilidad ──────────────────────────────────────── -->
+  <div class="br-accessibility">
+    <div class="br-a11y-head">
+      <div class="br-a11y-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="1"/><path d="M12 22v-8"/><path d="M12 14l-4 4"/><path d="M12 14l4 4"/><path d="M8 10l-3 2"/><path d="M16 10l3 2"/><path d="M8 10h8"/></svg>
+      </div>
+      <h2 class="br-a11y-title">Accesibilidad</h2>
+    </div>
+    <p class="br-body">El radio no debe afectar la legibilidad ni la claridad visual de los componentes.</p>
+    <p class="br-body"><strong>Reglas generales:</strong></p>
+    <ul class="br-a11y-list">
+      <li>Evitar radios extremos en componentes críticos.</li>
+      <li>Mantener consistencia entre estados interactivos.</li>
+      <li>Asegurar que el radio no interfiera con el área táctil del componente.</li>
+    </ul>
+  </div>
+
+  <!-- ── Código ─────────────────────────────────────────────── -->
+  <div class="code-block">
+    <div class="code-tabs">
+      <button class="code-tab active" onclick="switchTab(this,'br-css')">CSS / Web</button>
+      <button class="code-tab" onclick="switchTab(this,'br-scss')">App (SCSS)</button>
+    </div>
+    <div class="code-content">
+      <button class="copy-btn" onclick="copyCode(this)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copiar
+      </button>
+      <pre class="active" id="br-css"><span class="cmt">/* Border radius tokens — Compensar */</span>
+
+<span class="cmt">/* Escala */</span>
+<span class="prop">--radius-xs</span>: <span class="val">0.5rem</span>;  <span class="cmt">/* 8px · Elementos pequeños, inputs compactos  */</span>
+<span class="prop">--radius-sm</span>: <span class="val">1rem</span>;    <span class="cmt">/* 16px · Botones, inputs, controles           */</span>
+<span class="prop">--radius-md</span>: <span class="val">1.5rem</span>;  <span class="cmt">/* 24px · Cards, modales, contenedores         */</span>
+<span class="prop">--radius-lg</span>: <span class="val">2rem</span>;    <span class="cmt">/* 32px · Chips, badges, superficies grandes   */</span>
+
+<span class="cmt">/* Uso */</span>
+<span class="sel">.btn</span>         { <span class="prop">border-radius</span>: <span class="val">var(--radius-sm)</span>; }  <span class="cmt">/* 1rem = 16px */</span>
+<span class="sel">.input</span>       { <span class="prop">border-radius</span>: <span class="val">var(--radius-sm)</span>; }  <span class="cmt">/* 1rem = 16px */</span>
+<span class="sel">.card</span>        { <span class="prop">border-radius</span>: <span class="val">var(--radius-md)</span>; }  <span class="cmt">/* 1.5rem = 24px */</span>
+<span class="sel">.modal</span>       { <span class="prop">border-radius</span>: <span class="val">var(--radius-md)</span>; }  <span class="cmt">/* 1.5rem = 24px */</span>
+<span class="sel">.chip, .badge</span>{ <span class="prop">border-radius</span>: <span class="val">var(--radius-lg)</span>; }  <span class="cmt">/* 2rem = 32px */</span></pre>
+      <pre id="br-scss"><span class="cmt">// Border radius — App (SCSS)</span>
+<span class="cmt">// Los tokens viven en :root como CSS custom props</span>
+
+<span class="sel">.cmp-button</span>  { <span class="prop">border-radius</span>: <span class="val">var(--radius-sm)</span>; }  <span class="cmt">// 1rem = 16px</span>
+<span class="sel">.cmp-input</span>   { <span class="prop">border-radius</span>: <span class="val">var(--radius-sm)</span>; }  <span class="cmt">// 1rem = 16px</span>
+<span class="sel">.cmp-card</span>    { <span class="prop">border-radius</span>: <span class="val">var(--radius-md)</span>; }  <span class="cmt">// 1.5rem = 24px</span>
+<span class="sel">.cmp-modal</span>   { <span class="prop">border-radius</span>: <span class="val">var(--radius-md)</span>; }  <span class="cmt">// 1.5rem = 24px</span>
+<span class="sel">.cmp-chip</span>,
+<span class="sel">.cmp-badge</span>   { <span class="prop">border-radius</span>: <span class="val">var(--radius-lg)</span>; }  <span class="cmt">// 2rem = 32px</span>
+
+<span class="cmt">// Nunca usar valores arbitrarios como border-radius: 10px</span></pre>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+(function() {
+  function brCopy(token, rowEl) {
+    navigator.clipboard.writeText('var(' + token + ')').then(function() {
+      var btn = rowEl.querySelector('.br-copy-btn');
+      if (btn) {
+        btn.classList.add('br-copied');
+        btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+        setTimeout(function() {
+          btn.classList.remove('br-copied');
+          btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        }, 1400);
+      }
+    });
+  }
+  window.brCopy = brCopy;
+  // ── Downloads ─────────────────────────────────────
+  var BR_TOKENS = [
+    { token: 'radius/xs', var: '--radius-xs', rem: '0.5rem', px: 8, cls: 'radius-xs', use: 'Elementos pequenos, inputs compactos, badges' },
+    { token: 'radius/sm', var: '--radius-sm', rem: '1rem', px: 16, cls: 'radius-sm', use: 'Botones, inputs, controles de formulario' },
+    { token: 'radius/md', var: '--radius-md', rem: '1.5rem', px: 24, cls: 'radius-md', use: 'Cards, modales, contenedores principales' },
+    { token: 'radius/lg', var: '--radius-lg', rem: '2rem', px: 32, cls: 'radius-lg', use: 'Superficies grandes, chips, badges prominentes' },
+  ];
+
+  function brTriggerDownload(content, filename, type) {
+    var blob = new Blob([content], { type: type });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  window.brDownloadCSS = function() {
+    var d = new Date().toISOString().split('T')[0];
+    var lines = [
+      '/* ════════════════════════════════════════════════════════════════════',
+      '   BORDER RADIUS TOKENS — Compensar Medicina Prepagada · Design System v2',
+      '   ────────────────────────────────────────────────────────────────────',
+      '   Fuente    : Figma · Compensar v2 – Sistema de diseño',
+      '   Generado  : ' + d,
+      '   Archivo   : radius-tokens.css',
+      '',
+      '   CONTENIDO',
+      '   ─────────',
+      '   1. Custom properties :root  — --radius-xs … --radius-full',
+      '   2. Clases utilitarias       — .radius-xs … .radius-full',
+      '   3. Variantes direccionales  — .radius-t-md, .radius-b-md, etc.',
+      '',
+      '   ESCALA',
+      '   ──────',
+      '   none  → 0rem (0px)      Sin redondeo (tablas, imagenes a sangre)',
+      '   xs    → 0.5rem (8px)    Badges, tooltips pequenos',
+      '   sm    → 1rem (16px)     Botones, inputs, controles',
+      '   md    → 1.5rem (24px)   Cards, modales',
+      '   lg    → 2rem (32px)     Superficies grandes, chips',
+      '   full  → 624.9375rem (9999px)    Pill — solo chips y tags',
+      '',
+      '   REGLA DE USO',
+      '   ────────────',
+      '   ✓  border-radius: var(--radius-md);',
+      '   ✓  class="radius-sm"',
+      '   ✗  border-radius: 1rem  ←  nunca valor hardcoded',
+      '',
+      '   INSTALACIÓN',
+      '   ───────────',
+      '   <link rel="stylesheet" href="radius-tokens.css">',
+      '   ════════════════════════════════════════════════════════════════════ */',
+      '',
+      '/* ─────────────────────────────────────────────────────────────────────',
+      '   1. CUSTOM PROPERTIES',
+      '   ──────────────────────────────────────────────────────────────────── */',
+      ':root {'
+    ];
+    BR_TOKENS.forEach(function(t) {
+      lines.push('  ' + t.var + ': ' + t.rem + ';  /* ' + t.px + 'px · ' + t.use + ' */');
+    });
+    lines.push('  --radius-full: 624.9375rem;  /* 9999px · Pill — solo para chips, tags, badges */');
+    lines.push('}');
+    lines.push('');
+    lines.push('/* ─────────────────────────────────────────────────────────────────────');
+    lines.push('   2. CLASES UTILITARIAS');
+    lines.push('   Ej: <div class="radius-md"> o <button class="radius-sm">');
+    lines.push('   ──────────────────────────────────────────────────────────────────── */');
+    BR_TOKENS.forEach(function(t) {
+      lines.push('.' + t.cls + ' { border-radius: var(' + t.var + '); }  /* ' + t.rem + ' = ' + t.px + 'px · ' + t.use + ' */');
+    });
+    lines.push('.radius-full { border-radius: var(--radius-full); }  /* 624.9375rem = 9999px · Pill */');
+    lines.push('');
+    lines.push('/* ─────────────────────────────────────────────────────────────────────');
+    lines.push('   3. VARIANTES DIRECCIONALES');
+    lines.push('   Para redondear solo ciertas esquinas (ej. tabs, paneles adheridos).');
+    lines.push('   ──────────────────────────────────────────────────────────────────── */');
+    lines.push('.radius-t-sm  { border-radius: var(--radius-sm)  var(--radius-sm)  0 0; }  /* Solo esquinas superiores */');
+    lines.push('.radius-b-sm  { border-radius: 0 0 var(--radius-sm)  var(--radius-sm); }   /* Solo esquinas inferiores */');
+    lines.push('.radius-t-md  { border-radius: var(--radius-md) var(--radius-md) 0 0; }');
+    lines.push('.radius-b-md  { border-radius: 0 0 var(--radius-md) var(--radius-md); }');
+    lines.push('.radius-l-md  { border-radius: var(--radius-md) 0 0 var(--radius-md); }   /* Solo lado izquierdo */');
+    lines.push('.radius-r-md  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }   /* Solo lado derecho */');
+    lines.push('');
+    lines.push('/* ── FIN: radius-tokens.css ─── Compensar Medicina Prepagada ── */');
+    brTriggerDownload(lines.join('\n'), 'radius-tokens.css', 'text/css');
+  };
+
+  window.brDownloadSCSS = function() {
+    var d = new Date().toISOString().split('T')[0];
+    var lines = [
+      '// ════════════════════════════════════════════════════════════════════',
+      '// BORDER RADIUS TOKENS — Compensar Medicina Prepagada · Design System v2',
+      '// ────────────────────────────────────────────────────────────────────',
+      '// Fuente    : Figma · Compensar v2 – Sistema de diseño',
+      '// Generado  : ' + d,
+      '// Archivo   : _radius-tokens.scss',
+      '//',
+      '// CONTENIDO',
+      '// ─────────',
+      '// 1. Variables Sass  ($radius-sm: 1rem // 16px)',
+      '// 2. CSS custom properties en :root',
+      '// 3. Mixins  (@mixin radius-md)',
+      '// 4. Mapa $radii + generación @each de clases',
+      '//',
+      '// USO',
+      '// ───',
+      '// @use "radius-tokens" as *;',
+      '//',
+      '// .mi-componente {',
+      '//   border-radius: var(--radius-md);   ← CSS puro',
+      '//   @include radius-md;                ← mixin Sass',
+      '// }',
+      '//',
+      '// REGLA',
+      '// ─────',
+      '// ✓  var(--radius-sm)  o  $radius-sm',
+      '// ✗  border-radius: 1rem  ←  nunca hardcoded',
+      '// ════════════════════════════════════════════════════════════════════',
+      '',
+      '// ─────────────────────────────────────────────────────────────────────',
+      '// 1. VARIABLES SASS',
+      '// ─────────────────────────────────────────────────────────────────────'
+    ];
+    BR_TOKENS.forEach(function(t) {
+      lines.push('$' + t.cls + ': ' + t.rem + ';  // ' + t.px + 'px · ' + t.use);
+    });
+    lines.push('$radius-full: 624.9375rem;  // 9999px · Pill — solo chips, tags, badges');
+    lines.push('');
+    lines.push('// ─────────────────────────────────────────────────────────────────────');
+    lines.push('// 2. CSS CUSTOM PROPERTIES');
+    lines.push('// ─────────────────────────────────────────────────────────────────────');
+    lines.push(':root {');
+    BR_TOKENS.forEach(function(t) {
+      lines.push('  ' + t.var + ': #{$' + t.cls + '};');
+    });
+    lines.push('  --radius-full: #{$radius-full};');
+    lines.push('}');
+    lines.push('');
+    lines.push('// ─────────────────────────────────────────────────────────────────────');
+    lines.push('// 3. MIXINS');
+    lines.push('// Uso: @include radius-md;  dentro de un bloque CSS.');
+    lines.push('// ─────────────────────────────────────────────────────────────────────');
+    BR_TOKENS.forEach(function(t) {
+      lines.push('@mixin ' + t.cls + ' { border-radius: $' + t.cls + '; }  // ' + t.use);
+    });
+    lines.push('@mixin radius-full { border-radius: $radius-full; }  // Pill');
+    lines.push('');
+    lines.push('// ─────────────────────────────────────────────────────────────────────');
+    lines.push('// 4. MAPA $radii + GENERACIÓN DE CLASES');
+    lines.push('// Permite iterar sobre la escala o referenciar un radio por nombre.');
+    lines.push('// ─────────────────────────────────────────────────────────────────────');
+    lines.push('$radii: (');
+    BR_TOKENS.forEach(function(t) {
+      lines.push('  "' + t.cls.replace('radius-','') + '": $' + t.cls + ',');
+    });
+    lines.push('  "full": $radius-full,');
+    lines.push(');');
+    lines.push('');
+    lines.push('// Genera .radius-xs, .radius-sm, .radius-md, .radius-lg, .radius-full');
+    lines.push('@each $name, $value in $radii {');
+    lines.push('  .radius-#{$name} { border-radius: $value; }');
+    lines.push('}');
+    lines.push('');
+    lines.push('// ── FIN: _radius-tokens.scss ─── Compensar Medicina Prepagada ──');
+    brTriggerDownload(lines.join('\n'), '_radius-tokens.scss', 'text/plain');
+  };
+
+  window.brDownloadJSON = function() {
+    var d = new Date().toISOString().split('T')[0];
+    var out = {
+      metadata: {
+        title:       'Border Radius Tokens — Compensar Medicina Prepagada',
+        version:     '2.0',
+        generatedAt: d,
+        source:      'Figma · Compensar v2 – Sistema de diseño',
+        description: 'Escala de redondeo del Design System. Uso consistente para identidad visual y coherencia entre componentes.',
+        scale: {
+          none: '0rem (0px) — sin redondeo',
+          xs:   '0.5rem (8px) — badges, tooltips pequenos',
+          sm:   '1rem (16px) — botones, inputs',
+          md:   '1.5rem (24px) — cards, modales',
+          lg:   '2rem (32px) — superficies grandes',
+          full: '624.9375rem (9999px) — pill, solo chips y tags'
+        },
+        usage: {
+          css:  'border-radius: var(--radius-md)',
+          html: '<div class="radius-md">',
+          sass: '@include radius-md;  o  $radius-md',
+          rule: 'Nunca usar valores hardcoded (border-radius: 1rem). Siempre el token.'
+        }
+      },
+      tokens: BR_TOKENS.map(function(t) {
+        return {
+          token:        t.token,
+          cssVariable:  t.var,
+          sassVariable: '$' + t.cls,
+          cssClass:     '.' + t.cls,
+          value:        t.rem,
+          unit:         'rem',
+          pxEquivalent: t.px,
+          usage:        t.use
+        };
+      }).concat([{
+        token:        'radius/full',
+        cssVariable:  '--radius-full',
+        sassVariable: '$radius-full',
+        cssClass:     '.radius-full',
+        value:        '624.9375rem',
+        unit:         'rem',
+        pxEquivalent: 9999,
+        usage:        'Pill — solo para chips, tags y badges'
+      }])
+    };
+    brTriggerDownload(JSON.stringify(out, null, 2), 'radius-tokens.json', 'application/json');
+  };
+
+  window.brCopyVars = function() {
+    var lines = [':root {'];
+    BR_TOKENS.forEach(function(t) { lines.push('  ' + t.var + ': ' + t.rem + '; /* ' + t.px + 'px */'); });
+    lines.push('  --radius-full: 624.9375rem; /* 9999px */');
+    lines.push('}');
+    navigator.clipboard.writeText(lines.join('\n')).then(function() {
+      var btn = document.querySelector('[onclick="brCopyVars()"]');
+      if (btn) {
+        var orig = btn.innerHTML;
+        btn.innerHTML = '<span class="material-symbols-rounded">check</span> ¡Copiado!';
+        setTimeout(function() { btn.innerHTML = orig; }, 1600);
+      }
+    });
+  };
+
+  window.brDownloadMAUI = function() {
+    var d = new Date().toISOString().split('T')[0];
+    var lines = [
+      '<?xml version="1.0" encoding="utf-8" ?>',
+      '<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"',
+      '                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">',
+      '',
+      `  <!-- Border Radius tokens for .NET MAUI · ${d} -->`,
+      '  <!-- Source: core/abstracts/_tokens-radius.scss + docs/transversales/fundamentos/border-radius.html -->',
+      ''
+    ];
+
+    // Add border radius tokens
+    BR_TOKENS.forEach(function(t) {
+      var key = 'MpRadius' + t.cls.charAt(0).toUpperCase() + t.cls.slice(1);
+      lines.push(`  <x:Double x:Key="${key}">${t.px}</x:Double>`);
+    });
+
+    lines.push('  <x:Double x:Key="MpRadiusFull">9999</x:Double>');
+    lines.push('');
+    lines.push('</ResourceDictionary>');
+
+    var content = lines.join('\n');
+    var blob = new Blob([content], { type: 'application/xml' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'BorderRadius.Maui.xaml';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+})();
+</script>

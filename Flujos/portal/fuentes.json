@@ -1,0 +1,134 @@
+{
+  "$comentario": "Configuración del portal centralizador. Define los repositorios que lee, qué versión publica de cada uno ('ref': rama, tag o commit; 'WORKTREE' = carpeta tal cual, solo para pruebas) y la lista blanca de archivos.",
+
+  "portal": {
+    "nombre": "Portal UX",
+    "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
+    "repositorioPropuesto": "compensar-ux-portal"
+  },
+
+  "designSystem": {
+    "nombre": "Sistema de diseño",
+    "rol": "Fuente de verdad visual: tokens, estilos y componentes de Compensar.",
+    "repositorioPropuesto": "compensar-ux-design-system",
+    "repo": "../../Core-Design-System",
+    "ref": "HEAD",
+    "destino": "ds",
+    "incluir": [
+      "index.html",
+      "drupal.html",
+      "app.html",
+      "favicon.ico",
+      "css/core.css",
+      "css/portal.css",
+      "css/themes.css",
+      "js/*.js",
+      "icons/icons.css",
+      "icons/fonts/**",
+      "icons/selection.json",
+      "core/abstracts/_tokens-*.scss",
+      "core/utils/_colors.scss",
+      "core/utils/_spacing.scss",
+      "core/utils/_typography.scss",
+      "docs/intro.html",
+      "docs/app/**/*.html",
+      "docs/web/**/*.html",
+      "docs/transversales/**/*.html",
+      "docs/foundations/*.html",
+      "docs/tokens/*.html",
+      "docs/guidelines/*.html",
+      "docs/demo/*.html",
+      "docs/web/**/assets/**",
+      "docs/app/**/assets/**",
+      "docs/transversales/**/assets/**"
+    ],
+    "excluir": [
+      "docs/auditoria-design-system/**",
+      "docs/technical-guides/**",
+      "docs/qa/**"
+    ]
+  },
+
+  "flujos": {
+    "nombre": "Prototipos",
+    "rol": "Flujos navegables de Drupal, ZT y APP. Consumen una copia controlada del sistema de diseño en shared/.",
+    "repositorioPropuesto": "compensar-ux-prototipos",
+    "repo": "../prototipos",
+    "ref": "HEAD",
+    "destino": "p",
+    "comun": [
+      "shared/vendor/**",
+      "shared/icons/**",
+      "shared/css/**",
+      "shared/js/**",
+      "shared/assets/**"
+    ],
+    "excluir": []
+  },
+
+  "$sincronizacion": "Archivos que los prototipos copian del sistema de diseño (lo hace flujos/scripts/sync-flows.mjs). El portal compara versiones y avisa si están desactualizados.",
+  "sincronizacion": {
+    "archivos": [
+      { "ds": "css/core.css", "flujos": "shared/vendor/core.css" },
+      { "ds": "css/portal.css", "flujos": "shared/vendor/portal.css" },
+      { "ds": "icons/icons.css", "flujos": "shared/icons/icons.css" },
+      { "ds": "js/mp-tabs.js", "flujos": "shared/vendor/mp-tabs.js" }
+    ]
+  },
+
+  "plataformas": {
+    "drupal": {
+      "nombre": "Drupal",
+      "tecnologia": "HTML, CSS y JavaScript",
+      "descripcion": "Prototipos del portal web institucional.",
+      "comun": ["drupal/shared/**"]
+    },
+    "zt": {
+      "nombre": "Zona Transaccional",
+      "nombreCorto": "ZT",
+      "tecnologia": "Referencia para Angular",
+      "descripcion": "Flujos y pantallas de la oficina virtual.",
+      "comun": ["zt/shared/**", "zt/css/**", "zt/assets/**", "zt/favicon.ico"]
+    },
+    "app": {
+      "nombre": "Aplicación móvil",
+      "nombreCorto": "APP",
+      "tecnologia": "Referencia para .NET MAUI",
+      "descripcion": "Representación web navegable de la aplicación móvil.",
+      "comun": ["app/shared/**", "app/css/**"]
+    }
+  },
+
+  "$robots": "Bloqueo de buscadores y rastreadores. Es una indicación que los rastreadores respetan voluntariamente: la protección real es Vercel Authentication cuando se publique.",
+  "robots": {
+    "meta": "noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai",
+    "bloquear": [
+      "Googlebot", "Google-Extended", "Bingbot", "Applebot", "Applebot-Extended", "DuckDuckBot", "YandexBot", "Baiduspider",
+      "GPTBot", "ChatGPT-User", "OAI-SearchBot", "ClaudeBot", "Claude-Web", "anthropic-ai", "CCBot", "PerplexityBot",
+      "Bytespider", "Amazonbot", "meta-externalagent", "FacebookBot", "cohere-ai", "Diffbot", "Omgilibot", "ImagesiftBot"
+    ]
+  },
+
+  "$prohibidos": "Red de seguridad: si algún archivo publicado coincide con estos patrones, el build falla.",
+  "prohibidos": [
+    "**/*.md",
+    "**/.git/**",
+    "**/.env*",
+    "**/node_modules/**",
+    "**/.DS_Store",
+    "**/.htaccess",
+    "**/core/components/**",
+    "**/core/vendors/**",
+    "**/portal/**",
+    "**/prepros.config",
+    "**/nara/**",
+    "**/_dec012*/**",
+    "**/Documentacion/**",
+    "**/auditoria*/**",
+    "**/technical-guides/**",
+    "**/ia-context*",
+    "**/kiro-context*",
+    "**/AGENTS*",
+    "**/.gitkeep"
+  ]
+}

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Proceso de afiliación · Paso 1</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → componentes transversales → custom del flujo -->
+<link rel="stylesheet" href="../../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../../shared/zt.css">
+<link rel="stylesheet" href="../../../shared/components/stepper.css">
+<link rel="stylesheet" href="../../../shared/components/radio.css">
+<link rel="stylesheet" href="../../../shared/components/dropdown.css">
+<link rel="stylesheet" href="../../../shared/components/datepicker.css">
+<link rel="stylesheet" href="../../../shared/components/alert.css">
+<link rel="stylesheet" href="../../../shared/components/form-error.css">
+<link rel="stylesheet" href="../../../shared/components/readonly-field.css">
+<link rel="stylesheet" href="../../../shared/components/person-summary.css">
+<link rel="stylesheet" href="../../../shared/components/modal.css">
+<link rel="stylesheet" href="css/paso-1.css">
+<link rel="stylesheet" href="../css/proceso-layout.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) — selector de persona + Plan Ideal ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-person" data-person-selector>
+        <button class="hd-person__trigger" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu">
+          <span class="hd-person__info">
+            <span class="hd-person__name" data-person-name>Margarita López Arenas</span>
+            <span class="hd-person__plan" data-person-plan>Plan Ideal</span>
+          </span>
+          <span class="hd-person__caret icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+        </button>
+        <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
+          <p class="person-menu__label" id="person-menu-label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Margarita López Arenas" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Margarita López Arenas</span>
+              <span class="person-opt__role">Contratante</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal — "Ventas y Afiliación" activo -->
+    <nav class="sidebar" data-active="ventas"></nav>
+
+    <!-- MAIN (shell ZT) -->
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page">
+
+          <!-- Breadcrumb — Inicio / Ventas y afiliación / Iniciar afiliación -->
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../../../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <a href="../../index.html">Ventas y afiliación</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Iniciar afiliación</span>
+          </nav>
+
+          <!-- Título — "Proceso" naranja + "de afiliación" primary (H2 40px) -->
+          <h1 class="page-title">
+            <span class="orange">Proceso </span><span class="dark">de afiliación</span>
+          </h1>
+
+          <!-- ═══ LAYOUT DEL PROCESO: panel de pasos + card del paso actual ═══ -->
+          <div class="pa-layout">
+
+            <!-- PANEL IZQUIERDO: resumen del candidato + stepper -->
+            <aside class="pa-side" aria-label="Progreso del proceso de afiliación">
+              <!-- Resumen del candidato (Person Summary variante compact). Mismo
+                   componente y MISMO objeto candidato usado en todo el flujo. -->
+              <div id="pa-cand-summary"></div>
+              <!-- Stepper transversal (lo renderiza paso-1.js) -->
+              <div id="pa-stepper"></div>
+            </aside>
+
+            <!-- CARD DERECHA: Paso 1 — Datos generales -->
+            <section class="pa-card" aria-labelledby="pa-card-title">
+              <form id="pa-form" novalidate>
+
+                <!-- Encabezado de la card: badge + título -->
+                <header class="pa-card__head">
+                  <span class="pa-badge">PASO 1 DE 8</span>
+                  <h2 class="pa-card__title" id="pa-card-title">Datos generales</h2>
+                </header>
+
+                <!-- Row: Tipo y Número de documento (READ ONLY, vienen de la consulta) -->
+                <div class="pa-row">
+                  <div class="mp-input-group">
+                    <label class="mp-input-label" for="pa-tipo">
+                      <span class="mp-input-required" aria-hidden="true">*</span> Tipo de documento
+                    </label>
+                    <div class="mp-input-wrapper">
+                      <input class="mp-input-field pa-readonly" id="pa-tipo" type="text"
+                             readonly aria-readonly="true" tabindex="-1" value="">
+                    </div>
+                  </div>
+                  <div class="mp-input-group">
+                    <label class="mp-input-label" for="pa-numero">
+                      <span class="mp-input-required" aria-hidden="true">*</span> Número de documento
+                    </label>
+                    <div class="mp-input-wrapper">
+                      <input class="mp-input-field pa-readonly" id="pa-numero" type="text"
+                             readonly aria-readonly="true" tabindex="-1" value="">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modalidad (radios) -->
+                <fieldset class="pa-field">
+                  <legend class="mp-input-label"><span class="mp-input-required" aria-hidden="true">*</span> Modalidad</legend>
+                  <div class="pa-radios" role="radiogroup" aria-label="Modalidad">
+                    <label class="mp-choice mp-radio">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="radio" name="modality" value="individual" checked>
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">Individual</span></span>
+                    </label>
+                    <label class="mp-choice mp-radio">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="radio" name="modality" value="familiar">
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">Familiar</span></span>
+                    </label>
+                    <label class="mp-choice mp-radio">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="radio" name="modality" value="colectivo">
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">Colectivo</span></span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <!-- Tipo de transacción / vinculación (radios) -->
+                <fieldset class="pa-field">
+                  <legend class="mp-input-label"><span class="mp-input-required" aria-hidden="true">*</span> Tipo de transacción / vinculación</legend>
+                  <div class="pa-radios" role="radiogroup" aria-label="Tipo de transacción / vinculación">
+                    <label class="mp-choice mp-radio">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="radio" name="transactionType" value="new" checked>
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">Nueva afiliación</span></span>
+                    </label>
+                    <label class="mp-choice mp-radio">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="radio" name="transactionType" value="inclusion" disabled aria-disabled="true">
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">Inclusión de beneficiario</span></span>
+                    </label>
+                    <label class="mp-choice mp-radio">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="radio" name="transactionType" value="novelty" disabled aria-disabled="true">
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">Novedades</span></span>
+                    </label>
+                  </div>
+                  <p class="pa-choice-hint" id="pa-tx-hint" aria-live="polite"></p>
+                </fieldset>
+
+                <!-- Campo NOVEDADES (condicional) — solo visible si Tipo de transacción = Novedades.
+                     Dropdown transversal (data-zt-dropdown). Ocupa una fila completa (full width).
+                     Lo muestra/oculta/limpia paso-1.js según la transacción seleccionada. -->
+                <div class="mp-input-group pa-novelty" id="pa-novelty-group" hidden>
+                  <label class="mp-input-label" for="pa-novedad">
+                    <span class="mp-input-required" aria-hidden="true">*</span> Novedades
+                  </label>
+                  <div class="mp-input-wrapper">
+                    <select class="mp-input-field mp-select" id="pa-novedad" name="noveltyType"
+                            data-zt-dropdown data-zt-dropdown-search="false"
+                            aria-describedby="pa-novedad-error">
+                      <option value="" selected disabled>Seleccionar</option>
+                      <!-- Opciones MOCK — reemplazar por catálogo real de novedades -->
+                      <option value="change-plan">Cambio de plan</option>
+                      <option value="change-modality">Cambio de modalidad</option>
+                      <option value="update-data">Actualización de datos</option>
+                      <option value="reactivation">Reactivación</option>
+                      <option value="other">Otro</option>
+                    </select>
+                  </div>
+                  <p class="mp-input-error" id="pa-novedad-error" role="alert" hidden>Selecciona una opción.</p>
+                </div>
+
+                <!-- ¿Cómo se afilia el contratante? (radios) — decide si se piden los datos
+                     de la empresa. Pregunta explícita (no un check): "Independiente" queda
+                     registrado como respuesta y no como ausencia de marca. -->
+                <fieldset class="pa-field" id="pa-channel-field" aria-describedby="pa-channel-error">
+                  <legend class="mp-input-label"><span class="mp-input-required" aria-hidden="true">*</span> ¿Cómo se afilia el contratante?</legend>
+                  <div class="pa-radios" role="radiogroup" aria-label="¿Cómo se afilia el contratante?">
+                    <label class="mp-choice mp-radio">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="radio" name="affiliationChannel" value="independent">
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">Como independiente</span></span>
+                    </label>
+                    <label class="mp-choice mp-radio">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="radio" name="affiliationChannel" value="company">
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">A través de una empresa</span></span>
+                    </label>
+                  </div>
+                  <p class="mp-input-error" id="pa-channel-error" role="alert" hidden>Selecciona una opción.</p>
+                </fieldset>
+
+                <!-- Datos de la empresa (bloque contextual) — solo visible y obligatorio si
+                     el contratante se afilia "A través de una empresa". Al elegir
+                     "Como independiente" se oculta y se limpian sus valores. -->
+                <div class="pa-context" id="pa-company-block" hidden>
+                  <p class="pa-context__title">Datos de la empresa</p>
+                  <div class="pa-row" id="pa-company-row">
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-empresa">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Nombre de la empresa
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <input class="mp-input-field" id="pa-empresa" name="companyName" type="text"
+                               autocomplete="organization" placeholder="Escribir" aria-describedby="pa-empresa-error">
+                      </div>
+                      <p class="mp-input-error" id="pa-empresa-error" role="alert" hidden>Este campo es obligatorio.</p>
+                    </div>
+                    <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-nit">
+                        <span class="mp-input-required" aria-hidden="true">*</span> NIT
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <input class="mp-input-field" id="pa-nit" name="nit" type="text"
+                               inputmode="numeric" autocomplete="off" placeholder="Escribir" maxlength="15"
+                               aria-describedby="pa-nit-hint pa-nit-error">
+                      </div>
+                      <p class="mp-hint" id="pa-nit-hint">Sin puntos, guiones ni dígito de verificación</p>
+                      <p class="mp-input-error" id="pa-nit-error" role="alert" hidden>Ingresa un NIT válido.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Row: Plan (dropdown) + Fecha de inicio de vigencia -->
+                <div class="pa-row" id="pa-plan-row">
+                  <div class="mp-input-group">
+                    <label class="mp-input-label" for="pa-plan">
+                      <span class="mp-input-required" aria-hidden="true">*</span> Plan
+                    </label>
+                    <div class="mp-input-wrapper">
+                      <select class="mp-input-field mp-select" id="pa-plan" name="plan" required
+                              aria-required="true" data-zt-dropdown data-zt-dropdown-search="false"
+                              aria-describedby="pa-plan-error">
+                        <option value="ideal" selected>Plan Ideal</option>
+                        <option value="optimo">Plan Óptimo</option>
+                      </select>
+                    </div>
+                    <p class="mp-input-error" id="pa-plan-error" role="alert" hidden>Selecciona una opción.</p>
+                  </div>
+                  <div class="mp-input-group">
+                    <label class="mp-input-label" for="pa-vigencia">
+                      <span class="mp-input-required" aria-hidden="true">*</span> Fecha de inicio de vigencia
+                    </label>
+                    <div class="mp-input-wrapper">
+                      <!-- Fecha de vigencia: Date Field transversal ZT en modo READONLY.
+                           Regla de negocio (prototipo): la vigencia inicia el primer día
+                           del mes siguiente y NO la edita el usuario → readonly, no abre
+                           calendario. Reutiliza el estilo del campo, no la interacción. -->
+                      <input class="mp-input-field pa-readonly" id="pa-vigencia" name="startDate" type="date"
+                             required aria-required="true" readonly aria-readonly="true"
+                             data-zt-datepicker aria-describedby="pa-vigencia-error">
+                    </div>
+                    <p class="mp-input-error" id="pa-vigencia-error" role="alert" hidden>Este campo es obligatorio.</p>
+                  </div>
+                </div>
+
+                <!-- Alerta informativa (componente transversal Alert, variante info) -->
+                <div class="pa-alert" id="pa-alert" aria-live="polite"></div>
+
+                <!-- CTA: Atrás + Guardar y continuar -->
+                <div class="pa-cta">
+                  <button class="mp-btn mp-btn--secundario pa-back" id="pa-back" type="button">
+                    <span class="icon icon-caret-left icon-20 gs-inherit" aria-hidden="true"></span>
+                    Atrás
+                  </button>
+                  <button class="mp-btn mp-btn--primario pa-next" id="pa-next" type="submit">
+                    Guardar y continuar
+                  </button>
+                </div>
+
+              </form>
+            </section>
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../../../shared/zt-sidebar.js"></script>
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script src="../../../shared/components/stepper.js"></script>
+<script src="../../../shared/components/dropdown.js"></script>
+<script src="../../../shared/components/datepicker.js"></script>
+<script src="../../../shared/components/alert.js"></script>
+<script src="../../../shared/components/person-summary.js"></script>
+<script src="../../../shared/components/modal.js"></script>
+<script src="js/paso-1.js"></script>
+<!-- ⚠️ Solo prototipo: navegación entre pasos sin validar (quitar para producción) -->
+<script src="../js/demo-nav.js"></script>
+</body>
+</html>

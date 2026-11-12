@@ -1,0 +1,1273 @@
+/* ==============================================================
+   NAV-PROTOTYPE.CSS
+   Prueba: Arquitectura de navegación (menu-1 / menu-2)
+   Compensar Design System
+
+   Regla del proyecto: los componentes productivos viven en `core`
+   (mp-web-header, mp-sidebar, mp-accordion, mp-btn, mp-card...).
+   Este archivo NO redefine esos componentes ni sus tokens; solo:
+     1) arma el layout de página de la prueba (hero + teaser),
+     2) agrega los modificadores mínimos que el core no cubre
+        (ítem de acordeón como link, indentación anidada, filas
+        de navegación progresiva), siempre apoyado en las mismas
+        variables --use-*/--space-*/--radius-* del sistema.
+   Aislado a esta carpeta, no se importa desde css/core.css.
+   ============================================================== */
+
+/* ── Página ──────────────────────────────────────────────── */
+.proto-page-body {
+  background: var(--use-background-page, #ffffff);
+  min-height: 100vh;
+}
+
+/* El panel .mp-sidebar (menú "Menú" a pantalla completa) es solo
+   para la barra compacta (hamburguesa) — que en este prototipo
+   llega hasta 1024px (ver el bloque @media más abajo que extiende
+   el corte móvil del core, pensado para 768px, a 1024px). Si el
+   panel quedó abierto y la ventana se agranda a escritorio real
+   (resize, no reload), la clase .is-open no depende del viewport y
+   seguiría visible. Se fuerza oculto en escritorio; nav-shell.js
+   además cierra el panel al cruzar el mismo breakpoint (1025px). */
+@media (min-width: 1025px) {
+  .mp-sidebar {
+    display: none !important;
+  }
+}
+
+.proto-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+
+/* Nav horizontal visible en desktop (≥768px, comportamiento por
+   defecto del core) y hamburguesa en mobile (<768px). Ambos abren
+   el mismo panel .mp-sidebar — en esta prueba el nav de escritorio
+   no despliega submenús anclados por ítem, dispara el mismo flyout
+   que se está testeando, adaptado a clic en vez de hover. */
+/* Ajustado 2026-08-24 (spec de Figma: Roboto Medium 16px, line-height
+   120%, letter-spacing 2.2%) — el core trae 700/14px por defecto. */
+.proto-header .mp-web-header__nav-link {
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.022em;
+  transition: color .2s cubic-bezier(.4, 0, .2, 1), border-color .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Fila de nav gris #f5f5f5, sin bordes — el core trae border-top,
+   lo quitamos. Separación del contenido de abajo con sombra sutil
+   en el borde inferior (no border), igual al mockup. Altura exacta
+   60px (spec de Figma). */
+.proto-header .mp-web-header__nav {
+  background: #f5f5f5;
+  border-top: none;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding: 0;
+  height: 60px;
+}
+
+/* Ítems distribuidos de forma pareja a lo ancho de todo el menú
+   (Figma: los 6 ítems ocupan el ancho completo del header, no
+   agrupados a la izquierda). Con flex-wrap el texto de los 6 ítems
+   no cabe en anchos de escritorio angostos (~992–1279px, el
+   .container de Bootstrap ahí queda más chico que el viewport) y
+   "Nosotros" se caía a una segunda fila. Por defecto: una sola
+   fila sin wrap, agrupados a la izquierda con scroll horizontal si
+   hiciera falta; desde 1280px (donde ya sobra espacio) se recupera
+   el space-between del mockup. */
+.proto-header__nav-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: var(--space-24);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.proto-header__nav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.proto-header .mp-web-header__nav-item {
+  flex: 0 0 auto;
+}
+
+@media (min-width: 1280px) {
+  .proto-header__nav-inner {
+    justify-content: space-between;
+    overflow-x: visible;
+  }
+}
+
+/* Ajustado 2026-08-24: el header envuelve __main y __nav en
+   .container (Bootstrap) para que todo el contenido — logo, buscador,
+   botones y nav — quede alineado con el mismo ancho centrado que el
+   resto de la página, en vez de pegado al borde de la ventana. El
+   propio .container ya trae el padding horizontal responsive, así
+   que quitamos el padding lateral que el core aplica por defecto.
+   Además se pasa a flex: el buscador se agrupa junto a los botones
+   a la derecha (con margin-left:auto), no pegado al logo. */
+.proto-header .mp-web-header__main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  height: 102px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.proto-header__ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* ── Logo real (assets/images/logo.svg) ─────────────────────────
+   El archivo ya trae dibujado el lockup completo: ícono + "compensar"
+   + divisor + "medicina prepagada". No se agrega texto aparte. */
+.proto-header__logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+/* Buscador corto, con borde totalmente redondeado (pill, como los
+   botones), agrupado a la derecha junto a "Oficina virtual" /
+   "Afíliate" — el margin-left:auto empuja este ítem y todos los
+   que le siguen (flex) hacia el borde derecho del header. */
+.proto-header .mp-web-header__search {
+  flex: 0 0 260px;
+  width: 260px;
+  margin-left: auto;
+}
+
+.proto-header .mp-web-header__search-input {
+  border-radius: 999px;
+}
+
+/* El core solo cambia a la barra móvil (hamburguesa, sin nav/cta/
+   buscador) por debajo de 768px. En el rango 768–1024px el nav de
+   escritorio (6 ítems) ya no entra bien ni con el scroll horizontal
+   de .proto-header__nav-inner — Figma pide quedarse en la barra
+   compacta ahí también. Se extiende el corte a 1024px para tablet,
+   Bootstrap) y se arma el layout del mockup: hamburguesa a la
+   izquierda, logo centrado, solo el ícono de buscar a la derecha
+   (sin el input ni los botones Oficina virtual/Afíliate). */
+@media (max-width: 1024px) {
+  .proto-header .mp-web-header__nav,
+  .proto-header__ctas {
+    display: none;
+  }
+
+  .proto-header > .container {
+    max-width: none;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .proto-header .mp-web-header__main {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    gap: var(--space-16);
+    height: 65px;
+    min-height: 65px;
+  }
+
+  .proto-header .mp-web-header__mobile-toggle {
+    display: grid;
+    order: -1;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .proto-header .mp-web-header__mobile-toggle .icon {
+    display: none;
+  }
+
+  .proto-header .mp-web-header__mobile-toggle::before {
+    content: '';
+    width: 28px;
+    height: 4px;
+    background: var(--mp-web-header-text);
+    border-radius: 999px;
+    box-shadow: 0 -9px 0 var(--mp-web-header-text), 0 9px 0 var(--mp-web-header-text);
+  }
+
+  .proto-header .mp-web-header__brand {
+    justify-self: center;
+    margin: 0;
+    min-width: 0;
+  }
+
+  .proto-header__logo-img {
+    height: 44px;
+    max-width: min(54vw, 360px);
+  }
+
+  .proto-header .mp-web-header__search {
+    position: static;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    justify-self: end;
+    width: 44px;
+    height: 44px;
+    margin-left: 0;
+  }
+
+  .proto-header .mp-web-header__search-input,
+  .proto-header .mp-web-header__search > label {
+    display: none;
+  }
+
+  .proto-header .mp-web-header__search-icon {
+    position: static;
+    transform: none;
+    pointer-events: auto;
+    color: var(--mp-web-header-text);
+    font-size: 44px;
+    line-height: 1;
+  }
+
+  .mp-sidebar__panel {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    width: min(393px, 100vw);
+    max-height: none;
+    border-radius: 0 32px 0 0;
+    transform: translateX(-100%);
+    box-shadow: 12px 0 32px rgba(0, 0, 0, .24);
+    overflow-y: auto;
+  }
+
+  .mp-sidebar.is-open .mp-sidebar__panel {
+    transform: translateX(0);
+  }
+
+  .mp-sidebar__header {
+    min-height: 88px;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--use-border-default);
+  }
+
+  .mp-sidebar__title {
+    font-size: 24px;
+  }
+
+  .mp-sidebar__close {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .mp-sidebar__close:hover,
+  .mp-sidebar__close:focus-visible {
+    background: transparent;
+  }
+
+  .mp-sidebar__close .icon {
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .mp-sidebar__body {
+    flex: 0 0 auto;
+    padding: 0;
+    gap: 0;
+  }
+
+  .proto-sidebar-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 28px 24px 40px;
+  }
+
+  .proto-sidebar-search {
+    position: relative;
+    width: min(100%, 292px);
+  }
+
+  .proto-sidebar-search__input {
+    width: 100%;
+    height: 56px;
+    padding: 0 64px 0 24px;
+    border: 1px solid var(--use-border-default);
+    border-radius: 999px;
+    background: var(--use-surface-white);
+    color: var(--use-text-primary);
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+  }
+
+  .proto-sidebar-search__input::placeholder {
+    color: var(--use-text-tertiary);
+    opacity: 1;
+  }
+
+  .proto-sidebar-search__icon {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    color: var(--use-text-primary);
+    font-size: 32px;
+    pointer-events: none;
+  }
+
+  .proto-sidebar-actions__btn {
+    min-width: 190px;
+    min-height: 56px;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 16px;
+  }
+
+  .proto-page-menu1 .mp-sidebar__panel {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .proto-page-menu1 .mp-sidebar__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .proto-page-menu1 .proto-sidebar-actions {
+    flex: 0 0 auto;
+  }
+}
+
+/* Ajustado 2026-08-24: el layout de página usa el grid de Bootstrap
+   (.container/.row/.col-*), ya compilado en css/core.css — regla
+   del proyecto (ia-context.md, "Regla de layout para documentación").
+   Este archivo ya no define su propio grid; solo estilos de detalle
+   que Bootstrap no cubre. */
+
+/* ── Home: hero ──────────────────────────────────────────── */
+.home-hero { padding: var(--space-32) 0; }
+
+@media (min-width: 768px) {
+  .home-hero { padding: var(--space-48) 0 var(--space-64); }
+}
+
+.home-hero__eyebrow-accent { color: var(--use-primary-default); }
+
+.home-hero h1 { margin: 0 0 var(--space-12); }
+
+.home-hero p { max-width: 480px; color: var(--use-text-secondary); margin: 0 0 var(--space-24); }
+
+/* Imagen "blob": forma orgánica con acento de color detrás, como
+   en el mockup. Sin foto real disponible, se usa un placeholder
+   con degradado + ícono. */
+.home-hero__media-wrap {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.home-hero__media-wrap::before {
+  content: '';
+  position: absolute;
+  inset: var(--space-16) calc(var(--space-16) * -1) calc(var(--space-16) * -1) var(--space-16);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  background: linear-gradient(135deg, var(--use-primary-default) 0%, var(--product-violet-50, #7c5cd6) 100%);
+  z-index: 0;
+}
+
+.home-hero__media {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 3.4;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  background: linear-gradient(135deg, var(--use-primary-default) 0%, var(--product-violet-50, #7c5cd6) 100%);
+  display: grid;
+  place-items: center;
+  color: var(--use-text-on-dark-primary, #fff);
+  border: 3px solid var(--use-surface-white);
+}
+
+.home-hero__media .icon { font-size: 64px; opacity: .9; }
+
+/* Controles de carrusel (decorativos, sin JS de slider en esta prueba) */
+.home-hero__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  margin-top: var(--space-24);
+}
+
+.home-hero__arrow {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--use-primary-default);
+  background: var(--use-surface-white);
+  color: var(--use-primary-default);
+  cursor: pointer;
+}
+
+.home-hero__arrow:hover { background: color-mix(in srgb, var(--use-primary-default) 8%, transparent); }
+
+.home-hero__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-24);
+  justify-content: center;
+}
+
+.home-hero__dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--use-border-default);
+}
+
+.home-hero__dots span:first-child {
+  width: 28px;
+  border-radius: 4px;
+  background: var(--use-primary-default);
+}
+
+/* ── Home: card flotante de accesos rápidos ─────────────────── */
+.home-quicklinks-card {
+  position: relative;
+  z-index: 2;
+  margin-top: calc(var(--space-32) * -1);
+  margin-bottom: var(--space-32);
+  padding: var(--space-24) var(--space-16);
+  border-radius: var(--radius-md);
+  background: var(--use-surface-white);
+}
+
+.home-quicklink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  color: var(--use-text-primary);
+  text-decoration: none;
+  padding: var(--space-8) 0;
+}
+
+.home-quicklink:hover,
+.home-quicklink:focus-visible { color: var(--use-primary-default); }
+
+.home-quicklink__icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-xs);
+  background: var(--use-surface-violet, #efecf9);
+  color: var(--product-violet-60, #5b3ab4);
+}
+
+.home-quicklink__label { font-size: 14px; font-weight: 700; }
+
+@media (min-width: 768px) {
+  .home-quicklinks-card .col:not(:last-child) {
+    border-right: 1px dashed var(--use-border-default);
+  }
+}
+
+/* ── Home: secciones genéricas ───────────────────────────────── */
+.home-section {
+  padding: var(--space-48) 0;
+}
+
+.home-section--tint {
+  background: var(--use-surface-violet, #efecf9);
+  border-radius: var(--radius-md);
+}
+
+.home-section__header {
+  max-width: 640px;
+  margin: 0 auto var(--space-32);
+  text-align: center;
+}
+
+.home-section__header p { color: var(--use-text-secondary); }
+
+.home-plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-plan-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  font-size: 14px;
+  color: var(--use-text-secondary);
+}
+
+.home-plan-list .icon {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--use-primary-default);
+}
+
+.home-plan-price {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--use-text-primary);
+}
+
+.home-plan-fineprint {
+  font-size: 12px;
+  color: var(--use-text-tertiary);
+  text-align: center;
+}
+
+/* ── Home: grid de confianza (Bootstrap .row-cols-*) ─────────── */
+.home-trust-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  text-align: center;
+  border-radius: var(--radius-xs);
+  background: var(--use-surface-white);
+}
+
+.home-trust-card__icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--use-primary-default) 12%, transparent);
+  color: var(--use-primary-default);
+}
+
+.home-trust-card h3 { margin: 0; font-size: 14px; }
+.home-trust-card p { margin: 0; font-size: 12px; color: var(--use-text-secondary); }
+
+/* ── Home: banners con imagen (bienestar / video / protección) ──
+   Columnas via Bootstrap .row/.col-md-6; el orden en desktop se
+   controla con .order-md-first/.order-md-last en el markup. */
+.home-banner h2 { margin: 0 0 var(--space-12); }
+.home-banner p { color: var(--use-text-secondary); margin: 0 0 var(--space-24); max-width: 480px; }
+
+.home-banner__media {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--product-violet-40, #a893e6) 0%, var(--use-primary-default) 100%);
+  display: grid;
+  place-items: center;
+  color: var(--use-text-on-dark-primary, #fff);
+  position: relative;
+}
+
+.home-banner__media--video { cursor: pointer; }
+
+.home-banner__media .icon { font-size: 56px; }
+
+.home-banner__play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--use-surface-white);
+  color: var(--use-primary-default);
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+}
+
+/* ── Home: footer ─────────────────────────────────────────────── */
+.home-footer {
+  border-top: 1px solid var(--use-border-default);
+  padding: var(--space-48) 0 var(--space-32);
+  margin-top: var(--space-32);
+}
+
+/* Columnas del footer via Bootstrap .row/.col-md-4 */
+.home-footer h3 { font-size: 14px; margin: 0 0 var(--space-12); }
+
+.home-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.home-footer a {
+  color: var(--use-text-secondary);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.home-footer a:hover { color: var(--use-primary-default); }
+
+.home-footer__social {
+  display: flex;
+  gap: var(--space-12);
+  margin-top: var(--space-12);
+}
+
+.home-footer__social a {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--use-border-default);
+  color: var(--use-text-secondary);
+}
+
+.home-footer__social a:hover {
+  border-color: var(--use-primary-default);
+  color: var(--use-primary-default);
+}
+
+.home-footer__org {
+  margin-top: var(--space-32);
+  padding-top: var(--space-24);
+  border-top: 1px solid var(--use-border-default);
+  font-size: 12px;
+  color: var(--use-text-tertiary);
+}
+
+.home-footer__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  margin-top: var(--space-16);
+}
+
+.home-footer__badges img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── menu-1: acordeón jerárquico ────────────────────────────
+   Todo vive dentro de .mp-accordion (core/components/web/_accordion.scss).
+   Solo agregamos: ítems tipo link (hojas), indentación anidada y
+   el estado "activo" cuando un nivel está abierto. */
+
+.proto-menu1__accordion {
+  --mp-accordion-padding: var(--space-16);
+}
+
+.proto-menu1__accordion .mp-accordion__item,
+.proto-menu1__accordion .mp-accordion__item:not(:last-child),
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion__item:not(:last-child) {
+  border: 0;
+  border-radius: 0;
+}
+
+.proto-menu1__accordion .mp-accordion__trigger {
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.proto-menu1__accordion .mp-accordion__content--nav {
+  border-top: 0;
+}
+
+.proto-menu1__accordion > .mp-accordion__item:not(:last-child),
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion__item:not(:last-child) {
+  border-bottom: 1px solid var(--use-border-default);
+}
+
+.proto-menu1__accordion .mp-accordion__trigger {
+  min-height: 72px;
+  padding: 24px;
+  font-weight: 400;
+}
+
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion__trigger {
+  background: var(--use-surface-white);
+  padding-left: 40px !important;
+  border-radius: 0;
+}
+
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
+  background: var(--use-surface-white);
+}
+
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__trigger {
+  background: #f5f5f5;
+  padding-left: 56px !important;
+  border-radius: 0 !important;
+}
+
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested,
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__item,
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__panel,
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__content {
+  border-radius: 0 !important;
+}
+
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
+.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
+  background: #f5f5f5;
+}
+
+.proto-page-menu1 .proto-flyout .mp-accordion--nested .mp-accordion--nested .mp-accordion__trigger,
+.proto-page-menu1 .proto-flyout .mp-accordion--nested .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
+.proto-page-menu1 .proto-flyout .mp-accordion--nested .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
+  background: #f5f5f5;
+  border-radius: 0;
+}
+
+.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__trigger {
+  background: #f5f5f5;
+  border-radius: 0;
+}
+
+.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
+.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
+  background: #f5f5f5;
+}
+
+.mp-accordion__trigger--link {
+  text-decoration: none;
+}
+
+/* Hoja del acordeón (sin hijos): al pasar el mouse o enfocar,
+   tinte durazno claro — no relleno naranja sólido, ese se reserva
+   para el trigger del nivel padre cuando está abierto. Mismo
+   componente .mp-accordion en el flyout de escritorio (nav-flyout.js)
+   y en el panel móvil (menu-1.js), así que el estado aplica a ambos. */
+.mp-accordion__trigger--link:hover,
+.mp-accordion__trigger--link:focus-visible {
+  background: var(--base-orange-20, #ffe5cc);
+  outline: none;
+  text-decoration: none;
+}
+
+/* El core trae hover gris por defecto para triggers con hijos
+   (.mp-accordion__trigger:hover). En todo el prototipo el hover
+   debe ser durazno (#ffe5cc), en cualquier nivel — excepto el
+   ítem que ya está abierto, que usa su propio hover naranja más
+   oscuro (ver regla is-open > trigger:hover más arriba). */
+.mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
+.mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
+  background: var(--base-orange-20, #ffe5cc);
+}
+
+.mp-accordion__leading {
+  flex: 0 0 auto;
+  color: var(--mp-accordion-text);
+}
+
+/* El core trae transition:background .15s ease en el trigger — muy
+   corto para notarse. Se alarga y se pasa a la misma curva que usa
+   el resto del sistema (mp-sidebar), tanto para el hover durazno
+   como para el fondo naranja del ítem abierto. */
+.mp-accordion__trigger {
+  transition: background .24s cubic-bezier(.4, 0, .2, 1),
+              color .24s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Estado activo: nivel abierto.
+   Ajustado 2026-08-24 para calzar con el mockup de Figma (Page 4,
+   flyout "Planes"): el ítem activo usa relleno naranja sólido +
+   texto/ícono blancos, no un tinte sutil. */
+.mp-accordion__item.is-open > .mp-accordion__trigger:not(.mp-accordion__trigger--link) {
+  color: var(--use-text-on-dark-primary, #ffffff);
+  background: var(--use-primary-default);
+}
+
+.mp-accordion__item.is-open > .mp-accordion__trigger:not(.mp-accordion__trigger--link) .mp-accordion__leading,
+.mp-accordion__item.is-open > .mp-accordion__trigger:not(.mp-accordion__trigger--link) .mp-accordion__icon {
+  color: var(--use-text-on-dark-primary, #ffffff);
+}
+
+.mp-accordion__item.is-open > .mp-accordion__trigger:not(.mp-accordion__trigger--link):hover {
+  background: var(--use-primary-hover, #e65300);
+}
+
+/* El core rota el chevron 180° porque su ícono base es caret-down
+   (cerrado=abajo, abierto=arriba). Esta prueba pide cerrado=derecha,
+   abierto=arriba, así que partimos de icon-caret-right y ajustamos
+   el ángulo de rotación (misma transición, mismo componente). */
+.mp-accordion__icon {
+  transform: rotate(0deg);
+}
+
+.mp-accordion__item.is-open > .mp-accordion__trigger > .mp-accordion__icon {
+  transform: rotate(-90deg);
+}
+
+/* Subniveles anidados: filas planas dentro del panel, sin repetir
+   la tarjeta con borde propio del nivel superior. */
+.mp-accordion--nested {
+  gap: 0;
+}
+
+.mp-accordion--nested .mp-accordion__item {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.mp-accordion--nested .mp-accordion__item:not(:last-child) {
+  border-bottom: 1px solid var(--mp-accordion-border);
+}
+
+/* Nivel 2 y siguientes (todo lo que cuelga del nivel raíz del
+   acordeón, tanto en el flyout de escritorio como en el panel
+   móvil): 16px, peso normal — el nivel raíz se queda en 16px/700
+   (heredado de .mp-accordion__trigger, sin tocar). */
+.mp-accordion--nested .mp-accordion__trigger {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.mp-accordion__content--nav {
+  padding: 0;
+  border-top: 1px solid var(--mp-accordion-border);
+}
+
+/* ── Flyout de escritorio (nav-flyout.js) ─────────────────────
+   Contenedor: reutiliza .mp-web-header__dropdown (core) — mismo
+   fondo/borde/radio/sombra — pero forzado a una sola columna,
+   porque el core lo trae en grid de 2 columnas para listas planas.
+   El contenido interno es el mismo .mp-accordion --flush que arma
+   menu-1.js, así que hereda toda la visual ya definida arriba
+   (trigger abierto = naranja sólido, hoja en hover = durazno). */
+/* Abre/cierra con fundido + leve deslizamiento (no con [hidden],
+   que no se puede animar). nav-flyout.js alterna la clase is-open;
+   visibility:hidden ya saca el panel cerrado del foco/lectores de
+   pantalla, igual que hacía [hidden]. */
+.proto-flyout {
+  display: block;
+  grid-template-columns: none;
+  width: min(300px, calc(100vw - 32px));
+  padding: 0;
+  overflow: hidden;
+  transform-origin: top left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-10px) scale(.97);
+  transition: opacity .28s cubic-bezier(.4, 0, .2, 1),
+              transform .28s cubic-bezier(.4, 0, .2, 1),
+              visibility .28s cubic-bezier(.4, 0, .2, 1);
+}
+
+.proto-flyout.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* El core ancla el dropdown a la izquierda del ítem (left:0). Para
+   los últimos ítems del nav ("Nosotros"...) eso lo saca del borde
+   derecho de la pantalla. nav-flyout.js mide el overflow al abrir
+   y agrega esta clase para anclarlo a la derecha en su lugar. */
+.proto-flyout--right {
+  left: auto;
+  right: 0;
+  transform-origin: top right;
+}
+
+.proto-flyout__accordion {
+  --mp-accordion-padding: var(--space-16);
+}
+
+/* Nivel 2 (ítems raíz del flyout, ej. "Plan Ideal"/"Autorizaciones"):
+   heredan por defecto el trigger base (16px/700, pensado para el
+   nivel 1 del panel móvil) — acá se corrige a 16px/400 según Figma.
+   Solo los triggers directos del nivel raíz del flyout, no los
+   anidados (nivel 3, ya en 400 por la regla --nested de arriba).
+   Excluye el ítem abierto (.is-open): en el mockup, cuando "Plan
+   Ideal" queda activo con relleno naranja, el texto vuelve a 700 —
+   funciona como título de la sección expandida. */
+.proto-flyout__accordion > .mp-accordion__item:not(.is-open) > .mp-accordion__trigger {
+  font-weight: 400;
+}
+
+/* Figma (spec "Item submenú": padding 16, sin borde) muestra el
+   flyout de escritorio como una lista plana — sin la tarjeta con
+   borde propio de --flush ni radios por ítem, solo una línea sutil
+   entre filas. Se sobreescribe aquí (después de --flush en este
+   archivo) para que aplique en todos los niveles del flyout; el
+   panel móvil (.proto-menu1__accordion) no se toca, ahí sí se prueba
+   el patrón de tarjeta. */
+.proto-flyout .mp-accordion__item {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* --flush redondea el primer/último ítem con selectores :first-child/
+   :last-child (más específicos que la regla de arriba), así que el
+   fondo durazno del hover se recortaba dejando esquinas blancas.
+   Se anula explícitamente: en el flyout ningún ítem lleva radio. */
+.proto-flyout .mp-accordion__item:first-child,
+.proto-flyout .mp-accordion__item:last-child {
+  border-radius: 0;
+}
+
+.proto-flyout .mp-accordion__item:not(:last-child) {
+  border-bottom: 1px solid var(--mp-accordion-border);
+}
+
+.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item,
+.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__trigger,
+.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__trigger--link,
+.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
+.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
+  background: #f5f5f5 !important;
+  border-radius: 0 !important;
+}
+
+/* ── menu-2: navegación progresiva por niveles ──────────────
+   Markup propio (no hay equivalente productivo en core todavía),
+   reutiliza únicamente tokens --use-*/--space-*/--radius-* y la
+   tipografía Roboto del sistema. */
+
+.proto-drill__back {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 44px;
+  margin: 0 0 var(--space-8) calc(var(--space-8) * -1);
+  padding: var(--space-8);
+  border: none;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--use-text-secondary);
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.proto-drill__back:hover {
+  color: var(--use-primary-default);
+}
+
+.proto-drill__back:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--use-primary-default);
+}
+
+.proto-drill__crumb {
+  margin: 0 0 var(--space-4);
+  color: var(--use-text-tertiary);
+}
+
+.proto-drill__level-title {
+  margin: 0 0 var(--space-16);
+}
+
+.proto-drill__level-title:focus-visible {
+  outline: none;
+}
+
+/* Ajustado 2026-08-24: en el mockup de Figma cada columna es UNA sola
+   caja con borde fino y filas planas separadas por una línea, no
+   chips individuales con su propio borde. Mantenemos altura mínima
+   de 44px por accesibilidad (regla del sistema), aunque en Figma
+   las filas del flyout de escritorio se ven más compactas. */
+.proto-drill__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--use-surface-white);
+}
+
+.proto-drill__list li:not(:last-child) {
+  border-bottom: 1px solid var(--use-border-default);
+}
+
+.proto-drill__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  width: 100%;
+  min-height: 72px;
+  padding: 24px;
+  border: none;
+  background: var(--use-surface-white);
+  color: var(--use-text-primary);
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+a.proto-drill__row {
+  font-weight: 400;
+}
+
+.proto-drill__row:hover,
+.proto-drill__row:focus-visible {
+  background: var(--use-primary-default);
+  color: var(--use-text-on-dark-primary, #ffffff);
+}
+
+.proto-drill__row:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--use-primary-hover, #e65300);
+}
+
+.proto-drill__row-leading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-width: 0;
+}
+
+.proto-drill__row-chevron {
+  flex-shrink: 0;
+  color: var(--use-text-tertiary);
+}
+
+.proto-drill__row:hover .proto-drill__row-chevron,
+.proto-drill__row:focus-visible .proto-drill__row-chevron {
+  color: var(--use-text-on-dark-primary, #ffffff);
+}
+
+@keyframes protoDrillInForward {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes protoDrillInBack {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.proto-drill--enter-forward { animation: protoDrillInForward .22s ease; }
+.proto-drill--enter-back    { animation: protoDrillInBack .22s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .proto-drill--enter-forward,
+  .proto-drill--enter-back {
+    animation: none;
+  }
+}
+
+/* ── menu-2 (mobile, ≤1024px): navegación progresiva "menu-mobile-v2" ──
+   Bloque nuevo, agregado al final del archivo sin tocar ninguna
+   línea existente arriba. Namespace exclusivo .menu-mobile-v2__* —
+   nada de esto se usa en menu-1 (que sigue con .mp-accordion /
+   .proto-menu1__accordion, intactos) ni en el flyout de escritorio
+   (.proto-flyout). Solo lo genera assets/menu-2.js, cargado
+   únicamente en menu-2.html.
+
+   Densidad de fila (72px de alto, 24px de padding, 16px de texto)
+   igual a .proto-menu1__accordion a propósito: la prueba compara el
+   PATRÓN de navegación (acordeón vs. avance por vistas), no el
+   estilo visual de las filas — eso se mantiene idéntico entre las
+   dos propuestas. */
+@media (max-width: 1024px) {
+  /* El core ya scrollea .mp-sidebar__body por defecto, pero el
+     bloque mobile compartido (línea ~294 de este archivo) lo deja en
+     flex:0 0 auto/padding:0/gap:0 para que cada propuesta arme su
+     propio scroll. menu-1 ya tiene su override .proto-page-menu1;
+     este es el equivalente para menu-2, sin tocar el de menu-1. */
+  .proto-page-menu2 .mp-sidebar__panel {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .proto-page-menu2 .mp-sidebar__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+  }
+
+  /* La flecha de "volver" vive en el header fijo del panel
+     (.mp-sidebar__header, junto al título y la X), no como fila
+     aparte dentro de la lista — el título ya dice en qué nivel está
+     el usuario, así que "← Planes" no se repite dos veces. Mismo
+     trato circular que .mp-sidebar__close (ver overrides mobile de
+     ese componente más arriba en este archivo), espejado a la
+     izquierda del título. Solo existe en menu-2.html — menu-1.html
+     no incluye este botón en su copia del header, así que su layout
+     no cambia. */
+  .menu-mobile-v2__header-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 auto;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--use-text-primary);
+    cursor: pointer;
+    transition: background-color .15s ease;
+  }
+
+  .menu-mobile-v2__header-back[hidden] {
+    display: none;
+  }
+
+  .menu-mobile-v2__header-back:hover,
+  .menu-mobile-v2__header-back:focus-visible {
+    background: var(--base-orange-20, #ffe5cc);
+  }
+
+  .menu-mobile-v2__header-back:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--use-primary-default);
+  }
+
+  .menu-mobile-v2__header-back .icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .menu-mobile-v2__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu-mobile-v2__list li:not(:last-child) {
+    border-bottom: 1px solid var(--use-border-default);
+  }
+
+  /* Fila: con hijos (button, avanza de vista) o final (a, va al
+     destino) — nunca las dos cosas a la vez, y solo la primera trae
+     chevron (Figma: "no todas las opciones necesitan flecha"). */
+  .menu-mobile-v2__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    width: 100%;
+    min-height: 72px;
+    padding: 24px;
+    border: none;
+    background: var(--use-surface-white);
+    color: var(--use-text-primary);
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease;
+  }
+
+  .menu-mobile-v2__row:hover,
+  .menu-mobile-v2__row:focus-visible {
+    background: var(--base-orange-20, #ffe5cc);
+  }
+
+  .menu-mobile-v2__row:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--use-primary-default);
+  }
+
+  .menu-mobile-v2__row-label {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .menu-mobile-v2__row-chevron {
+    flex: 0 0 auto;
+    color: var(--use-text-tertiary);
+  }
+
+  .menu-mobile-v2__row-check {
+    flex: 0 0 auto;
+    color: var(--use-primary-default);
+  }
+
+  /* Fila activa (la página donde "está" el usuario en esta prueba):
+     no depende solo del color — suma ícono de check y negrita sobre
+     el mismo tinte durazno del resto del sistema. */
+  .menu-mobile-v2__row--active {
+    background: var(--base-orange-20, #ffe5cc);
+    font-weight: 700;
+  }
+
+  /* Punto discreto junto al nombre de una categoría que contiene la
+     opción activa en un nivel más profundo — ayuda a ubicarse desde
+     Nivel 1/2 sin tener que llegar hasta el final del árbol. */
+  .menu-mobile-v2__row-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: var(--space-8);
+    border-radius: 50%;
+    background: var(--use-primary-default);
+    vertical-align: middle;
+  }
+
+  /* Transición horizontal sutil y rápida: avanzar entra desde la
+     derecha, regresar desde la izquierda — nunca se "sale" del
+     menú, todo ocurre dentro del mismo panel. */
+  @keyframes menuMobileV2Forward {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @keyframes menuMobileV2Back {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .menu-mobile-v2--enter-forward { animation: menuMobileV2Forward .18s ease; }
+  .menu-mobile-v2--enter-back    { animation: menuMobileV2Back .18s ease; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-mobile-v2--enter-forward,
+  .menu-mobile-v2--enter-back {
+    animation: none;
+  }
+}
+
+/* ── index.html de comparación ──────────────────────────────
+   Reutiliza .portal-card / .portal-header ya definidos en css/portal.css
+   (mismo patrón que el index.html raíz del proyecto). Sin overrides. */

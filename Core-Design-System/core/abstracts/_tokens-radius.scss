@@ -1,0 +1,26 @@
+// ============================================================
+//  _tokens-radius.scss
+//  Generated from Figma token exports. Do not edit by hand.
+// ============================================================
+
+$border-radius-xs: 0.5rem; // 8px
+$border-radius-sm: 1rem; // 16px
+$border-radius-md: 1.5rem; // 24px
+$border-radius-lg: 2rem; // 32px
+
+$tokens-light: (
+  'border-radius/xs': 0.5rem, // 8px
+  'border-radius/sm': 1rem, // 16px
+  'border-radius/md': 1.5rem, // 24px
+  'border-radius/lg': 2rem, // 32px
+);
+
+// Legacy Sass aliases used by the current core implementation.
+// Values point to Figma-exported radius tokens.
+$radius-none: 0;
+$radius-xs: $border-radius-xs;
+$radius-sm: $border-radius-sm;
+$radius-md: $border-radius-md;
+$radius-lg: $border-radius-lg;
+$radius-full: $border-radius-lg;
+

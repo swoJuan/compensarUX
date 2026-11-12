@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harness auditoría</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+<link rel="stylesheet" href="css/core.css">
+<style>body{padding:24px} section{margin:0 0 24px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start} h2{width:100%;font-size:14px;margin:0}</style>
+</head>
+<body>
+<section id="buttons"><h2>Buttons</h2>
+ <button class="mp-btn mp-btn--primario" data-k="btn-primario">Boton</button>
+ <button class="mp-btn mp-btn--secundario" data-k="btn-secundario">Boton</button>
+ <button class="mp-btn mp-btn--terciario" data-k="btn-terciario">Boton</button>
+ <button class="mp-btn mp-btn--especial" data-k="btn-especial">Boton</button>
+ <button class="mp-btn mp-btn--primario" disabled data-k="btn-disabled">Boton</button>
+ <button class="mp-btn mp-btn--primario mp-btn--icon-left" data-k="btn-icon"><span class="material-symbols-rounded" aria-hidden="true">chevron_left</span>Boton</button>
+ <button class="btn btn-primary" data-k="legacy-btn-primary">Legacy</button>
+</section>
+<section id="inputs"><h2>Inputs</h2>
+ <div class="mp-input-group" style="width:320px">
+  <label class="mp-input-label" for="i1" data-k="inp-label">Nombre <span class="mp-input-required" aria-hidden="true">*</span></label>
+  <div class="mp-input-wrapper"><input id="i1" class="mp-input-field" placeholder="Placeholder" data-k="inp-field"></div>
+  <p class="mp-input-helper" data-k="inp-helper">Texto de apoyo</p>
+ </div>
+ <div class="mp-input-group" style="width:320px">
+  <label class="mp-input-label" for="i2">Error</label>
+  <input id="i2" class="mp-input-field error" placeholder="Placeholder" data-k="inp-error" aria-invalid="true" aria-describedby="i2h">
+  <p class="mp-input-helper error" id="i2h" data-k="inp-helper-error">Campo obligatorio</p>
+ </div>
+ <div class="mp-input-group" style="width:320px">
+  <label class="mp-input-label" for="i3">Disabled</label>
+  <input id="i3" class="mp-input-field" placeholder="Placeholder" disabled data-k="inp-disabled" value="Valor">
+ </div>
+ <div class="mp-input-group" style="width:320px">
+  <label class="mp-input-label" for="i4">Readonly</label>
+  <input id="i4" class="mp-input-field" readonly value="Solo lectura" data-k="inp-readonly">
+ </div>
+ <div class="field" style="width:320px"><label class="field-label" for="l1">Legacy</label><input id="l1" class="input" placeholder="Placeholder legacy" data-k="legacy-input"></div>
+</section>
+<section id="selection"><h2>Selection</h2>
+ <label class="mp-choice mp-checkbox" data-k="chk"><span class="mp-choice__field"><input class="form-check-input mp-choice__input" type="checkbox" checked data-k="chk-input"><span class="mp-choice__control" aria-hidden="true" data-k="chk-control"></span></span><span class="mp-choice__text"><span class="mp-choice__label" data-k="chk-label">Label</span></span></label>
+ <label class="mp-choice mp-checkbox"><span class="mp-choice__field"><input class="form-check-input mp-choice__input" type="checkbox" data-k="chk-off"><span class="mp-choice__control" aria-hidden="true" data-k="chk-off-control"></span></span><span class="mp-choice__text"><span class="mp-choice__label">Off</span></span></label>
+ <label class="mp-switch" data-k="sw"><span class="mp-switch__field"><input class="form-check-input mp-switch__input" type="checkbox" role="switch" data-k="sw-input"><span class="mp-switch__track" aria-hidden="true" data-k="sw-track"></span></span><span class="mp-switch__text"><span class="mp-switch__label">Switch</span></span></label>
+ <label class="mp-switch"><span class="mp-switch__field"><input class="form-check-input mp-switch__input" type="checkbox" role="switch" checked><span class="mp-switch__track" aria-hidden="true" data-k="sw-track-on"></span></span><span class="mp-switch__text"><span class="mp-switch__label">On</span></span></label>
+</section>
+<section id="alerts" style="display:grid;grid-template-columns:repeat(2,360px)"><h2>Alerts / Toast</h2>
+ <div class="mp-alert mp-alert--info" role="status" data-k="alert-info"><span class="mp-alert__icon material-symbols-rounded" aria-hidden="true">info</span><div class="mp-alert__content"><p class="mp-alert__title" data-k="alert-info-title">Notification title</p><p class="mp-alert__body" data-k="alert-info-body">Notification message.</p></div></div>
+ <div class="mp-alert mp-alert--warning" role="status"><span class="mp-alert__icon material-symbols-rounded" aria-hidden="true">warning</span><div class="mp-alert__content"><p class="mp-alert__title">Warning</p><p class="mp-alert__body" data-k="alert-warning-body">Notification message.</p></div></div>
+ <div class="mp-alert mp-alert--success" role="status"><span class="mp-alert__icon material-symbols-rounded" aria-hidden="true">check_circle</span><div class="mp-alert__content"><p class="mp-alert__title">Success</p><p class="mp-alert__body" data-k="alert-success-body">Notification message.</p></div></div>
+ <div class="mp-alert mp-alert--error" role="alert"><span class="mp-alert__icon material-symbols-rounded" aria-hidden="true">error</span><div class="mp-alert__content"><p class="mp-alert__title">Error</p><p class="mp-alert__body" data-k="alert-error-body">Notification message.</p></div></div>
+ <div class="mp-toast mp-toast--warning" role="status"><span class="mp-toast__icon material-symbols-rounded" aria-hidden="true">warning</span><div class="mp-toast__content"><p class="mp-toast__title" data-k="toast-title">Toast</p><p class="mp-toast__body" data-k="toast-body">Mensaje</p></div><button class="mp-toast__close" aria-label="Cerrar" data-k="toast-close"><span class="material-symbols-rounded" aria-hidden="true">close</span></button></div>
+</section>
+<section id="nav"><h2>Tabs / Pagination / Breadcrumb / Stepper</h2>
+ <div class="mp-tabs" role="tablist" aria-label="Demo"><button class="mp-tab is-active" role="tab" aria-selected="true" data-k="tab-active">Title tab</button><button class="mp-tab" role="tab" aria-selected="false" data-k="tab">Title tab</button></div>
+ <nav class="mp-pagination" aria-label="Paginación"><ul class="mp-pagination__list"><li class="mp-pagination__item"><a class="mp-pagination__link" href="#" data-k="pag-link">2</a></li><li class="mp-pagination__item"><a class="mp-pagination__link" aria-current="page" href="#" data-k="pag-current">3</a></li></ul></nav>
+ <nav class="mp-breadcrumb" aria-label="Migas"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="#" data-k="bc-link">Inicio</a></li><li class="mp-breadcrumb__item"><span class="mp-breadcrumb__current" aria-current="page" data-k="bc-current">Actual</span></li></ol></nav>
+ <div class="mp-stepper" style="width:300px"><div class="mp-stepper__track"><span class="mp-stepper__bar is-done" data-k="step-done"></span><span class="mp-stepper__bar is-current" data-k="step-current"></span><span class="mp-stepper__bar" data-k="step-pending"></span></div></div>
+</section>
+<section id="misc"><h2>Badges / Avatar / Dropdown option / Chip</h2>
+ <span class="mp-badge mp-badge--green" data-k="badge-green">Verde</span>
+ <span class="mp-badge mp-badge--error" data-k="badge-error">Error</span>
+ <span class="mp-avatar mp-avatar--brand" data-k="avatar-brand">JS</span>
+ <span class="mp-avatar mp-avatar--teal" data-k="avatar-teal">JS</span>
+ <button class="mp-user-chip mp-user-chip--is-hover" data-k="userchip"><span class="mp-avatar">JS</span><span class="mp-user-chip__body"><span class="mp-user-chip__name" data-k="userchip-name">Juan</span></span></button>
+ <div class="mp-dropdown" style="width:280px"><div class="mp-dropdown__panel" style="display:block;position:relative"><div class="mp-dropdown__option mp-dropdown__option--selected" data-k="dd-selected">Medellín</div><div class="mp-dropdown__option" data-k="dd-option">Cali</div></div></div>
+ <button class="mp-chip is-selected" aria-pressed="true" data-k="chip-selected">Chip</button>
+ <div class="mp-card" style="min-height:0" data-k="card"><h3 class="mp-card__title" data-k="card-title">Título card</h3><p class="mp-card__body">Cuerpo</p></div>
+ <a class="link-demo" href="#" data-k="link">Enlace de texto</a>
+ <div class="mp-loading" role="status"><div class="mp-loading__spinner" data-k="spinner" aria-hidden="true"><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span></div><p class="mp-loading__text">Cargando</p></div>
+</section>
+<section id="type"><h2>Tipografía</h2>
+ <h4 class="mp-h4" data-k="mp-h4">H4</h4><h5 class="mp-h5" data-k="mp-h5">H5</h5><p class="mp-display-l" data-k="mp-display-l">Display</p><p class="mp-eyebrow" data-k="mp-eyebrow">Eyebrow</p>
+</section>
+</body></html>

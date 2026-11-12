@@ -1,0 +1,998 @@
+{
+  "equivalence": {
+    "header": {
+      "1280-light": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "1280-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "1280-hc": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "320-light": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "768-light": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "1440-light": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "1280-dropdown+open": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "320-dropdown+open": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "zoom200-light": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "zoom200-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "zoom200-high-contrast": {
+        "count": 0,
+        "sample": [],
+        "total": 407
+      },
+      "rootfont150": {
+        "skipped": "informativo (rem escala con el tamaño de texto)"
+      },
+      "rootfont200": {
+        "skipped": "informativo (rem escala con el tamaño de texto)"
+      }
+    },
+    "sidebar": {
+      "1280-light": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "1280-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "1280-hc": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "320-light": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "768-light": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "1440-light": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "zoom200-light": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "zoom200-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "zoom200-high-contrast": {
+        "count": 0,
+        "sample": [],
+        "total": 551
+      },
+      "rootfont150": {
+        "skipped": "informativo (rem escala con el tamaño de texto)"
+      },
+      "rootfont200": {
+        "skipped": "informativo (rem escala con el tamaño de texto)"
+      }
+    },
+    "avatar": {
+      "1280-light": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      },
+      "1280-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      },
+      "1280-hc": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      },
+      "320-light": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      },
+      "768-light": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      },
+      "1440-light": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      },
+      "zoom200-light": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      },
+      "zoom200-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      },
+      "zoom200-high-contrast": {
+        "count": 0,
+        "sample": [],
+        "total": 351
+      }
+    },
+    "badges": {
+      "1280-light": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      },
+      "1280-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      },
+      "1280-hc": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      },
+      "320-light": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      },
+      "768-light": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      },
+      "1440-light": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      },
+      "zoom200-light": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      },
+      "zoom200-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      },
+      "zoom200-high-contrast": {
+        "count": 0,
+        "sample": [],
+        "total": 601
+      }
+    },
+    "iconos-intro": {
+      "1280-light": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      },
+      "1280-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      },
+      "1280-hc": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      },
+      "320-light": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      },
+      "768-light": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      },
+      "1440-light": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      },
+      "zoom200-light": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      },
+      "zoom200-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      },
+      "zoom200-high-contrast": {
+        "count": 0,
+        "sample": [],
+        "total": 346
+      }
+    },
+    "iconos-libreria": {
+      "1280-light": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      },
+      "1280-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      },
+      "1280-hc": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      },
+      "320-light": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      },
+      "768-light": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      },
+      "1440-light": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      },
+      "zoom200-light": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      },
+      "zoom200-dark": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      },
+      "zoom200-high-contrast": {
+        "count": 0,
+        "sample": [],
+        "total": 4343
+      }
+    }
+  },
+  "overflow": {
+    "header": {
+      "1280-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-hc": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "320-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "320->320",
+        "clientW": 320
+      },
+      "768-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "768->768",
+        "clientW": 768
+      },
+      "1440-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1440->1440",
+        "clientW": 1440
+      },
+      "1280-dropdown+open": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "320-dropdown+open": {
+        "base": false,
+        "now": false,
+        "scrollW": "320->320",
+        "clientW": 320
+      },
+      "zoom200-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-high-contrast": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "rootfont150": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "rootfont200": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      }
+    },
+    "sidebar": {
+      "1280-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-hc": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "320-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "320->320",
+        "clientW": 320
+      },
+      "768-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "768->768",
+        "clientW": 768
+      },
+      "1440-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1440->1440",
+        "clientW": 1440
+      },
+      "zoom200-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-high-contrast": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "rootfont150": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "rootfont200": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      }
+    },
+    "avatar": {
+      "1280-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-hc": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "320-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "320->320",
+        "clientW": 320
+      },
+      "768-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "768->768",
+        "clientW": 768
+      },
+      "1440-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1440->1440",
+        "clientW": 1440
+      },
+      "zoom200-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-high-contrast": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      }
+    },
+    "badges": {
+      "1280-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-hc": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "320-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "320->320",
+        "clientW": 320
+      },
+      "768-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "768->768",
+        "clientW": 768
+      },
+      "1440-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1440->1440",
+        "clientW": 1440
+      },
+      "zoom200-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-high-contrast": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      }
+    },
+    "iconos-intro": {
+      "1280-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-hc": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "320-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "320->320",
+        "clientW": 320
+      },
+      "768-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "768->768",
+        "clientW": 768
+      },
+      "1440-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1440->1440",
+        "clientW": 1440
+      },
+      "zoom200-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-high-contrast": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      }
+    },
+    "iconos-libreria": {
+      "1280-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "1280-hc": {
+        "base": false,
+        "now": false,
+        "scrollW": "1280->1280",
+        "clientW": 1280
+      },
+      "320-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "320->320",
+        "clientW": 320
+      },
+      "768-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "768->768",
+        "clientW": 768
+      },
+      "1440-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "1440->1440",
+        "clientW": 1440
+      },
+      "zoom200-light": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-dark": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      },
+      "zoom200-high-contrast": {
+        "base": false,
+        "now": false,
+        "scrollW": "640->640",
+        "clientW": 640
+      }
+    }
+  },
+  "clipped": {
+    "header": {
+      "1280-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-hc": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "320-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "768-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1440-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-dropdown+open": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "320-dropdown+open": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-high-contrast": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "rootfont150": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "rootfont200": {
+        "base": [],
+        "now": [],
+        "same": true
+      }
+    },
+    "sidebar": {
+      "1280-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-hc": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "320-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "768-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1440-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-high-contrast": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "rootfont150": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "rootfont200": {
+        "base": [
+          "DIV.mp-sidebar__panel"
+        ],
+        "now": [],
+        "same": false
+      }
+    },
+    "avatar": {
+      "1280-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-hc": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "320-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "768-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1440-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-high-contrast": {
+        "base": [],
+        "now": [],
+        "same": true
+      }
+    },
+    "badges": {
+      "1280-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-hc": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "320-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "768-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1440-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-high-contrast": {
+        "base": [],
+        "now": [],
+        "same": true
+      }
+    },
+    "iconos-intro": {
+      "1280-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-hc": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "320-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "768-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1440-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-high-contrast": {
+        "base": [],
+        "now": [],
+        "same": true
+      }
+    },
+    "iconos-libreria": {
+      "1280-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1280-hc": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "320-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "768-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "1440-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-light": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-dark": {
+        "base": [],
+        "now": [],
+        "same": true
+      },
+      "zoom200-high-contrast": {
+        "base": [],
+        "now": [],
+        "same": true
+      }
+    }
+  }
+}

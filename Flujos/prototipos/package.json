@@ -1,0 +1,9 @@
+{
+  "name": "compensar-flujos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Compensar — Prototipos (flujos ZT y Drupal). Consume el Design System vía sync-flows.",
+  "scripts": {
+    "sync-flows": "node scripts/sync-flows.mjs"
+  }
+}

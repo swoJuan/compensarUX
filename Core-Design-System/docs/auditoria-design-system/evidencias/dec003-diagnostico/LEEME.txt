@@ -1,0 +1,8 @@
+DEC-003 - diagnostico (sin cambios de codigo). BASE: Core Design System v2.2.0 (77696a7).
+inputs-states.js   Estados reales (hover/active/focus/error/disabled/readonly...) x 3 temas sobre v2.2.0:css/core.css.
+                   Mide bordes, fondo, texto, sombras, outline, opacidad acumulada, contrastes y si el estado cambia pixeles.
+states-v220.json   Resultados sobre v2.2.0 (42 filas: 14 estados x 3 temas).
+wip-inputs-scss.patch  Respaldo historico del WIP previo a v2.2.0 (ya incorporado en el commit 879fadb; NO reaplicar).
+axe.js             axe-core por tema.    figma-estados.png  Figma 2.2.3 (4527:13883).
+Reproducir: Playwright + axe-core fuera del repo (/tmp/dec003), servidor `python3 -m http.server 8000`;
+CSS de la base: git show v2.2.0:css/core.css > core.v220.css (apuntar VARIANTS a ese archivo).

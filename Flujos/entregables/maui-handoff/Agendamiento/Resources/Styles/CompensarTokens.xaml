@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Tokens y estilos del Design System Compensar (Medicina Prepagada) usados en la
+  pantalla "1-medicina prepagada - home" (Figma 7249:26353).
+  Los nombres de las keys replican las variables de Figma (use/..., body/..., etc.).
+  Registrar en App.xaml:  <ResourceDictionary Source="Resources/Styles/CompensarTokens.xaml" />
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ===== Colores (variables Figma) ===== -->
+    <Color x:Key="UsePrimaryDefault">#FF6600</Color>         <!-- use/primary/default -->
+    <Color x:Key="UsePrimaryGradientEnd">#E63F0C</Color>     <!-- gradiant boton (fin) -->
+    <Color x:Key="UseTextPrimary">#111111</Color>            <!-- use/text/primary -->
+    <Color x:Key="UseTextSecondary">#333333</Color>          <!-- use/text/secondary -->
+    <Color x:Key="UseTextTertiary">#666666</Color>           <!-- use/text/tertiary -->
+    <Color x:Key="UseTextLink">#FF6600</Color>               <!-- use/text/link -->
+    <Color x:Key="UseTextOnDarkPrimary">#FFFFFF</Color>      <!-- use/text/on-dark/primary -->
+    <Color x:Key="UseBorderSubtle">#E0E0E0</Color>           <!-- use/border/subtle -->
+    <Color x:Key="UseFocusBorder">#FFE6D6</Color>            <!-- use/focus/border -->
+    <Color x:Key="UseSurfaceWhite">#FFFFFF</Color>           <!-- use/surface/white -->
+    <Color x:Key="UseSurfaceOrange">#FFF2E3</Color>          <!-- use/surface/orange -->
+    <Color x:Key="UseStateErrorMandatory">#BB4945</Color>    <!-- use/state/error/mandatory -->
+
+    <!-- ===== Radios / espaciado ===== -->
+    <x:Double x:Key="BorderRadiusSm">16</x:Double>           <!-- border-radius/sm -->
+    <x:Double x:Key="BorderRadiusMd">24</x:Double>           <!-- border-radius/md -->
+
+    <!-- ===== Gradiente botón primario (vertical: #FF6600 -> #E63F0C) ===== -->
+    <LinearGradientBrush x:Key="GradientBoton" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FF6600" Offset="0" />
+        <GradientStop Color="#E63F0C" Offset="0.5" />
+        <GradientStop Color="#E63F0C" Offset="1" />
+    </LinearGradientBrush>
+
+    <!-- ===== Tipografía (Roboto; ver README para registrar fuentes) ===== -->
+    <!-- heading/h4: Bold 28 / lh 1.2 -->
+    <Style x:Key="HeadingH4" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoBold" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="LineHeight" Value="1.2" />
+        <Setter Property="TextColor" Value="{StaticResource UseTextPrimary}" />
+    </Style>
+    <!-- body/L: Regular 16 / lh 1.3 -->
+    <Style x:Key="BodyL" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="LineHeight" Value="1.3" />
+        <Setter Property="TextColor" Value="{StaticResource UseTextPrimary}" />
+    </Style>
+    <!-- body/M: Regular 14 / lh 1.5 -->
+    <Style x:Key="BodyM" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.5" />
+        <Setter Property="TextColor" Value="{StaticResource UseTextSecondary}" />
+    </Style>
+    <!-- comun/Label y comun/Placeholder: Regular 16 / lh 1 -->
+    <Style x:Key="ComunLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CharacterSpacing" Value="0.19" />
+        <Setter Property="TextColor" Value="{StaticResource UseTextPrimary}" />
+    </Style>
+    <Style x:Key="ComunPlaceholder" TargetType="Label" BasedOn="{StaticResource ComunLabel}">
+        <Setter Property="TextColor" Value="{StaticResource UseTextTertiary}" />
+    </Style>
+    <!-- M3/title/small: Medium 14 / lh 20 / tracking 0.1 (tabs) -->
+    <Style x:Key="M3TitleSmall" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoMedium" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="CharacterSpacing" Value="0.1" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource UseTextSecondary}" />
+    </Style>
+    <!-- comun/Boton: Bold 16 / lh 1 -->
+    <Style x:Key="ComunBoton" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoBold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CharacterSpacing" Value="0.35" />
+        <Setter Property="TextColor" Value="{StaticResource UseTextOnDarkPrimary}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+
+    <!-- ===== Componente: text field / select (min-h 56, p16, r16, borde subtle) ===== -->
+    <Style x:Key="MpSelectField" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource UseSurfaceWhite}" />
+        <Setter Property="Stroke" Value="{StaticResource UseBorderSubtle}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="MinimumHeightRequest" Value="56" />
+    </Style>
+
+    <!-- ===== Componente: MP RADIO buttons (M3: caja 24, aro 20 / trazo 2, punto 10) ===== -->
+    <ControlTemplate x:Key="MpRadioIndicator">
+        <Grid WidthRequest="24" HeightRequest="24">
+            <Ellipse x:Name="Ring" WidthRequest="20" HeightRequest="20"
+                     Stroke="{StaticResource UseTextPrimary}" StrokeThickness="2" Fill="Transparent" />
+            <Ellipse x:Name="Dot" WidthRequest="10" HeightRequest="10"
+                     Fill="{StaticResource UsePrimaryDefault}" IsVisible="False" />
+        </Grid>
+    </ControlTemplate>
+
+    <!-- Radio con etiqueta debajo (Centros médicos propios / Otros prestadores) -->
+    <ControlTemplate x:Key="MpRadioVerticalTemplate">
+        <VerticalStackLayout Spacing="4" HorizontalOptions="Fill">
+            <Grid WidthRequest="24" HeightRequest="24" HorizontalOptions="Center">
+                <Ellipse x:Name="Ring" WidthRequest="20" HeightRequest="20"
+                         Stroke="{StaticResource UseTextPrimary}" StrokeThickness="2" Fill="Transparent" />
+                <Ellipse x:Name="Dot" WidthRequest="10" HeightRequest="10"
+                         Fill="{StaticResource UsePrimaryDefault}" IsVisible="False" />
+            </Grid>
+            <ContentPresenter HorizontalOptions="Center" />
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CheckedStates">
+                        <VisualState x:Name="Checked">
+                            <VisualState.Setters>
+                                <Setter TargetName="Ring" Property="Ellipse.Stroke" Value="{StaticResource UsePrimaryDefault}" />
+                                <Setter TargetName="Dot" Property="Ellipse.IsVisible" Value="True" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked" />
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
+        </VerticalStackLayout>
+    </ControlTemplate>
+
+    <!-- Componente: tabCitas (tarjeta seleccionable Presencial / Virtual) -->
+    <ControlTemplate x:Key="MpTabCitasTemplate">
+        <Border x:Name="Card" Padding="16" StrokeThickness="1" StrokeShape="RoundRectangle 8"
+                BackgroundColor="{StaticResource UseSurfaceWhite}" Stroke="{StaticResource UseBorderSubtle}">
+            <VerticalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                <Grid WidthRequest="24" HeightRequest="24" HorizontalOptions="Center">
+                    <Ellipse x:Name="Ring" WidthRequest="20" HeightRequest="20"
+                             Stroke="{StaticResource UseTextPrimary}" StrokeThickness="2" Fill="Transparent" />
+                    <Ellipse x:Name="Dot" WidthRequest="10" HeightRequest="10"
+                             Fill="{StaticResource UsePrimaryDefault}" IsVisible="False" />
+                </Grid>
+                <ContentPresenter HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CheckedStates">
+                        <VisualState x:Name="Checked">
+                            <VisualState.Setters>
+                                <Setter TargetName="Card" Property="Border.BackgroundColor" Value="{StaticResource UseSurfaceOrange}" />
+                                <Setter TargetName="Card" Property="Border.Stroke" Value="{StaticResource UseFocusBorder}" />
+                                <Setter TargetName="Ring" Property="Ellipse.Stroke" Value="{StaticResource UsePrimaryDefault}" />
+                                <Setter TargetName="Dot" Property="Ellipse.IsVisible" Value="True" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Unchecked" />
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </VisualStateManager.VisualStateGroups>
+        </Border>
+    </ControlTemplate>
+
+    <!-- Chevron (arrows / CaretDown 24) dibujado como Path para no depender de un asset -->
+    <Style x:Key="CaretDown" TargetType="Path">
+        <Setter Property="Data" Value="M5,9 L12,16 L19,9" />
+        <Setter Property="Stroke" Value="{StaticResource UseTextSecondary}" />
+        <Setter Property="StrokeThickness" Value="1.5" />
+        <Setter Property="StrokeLineCap" Value="Round" />
+        <Setter Property="StrokeLineJoin" Value="Round" />
+        <Setter Property="WidthRequest" Value="24" />
+        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+</ResourceDictionary>

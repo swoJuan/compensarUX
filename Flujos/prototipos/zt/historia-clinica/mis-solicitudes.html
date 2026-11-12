@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Historia clínica · Mis solicitudes</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → componentes → custom del flujo -->
+<link rel="stylesheet" href="../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../shared/icons/icons.css">
+<link rel="stylesheet" href="../shared/zt.css">
+<link rel="stylesheet" href="../shared/components/alert.css">
+<link rel="stylesheet" href="../shared/components/modal.css">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Familiar</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" data-active="historia"></nav>
+
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page hc-page hc-page--wide">
+
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Historia clínica</span>
+          </nav>
+
+          <h1 class="page-title">
+            <span class="orange">Historia </span><span class="dark">clínica</span>
+          </h1>
+
+          <nav class="mp-tabs hc-tabs" aria-label="Historia clínica">
+            <a class="mp-tab" href="index.html">Nueva solicitud</a>
+            <a class="mp-tab is-active" href="mis-solicitudes.html" aria-current="page">Mis solicitudes</a>
+          </nav>
+
+          <!-- Listado (lo pinta mis-solicitudes.js) -->
+          <div id="hc-list-wrap" class="hc-list-wrap"></div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../../shared/vendor/mp-tabs.js" defer></script>
+<script src="../shared/zt-sidebar.js"></script>
+<script src="../shared/components/modal.js"></script>
+<script src="js/hc-mock.js"></script>
+<script src="js/mensajes.js"></script>
+<script src="js/mis-solicitudes.js"></script>
+<script src="js/simulador.js"></script>
+</body>
+</html>

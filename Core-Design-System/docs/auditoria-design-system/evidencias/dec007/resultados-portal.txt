@@ -1,0 +1,105 @@
+== PORTAL real: base v2.2.1 vs nuevo (Light) ==
+Web · wrappers con aria-expanded (debe ser 0) ->    base v2.2.1 · light        1
+Web · wrappers con aria-expanded (debe ser 0) ->    nuevo · light              0
+Web · wrappers con role=combobox (debe ser 0) ->    base v2.2.1 · light        0
+Web · wrappers con role=combobox (debe ser 0) ->    nuevo · light              0
+Web · triggers con aria-controls roto (debe ser 0) ->    base v2.2.1 · light        0
+Web · triggers con aria-controls roto (debe ser 0) ->    nuevo · light              0
+Web · playground: ↓ abre el panel y mueve el foco ->    base v2.2.1 · light        FALLA
+Web · playground: ↓ abre el panel y mueve el foco ->    nuevo · light              OK
+Web · playground: ↓ + Enter selecciona, cierra y devuelve el foco ->    base v2.2.1 · light        FALLA
+Web · playground: ↓ + Enter selecciona, cierra y devuelve el foco ->    nuevo · light              OK
+Web · tras regenerar (búsqueda): foco al campo, filtra y selecciona ->    base v2.2.1 · light        FALLA
+Web · tras regenerar (búsqueda): foco al campo, filtra y selecciona ->    nuevo · light              OK
+Web · multi-selección: Espacio alterna (2 marcadas, 2 chips, sigue abierto) ->    base v2.2.1 · light        FALLA
+Web · multi-selección: Espacio alterna (2 marcadas, 2 chips, sigue abierto) ->    nuevo · light              OK
+Web · tarjeta de estado estática: ↓ abre ->    base v2.2.1 · light        FALLA
+Web · tarjeta de estado estática: ↓ abre ->    nuevo · light              OK
+Web · diagrama de anatomía marcado data-mp-static y sin enhance ->    base v2.2.1 · light        FALLA
+Web · diagrama de anatomía marcado data-mp-static y sin enhance ->    nuevo · light              OK
+Web · axe (sin contraste) en la página de Dropdown ->    base v2.2.1 · light        aria-input-field-name(1), aria-required-children(2), button-name(1), scrollable-region-focusable(1)
+Web · axe (sin contraste) en la página de Dropdown ->    nuevo · light              aria-required-children(2), scrollable-region-focusable(1)
+Web · errores JS ->    base v2.2.1 · light        ninguno
+Web · errores JS ->    nuevo · light              ninguno
+Web · tabs playground: → mueve foco, activa y conserva el foco tras renderizar ->    base v2.2.1 · light        FALLA
+Web · tabs playground: → mueve foco, activa y conserva el foco tras renderizar ->    nuevo · light              OK
+Web · tabs playground: Fin va a la última y conserva el foco ->    base v2.2.1 · light        FALLA
+Web · tabs playground: Fin va a la última y conserva el foco ->    nuevo · light              OK
+Web · tabs playground: Inicio va a la primera ->    base v2.2.1 · light        OK
+Web · tabs playground: Inicio va a la primera ->    nuevo · light              OK
+Web · tira estática "Tabs solo texto": → activa la siguiente ->    base v2.2.1 · light        FALLA
+Web · tira estática "Tabs solo texto": → activa la siguiente ->    nuevo · light              OK
+Web · axe (sin contraste) en la página de Tabs ->    base v2.2.1 · light        aria-required-children(1), aria-required-parent(16), aria-valid-attr-value(1)
+Web · axe (sin contraste) en la página de Tabs ->    nuevo · light              aria-required-children(1), aria-required-parent(16)
+Web · errores JS (tabs) ->    base v2.2.1 · light        ninguno
+Web · errores JS (tabs) ->    nuevo · light              ninguno
+App · dropdown playground: ↓ + Enter selecciona y devuelve el foco ->    base v2.2.1 · light        FALLA
+App · dropdown playground: ↓ + Enter selecciona y devuelve el foco ->    nuevo · light              OK
+App · tabs: → activa la siguiente y conserva el foco tras renderizar ->    base v2.2.1 · light        FALLA
+App · tabs: → activa la siguiente y conserva el foco tras renderizar ->    nuevo · light              OK
+App · tabs: tabindex móvil tras renderizar ->    base v2.2.1 · light        0,0,0
+App · tabs: tabindex móvil tras renderizar ->    nuevo · light              -1,0,-1
+
+== PORTAL real: nuevo en Dark y High Contrast ==
+Web · wrappers con aria-expanded (debe ser 0) ->    nuevo · dark               0
+Web · wrappers con role=combobox (debe ser 0) ->    nuevo · dark               0
+Web · triggers con aria-controls roto (debe ser 0) ->    nuevo · dark               0
+Web · playground: ↓ abre el panel y mueve el foco ->    nuevo · dark               OK
+Web · playground: ↓ + Enter selecciona, cierra y devuelve el foco ->    nuevo · dark               OK
+Web · tras regenerar (búsqueda): foco al campo, filtra y selecciona ->    nuevo · dark               OK
+Web · multi-selección: Espacio alterna (2 marcadas, 2 chips, sigue abierto) ->    nuevo · dark               OK
+Web · tarjeta de estado estática: ↓ abre ->    nuevo · dark               OK
+Web · diagrama de anatomía marcado data-mp-static y sin enhance ->    nuevo · dark               OK
+Web · axe (sin contraste) en la página de Dropdown ->    nuevo · dark               aria-required-children(2), scrollable-region-focusable(1)
+Web · errores JS ->    nuevo · dark               ninguno
+Web · tabs playground: → mueve foco, activa y conserva el foco tras renderizar ->    nuevo · dark               OK
+Web · tabs playground: Fin va a la última y conserva el foco ->    nuevo · dark               OK
+Web · tabs playground: Inicio va a la primera ->    nuevo · dark               OK
+Web · tira estática "Tabs solo texto": → activa la siguiente ->    nuevo · dark               OK
+Web · axe (sin contraste) en la página de Tabs ->    nuevo · dark               aria-required-children(1), aria-required-parent(16)
+Web · errores JS (tabs) ->    nuevo · dark               ninguno
+App · dropdown playground: ↓ + Enter selecciona y devuelve el foco ->    nuevo · dark               OK
+App · tabs: → activa la siguiente y conserva el foco tras renderizar ->    nuevo · dark               OK
+App · tabs: tabindex móvil tras renderizar ->    nuevo · dark               -1,0,-1
+Web · wrappers con aria-expanded (debe ser 0) ->    nuevo · high-contrast      0
+Web · wrappers con role=combobox (debe ser 0) ->    nuevo · high-contrast      0
+Web · triggers con aria-controls roto (debe ser 0) ->    nuevo · high-contrast      0
+Web · playground: ↓ abre el panel y mueve el foco ->    nuevo · high-contrast      OK
+Web · playground: ↓ + Enter selecciona, cierra y devuelve el foco ->    nuevo · high-contrast      OK
+Web · tras regenerar (búsqueda): foco al campo, filtra y selecciona ->    nuevo · high-contrast      OK
+Web · multi-selección: Espacio alterna (2 marcadas, 2 chips, sigue abierto) ->    nuevo · high-contrast      OK
+Web · tarjeta de estado estática: ↓ abre ->    nuevo · high-contrast      OK
+Web · diagrama de anatomía marcado data-mp-static y sin enhance ->    nuevo · high-contrast      OK
+Web · axe (sin contraste) en la página de Dropdown ->    nuevo · high-contrast      aria-required-children(2), scrollable-region-focusable(1)
+Web · errores JS ->    nuevo · high-contrast      ninguno
+Web · tabs playground: → mueve foco, activa y conserva el foco tras renderizar ->    nuevo · high-contrast      OK
+Web · tabs playground: Fin va a la última y conserva el foco ->    nuevo · high-contrast      OK
+Web · tabs playground: Inicio va a la primera ->    nuevo · high-contrast      OK
+Web · tira estática "Tabs solo texto": → activa la siguiente ->    nuevo · high-contrast      OK
+Web · axe (sin contraste) en la página de Tabs ->    nuevo · high-contrast      aria-required-children(1), aria-required-parent(16)
+Web · errores JS (tabs) ->    nuevo · high-contrast      ninguno
+App · dropdown playground: ↓ + Enter selecciona y devuelve el foco ->    nuevo · high-contrast      OK
+App · tabs: → activa la siguiente y conserva el foco tras renderizar ->    nuevo · high-contrast      OK
+App · tabs: tabindex móvil tras renderizar ->    nuevo · high-contrast      -1,0,-1
+
+== 320 px y texto 200 % en el portal real ==
+100% 320px base v2.2.1  {"dropdown overflow":0,"dropdown teclado":false,"panel en viewport":true,"tabs overflow":0,"tabs teclado":false,"tab enfocada visible":true}
+100% 320px nuevo        {"dropdown overflow":0,"dropdown teclado":true,"panel en viewport":true,"tabs overflow":0,"tabs teclado":true,"tab enfocada visible":true}
+200% 320px base v2.2.1  {"dropdown overflow":0,"dropdown teclado":false,"panel en viewport":false,"tabs overflow":0,"tabs teclado":false,"tab enfocada visible":true}
+200% 320px nuevo        {"dropdown overflow":0,"dropdown teclado":true,"panel en viewport":true,"tabs overflow":0,"tabs teclado":true,"tab enfocada visible":true}
+
+== Barrido de 84 rutas ==
+rutas comparadas: 84 · tablists (nuevo): 76 · dropdowns (nuevo): 25
+errores JS nuevos: 0 · desbordes nuevos: 0 · tablists con >1 seleccionada nuevos: 0
+tablists sin exactamente una parada de Tab → base: 50 · nuevo: 0
+sin diferencias adversas
+
+== Sin cambios visuales en reposo (tarjetas ancladas) ==
+light          idénticas acumuladas: 12 distintas acumuladas: 0
+dark           idénticas acumuladas: 23 distintas acumuladas: 1 → dropdown|#drp-live-preview|0
+high-contrast  idénticas acumuladas: 35 distintas acumuladas: 1
+
+NOTA (lectura de la última sección): la fila "dark ... dropdown|#drp-live-preview|0" es un artefacto de la técnica de aislamiento
+(ese bloque no tiene fondo propio y deja ver contenido de la página que cambia de altura). Verificado con captura directa del
+elemento, base frente a nuevo, en Dark: 320x109 px, 0 filas distintas. Resultado real: idénticas en Light, Dark y High Contrast.
+Las 11 apariciones de FALLA corresponden a la línea base v2.2.1 (sin teclado); el árbol nuevo tiene 0.

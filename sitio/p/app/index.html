@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar APP – Inicio</title>
+<link rel="icon" href="../zt/favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!-- Cascada APP: Design System → iconos → shell APP → custom de la pantalla -->
+<link rel="stylesheet" href="../shared/vendor/core.css">
+<link rel="stylesheet" href="../shared/icons/icons.css">
+<link rel="stylesheet" href="shared/app.css">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+<div class="app-viewer">
+  <div class="app-stage" data-app-stage>
+    <div class="app-device">
+      <div class="app-screen home">
+
+        <div class="app-status" aria-hidden="true">
+          <span>9:41</span>
+          <span class="app-status__pills"><i></i><i></i><i></i></span>
+        </div>
+
+        <div class="app-views">
+          <main class="app-view" aria-label="Inicio">
+
+            <header class="home__bar">
+              <button class="app-iconbtn" type="button" aria-label="Abrir menú">
+                <span class="home__bars" aria-hidden="true"></span>
+              </button>
+              <img class="home__logo" src="../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+              <button class="app-iconbtn" type="button" aria-label="Notificaciones">
+                <span class="icon icon-bell icon-32 gs-inherit" aria-hidden="true"></span>
+              </button>
+            </header>
+
+            <section class="home__welcome" aria-labelledby="home-hello">
+              <span class="home__avatar icon icon-user-circle icon-48 gs-inherit" aria-hidden="true"></span>
+              <div>
+                <h1 class="home__hello" id="home-hello">Bienvenido</h1>
+                <label class="home__hint" for="home-user">Por favor, seleccione el usuario:</label>
+                <div class="home__select-wrap">
+                  <select class="home__select" id="home-user">
+                    <option>Margarita López Arenas</option>
+                    <option>Luis Orejuela</option>
+                    <option>Ana Orejuela</option>
+                  </select>
+                  <span class="icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+                </div>
+                <p class="home__doc">C.C. 1.234.567.890</p>
+              </div>
+            </section>
+
+            <nav class="home__grid" aria-label="Servicios">
+              <button class="home__tile" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-plus icon-32 gs-inherit" aria-hidden="true"></span>Agendamiento
+              </button>
+              <button class="home__tile home__tile--purple" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-flask icon-32 gs-inherit" aria-hidden="true"></span>Resultado laboratorios clínicos
+              </button>
+              <button class="home__tile home__tile--pink" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-medical-file icon-32 gs-inherit" aria-hidden="true"></span>Certificaciones salud
+              </button>
+              <button class="home__tile home__tile--green" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-device-mobile icon-32 gs-inherit" aria-hidden="true"></span>Pagos en línea
+              </button>
+              <button class="home__tile" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-calendar-blank icon-32 gs-inherit" aria-hidden="true"></span>Turno virtual
+              </button>
+              <button class="home__tile home__tile--purple" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-medical-file icon-32 gs-inherit" aria-hidden="true"></span>Resultados imágenes diagnósticas
+              </button>
+              <button class="home__tile home__tile--yellow" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-headset icon-32 gs-inherit" aria-hidden="true"></span>Orientación médica
+              </button>
+              <button class="home__tile home__tile--pink" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-check icon-32 gs-inherit" aria-hidden="true"></span>Autorizaciones médicas
+              </button>
+              <button class="home__tile home__tile--teal" type="button" aria-disabled="true">
+                <span class="home__tile-icon icon icon-envelope icon-32 gs-inherit" aria-hidden="true"></span>Información clínica
+              </button>
+              <!-- Flujo activo -->
+              <a class="home__tile" href="historia-clinica/index.html">
+                <span class="home__tile-icon icon icon-heartbeat icon-32 gs-inherit" aria-hidden="true"></span>Historia clínica
+              </a>
+            </nav>
+
+          </main>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script src="shared/app-viewer.js"></script>
+</body>
+</html>

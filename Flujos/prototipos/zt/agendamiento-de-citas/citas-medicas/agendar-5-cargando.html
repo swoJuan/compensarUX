@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Compensar – Buscando agenda</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="css/custom.css">
+<script>
+(function (m, a, z, e) {
+  var s, t, u, v;
+  try {
+    t = m.sessionStorage.getItem('maze-us');
+  } catch (err) {}
+
+  if (!t) {
+    t = new Date().getTime();
+    try {
+      m.sessionStorage.setItem('maze-us', t);
+    } catch (err) {}
+  }
+
+  u = document.currentScript || (function () {
+    var w = document.getElementsByTagName('script');
+    return w[w.length - 1];
+  })();
+  v = u && u.nonce;
+
+  s = a.createElement('script');
+  s.src = z + '?apiKey=' + e;
+  s.async = true;
+  if (v) s.setAttribute('nonce', v);
+  a.getElementsByTagName('head')[0].appendChild(s);
+  m.mazeUniversalSnippetApiKey = e;
+})(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '91229964-c105-482c-bdda-48610b6c5d69');
+</script>
+<style>
+/* ─── STEP PROGRESS ─── */
+.step-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.step-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+}
+.step-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.2;
+  margin: 0;
+}
+.step-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+  margin: 0;
+  line-height: 1.3;
+}
+.step-bar {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+.step-bar__track {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: #e0e0e0;
+}
+.step-bar__track.active {
+  background: var(--color-primary, #ff6600);
+}
+
+#s-home .scroller {
+  padding: 0 20px 100px;
+}
+
+#s-home .breadcrumb {
+  padding: 20px 0 0;
+}
+
+/* ─── TWO COLUMN LAYOUT ─── */
+.lab-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-top: 28px;
+}
+.lab-col-left {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.lab-col-right {
+  width: 387px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── SECTION HEADINGS ─── */
+.lab-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.3;
+  margin: 0;
+}
+.lab-section-sub {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ─── BADGES ─── */
+.lab-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lab-badge-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.mp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.mp-chip--violet {
+  background: #efecf9;
+  color: #4e3199;
+}
+.mp-chip--info {
+  background: #e6f1fb;
+  color: #2d4a67;
+}
+.mp-chip,
+.mp-chip:hover,
+.mp-chip:focus,
+.mp-chip:focus-visible,
+.mp-chip:active {
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+  transform: none;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+.mp-chip--violet:hover,
+.mp-chip--violet:focus,
+.mp-chip--violet:focus-visible,
+.mp-chip--violet:active {
+  background: #efecf9 !important;
+  color: #4e3199 !important;
+}
+.mp-chip--info:hover,
+.mp-chip--info:focus,
+.mp-chip--info:focus-visible,
+.mp-chip--info:active {
+  background: #e6f1fb !important;
+  color: #2d4a67 !important;
+}
+.mp-chip--close {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.mp-chip--close .chip-x {
+  width: 12px;
+  height: 12px;
+  opacity: 0.6;
+}
+
+/* ─── SEARCH / FILTER BAR ─── */
+.lab-filters {
+  display: flex;
+  gap: 12px;
+}
+.lab-input-wrap {
+  flex: 1;
+  position: relative;
+}
+.lab-input-wrap .icon-inside {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
+.lab-input {
+  width: 100%;
+  height: 56px;
+  padding: 0 44px 0 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #666;
+  background: #fff;
+  box-sizing: border-box;
+  appearance: none;
+  cursor: pointer;
+}
+.lab-input:focus {
+  outline: none;
+  border-color: #ff6600;
+}
+.lab-input::placeholder {
+  color: #999;
+}
+
+/* ─── ORDER ACCORDION LIST ─── */
+.lab-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+/* ─── COMPACT CHECKBOX (usa componente DS mp-choice) ─── */
+.lab-chk-compact {
+  flex: 0 0 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+  flex-shrink: 0;
+}
+.lab-chk-compact .mp-choice__input {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+/* ─── ORDER ITEM ─── */
+.order-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.order-item__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px 16px 12px;
+  background: #fff;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s;
+}
+.order-item__head:hover {
+  background: #fafafa;
+}
+.order-item.is-expanded .order-item__head {
+  border-bottom-color: #e0e0e0;
+}
+
+
+
+/* order icon */
+.order-icon {
+  width: 40px;
+  height: 40px;
+  background: #fff2e3;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.order-icon .icon {
+  color: #ff6600;
+}
+.order-item__info {
+  flex: 1;
+  min-width: 0;
+}
+.order-item__name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.3;
+}
+.order-item__count {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.order-item__count .meta-dot {
+  opacity: 0.4;
+}
+.order-item__count .meta-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.order-item__count .meta-date .icon {
+  font-size: 13px;
+  vertical-align: -1px;
+}
+.order-item__arrow {
+  flex-shrink: 0;
+  color: #666;
+  transition: transform 0.2s;
+}
+.order-item.is-expanded .order-item__arrow {
+  transform: rotate(90deg);
+}
+
+/* expanded exams list */
+.order-item__content {
+  display: none;
+  background: #fff;
+  padding: 20px 24px;
+  border-top: 1px solid #ccc;
+}
+.order-item.is-expanded .order-item__content {
+  display: block;
+}
+.exam-list {
+  display: flex;
+  flex-direction: column;
+}
+.exam-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 0;
+  border-bottom: 1px dashed #ccc;
+}
+.exam-item:last-child {
+  border-bottom: none;
+}
+.exam-item__name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.3;
+}
+.exam-item__desc {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ─── CENTROS MÉDICOS ─── */
+.centros-badge-row {
+  display: flex;
+  justify-content: flex-end;
+}
+.centros-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 540px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #b8b8b8 #f5f5f5;
+}
+.centros-list::-webkit-scrollbar {
+  width: 6px;
+}
+.centros-list::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 12px;
+}
+.centros-list::-webkit-scrollbar-thumb {
+  background: #b8b8b8;
+  border-radius: 12px;
+}
+.centros-section-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 0 4px 0;
+}
+.centros-section-label.has-top-gap {
+  padding-top: 24px;
+}
+.centro-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+.centro-item:last-child {
+  border-bottom: none;
+}
+.centro-item__text {
+  flex: 1;
+  min-width: 0;
+}
+.centro-item__name {
+  font-size: 16px;
+  font-weight: 400;
+  color: #111;
+  line-height: 1.3;
+}
+.centro-item__addr {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ─── BOTTOM SUMMARY BAR ─── */
+.lab-summary-bar {
+  position: fixed;
+  bottom: 0;
+  left: var(--sidebar-w, 227px);
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+.lab-summary-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lab-summary-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.3;
+}
+.lab-summary-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lab-summary-right {
+  flex-shrink: 0;
+}
+
+#s-home .footer {
+  margin-top: 56px;
+}
+
+/* ─── SELECT ALL ROW ─── */
+.select-all-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 0;
+}
+.select-all-row label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.orders-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+}
+
+
+/* ─── CENTRO DISABLED STATE (max 3 seleccionados) ─── */
+.centro-item.is-disabled {
+  opacity: 0.4;
+}
+.centro-item.is-disabled .mp-choice__control::before {
+  border-color: #ccc !important;
+  background: #f5f5f5 !important;
+}
+.centro-item.is-disabled .mp-choice__input {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.centro-item.is-disabled .centro-item__name,
+.centro-item.is-disabled .centro-item__addr {
+  color: #aaa;
+}
+
+
+/* ─── PANTALLA CARGANDO ─── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+.loading-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px 120px;
+  min-height: 60vh;
+}
+.loading-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 48px 36px;
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+.loading-icon-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.loading-search-icon {
+  position: relative;
+  width: 72px;
+  height: 72px;
+}
+.loading-search-icon .circle {
+  width: 52px;
+  height: 52px;
+  background: #ff6600;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: pulse-search 1.6s ease-in-out infinite;
+}
+.loading-search-icon .handle {
+  width: 24px;
+  height: 6px;
+  background: #ff6600;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+  transform: rotate(45deg);
+  transform-origin: left center;
+  animation: pulse-search 1.6s ease-in-out infinite;
+}
+@keyframes pulse-search {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.loading-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 6px;
+}
+.loading-card-sub {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 28px;
+}
+.loading-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.loading-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+  font-size: 15px;
+  color: #333;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+.loading-step:last-child { border-bottom: none; }
+.loading-step.is-done { opacity: 1; }
+.loading-step.is-active { opacity: 1; }
+.loading-step__icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-step.is-done .loading-step__icon {
+  background: #2e7d32;
+}
+.loading-step.is-done .loading-step__icon .icon {
+  color: #fff;
+  font-size: 13px;
+}
+.loading-step.is-active .loading-step__icon {
+  border: 2px solid #e0e0e0;
+  background: transparent;
+}
+.step-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ccc;
+  border-top-color: #ff6600;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-step:not(.is-done):not(.is-active) .loading-step__icon {
+  border: 2px solid #e0e0e0;
+  background: transparent;
+}
+
+/* ─── MOBILE OVERRIDES ─── */
+@media (max-width: 900px) {
+  #s-home .scroller {
+    padding: 0 16px 20px;
+  }
+
+  #s-home .breadcrumb {
+    padding: 16px 0 0;
+  }
+
+  .step-header {
+    gap: 10px;
+  }
+
+  .lab-row {
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .lab-col-left,
+  .lab-col-right {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .lab-col-right {
+    width: 100%;
+  }
+
+  .lab-filters {
+    flex-direction: column;
+  }
+
+  .orders-list-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .lab-summary-bar {
+    left: 0;
+    padding: 12px 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  #s-home .scroller {
+    padding-bottom: 120px;
+  }
+
+  .lab-summary-right {
+    width: 100%;
+  }
+
+  .lab-summary-right .btn-primary {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #s-home .scroller {
+    padding: 0 32px 32px;
+  }
+
+  #s-home .breadcrumb {
+    padding: 22px 0 0;
+  }
+}
+
+/* ─── VALIDACIÓN — estados de error ─── */
+.lab-col-left.has-val-error .lab-orders-list,
+.lab-col-left.has-val-error .lab-filters {
+  border: 2px solid #d32f2f !important;
+  border-radius: 12px;
+}
+.lab-col-right.has-val-error .centros-list {
+  border: 2px solid #d32f2f !important;
+  border-radius: 12px;
+}
+.val-error-alert {
+  margin-bottom: 8px;
+}
+
+
+.loading-svg-icon {
+  animation: pulse-search 1.6s ease-in-out infinite;
+  display: block;
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Familiar</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar" data-active="agendamiento"></nav>
+
+    <!-- MAIN -->
+    <main class="main">
+
+    <main class="main">
+  <div class="scroller" style="padding-bottom:60px;">
+    <nav class="breadcrumb">
+      <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+      <a href="prueba-5.html">Inicio</a>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="bc-muted">Laboratorios</span>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="current">Agendar exámenes</span>
+    </nav>
+
+    <h1 class="page-title">
+      <span class="orange">Buscando </span><span class="dark">agenda</span>
+    </h1>
+
+    <div class="loading-wrap">
+      <div class="loading-card">
+
+        <p class="loading-card-title">Analizando tus exámenes</p>
+
+        <div class="loading-icon-wrap">
+          <img src="assets/IconCargando-5.svg" alt="" width="96" height="96" class="loading-svg-icon">
+        </div>
+
+        <p class="loading-card-sub">
+          <strong>Estamos revisando tus exámenes</strong><br>
+          para organizarlos de la mejor manera.
+        </p>
+
+        <ul class="loading-steps" id="loading-steps">
+          <li class="loading-step" data-step="0">
+            <div class="loading-step__icon"></div>
+            <span>Validando requisitos</span>
+          </li>
+          <li class="loading-step" data-step="1">
+            <div class="loading-step__icon"></div>
+            <span>Verificando compatibilidades</span>
+          </li>
+          <li class="loading-step" data-step="2">
+            <div class="loading-step__icon"></div>
+            <span>Calculando tiempos y duración</span>
+          </li>
+          <li class="loading-step" data-step="3">
+            <div class="loading-step__icon"></div>
+            <span>Buscando sedes disponibles</span>
+          </li>
+          <li class="loading-step" data-step="4">
+            <div class="loading-step__icon"></div>
+            <span>Preparando resultados</span>
+          </li>
+        </ul>
+
+        <div class="mp-alert mp-alert--info" id="loading-alert" style="margin-bottom:0; text-align:left;">
+          <span class="mp-alert__icon">
+            <span class="icon icon-info icon-20" aria-hidden="true"></span>
+          </span>
+          <div class="mp-alert__content">
+            <p class="mp-alert__title">Esto puede tomar unos segundos...</p>
+            <p class="mp-alert__body">Por favor, espera un momento</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+    </main>
+  </div><!-- /layout -->
+</div><!-- /app -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var steps = document.querySelectorAll('#loading-steps .loading-step');
+
+  steps.forEach(function(s) {
+    s.classList.remove('is-done', 'is-active');
+    s.querySelector('.loading-step__icon').innerHTML = '';
+  });
+
+  function activar(i) {
+    if (i >= steps.length) {
+      // Todos listos: redirigir a selección de horario
+      setTimeout(function() {
+        window.location.href = 'agenda-5.html';
+      }, 600);
+      return;
+    }
+    var step = steps[i];
+    step.classList.add('is-active');
+    step.querySelector('.loading-step__icon').innerHTML = '<div class="step-spinner"></div>';
+
+    setTimeout(function() {
+      step.classList.remove('is-active');
+      step.classList.add('is-done');
+      step.querySelector('.loading-step__icon').innerHTML = '<span class="icon icon-check icon-12" aria-hidden="true"></span>';
+      setTimeout(function() { activar(i + 1); }, 300);
+    }, 900 + Math.random() * 400);
+  }
+
+  activar(0);
+});
+</script>
+  <script src="../../shared/zt-sidebar.js"></script>
+</body>
+</html>

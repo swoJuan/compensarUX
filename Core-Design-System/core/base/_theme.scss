@@ -1,0 +1,594 @@
+// ============================================================
+//  _theme.scss
+//  Core compatibility layer.
+//  All color values point to Figma-exported tokens in the core.
+//  Do not add portal-only tokens here.
+// ============================================================
+
+@use 'sass:string';
+@use '../abstracts/tokens-colors' as color-tokens;
+@use '../abstracts/tokens-typography' as *;
+@use '../abstracts/tokens-spacing' as spacing-tokens;
+@use '../abstracts/tokens-radius' as radius-tokens;
+@use '../abstracts/tokens-shadows' as *;
+
+@function token-custom-property-name($path) {
+  $raw: string.to-lower-case('#{$path}');
+  $name: '';
+
+  @for $i from 1 through string.length($raw) {
+    $char: string.slice($raw, $i, $i);
+
+    @if $char == '/' or $char == ' ' {
+      $name: $name + '-';
+    } @else if $char == '(' or $char == ')' {
+      // DEC-008/DS-23: 'base/neutral/100 (Negro)' generaba '--base-neutral-100-(negro)', un identificador CSS inválido.
+      // Se omiten los paréntesis para obtener '--base-neutral-100-negro', la variable que el sistema ya usa.
+    } @else {
+      $name: $name + $char;
+    }
+  }
+
+  @return '--#{$name}';
+}
+
+:root,
+[data-theme='light'],
+[data-theme='dark'],
+[data-theme='high-contrast'] {
+  // Figma token custom properties.
+  // These make core.css self-contained, so the portal does not need css/tokens.css.
+  @each $path, $value in color-tokens.$tokens-light {
+    #{token-custom-property-name($path)}: #{$value};
+  }
+
+  @each $path, $value in spacing-tokens.$tokens-light {
+    #{token-custom-property-name($path)}: #{$value};
+  }
+
+  @each $path, $value in radius-tokens.$tokens-light {
+    #{token-custom-property-name($path)}: #{$value};
+  }
+
+  // Brand / action aliases used by current components.
+  --color-primary: var(--use-primary-default);
+  --color-primary-hover: var(--use-primary-hover);
+  --color-primary-active: var(--use-primary-active);
+  --color-primary-subtle: var(--base-brand-40);
+  --color-primary-surface: var(--base-brand-40);
+  --color-primary-rgb: 255, 102, 0;
+
+  --color-secondary: var(--product-accent-100);
+  --color-secondary-hover: var(--product-accent-90);
+  --color-secondary-active: var(--product-accent-80);
+  --color-secondary-subtle: var(--product-accent-30);
+
+  // Text aliases.
+  --color-text-primary:   var(--use-text-primary);
+  --color-text-secondary: var(--use-text-secondary);
+  --color-text-tertiary:  var(--use-text-tertiary);
+  --color-text-muted:     var(--use-text-tertiary);
+  // disabled: no existe en Figma; se sobreescribe en HC para cumplir WCAG.
+  --color-text-disabled:  var(--base-neutral-50);
+  --color-text-inverse:   var(--use-text-inverse);
+  --color-text-link:      var(--use-text-link);
+  --color-text-on-dark:   var(--use-text-on-dark-primary);
+
+  // Surface aliases.
+  --color-surface-page: var(--use-background-page);
+  --color-surface: var(--use-surface-surface);
+  --color-surface-default: var(--use-surface-white);
+  --color-surface-alt: var(--use-surface-subtle);
+  --color-surface-subtle: var(--use-surface-subtle);
+  --color-surface-hover: var(--use-surface-subtle);
+  --color-surface-disabled: var(--use-surface-subtle);
+  --color-surface-inverse: var(--base-neutral-100-negro);
+  --color-surface-violet: var(--use-surface-violet);
+  --color-surface-green: var(--use-surface-green);
+  --color-surface-orange: var(--use-surface-orange);
+  --color-surface-cyan: var(--use-surface-cyan-blue);
+
+  // Border and focus aliases.
+  --color-border: var(--use-border-default);
+  --color-border-default: var(--use-border-default);
+  --color-border-strong: var(--use-border-strong);
+  --color-border-subtle: var(--use-border-subtle);
+  --color-border-violet: var(--use-border-violet);
+  --color-focus-outline: var(--use-focus-outline);
+  --color-focus-ring: var(--use-focus-outline);
+  --color-focus-ring-width: 3px;
+  --color-focus-bg: var(--use-focus-background);
+
+  // State aliases.
+  --color-success: var(--use-state-success-icon);
+  --color-success-bg: var(--use-state-success-bg);
+  --color-success-surface: var(--use-state-success-bg);
+  --color-success-text: var(--use-state-success-text);
+  --color-success-border: var(--use-state-success-border);
+  --color-success-icon: var(--use-state-success-icon);
+
+  --color-error: var(--use-state-error-icon);
+  --color-error-bg: var(--use-state-error-bg);
+  --color-error-surface: var(--use-state-error-bg);
+  --color-error-text: var(--use-state-error-text);
+  --color-error-border: var(--use-state-error-border);
+  --color-error-icon: var(--use-state-error-icon);
+  --color-error-field: var(--use-state-error-text-error-field);
+
+  --color-warning: var(--use-state-warning-icon-bg);
+  --color-warning-bg: var(--use-state-warning-bg);
+  --color-warning-surface: var(--use-state-warning-bg);
+  --color-warning-text: var(--use-state-warning-text);
+  --color-warning-border: var(--use-state-warning-border);
+  --color-warning-icon: var(--use-state-warning-icon-bg);
+
+  --color-info: var(--use-state-info-icon);
+  --color-info-bg: var(--use-state-info-bg);
+  --color-info-surface: var(--use-state-info-bg);
+  --color-info-text: var(--use-state-info-text);
+  --color-info-border: var(--use-state-info-border);
+  --color-info-icon: var(--use-state-info-icon);
+
+  --color-table-head: var(--use-tables-head);
+  --color-table-filter: var(--use-tables-filter);
+  --color-table-stripe: var(--use-tables-stripes);
+
+  --color-code-bg: var(--base-neutral-100-negro);
+  --color-code-text: var(--use-text-on-dark-primary);
+
+  // Radius aliases.
+  --radius-none: 0;
+  --radius-xs: var(--border-radius-xs);
+  --radius-sm: var(--border-radius-sm);
+  --radius-md: var(--border-radius-md);
+  --radius-lg: var(--border-radius-lg);
+  --radius-xl: #{radius-tokens.$border-radius-md};    // 1.5rem — 24px; faltaba, usado en _icons.scss
+  --radius-full: var(--border-radius-lg);
+  --radius-pill: #{radius-tokens.$border-radius-lg}; // 2rem — alias pill; faltaba, usado en _icons.scss
+
+  // Base neutral 100 alias — la clave del mapa Figma contiene paréntesis
+  // ('base/neutral/100 (Negro)') lo que genera un nombre CSS inválido
+  // --base-neutral-100-(negro). Se define aquí manualmente para que todas
+  // las referencias a var(--base-neutral-100-negro) resuelvan correctamente.
+  --base-neutral-100-negro: #111111;
+
+  // Spacing tokens — --space-2 through --space-128 are generated
+  // by the @each loop above from spacing-tokens.$tokens-light.
+  --space-0: 0;
+
+  // Typography aliases.
+  --font-body: #{$font-body};
+  --font-heading: #{$font-heading};
+  --font-code: #{$font-code};
+  --font-family-sans: #{$font-body};
+  --font-family-mono: #{$font-code};
+  --font-icons-primary: 'CompensarIcons';
+  --font-icons-secondary: 'Material Symbols Rounded';
+
+  --font-size-xs: #{$fs-body-xs};
+  --font-size-sm: #{$fs-body-s};
+  --font-size-md: #{$fs-body-m};
+  --font-size-lg: #{$fs-body-l};
+  --font-size-xl: #{$fs-body-xl};
+  --font-size-2xl: #{$fs-body-2xl};
+  --font-size-3xl: #{$fs-h4};
+  --font-size-4xl: #{$fs-h3};
+  --font-size-btn: #{$fs-button};
+
+  // Figma typography size tokens.
+  // Keep these aligned with core/abstracts/_tokens-typography.scss.
+  --display---display--l: #{$fs-display-l};
+  --display---display--m: #{$fs-display-m};
+  --display--mobile---display--x-l: #{$fs-display-mob-xl};
+  --display--mobile---display--l: #{$fs-display-mob-l};
+  --display--mobile---display--m: #{$fs-display-mob-m};
+  --heading--h1: #{$fs-h1};
+  --heading--h2: #{$fs-h2};
+  --heading--h3: #{$fs-h3};
+  --heading--h4: #{$fs-h4};
+  --heading--h5: #{$fs-h5};
+  --heading--h6: #{$fs-h6};
+  --title--eyebrow: #{$fs-eyebrow};
+  --title---paragraph--x-l: #{$fs-paragraph-xl};
+  --title---paragraph--l: #{$fs-paragraph-l};
+  --body--2-x-l: #{$fs-body-2xl};
+  --body---x-l: #{$fs-body-xl};
+  --body---l: #{$fs-body-l};
+  --body---m: #{$fs-body-m};
+  --body---s: #{$fs-body-s};
+  --body---x-s: #{$fs-body-xs};
+  --comun---boton: #{$fs-button};
+  --comun---label: #{$fs-label};
+  --comun---hint: #{$fs-hint};
+  --comun---placeholder: #{$fs-placeholder};
+
+  // Production .mp-* aliases used by the documentation and downloads.
+  --mp-display-l-size: var(--display---display--l);
+  --mp-display-l-lh: #{$lh-display-l};
+  --mp-display-l-weight: #{$fw-bold};   // DEC-005/DS-13: Figma Display L = Bold 700 (antes 900)
+  --mp-display-m-size: var(--display---display--m);
+  --mp-display-m-lh: #{$lh-display-m};
+  --mp-display-m-weight: #{$fw-bold};   // DEC-005/DS-13: Figma Display M = Bold 700 (antes 900)
+  --mp-display-xl-mob-size: var(--display--mobile---display--x-l);
+  --mp-display-xl-mob-lh: #{$lh-display-mob};
+  --mp-display-xl-mob-weight: #{$fw-bold};
+  --mp-display-l-mob-size: var(--display--mobile---display--l);
+  --mp-display-l-mob-lh: #{$lh-display-mob};
+  --mp-display-l-mob-weight: #{$fw-bold};
+  --mp-display-m-mob-size: var(--display--mobile---display--m);
+  --mp-display-m-mob-lh: #{$lh-display-mob};
+  --mp-display-m-mob-weight: #{$fw-bold};
+  --mp-h1-size: var(--heading--h1);
+  --mp-h1-lh: #{$lh-h1-h4};
+  --mp-h1-weight: #{$fw-bold};
+  --mp-h2-size: var(--heading--h2);
+  --mp-h2-lh: #{$lh-h1-h4};
+  --mp-h2-weight: #{$fw-bold};
+  --mp-h3-size: var(--heading--h3);
+  --mp-h3-lh: #{$lh-h1-h4};
+  --mp-h3-weight: #{$fw-bold};
+  --mp-h4-size: var(--heading--h4);
+  --mp-h4-lh: #{$lh-h1-h4};
+  --mp-h4-weight: #{$fw-bold};   // DEC-005/DS-13: Figma H4 = Bold 700 (antes 500)
+  --mp-h5-size: var(--heading--h5);
+  --mp-h5-lh: #{$lh-h5-h6};
+  --mp-h5-weight: #{$fw-bold};   // DEC-005/DS-13: Figma H5 = Bold 700 (antes 500)
+  --mp-h6-size: var(--heading--h6);
+  --mp-h6-lh: #{$lh-h5-h6};
+  --mp-h6-weight: #{$fw-bold};   // DEC-005/DS-13: Figma H6 = Bold 700 (antes 500)
+  --mp-eyebrow-size: var(--title--eyebrow);
+  --mp-eyebrow-lh: #{$lh-eyebrow};
+  --mp-eyebrow-weight: #{$fw-regular};   // DEC-005/DS-13: Figma Eyebrow = Regular 400 (antes 500). uppercase y letter-spacing NO se tocan (cond. 4)
+  --mp-parrafo-xl-size: var(--title---paragraph--x-l);
+  --mp-parrafo-xl-lh: #{$lh-paragraph};
+  --mp-parrafo-xl-weight: #{$fw-regular};
+  --mp-parrafo-l-size: var(--title---paragraph--l);
+  --mp-parrafo-l-lh: #{$lh-paragraph};
+  --mp-parrafo-l-weight: #{$fw-regular};
+  --mp-body-2xl-size: var(--body--2-x-l);
+  --mp-body-2xl-lh: #{$lh-body};
+  --mp-body-2xl-weight: #{$fw-regular};
+  --mp-body-xl-size: var(--body---x-l);
+  --mp-body-xl-lh: #{$lh-body};
+  --mp-body-xl-weight: #{$fw-regular};
+  --mp-body-l-size: var(--body---l);
+  --mp-body-l-lh: #{$lh-body};
+  --mp-body-l-weight: #{$fw-regular};
+  --mp-body-m-size: var(--body---m);
+  --mp-body-m-lh: #{$lh-body-m};
+  --mp-body-m-weight: #{$fw-regular};
+  --mp-body-s-size: var(--body---s);
+  --mp-body-s-lh: #{$lh-body};
+  --mp-body-s-weight: #{$fw-regular};
+  --mp-body-xs-size: var(--body---x-s);
+  --mp-body-xs-lh: #{$lh-body};
+  --mp-body-xs-weight: #{$fw-regular};
+  --mp-btn-size: var(--comun---boton);
+  --mp-btn-lh: #{$lh-ui};
+  --mp-btn-weight: #{$fw-bold};   // DEC-005/DS-13: Figma comun/Boton = Bold 700 (antes 500). .mp-btn ya aplicaba 700
+  --mp-label-size: var(--comun---label);
+  --mp-label-lh: #{$lh-ui};
+  --mp-label-weight: #{$fw-regular};   // DEC-005/DS-13: Figma comun/Label = Regular 400 (antes 700). uppercase y letter-spacing NO se tocan (cond. 4)
+  --mp-hint-size: var(--comun---hint);
+  --mp-hint-lh: #{$lh-ui};
+  --mp-hint-weight: #{$fw-regular};
+  --mp-placeholder-size: var(--comun---placeholder);
+  --mp-placeholder-lh: #{$lh-ui};
+  --mp-placeholder-weight: #{$fw-regular};
+
+  --font-weight-light: 300;
+  --font-weight-regular: #{$fw-regular};
+  --font-weight-medium: #{$fw-medium};
+  --font-weight-semibold: 600;
+  --font-weight-bold: #{$fw-bold};
+  --font-weight-black: #{$fw-black};
+
+  --font-line-height-normal: #{$lh-body};
+  --line-height-none: 1;
+  --line-height-tight: #{$lh-display-l};
+  --line-height-snug: #{$lh-h5-h6};
+  --line-height-normal: #{$lh-body};
+  --line-height-relaxed: #{$lh-paragraph};
+  --line-height-loose: 1.75;
+  --letter-spacing-normal: #{$ls-normal};
+  --letter-spacing-tight: 0;
+  --letter-spacing-wide: #{$ls-label};
+  --letter-spacing-wider: #{$ls-eyebrow};
+  --letter-spacing-widest: #{$ls-eyebrow};
+
+  // Existing elevation aliases. These are not color tokens.
+  --shadow-1: #{$shadow-1};
+  --shadow-2: #{$shadow-2};
+  --shadow-3: #{$shadow-3};
+  --shadow-4: #{$shadow-4};
+  --shadow-sm: var(--shadow-1);
+  --shadow-lg: var(--shadow-3);
+  --shadow-xl: var(--shadow-4);
+  --shadow-header: #{$shadow-header};
+  --shadow-btn-hover: #{$shadow-btn-hover};
+  --shadow-button-hover: #{$shadow-btn-hover};
+  --shadow-button-special-hover: #{$shadow-btn-especial-hover};
+  --shadow-button-pressed: #{$shadow-btn-pressed};
+  --elevation-1: var(--shadow-1);
+  --elevation-2: var(--shadow-2);
+  --elevation-3: var(--shadow-3);
+  --elevation-4: var(--shadow-4);
+
+  // Layer aliases.
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-header: 300;
+  --z-overlay: 400;
+  --z-modal: 500;
+  --z-toast: 600;
+  --z-tooltip: 700;
+
+  // Bootstrap optional variables referenced by generated CSS.
+  --bs-body-text-align: left;
+  --bs-breadcrumb-divider: "/";
+  --bs-breadcrumb-font-size: 1rem;
+  --bs-dropdown-item-border-radius: var(--radius-xs);
+  --bs-focus-ring-x: 0;
+  --bs-focus-ring-y: 0;
+  --bs-focus-ring-blur: 0;
+  --bs-icon-link-transform: translate3d(0, -0.125rem, 0);
+  --bs-nav-link-font-size: 1rem;
+  --bs-scroll-height: 340px;
+}
+
+// ============================================================
+//  Dark mode token overrides
+//  Alineado con Figma Dark.tokens.json.
+//  Se sobreescriben --base-brand-80 y --base-brand-90 con los
+//  valores dark de Figma. Todos los alias que los referencian
+//  (use-primary-default, use-text-link, use-focus-outline, etc.)
+//  se actualizan automáticamente sin necesidad de redefinirlos.
+// ============================================================
+[data-theme='dark'] {
+  // ── Base brand — valores dark de Figma ──────────────────
+  // base/brand/80 dark = #FF9D5C · base/brand/90 dark = #E65C00
+  --base-brand-80: #{color-tokens.$use-primary-default-dark}; // #ff9d5c
+  --base-brand-90: #e65c00;
+  // use-primary-default, use-primary-hover, use-text-link
+  // y use-focus-outline se actualizan solos via var(--base-brand-*)
+
+  // ── Fondos ───────────────────────────────────────────────
+  --use-background-page:   #{color-tokens.$base-neutral-90};
+  --use-surface-surface:   #{color-tokens.$base-neutral-80};
+  --use-surface-white:     #{color-tokens.$base-neutral-90};
+  --use-surface-subtle:    #{color-tokens.$product-gray-90};
+
+  // ── Texto ────────────────────────────────────────────────
+  --use-text-primary:           #{color-tokens.$base-neutral-10};
+  --use-text-secondary:         #{color-tokens.$base-neutral-20};   // Figma: base.neutral.20
+  --use-text-tertiary:          #{color-tokens.$base-neutral-50};   // Figma: base.neutral.50
+  --use-text-inverse:           #{color-tokens.$base-neutral-100-negro};
+  // use-text-link hereda var(--base-brand-80) → auto #ff9d5c
+  --use-text-on-dark-primary:   #{color-tokens.$base-neutral-white};
+  --use-text-on-dark-secondary: #{color-tokens.$base-neutral-20};   // Figma: base.neutral.20
+
+  // ── Texto temático — tonos claros para fondo oscuro ─────
+  --use-text-theme-blue:    #{color-tokens.$base-blue-30};          // Figma: base.blue.30
+  --use-text-theme-green-1: #{color-tokens.$base-green-1-30};       // Figma: base.green-1.30
+  --use-text-theme-green-2: #{color-tokens.$base-green-2-10};       // Figma: base.green-2.10
+  --use-text-theme-orange:  #{color-tokens.$base-orange-10};        // Figma: base.orange.10
+  --use-text-theme-red:     #{color-tokens.$base-red-30};           // Figma: base.red.30
+  --use-text-theme-violet:  #{color-tokens.$product-violet-30};     // Figma: product.violet.30
+  --use-text-theme-yellow:  #{color-tokens.$base-yellow-30};        // Figma: base.yellow.30
+
+  // ── Bordes ───────────────────────────────────────────────
+  --use-border-default:    #{color-tokens.$base-neutral-60};
+  --use-border-strong:     #{color-tokens.$base-neutral-20};   // DEC-004/DEC-006: Figma Dark = base.neutral.20 (#E0E0E0); antes neutral.40 (#B8B8B8). Contorno de Focus de Checkbox, Radio, Switch, Dropdown y Tabs
+  --use-border-subtle:     #{color-tokens.$base-neutral-70};
+
+  // ── Foco ─────────────────────────────────────────────────
+  // use-focus-outline hereda var(--base-brand-80) → auto #ff9d5c
+  --use-focus-background:  #{color-tokens.$base-brand-40};          // Figma: base.brand.40
+
+  // ── Estado: éxito ────────────────────────────────────────
+  --use-state-success-bg:     #{color-tokens.$base-green-1-90};     // DEC-006 (aprobado): Dark base.green-1.90 (#166936). Antes green-1.80
+  --use-state-success-text:   #{color-tokens.$base-neutral-10};     // Figma: base.neutral.10
+  --use-state-success-border: #{color-tokens.$base-green-1-70};     // Figma: base.green-1.70
+  --use-state-success-icon:   #{color-tokens.$base-green-1-40};     // Figma: base.green-1.40
+
+  // ── Estado: error ────────────────────────────────────────
+  --use-state-error-bg:               #{color-tokens.$base-red-90};
+  --use-state-error-text:             #{color-tokens.$base-neutral-10};  // Figma: base.neutral.10
+  --use-state-error-text-error-field: #{color-tokens.$base-neutral-10};  // Figma: base.neutral.10
+  --use-state-error-border:           #{color-tokens.$base-red-70};      // Figma: base.red.70
+  --use-state-error-icon:             #{color-tokens.$base-neutral-10};  // Figma: base.neutral.10
+  --use-state-error-mandatory:        #{color-tokens.$base-red-70};      // Figma: base.red.70
+
+  // ── Estado: advertencia ──────────────────────────────────
+  --use-state-warning-bg:     #{color-tokens.$base-yellow-100};     // DEC-006 (aprobado): Dark base.yellow.100 (#634A1A). Antes yellow.90
+  --use-state-warning-border: var(--base-yellow-70);   // DEC-006: Figma Dark = base.yellow.70 de modo Dark (#FCBF44); el literal $base-yellow-70 capturaba el de Light (#FFC154)
+  // warning text e icon-color apuntan a --use-text-primary → se actualiza solo
+
+  // ── Estado: información ──────────────────────────────────
+  --use-state-info-bg:     #{color-tokens.$base-blue-90};
+  --use-state-info-text:   #{color-tokens.$base-neutral-10};        // Figma: base.neutral.10
+  --use-state-info-border: #{color-tokens.$base-blue-70};           // Figma: base.blue.70
+  --use-state-info-icon:   #{color-tokens.$base-blue-70};           // Figma: base.blue.70
+
+  // >>> sync-theme-modes (DEC-006) · generado desde tokens/compensar.tokens.json · no editar a mano
+  --base-brand-yellow: #ffe6d6;
+  --base-blue-30: #edf2fa;
+  --base-blue-100: #102c5e;
+  --base-orange-100: #cc7a33;
+  --base-yellow-70: #fcbf44;
+  --use-text-badge-orange: var(--use-text-inverse);
+  --use-text-badge-green-3: var(--use-text-theme-green-2);
+  --use-text-badge-error: var(--use-text-theme-red);
+  --use-state-warning-text: var(--base-neutral-10);
+  --use-state-warning-icon-bg: var(--base-yellow-70);
+  --use-state-warning-icon-color: var(--use-text-inverse);
+  --use-surface-orange: var(--base-orange-60);
+  --use-surface-cyan-blue: var(--base-cyan-blue-80);
+  --use-surface-violet: var(--product-violet-80);
+  --use-surface-green: var(--base-green-1-90);
+  --use-surface-green-2: var(--base-green-1-90);
+  --use-surface-theme-blue-dark-30: var(--base-blue-80);
+  --use-surface-theme-blue-dark-40: var(--base-blue-50);
+  --use-surface-theme-blue-dark-50: var(--base-blue-60);
+  --use-surface-theme-blue-dark-90: var(--base-blue-30);
+  --use-surface-theme-gray-5: var(--product-gray-90);
+  --use-surface-theme-gray-10: var(--product-gray-80);
+  --use-surface-theme-gray-20: var(--product-gray-70);
+  --use-surface-theme-green-1-30: var(--base-green-1-80);
+  --use-surface-theme-green-1-40: var(--base-green-1-50);
+  --use-surface-theme-green-1-50: var(--base-green-1-60);
+  --use-surface-theme-green-2-10: var(--base-green-2-100);
+  --use-surface-theme-green-2-20: var(--base-green-2-60);
+  --use-surface-theme-green-2-40: var(--base-green-2-60);
+  --use-surface-theme-green-2-60: var(--base-green-2-20);
+  --use-surface-theme-neutral-30: var(--base-neutral-70);
+  --use-surface-theme-orange-10: var(--base-orange-100);
+  --use-surface-theme-orange-20: var(--base-orange-40);
+  --use-surface-theme-orange-40: var(--base-orange-60);
+  --use-surface-theme-orange-60: var(--base-orange-10);
+  --use-surface-theme-red-30: var(--base-red-80);
+  --use-surface-theme-red-40: var(--base-red-50);
+  --use-surface-theme-red-50: var(--base-red-60);
+  --use-surface-theme-violet-5: var(--product-violet-90);
+  --use-surface-theme-violet-10: var(--product-violet-80);
+  --use-surface-theme-violet-20: var(--product-violet-70);
+  --use-surface-theme-violet-60: var(--product-violet-10);
+  --use-surface-theme-violet-70: var(--product-violet-20);
+  --use-surface-theme-yellow-30: var(--base-yellow-90);
+  --use-surface-theme-yellow-50: var(--base-yellow-60);
+  --use-surface-theme-yellow-60: var(--base-yellow-70);
+  // <<< sync-theme-modes
+}
+
+// ============================================================
+//  High-contrast token overrides
+//  Alineado con Figma "High Contrast.tokens.json".
+//  Se sobreescriben --base-brand-80/90/100 con los valores HC.
+//  Todos los alias que los referencian (use-primary-default,
+//  use-text-link, use-focus-outline) se actualizan solos.
+// ============================================================
+[data-theme='high-contrast'] {
+  // ── Base brand — valores HC de Figma (#FFFF00) ──────────
+  // base/brand/80 HC = #FFFF00 → propaga a use-primary-default,
+  // use-text-link y use-focus-outline automáticamente.
+  --base-brand-80:  #{color-tokens.$base-brand-hc};        // #ffff00
+  --base-brand-90:  #{color-tokens.$base-brand-hc-hover};  // #e6e600
+  --base-brand-100: #{color-tokens.$base-brand-hc-active}; // #cccc00
+
+  // ── Fondos — negro puro ──────────────────────────────────
+  --use-background-page:  #{color-tokens.$base-neutral-black};
+  --use-surface-surface:  #{color-tokens.$base-neutral-black};
+  --use-surface-white:    #{color-tokens.$base-neutral-black};
+  --use-surface-subtle:   #{color-tokens.$base-neutral-90};
+
+  // ── Texto — blanco puro para máximo contraste ────────────
+  --use-text-primary:           #{color-tokens.$base-neutral-white};
+  --use-text-secondary:         #{color-tokens.$base-neutral-10};
+  --use-text-tertiary:          #{color-tokens.$base-neutral-20};
+  --use-text-inverse:           #{color-tokens.$base-neutral-black};
+  // use-text-link hereda var(--base-brand-80) → auto #ffff00
+  --use-text-on-dark-primary:   #{color-tokens.$base-neutral-white};
+  --use-text-on-dark-secondary: #{color-tokens.$base-neutral-10};
+
+  // ── Texto temático — blanco puro en HC ──────────────────
+  // Figma HC: todos use/text/theme/* = base.neutral.white
+  --use-text-theme-blue:    #{color-tokens.$base-neutral-white};
+  --use-text-theme-green-1: #{color-tokens.$base-neutral-white};
+  --use-text-theme-green-2: #{color-tokens.$base-neutral-white};
+  --use-text-theme-orange:  #{color-tokens.$base-neutral-white};
+  --use-text-theme-red:     #{color-tokens.$base-neutral-white};
+  --use-text-theme-violet:  #{color-tokens.$base-neutral-white};
+  --use-text-theme-yellow:  #{color-tokens.$base-neutral-white};
+
+  // ── Texto disabled — mayor contraste en HC ───────────────
+  // No existe en Figma; se aumenta para cumplir WCAG sobre negro.
+  --color-text-disabled: #{color-tokens.$base-neutral-40};  // #b8b8b8 — 6:1 sobre negro
+
+  // ── Bordes — visibles sobre negro ───────────────────────
+  --use-border-default: #{color-tokens.$base-neutral-white};
+  --use-border-strong:  #{color-tokens.$base-neutral-white};
+  --use-border-subtle:  #{color-tokens.$base-neutral-40};
+
+  // ── Foco ─────────────────────────────────────────────────
+  // use-focus-outline hereda var(--base-brand-80) → auto #ffff00
+  --use-focus-background: #{color-tokens.$base-neutral-black};
+
+  // ── Estado: éxito ────────────────────────────────────────
+  --use-state-success-bg:     #{color-tokens.$base-green-1-100};    // Figma: base.green-1.100
+  --use-state-success-text:   #{color-tokens.$base-neutral-white};  // Figma: base.neutral.white
+  --use-state-success-border: #{color-tokens.$base-green-1-70};     // Figma: base.green-1.70
+  --use-state-success-icon:   #{color-tokens.$base-green-1-40};     // Figma: base.green-1.40
+
+  // ── Estado: error ────────────────────────────────────────
+  --use-state-error-bg:               #{color-tokens.$base-red-100};           // Figma: base.red.100
+  --use-state-error-text:             #{color-tokens.$base-neutral-white};      // Figma: base.neutral.white
+  --use-state-error-text-error-field: #{color-tokens.$base-neutral-white};      // Figma: base.neutral.white
+  --use-state-error-border:           #{color-tokens.$base-red-70};             // Figma: base.red.70
+  --use-state-error-icon:             #{color-tokens.$base-neutral-white};      // Figma: base.neutral.white
+  --use-state-error-mandatory:        #{color-tokens.$base-red-70};             // Figma: base.red.70
+
+  // ── Estado: advertencia ──────────────────────────────────
+  --use-state-warning-bg:     #{color-tokens.$base-yellow-100};     // DEC-006: Figma HC = base.yellow.100 (#634A1A); antes negro, fuera de Figma
+  --use-state-warning-border: var(--base-yellow-70);   // DEC-006: Figma HC = base.yellow.70 de modo HC (#FCBF44); antes amarillo de marca HC (#FFFF00). Mismo borde que ya usaba mp alert/toast en HC
+  // warning text hereda --use-text-primary → blanco
+
+  // ── Estado: información ──────────────────────────────────
+  --use-state-info-bg:     var(--base-blue-100);                     // Figma: base.blue.100 de modo HC (#102C5E); el literal capturaba el de Light (#2D4A67)
+  --use-state-info-text:   #{color-tokens.$base-neutral-white};      // Figma: base.neutral.white
+  --use-state-info-border: #{color-tokens.$base-blue-70};            // Figma: base.blue.70
+  --use-state-info-icon:   #{color-tokens.$base-blue-70};            // Figma: base.blue.70
+
+  // >>> sync-theme-modes (DEC-006) · generado desde tokens/compensar.tokens.json · no editar a mano
+  --base-brand-yellow: #ffe6d6;
+  --base-blue-30: #edf2fa;
+  --base-blue-100: #102c5e;
+  --base-green-1-40: #cef0db;
+  --base-orange-100: #cc7a33;
+  --base-yellow-70: #fcbf44;
+  --use-text-badge-green-3: var(--use-text-theme-green-2);
+  --use-text-badge-error: var(--use-text-theme-red);
+  --use-state-warning-text: var(--base-neutral-white);
+  --use-state-warning-icon-bg: var(--base-yellow-70);
+  --use-state-warning-icon-color: var(--use-text-inverse);
+  --use-surface-orange: var(--base-neutral-black);
+  --use-surface-cyan-blue: var(--base-neutral-black);
+  --use-surface-violet: var(--base-neutral-black);
+  --use-surface-green: var(--base-neutral-black);
+  --use-surface-green-2: var(--base-neutral-black);
+  --use-surface-theme-blue-dark-30: var(--base-neutral-black);
+  --use-surface-theme-blue-dark-40: var(--base-neutral-black);
+  --use-surface-theme-blue-dark-50: var(--base-neutral-black);
+  --use-surface-theme-blue-dark-60: var(--base-neutral-black);
+  --use-surface-theme-blue-dark-90: var(--base-neutral-white);
+  --use-surface-theme-gray-5: var(--base-neutral-black);
+  --use-surface-theme-gray-10: var(--base-neutral-black);
+  --use-surface-theme-gray-20: var(--base-neutral-black);
+  --use-surface-theme-green-1-30: var(--base-neutral-black);
+  --use-surface-theme-green-1-40: var(--base-neutral-black);
+  --use-surface-theme-green-1-50: var(--base-neutral-black);
+  --use-surface-theme-green-2-10: var(--base-neutral-black);
+  --use-surface-theme-green-2-20: var(--base-neutral-black);
+  --use-surface-theme-green-2-40: var(--base-neutral-black);
+  --use-surface-theme-green-2-60: var(--base-neutral-black);
+  --use-surface-theme-neutral-30: var(--base-neutral-black);
+  --use-surface-theme-orange-10: var(--base-neutral-black);
+  --use-surface-theme-orange-20: var(--base-neutral-black);
+  --use-surface-theme-orange-40: var(--base-neutral-black);
+  --use-surface-theme-orange-60: var(--base-neutral-black);
+  --use-surface-theme-red-30: var(--base-neutral-black);
+  --use-surface-theme-red-40: var(--base-neutral-black);
+  --use-surface-theme-red-50: var(--base-neutral-black);
+  --use-surface-theme-red-60: var(--base-neutral-black);
+  --use-surface-theme-violet-5: var(--base-neutral-black);
+  --use-surface-theme-violet-10: var(--base-neutral-black);
+  --use-surface-theme-violet-20: var(--base-neutral-black);
+  --use-surface-theme-violet-60: var(--base-neutral-black);
+  --use-surface-theme-violet-70: var(--base-neutral-black);
+  --use-surface-theme-yellow-30: var(--base-neutral-black);
+  --use-surface-theme-yellow-50: var(--base-neutral-black);
+  --use-surface-theme-yellow-60: var(--base-neutral-black);
+  --use-surface-theme-yellow-70: var(--base-neutral-black);
+  // <<< sync-theme-modes
+}

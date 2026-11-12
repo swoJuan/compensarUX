@@ -1,0 +1,147 @@
+{
+  "$comentario": "Catálogo de flujos. UX edita este archivo. 'publicar: true' copia el flujo al portal. 'incluir' es opcional: por defecto se publica toda la carpeta 'ruta'. 'actualizado' se calcula con git. Descripciones, versiones, estados y enlaces de Figma son valores iniciales: UX debe validarlos.",
+  "flujos": [
+    {
+      "id": "zt-oficina-virtual",
+      "nombre": "Oficina virtual (inicio ZT)",
+      "descripcion": "Pantalla de inicio de la Zona Transaccional con el menú lateral y los accesos a los flujos.",
+      "plataforma": "zt",
+      "ruta": "zt/",
+      "entrada": "index.html",
+      "incluir": [
+        "zt/index.html"
+      ],
+      "version": "0.1.0",
+      "estado": "en-revision",
+      "figma": "",
+      "publicar": true,
+      "aprobacionUX": {
+        "aprobado": false,
+        "por": null,
+        "fecha": null
+      }
+    },
+    {
+      "id": "zt-agendamiento-de-citas",
+      "nombre": "Agendamiento de citas",
+      "descripcion": "Agendamiento de citas médicas: búsqueda, selección de agenda, confirmación y variantes de prueba. Incluye el esqueleto de laboratorio clínico.",
+      "plataforma": "zt",
+      "ruta": "zt/agendamiento-de-citas/",
+      "entrada": "index.html",
+      "version": "0.1.0",
+      "estado": "en-revision",
+      "figma": "",
+      "publicar": true,
+      "aprobacionUX": {
+        "aprobado": false,
+        "por": null,
+        "fecha": null
+      }
+    },
+    {
+      "id": "zt-historia-clinica",
+      "nombre": "Solicitud de historia clínica",
+      "descripcion": "Solicitud de copia de historia clínica, seguimiento en mis solicitudes y confirmación de radicado.",
+      "plataforma": "zt",
+      "ruta": "zt/historia-clinica/",
+      "entrada": "index.html",
+      "version": "0.1.0",
+      "estado": "borrador",
+      "figma": "",
+      "publicar": true,
+      "aprobacionUX": {
+        "aprobado": false,
+        "por": null,
+        "fecha": null
+      }
+    },
+    {
+      "id": "zt-ventas-y-afiliacion",
+      "nombre": "Ventas y afiliación",
+      "descripcion": "Proceso de afiliación en ocho pasos con validación de información y consulta de mis radicados.",
+      "plataforma": "zt",
+      "ruta": "zt/ventas-y-afiliacion/",
+      "entrada": "index.html",
+      "version": "0.1.0",
+      "estado": "borrador",
+      "figma": "",
+      "publicar": true,
+      "aprobacionUX": {
+        "aprobado": false,
+        "por": null,
+        "fecha": null
+      }
+    },
+    {
+      "id": "drupal-navegacion",
+      "nombre": "Navegación del portal",
+      "descripcion": "Tres alternativas de menú principal del portal web para pruebas de navegación.",
+      "plataforma": "drupal",
+      "ruta": "drupal/navegacion/",
+      "entrada": "menu-1.html",
+      "version": "0.1.0",
+      "estado": "borrador",
+      "figma": "",
+      "publicar": true,
+      "aprobacionUX": {
+        "aprobado": false,
+        "por": null,
+        "fecha": null
+      }
+    },
+    {
+      "id": "drupal-ayudas-diagnosticas",
+      "nombre": "Ayudas diagnósticas",
+      "descripcion": "Flujo reservado. Aún no tiene pantallas.",
+      "plataforma": "drupal",
+      "ruta": "drupal/ayudas-diagnosticas/",
+      "entrada": "index.html",
+      "version": "0.0.0",
+      "estado": "borrador",
+      "figma": "",
+      "publicar": false,
+      "aprobacionUX": {
+        "aprobado": false,
+        "por": null,
+        "fecha": null
+      }
+    },
+    {
+      "id": "app-inicio",
+      "nombre": "Inicio de la APP",
+      "descripcion": "Pantalla de inicio de la aplicación móvil dentro del marco de dispositivo.",
+      "plataforma": "app",
+      "ruta": "app/",
+      "entrada": "index.html",
+      "incluir": [
+        "app/index.html"
+      ],
+      "version": "0.1.0",
+      "estado": "borrador",
+      "figma": "",
+      "publicar": true,
+      "aprobacionUX": {
+        "aprobado": false,
+        "por": null,
+        "fecha": null
+      }
+    },
+    {
+      "id": "app-historia-clinica",
+      "nombre": "Historia clínica (APP)",
+      "descripcion": "Solicitud de historia clínica en la aplicación móvil.",
+      "plataforma": "app",
+      "ruta": "app/historia-clinica/",
+      "entrada": "index.html",
+      "version": "0.1.0",
+      "estado": "borrador",
+      "figma": "",
+      "publicar": true,
+      "aprobacionUX": {
+        "aprobado": false,
+        "por": null,
+        "fecha": null
+      }
+    }
+  ]
+}

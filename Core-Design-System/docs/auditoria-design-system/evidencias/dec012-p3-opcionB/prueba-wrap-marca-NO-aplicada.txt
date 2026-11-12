@@ -1,0 +1,7 @@
+ancho | texto | sin fix              | con fix (min-width:0 + overflow-wrap en la marca)
+ 320 |  100% | overflow doc=0px, fuera=0, alto marca=44px     | overflow doc=0px, fuera=0, alto marca=44px
+ 320 |  150% | overflow doc=57px, fuera=1, alto marca=66px    | overflow doc=0px, fuera=0, alto marca=109px
+ 320 |  200% | overflow doc=182px, fuera=2, alto marca=88px   | overflow doc=0px, fuera=0, alto marca=319px
+ 360 |  100% | overflow doc=0px, fuera=0, alto marca=44px     | overflow doc=0px, fuera=0, alto marca=44px
+ 360 |  150% | overflow doc=17px, fuera=0, alto marca=66px    | overflow doc=0px, fuera=0, alto marca=81px
+ 360 |  200% | overflow doc=142px, fuera=1, alto marca=88px   | overflow doc=0px, fuera=0, alto marca=212px

@@ -1,0 +1,208 @@
+{
+  "equivalence": {
+    "1280-light": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "1280-dark": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "1280-hc": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "320-light": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "768-light": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "1440-light": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "zoom200-light": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "zoom200-dark": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "zoom200-high-contrast": {
+      "count": 0,
+      "sample": [],
+      "total": 336
+    },
+    "rootfont150": {
+      "skipped": "informativo"
+    },
+    "rootfont200": {
+      "skipped": "informativo"
+    }
+  },
+  "overflow": {
+    "1280-light": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "1280->1280",
+      "clientW": 1280
+    },
+    "1280-dark": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "1280->1280",
+      "clientW": 1280
+    },
+    "1280-hc": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "1280->1280",
+      "clientW": 1280
+    },
+    "320-light": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "320->320",
+      "clientW": 320
+    },
+    "768-light": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "768->768",
+      "clientW": 768
+    },
+    "1440-light": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "1440->1440",
+      "clientW": 1440
+    },
+    "zoom200-light": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "640->640",
+      "clientW": 640
+    },
+    "zoom200-dark": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "640->640",
+      "clientW": 640
+    },
+    "zoom200-high-contrast": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "640->640",
+      "clientW": 640
+    },
+    "rootfont150": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "1280->1280",
+      "clientW": 1280
+    },
+    "rootfont200": {
+      "base": false,
+      "now": false,
+      "nHeaderRoots": 6,
+      "nHeaderEls": 226,
+      "domNodes": 336,
+      "scrollW": "1280->1280",
+      "clientW": 1280
+    }
+  },
+  "clipChanges": [],
+  "functional": {
+    "desktop": {
+      "dropdownVisible": true,
+      "dropdownRect": [
+        41,
+        761,
+        720
+      ],
+      "dropdownInsideViewport": true,
+      "dropdownNotCovered": true,
+      "toggleHiddenOnDesktop": true,
+      "navLinksVisible": 4,
+      "navLinkMinH": 48,
+      "ctaH": 44,
+      "logo": [
+        44,
+        44
+      ]
+    },
+    "keyboardTabSequence": [
+      "mp-web-header__search-input",
+      "mp-web-header__cta",
+      "mp-web-header__nav-link",
+      "mp-web-header__nav-link",
+      "mp-web-header__nav-link",
+      "mp-web-header__nav-link",
+      "mp-web-header__utility-link",
+      "mp-web-header__utility-link",
+      "mp-web-header__utility-link",
+      "mp-web-header__brand",
+      "mp-web-header__search-input",
+      "mp-web-header__cta",
+      "mp-web-header__nav-link",
+      "mp-web-header__dropdown-link"
+    ],
+    "keyboardReachesAllNavLinks": true,
+    "mobile320": {
+      "toggleDisplayed": true,
+      "toggleSize": [
+        63,
+        44
+      ],
+      "toggleTouchOK": true,
+      "navHidden": true,
+      "drawerShown": true,
+      "drawerLinkMinH": 48,
+      "headerFitsViewport": true,
+      "docOverflow": false,
+      "ctaHiddenOnMobile": true
+    }
+  }
+}

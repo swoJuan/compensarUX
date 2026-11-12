@@ -1,0 +1,151 @@
+// ============================================================
+//  mp-toast
+//  Componente transversal de notificacion temporal flotante.
+//  Fuente Figma: 1zVGMpzqBgiBUqhmfFEAoT / 4590:22197
+// ============================================================
+
+@use '../../abstracts' as *;   // DEC-012: acceso a rem() y tokens
+
+.mp-toast {
+  --mp-toast-bg: var(--use-state-success-bg, #e6f7e8);
+  --mp-toast-border: var(--use-state-success-border, #44bd75);
+  --mp-toast-title: var(--use-state-success-text, #0d3d1f);
+  --mp-toast-body: var(--use-state-success-text, #0d3d1f);
+  --mp-toast-icon: var(--mp-toast-title);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+  width: min(100%, rem(350px));   // DEC-012: 350px → 21.875rem (ancho máx, Figma 350)
+  max-width: rem(350px);
+  min-height: rem(78px);   // DEC-012: 78px → 4.875rem
+  padding: var(--space-16);
+  border: 1px solid var(--mp-toast-border);
+  border-radius: rem(12px);   // DEC-012: 12px → 0.75rem (mismo valor)
+  background: var(--mp-toast-bg);
+  color: var(--mp-toast-body);
+  font-family: var(--font-body, Roboto, Arial, sans-serif);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg, 0 12px 28px rgba(17, 17, 17, .16));
+}
+
+.mp-toast__icon {
+  flex: 0 0 rem(32px);   // DEC-012: 32px → 2rem
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(32px);
+  height: rem(32px);
+  color: var(--mp-toast-icon);
+}
+
+.mp-toast__icon .material-symbols-rounded,
+.mp-toast__icon.material-symbols-rounded {
+  font-size: rem(32px);   // DEC-012: 32px → 2rem
+  line-height: 1;
+}
+// F-1 (DEC-011): ver _alerts.scss. `.icon-info` (con !important) ganaba a --mp-toast-icon y dejaba el icono Info azul sobre azul en Dark/HC.
+// var(--mp-toast-icon) y no `currentColor`, para no romper el icono cuando la clase va en el propio elemento.
+.mp-toast__icon.icon,
+.mp-toast__icon .icon {
+  color: var(--mp-toast-icon) !important;
+}
+
+.mp-toast__content {
+  display: grid;
+  flex: 1 1 auto;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.mp-toast .mp-toast__title {
+  margin: 0;
+  color: var(--mp-toast-title);
+  // DEC-005/DS-11: Figma título de toast = 16px (body/L). Antes --font-size-md resolvía a 14px.
+  font-size: var(--body---l);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.3;
+}
+
+.mp-toast .mp-toast__body {
+  margin: 0;
+  color: var(--mp-toast-body);
+  // DEC-005/DS-11: Figma cuerpo de toast = 16px (body/L). Antes --font-size-sm resolvía a 12px.
+  font-size: var(--body---l);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.5;
+}
+
+.mp-toast .mp-toast__close {
+  flex: 0 0 rem(24px);   // DEC-012: 24px → 1.5rem
+  width: rem(24px);
+  height: rem(24px);
+  min-width: rem(24px);
+  min-height: rem(24px);
+  padding: 0;
+  margin-left: auto;
+  color: var(--mp-toast-title);
+}
+
+.mp-toast .mp-toast__close .material-symbols-rounded {
+  font-size: rem(24px);   // DEC-012: 24px → 1.5rem
+}
+
+.mp-toast--info {
+  --mp-toast-bg: var(--use-state-info-bg, #e6f1fb);
+  --mp-toast-border: var(--use-state-info-border, #6c9fd0);
+  --mp-toast-title: var(--use-state-info-text, #2d4a67);
+  --mp-toast-body: var(--use-state-info-text, #2d4a67);
+}
+
+.mp-toast--success {
+  --mp-toast-bg: var(--use-state-success-bg, #e6f7e8);
+  --mp-toast-border: var(--use-state-success-border, #44bd75);
+  --mp-toast-title: var(--use-state-success-text, #0d3d1f);
+  --mp-toast-body: var(--use-state-success-text, #0d3d1f);
+}
+
+.mp-toast--warning {
+  --mp-toast-bg: var(--use-state-warning-bg, #fff2d9);
+  --mp-toast-border: var(--use-state-warning-border, #fcce72);
+  --mp-toast-title: var(--use-state-warning-text, #111111);
+  --mp-toast-body: var(--use-state-warning-text, #111111);
+  --mp-toast-icon: var(--use-state-warning-icon-bg, #967229);   // DEC-006: mismo pictograma que mp alert Warning
+}
+
+.mp-toast--error {
+  --mp-toast-bg: var(--use-state-error-bg, #f7eeed);
+  --mp-toast-border: var(--use-state-error-border, #db7165);
+  --mp-toast-title: var(--use-state-error-text, #521a14);
+  --mp-toast-body: var(--use-state-error-text, #521a14);
+  --mp-toast-icon: var(--use-state-error-icon, #d14434);   // mismo icono que mp alert Error
+}
+
+.mp-toast--is-leaving {
+  opacity: 0;
+  transform: translateY(rem(-8px));   // DEC-012: -8px → -0.5rem (desplazamiento de salida)
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.mp-toast-region {
+  position: fixed;
+  z-index: var(--z-toast, 1080);
+  top: var(--space-24);
+  right: var(--space-24);
+  display: grid;
+  gap: var(--space-12);
+  width: min(rem(350px), calc(100vw - 48px));   // DEC-012: 350px → 21.875rem; 48px se conserva (gutter vs viewport)
+  pointer-events: none;
+}
+
+.mp-toast-region .mp-toast {
+  pointer-events: auto;
+}
+
+// DEC-006: Dark y High Contrast salen de use/state/*/bg|border|text (Toast reutiliza la apariencia de mp alert, Figma 4590:22197).
+// Se retiraron los hex fijos de Success Dark (#0B853D) y Warning Dark (#967229), que no seguían los valores aprobados.
+[data-theme='high-contrast'] {
+  .mp-toast {
+    box-shadow: none;
+  }
+}

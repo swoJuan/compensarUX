@@ -1,0 +1,1142 @@
+{
+ "#accordion|light": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 5,
+   "mp": 2
+  }
+ ],
+ "#accordion|dark": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 9,
+   "mp": 2
+  }
+ ],
+ "#accordion|high-contrast": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#alertas|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 7,
+   "mp": 3
+  }
+ ],
+ "#alertas|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 10,
+   "mp": 6
+  }
+ ],
+ "#alertas|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  }
+ ],
+ "#avatar|light": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 5,
+   "mp": 2
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#avatar|dark": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 3,
+   "mp": 0
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#avatar|high-contrast": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#botones|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 21,
+   "mp": 8
+  }
+ ],
+ "#botones|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 25,
+   "mp": 8
+  }
+ ],
+ "#botones|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 8,
+   "mp": 5
+  }
+ ],
+ "#breadcrumb|light": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 7,
+   "mp": 3
+  }
+ ],
+ "#breadcrumb|dark": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 22,
+   "mp": 13
+  }
+ ],
+ "#breadcrumb|high-contrast": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 2,
+   "mp": 2
+  }
+ ],
+ "#cards|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 27,
+   "mp": 12
+  }
+ ],
+ "#cards|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 22,
+   "mp": 5
+  }
+ ],
+ "#cards|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 17,
+   "mp": 4
+  }
+ ],
+ "#seleccion|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 14,
+   "mp": 3
+  }
+ ],
+ "#seleccion|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 12,
+   "mp": 1
+  }
+ ],
+ "#seleccion|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  }
+ ],
+ "#badges|light": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 35,
+   "mp": 19
+  }
+ ],
+ "#badges|dark": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 43,
+   "mp": 22
+  }
+ ],
+ "#badges|high-contrast": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 3,
+   "mp": 1
+  }
+ ],
+ "#dropdown|light": [
+  {
+   "id": "aria-input-field-name",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 27,
+   "mp": 10
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  }
+ ],
+ "#dropdown|dark": [
+  {
+   "id": "aria-input-field-name",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 40,
+   "mp": 10
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  }
+ ],
+ "#dropdown|high-contrast": [
+  {
+   "id": "aria-input-field-name",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 2,
+   "mp": 2
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  }
+ ],
+ "#empty-state|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 31,
+   "mp": 11
+  }
+ ],
+ "#empty-state|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 16,
+   "mp": 1
+  }
+ ],
+ "#empty-state|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 13,
+   "mp": 1
+  }
+ ],
+ "#header|light": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 3,
+   "mp": 1
+  }
+ ],
+ "#header|dark": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 11,
+   "mp": 1
+  }
+ ],
+ "#header|high-contrast": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 11,
+   "mp": 1
+  }
+ ],
+ "#inputs|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 26,
+   "mp": 3
+  },
+  {
+   "id": "label",
+   "impact": "critical",
+   "n": 5,
+   "mp": 5
+  }
+ ],
+ "#inputs|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 44,
+   "mp": 11
+  },
+  {
+   "id": "label",
+   "impact": "critical",
+   "n": 5,
+   "mp": 5
+  }
+ ],
+ "#inputs|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 2,
+   "mp": 2
+  },
+  {
+   "id": "label",
+   "impact": "critical",
+   "n": 5,
+   "mp": 5
+  }
+ ],
+ "#loading|light": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 5,
+   "mp": 2
+  }
+ ],
+ "#loading|dark": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 13,
+   "mp": 2
+  }
+ ],
+ "#loading|high-contrast": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  }
+ ],
+ "#modales|light": [
+  {
+   "id": "aria-prohibited-attr",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 10,
+   "mp": 7
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 2,
+   "mp": 0
+  }
+ ],
+ "#modales|dark": [
+  {
+   "id": "aria-prohibited-attr",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 5,
+   "mp": 2
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 2,
+   "mp": 0
+  }
+ ],
+ "#modales|high-contrast": [
+  {
+   "id": "aria-prohibited-attr",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 2,
+   "mp": 0
+  }
+ ],
+ "#paginacion|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 17,
+   "mp": 6
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#paginacion|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 10,
+   "mp": 2
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#paginacion|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 1,
+   "mp": 1
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#sidebar|light": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 21,
+   "mp": 9
+  }
+ ],
+ "#sidebar|dark": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 16,
+   "mp": 5
+  }
+ ],
+ "#sidebar|high-contrast": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#stepper|light": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-progressbar-name",
+   "impact": "serious",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 15,
+   "mp": 7
+  }
+ ],
+ "#stepper|dark": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-progressbar-name",
+   "impact": "serious",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 23,
+   "mp": 9
+  }
+ ],
+ "#stepper|high-contrast": [
+  {
+   "id": "aria-allowed-attr",
+   "impact": "critical",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-progressbar-name",
+   "impact": "serious",
+   "n": 3,
+   "mp": 3
+  },
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  }
+ ],
+ "#tables|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 17,
+   "mp": 5
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 3,
+   "mp": 1
+  }
+ ],
+ "#tables|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 34,
+   "mp": 15
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 3,
+   "mp": 1
+  }
+ ],
+ "#tables|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 12,
+   "mp": 0
+  },
+  {
+   "id": "scrollable-region-focusable",
+   "impact": "serious",
+   "n": 3,
+   "mp": 1
+  }
+ ],
+ "#tabs|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "aria-required-parent",
+   "impact": "critical",
+   "n": 16,
+   "mp": 16
+  },
+  {
+   "id": "aria-valid-attr-value",
+   "impact": "critical",
+   "n": 1,
+   "mp": 1
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 33,
+   "mp": 11
+  }
+ ],
+ "#tabs|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "aria-required-parent",
+   "impact": "critical",
+   "n": 16,
+   "mp": 16
+  },
+  {
+   "id": "aria-valid-attr-value",
+   "impact": "critical",
+   "n": 1,
+   "mp": 1
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 29,
+   "mp": 11
+  }
+ ],
+ "#tabs|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 1,
+   "mp": 0
+  },
+  {
+   "id": "aria-required-parent",
+   "impact": "critical",
+   "n": 16,
+   "mp": 16
+  },
+  {
+   "id": "aria-valid-attr-value",
+   "impact": "critical",
+   "n": 1,
+   "mp": 1
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 15,
+   "mp": 2
+  }
+ ],
+ "#toast|light": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 7,
+   "mp": 4
+  }
+ ],
+ "#toast|dark": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  },
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 17,
+   "mp": 12
+  }
+ ],
+ "#toast|high-contrast": [
+  {
+   "id": "aria-required-children",
+   "impact": "critical",
+   "n": 2,
+   "mp": 0
+  }
+ ]
+}

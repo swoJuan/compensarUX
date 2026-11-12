@@ -1,0 +1,16 @@
+/* ============================================================
+ * drupal.css — Estilos propios de la plataforma Drupal
+ * ------------------------------------------------------------
+ * Nivel 3 de la cascada:
+ *   Design System → shared global → ESTE archivo (Drupal) → custom del flujo
+ *
+ * Aquí van SOLO las diferencias de Drupal frente a ZT:
+ * - header/topbar de Drupal
+ * - navegación propia de la plataforma
+ * - estructura/comportamientos particulares de Drupal
+ *
+ * Drupal y ZT comparten el mismo Design System. NO duplicar estilos
+ * generales: reutilizar Design System + shared global.
+ * ============================================================ */
+
+/* (Vacío por ahora. Aún no hay flujos Drupal.) */

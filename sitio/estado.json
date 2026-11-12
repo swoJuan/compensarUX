@@ -1,0 +1,590 @@
+{
+  "generado": "2026-11-12T17:10:47.544Z",
+  "repositorio": {
+    "unico": true,
+    "nombre": "Compensar",
+    "rama": "main",
+    "remoto": null,
+    "version": "v2.4.0",
+    "commits": 95,
+    "commitsSinSubir": null,
+    "pendientes": 31,
+    "carpetas": [
+      {
+        "id": "designSystem",
+        "nombre": "Sistema de diseño",
+        "rol": "Fuente de verdad visual: tokens, estilos y componentes de Compensar.",
+        "carpeta": "Core-Design-System",
+        "commit": "9dbf1f0",
+        "fecha": "2026-11-11T21:29:14+00:00",
+        "pendientes": 0
+      },
+      {
+        "id": "flujos",
+        "nombre": "Prototipos",
+        "rol": "Flujos navegables de Drupal, ZT y APP. Consumen una copia controlada del sistema de diseño en shared/.",
+        "carpeta": "Flujos/prototipos",
+        "commit": "eb66ed5",
+        "fecha": "2026-11-11T21:37:15+00:00",
+        "pendientes": 0
+      },
+      {
+        "id": "portal",
+        "nombre": "Portal UX",
+        "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
+        "carpeta": "Flujos/portal",
+        "commit": "db85bd0",
+        "fecha": "2026-11-12T16:38:49+00:00",
+        "pendientes": 9
+      }
+    ]
+  },
+  "sincronizacion": {
+    "estado": "al-dia",
+    "dsCommit": "9dbf1f0",
+    "archivos": [
+      {
+        "ds": "css/core.css",
+        "flujos": "shared/vendor/core.css",
+        "estado": "al-dia",
+        "versionUsada": null
+      },
+      {
+        "ds": "css/portal.css",
+        "flujos": "shared/vendor/portal.css",
+        "estado": "al-dia",
+        "versionUsada": null
+      },
+      {
+        "ds": "icons/icons.css",
+        "flujos": "shared/icons/icons.css",
+        "estado": "al-dia",
+        "versionUsada": null
+      },
+      {
+        "ds": "js/mp-tabs.js",
+        "flujos": "shared/vendor/mp-tabs.js",
+        "estado": "al-dia",
+        "versionUsada": null
+      }
+    ],
+    "version": "v2.4.0",
+    "comando": "npm run ds:sincronizar"
+  },
+  "componentes": {
+    "ds": [
+      {
+        "id": "bottom-sheet",
+        "ambito": "app"
+      },
+      {
+        "id": "dropdown",
+        "ambito": "app"
+      },
+      {
+        "id": "header",
+        "ambito": "app"
+      },
+      {
+        "id": "tabs",
+        "ambito": "app"
+      },
+      {
+        "id": "accordion",
+        "ambito": "transversales"
+      },
+      {
+        "id": "alerts",
+        "ambito": "transversales"
+      },
+      {
+        "id": "avatar",
+        "ambito": "transversales"
+      },
+      {
+        "id": "badges",
+        "ambito": "transversales"
+      },
+      {
+        "id": "buttons",
+        "ambito": "transversales"
+      },
+      {
+        "id": "cards",
+        "ambito": "transversales"
+      },
+      {
+        "id": "dropdown",
+        "ambito": "transversales"
+      },
+      {
+        "id": "inputs",
+        "ambito": "transversales"
+      },
+      {
+        "id": "loading",
+        "ambito": "transversales"
+      },
+      {
+        "id": "modals",
+        "ambito": "transversales"
+      },
+      {
+        "id": "pagination",
+        "ambito": "transversales"
+      },
+      {
+        "id": "selection-controls",
+        "ambito": "transversales"
+      },
+      {
+        "id": "tables",
+        "ambito": "transversales"
+      },
+      {
+        "id": "tabs",
+        "ambito": "transversales"
+      },
+      {
+        "id": "toasts",
+        "ambito": "transversales"
+      },
+      {
+        "id": "accordion",
+        "ambito": "web"
+      },
+      {
+        "id": "badges",
+        "ambito": "web"
+      },
+      {
+        "id": "breadcrumb",
+        "ambito": "web"
+      },
+      {
+        "id": "empty-state",
+        "ambito": "web"
+      },
+      {
+        "id": "header",
+        "ambito": "web"
+      },
+      {
+        "id": "icons-connect",
+        "ambito": "web"
+      },
+      {
+        "id": "icons-intro",
+        "ambito": "web"
+      },
+      {
+        "id": "icons-library",
+        "ambito": "web"
+      },
+      {
+        "id": "loading",
+        "ambito": "web"
+      },
+      {
+        "id": "sidebar",
+        "ambito": "web"
+      },
+      {
+        "id": "stepper",
+        "ambito": "web"
+      }
+    ],
+    "usoDs": [
+      {
+        "bloque": "mp-btn",
+        "archivos": 39,
+        "flujos": [
+          "app/historia-clinica",
+          "drupal/navegacion",
+          "zt/agendamiento-de-citas",
+          "zt/historia-clinica",
+          "zt/index.html",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-choice",
+        "archivos": 25,
+        "flujos": [
+          "app/historia-clinica",
+          "zt/agendamiento-de-citas",
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-badge",
+        "archivos": 14,
+        "flujos": [
+          "app/historia-clinica",
+          "zt/agendamiento-de-citas",
+          "zt/historia-clinica"
+        ]
+      },
+      {
+        "bloque": "mp-sidebar",
+        "archivos": 14,
+        "flujos": [
+          "drupal/navegacion",
+          "zt/agendamiento-de-citas",
+          "zt/historia-clinica"
+        ]
+      },
+      {
+        "bloque": "mp-modal",
+        "archivos": 13,
+        "flujos": [
+          "zt/agendamiento-de-citas",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-input-group",
+        "archivos": 13,
+        "flujos": [
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-input-field",
+        "archivos": 13,
+        "flujos": [
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-dropdown",
+        "archivos": 12,
+        "flujos": [
+          "zt/agendamiento-de-citas"
+        ]
+      },
+      {
+        "bloque": "mp-select",
+        "archivos": 12,
+        "flujos": [
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-alert",
+        "archivos": 11,
+        "flujos": [
+          "app/historia-clinica",
+          "zt/agendamiento-de-citas"
+        ]
+      },
+      {
+        "bloque": "mp-chip",
+        "archivos": 11,
+        "flujos": [
+          "zt/agendamiento-de-citas"
+        ]
+      },
+      {
+        "bloque": "mp-input-label",
+        "archivos": 11,
+        "flujos": [
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-input-wrapper",
+        "archivos": 11,
+        "flujos": [
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-input-error",
+        "archivos": 11,
+        "flujos": [
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-input-required",
+        "archivos": 10,
+        "flujos": [
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-modal-wrap",
+        "archivos": 9,
+        "flujos": [
+          "zt/agendamiento-de-citas"
+        ]
+      },
+      {
+        "bloque": "tipografía (mp-h*, mp-body-*)",
+        "archivos": 8,
+        "flujos": [
+          "drupal/navegacion",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-dropdown-group",
+        "archivos": 8,
+        "flujos": [
+          "zt/agendamiento-de-citas"
+        ]
+      },
+      {
+        "bloque": "mp-dropdown-label",
+        "archivos": 8,
+        "flujos": [
+          "zt/agendamiento-de-citas"
+        ]
+      },
+      {
+        "bloque": "mp-dropdown-required",
+        "archivos": 8,
+        "flujos": [
+          "zt/agendamiento-de-citas"
+        ]
+      },
+      {
+        "bloque": "mp-checkbox",
+        "archivos": 7,
+        "flujos": [
+          "app/historia-clinica",
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-radio",
+        "archivos": 7,
+        "flujos": [
+          "app/historia-clinica",
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-web-header",
+        "archivos": 6,
+        "flujos": [
+          "drupal/navegacion"
+        ]
+      },
+      {
+        "bloque": "mp-accordion",
+        "archivos": 3,
+        "flujos": [
+          "drupal/navegacion"
+        ]
+      },
+      {
+        "bloque": "mp-card",
+        "archivos": 3,
+        "flujos": [
+          "drupal/navegacion"
+        ]
+      },
+      {
+        "bloque": "mp-tabs",
+        "archivos": 2,
+        "flujos": [
+          "zt/historia-clinica"
+        ]
+      },
+      {
+        "bloque": "mp-tab",
+        "archivos": 2,
+        "flujos": [
+          "zt/historia-clinica"
+        ]
+      },
+      {
+        "bloque": "mp-loading",
+        "archivos": 1,
+        "flujos": [
+          "app/historia-clinica"
+        ]
+      }
+    ],
+    "locales": [
+      {
+        "nombre": "modal",
+        "plataforma": "zt",
+        "archivos": [
+          "modal.css",
+          "modal.js"
+        ],
+        "equivalenteDs": "modals",
+        "tipo": "existe-en-ds",
+        "paginas": 13
+      },
+      {
+        "nombre": "alert",
+        "plataforma": "zt",
+        "archivos": [
+          "alert.css",
+          "alert.js"
+        ],
+        "equivalenteDs": "alerts",
+        "tipo": "existe-en-ds",
+        "paginas": 11
+      },
+      {
+        "nombre": "dropdown",
+        "plataforma": "zt",
+        "archivos": [
+          "dropdown.css",
+          "dropdown.js"
+        ],
+        "equivalenteDs": "dropdown",
+        "tipo": "existe-en-ds",
+        "paginas": 9
+      },
+      {
+        "nombre": "person-summary",
+        "plataforma": "zt",
+        "archivos": [
+          "person-summary.css",
+          "person-summary.js"
+        ],
+        "equivalenteDs": null,
+        "tipo": "candidato-transversal",
+        "paginas": 9
+      },
+      {
+        "nombre": "stepper",
+        "plataforma": "zt",
+        "archivos": [
+          "stepper.css",
+          "stepper.js"
+        ],
+        "equivalenteDs": "stepper",
+        "tipo": "existe-en-ds",
+        "paginas": 9
+      },
+      {
+        "nombre": "form-error",
+        "plataforma": "zt",
+        "archivos": [
+          "form-error.css"
+        ],
+        "equivalenteDs": "inputs",
+        "tipo": "existe-en-ds",
+        "paginas": 8
+      },
+      {
+        "nombre": "datepicker",
+        "plataforma": "zt",
+        "archivos": [
+          "datepicker.css",
+          "datepicker.js"
+        ],
+        "equivalenteDs": null,
+        "tipo": "candidato-transversal",
+        "paginas": 7
+      },
+      {
+        "nombre": "radio",
+        "plataforma": "zt",
+        "archivos": [
+          "radio.css"
+        ],
+        "equivalenteDs": "selection-controls",
+        "tipo": "existe-en-ds",
+        "paginas": 6
+      },
+      {
+        "nombre": "readonly-field",
+        "plataforma": "zt",
+        "archivos": [
+          "readonly-field.css"
+        ],
+        "equivalenteDs": "inputs",
+        "tipo": "existe-en-ds",
+        "paginas": 4
+      },
+      {
+        "nombre": "action-card",
+        "plataforma": "zt",
+        "archivos": [
+          "action-card.css",
+          "action-card.js"
+        ],
+        "equivalenteDs": "cards",
+        "tipo": "existe-en-ds",
+        "paginas": 2
+      },
+      {
+        "nombre": "file-upload",
+        "plataforma": "zt",
+        "archivos": [
+          "file-upload.css",
+          "file-upload.js"
+        ],
+        "equivalenteDs": null,
+        "tipo": "candidato-transversal",
+        "paginas": 2
+      },
+      {
+        "nombre": "benef-card",
+        "plataforma": "zt",
+        "archivos": [
+          "benef-card.css",
+          "benef-card.js"
+        ],
+        "equivalenteDs": "cards",
+        "tipo": "existe-en-ds",
+        "paginas": 1
+      },
+      {
+        "nombre": "otp-input",
+        "plataforma": "zt",
+        "archivos": [
+          "otp-input.css",
+          "otp-input.js"
+        ],
+        "equivalenteDs": null,
+        "tipo": "candidato-transversal",
+        "paginas": 1
+      },
+      {
+        "nombre": "status-result",
+        "plataforma": "zt",
+        "archivos": [
+          "status-result.css",
+          "status-result.js"
+        ],
+        "equivalenteDs": null,
+        "tipo": "candidato-transversal",
+        "paginas": 1
+      },
+      {
+        "nombre": "switch",
+        "plataforma": "zt",
+        "archivos": [
+          "switch.css",
+          "switch.js"
+        ],
+        "equivalenteDs": "selection-controls",
+        "tipo": "existe-en-ds",
+        "paginas": 1
+      }
+    ],
+    "cifras": {
+      "iconos": 1025,
+      "tokens": 97,
+      "modos": 3
+    }
+  }
+}

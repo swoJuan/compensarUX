@@ -1,0 +1,17 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>seed</title></head><body>
+<!-- Carga el mock para derivar la persona del documento (fuente única). -->
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script>
+  // Semilla de prototipo. El nombre se deriva del documento con la MISMA lógica
+  // del flujo (nombreMock): doc 222 → Laura Fernanda Rodríguez Duarte.
+  var num = '222';
+  var p = ZTAfiliacion.personaMock(num);
+  ZTAfiliacion.saveCandidate({
+    documentType:'CC', documentNumber:num,
+    name: ZTAfiliacion.nombreMock(num),
+    firstName:p.firstName, secondName:p.secondName,
+    firstSurname:p.firstSurname, secondSurname:p.secondSurname,
+    viable:true
+  });
+  location.replace('index.html');
+</script></body></html>

@@ -1,0 +1,154 @@
+/* ============================================================
+ * validacion.css — Pantalla "Validación de información" (OTP) del Paso 2
+ * ------------------------------------------------------------
+ * Sigue perteneciendo al PASO 2 (no es un paso nuevo del stepper). Reutiliza la
+ * composición del proceso (panel de pasos + card + CTA) igual que Paso 1/2, y
+ * añade el bloque central del OTP. Los componentes (stepper, person-summary,
+ * alert, otp-input, botones) son transversales/DS. Token-first.
+ * ============================================================ */
+
+/* ═══════════════ LAYOUT DEL PROCESO (igual a los pasos) ═══════════════ */
+.pa-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12, 0.75rem);
+  width: 100%;
+  margin-top: var(--space-24);
+}
+.pa-side {
+  flex: 0 0 280px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12, 0.75rem);
+}
+
+/* ═══════════════ CARD ═══════════════ */
+.pa-card {
+  flex: 1 1 800px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-12, 0.75rem);
+  padding: 28px var(--space-24) var(--space-32);
+}
+.pa-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+.pa-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-radius: 4px;
+  background: var(--use-surface-violet, #efecf9);
+  color: var(--use-text-theme-violet, #4e3199);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.pa-card__title {
+  margin: 0;
+  font-size: 24px;                 /* heading/h5 */
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+
+/* ═══════════════ CUERPO OTP (centrado) ═══════════════ */
+.ov-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-16, 1rem);
+  width: 100%;
+}
+
+/* Icono de seguridad en círculo violeta suave (Figma). */
+.ov-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full, 999px);
+  background: var(--use-surface-violet, #efecf9);
+  margin-top: var(--space-8);
+}
+
+.ov-title {
+  margin: 0;
+  font-size: var(--font-size-xl, 1.125rem);   /* ~18-20px, heading corto */
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+.ov-desc {
+  margin: 0;
+  max-width: 520px;
+  font-size: var(--font-size-lg, 1rem);
+  line-height: 1.5;
+  color: var(--use-text-secondary, #333);
+}
+.ov-prompt {
+  margin: var(--space-8) 0 0;
+  font-size: var(--font-size-lg, 1rem);
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--use-text-primary, #111);
+}
+
+/* Host de la alerta (success/error). Vacío → sin caja. */
+.ov-alert { width: 100%; max-width: 480px; }
+.ov-alert:empty { display: none; }
+
+/* ═══════════════ REENVÍO + COUNTDOWN ═══════════════ */
+.ov-resend {
+  margin: 0;
+  font-size: var(--font-size-md, 14px);
+  line-height: 1.5;
+  color: var(--use-text-secondary, #333);
+}
+/* Acción de reenvío: durante el countdown es texto no clicable (naranja);
+   al expirar, .is-active la vuelve un enlace clicable. */
+.ov-resend__action {
+  color: var(--use-primary-default, #ff6600);
+  font-weight: var(--font-weight-medium, 500);
+  font-style: italic;
+}
+.ov-resend__action.is-active {
+  font-style: normal;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ov-resend__action.is-active:focus-visible {
+  outline: 2px solid var(--use-focus-outline, #ff6600);
+  outline-offset: 2px;
+}
+
+/* ═══════════════ CTA (Atrás + Continuar) ═══════════════ */
+.pa-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+  margin-top: var(--space-24);
+}
+.pa-back { display: inline-flex; align-items: center; gap: var(--space-4); }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 900px) {
+  .pa-layout { flex-direction: column; }
+  .pa-side { flex: 1 1 auto; width: 100%; }
+  .pa-card { flex: 1 1 auto; max-width: 100%; width: 100%; }
+}
+@media (max-width: 680px) {
+  .pa-cta { flex-direction: column-reverse; align-items: stretch; }
+  .pa-cta .mp-btn { width: 100%; justify-content: center; }
+}

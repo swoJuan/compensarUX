@@ -1,0 +1,153 @@
+/* ============================================================
+ * custom.css — Flujo "Historia clínica" (APP)
+ * Cascada: DS (core.css) → iconos → shell APP (app.css) → ESTE archivo.
+ * Solo lo específico del flujo. Prefijo propio: .hc-*
+ * Referencia: Figma "APP Medicina Prepagada" · Historia clínica — App (8336:20380).
+ * ============================================================ */
+
+/* ═══════════════ ENCABEZADO DE NUEVA SOLICITUD ═══════════════ */
+/* Título + descripción (sin recuadro): Figma App 02 · gap 6 */
+.hc-head { display: flex; flex-direction: column; }
+
+/* ═══════════════ FORMULARIO ═══════════════ */
+.hc-period { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.hc-period .app-question { padding: 0; }
+.hc-range { display: flex; flex-direction: column; gap: 16px; }
+.hc-range[hidden], #grp-mes[hidden], #grp-anio[hidden] { display: none; }
+/* Alerta info "Último año" (Figma App 02C): icono y texto centrados, cuerpo 16/1.3; sin alto mínimo del DS */
+.hc-anio.mp-alert { align-items: center; min-height: 0; }
+.hc-anio .mp-alert__body { font-size: 16px; line-height: 1.3; }
+
+/* ═══════════════ CALENDARIO (hoja) — Figma App 02 · "Fecha desde" ═══════════════ */
+.hc-cal__nav { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 8px; }
+.hc-cal__month { font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--app-text); }
+.hc-cal__arrow {
+  width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 50%; background: none; color: var(--app-violet); cursor: pointer;
+}
+.hc-cal__arrow:hover:not(:disabled) { background: var(--app-violet-bg); }
+.hc-cal__arrow:disabled { color: var(--app-border); cursor: default; }
+.hc-cal__arrow:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 1px; }
+.hc-cal__week, .hc-cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); justify-items: center; }
+.hc-cal__week span { padding: 6px 0; font-size: 14px; line-height: 1.5; color: var(--app-text-3); }
+.hc-cal__grid { grid-auto-rows: 44px; align-items: center; row-gap: 4px; margin-bottom: 4px; }
+.hc-cal__day {
+  width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; padding: 0;
+  border: 0; border-radius: 999px; background: none; font: inherit; font-size: 16px; line-height: 1.3;
+  color: var(--base-neutral-50, #a4a4a4);   /* deshabilitado (fecha futura / anterior a "Desde") */
+}
+.hc-cal__day:disabled { cursor: default; }
+.hc-cal__day.is-available { color: var(--app-text-2); cursor: pointer; }
+.hc-cal__day.is-available:hover { background: var(--use-surface-theme-orange-10, #fff1e8); }
+.hc-cal__day.is-available:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 1px; }
+/* Seleccionado: gana también sobre :hover (si no, el texto blanco queda sobre fondo claro) */
+.hc-cal__day.is-available[aria-pressed="true"],
+.hc-cal__day.is-available[aria-pressed="true"]:hover { background: var(--app-orange); color: #fff; font-weight: 700; }
+
+/* Error del rango de fechas (mismo criterio y texto que ZT) */
+.hc-error { grid-column: 1 / -1; margin: 0; font-size: 14px; line-height: 1.5; color: var(--use-state-error-text-error-field, #b3251e); }
+.hc-error[hidden] { display: none; }
+.app-field.is-invalid { border-color: var(--use-state-error-icon, #d13c34); }
+
+/* ═══════════════ CONFIRMAR (hoja) — Figma App 02 · "Modal" ═══════════════ */
+.hc-confirm { overflow: hidden; }                                  /* las esquinas del encabezado violeta siguen el radio de 24px */
+.hc-confirm__header {
+  position: relative; flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+  padding: 24px; background: var(--app-violet-bg); touch-action: none;
+}
+.hc-confirm__handle { align-self: stretch; height: 36px; display: flex; align-items: center; justify-content: center; cursor: grab; }
+.hc-confirm__handle::before { content: ""; width: 32px; height: 4px; border-radius: 100px; background: #79747e; }   /* outline del Figma (sin token en el DS) */
+.hc-confirm__icon {
+  display: inline-flex; align-items: center; justify-content: center; padding: 12px; border-radius: 56px;
+  background: var(--use-surface-theme-violet-10, #e0d9f3);
+}
+.hc-confirm__title { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.2; color: var(--app-text); }
+.hc-confirm__intro { margin: 0; font-size: 16px; line-height: 1.3; color: var(--app-text-3); }
+.hc-confirm__close {
+  position: absolute; top: 21px; right: 17px; display: inline-flex; align-items: center; justify-content: center;
+  padding: 8px; border: 0; border-radius: 24px; background: #fff; color: var(--app-text); cursor: pointer;
+}
+.hc-confirm__close:hover { background: var(--app-bg); }
+.hc-confirm__close:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 2px; }
+
+.hc-confirm__list { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 24px; }
+.hc-confirm__row { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px dashed var(--app-border-s); }
+.hc-confirm__row--patient { align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--app-border-s); }
+.hc-confirm__row-icon { flex: none; display: inline-flex; align-items: center; justify-content: center; padding: 12px; border-radius: 24px; background: var(--app-violet-bg); }
+.hc-confirm__row-text { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.hc-confirm__row--patient .hc-confirm__row-text { gap: 2px; }
+.hc-confirm__label { margin: 0; font-size: 12px; font-weight: 700; line-height: 1.3; letter-spacing: .5px; text-transform: uppercase; color: var(--app-text-2); }
+.hc-confirm__value { margin: 0; font-size: 16px; line-height: 1.3; color: var(--app-text); }
+.hc-confirm__row--patient .hc-confirm__value { font-weight: 700; }
+
+.hc-confirm__actions { flex: none; width: 236px; max-width: 100%; align-self: center; display: flex; flex-direction: column; gap: 10px; padding-bottom: 34px; }
+.hc-confirm__actions .mp-btn { width: 100%; justify-content: center; }
+
+/* ═══════════════ MIS SOLICITUDES ═══════════════ */
+.hc-list { display: flex; flex-direction: column; gap: 16px; }
+.hc-req { padding: 16px; background: #fff; border-radius: 16px; }
+.hc-req__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--app-border-s); }
+.hc-req__label { margin: 0; font-size: 14px; color: var(--app-text-2); text-transform: uppercase; }
+.hc-req__id { margin: 2px 0 0; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.hc-req__rows { margin: 0; padding-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+.hc-req__row { display: grid; grid-template-columns: 140px 1fr; gap: 8px; font-size: 14px; line-height: 1.3; }
+.hc-req__row dt { font-weight: 400; color: var(--app-text-2); }
+.hc-req__row dd { margin: 0; color: var(--app-text); }
+.hc-req__actions { margin-top: 16px; }
+.hc-req__actions .mp-btn { width: 100%; justify-content: center; }
+.hc-req__reason { margin-top: 12px; padding: 12px; border-radius: 8px; background: var(--app-bg); font-size: 14px; line-height: 1.4; }
+
+/* Carga infinita: contenedor del spinner del DS (mp-loading) y marca de fin de lista */
+/* El listado se desliza con gestos: arrastrar (mouse) no debe seleccionar texto */
+#panel-mis { -webkit-user-select: none; user-select: none; }
+
+.hc-more {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  min-height: 56px; padding: 8px 16px; border: 0; border-radius: 16px; background: none;
+  font: inherit; font-size: 14px; font-weight: 700; color: var(--app-orange); cursor: pointer;
+  animation: hc-more-nudge 1.8s ease-in-out infinite;
+}
+.hc-more[hidden] { display: none; }
+.hc-more__text { text-decoration: none; }
+.hc-more__count { font-size: 12px; font-weight: 400; color: var(--app-text-3); font-variant-numeric: tabular-nums; }
+.hc-more:hover { background: var(--use-surface-theme-orange-10, #fff1e8); }
+.hc-more:focus-visible { outline: 2px solid var(--app-orange); outline-offset: 2px; }
+@keyframes hc-more-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .hc-more { animation: none; } }
+.hc-loading { display: flex; justify-content: center; padding: 12px 0; }
+.hc-loading[hidden] { display: none; }
+.hc-end { margin: 0; padding: 8px 16px 4px; text-align: center; font-size: 14px; color: var(--app-text-3); }
+.hc-end[hidden] { display: none; }
+
+.hc-empty { padding: 24px 20px; background: #fff; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.hc-empty__icon { width: 64px; height: 64px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--app-violet-bg); }
+.hc-empty__title { margin: 0; font-size: 18px; font-weight: 700; }
+.hc-empty__text { margin: 0 0 8px; font-size: 14px; line-height: 1.45; color: var(--app-text-2); }
+.hc-empty .mp-btn { width: 100%; justify-content: center; }
+
+/* ═══════════════ SOLICITUD RADICADA — Figma App 06 ═══════════════ */
+.hc-done { align-items: stretch; text-align: center; gap: 20px; padding: 24px 20px 20px; }
+.hc-done__check {
+  align-self: center; flex: none; width: 64px; height: 64px; display: inline-flex; align-items: center; justify-content: center;
+  border: 5px solid var(--use-surface-theme-green-2-10, #ecf7c9); border-radius: 48px;
+  background: var(--use-surface-theme-green-2-60, #95bf1b); color: #fff;
+}
+.hc-done__msg { display: flex; flex-direction: column; gap: 6px; }
+.hc-done__title { margin: 0; font-size: 24px; font-weight: 700; line-height: 1.3; color: var(--app-text); }
+.hc-done__lead { margin: 0; font-size: 14px; line-height: 1.5; color: var(--app-text-2); }
+.hc-radicado { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 16px; border-radius: 16px; background: var(--use-surface-theme-violet-5, #efecf9); }
+.hc-radicado__label { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--app-violet); }
+.hc-radicado__num { margin: 0; font-size: 40px; font-weight: 700; line-height: 1.2; letter-spacing: 2px; color: var(--app-violet); font-variant-numeric: tabular-nums; }
+.hc-radicado__hint { margin: 0; font-size: 14px; line-height: 1.5; color: var(--app-text-2); }
+.hc-next__title { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--app-text-2); }
+.hc-next__title::before, .hc-next__title::after { content: ""; flex: 1; height: 1px; background: var(--app-border-s); }
+.hc-next { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; text-align: left; }
+.hc-next__card { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px; border: 1px solid var(--app-border-s); border-radius: 16px; background: #fff; }
+.hc-next__icon { display: inline-flex; padding: 8px; border-radius: 10px; background: var(--use-surface-theme-violet-5, #efecf9); }
+.hc-next__strong { margin: 0; font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--app-text); }
+.hc-next__text { margin: 0; font-size: 14px; line-height: 1.5; color: var(--app-text-2); }
+
+@media (max-width: 360px) {
+  .hc-req__row { grid-template-columns: 1fr; gap: 2px; }
+  .hc-radicado__num { font-size: 32px; }
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>seed OTP</title></head><body>
+<!-- Carga el mock para derivar la persona del documento (fuente única). -->
+<script src="../../../../shared/afiliacion-mock.js"></script>
+<script>
+  // Semilla de prototipo para abrir la Validación OTP directamente: candidato
+  // viable + Paso 1 completado + datos del Paso 2 guardados (sin otpVerified).
+  var num = '222';
+  var p = ZTAfiliacion.personaMock(num);
+  ZTAfiliacion.saveCandidate({
+    documentType:'CC', documentNumber:num, name: ZTAfiliacion.nombreMock(num),
+    firstName:p.firstName, secondName:p.secondName, firstSurname:p.firstSurname, secondSurname:p.secondSurname,
+    viable:true
+  });
+  ZTAfiliacion.saveStep1({ modality:'individual', transactionType:'new', noveltyType:null,
+    companyName:'Empresa Demo S.A.S.', nit:'900123456', plan:'ideal', startDate:'2026-10-01', completed:true });
+  ZTAfiliacion.saveStep2({ birthDate:'1990-05-10', age:36, gender:'mujer', sex:'femenino',
+    maritalStatus:'casado', eps:'compensar', ethnicGroup:'ninguno', nationality:'colombiana', birthCountry:'colombia',
+    phone:'3001234567', email:'usuario@email.com', address:'Calle 10 # 20-30', department:'valle', city:'cali',
+    completed:false, otpVerified:false });
+  ZTAfiliacion.clearOtpResend();  // countdown limpio para arrancar en 2:00
+  location.replace('index.html');
+</script></body></html>

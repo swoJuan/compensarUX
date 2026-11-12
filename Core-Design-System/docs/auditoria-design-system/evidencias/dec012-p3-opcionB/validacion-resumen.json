@@ -1,0 +1,32 @@
+{
+  "out": {
+    "before": {
+      "e": {
+        "ok": 16,
+        "total": 16,
+        "diffs": []
+      },
+      "z": {
+        "ok": 3,
+        "total": 3,
+        "diffs": []
+      }
+    },
+    "pre": {
+      "e": {
+        "ok": 16,
+        "total": 16,
+        "diffs": []
+      },
+      "z": {
+        "ok": 3,
+        "total": 3,
+        "diffs": []
+      }
+    }
+  },
+  "nPre": 22,
+  "nBef": 25,
+  "nAft": 9,
+  "n": 50
+}

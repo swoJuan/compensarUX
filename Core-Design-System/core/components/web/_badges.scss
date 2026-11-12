@@ -1,0 +1,299 @@
+// ============================================================
+//  mp-badge / mp-chip / mp-tag
+//  Chips, tags y badges para UI web.
+//  Fuente Figma: 1zVGMpzqBgiBUqhmfFEAoT / 4610:73562
+// ============================================================
+
+@use '../../abstracts' as *;
+
+.mp-badge,
+.mp-chip,
+.mp-tag {
+  --mp-pill-bg: var(--use-state-info-bg, #e6f1fb);
+  --mp-pill-color: var(--use-state-info-text, #2d4a67);
+  --mp-pill-border: transparent;
+  --mp-pill-hover-bg: color-mix(in srgb, var(--mp-pill-bg) 86%, var(--use-primary-default, #ff6600));
+  --mp-pill-focus: var(--use-primary-default, #ff6600);
+  --mp-pill-selected-bg: var(--use-primary-default, #ff6600);
+  --mp-pill-selected-color: var(--use-text-on-dark-primary, #ffffff);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8, 8px);
+  min-height: rem(29px);
+  margin: 0;
+  padding: rem(4px) var(--space-12, 12px);
+  border: rem(1px) solid var(--mp-pill-border);
+  border-radius: var(--space-16, 16px);
+  background: var(--mp-pill-bg);
+  color: var(--mp-pill-color);
+  font-family: var(--font-body, Roboto, Arial, sans-serif);
+  font-size: rem(14px);   // DEC-012 P3: 14px → 0.875rem
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mp-badge__label,
+.mp-chip__label,
+.mp-tag__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: inherit;
+}
+
+.mp-badge__icon,
+.mp-chip__icon,
+.mp-tag__icon,
+.mp-badge-icon,
+.mp-chip__remove {
+  width: rem(14px);
+  height: rem(14px);
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  font-size: rem(14px);
+  line-height: 1;
+}
+
+.mp-badge-dot {
+  width: rem(6px);
+  height: rem(6px);
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.mp-chip {
+  cursor: pointer;
+  transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+
+  &:hover,
+  &.mp-chip--is-hover {
+    background: var(--mp-pill-hover-bg);
+    border-color: var(--mp-pill-focus);
+    box-shadow: inset 0 0 0 rem(1px) var(--mp-pill-focus);
+  }
+
+  &:focus-visible,
+  &.mp-chip--is-focus {
+    outline: none;
+    box-shadow: 0 0 0 rem(3px) color-mix(in srgb, var(--mp-pill-focus) 28%, transparent);
+    border-color: var(--mp-pill-focus);
+  }
+
+  &[aria-pressed='true'],
+  &.is-selected {
+    background: var(--mp-pill-selected-bg);
+    border-color: var(--mp-pill-selected-bg);
+    color: var(--mp-pill-selected-color);
+    box-shadow: inset 0 0 0 rem(1px) var(--mp-pill-selected-bg);
+  }
+
+  &:disabled,
+  &[aria-disabled='true'],
+  &.is-disabled {
+    opacity: 0.48;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.mp-chip__remove {
+  margin-inline-end: rem(-2px);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mp-tag {
+  --mp-pill-bg: var(--use-surface-theme-gray-5, #f8f7f7);
+  --mp-pill-color: var(--use-text-secondary, #333333);
+  --mp-pill-border: var(--base-neutral-30, #e0e0e0);
+}
+
+.mp-badge--sm,
+.mp-chip--sm,
+.mp-tag--sm {
+  min-height: rem(25px);
+  padding: rem(2px) var(--space-8, 8px);
+  font-size: rem(14px);   // DEC-012 P3: 14px → 0.875rem
+}
+
+.mp-badge--lg,
+.mp-chip--lg,
+.mp-tag--lg {
+  min-height: rem(34px);
+  padding: rem(5px) var(--space-16, 16px);
+  font-size: var(--font-size-md, 16px);
+}
+
+.mp-badge--count {
+  min-width: rem(20px);
+  height: rem(20px);
+  min-height: rem(20px);
+  padding: 0 rem(6px);
+  border-radius: rem(999px);
+  font-size: rem(14px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mp-badge--count-lg {
+  min-width: rem(24px);
+  height: rem(24px);
+  min-height: rem(24px);
+  padding: 0 rem(8px);
+  font-size: rem(14px);
+}
+
+.mp-badge--outline,
+.mp-tag--outline,
+.mp-chip--outline {
+  background: transparent;
+  border-color: currentColor;
+}
+
+.mp-badge--warning,
+.mp-badge--yellow,
+.mp-chip--warning,
+.mp-chip--yellow,
+.mp-tag--warning,
+.mp-tag--yellow {
+  --mp-pill-bg: var(--use-state-warning-bg, #fff2d9);
+  --mp-pill-color: var(--use-state-warning-text, #111111);
+  --mp-pill-border: transparent;
+}
+
+.mp-badge--orange,
+.mp-chip--orange,
+.mp-tag--orange {
+  --mp-pill-bg: var(--use-surface-orange, #fff2e3);
+  --mp-pill-color: var(--use-text-badge-orange, #333333);   // DEC-006: variable propia de Badge (Figma 3200:17594)
+}
+
+.mp-badge--info,
+.mp-chip--info,
+.mp-tag--info {
+  --mp-pill-bg: var(--use-state-info-bg, #e6f1fb);
+  --mp-pill-color: var(--use-state-info-text, #2d4a67);
+}
+
+.mp-badge--success,
+.mp-badge--green-1,
+.mp-chip--success,
+.mp-chip--green-1,
+.mp-tag--success,
+.mp-tag--green-1 {
+  --mp-pill-bg: var(--use-state-success-bg, #e6f7e8);
+  --mp-pill-color: var(--use-state-success-text, #0d3d1f);
+}
+
+.mp-badge--green,
+.mp-badge--green-3,
+.mp-chip--green,
+.mp-chip--green-3,
+.mp-tag--green,
+.mp-tag--green-3 {
+  --mp-pill-bg: var(--use-surface-theme-green-2-10, #ecf7c9);
+  --mp-pill-color: var(--use-text-badge-green-3, #516d0d);   // DEC-006: texto e iconos (Figma 3200:17618); use/text/theme/green-2 no cambia
+}
+
+.mp-badge--error,
+.mp-chip--error,
+.mp-tag--error {
+  --mp-pill-bg: var(--use-state-error-bg, #f7eeed);
+  --mp-pill-color: var(--use-text-badge-error, #9e3328);   // DEC-006: texto e iconos (Figma 3200:17624); use/text/theme/red no cambia
+}
+
+.mp-badge--neutral,
+.mp-badge--white,
+.mp-chip--neutral,
+.mp-chip--white,
+.mp-tag--neutral,
+.mp-tag--white {
+  --mp-pill-bg: var(--use-surface-white, #ffffff);
+  --mp-pill-color: var(--use-text-primary, #111111);
+  --mp-pill-border: var(--base-neutral-30, #e0e0e0);
+}
+
+.mp-badge--violet,
+.mp-chip--violet,
+.mp-tag--violet {
+  --mp-pill-bg: var(--use-surface-violet, #efecf9);
+  --mp-pill-color: var(--use-text-primary, #111111);   // DEC-006: Badge violeta 3229:17545 y Chip normal 3200:17643 (antes use/text/theme/violet)
+}
+
+// DEC-006 · Chip activo (Figma 3200:17649): texto use/text/inverse sobre fondo use/text/theme/violet.
+// Excepción documentada: ese fondo está enlazado en el maestro a un token de texto; no se renombra ni se migra sin aprobación.
+.mp-chip--violet {
+  --mp-pill-selected-bg: var(--use-text-theme-violet, #4e3199);
+  --mp-pill-selected-color: var(--use-text-inverse, #f5f5f5);
+}
+
+[data-theme='dark'] {
+  .mp-badge,
+  .mp-chip,
+  .mp-tag {
+    --mp-pill-selected-bg: var(--use-primary-default-dark, #ff9d5c);
+    --mp-pill-selected-color: var(--base-neutral-100-negro, #111111);
+    --mp-pill-focus: var(--use-primary-default-dark, #ff9d5c);
+  }
+
+  .mp-chip--violet {
+    --mp-pill-selected-bg: var(--use-text-theme-violet);
+    --mp-pill-selected-color: var(--use-text-inverse);
+  }
+
+  .mp-badge--neutral,
+  .mp-badge--white,
+  .mp-chip--neutral,
+  .mp-chip--white,
+  .mp-tag--neutral,
+  .mp-tag--white {
+    --mp-pill-bg: var(--base-neutral-80, #4d4746);
+    --mp-pill-color: var(--base-neutral-10, #f5f5f5);
+    --mp-pill-border: var(--base-neutral-70, #696363);
+  }
+}
+
+[data-theme='high-contrast'] {
+  .mp-badge,
+  .mp-chip,
+  .mp-tag {
+    --mp-pill-bg: var(--base-neutral-black, #000000);
+    --mp-pill-color: var(--base-neutral-white, #ffffff);
+    --mp-pill-border: var(--base-neutral-white, #ffffff);
+    --mp-pill-hover-bg: var(--base-neutral-black, #000000);
+    --mp-pill-focus: var(--use-primary-default, #ffff00);
+    --mp-pill-selected-bg: var(--use-primary-default, #ffff00);
+    --mp-pill-selected-color: var(--base-neutral-black, #000000);
+  }
+
+  .mp-chip--violet {
+    --mp-pill-selected-bg: var(--use-text-theme-violet);
+    --mp-pill-selected-color: var(--use-text-inverse);
+  }
+}
+
+// DEC-006 (DS-08) · Colores forzados: el chip seleccionado solo cambiaba el fondo y no se distinguía del no seleccionado.
+@media (forced-colors: active) {
+  .mp-chip[aria-pressed='true'],
+  .mp-chip.is-selected {
+    forced-color-adjust: none;
+    background: Highlight;
+    border-color: Highlight;
+    color: HighlightText;
+  }
+}

@@ -1,0 +1,32 @@
+@use '../../core/abstracts' as *;
+
+/* ══════════════════════════════════════════════════════════
+   CHIP / TAG
+   ══════════════════════════════════════════════════════════ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(5px);
+  padding: rem(3px) rem(10px) rem(3px) rem(8px);
+  border-radius: rem(20px);
+  font-size: rem(11.5px);
+  font-weight: 600;
+  background: var(--ui-surface-alt);
+  color: var(--ui-text-muted);
+  border: rem(1px) solid var(--ui-border);
+  cursor: default;
+  user-select: none;
+  transition: background .15s;
+}
+
+.chip:hover { background: var(--ui-tag-bg); color: var(--ui-accent); border-color: var(--ui-accent); }
+
+/* ══════════════════════════════════════════════════════════
+   DIVIDER
+   ══════════════════════════════════════════════════════════ */
+.divider {
+  height: rem(1px);
+  background: var(--ui-border);
+  border: none;
+  margin: var(--space-32) 0;
+}

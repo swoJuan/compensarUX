@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Compensar — Medicina prepagada</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/vendor/core.css">
+  <link rel="stylesheet" href="../../shared/icons/icons.css">
+  <link rel="stylesheet" href="../shared/nav-prototype.css">
+  <link rel="stylesheet" href="assets/menu-3.css">
+</head>
+<body class="proto-page-body proto-page-menu3">
+
+  <!-- ══ Header ═══════════════════════════════════════════════ -->
+  <header class="mp-web-header proto-header" aria-label="Header principal">
+    <div class="container">
+      <div class="mp-web-header__main">
+        <a class="mp-web-header__brand proto-header__brand" href="menu-3.html" aria-label="Compensar, ir al inicio">
+          <img class="proto-header__logo-img" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada" width="164" height="33">
+        </a>
+        <div class="mp-web-header__search">
+          <label class="visually-hidden" for="menu3-search">Buscar en Compensar</label>
+          <input class="mp-web-header__search-input" id="menu3-search" type="search" placeholder="Buscar">
+          <i class="icon icon-magnifying-glass icon-24 mp-web-header__search-icon" aria-hidden="true"></i>
+        </div>
+        <div class="proto-header__ctas">
+          <a class="mp-btn mp-btn--secundario" href="#">Oficina virtual</a>
+          <a class="mp-btn mp-btn--especial" href="#">Afíliate</a>
+        </div>
+        <button class="mp-web-header__mobile-toggle" type="button" id="nav-trigger"
+          aria-haspopup="dialog" aria-controls="nav-sidebar" aria-expanded="false" aria-label="Abrir menú de navegación">
+          <i class="icon icon-hamburger icon-32" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <nav class="mp-web-header__nav" aria-label="Navegación principal">
+      <div class="container proto-header__nav-inner">
+        <div class="mp-web-header__nav-item"><button type="button" class="mp-web-header__nav-link" data-open-nav data-nav-id="planes">Planes <i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button></div>
+        <div class="mp-web-header__nav-item"><button type="button" class="mp-web-header__nav-link" data-open-nav data-nav-id="servicios-salud">Servicios de salud <i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button></div>
+        <div class="mp-web-header__nav-item"><button type="button" class="mp-web-header__nav-link" data-open-nav data-nav-id="red-atencion">Red de atención <i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button></div>
+        <div class="mp-web-header__nav-item"><button type="button" class="mp-web-header__nav-link" data-open-nav data-nav-id="canales-atencion">Canales de atención <i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button></div>
+        <div class="mp-web-header__nav-item"><button type="button" class="mp-web-header__nav-link" data-open-nav data-nav-id="beneficios">Beneficios <i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button></div>
+        <div class="mp-web-header__nav-item"><button type="button" class="mp-web-header__nav-link" data-open-nav data-nav-id="nosotros">Nosotros <i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button></div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══ Panel de navegación (navegación progresiva) ═════════════ -->
+  <div class="mp-sidebar" id="nav-sidebar" role="dialog" aria-modal="true" aria-labelledby="nav-sidebar-title">
+    <div class="mp-sidebar__backdrop" data-nav-close></div>
+    <div class="mp-sidebar__panel">
+      <div class="mp-sidebar__header">
+        <h2 class="mp-sidebar__title" id="nav-sidebar-title" tabindex="-1">Menú</h2>
+        <button class="mp-sidebar__close" type="button" data-nav-close aria-label="Cerrar menú">
+          <i class="icon icon-x icon-20" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="mp-sidebar__body" id="nav-sidebar-body"></div>
+    </div>
+  </div>
+
+  <!-- ══ Home (grid Bootstrap: .container/.row/.col-*) ══════════ -->
+  <main>
+    <div class="container">
+
+      <div class="row align-items-center gy-4 home-hero">
+        <div class="col-12 col-lg-6">
+          <h1 class="mp-h1">Solicita tus <span class="home-hero__eyebrow-accent">medicamentos</span></h1>
+          <p class="mp-body-l">Conoce las alternativas que tienes para acceder a este servicio con tu Plan Ideal.</p>
+          <a class="mp-btn mp-btn--primario" href="#">Ingresa aquí</a>
+          <div class="home-hero__controls">
+            <button type="button" class="home-hero__arrow" aria-label="Anterior"><i class="icon icon-caret-left icon-20" aria-hidden="true"></i></button>
+            <button type="button" class="home-hero__arrow" aria-label="Siguiente"><i class="icon icon-caret-right icon-20" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="home-hero__media-wrap">
+            <div class="home-hero__media"><i class="icon icon-heartbeat" aria-hidden="true"></i></div>
+          </div>
+          <div class="home-hero__dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+
+      <div class="home-quicklinks-card shadow-sm">
+        <div class="row row-cols-2 row-cols-md-4 g-3" aria-label="Accesos rápidos">
+          <div class="col">
+            <a class="home-quicklink" href="#">
+              <span class="home-quicklink__icon"><i class="icon icon-calendar-check icon-20" aria-hidden="true"></i></span>
+              <span class="home-quicklink__label">Agenda tu cita</span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="home-quicklink" href="#">
+              <span class="home-quicklink__icon"><i class="icon icon-credit-card icon-20" aria-hidden="true"></i></span>
+              <span class="home-quicklink__label">Canales de pago</span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="home-quicklink" href="#">
+              <span class="home-quicklink__icon"><i class="icon icon-map-pin icon-20" aria-hidden="true"></i></span>
+              <span class="home-quicklink__label">Red de atención</span>
+            </a>
+          </div>
+          <div class="col">
+            <a class="home-quicklink" href="#">
+              <span class="home-quicklink__icon"><i class="icon icon-pill icon-20" aria-hidden="true"></i></span>
+              <span class="home-quicklink__label">Medicamentos</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <section class="home-section" id="planes" aria-labelledby="planes-title">
+        <div class="home-section__header">
+          <h2 id="planes-title" class="mp-h2">Conoce <span style="color:var(--use-primary-default)">nuestros planes</span></h2>
+          <p class="mp-body-m">Compara nuestras opciones y elige el plan que mejor se adapta a tu estilo de vida, con el respaldo y la tranquilidad que tú y tu familia necesitan.</p>
+        </div>
+        <div class="row g-4">
+
+          <div class="col-12 col-md-6">
+            <article class="mp-card h-100">
+              <div class="mp-card__content">
+                <div class="mp-card__header">
+                  <div>
+                    <h3 class="mp-card__title">Plan Ideal</h3>
+                    <p class="mp-card__subtitle">Cuidado integral con mayor libertad y bienestar.</p>
+                  </div>
+                  <i class="icon icon-heart mp-card__icon icon-32" aria-hidden="true"></i>
+                </div>
+                <ul class="home-plan-list">
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>60 especialidades con acceso directo.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Programa personalizado de bienestar.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Habitación individual con cama para acompañante.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Coberturas ampliadas para maternidad y enfermedades de alto costo.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Bolsa de medicamentos con reembolso.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Consultas de odontología general y especializada.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Asistencia internacional hasta por 50.000 USD/EUR y seguros adicionales.</li>
+                </ul>
+              </div>
+              <div class="mp-card__footer" style="flex-direction:column;align-items:stretch;gap:var(--space-8)">
+                <p class="home-plan-price" style="text-align:center">Desde $310.000 / mes</p>
+                <div class="mp-card__actions"><a class="mp-btn mp-btn--primario" href="#">Quiero el Plan Ideal</a></div>
+                <div class="mp-card__actions"><a class="mp-btn mp-btn--terciario" href="#">Conoce más</a></div>
+                <p class="home-plan-fineprint">*Aplican términos y condiciones.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <article class="mp-card h-100">
+              <div class="mp-card__content">
+                <div class="mp-card__header">
+                  <div>
+                    <h3 class="mp-card__title">Plan Óptimo</h3>
+                    <p class="mp-card__subtitle">El equilibrio entre respaldo, calidad y precio.</p>
+                  </div>
+                  <i class="icon icon-shield-check mp-card__icon icon-32" aria-hidden="true"></i>
+                </div>
+                <ul class="home-plan-list">
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Acceso a 17 especialidades sin remisión.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Medicina alternativa ilimitada.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Habitación individual para hospitalización.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Cobertura para urgencias, hospitalización y atención domiciliaria.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Cobertura en salud mental.</li>
+                  <li><i class="icon icon-check icon-16" aria-hidden="true"></i>El bono más económico del mercado: $25.000.</li>
+                </ul>
+              </div>
+              <div class="mp-card__footer" style="flex-direction:column;align-items:stretch;gap:var(--space-8)">
+                <p class="home-plan-price" style="text-align:center">Desde $211.000 / mes</p>
+                <div class="mp-card__actions"><a class="mp-btn mp-btn--primario" href="#">Quiero el Plan Óptimo</a></div>
+                <div class="mp-card__actions"><a class="mp-btn mp-btn--terciario" href="#">Conoce más</a></div>
+                <p class="home-plan-fineprint">*Aplican términos y condiciones.</p>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="home-section home-section--tint" aria-labelledby="trust-title" style="padding:var(--space-48) var(--space-24)">
+        <div class="home-section__header">
+          <h2 id="trust-title" class="mp-h2">¿Por qué <span style="color:var(--use-primary-default)">confiar</span> en nosotros?</h2>
+          <p class="mp-body-m">En Compensar trabajamos cada día para brindarte respaldo, experiencia y una atención pensada para cuidar de ti y de tu bienestar.</p>
+        </div>
+        <div class="row row-cols-2 row-cols-md-5 g-3 g-md-4">
+          <div class="col">
+            <div class="home-trust-card">
+              <span class="home-trust-card__icon"><i class="icon icon-users-three icon-24" aria-hidden="true"></i></span>
+              <h3>Liderazgo en Colombia</h3>
+              <p>Amplia presencia y respaldo como Caja de Compensación Familiar.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="home-trust-card">
+              <span class="home-trust-card__icon"><i class="icon icon-star icon-24" aria-hidden="true"></i></span>
+              <h3>46 años de experiencia</h3>
+              <p>Más de cuatro décadas cuidando la salud de las familias colombianas.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="home-trust-card">
+              <span class="home-trust-card__icon"><i class="icon icon-heart icon-24" aria-hidden="true"></i></span>
+              <h3>Bienestar integral</h3>
+              <p>Servicios y acompañamiento para cuidar de ti y tu familia en cada etapa.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="home-trust-card">
+              <span class="home-trust-card__icon"><i class="icon icon-building icon-24" aria-hidden="true"></i></span>
+              <h3>Más de 500 empresas</h3>
+              <p>Confían en nosotros para el bienestar de sus colaboradores.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="home-trust-card">
+              <span class="home-trust-card__icon"><i class="icon icon-handshake icon-24" aria-hidden="true"></i></span>
+              <h3>Aliados de primer nivel</h3>
+              <p>Trabajamos junto a instituciones reconocidas del sector salud.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section" aria-labelledby="wellness-title">
+        <div class="row align-items-center gy-4">
+          <div class="col-12 col-md-6">
+            <h2 id="wellness-title" class="mp-h2">Tu <span style="color:var(--use-primary-default)">bienestar</span> nos inspira a brindarte todo lo que necesitas</h2>
+            <p class="mp-body-m">Estamos a un clic de distancia: regístrate y descubre una nueva forma de vivir tu salud y bienestar con nuestros planes. ¡Hazlo ahora!</p>
+            <a class="mp-btn mp-btn--terciario mp-btn--icon-right" href="#">Quiero que me contacten <i class="icon icon-arrow-right icon-20" aria-hidden="true"></i></a>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="home-banner__media"><i class="icon icon-heart-straight icon-48" aria-hidden="true"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section home-section--tint" aria-labelledby="video-title" style="padding:var(--space-48) var(--space-24)">
+        <div class="row align-items-center gy-4">
+          <div class="col-12 col-md-6 order-md-last">
+            <h2 id="video-title" class="mp-h2">Plan personalizado <span style="color:var(--use-primary-default)">vive tu bienestar</span></h2>
+            <p class="mp-body-m">Accede a experiencias diseñadas para mantenerte activo, prevenir enfermedades y fortalecer tu bienestar físico y emocional, con el acompañamiento de un equipo médico y coach de bienestar.</p>
+            <a class="mp-btn mp-btn--primario" href="#">Conoce el programa</a>
+          </div>
+          <div class="col-12 col-md-6 order-md-first">
+            <div class="home-banner__media home-banner__media--video" role="button" tabindex="0" aria-label="Reproducir video: Programa Personalizado de Bienestar Integral">
+              <span class="home-banner__play"><i class="icon icon-play icon-24" aria-hidden="true"></i></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section" aria-labelledby="protection-title">
+        <div class="row align-items-center gy-4">
+          <div class="col-12 col-md-6">
+            <h2 id="protection-title" class="mp-h2">La protección de tu salud <span style="color:var(--use-primary-default)">perfecta para ti</span></h2>
+            <p class="mp-body-m">Descubre la alternativa que más se adapta a tus necesidades y conoce las tarifas especiales que tenemos para cada plan.</p>
+            <a class="mp-btn mp-btn--primario" href="#">Cotiza ahora</a>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="home-banner__media"><i class="icon icon-shield-check icon-48" aria-hidden="true"></i></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="home-footer">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-12 col-md-4">
+            <h3>Te puede interesar</h3>
+            <ul>
+              <li><a href="#">Derechos y deberes</a></li>
+              <li><a href="#">Notificaciones judiciales</a></li>
+              <li><a href="#">Políticas de privacidad y condiciones de uso</a></li>
+              <li><a href="#">Transparencia y acceso a la información pública</a></li>
+              <li><a href="#">Canal de denuncias</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-4">
+            <h3>Conoce más</h3>
+            <ul>
+              <li><a href="#">Nuestra organización</a></li>
+              <li><a href="#">Radicar PQRS</a></li>
+              <li><a href="#">Consultar PQRS</a></li>
+              <li><a href="#">Proveedores</a></li>
+              <li><a href="#">Términos y condiciones</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-4">
+            <h3>Síguenos</h3>
+            <div class="home-footer__social">
+              <a href="#" aria-label="Facebook"><i class="icon icon-facebook-logo icon-20" aria-hidden="true"></i></a>
+              <a href="#" aria-label="X"><i class="icon icon-x-logo icon-20" aria-hidden="true"></i></a>
+              <a href="#" aria-label="Instagram"><i class="icon icon-instagram-logo icon-20" aria-hidden="true"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="icon icon-linkedin-logo icon-20" aria-hidden="true"></i></a>
+              <a href="#" aria-label="YouTube"><i class="icon icon-youtube-logo icon-20" aria-hidden="true"></i></a>
+              <a href="#" aria-label="TikTok"><i class="icon icon-tiktok-logo icon-20" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="home-footer__org">
+          <p><strong>Caja de Compensación Familiar</strong><br>Sede Principal — Av. 68 # 49A - 47, Bogotá D.C.<br>Bogotá 601 3877971 · Línea nacional 01 8000 967070</p>
+          <div class="home-footer__badges">
+            <img src="../../shared/assets/logo-vigilado.svg" alt="Vigilado Supersalud" height="28">
+            <img src="../../shared/assets/logo-supervigilado.svg" alt="Vigilado Superintendencia de Subsidio Familiar" height="28">
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="../shared/nav-data.js"></script>
+  <script src="../shared/nav-shell.js"></script>
+  <script src="assets/menu-3.js"></script>
+  <script src="assets/menu-3-desktop.js"></script>
+  <script>
+    var menu3MobileQuery = window.matchMedia('(max-width: 991.98px)');
+    document.querySelectorAll('[data-open-nav]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (menu3MobileQuery.matches && window.NavShell) window.NavShell.open();
+      });
+    });
+  </script>
+</body>
+</html>

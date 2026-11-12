@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Compensar – Citas médicas</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="css/custom.css">
+<script>
+(function (m, a, z, e) {
+  var s, t, u, v;
+  try {
+    t = m.sessionStorage.getItem('maze-us');
+  } catch (err) {}
+
+  if (!t) {
+    t = new Date().getTime();
+    try {
+      m.sessionStorage.setItem('maze-us', t);
+    } catch (err) {}
+  }
+
+  u = document.currentScript || (function () {
+    var w = document.getElementsByTagName('script');
+    return w[w.length - 1];
+  })();
+  v = u && u.nonce;
+
+  s = a.createElement('script');
+  s.src = z + '?apiKey=' + e;
+  s.async = true;
+  if (v) s.setAttribute('nonce', v);
+  a.getElementsByTagName('head')[0].appendChild(s);
+  m.mazeUniversalSnippetApiKey = e;
+})(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '91229964-c105-482c-bdda-48610b6c5d69');
+</script>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Familiar</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar" data-active="agendamiento"></nav>
+
+    <!-- MAIN -->
+    <main class="main">
+
+<!-- Estado técnico heredado desde index.html: no es una pantalla visible. -->
+<div class="agenda-route-state" hidden>
+  <span id="val-esp" class="mp-dropdown__value is-placeholder">Ej: Medicina general, pediatría</span>
+  <span id="val-sede" class="mp-dropdown__value is-placeholder">Selecciona hasta 3 centros médicos</span>
+  <button id="btn-esp" type="button" aria-expanded="false"></button>
+  <button id="btn-sede" type="button" aria-expanded="false"></button>
+  <div id="panel-esp"></div>
+  <div id="panel-sede"></div>
+  <div id="date-opts"></div>
+  <input type="checkbox" id="mt-check">
+  <div id="mt-wrap"></div>
+  <div id="alert-form"></div>
+  <div id="err-esp"></div>
+  <div id="err-sede"></div>
+  <div id="fecha-display"></div>
+  <div id="confirm-fecha"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN: CITAS DISPONIBLES
+═══════════════════════════════════════ -->
+<div id="s-resultados" class="screen active">
+  <div class="scroller">
+    <nav class="breadcrumb">
+      <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+      <a href="javascript:void(0)" onclick="window.location.href='index.html';return false;">Inicio</a>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="current">Agenda la cita</span>
+    </nav>
+
+    <!-- Encabezado con título + botón Modificar búsqueda -->
+    <div class="resultados-header">
+      <h1 class="page-title"><span class="orange">Citas disponibles para </span><span class="dark" id="res-title-especialidad">especialidad</span></h1>
+      <button class="mp-btn mp-btn--secundario" onclick="openResultadosModifyPanel()">
+        <span class="icon icon-magnifying-glass icon-16 gs-inherit" aria-hidden="true"></span>
+        Modificar búsqueda
+      </button>
+    </div>
+
+    <div class="resultados-wrap">
+      <!-- Fila de filtros: Fecha, Centro médico, Médico, Modalidad -->
+      <div class="resultados-filters">
+        <!-- Filtro: Fecha -->
+        <div class="resultados-filter mp-dropdown res-dd">
+          <button class="mp-dropdown__trigger res-dd__trigger" id="btn-res-fecha" aria-expanded="false" onclick="openCalendarModal('res','btn-res-fecha')">
+            <span class="icon icon-calendar icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="mp-dropdown__value" id="res-filter-fecha">Lunes, 5 Enero 2026</span>
+            <span class="mp-dropdown__caret">
+              <span class="icon icon-caret-down icon-16 gs-inherit" aria-hidden="true"></span>
+            </span>
+          </button>
+          <div class="mp-dropdown__panel" id="panel-res-fecha"></div>
+        </div>
+
+        <!-- Filtro: Centro médico -->
+        <div class="resultados-filter mp-dropdown res-dd">
+          <button class="mp-dropdown__trigger res-dd__trigger" id="btn-res-sede" aria-expanded="false" onclick="togglePanel('panel-res-sede','btn-res-sede')">
+            <span class="icon icon-map-pin icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="mp-dropdown__value" id="res-filter-sede">San Roque</span>
+            <span class="mp-dropdown__caret">
+              <span class="icon icon-caret-down icon-16 gs-inherit" aria-hidden="true"></span>
+            </span>
+          </button>
+          <div class="mp-dropdown__panel" id="panel-res-sede"></div>
+        </div>
+
+        <!-- Filtro: Médico -->
+        <div class="resultados-filter mp-dropdown res-dd">
+          <button class="mp-dropdown__trigger res-dd__trigger" id="btn-res-doctor" aria-expanded="false" onclick="togglePanel('panel-res-doctor','btn-res-doctor')">
+            <span class="icon icon-user icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="mp-dropdown__value" id="res-filter-doctor">Médico tratante</span>
+            <span class="mp-dropdown__caret">
+              <span class="icon icon-caret-down icon-16 gs-inherit" aria-hidden="true"></span>
+            </span>
+          </button>
+          <div class="mp-dropdown__panel" id="panel-res-doctor"></div>
+        </div>
+
+        <!-- Filtro: Modalidad -->
+        <div class="resultados-filter mp-dropdown res-dd">
+          <button class="mp-dropdown__trigger res-dd__trigger" id="btn-res-modality" aria-expanded="false" onclick="togglePanel('panel-res-modality','btn-res-modality')">
+            <span class="icon icon-videocam icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="mp-dropdown__value" id="res-filter-modality">Presencial</span>
+            <span class="mp-dropdown__caret">
+              <span class="icon icon-caret-down icon-16 gs-inherit" aria-hidden="true"></span>
+            </span>
+          </button>
+          <div class="mp-dropdown__panel" id="panel-res-modality">
+            <div class="ol-item" onclick="pickResultadosModalidad('Presencial')">Presencial</div>
+            <div class="ol-item" onclick="pickResultadosModalidad('Virtual')">Virtual</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Encabezado de resultados con contexto y ordenamiento -->
+      <div class="resultados-context">
+        <div class="resultados-context-left">
+          <span class="icon icon-calendar icon-16 gs-muted" aria-hidden="true"></span>
+          <span id="res-context-fecha">Lunes, 5 Enero 2026</span>
+        </div>
+        <div class="mp-dropdown res-dd res-dd-sort">
+          <button class="resultados-sort-btn" id="btn-res-sort" aria-expanded="false" onclick="togglePanel('panel-res-sort','btn-res-sort')">
+            <span id="res-sort-label">Ordenar por</span>
+            <span class="icon icon-sliders-horizontal icon-16 gs-inherit" aria-hidden="true"></span>
+          </button>
+          <div class="mp-dropdown__panel" id="panel-res-sort">
+            <div class="ol-item" onclick="pickResultadosSort('Hora más temprana')">Hora más temprana</div>
+            <div class="ol-item" onclick="pickResultadosSort('Hora más tarde')">Hora más tarde</div>
+            <div class="ol-item" onclick="pickResultadosSort('Sede')">Sede</div>
+            <div class="ol-item" onclick="pickResultadosSort('Médico')">Médico</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de citas disponibles -->
+      <div class="resultados-list" id="res-lista-citas"></div>
+
+      <!-- Botón "Más horarios disponibles" -->
+      <div class="resultados-more">
+        <button class="btn-outline" onclick="loadMoreAppointments()">Más horarios disponibles</button>
+      </div>
+
+      <div class="resultados-back">
+        <button class="mp-btn mp-btn--secundario" type="button" onclick="window.location.href='index.html'">Regresar</button>
+      </div>
+
+      <!-- Estado: Sin resultados -->
+      <div class="resultados-empty" id="res-empty" style="display:none;">
+        <div class="empty-state">
+          <div class="empty-state-icon">
+            <span class="icon icon-calendar-x icon-56" aria-hidden="true" style="font-size:56px; color:var(--text-3);"></span>
+          </div>
+          <div class="empty-state-title">No encontramos citas disponibles con estos filtros</div>
+          <div class="empty-state-body">Intenta cambiar la fecha, el centro médico, el médico o la modalidad para ver nuevas opciones.</div>
+          <div class="empty-state-actions">
+            <button class="btn-outline" onclick="openResultadosModifyPanel()">Cambiar filtros</button>
+            <button class="mp-btn mp-btn--terciario" onclick="window.location.href='index.html'">Modificar búsqueda</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estado: Error -->
+      <div class="resultados-error" id="res-error" style="display:none;">
+        <div class="empty-state">
+          <div class="empty-state-icon">
+            <span class="icon icon-warning icon-56" aria-hidden="true" style="font-size:56px; color:#db7165;"></span>
+          </div>
+          <div class="empty-state-title">No pudimos cargar las citas disponibles</div>
+          <div class="empty-state-body">Intenta nuevamente en unos minutos.</div>
+          <div class="empty-state-actions">
+            <button class="btn-primary" onclick="retryLoadAppointments()">Reintentar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Sidebar: Modificar búsqueda (componente DS mp-sidebar) -->
+<div class="mp-sidebar" id="overlay-modify-search" role="dialog" aria-modal="true" aria-labelledby="msb-title">
+  <div class="mp-sidebar__backdrop" onclick="closeResultadosModifyPanel()"></div>
+  <div class="mp-sidebar__panel">
+
+    <!-- Header -->
+    <div class="mp-sidebar__header">
+      <div class="csb-icon-wrap">
+        <span class="icon icon-search icon-24 gs-violet" aria-hidden="true"></span>
+      </div>
+      <div class="csb-header-text">
+        <h2 class="mp-sidebar__title" id="msb-title">Ajustar búsqueda</h2>
+        <p class="csb-subtitle">Revisa y ajusta los filtros para consultar nuevas opciones de citas.</p>
+      </div>
+      <button class="mp-sidebar__close" onclick="closeResultadosModifyPanel()" aria-label="Cerrar">
+        <span class="icon icon-x icon-20" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="mp-sidebar__body">
+
+      <!-- Alerta de validación en modificar búsqueda -->
+      <div class="mp-alert mp-alert--error" id="alert-form-mod" style="display:none;" role="alert">
+        <span class="mp-alert__icon">
+          <span class="icon icon-warning icon-24" aria-hidden="true" style="font-size:24px;"></span>
+        </span>
+        <div class="mp-alert__content">
+          <p class="mp-alert__title">Completa los campos obligatorios</p>
+          <p class="mp-alert__body">Para continuar, debes seleccionar la especialidad y al menos un centro médico.</p>
+        </div>
+      </div>
+
+      <!-- Especialidad -->
+      <div class="mp-dropdown-group">
+        <label class="mp-dropdown-label">
+          <span class="mp-dropdown-required">*</span> ¿Qué especialidad necesitas?
+        </label>
+        <div class="mp-dropdown">
+          <button class="mp-dropdown__trigger" id="btn-esp-mod" aria-expanded="false" onclick="togglePanel('panel-esp-mod','btn-esp-mod')">
+            <span class="mp-dropdown__value is-placeholder" id="val-esp-mod">Ej: Medicina general, pediatría</span>
+            <span class="mp-dropdown__caret">
+              <span class="icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+            </span>
+          </button>
+          <div class="mp-dropdown__panel" id="panel-esp-mod">
+            <div class="ol-item" onclick="pickEsp('Dermatología','mod')">Dermatología</div>
+            <div class="ol-item" onclick="pickEsp('Endocrinología','mod')">Endocrinología</div>
+            <div class="ol-item" onclick="pickEsp('Medicina general','mod')">Medicina general</div>
+            <div class="ol-item" onclick="pickEsp('Oftalmología','mod')">Oftalmología</div>
+            <div class="ol-item" onclick="pickEsp('Pediatría','mod')">Pediatría</div>
+          </div>
+        </div>
+        <span class="field-error-msg" id="err-esp-mod" style="display:none;">
+          <span class="icon icon-warning icon-16" aria-hidden="true"></span>
+          Selecciona una especialidad para continuar.
+        </span>
+      </div>
+
+      <!-- Centro médico -->
+      <div class="mp-dropdown-group">
+        <label class="mp-dropdown-label"><span class="mp-dropdown-required">*</span> ¿Dónde prefieres ser atendido?</label>
+        <div class="mp-dropdown">
+          <button class="mp-dropdown__trigger" id="btn-sede-mod" aria-expanded="false" onclick="togglePanel('panel-sede-mod','btn-sede-mod')">
+            <span class="mp-dropdown__value is-placeholder" id="val-sede-mod">Selecciona hasta 3 centros médicos</span>
+            <span class="mp-dropdown__caret">
+              <span class="icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+            </span>
+          </button>
+          <div class="mp-dropdown__panel" id="panel-sede-mod">
+            <label class="mp-choice ol-choice" data-id="av68">
+              <div class="mp-choice__field">
+                <input type="checkbox" class="mp-choice__input" id="chk-av68-mod" onchange="toggleSede('av68',null,'mod')">
+                <div class="mp-choice__control"></div>
+              </div>
+              <span class="mp-choice__label">Clínica Compensar (Av. 68)</span>
+            </label>
+            <label class="mp-choice ol-choice" data-id="c94">
+              <div class="mp-choice__field">
+                <input type="checkbox" class="mp-choice__input" id="chk-c94-mod" onchange="toggleSede('c94',null,'mod')">
+                <div class="mp-choice__control"></div>
+              </div>
+              <span class="mp-choice__label">Clínica Compensar Calle 94</span>
+            </label>
+            <label class="mp-choice ol-choice" data-id="suba">
+              <div class="mp-choice__field">
+                <input type="checkbox" class="mp-choice__input" id="chk-suba-mod" onchange="toggleSede('suba',null,'mod')">
+                <div class="mp-choice__control"></div>
+              </div>
+              <span class="mp-choice__label">Centro Médico Compensar Suba</span>
+            </label>
+            <label class="mp-choice ol-choice" data-id="c26">
+              <div class="mp-choice__field">
+                <input type="checkbox" class="mp-choice__input" id="chk-c26-mod" onchange="toggleSede('c26',null,'mod')">
+                <div class="mp-choice__control"></div>
+              </div>
+              <span class="mp-choice__label">Centro Médico Compensar Calle 26</span>
+            </label>
+            <label class="mp-choice ol-choice" data-id="kennedy">
+              <div class="mp-choice__field">
+                <input type="checkbox" class="mp-choice__input" id="chk-kennedy-mod" onchange="toggleSede('kennedy',null,'mod')">
+                <div class="mp-choice__control"></div>
+              </div>
+              <span class="mp-choice__label">Centro Médico Compensar Kennedy</span>
+            </label>
+            <label class="mp-choice ol-choice" data-id="bosa">
+              <div class="mp-choice__field">
+                <input type="checkbox" class="mp-choice__input" id="chk-bosa-mod" onchange="toggleSede('bosa',null,'mod')">
+                <div class="mp-choice__control"></div>
+              </div>
+              <span class="mp-choice__label">Centro Médico Compensar Bosa</span>
+            </label>
+            <label class="mp-choice ol-choice" data-id="sanroque">
+              <div class="mp-choice__field">
+                <input type="checkbox" class="mp-choice__input" id="chk-sanroque-mod" onchange="toggleSede('sanroque',null,'mod')">
+                <div class="mp-choice__control"></div>
+              </div>
+              <span class="mp-choice__label">Centro Médico San Roque (Cajicá)</span>
+            </label>
+          </div>
+        </div>
+        <span class="field-error-msg" id="err-sede-mod" style="display:none;">
+          <span class="icon icon-warning icon-16" aria-hidden="true"></span>
+          Selecciona al menos un centro médico para continuar.
+        </span>
+      </div>
+
+    </div><!-- /body -->
+
+    <!-- Footer -->
+    <div class="mp-sidebar__footer mp-sidebar__footer--space-between">
+      <button class="btn-outline" onclick="closeResultadosModifyPanel()">Cancelar</button>
+      <button class="btn-primary" onclick="applyResultadosModifyPanel()">Actualizar</button>
+    </div>
+
+  </div><!-- /panel -->
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: MIS CITAS
+═══════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════
+     SIDEBAR OVERLAY: CONFIRMAR CITA
+═══════════════════════════════════════ -->
+<div class="mp-sidebar" id="confirm-sidebar" role="dialog" aria-modal="true" aria-labelledby="csb-title">
+  <div class="mp-sidebar__backdrop" onclick="cerrarConfirmSidebar()"></div>
+  <div class="mp-sidebar__panel">
+
+    <!-- Header -->
+    <div class="mp-sidebar__header csb-header-tinted">
+      <div class="csb-icon-wrap">
+        <span class="icon icon-calendar-check icon-24 gs-violet" aria-hidden="true"></span>
+      </div>
+      <div class="csb-header-text">
+        <h2 class="mp-sidebar__title" id="csb-title">Confirma tu cita</h2>
+        <p class="csb-subtitle">Revisa los detalles y presiona confirmar para agendar.</p>
+      </div>
+      <button class="mp-sidebar__close" onclick="cerrarConfirmSidebar()" aria-label="Cerrar">
+        <span class="icon icon-x icon-20" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <!-- Body scrollable -->
+    <div class="mp-sidebar__body">
+
+      <!-- Filas de detalle -->
+      <div class="mp-sidebar__section">
+         <!-- Fecha y hora destacada -->
+        <div class="mp-sidebar__row">
+          <div class="mp-sidebar__row-icon">
+          <span class="icon icon-clock icon-20 gs-violet" aria-hidden="true"></span>
+          </div>
+          <div class="mp-sidebar__row-content">
+            <p class="mp-sidebar__row-label">Fecha y hora de tu cita</p>
+            <p class="csb-datetime-val" id="csb-fecha">—</p>
+          </div>
+        </div>
+        <!-- Doctor -->
+        <div class="mp-sidebar__row">
+          <div class="mp-sidebar__row-icon">
+            <span class="icon icon-user-circle icon-24 gs-inherit" aria-hidden="true"></span>
+          </div>
+          <div class="mp-sidebar__row-content">
+            <p class="mp-sidebar__row-label">Médico</p>
+            <p class="csb-datetime-val" id="csb-doc-name">—</p>
+            <span class="csb-doc-spec" id="csb-doc-spec">—</span>
+          </div>
+        </div>
+        <!-- Especialidad -->
+        <div class="mp-sidebar__row">
+          <div class="mp-sidebar__row-icon">
+            <span class="icon icon-heartbeat icon-24 d" aria-hidden="true"></span>
+          </div>
+          <div class="mp-sidebar__row-content">
+            <p class="mp-sidebar__row-label">Especialidad</p>
+            <p class="csb-datetime-val" id="csb-especialidad">—</p>
+          </div>
+        </div>
+        <!-- Ubicación -->
+        <div class="mp-sidebar__row">
+          <div class="mp-sidebar__row-icon">
+            <span class="icon icon-map-pin icon-24" aria-hidden="true"></span>
+          </div>
+          <div class="mp-sidebar__row-content">
+            <p class="mp-sidebar__row-label">Ubicación</p>
+            <p class="mp-sidebar__row-value csb-loc-name" id="csb-loc-name">—</p>
+            <p class="mp-sidebar__row-value csb-loc-addr" id="csb-loc-addr"></p>
+            <a href="javascript:void(0)" class="csb-map-link">Consultar en el mapa</a>
+          </div>
+        </div>
+        <!-- Modalidad -->
+        <div class="mp-sidebar__row">
+          <div class="mp-sidebar__row-icon">
+            <span class="icon icon-tag icon-24" aria-hidden="true"></span>
+          </div>
+          <div class="mp-sidebar__row-content">
+            <p class="mp-sidebar__row-label">Modalidad</p>
+            <p class="csb-datetime-val">Cita presencial</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ten en cuenta -->
+      <div class="csb-notice">
+        <p class="csb-notice-title">Ten en cuenta</p>
+        <ul class="csb-notice-list">
+          <li>Lleva tu documento de identificación.</li>
+          <li>Presenta tus exámenes médicos (si aplica).</li>
+          <li>Si necesitas cancelar, hazlo con al menos una hora de anticipación.</li>
+        </ul>
+      </div>
+
+    </div><!-- /body -->
+
+    <!-- Footer -->
+    <div class="mp-sidebar__footer">
+      <button class="btn-outline" onclick="cerrarConfirmSidebar()">Regresar</button>
+      <button class="btn-primary" onclick="confirmarCita()">Confirmar</button>
+    </div>
+
+  </div><!-- /panel -->
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: CONFIRMACIÓN
+═══════════════════════════════════════ -->
+<div id="s-confirm" class="screen">
+  <div class="scroller">
+    <nav class="breadcrumb">
+      <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+      <a href="javascript:void(0)" onclick="window.location.href='index.html';return false;">Inicio</a>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="bc-muted">Citas médicas</span>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="current">Confirmación</span>
+    </nav>
+
+    <div class="cfm-wrap">
+
+      <!-- Hero de éxito -->
+      <div class="cfm-hero">
+        <div class="cfm-hero-icon">
+          <span class="icon icon-check icon-24" aria-hidden="true"></span>
+        </div>
+        <h1 class="cfm-hero-title">Cita agendada con éxito</h1>
+      </div>
+
+
+      <!-- Tarjeta principal -->
+      <div class="cfm-card">
+
+        <!-- Doctor (fondo tintado) -->
+        <div class="cfm-doc-row">
+          <div class="cfm-doc-avatar">
+            <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+          </div>
+          <div class="cfm-doc-info">
+            <p class="cfm-row-label">DOCTOR</p>
+            <p class="cfm-doc-name" id="cfm-doc-name">—</p>
+            <div class="cfm-doc-tags">
+              <span class="mp-badge mp-badge--violet mp-badge--sm">Médico familia</span>
+              <span class="cfm-doc-spec" id="cfm-doc-spec">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Número de autorización -->
+        <div class="cfm-auth-row">
+          <span class="cfm-auth-label">NÚMERO DE AUTORIZACIÓN</span>
+          <strong class="cfm-auth-num" id="cfm-auth-num">—</strong>
+        </div>
+
+        <!-- Grid de detalles — 2 columnas -->
+        <div class="cfm-details">
+
+          <div class="cfm-detail-item">
+            <div class="cfm-detail-icon">
+              <span class="icon icon-heartbeat icon-16" aria-hidden="true"></span>
+            </div>
+            <div class="cfm-detail-content">
+              <p class="cfm-row-label">ESPECIALIDAD</p>
+              <p class="cfm-detail-val" id="cfm-especialidad">—</p>
+            </div>
+          </div>
+
+          <div class="cfm-detail-item">
+            <div class="cfm-detail-icon">
+              <span class="icon icon-calendar-check icon-16" aria-hidden="true"></span>
+            </div>
+            <div class="cfm-detail-content">
+              <p class="cfm-row-label">FECHA Y HORA</p>
+              <p class="cfm-detail-val" id="cfm-fecha">—</p>
+            </div>
+          </div>
+
+          <div class="cfm-detail-item">
+            <div class="cfm-detail-icon">
+              <span class="icon icon-map-pin icon-16" aria-hidden="true"></span>
+            </div>
+            <div class="cfm-detail-content">
+              <p class="cfm-row-label">UBICACIÓN</p>
+              <p class="cfm-detail-val cfm-loc-bold" id="cfm-loc-name">—</p>
+              <p class="cfm-detail-sub" id="cfm-loc-addr"></p>
+              <a href="javascript:void(0)" class="csb-map-link">Consultar en el mapa</a>
+            </div>
+          </div>
+
+          <div class="cfm-detail-item">
+            <div class="cfm-detail-icon">
+              <span class="icon icon-tag icon-16" aria-hidden="true"></span>
+            </div>
+            <div class="cfm-detail-content">
+              <p class="cfm-row-label">MODALIDAD</p>
+              <p class="cfm-detail-val">Cita presencial</p>
+            </div>
+          </div>
+
+        </div><!-- /cfm-details -->
+
+        <!-- Valor del bono -->
+        <div class="cfm-bono-row">
+          <div class="cfm-bono-info">
+            <p class="cfm-row-label">VALOR DEL BONO</p>
+            <p class="cfm-bono-sub">Puedes pagar ahora o el día de tu cita</p>
+            <p class="cfm-bono-price" id="cfm-price">—</p>
+          </div>
+          <button class="btn-primary cfm-bono-btn">Pagar</button>
+        </div>
+
+      </div><!-- /cfm-card -->
+
+      <!-- Acciones secundarias -->
+      <div class="cfm-actions">
+        <button class="btn-outline cfm-download">
+          <span class="icon icon-download-simple icon-16" aria-hidden="true"></span>
+          Descargar comprobante
+        </button>
+        <button class="cfm-volver" onclick="window.location.href='index.html'">Volver al inicio</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    </main><!-- /main -->
+  </div><!-- /layout -->
+</div><!-- /app -->
+
+
+<!-- ═══════════════════════════════════════
+     OVERLAY: ESPECIALIDAD
+═══════════════════════════════════════ -->
+<div id="o-esp" class="overlay" onclick="closeOut(event,'o-esp')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <span class="sheet-title">¿Qué especialidad necesitas?</span>
+      <button class="sheet-close" onclick="closeOverlay('o-esp')" aria-label="Cerrar"><span class="icon icon-x icon-20 gs-inherit" aria-hidden="true"></span></button>
+    </div>
+    <div class="sheet-body">
+      <div class="ol-item" onclick="pickEsp('Dermatología')">Dermatología</div>
+      <div class="ol-item" onclick="pickEsp('Endocrinología')">Endocrinología</div>
+      <div class="ol-item" onclick="pickEsp('Medicina general')">Medicina general</div>
+      <div class="ol-item" onclick="pickEsp('Oftalmología')">Oftalmología</div>
+      <div class="ol-item" onclick="pickEsp('Pediatría')">Pediatría</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     OVERLAY: SEDES
+═══════════════════════════════════════ -->
+<div id="o-sedes" class="overlay" onclick="closeOut(event,'o-sedes')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <span class="sheet-title">¿En qué centro médico?</span>
+      <button class="sheet-close" onclick="closeOverlay('o-sedes')" aria-label="Cerrar"><span class="icon icon-x icon-20 gs-inherit" aria-hidden="true"></span></button>
+    </div>
+    <div class="sheet-body">
+      <div class="ol-section">Centros médicos recientes</div>
+      <label class="mp-choice ol-choice" onclick="toggleSede('av68',this)" data-id="av68">
+        <div class="mp-choice__field">
+          <input type="checkbox" class="mp-choice__input" id="chk-av68">
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Clínica Compensar (Av. 68)</span>
+      </label>
+      <label class="mp-choice ol-choice" onclick="toggleSede('c94',this)" data-id="c94">
+        <div class="mp-choice__field">
+          <input type="checkbox" class="mp-choice__input" id="chk-c94">
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Clínica Compensar Calle 94</span>
+      </label>
+      <label class="mp-choice ol-choice" onclick="toggleSede('suba',this)" data-id="suba">
+        <div class="mp-choice__field">
+          <input type="checkbox" class="mp-choice__input" id="chk-suba">
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Centro Médico Compensar Suba</span>
+      </label>
+      <div class="ol-section">Todos los centros</div>
+      <label class="mp-choice ol-choice" onclick="toggleSede('c26',this)" data-id="c26">
+        <div class="mp-choice__field">
+          <input type="checkbox" class="mp-choice__input" id="chk-c26">
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Centro Médico Compensar Calle 26</span>
+      </label>
+      <label class="mp-choice ol-choice" onclick="toggleSede('kennedy',this)" data-id="kennedy">
+        <div class="mp-choice__field">
+          <input type="checkbox" class="mp-choice__input" id="chk-kennedy">
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Centro Médico Compensar Kennedy</span>
+      </label>
+      <label class="mp-choice ol-choice" onclick="toggleSede('bosa',this)" data-id="bosa">
+        <div class="mp-choice__field">
+          <input type="checkbox" class="mp-choice__input" id="chk-bosa">
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Centro Médico Compensar Bosa</span>
+      </label>
+      <label class="mp-choice ol-choice" onclick="toggleSede('sanroque',this)" data-id="sanroque">
+        <div class="mp-choice__field">
+          <input type="checkbox" class="mp-choice__input" id="chk-sanroque">
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Centro Médico San Roque (Cajicá)</span>
+      </label>
+    </div>
+    <div class="sheet-footer">
+      <button class="btn-primary" style="width:100%;" onclick="confirmarSede()">Confirmar selección</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     OVERLAY: FECHA
+═══════════════════════════════════════ -->
+<div id="o-fecha" class="overlay" onclick="closeOut(event,'o-fecha')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <span class="sheet-title">Selecciona la fecha</span>
+      <button class="sheet-close" onclick="closeOverlay('o-fecha')" aria-label="Cerrar"><span class="icon icon-x icon-20 gs-inherit" aria-hidden="true"></span></button>
+    </div>
+    <div class="sheet-body">
+      <div class="date-opts" id="date-opts"></div>
+    </div>
+    <div class="sheet-footer">
+      <button class="btn-primary" style="width:100%;" onclick="confirmarFecha()">Confirmar fecha</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     OVERLAY: FILTROS
+═══════════════════════════════════════ -->
+<div id="o-filtros" class="overlay" onclick="closeOut(event,'o-filtros')">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-head">
+      <span class="sheet-title">Filtrar resultados</span>
+      <button class="sheet-close" onclick="closeOverlay('o-filtros')" aria-label="Cerrar"><span class="icon icon-x icon-20 gs-inherit" aria-hidden="true"></span></button>
+    </div>
+    <div class="sheet-body">
+      <div class="ol-section">Médico</div>
+      <label class="mp-choice ol-choice" onclick="pickFiltro('todos')">
+        <div class="mp-choice__field">
+          <input type="radio" name="filtro-doctor" class="mp-choice__input" id="frad-todos" value="todos" checked>
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Todos los médicos</span>
+      </label>
+      <label class="mp-choice ol-choice" onclick="pickFiltro('alejandra')">
+        <div class="mp-choice__field">
+          <input type="radio" name="filtro-doctor" class="mp-choice__input" id="frad-alejandra" value="alejandra">
+          <div class="mp-choice__control"></div>
+        </div>
+        <div>
+          <div class="mp-choice__label">Dra. Alejandra Sierra</div>
+          <div style="font-size:13px; color:#666;">Dermatología · Médico tratante</div>
+        </div>
+      </label>
+      <label class="mp-choice ol-choice" onclick="pickFiltro('vanessa')">
+        <div class="mp-choice__field">
+          <input type="radio" name="filtro-doctor" class="mp-choice__input" id="frad-vanessa" value="vanessa">
+          <div class="mp-choice__control"></div>
+        </div>
+        <div>
+          <div class="mp-choice__label">Dra. Vanessa Martínez</div>
+          <div style="font-size:13px; color:#666;">Dermatología</div>
+        </div>
+      </label>
+      <label class="mp-choice ol-choice" onclick="pickFiltro('luciana')">
+        <div class="mp-choice__field">
+          <input type="radio" name="filtro-doctor" class="mp-choice__input" id="frad-luciana" value="luciana">
+          <div class="mp-choice__control"></div>
+        </div>
+        <div>
+          <div class="mp-choice__label">Dra. Luciana Restrepo</div>
+          <div style="font-size:13px; color:#666;">Dermatología</div>
+        </div>
+      </label>
+      <label class="mp-choice ol-choice" onclick="pickFiltro('victor')">
+        <div class="mp-choice__field">
+          <input type="radio" name="filtro-doctor" class="mp-choice__input" id="frad-victor" value="victor">
+          <div class="mp-choice__control"></div>
+        </div>
+        <span class="mp-choice__label">Dr. Víctor García</span>
+      </label>
+    </div>
+    <div class="sheet-footer">
+      <button class="btn-primary" style="width:100%;" onclick="aplicarFiltro()">Aplicar filtro</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="js/app.js"></script>
+<script>
+/* ── FLUJO: recibe params de index.html y salta a resultados ── */
+document.addEventListener('DOMContentLoaded', async function () {
+  var raw = null;
+  try { raw = sessionStorage.getItem('compensarBusquedaParams'); } catch (e) {}
+  if (!raw) return;
+
+  var params = null;
+  try { params = JSON.parse(raw); } catch (e) {}
+  if (!params || params.from !== 'index') return;
+
+  if (typeof ensureMedicalCentersDbLoaded === 'function') {
+    await ensureMedicalCentersDbLoaded();
+  }
+
+  try { sessionStorage.removeItem('compensarBusquedaParams'); } catch (e) {}
+
+  // Restaurar especialidad
+  if (params.esp) {
+    var valEsp = document.getElementById('val-esp');
+    if (valEsp) {
+      valEsp.textContent = params.esp;
+      valEsp.classList.remove('is-placeholder');
+    }
+  }
+
+  // Restaurar sedes
+  if (Array.isArray(params.sedes) && params.sedes.length > 0) {
+    selectedSedes = params.sedes.slice();
+    // Marcar checkboxes visualmente
+    params.sedes.forEach(function (id) {
+      var inp = document.getElementById('chk-' + id);
+      if (inp) inp.checked = true;
+    });
+    var valSede = document.getElementById('val-sede');
+    if (valSede) {
+      renderChipValue(
+        valSede,
+        params.sedes.map(function (s) { return SEDES_LABEL[s] || getCenterDisplayLabel(s); }),
+        'Selecciona hasta 3 centros médicos'
+      );
+    }
+  }
+
+  // Restaurar fecha
+  if (params.fecha) selectedFecha = params.fecha;
+
+  // Navegar directo a resultados
+  renderHomeDropdownData();
+  syncResultadosFromNuevaCita();
+  renderResultadosCitas();
+  goTo('s-resultados');
+});
+
+/* Al confirmar, "Volver al inicio" regresa a index.html */
+(function () {
+  window.saveHomeRoute = function () {
+    try { sessionStorage.setItem('compensarHomeRoute', 'index.html'); } catch (e) {}
+  };
+})();
+</script>
+  <script src="../../shared/zt-sidebar.js"></script>
+</body>
+</html>

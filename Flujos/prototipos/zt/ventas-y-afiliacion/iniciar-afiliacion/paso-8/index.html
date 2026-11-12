@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Proceso de afiliación · Paso 8</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → componentes transversales → custom del flujo -->
+<link rel="stylesheet" href="../../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../../shared/zt.css">
+<link rel="stylesheet" href="../../../shared/components/stepper.css">
+<link rel="stylesheet" href="../../../shared/components/person-summary.css">
+<link rel="stylesheet" href="../../../shared/components/alert.css">
+<link rel="stylesheet" href="../../../shared/components/modal.css">
+<link rel="stylesheet" href="../../../shared/components/file-upload.css">
+<link rel="stylesheet" href="../../../shared/components/status-result.css">
+<link rel="stylesheet" href="css/paso-8.css">
+<link rel="stylesheet" href="../css/proceso-layout.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) — selector de persona + Plan Ideal ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-person" data-person-selector>
+        <button class="hd-person__trigger" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu">
+          <span class="hd-person__info">
+            <span class="hd-person__name" data-person-name>Margarita López Arenas</span>
+            <span class="hd-person__plan" data-person-plan>Plan Ideal</span>
+          </span>
+          <span class="hd-person__caret icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+        </button>
+        <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
+          <p class="person-menu__label" id="person-menu-label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Margarita López Arenas" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Margarita López Arenas</span>
+              <span class="person-opt__role">Contratante</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal — "Ventas y Afiliación" activo -->
+    <nav class="sidebar" data-active="ventas"></nav>
+
+    <!-- MAIN (shell ZT) -->
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page">
+
+          <!-- Breadcrumb — Inicio / Ventas y afiliación / Iniciar afiliación -->
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../../../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <a href="../../index.html">Ventas y afiliación</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Iniciar afiliación</span>
+          </nav>
+
+          <!-- Título — "Proceso" naranja + "de afiliación" primary -->
+          <h1 class="page-title">
+            <span class="orange">Proceso </span><span class="dark">de afiliación</span>
+          </h1>
+
+          <!-- ═══ LAYOUT DEL PROCESO: panel de pasos + card del paso actual ═══ -->
+          <div class="pa-layout">
+
+            <!-- PANEL IZQUIERDO: resumen del candidato + stepper -->
+            <aside class="pa-side" aria-label="Progreso del proceso de afiliación">
+              <div id="pa-cand-summary"></div>
+              <div id="pa-stepper"></div>
+            </aside>
+
+            <!-- CARD DERECHA: Paso 8 — Soportes (Figma 258:28007) -->
+            <section class="pa-card" aria-labelledby="pa-card-title" id="p8-card">
+
+              <header class="pa-card__head">
+                <span class="pa-badge">PASO 8 DE 8</span>
+                <h2 class="pa-card__title" id="pa-card-title">Soportes</h2>
+                <p class="pa-card__desc">
+                  Carga los documentos de identificación y el certificado de EPS de cada persona afiliada.
+                  Solo se aceptan archivos JPG, JPEG o PDF, con un tamaño máximo de 5 MB por archivo.
+                </p>
+              </header>
+
+              <!-- Contenido: lo pinta paso-8.js (listado por persona o confirmación final) -->
+              <div id="p8-body" class="p8-body"></div>
+
+              <div class="pa-cta" id="p8-cta">
+                <button class="mp-btn mp-btn--secundario pa-back" id="p8-back" type="button">
+                  <span class="icon icon-caret-left icon-20 gs-inherit" aria-hidden="true"></span>
+                  Atrás
+                </button>
+                <button class="mp-btn mp-btn--primario pa-next" id="p8-next" type="button">
+                  Finalizar afiliación
+                </button>
+              </div>
+
+            </section>
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../../../shared/zt-sidebar.js"></script>
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script src="../../../shared/components/stepper.js"></script>
+<script src="../../../shared/components/person-summary.js"></script>
+<script src="../../../shared/components/alert.js"></script>
+<script src="../../../shared/components/modal.js"></script>
+<script src="../../../shared/components/file-upload.js"></script>
+<script src="../../../shared/components/status-result.js"></script>
+<script src="js/paso-8.js"></script>
+<!-- ⚠️ Solo prototipo: navegación entre pasos sin validar (quitar para producción) -->
+<script src="../js/demo-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+{
+  "widths": {
+    "320": {
+      "triggers": 2,
+      "cases": [
+        {
+          "id": "sidebar-demo-detail",
+          "opened": true,
+          "panelRect": [
+            0,
+            90,
+            320,
+            900
+          ],
+          "panelW": 320,
+          "panelInsideViewport": true,
+          "closeSize": [
+            40,
+            40
+          ],
+          "closeVisible": true,
+          "headerH": 73,
+          "footerH": 81,
+          "bodyScrolls": true,
+          "focusOnClose": true,
+          "docOverflow": false,
+          "closedByEscape": true,
+          "closedByButton": true
+        },
+        {
+          "id": "sidebar-demo-confirm",
+          "opened": true,
+          "panelRect": [
+            0,
+            339,
+            320,
+            900
+          ],
+          "panelW": 320,
+          "panelInsideViewport": true,
+          "closeSize": [
+            40,
+            40
+          ],
+          "closeVisible": true,
+          "headerH": 73,
+          "footerH": 81,
+          "bodyScrolls": false,
+          "focusOnClose": true,
+          "docOverflow": false,
+          "closedByEscape": true,
+          "closedByButton": true
+        }
+      ]
+    },
+    "768": {
+      "triggers": 2,
+      "cases": [
+        {
+          "id": "sidebar-demo-detail",
+          "opened": true,
+          "panelRect": [
+            288,
+            0,
+            768,
+            900
+          ],
+          "panelW": 480,
+          "panelInsideViewport": true,
+          "closeSize": [
+            40,
+            40
+          ],
+          "closeVisible": true,
+          "headerH": 73,
+          "footerH": 81,
+          "bodyScrolls": false,
+          "focusOnClose": true,
+          "docOverflow": false,
+          "closedByEscape": true,
+          "closedByButton": true
+        },
+        {
+          "id": "sidebar-demo-confirm",
+          "opened": true,
+          "panelRect": [
+            288,
+            0,
+            768,
+            900
+          ],
+          "panelW": 480,
+          "panelInsideViewport": true,
+          "closeSize": [
+            40,
+            40
+          ],
+          "closeVisible": true,
+          "headerH": 73,
+          "footerH": 81,
+          "bodyScrolls": false,
+          "focusOnClose": true,
+          "docOverflow": false,
+          "closedByEscape": true,
+          "closedByButton": true
+        }
+      ]
+    },
+    "1440": {
+      "triggers": 2,
+      "cases": [
+        {
+          "id": "sidebar-demo-detail",
+          "opened": true,
+          "panelRect": [
+            960,
+            0,
+            1440,
+            900
+          ],
+          "panelW": 480,
+          "panelInsideViewport": true,
+          "closeSize": [
+            40,
+            40
+          ],
+          "closeVisible": true,
+          "headerH": 73,
+          "footerH": 81,
+          "bodyScrolls": false,
+          "focusOnClose": true,
+          "docOverflow": false,
+          "closedByEscape": true,
+          "closedByButton": true
+        },
+        {
+          "id": "sidebar-demo-confirm",
+          "opened": true,
+          "panelRect": [
+            960,
+            0,
+            1440,
+            900
+          ],
+          "panelW": 480,
+          "panelInsideViewport": true,
+          "closeSize": [
+            40,
+            40
+          ],
+          "closeVisible": true,
+          "headerH": 73,
+          "footerH": 81,
+          "bodyScrolls": false,
+          "focusOnClose": true,
+          "docOverflow": false,
+          "closedByEscape": true,
+          "closedByButton": true
+        }
+      ]
+    }
+  }
+}

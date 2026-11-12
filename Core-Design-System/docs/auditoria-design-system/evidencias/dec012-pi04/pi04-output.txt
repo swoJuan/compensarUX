@@ -1,0 +1,89 @@
+matriz: texto 100%...
+matriz: texto 150%...
+matriz: texto 200%...
+
+=== EQUIVALENCIA a texto 100% (DOM completo; 320/375/768/900/1024/1440 px x 3 temas) ===
+candidato vs P3+B (sin PI-04): 18/18 identicos
+candidato vs ORIGINAL anterior a P3: 18/18 identicos
+
+=== ACEPTACION por texto x ancho (3 temas): sin overflow, sin solape, logo + nombre visibles, nombre en 1 linea, boton de menu a la vista ===
+formato: celdas OK de 3 temas | detalle de lo que falla (peor tema)
+100%  320px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+100%  375px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+100%  768px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+100%  900px: original 0/3 (+32.5px)  P3+B 3/3            CANDIDATO 3/3
+100% 1024px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+100% 1440px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+150%  320px: original 3/3            P3+B 0/3 (+56.8px)  CANDIDATO 0/3 (+20.9px)
+150%  375px: original 3/3            P3+B 0/3 (+1.8px)   CANDIDATO 3/3
+150%  768px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+150%  900px: original 0/3 (+84.5px)  P3+B 3/3            CANDIDATO 3/3
+150% 1024px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+150% 1440px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+200%  320px: original 3/3            P3+B 0/3 (+182.1px) CANDIDATO 0/3 (+134.3px)
+200%  375px: original 3/3            P3+B 0/3 (+127.1px) CANDIDATO 0/3 (+79.3px)
+200%  768px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+200%  900px: original 0/3 (+136.5px) P3+B 3/3            CANDIDATO 3/3
+200% 1024px: original 0/3 (+12.5px)  P3+B 3/3            CANDIDATO 3/3
+200% 1440px: original 3/3            P3+B 3/3            CANDIDATO 3/3
+
+Casos que fallan en el CANDIDATO (peor tema):
+   150% 320px: s-hover, s-focus
+   200% 320px: v-public, v-dropdown, v-dropdown-late, v-mobile, s-hover, s-focus
+   200% 375px: v-public, v-dropdown, v-dropdown-late, v-mobile, s-hover, s-focus
+
+=== SUBTITULO (v-public, tema claro): visible? original/P3+B -> candidato ===
+100%: 320:si->si  375:si->si  768:si->si  900:si->si  1024:si->si  1440:si->si
+150%: 320:si->no  375:si->no  768:si->si  900:si->si  1024:si->si  1440:si->si
+200%: 320:si->no  375:si->no  768:si->si  900:si->si  1024:si->si  1440:si->si
+
+=== NOMBRE DE MARCA: lineas (debe ser 1) y ancho del boton, candidato, v-public claro ===
+100%: 320:1l/boton 95px  375:1l/boton 150px  768:1l/boton 543px  900:1l/boton -px  1024:1l/boton -px  1440:1l/boton -px
+150%: 320:1l/boton 66px  375:1l/boton 75px  768:1l/boton 432px  900:1l/boton 564px  1024:1l/boton 688px  1440:1l/boton -px
+200%: 320:1l/boton 88px  375:1l/boton 88px  768:1l/boton 321px  900:1l/boton 453px  1024:1l/boton 577px  1440:1l/boton 993px
+
+=== TECLADO (candidato) ===
+   200% 320px: orden OK, algun enfocable FUERA de vista
+   200% 320px: orden OK, algun enfocable FUERA de vista
+   200% 375px: orden OK, algun enfocable FUERA de vista
+   200% 375px: orden OK, algun enfocable FUERA de vista
+teclado: 32/36 combinaciones OK
+
+=== ZT (PI-01, preexistente) a 320px: overflow px original / P3+B / candidato ===
+100%: 24.5 / 24.5 / 24.5
+150%: 98 / 195.3 / 159.4
+200%: 173.5 / 368.1 / 320.3
+
+
+##### ALTERNATIVAS (inyectadas; NO aplicadas) #####
+Ancho minimo de viewport en que el Header publico cabe (modo movil), y apariencia a texto normal
+
+B solo subtitulo (candidato)
+   150%: minimo 342px (14.25em)  320:+20.9px 375:OK
+   200%: minimo 454px (14.19em)  320:+134.3px 375:+79.3px  | a 320/200%: alto header [con buscador, sin buscador]=138 / 138px, logo 88px, boton 88px, nombre 1 linea(s)
+   texto normal 320/375/768 identico al actual: SI
+
+A compactar espacios (padding/gap) y quitar la 3.a columna vacia
+   150%: minimo 294px (12.25em)  320:OK 375:OK
+   200%: minimo 390px (12.19em)  320:+70.3px 375:+15.3px  | a 320/200%: alto header [con buscador, sin buscador]=138 / 258px, logo 88px, boton 88px, nombre 1 linea(s)
+   texto normal 320/375/768 identico al actual: SI
+
+C el boton de menu pasa a una 2.a fila (wrap)
+   150%: minimo 228px (9.5em)    320:OK 375:OK
+   200%: minimo 302px (9.44em)   320:OK 375:OK  | a 320/200%: alto header [con buscador, sin buscador]=258 / 290px, logo 88px, boton 88px, nombre 1 linea(s)
+   texto normal 320/375/768 identico al actual: SI
+
+D nombre con elipsis (se trunca)
+   150%: minimo 180px (7.5em)    320:OK 375:OK
+   200%: minimo 186px (5.81em)   320:OK 375:OK  | a 320/200%: alto header [con buscador, sin buscador]=138 / 138px, logo 30px, boton 88px, nombre 1 linea(s)
+   texto normal 320/375/768 identico al actual: SI
+
+E tope de logo y boton: min(2.75rem, 12vw)
+   150%: minimo 276px (11.5em)   320:OK 375:OK
+   200%: minimo 366px (11.44em)  320:+35px 375:OK  | a 320/200%: alto header [con buscador, sin buscador]=88 / 88px, logo 38px, boton 38px, nombre 1 linea(s)
+   texto normal 320/375/768 identico al actual: SI
+
+F A + E
+   150%: minimo 212px (8.83em)   320:OK 375:OK
+   200%: minimo 282px (8.81em)   320:OK 375:OK  | a 320/200%: alto header [con buscador, sin buscador]=88 / 159px, logo 38px, boton 50px, nombre 1 linea(s)
+   texto normal 320/375/768 identico al actual: SI

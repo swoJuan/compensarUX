@@ -1,0 +1,21 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>seed Paso 5</title></head><body>
+<!-- Semilla de prototipo para abrir el Paso 5 (LVI) directamente: reutiliza la
+     semilla del Paso 4 y marca las declaraciones de salud como completas. -->
+<script src="../../../shared/afiliacion-mock.js"></script>
+<script>
+  var num = '222';
+  var p = ZTAfiliacion.personaMock(num);
+  ZTAfiliacion.saveCandidate({ documentType:'CC', documentNumber:num, name: ZTAfiliacion.nombreMock(num),
+    firstName:p.firstName, secondName:p.secondName, firstSurname:p.firstSurname, secondSurname:p.secondSurname, viable:true });
+  ZTAfiliacion.saveStep1({ modality:'individual', transactionType:'new', noveltyType:null, affiliationChannel:'independent',
+    companyName:null, nit:null, plan:'ideal', startDate:'2026-10-01', completed:true });
+  var d = ZTAfiliacion.datosDocumentoMock(num);
+  ZTAfiliacion.saveStep2({ birthDate:d.birthDate, gender:d.gender, sex:d.sex, maritalStatus:d.maritalStatus,
+    nationality:d.nationality, eps:'compensar', ethnicGroup:'ninguno', birthCountry:'colombia',
+    phone:'3001234567', email:'usuario@email.com', address:'Calle 10 # 20-30', department:'valle', city:'cali',
+    completed:true, otpVerified:true });
+  ZTAfiliacion.saveStep3({ completed:true, contractorIsBeneficiary:true, beneficiaries:[] });
+  ZTAfiliacion.saveStep4({ completed:true, currentPersonId:'contratante', declarations:{} });
+  ZTAfiliacion.clearStep5();
+  location.replace('index.html');
+</script></body></html>

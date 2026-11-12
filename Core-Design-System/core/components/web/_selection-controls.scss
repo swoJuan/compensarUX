@@ -1,0 +1,362 @@
+// ============================================================
+//  _selection-controls.scss
+//  Checkbox, radio button and switch.
+//  Built on native inputs + Bootstrap-compatible form structure.
+// ============================================================
+
+@use '../../abstracts' as *;   // DEC-012: acceso a rem() y tokens
+
+.mp-choice {
+  --mp-choice-control-size: #{rem(24px)};   // DEC-012: 24px → 1.5rem (control)
+  --mp-choice-visual-size: #{rem(18px)};    // DEC-012: 18px → 1.125rem (caja visual)
+  --mp-choice-hit-size: #{rem(44px)};       // DEC-012: 44px → 2.75rem (área táctil, escala con zoom)
+  --mp-choice-gap: 0;
+  --mp-choice-color: var(--use-primary-default);
+  --mp-choice-border: var(--use-text-primary);
+  --mp-choice-bg: transparent;
+  --mp-choice-label: var(--use-text-primary);
+  --mp-choice-helper: var(--use-text-tertiary);
+  --mp-choice-error: var(--use-state-error-text-error-field);
+  --mp-choice-disabled-opacity: .38;
+  // DEC-004: Focus de Checkbox y Radio (Figma 3301:3974 / 3301:4109): contorno de 3px con use/border/strong.
+  --mp-choice-focus-color: var(--use-border-strong);
+  --mp-choice-focus-width: 3px;   // borde: se conserva px (regla 4)
+
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--mp-choice-gap);
+  min-height: var(--mp-choice-hit-size);
+  color: var(--mp-choice-label);
+  font-family: var(--font-body);
+  font-size: var(--body---m);
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+
+.mp-choice__field {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 var(--mp-choice-hit-size);
+  width: var(--mp-choice-hit-size);
+  height: var(--mp-choice-hit-size);
+  margin: 0;
+}
+
+.mp-choice__input {
+  position: absolute;
+  inset: 0;
+  width: var(--mp-choice-hit-size);
+  height: var(--mp-choice-hit-size);
+  margin: 0;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.mp-choice__control {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: var(--mp-choice-control-size);
+  height: var(--mp-choice-control-size);
+  color: var(--mp-choice-color);
+  pointer-events: none;
+}
+
+.mp-choice__control::before {
+  content: '';
+  width: var(--mp-choice-visual-size);
+  height: var(--mp-choice-visual-size);
+  border: 1.5px solid var(--mp-choice-border);
+  background: var(--mp-choice-bg);
+  transition: background .16s, border-color .16s, box-shadow .16s;
+}
+
+.mp-choice__text {
+  display: grid;
+  gap: var(--space-4);
+  padding-top: rem(10px);   // DEC-012: 10px → 0.625rem
+}
+
+.mp-choice__label {
+  color: var(--mp-choice-label);
+}
+
+.mp-choice__helper {
+  display: none;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--mp-choice-helper);
+  font-size: var(--body---s);
+  line-height: 1;
+  letter-spacing: .012em;
+}
+
+.mp-choice__helper .material-symbols-rounded {
+  font-size: rem(16px);   // DEC-012: 16px → 1rem
+}
+
+.mp-choice__input:checked + .mp-choice__control::before {
+  border-color: var(--mp-choice-color);
+  background: var(--mp-choice-color);
+}
+
+// El foco es independiente de check, selección y error (se dibuja en .mp-choice__control, no en ::before/::after).
+.mp-choice__input:focus-visible + .mp-choice__control,
+.mp-choice__input.is-focus-demo:not(:disabled) + .mp-choice__control {
+  outline: var(--mp-choice-focus-width) solid var(--mp-choice-focus-color);
+  outline-offset: 2px;
+  border-radius: var(--radius-full);
+}
+
+.mp-choice__input:disabled {
+  cursor: not-allowed;
+}
+
+.mp-choice:has(.mp-choice__input:disabled) {
+  opacity: var(--mp-choice-disabled-opacity);
+  cursor: not-allowed;
+}
+
+.mp-choice--error {
+  --mp-choice-color: var(--use-state-error-icon);
+  --mp-choice-border: var(--use-state-error-icon);
+  --mp-choice-helper: var(--mp-choice-error);
+}
+
+.mp-choice--error .mp-choice__helper {
+  display: inline-flex;
+}
+
+// DEC-008: etiquetas de Checkbox (4541:39004), Radio (4541:39506) y Switch (4541:39656) = title/Paragraph L en Figma:
+// Roboto Regular 16px, line-height 24px (1.5). No se vuelve a 14px. letter-spacing no se toca.
+.mp-checkbox .mp-choice__label,
+.mp-radio .mp-choice__label {
+  font-size: var(--body---l);
+  line-height: 1.5;
+}
+
+.mp-checkbox .mp-choice__control::before {
+  border-radius: rem(2px);   // DEC-012: 2px → 0.125rem (radio caja; mismo valor)
+}
+
+.mp-checkbox .mp-choice__input:checked + .mp-choice__control::after {
+  content: '';
+  position: absolute;
+  width: rem(10px);   // DEC-012: 10px → 0.625rem (tilde)
+  height: rem(6px);   // DEC-012: 6px → 0.375rem
+  margin-top: rem(-1px);   // DEC-012: -1px → -0.0625rem (ajuste óptico)
+  border-left: 2px solid var(--use-text-on-dark-primary);    // borde: se conserva px (regla 4)
+  border-bottom: 2px solid var(--use-text-on-dark-primary);  // borde: se conserva px (regla 4)
+  transform: rotate(-45deg);
+}
+
+.mp-radio .mp-choice__control::before {
+  border-radius: 50%;
+}
+
+.mp-radio .mp-choice__input:checked + .mp-choice__control::after {
+  content: '';
+  position: absolute;
+  width: rem(8px);    // DEC-012: 8px → 0.5rem (punto del radio)
+  height: rem(8px);
+  border-radius: 50%;
+  background: var(--use-text-on-dark-primary);
+}
+
+.mp-switch {
+  --mp-switch-width: #{rem(52px)};          // DEC-012: 52px → 3.25rem
+  --mp-switch-height: #{rem(44px)};         // DEC-008: área interactiva 52 × 44 (Figma 1:7947); antes 40px. El track visible sigue en 32px
+  --mp-switch-track-height: #{rem(32px)};   // DEC-012: 32px → 2rem
+  --mp-switch-knob: #{rem(28px)};           // DEC-012: 28px → 1.75rem
+  --mp-switch-gap: #{rem(10px)};            // DEC-012: 10px → 0.625rem
+  --mp-switch-off: var(--base-neutral-50);
+  --mp-switch-on: var(--use-primary-default);
+  --mp-switch-knob-bg: var(--use-surface-white);
+  --mp-switch-label: var(--use-text-primary);
+  --mp-switch-helper: var(--use-state-error-text-error-field);
+  // DEC-004: Focus del Switch (Figma 1:7947, On y Off): contorno de 3px con use/border/strong.
+  --mp-switch-focus-color: var(--use-border-strong);
+  --mp-switch-focus-width: 3px;   // borde: se conserva px (regla 4)
+
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--mp-switch-gap);
+  min-height: rem(44px);   // DEC-012: 44px → 2.75rem (área táctil)
+  color: var(--mp-switch-label);
+  font-family: var(--font-body);
+  font-size: var(--body---m);
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+
+.mp-switch__field {
+  position: relative;
+  flex: 0 0 var(--mp-switch-width);
+  width: var(--mp-switch-width);
+  height: var(--mp-switch-height);
+  margin: 0;
+}
+
+.mp-switch__input {
+  position: absolute;
+  inset: 0;
+  width: var(--mp-switch-width);
+  height: var(--mp-switch-height);
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.mp-switch__track {
+  position: absolute;
+  left: 0;
+  top: calc((var(--mp-switch-height) - var(--mp-switch-track-height)) / 2);   // DEC-008: track de 32px centrado en el área de 44px (6px)
+  width: var(--mp-switch-width);
+  height: var(--mp-switch-track-height);
+  border-radius: var(--radius-full);
+  background: var(--mp-switch-off);
+  pointer-events: none;
+  transition: background .18s;
+}
+
+.mp-switch__track::after {
+  content: '';
+  position: absolute;
+  top: rem(2px);    // DEC-012: 2px → 0.125rem
+  left: rem(2px);
+  width: var(--mp-switch-knob);
+  height: var(--mp-switch-knob);
+  border-radius: 50%;
+  background: var(--mp-switch-knob-bg);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  transition: transform .18s;
+}
+
+.mp-switch__input:checked + .mp-switch__track {
+  background: var(--mp-switch-on);
+}
+
+.mp-switch__input:checked + .mp-switch__track::after {
+  transform: translateX(rem(20px));   // DEC-012: 20px → 1.25rem (desplazamiento proporcional del knob)
+}
+
+.mp-switch__input:focus-visible + .mp-switch__track,
+.mp-switch__input.is-focus-demo:not(:disabled) + .mp-switch__track {
+  outline: var(--mp-switch-focus-width) solid var(--mp-switch-focus-color);
+  outline-offset: 2px;
+}
+
+.mp-switch__text {
+  display: grid;
+  gap: var(--space-4);
+  padding-top: rem(10px);   // DEC-008: centra la etiqueta de 24px en el área de 44px ((44 − 24) / 2); antes 8px sobre 40px
+}
+
+.mp-switch__label {
+  color: var(--mp-switch-label);
+  font-size: var(--body---l);   // DEC-008: Roboto Regular 16px
+  line-height: 1.5;             // DEC-008: 24px
+}
+
+.mp-switch__helper {
+  display: none;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--mp-switch-helper);
+  font-size: var(--body---s);
+  line-height: 1;
+}
+
+.mp-switch__helper .material-symbols-rounded {
+  font-size: rem(16px);   // DEC-012: 16px → 1rem
+}
+
+.mp-switch--error {
+  --mp-switch-on: var(--use-state-error-icon);
+}
+
+.mp-switch--error .mp-switch__helper {
+  display: inline-flex;
+}
+
+.mp-switch:has(.mp-switch__input:disabled) {
+  opacity: .38;
+  cursor: not-allowed;
+}
+
+.mp-switch__input:disabled {
+  cursor: not-allowed;
+}
+
+[data-theme='dark'] {
+  .mp-choice {
+    --mp-choice-color: var(--use-primary-default-dark, #ff9d5c);
+    --mp-choice-border: var(--use-text-primary);
+  }
+
+  .mp-switch {
+    --mp-switch-on: var(--use-primary-default-dark, #ff9d5c);
+    --mp-switch-off: var(--base-neutral-50);
+  }
+}
+
+[data-theme='high-contrast'] {
+  .mp-choice {
+    --mp-choice-color: var(--use-primary-default, #ffff00);
+    --mp-choice-border: var(--use-text-primary, #ffffff);
+  }
+
+  // DEC-006 (DS-20): el tilde del checkbox se dibuja con dos bordes (10×6 px); darle además fondo lo rellenaba como un
+  // bloque negro. El punto del radio sí es un círculo de fondo, por lo que conserva ambas propiedades.
+  .mp-checkbox .mp-choice__input:checked + .mp-choice__control::after {
+    border-color: var(--use-text-inverse, #000000);
+  }
+
+  .mp-radio .mp-choice__input:checked + .mp-choice__control::after {
+    border-color: var(--use-text-inverse, #000000);
+    background: var(--use-text-inverse, #000000);
+  }
+
+  .mp-switch {
+    --mp-switch-on: var(--use-primary-default, #ffff00);
+    --mp-switch-off: var(--base-neutral-50, #808080);
+    --mp-switch-knob-bg: var(--use-text-inverse, #000000);
+  }
+}
+
+// DEC-006 (DS-08/DS-20) · Colores forzados (Windows Alto Contraste): el navegador sustituye los fondos por Canvas, así que el track
+// del switch, su knob y el punto del radio desaparecían. Se usan colores de sistema y forced-color-adjust:none solo en esos
+// elementos. El tilde del checkbox se dibuja con bordes y ya se respeta. No cambia Light, Dark ni High Contrast del sistema.
+@media (forced-colors: active) {
+  .mp-switch__track,
+  .mp-switch__track::after {
+    forced-color-adjust: none;
+  }
+
+  .mp-switch__track {
+    background: Canvas;
+    outline: 2px solid CanvasText;
+    outline-offset: -2px;
+  }
+
+  .mp-switch__track::after {
+    background: CanvasText;
+    box-shadow: none;
+  }
+
+  .mp-switch__input:checked + .mp-switch__track {
+    background: Highlight;
+    outline-color: Highlight;
+  }
+
+  .mp-switch__input:checked + .mp-switch__track::after {
+    background: HighlightText;
+  }
+
+  .mp-radio .mp-choice__input:checked + .mp-choice__control::after {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+}

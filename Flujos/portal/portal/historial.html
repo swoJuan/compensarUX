@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<!-- @include head -->
+<title>Historial · Portal UX Compensar</title>
+<meta name="description" content="Todo lo que ha cambiado en el sistema de diseño y en los prototipos de Compensar, con el estado de cada flujo.">
+</head>
+<body data-page="historial">
+<!-- @include header -->
+<main id="contenido" class="pux-main" tabindex="-1">
+
+  <section class="pux-page-head">
+    <div class="pux-container">
+      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Historial</span></li></ol></nav>
+      <h1 class="pux-page-head__title">Historial</h1>
+      <p class="mp-body-xl pux-page-head__lead">Qué ha cambiado en el sistema de diseño y en cada plataforma, en qué estado está cada flujo y qué versión del sistema están usando los prototipos.</p>
+    </div>
+  </section>
+
+  <section class="pux-section pux-section--tight">
+    <div class="pux-container">
+      <nav class="mp-tabs pux-plataformas" aria-label="Qué historial ver" data-historial-tabs></nav>
+      <div data-historial aria-live="polite"><p class="pux-muted">Cargando…</p></div>
+    </div>
+  </section>
+
+</main>
+<!-- @include footer -->
+</body>
+</html>

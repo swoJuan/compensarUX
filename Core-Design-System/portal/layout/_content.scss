@@ -1,0 +1,82 @@
+@use '../../core/abstracts' as *;
+
+/* ══════════════════════════════════════════════════════════
+   MAIN CONTENT
+   ══════════════════════════════════════════════════════════ */
+.main {
+  width: calc(100% - var(--ui-sidebar-w));
+  min-width: 0;
+  flex: 1;
+  max-width: none;
+  margin-left: var(--ui-sidebar-w);
+  padding: rem(48px) rem(48px) rem(80px);
+  overflow-x: hidden;
+  background-color: var(--ui-bg);
+}
+
+@media (max-width: rem(1180px)) {
+  .main {
+    padding: rem(40px) rem(32px) rem(72px);
+  }
+}
+
+@media (max-width: rem(760px)) {
+  .main {
+    width: 100%;
+    margin-left: 0;
+    padding: rem(32px) rem(24px) rem(56px);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION
+   ══════════════════════════════════════════════════════════ */
+.section {
+  margin-bottom: var(--space-12);
+  scroll-margin-top: calc(var(--ui-header-h) + var(--space-24));
+}
+
+.section-header {
+  margin-bottom: var(--space-32);
+  padding-bottom: var(--space-16);
+  border-bottom: rem(1px) solid var(--ui-border);
+}
+
+.section-eyebrow {
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ui-accent);
+  margin-bottom: var(--space-4);
+}
+
+.section-title {
+  color: var(--ui-text);
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+
+.section-desc {
+  margin-top: var(--space-8);
+  color: var(--ui-text-muted);
+  max-width: rem(620px);
+}
+
+/* ── Subsección ────────────────────────────────────────── */
+.subsection { margin-bottom: var(--space-64); }
+
+.subsection-title {
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+  margin-bottom: var(--space-16);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.subsection-title::after {
+  content: '';
+  flex: 1;
+  height: rem(1px);
+  background: var(--ui-border);
+}

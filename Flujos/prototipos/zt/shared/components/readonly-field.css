@@ -1,0 +1,35 @@
+/* ============================================================
+ * readonly-field.css — Patrón transversal ZT "Readonly Field"
+ * ------------------------------------------------------------
+ * Campo de solo lectura / deshabilitado con la MISMA apariencia en todos los
+ * flujos de ZT (afiliación, agendamiento…).
+ *
+ * IMPORTANTE — colores: el tratamiento visual del estado readonly/disabled
+ * (superficie `--use-surface-surface`, texto `--use-text-tertiary`, borde
+ * `--use-border-default`, `cursor:not-allowed`, sin hover/foco de edición y sin
+ * sombra) ya lo aplica el Design System vía `.mp-input-field[readonly]` /
+ * `.mp-input-field:disabled`. NO se redefine aquí para evitar divergencias entre
+ * pasos: todos los campos readonly comparten los colores del DS (los mismos que
+ * usa el Paso 1).
+ *
+ * Este componente solo aporta lo que el DS no cubre: la variante con caret
+ * (apariencia de select para "Tipo de documento") que NO despliega ninguna lista.
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ *
+ * Uso (input readonly, colores del DS):
+ *   <input class="mp-input-field" readonly aria-readonly="true" tabindex="-1">
+ *
+ * Variante con caret (apariencia de select, pero NO abre nada):
+ *   <input class="mp-input-field pa-readonly--select" readonly ...>
+ * ============================================================ */
+
+/* Variante con caret: muestra el chevron como un select del Figma, pero al ser
+   readonly no despliega ninguna lista (solo indicador visual). */
+.pa-readonly--select {
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23666' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem 1rem;
+}

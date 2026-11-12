@@ -1,0 +1,7 @@
+Header dentro de un contenedor con 16px de margen lateral (texto 100%) - dropdown anclado al 1.er item
+viewport | ANTERIOR A P3 (ancho / borde der.) | AHORA (ancho / borde der.)
+     769 | 720 / 761                          | 711 / 752
+     775 | 720 / 761                          | 717 / 758
+     780 | 720 / 761                          | 720 / 761
+     800 | 720 / 761                          | 720 / 761
+    1024 | 720 / 761                          | 720 / 761

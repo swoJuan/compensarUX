@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Oficina virtual</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → custom del Home -->
+<link rel="stylesheet" href="../shared/vendor/core.css">
+<link rel="stylesheet" href="../shared/icons/icons.css">
+<link rel="stylesheet" href="shared/zt.css">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+
+      <!-- Selector de persona/afiliado -->
+      <div class="hd-person" data-person-selector>
+        <button class="hd-person__trigger" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu">
+          <span class="hd-person__info">
+            <span class="hd-person__name" data-person-name>Margarita López Arenas</span>
+            <span class="hd-person__plan" data-person-plan>Plan Ideal</span>
+          </span>
+          <span class="hd-person__caret icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+        </button>
+
+        <!-- Dropdown -->
+        <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
+          <p class="person-menu__label" id="person-menu-label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Margarita López Arenas" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true">
+              <span class="icon icon-user icon-24 gs-violet"></span>
+            </span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Margarita López Arenas</span>
+              <span class="person-opt__role">Contratante</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+          <button class="person-opt" type="button" role="menuitemradio" aria-checked="false" data-person="Luis Orejuela" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true">
+              <span class="icon icon-user icon-24 gs-violet"></span>
+            </span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Luis Orejuela</span>
+              <span class="person-opt__role">Beneficiario · Menor de edad</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+          <button class="person-opt" type="button" role="menuitemradio" aria-checked="false" data-person="Ana Orejuela" data-plan="Plan Ideal">
+            <span class="person-opt__avatar" aria-hidden="true">
+              <span class="icon icon-user icon-24 gs-violet"></span>
+            </span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Ana Orejuela</span>
+              <span class="person-opt__role">Beneficiaria · Menor de edad</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal (inyectado desde zt/shared) — "Inicio" activo -->
+    <nav class="sidebar" data-active="inicio"></nav>
+
+    <!-- MAIN (shell ZT) -->
+    <main class="main">
+      <div class="screen active">
+        <div class="home-wrap">
+
+          <!-- ═══ BIENVENIDA ═══ -->
+          <section class="home-welcome" aria-labelledby="home-title">
+            <h1 class="home-title" id="home-title">
+              <span class="home-title__hi">¡Hola</span> <span class="home-title__name">Margarita!</span>
+            </h1>
+            <p class="home-desc">
+              Te damos la bienvenida a nuestra oficina virtual. <strong>¿Qué quieres hacer hoy?</strong>
+            </p>
+          </section>
+
+          <!-- ═══ CARDS DE SERVICIOS ═══ -->
+          <section class="home-cards" aria-label="Servicios">
+
+            <!-- 1. Agendamiento de citas → Home del módulo Agendamiento -->
+            <a class="home-card" href="agendamiento-de-citas/index.html">
+              <div class="home-card__head">
+                <span class="home-card__icon icon icon-calendar-blank icon-32 gs-violet" aria-hidden="true"></span>
+                <span class="home-card__title">Agendamiento de citas</span>
+              </div>
+              <p class="home-card__desc">Gestiona tus citas médicas, exámenes y procedimientos.</p>
+            </a>
+
+            <!-- 2. Resultados de exámenes -->
+            <a class="home-card" href="#" aria-disabled="true">
+              <div class="home-card__head">
+                <span class="home-card__icon icon icon-medical-file icon-32 gs-violet" aria-hidden="true"></span>
+                <span class="home-card__title">Resultados de exámenes</span>
+              </div>
+              <p class="home-card__desc">Descarga tus laboratorios, imágenes diagnósticas y patologías.</p>
+            </a>
+
+            <!-- 3. Certificados -->
+            <a class="home-card" href="#" aria-disabled="true">
+              <div class="home-card__head">
+                <span class="home-card__icon icon icon-download-simple icon-32 gs-violet" aria-hidden="true"></span>
+                <span class="home-card__title">Certificados</span>
+              </div>
+              <p class="home-card__desc">Descarga los certificados que requieras directamente.</p>
+            </a>
+
+            <!-- 4. Paga tu plan -->
+            <a class="home-card" href="#" aria-disabled="true">
+              <div class="home-card__head">
+                <span class="home-card__icon icon icon-credit-card icon-32 gs-violet" aria-hidden="true"></span>
+                <span class="home-card__title">Paga tu plan</span>
+              </div>
+              <p class="home-card__desc">Realiza tus pagos con toda la comodidad.</p>
+            </a>
+
+            <!-- 5. Orientación médica virtual -->
+            <a class="home-card" href="#" aria-disabled="true">
+              <div class="home-card__head">
+                <span class="home-card__icon icon icon-desktop icon-32 gs-violet" aria-hidden="true"></span>
+                <span class="home-card__title">Orientación médica virtual</span>
+              </div>
+              <p class="home-card__desc">Ante cualquier inquietud puedes consultar con un médico.</p>
+            </a>
+
+            <!-- 6. Detalle del plan -->
+            <a class="home-card" href="#" aria-disabled="true">
+              <div class="home-card__head">
+                <span class="home-card__icon icon icon-user-list icon-32 gs-violet" aria-hidden="true"></span>
+                <span class="home-card__title">Detalle del plan</span>
+              </div>
+              <p class="home-card__desc">Podrás encontrar más servicios ofrecidos en nuestro portafolio.</p>
+            </a>
+
+            <!-- 7. Autorizaciones médicas -->
+            <a class="home-card" href="#" aria-disabled="true">
+              <div class="home-card__head">
+                <span class="home-card__icon icon icon-check-circle icon-32 gs-violet" aria-hidden="true"></span>
+                <span class="home-card__title">Autorizaciones médicas</span>
+              </div>
+              <p class="home-card__desc">Consulta, autoriza o adjunta tus órdenes médicas pendientes.</p>
+            </a>
+
+            <!-- 8. Ventas y Afiliación → módulo de afiliación -->
+            <a class="home-card" href="ventas-y-afiliacion/index.html">
+              <div class="home-card__head">
+                <span class="home-card__icon icon icon-user-plus icon-32 gs-violet" aria-hidden="true"></span>
+                <span class="home-card__title">Ventas y Afiliación</span>
+              </div>
+              <p class="home-card__desc">Gestiona la afiliación a Medicina Prepagada.</p>
+            </a>
+
+          </section>
+
+          <!-- ═══ LA MEJOR ATENCIÓN MÉDICA ═══ -->
+          <section class="home-atencion" aria-labelledby="home-atencion-title">
+            <h2 class="home-atencion__title" id="home-atencion-title">La mejor atención médica, cerca de ti</h2>
+            <div class="home-atencion__row">
+
+              <!-- Red de atención -->
+              <article class="home-hcard">
+                <div class="home-hcard__media">
+                  <img src="assets/red-atencion.png" alt="Equipo médico de la red de atención de Compensar">
+                </div>
+                <div class="home-hcard__body">
+                  <h3 class="home-hcard__title">Red de atención</h3>
+                  <p class="home-hcard__desc">Conoce las instituciones y profesionales con los que podrás recibir atención.</p>
+                  <a class="mp-btn mp-btn--primario" href="#">Consulta aquí</a>
+                </div>
+              </article>
+
+              <!-- Medicamentos -->
+              <article class="home-hcard">
+                <div class="home-hcard__media">
+                  <img src="assets/medicamentos.png" alt="Persona consultando medicamentos en una farmacia">
+                </div>
+                <div class="home-hcard__body">
+                  <h3 class="home-hcard__title">Medicamentos</h3>
+                  <p class="home-hcard__desc">Consulta las alternativas que tienes para acceder al servicio.</p>
+                  <a class="mp-btn mp-btn--primario" href="#">Ingresa aquí</a>
+                </div>
+              </article>
+
+            </div>
+          </section>
+
+        </div>
+
+        <!-- ═══ FOOTER (estándar Compensar — ver nota: candidato a zt/shared) ═══ -->
+        <footer class="footer">
+          <div>
+            <div class="footer-col-title">Te puede interesar</div>
+            <a class="footer-link" href="javascript:void(0)">Derechos y deberes</a>
+            <a class="footer-link" href="javascript:void(0)">Notificaciones judiciales</a>
+            <a class="footer-link" href="javascript:void(0)">Políticas de privacidad y condiciones de uso</a>
+            <a class="footer-link" href="javascript:void(0)">Transparencia y acceso a la información pública</a>
+            <a class="footer-link" href="javascript:void(0)">Canal de denuncia</a>
+          </div>
+          <div>
+            <div class="footer-col-title">Conoce más</div>
+            <a class="footer-link" href="javascript:void(0)">Nuestra organización</a>
+            <a class="footer-link" href="javascript:void(0)">Radicar PQRS</a>
+            <a class="footer-link" href="javascript:void(0)">Consultar PQRS</a>
+            <a class="footer-link" href="javascript:void(0)">Proveedores</a>
+            <a class="footer-link" href="javascript:void(0)">Términos y condiciones</a>
+          </div>
+          <div>
+            <div class="footer-col-title">Síguenos</div>
+            <div class="footer-social" aria-label="Redes sociales">
+              <span class="icon icon-facebook-logo icon-20 gs-muted" aria-hidden="true"></span>
+              <span class="icon icon-x-logo icon-20 gs-muted" aria-hidden="true"></span>
+              <span class="icon icon-youtube-logo icon-20 gs-muted" aria-hidden="true"></span>
+              <span class="icon icon-linkedin-logo icon-20 gs-muted" aria-hidden="true"></span>
+              <span class="icon icon-instagram-logo icon-20 gs-muted" aria-hidden="true"></span>
+              <span class="icon icon-tiktok-logo icon-20 gs-muted" aria-hidden="true"></span>
+            </div>
+            <div class="footer-address">
+              <strong>Caja de Compensación Familiar Sede Principal</strong><br>
+              Av. 68 # 49A - 47, Bogotá D.C.<br>
+              Bogotá 601 3077001, Línea nacional 01 8000 967070
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="shared/zt-sidebar.js"></script>
+</body>
+</html>

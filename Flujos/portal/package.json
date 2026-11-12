@@ -1,0 +1,19 @@
+{
+  "name": "compensar-ux-portal",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Portal UX Compensar — repositorio centralizador del sistema de diseño y los prototipos (sitio estático).",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/watch.mjs",
+    "build": "node scripts/build.mjs",
+    "publicar": "PORTAL_DIST=../../sitio node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "serve": "node scripts/serve.mjs",
+    "ds:estado": "node scripts/ds-sincronizar.mjs",
+    "ds:sincronizar": "node scripts/ds-sincronizar.mjs --aplicar"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

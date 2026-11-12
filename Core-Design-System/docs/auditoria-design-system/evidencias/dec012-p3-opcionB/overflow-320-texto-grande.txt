@@ -1,0 +1,48 @@
+
+--- 320px, texto 150% | ANTERIOR A P3 | header=320px  columnas=[162.531px 59.4688px 0px] padding-main=24px
+   brand: x=25..188 w=163 font=24px
+   logo: x=25..69 w=44 font=18px
+   brand-text: x=81..188 w=107 font=24px
+   brand-name: x=81..188 w=107 font=16px
+   brand-service: x=81..188 w=107 font=14px
+   mobile-toggle: x=212..271 w=59 font=24px
+
+--- 320px, texto 150% | P3 sin B | header=320px  columnas=[237.797px 66px 0px] padding-main=24px
+   brand: x=25..263 w=238 font=24px
+   logo: x=25..91 w=66 font=27px
+   brand-text: x=103..263 w=160 font=24px
+   brand-name: x=103..263 w=160 font=24px
+   brand-service: x=103..263 w=160 font=21px
+   mobile-toggle: x=287..353 w=66 font=24px  <-- pasa +33
+
+--- 320px, texto 150% | AHORA (B) | header=320px  columnas=[237.797px 66px 0px] padding-main=24px
+   brand: x=25..263 w=238 font=24px
+   logo: x=25..91 w=66 font=27px
+   brand-text: x=103..263 w=160 font=24px
+   brand-name: x=103..263 w=160 font=24px
+   brand-service: x=103..263 w=160 font=21px
+   mobile-toggle: x=287..353 w=66 font=24px  <-- pasa +33
+
+--- 320px, texto 200% | ANTERIOR A P3 | header=320px  columnas=[166.531px 44px 0px] padding-main=32px
+   brand: x=33..200 w=167 font=32px
+   logo: x=33..77 w=44 font=18px
+   brand-text: x=93..200 w=107 font=32px
+   brand-name: x=93..200 w=107 font=16px
+   brand-service: x=93..200 w=107 font=14px
+   mobile-toggle: x=232..276 w=44 font=32px
+
+--- 320px, texto 200% | P3 sin B | header=320px  columnas=[317.062px 88px 0px] padding-main=32px
+   brand: x=33..350 w=317 font=32px  <-- pasa +30
+   logo: x=33..121 w=88 font=36px
+   brand-text: x=137..350 w=213 font=32px  <-- pasa +30
+   brand-name: x=137..350 w=213 font=32px  <-- pasa +30
+   brand-service: x=137..350 w=213 font=28px  <-- pasa +30
+   mobile-toggle: x=382..470 w=88 font=32px  <-- pasa +150
+
+--- 320px, texto 200% | AHORA (B) | header=320px  columnas=[317.062px 88px 0px] padding-main=32px
+   brand: x=33..350 w=317 font=32px  <-- pasa +30
+   logo: x=33..121 w=88 font=36px
+   brand-text: x=137..350 w=213 font=32px  <-- pasa +30
+   brand-name: x=137..350 w=213 font=32px  <-- pasa +30
+   brand-service: x=137..350 w=213 font=28px  <-- pasa +30
+   mobile-toggle: x=382..470 w=88 font=32px  <-- pasa +150

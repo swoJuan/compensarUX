@@ -1,0 +1,10 @@
+const { chromium } = require('playwright'); const fs=require('fs');
+const CSSF=process.argv[2]||'/Users/juan.soto/Documents/Desarrollo/Compensar/Core-Design-System/css/core.css', OUT=process.argv[3]||'/tmp/dec008/hc-check.png';
+const CSS=fs.readFileSync(CSSF,'utf8');
+const mk=(k,on)=>`<label class="mp-choice mp-${k}" style="margin:8px"><span class="mp-choice__field"><input class="form-check-input mp-choice__input" type="${k==='radio'?'radio':'checkbox'}" ${on?'checked':''}><span class="mp-choice__control" aria-hidden="true"></span></span><span class="mp-choice__label">${k} ${on?'on':'off'}</span></label>`;
+(async()=>{const b=await chromium.launch({channel:'chromium'});const p=await b.newPage({viewport:{width:640,height:120}});
+ await p.route('**/__h.html',r=>r.fulfill({contentType:'text/html',body:`<!doctype html><html data-theme="high-contrast"><head><link rel="stylesheet" href="/css/core.css"></head><body style="background:#000;color:#fff;padding:12px">${mk('checkbox',false)}${mk('checkbox',true)}${mk('radio',true)}</body></html>`}));
+ await p.route(/\/css\/core\.css/,r=>r.fulfill({contentType:'text/css',body:CSS}));
+ await p.goto('http://localhost:8000/__h.html');await p.waitForTimeout(200);
+ const m=await p.evaluate(()=>{const c=document.querySelector('.mp-checkbox .mp-choice__input:checked + .mp-choice__control');const a=getComputedStyle(c,'::after'),bf=getComputedStyle(c,'::before');return {afterBg:a.backgroundColor,afterBorder:a.borderLeftColor+' '+a.borderLeftWidth,beforeBg:bf.backgroundColor,beforeBorder:bf.borderTopColor}});
+ console.log(JSON.stringify(m)); await p.screenshot({path:OUT}); await b.close();})();

@@ -1,0 +1,71 @@
+--- a/core/components/web/_inputs.scss
++++ b/core/components/web/_inputs.scss
+@@ -313,6 +313,14 @@
+     outline: none;
+   }
+ 
++  // Accesibilidad (WCAG 2.4.7): un campo de solo lectura puede recibir foco con
++  // teclado; se conserva un indicador de foco visible (no el ring de edición).
++  &[readonly]:focus-visible,
++  &.is-readonly:focus-visible {
++    outline: rem(2px) solid var(--use-focus-outline);
++    outline-offset: rem(2px);
++  }
++
+   // Sin cursor de texto cuando el campo no es editable
+   &[readonly]:not(.mp-select),
+   &.is-readonly:not(.mp-select) {
+@@ -447,12 +455,22 @@
+     background-size: rem(16px) rem(16px);
+   }
+ 
+-  .mp-input-field:focus:not(:disabled),
+-  .mp-input-field.is-focus-demo:not(:disabled) {
++  .mp-input-field:focus:not(:disabled):not([readonly]):not(.is-readonly),
++  .mp-input-field.is-focus-demo:not(:disabled):not([readonly]):not(.is-readonly) {
+     --mp-inp-border: var(--use-primary-default);
+     box-shadow: 0 0 0 rem(3px) color-mix(in srgb, var(--use-primary-default) 22%, transparent);
+   }
+ 
++  .mp-input-field:disabled,
++  .mp-input-field[readonly],
++  .mp-input-field.is-readonly {
++    background: var(--use-surface-surface);
++    color: var(--use-text-tertiary);
++    --mp-inp-border: var(--use-border-default);
++    border-color: var(--mp-inp-border);
++    box-shadow: none;
++  }
++
+   .mp-input-label {
+     color: var(--use-text-primary);
+   }
+@@ -480,8 +498,8 @@
+     background-size: rem(16px) rem(16px);
+   }
+ 
+-  .mp-input-field:focus:not(:disabled),
+-  .mp-input-field.is-focus-demo:not(:disabled) {
++  .mp-input-field:focus:not(:disabled):not([readonly]):not(.is-readonly),
++  .mp-input-field.is-focus-demo:not(:disabled):not([readonly]):not(.is-readonly) {
+     outline: rem(3px) solid var(--use-focus-outline);
+     outline-offset: rem(2px);
+     box-shadow: none;
+@@ -493,10 +511,16 @@
+     box-shadow: none;
+   }
+ 
+-  .mp-input-field:hover:not(:disabled):not(.error):not(:focus) {
++  .mp-input-field:hover:not(:disabled):not([readonly]):not(.is-readonly):not(.error):not(:focus) {
+     border-color: var(--use-primary-default, #ffff00);
+   }
+ 
++  .mp-input-field:disabled,
++  .mp-input-field[readonly],
++  .mp-input-field.is-readonly {
++    border-style: dashed;
++  }
++
+   .mp-input-label {
+     color: var(--base-neutral-white);
+   }

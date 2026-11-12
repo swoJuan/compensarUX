@@ -1,0 +1,243 @@
+/* ============================================================
+ * paso-6.css — Estilos del PASO 6 "Sarlaft" (Proceso de afiliación)
+ * ------------------------------------------------------------
+ * Nivel 4 de la cascada: Design System (core.css) → shell ZT (zt.css) →
+ * componentes transversales → ESTE archivo. Shell .pa-* igual a Pasos 1–5.
+ * Objetivo visual: MENOS carga que el Figma → secciones sin borde (separadas
+ * por aire y un divisor), datos conocidos como información, grilla 2 col.
+ * ============================================================ */
+
+/* ═══════════════ LAYOUT DEL PROCESO ═══════════════ */
+.pa-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12, 0.75rem);
+  width: 100%;
+  margin-top: var(--space-24);
+}
+.pa-side {
+  flex: 0 0 280px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12, 0.75rem);
+}
+
+/* ═══════════════ CARD DEL PASO ═══════════════ */
+.pa-card {
+  flex: 1 1 800px;
+  max-width: 800px;
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-12, 0.75rem);
+  padding: 28px var(--space-24) var(--space-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+/* Encabezado: badge PASO 3 DE 8 + título + descripción */
+.pa-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+.pa-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-8);
+  border-radius: 4px;                 /* Figma badge = 4px (no hay token 4px en el DS) */
+  background: var(--use-surface-violet, #efecf9);
+  color: var(--use-text-theme-violet, #4e3199);
+  font-size: 12px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.pa-card__title {
+  margin: 0;
+  font-size: 24px;                    /* heading/h5 */
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+.pa-card__desc {
+  margin: var(--space-4) 0 0;
+  font-size: var(--font-size-lg, 1rem);   /* Body L 16px */
+  line-height: 1.3;
+  color: var(--use-text-secondary, #333);
+}
+
+.p6-form { display: flex; flex-direction: column; gap: var(--space-32, 2rem); }
+#p6-alert:empty { display: none; }
+
+/* ═══════════════ TIPO DE PERSONA (2 tarjetas) ═══════════════ */
+.p6-types { margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: var(--space-12); }
+.p6-types__legend { padding: 0; margin-bottom: var(--space-12); font-size: var(--font-size-lg, 1rem); font-weight: var(--font-weight-semibold, 600); color: var(--use-text-primary, #111); }
+.p6-types__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); }
+.p6-type {
+  position: relative;
+  display: flex; align-items: center; gap: var(--space-12);
+  padding: var(--space-16);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-xs, 0.5rem);
+  background: var(--use-surface-white, #fff);
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.p6-type:hover { border-color: var(--use-border-default, #ccc); background: var(--use-surface-theme-gray-5, #f8f7f7); }
+.p6-type__input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.p6-type:has(.p6-type__input:focus-visible) { outline: 2px solid var(--use-focus-outline, #f60); outline-offset: 2px; }
+.p6-type__icon {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--use-surface-theme-gray-5, #f8f7f7); color: var(--use-text-secondary, #333);
+}
+.p6-type__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.p6-type__title { font-size: var(--font-size-lg, 1rem); font-weight: var(--font-weight-semibold, 600); color: var(--use-text-primary, #111); }
+.p6-type__desc { font-size: var(--font-size-md, 0.875rem); color: var(--use-text-tertiary, #666); }
+.p6-type__check { margin-left: auto; color: var(--use-surface-theme-violet-60, #5b3ab4); visibility: hidden; }
+.p6-type.is-active {
+  border-color: var(--use-surface-theme-violet-60, #5b3ab4);
+  background: var(--use-surface-violet, #efecf9);
+  box-shadow: inset 0 0 0 1px var(--use-surface-theme-violet-60, #5b3ab4);
+}
+.p6-type.is-active .p6-type__icon { background: var(--use-surface-white, #fff); color: var(--use-text-theme-violet, #4e3199); }
+.p6-type.is-active .p6-type__check { visibility: visible; }
+
+/* ═══════════════ SECCIONES (sin caja: divisor + aire) ═══════════════ */
+.p6-section { display: flex; flex-direction: column; gap: var(--space-16); padding-top: var(--space-24); border-top: 1px solid var(--use-border-subtle, #e0e0e0); }
+.p6-section__head { display: flex; align-items: flex-start; gap: var(--space-8); color: var(--use-text-primary, #111); }
+.p6-section__head > .icon { margin-top: 1px; }
+.p6-section__title { margin: 0; font-size: 18px; font-weight: var(--font-weight-bold, 700); line-height: 1.3; }
+.p6-section__hint { margin: 2px 0 0; font-size: var(--font-size-md, 0.875rem); line-height: 1.4; color: var(--use-text-tertiary, #666); }
+.p6-section__body { display: flex; flex-direction: column; gap: var(--space-16); }
+.p6-sub {
+  margin: var(--space-8) 0 0;
+  font-size: var(--font-size-sm, 0.75rem);
+  font-weight: var(--font-weight-semibold, 600);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--use-text-tertiary, #666);
+}
+.p6-note { display: flex; align-items: center; gap: var(--space-4); margin: 0; font-size: var(--font-size-md, 0.875rem); color: var(--use-text-tertiary, #666); }
+.p6-opt { font-size: var(--font-size-md, 0.875rem); color: var(--use-text-tertiary, #666); }
+
+/* Grilla de campos 2 columnas (gap 16/24). */
+.p6-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16) var(--space-24); }
+.p6-grid > .mp-input-group { margin: 0; min-width: 0; }
+.p6-full { grid-column: 1 / -1; }
+.p6-grid .zt-datefield, .p6-grid .zt-datefield__trigger { width: 100%; }
+.mp-input-group:has(.mp-input-error:not([hidden])) .mp-hint { display: none; }
+
+/* ═══════════════ DATOS REGISTRADOS (no editables) ═══════════════ */
+.p6-facts { display: flex; flex-direction: column; gap: var(--space-12); padding: var(--space-16) var(--space-20, 1.25rem); background: var(--use-surface-theme-gray-5, #f8f7f7); border-radius: var(--radius-xs, 0.5rem); }
+.p6-facts__title { display: flex; align-items: center; gap: var(--space-4); margin: 0; font-size: var(--font-size-sm, 0.75rem); font-weight: var(--font-weight-semibold, 600); letter-spacing: 0.04em; text-transform: uppercase; color: var(--use-text-tertiary, #666); }
+.p6-facts__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12) var(--space-24); margin: 0; }
+.p6-facts__item { min-width: 0; }
+.p6-facts__item.is-wide { grid-column: span 2; }
+.p6-facts__item dt { margin: 0 0 2px; font-size: var(--font-size-md, 0.875rem); color: var(--use-text-tertiary, #666); }
+.p6-facts__item dd { margin: 0; font-size: var(--font-size-lg, 1rem); font-weight: var(--font-weight-medium, 500); color: var(--use-text-primary, #111); overflow-wrap: break-word; }
+
+/* ═══════════════ PREGUNTAS SÍ/NO (filas compactas, patrón Paso 4) ═══════════════ */
+.p6-qs { display: flex; flex-direction: column; }
+.p6-q {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-16);
+  margin: 0 calc(-1 * var(--space-12));
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-xs, 0.5rem);
+  transition: background-color .15s ease;
+}
+.p6-q + .p6-q { border-top: 1px solid var(--use-border-subtle, #e0e0e0); }
+.p6-q:hover, .p6-q:focus-within { background: var(--use-surface-theme-gray-5, #f8f7f7); }
+.p6-q.is-yes, .p6-q.is-yes:hover { background: var(--use-surface-orange, #fff2e3); box-shadow: inset 3px 0 0 var(--use-primary-default, #f60); border-top-color: transparent; }
+.p6-q.is-yes + .p6-q { border-top-color: transparent; }
+.p6-q__text { margin: 0; font-size: var(--font-size-lg, 1rem); line-height: 1.3; color: var(--use-text-primary, #111); }
+.p6-q.is-yes .p6-q__text { font-weight: var(--font-weight-medium, 500); }
+.p6-q__opts { display: flex; flex: 0 0 auto; gap: var(--space-16); }
+
+/* Tipo de operación: chips (opción única). */
+.p6-ops { margin: 0; padding: var(--space-16); border: 0; border-radius: var(--radius-xs, 0.5rem); background: var(--use-surface-theme-gray-5, #f8f7f7); display: flex; flex-direction: column; gap: var(--space-12); }
+.p6-ops > legend { float: left; width: 100%; padding: 0; margin-bottom: var(--space-12); }
+.p6-ops__list { clear: both; display: flex; flex-wrap: wrap; gap: var(--space-8); }
+.p6-ops .mp-input-error { margin: 0; }
+.p6-chip {
+  position: relative;
+  display: inline-flex; align-items: center;
+  padding: var(--space-8) var(--space-16);
+  border: 1px solid var(--use-border-default, #ccc);
+  border-radius: 999px;
+  background: var(--use-surface-white, #fff);
+  font-size: var(--font-size-md, 0.875rem);
+  color: var(--use-text-primary, #111);
+  cursor: pointer;
+}
+.p6-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.p6-chip:hover { border-color: var(--use-text-tertiary, #666); }
+.p6-chip:has(input:focus-visible) { outline: 2px solid var(--use-focus-outline, #f60); outline-offset: 2px; }
+.p6-chip.is-active { border-color: var(--use-primary-default, #f60); background: var(--use-surface-orange, #fff2e3); color: var(--base-orange-100, #6b4400); font-weight: var(--font-weight-semibold, 600); }
+
+/* ═══════════════ SOCIOS ═══════════════ */
+.p6-partner { display: flex; flex-direction: column; gap: var(--space-12); padding: var(--space-16); border: 1px solid var(--use-border-subtle, #e0e0e0); border-radius: var(--radius-xs, 0.5rem); }
+.p6-partner__head { display: flex; align-items: center; justify-content: space-between; }
+.p6-partner__title { margin: 0; font-size: var(--font-size-lg, 1rem); font-weight: var(--font-weight-semibold, 600); color: var(--use-text-primary, #111); }
+.p6-partner .p6-q { margin: 0 calc(-1 * var(--space-8)); padding-left: var(--space-8); padding-right: var(--space-8); }
+.p6-qs--compact .p6-q__text { font-size: var(--font-size-md, 0.875rem); }
+.p6-link-btn { border: 0; background: transparent; padding: var(--space-4) 0; font: inherit; font-size: var(--font-size-md, 0.875rem); font-weight: var(--font-weight-bold, 700); color: var(--use-primary-default, #f60); cursor: pointer; }
+.p6-link-btn--danger { color: var(--use-text-tertiary, #666); }
+.p6-link-btn--danger:hover { color: var(--use-state-error-mandatory, #bb4945); }
+.p6-total { margin: 0; font-size: var(--font-size-md, 0.875rem); color: var(--use-text-secondary, #333); }
+.p6-total.is-error { color: var(--use-state-error-mandatory, #bb4945); }
+.p6-add { display: flex; justify-content: center; padding: var(--space-12); border: 1px dashed var(--use-border-subtle, #e0e0e0); border-radius: 10px; }
+
+/* ═══════════════ CTA ═══════════════ */
+.pa-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  width: 100%;
+  margin-top: var(--space-4);
+}
+.pa-back { display: inline-flex; align-items: center; gap: var(--space-4); }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 900px) {
+  .pa-layout { flex-direction: column; }
+  .pa-side { flex: 1 1 auto; width: 100%; }
+  .pa-card { flex: 1 1 auto; max-width: 100%; width: 100%; }
+}
+@media (max-width: 680px) {
+  .pa-card { padding: var(--space-24) var(--space-16); }
+  .p6-types__grid, .p6-grid { grid-template-columns: 1fr; }
+  .p6-facts__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .p6-q { flex-direction: column; align-items: flex-start; gap: 0; }
+  .pa-cta { flex-direction: column-reverse; align-items: stretch; }
+  .pa-cta .mp-btn { width: 100%; justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) { .p6-type, .p6-q { transition: none !important; } }
+
+/* ═══════════════ MODAL ORIGEN DE FONDOS (guion para el asesor) ═══════════════ */
+/* Indicación de lectura en voz alta (arriba del texto legal). */
+.p6-read-cue {
+  display: flex; align-items: flex-start; gap: var(--space-8);
+  margin-bottom: var(--space-16);
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-xs, 0.5rem);
+  background: var(--use-state-info-bg, #e8f1fb);
+  color: var(--use-state-info-text, #111);
+  font-size: var(--font-size-md, 0.875rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.4;
+}
+.p6-read-cue .icon { flex: 0 0 auto; color: var(--use-state-info-icon, #3a75c4); }
+/* Constancia del asesor al final del texto. */
+.p6-read-confirm {
+  display: flex;
+  width: 100%;
+  margin-top: var(--space-16);
+  padding: var(--space-8) var(--space-12) var(--space-8) var(--space-4);
+  border-top: 1px solid var(--use-border-subtle, #e0e0e0);
+  align-items: center;
+}
+.p6-read-confirm .mp-choice__label { font-weight: var(--font-weight-semibold, 600); }

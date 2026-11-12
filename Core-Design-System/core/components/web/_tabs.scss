@@ -1,0 +1,176 @@
+// ============================================================
+//  mp-tab / mp-tabs / mp-tab-panel
+//  Componente transversal de navegación por pestañas.
+//  Fuente Figma: 1zVGMpzqBgiBUqhmfFEAoT / 4610:37808
+// ============================================================
+
+@use '../../abstracts' as *;
+
+// ── Tab strip (contenedor) ────────────────────────────────────
+.mp-tabs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+// ── Tab individual ────────────────────────────────────────────
+// DEC-008 (Figma 2245:22499): el botón es el ÁREA INTERACTIVA, mínimo 52 × 44 px (el ancho crece con el texto). La SUPERFICIE VISUAL
+// (fondo del tab activo, subrayado de hover y fondo de disabled) mide 35 px de alto y va centrada: la dibuja ::before, que no captura
+// eventos propios (pointer-events: none) y queda dentro del botón, de modo que los 44 px completos son clicables sin estirar el diseño.
+.mp-tab {
+  --mp-tab-hit-h: #{rem(44px)};
+  --mp-tab-surface-h: #{rem(35px)};
+  --mp-tab-surface-bg: transparent;
+  --mp-tab-surface-radius: var(--space-12);
+  --mp-tab-underline: transparent;
+
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: #{rem(52px)};
+  min-height: var(--mp-tab-hit-h);
+  gap: var(--space-12);
+  padding: 0 var(--space-12);
+  border: none;
+  background: transparent;
+  color: var(--use-text-primary);
+  font-family: var(--font-body);
+  // DEC-005/DS-11: Figma Tab = 16px (body/L). Antes --font-size-md resolvía a 14px.
+  font-size: var(--body---l);
+  font-weight: 600;   // DEC-005/DS-14: SemiBold 600 ya disponible tras cargar el peso real (antes se sintetizaba)
+  line-height: 1;
+  letter-spacing: 0.352px;   // cond. 4: no se modifica (equivale a Figma 2.2%)
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+.mp-tab::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: calc((100% - var(--mp-tab-surface-h)) / 2);
+  height: var(--mp-tab-surface-h);
+  box-sizing: border-box;
+  border-bottom: rem(2px) solid var(--mp-tab-underline);
+  border-radius: var(--mp-tab-surface-radius);
+  background: var(--mp-tab-surface-bg);
+  pointer-events: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+// Foco visible · DEC-004 (Figma 2245:22499, variantes Focus=On, nodo 5990:6): contorno EXTERIOR de 3px con use/border/strong
+// alrededor de la superficie visible de 35px (no del área táctil). Vale para tab activo e inactivo y no sustituye el indicador de activo.
+.mp-tab:focus-visible,
+.mp-tab.mp-tab--is-focus {
+  outline: none;
+}
+
+.mp-tab:focus-visible::before,
+.mp-tab.mp-tab--is-focus::before {
+  outline: 3px solid var(--use-border-strong);   // borde: se conserva px (regla 4)
+  outline-offset: 0;
+}
+
+// ── Estado Activo ─────────────────────────────────────────────
+.mp-tab[aria-selected='true'],
+.mp-tab.is-active {
+  --mp-tab-surface-bg: var(--use-primary-default);
+  --mp-tab-surface-radius: var(--space-12);
+  --mp-tab-underline: transparent;
+  color: var(--use-text-on-dark-primary);
+  font-weight: 700;
+}
+
+// ── Estado Hover (no activo, no disabled) ─────────────────────
+.mp-tab:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+.mp-tab.mp-tab--is-hover {
+  --mp-tab-surface-bg: transparent;
+  --mp-tab-surface-radius: 0;
+  --mp-tab-underline: var(--use-text-link);
+  color: var(--use-text-link);
+}
+
+// ── Estado Disabled ───────────────────────────────────────────
+.mp-tab:disabled,
+.mp-tab.is-disabled {
+  --mp-tab-surface-bg: var(--use-surface-theme-gray-5);
+  --mp-tab-surface-radius: var(--space-8) var(--space-8) 0 0;
+  --mp-tab-underline: var(--use-text-tertiary);
+  color: var(--use-text-tertiary);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// ── Ícono dentro del tab ──────────────────────────────────────
+.mp-tab__icon {
+  font-size: var(--font-size-xl);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+// ── Panel de contenido ────────────────────────────────────────
+.mp-tab-panel {
+  width: 100%;
+}
+
+.mp-tab-panel[hidden] {
+  display: none;
+}
+
+// ── Responsive · menú desplegable por debajo de 768 px ────────
+// DS «Tabs · 6. Responsive»: en pantallas pequeñas la tira de pestañas se presenta como
+// menú desplegable y mantiene visible la selección. Lo arma `js/mp-tabs.js`, que oculta la
+// tira (.mp-tabs--collapsed) y muestra el desplegable (.mp-tabs__select) con las mismas
+// pestañas. El punto de quiebre es md (768 px), el mismo de cards y sidebar.
+//
+// Sin JavaScript la tira NO se parte en dos líneas: se desplaza en horizontal, de modo que
+// una página que no cargue el módulo conserva una presentación usable.
+// Para dejar una tira fuera (especímenes de documentación): data-mp-tabs-responsive="off".
+.mp-tabs__select {
+  display: none;
+  width: 100%;
+}
+
+@include md-down {
+  .mp-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .mp-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mp-tab {
+    flex: 0 0 auto;
+  }
+
+  .mp-tabs.mp-tabs--collapsed {
+    display: none;
+  }
+
+  .mp-tabs__select {
+    display: block;
+  }
+}
+
+// ── High Contrast ─────────────────────────────────────────────
+// DEC-006 (DS-02): en Dark la pestaña activa (blanco sobre #ff9d5c = 2,05:1) usa use/text/inverse (#111 en Dark, negro en HC).
+[data-theme='dark'],
+[data-theme='high-contrast'] {
+  .mp-tab[aria-selected='true'],
+  .mp-tab.is-active {
+    color: var(--use-text-inverse);
+  }
+}

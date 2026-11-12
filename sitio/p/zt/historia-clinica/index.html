@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar – Solicita tu historia clínica</title>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Cascada ZT: Design System → iconos → shell ZT → componentes → custom del flujo -->
+<link rel="stylesheet" href="../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../shared/icons/icons.css">
+<link rel="stylesheet" href="../shared/zt.css">
+<link rel="stylesheet" href="../shared/components/radio.css">
+<link rel="stylesheet" href="../shared/components/dropdown.css">
+<link rel="stylesheet" href="../shared/components/datepicker.css">
+<link rel="stylesheet" href="../shared/components/form-error.css">
+<link rel="stylesheet" href="../shared/components/alert.css">
+<link rel="stylesheet" href="../shared/components/modal.css">
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE (shell ZT) ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Abrir menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (shell ZT) ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Familiar</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT (shell ZT) ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR transversal — "Historia clínica" activo -->
+    <nav class="sidebar" data-active="historia"></nav>
+
+    <main class="main">
+      <div class="screen active">
+        <div class="zt-page hc-page">
+
+          <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="../index.html">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Historia clínica</span>
+          </nav>
+
+          <h1 class="page-title">
+            <span class="orange">Solicita </span><span class="dark">tu historia clínica</span>
+          </h1>
+          <p class="hc-lead">Seleccione los servicios y el periodo que deseas consultar.</p>
+
+          <!-- Pestañas del módulo -->
+          <nav class="mp-tabs hc-tabs" aria-label="Historia clínica">
+            <a class="mp-tab is-active" href="index.html" aria-current="page">Nueva solicitud</a>
+            <a class="mp-tab" href="mis-solicitudes.html">Mis solicitudes</a>
+          </nav>
+
+          <!-- ═══ FORMULARIO NUEVA SOLICITUD ═══ -->
+          <section class="hc-card" aria-labelledby="hc-form-title">
+            <span class="hc-card__icon icon icon-article icon-32 gs-violet" aria-hidden="true"></span>
+            <h2 class="hc-card__title" id="hc-form-title">Realizar nueva solicitud</h2>
+            <p class="hc-card__desc">
+              Solo se puede solicitar la historia clínica de IPS Compensar.<br>
+              Para otras IPS deberás realizarlo directamente con el prestador.
+            </p>
+
+            <form class="hc-form" id="hc-form" novalidate>
+
+              <!-- Servicios (selección múltiple) -->
+              <div class="mp-input-group">
+                <label class="mp-input-label" id="hc-serv-label" for="hc-serv-trigger">
+                  <span class="hc-star" aria-hidden="true">*</span> Servicios
+                </label>
+                <div class="hc-multi" id="hc-multi">
+                  <button type="button" class="mp-input-field hc-multi__trigger" id="hc-serv-trigger"
+                          aria-haspopup="dialog" aria-expanded="false" aria-controls="hc-serv-panel"
+                          aria-labelledby="hc-serv-label hc-serv-value" aria-required="true">
+                    <span class="hc-multi__value is-placeholder" id="hc-serv-value">Selecciona uno o varios servicios</span>
+                    <span class="hc-multi__caret icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+                  </button>
+
+                  <div class="hc-multi__panel" id="hc-serv-panel" role="dialog" aria-label="Servicios" hidden>
+                    <div class="hc-multi__search">
+                      <input type="search" class="hc-multi__search-input" id="hc-serv-search"
+                             placeholder="Buscar servicio" aria-label="Buscar servicio" autocomplete="off">
+                      <span class="icon icon-magnifying-glass icon-24 gs-inherit" aria-hidden="true"></span>
+                    </div>
+
+                    <label class="mp-choice mp-checkbox hc-multi__opt hc-multi__all">
+                      <span class="mp-choice__field">
+                        <input class="mp-choice__input" type="checkbox" id="hc-serv-all">
+                        <span class="mp-choice__control"></span>
+                      </span>
+                      <span class="mp-choice__text"><span class="mp-choice__label">Seleccionar todos</span></span>
+                    </label>
+
+                    <div class="hc-multi__list" id="hc-serv-list" role="group" aria-label="Lista de servicios"></div>
+                    <p class="hc-multi__empty" id="hc-serv-empty" hidden>No encontramos servicios con ese nombre.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Periodo -->
+              <fieldset class="hc-period">
+                <legend class="hc-period__legend">¿De qué periodo necesitas la historia clínica?</legend>
+
+                <div class="hc-period__options">
+                  <label class="mp-choice mp-radio">
+                    <span class="mp-choice__field">
+                      <input class="mp-choice__input" type="radio" name="periodo" value="mes" checked>
+                      <span class="mp-choice__control"></span>
+                    </span>
+                    <span class="mp-choice__text"><span class="mp-choice__label">Por mes</span></span>
+                  </label>
+                  <label class="mp-choice mp-radio">
+                    <span class="mp-choice__field">
+                      <input class="mp-choice__input" type="radio" name="periodo" value="rango">
+                      <span class="mp-choice__control"></span>
+                    </span>
+                    <span class="mp-choice__text"><span class="mp-choice__label">Por rango de fechas</span></span>
+                  </label>
+                  <label class="mp-choice mp-radio">
+                    <span class="mp-choice__field">
+                      <input class="mp-choice__input" type="radio" name="periodo" value="anio">
+                      <span class="mp-choice__control"></span>
+                    </span>
+                    <span class="mp-choice__text"><span class="mp-choice__label" id="hc-anio-label">Año anterior</span></span>
+                  </label>
+                </div>
+
+                <!-- Por mes -->
+                <div class="hc-period__panel" id="hc-panel-mes">
+                  <div class="mp-input-group">
+                    <label class="mp-input-label" for="hc-mes"><span class="hc-star" aria-hidden="true">*</span> Mes</label>
+                    <div class="mp-input-wrapper">
+                      <select class="mp-input-field mp-select" id="hc-mes" data-zt-dropdown data-zt-dropdown-search="false" required aria-required="true">
+                        <option value="" disabled selected>Selecciona un mes</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Por rango de fechas -->
+                <div class="hc-period__panel hc-period__panel--grid" id="hc-panel-rango" hidden>
+                  <div class="mp-input-group">
+                    <label class="mp-input-label" for="hc-desde"><span class="hc-star" aria-hidden="true">*</span> Fecha desde</label>
+                    <div class="mp-input-wrapper">
+                      <input class="mp-input-field" id="hc-desde" type="date" placeholder="dd/mm/aaaa"
+                             required aria-required="true" data-zt-datepicker
+                             data-zt-datepicker-title="Seleccione la fecha inicial" aria-describedby="hc-rango-error">
+                    </div>
+                  </div>
+                  <div class="mp-input-group">
+                    <label class="mp-input-label" for="hc-hasta"><span class="hc-star" aria-hidden="true">*</span> Fecha hasta</label>
+                    <div class="mp-input-wrapper">
+                      <input class="mp-input-field" id="hc-hasta" type="date" placeholder="dd/mm/aaaa"
+                             required aria-required="true" data-zt-datepicker
+                             data-zt-datepicker-title="Seleccione la fecha final" aria-describedby="hc-rango-error">
+                    </div>
+                  </div>
+                  <p class="mp-input-error hc-period__error" id="hc-rango-error" role="alert" hidden>
+                    La fecha final no puede ser anterior a la fecha inicial.
+                  </p>
+                </div>
+
+                <!-- Año anterior -->
+                <div class="hc-period__panel" id="hc-panel-anio" hidden>
+                  <!-- Alerta info del sistema (zt-alert), solo descripción -->
+                  <div class="zt-alert zt-alert--info" role="status" aria-live="polite">
+                    <span class="zt-alert__icon icon icon-info icon-32 gs-inherit" aria-hidden="true"></span>
+                    <div class="zt-alert__content">
+                      <p class="zt-alert__desc" id="hc-anio-note">Incluye la información del 1 de enero al 31 de diciembre.</p>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="hc-form__actions">
+                <button type="submit" class="mp-btn mp-btn--primario" id="hc-continuar" disabled>Continuar</button>
+              </div>
+            </form>
+          </section>
+
+          <!-- Ayuda -->
+          <aside class="hc-help" aria-label="Ayuda">
+            <span class="hc-help__icon icon icon-question icon-24 gs-violet" aria-hidden="true"></span>
+            <div class="hc-help__text">
+              <p class="hc-help__title">¿Necesitas ayuda con tu historia clínica?</p>
+              <p class="hc-help__desc">Conoce quién puede solicitarla, qué documentos necesitas y otros canales.</p>
+            </div>
+            <!-- [PENDIENTE] Destino de "Más información" no definido en Figma -->
+            <button type="button" class="hc-help__link" aria-disabled="true">
+              Más información
+              <span class="icon icon-arrow-right icon-16 gs-inherit" aria-hidden="true"></span>
+            </button>
+          </aside>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="../shared/zt-sidebar.js"></script>
+<script src="../shared/components/dropdown.js"></script>
+<script src="../shared/components/datepicker.js"></script>
+<script src="../../shared/vendor/mp-tabs.js" defer></script>
+<script src="../shared/components/modal.js"></script>
+<script src="js/hc-mock.js"></script>
+<script src="js/mensajes.js"></script>
+<script src="js/confirm-drawer.js"></script>
+<script src="js/nueva-solicitud.js"></script>
+<script src="js/simulador.js"></script>
+</body>
+</html>

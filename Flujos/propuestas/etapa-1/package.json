@@ -1,0 +1,17 @@
+{
+  "name": "compensar-ux-etapa1-ds-versionado",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Propuesta etapa 1: sincronización versionada del sistema de diseño hacia los prototipos y prueba de regresión. No está conectada todavía al Portal UX.",
+  "type": "module",
+  "scripts": {
+    "plan": "node ds-sync.mjs --ref",
+    "verificar": "node ds-sync.mjs --verificar",
+    "regresion": "node regresion.mjs --ref"
+  },
+  "devDependencies": {
+    "playwright": "1.47.2",
+    "pngjs": "7.0.0",
+    "pixelmatch": "5.3.0"
+  }
+}

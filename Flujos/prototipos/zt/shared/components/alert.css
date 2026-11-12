@@ -1,0 +1,128 @@
+/* ============================================================
+ * alert.css — Componente transversal ZT "Alert"
+ * ------------------------------------------------------------
+ * ALERTA CONTEXTUAL inline (no modal, no overlay, no bloqueante).
+ * Comunica un aviso dentro del propio contenido/formulario, sin
+ * sacar al usuario de la pantalla ni interrumpir su trabajo.
+ *
+ * Anatomía (ref. Figma "mp alert"):
+ *   [icono 32px]  [ Título        ]
+ *                 [ Descripción   ]
+ *   Fila: icono a la izquierda alineado arriba (items-start) + bloque
+ *   de contenido (título + descripción) alineado a la izquierda.
+ *
+ * Variantes: warning (activa). Preparadas: success · info · error.
+ *   El componente NO está acoplado a "viabilidad": es un Alert general.
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ * Token-first: usa los tokens de estado del Design System. Sin hex ni
+ * medidas mágicas fuera del sistema (los fallbacks reflejan el Figma).
+ * ============================================================ */
+
+.zt-alert {
+  /* Tokens por defecto (se sobreescriben por variante) */
+  --zta-bg:       var(--use-surface-theme-gray-5, #f8f7f7);
+  --zta-border:   var(--use-border-subtle, #e0e0e0);
+  --zta-icon:     var(--use-text-primary, #111);
+  --zta-title:    var(--use-text-primary, #111);
+  --zta-body:     var(--use-text-primary, #111);
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;       /* icono alineado arriba respecto al texto */
+  gap: var(--space-16, 1rem);
+  width: 100%;                   /* ocupa el ancho disponible en la card */
+  padding: var(--space-16, 1rem);
+  background: var(--zta-bg);
+  border: 1px solid var(--zta-border);
+  border-radius: var(--radius-12, 0.75rem);
+  text-align: left;
+}
+.zt-alert[hidden] { display: none; }
+
+/* Icono de estado (font-icon del sistema, 32×32). Color por variante. */
+.zt-alert__icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--zta-icon);
+  line-height: 1;
+}
+
+/* Bloque de contenido: título + descripción, apilados a la izquierda */
+.zt-alert__content {
+  flex: 1 1 auto;
+  min-width: 0;                  /* permite el wrap del texto sin overflow */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 0.25rem);
+}
+
+/* Título — Body L strong (16px, semibold, line-height 1.3), warning text token */
+.zt-alert__title {
+  margin: 0;
+  font-family: var(--font-family-base, "Roboto", sans-serif);
+  font-size: var(--font-size-lg, 1rem);            /* Body L = 16px */
+  font-weight: var(--font-weight-semibold, 600);   /* strong */
+  line-height: var(--line-height-normal, 1.3);
+  color: var(--zta-title);
+  overflow-wrap: anywhere;       /* evita overflow con palabras largas */
+}
+
+/* Descripción — Body M (14px, regular, line-height 1.3), text primary */
+.zt-alert__desc {
+  margin: 0;
+  font-family: var(--font-family-base, "Roboto", sans-serif);
+  font-size: var(--font-size-md, 0.875rem);        /* Body M = 14px */
+  font-weight: var(--font-weight-regular, 400);
+  line-height: var(--line-height-normal, 1.3);
+  color: var(--zta-body);
+  overflow-wrap: anywhere;
+}
+
+/* ── Variante WARNING — amarillo suave (aviso, NO error) ── */
+.zt-alert--warning {
+  --zta-bg:     var(--use-state-warning-bg, #fff2d9);
+  --zta-border: var(--use-state-warning-border, #fcce72);
+  --zta-icon:   var(--use-state-warning-text, #111);
+  --zta-title:  var(--use-state-warning-text, #111);
+  --zta-body:   var(--use-text-primary, #111);
+}
+
+/* ── Variante SUCCESS (preparada) ── */
+.zt-alert--success {
+  --zta-bg:     var(--use-state-success-bg, #e6f7e8);
+  --zta-border: var(--use-state-success-border, #44bd75);
+  --zta-icon:   var(--use-state-success-text, #0d3d1f);
+  --zta-title:  var(--use-state-success-text, #0d3d1f);
+  --zta-body:   var(--use-text-primary, #111);
+}
+
+/* ── Variante INFO ── azul suave; texto en color info (fallbacks = tokens DS/Figma).
+   A diferencia del warning, en Figma la info alinea icono + texto al centro. */
+.zt-alert--info {
+  --zta-bg:     var(--use-state-info-bg, #e6f1fb);
+  --zta-border: var(--use-state-info-border, #6c9fd0);
+  --zta-icon:   var(--use-state-info-text, #2d4a67);
+  --zta-title:  var(--use-state-info-text, #2d4a67);
+  --zta-body:   var(--use-state-info-text, #2d4a67);
+  align-items: center;                 /* icono + texto centrados verticalmente */
+}
+.zt-alert--info .zt-alert__content { justify-content: center; }
+
+/* ── Variante ERROR (preparada) ── */
+.zt-alert--error {
+  --zta-bg:     var(--use-state-error-bg, #fdecec);
+  --zta-border: var(--use-state-error-border, #e05353);
+  --zta-icon:   var(--use-state-error-text, #5a1414);
+  --zta-title:  var(--use-state-error-text, #5a1414);
+  --zta-body:   var(--use-text-primary, #111);
+}
+
+/* ── Responsive ── */
+/* La alerta es fluida (width 100%): el icono conserva 32px y el contenido
+   hace wrap. No hay dimensiones fijas que rompan el layout en mobile.
+   La tipografía (Body L strong / Body M) se mantiene en todos los breakpoints. */
