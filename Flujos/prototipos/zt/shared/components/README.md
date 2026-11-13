@@ -36,7 +36,7 @@ opcional) al centro y un chevron a la derecha. Toda la card es interactiva.
 | `disabled` | no | `aria-disabled="true"`, no navega, sin pointer. Nunca `href="#"`. |
 
 ### Estados
-`default` · `hover` (fondo violeta suave + borde 2px violet-dark, sin layout shift) ·
+`default` · `hover` (fondo surface-orange #fff2e3 + borde 2px primary #f60; título, icono, caret y sombra no cambian; sin layout shift) ·
 `focus-visible` (outline violeta) · `active` (pressed sutil) · `disabled` (opacidad reducida, sin interacción).
 
 ### Uso en HTML — SIN descripción
@@ -74,9 +74,33 @@ document.querySelector('.va-acciones__row').appendChild(card);
 // o: ZTActionCard.render(contenedor, { ... });
 ```
 
+### Variante de icono "acento" (`zt-action-card__icon--acento`)
+**Qué es:** el icono de fuente se muestra en negro (`--use-text-primary`) sobre un círculo
+naranja de 24px (`--base-orange-40`) centrado en el área de 40x40. Funciona con cualquier
+glifo `.icon` (no aplica a `<img>`). El aspecto por defecto (icono violeta) no cambia.
+
+**Cuándo usarla:** accesos principales de un módulo que deben destacar con icono de acento
+(p. ej. Ventas y Afiliación: "Iniciar afiliación", "Ver afiliaciones"). Usarla de forma
+consistente en todas las cards de un mismo grupo.
+
+**Estados:** hover/focus no alteran el icono; disabled hereda la opacidad de la card.
+
+**Origen:** Figma `u4bXqFvoAf9re85YN3yfB8`, nodo `13542:109548`.
+
+```html
+<a class="zt-action-card" href="iniciar-afiliacion/index.html">
+  <span class="zt-action-card__icon zt-action-card__icon--acento icon icon-user-plus icon-40" aria-hidden="true"></span>
+  <span class="zt-action-card__text">
+    <span class="zt-action-card__title">Iniciar afiliación</span>
+  </span>
+  <span class="zt-action-card__caret icon icon-caret-right icon-24 gs-inherit" aria-hidden="true"></span>
+</a>
+```
+Por JS: `ZTActionCard.create({ title, href, iconClass: 'icon icon-user-plus icon-40', iconAccent: true })`.
+
 ### Tokens usados
-`--use-surface-white`, `--use-surface-violet`, `--use-border-violet-dark`, `--use-text-theme-violet`,
-`--color-text-primary`, `--color-text-secondary`, `--text-3`, `--space-2`, `--space-12`,
+`--use-surface-white`, `--use-surface-orange`, `--use-primary-default`, `--use-border-violet-dark`, `--use-text-theme-violet`,
+`--use-text-primary` y `--base-orange-40` (solo variante acento), `--color-text-primary`, `--color-text-secondary`, `--text-3`, `--space-2`, `--space-12`,
 `--radius-xs` (8px), `--font-size-lg` (16px), `--font-size-md` (14px), `--font-weight-bold/regular`.
 Sombra: `shadow 1` de Figma (`2px 5px 16px rgba(0,0,0,.15)`).
 

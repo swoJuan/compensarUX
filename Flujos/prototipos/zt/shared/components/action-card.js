@@ -10,6 +10,7 @@
  *     description: "Texto opcional",        // opcional (Body M)
  *     icon:        "assets/ic.svg",         // ruta a imagen  (o iconClass)
  *     iconClass:   "icon icon-user-plus icon-32 gs-violet", // alternativa: icono de fuente
+ *     iconAccent:  false,                   // opcional: variante "acento" (glifo negro sobre círculo naranja; solo con iconClass)
  *     href:        "destino.html",          // si existe → <a>; si no → <button>
  *     disabled:    false                     // opcional
  *   }) -> HTMLElement
@@ -44,7 +45,8 @@
 
     // Ícono: imagen (icon) o icono de fuente (iconClass)
     if (cfg.iconClass) {
-      var iSpan = el('span', 'zt-action-card__icon ' + cfg.iconClass);
+      var iSpan = el('span', 'zt-action-card__icon' +
+        (cfg.iconAccent ? ' zt-action-card__icon--acento' : '') + ' ' + cfg.iconClass);
       iSpan.setAttribute('aria-hidden', 'true');
       root.appendChild(iSpan);
     } else if (cfg.icon) {
