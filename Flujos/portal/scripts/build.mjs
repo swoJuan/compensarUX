@@ -290,12 +290,21 @@ try {
     sincronizado: reg.sincronizado || null,
   };
 } catch { dsEnPrototipos = null; }
-const versionesDs = ds.versiones().map((v, i, todas) => ({
+/* Respaldo: si el repositorio no tiene tags (se perdieron al unir los repos), se usa el
+   historial guardado en versiones.json. Los tags reales, cuando existen, prevalecen. */
+const versionesGit = ds.versiones();
+const historico = Array.isArray(notasVersiones.historico) ? notasVersiones.historico : [];
+const versionesBase = versionesGit.length ? versionesGit : [...historico]
+  .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+  .map((h) => ({ tag: h.tag, fecha: h.fecha, commit: h.commit, titulo: h.titulo || '', cuerpo: '', publicada: true, cambios: [], totalCambios: 0 }));
+const versionesDs = versionesBase.map((v, i, todas) => ({
   ...v,
   primera: i === todas.length - 1,
   enPrototipos: !!(dsEnPrototipos && dsEnPrototipos.tag === v.tag),
   revisar: (notasVersiones[v.tag] || {}).revisar || null,
 }));
+/* Versión efectiva del sistema de diseño en el catálogo: el tag real o, sin tags, la más reciente del histórico. */
+const versionDsCatalogo = infoDs.version || versionesDs[0]?.tag || null;
 /* El sistema de diseño, los prototipos y el portal viven en un solo repositorio,
    cada uno en su carpeta. Se informa el repositorio una vez y, dentro, cada carpeta
    con su último cambio. Si alguna vez volvieran a estar separados, `unico` lo dice. */
@@ -310,7 +319,7 @@ const repositorio = {
   nombre: path.basename(po.raiz || ROOT),
   rama: po.rama(),
   remoto: po.remoto(),
-  version: infoDs.version,
+  version: versionDsCatalogo,
   commits: po.commitsRepo(),
   commitsSinSubir: po.sinSubir(),
   pendientes: po.pendientesRepo(),
@@ -330,7 +339,7 @@ const plataformas = Object.fromEntries(Object.entries(cfg.plataformas).map(([id,
 const salida = {
   generado: new Date().toISOString(),
   fuentes: {
-    designSystem: { ...infoDs, versiones: versionesDs, prototipos: dsEnPrototipos, descargas },
+    designSystem: { ...infoDs, version: versionDsCatalogo, versiones: versionesDs, prototipos: dsEnPrototipos, descargas },
     flujos: infoFl,
   },
   plataformas,
