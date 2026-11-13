@@ -1,0 +1,38 @@
+{
+  "paquete": "compensar-drupal",
+  "version": "1.0.0",
+  "plataforma": "drupal",
+  "commit": "f6cdff42de04e7a9e59059ae6eb06dcff3fad38e",
+  "commitCorto": "f6cdff4",
+  "arbolSucio": true,
+  "fecha": "2026-11-13T22:25:39.114Z",
+  "fuentes": {
+    "css": [
+      "shared/css/compensar.css",
+      "drupal/shared/drupal.css",
+      "drupal/shared/nav-prototype.css"
+    ],
+    "js": [
+      "shared/js/compensar.js",
+      "drupal/shared/drupal.js",
+      "drupal/shared/nav-data.js",
+      "drupal/shared/nav-shell.js",
+      "drupal/shared/nav-flyout.js"
+    ],
+    "excluidos": {
+      "drupal/shared/header/.gitkeep": "placeholder"
+    }
+  },
+  "archivos": {
+    "compensar-drupal.min.css": {
+      "bytes": 18505,
+      "sha256": "77c109c5ab65269334dc62d0a2bcc39767d1ab96e793453461ddd33bd563f3ce",
+      "integrity": "sha384-O7hlw/QIirIjV7yd9kVqcX/Rx/BP24f8bEBVYfOjGQyEcyugSunkDwKTj/DUuR3l"
+    },
+    "compensar-drupal.min.js": {
+      "bytes": 12105,
+      "sha256": "8b6f73578ed6ac7ef5a18127aedcfdc7932f98d4cd53601698e669da96059c38",
+      "integrity": "sha384-naJtPMw/AksRZcZy/ibLu/HJjrDKY3krWiBZ9l9UwsG1MMlsobtNifFo44RUKR+g"
+    }
+  }
+}

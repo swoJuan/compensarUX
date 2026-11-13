@@ -66,6 +66,12 @@
     "excluir": []
   },
 
+  "$cdn": "Paquetes públicos versionados (estilo Bootstrap). Salen de Core-Design-System/dist/compensar/ y Flujos/prototipos/dist/compensar-<plataforma>/ y se publican en <destino>/<paquete>/v<x.y.z>/. 'base' es la URL pública donde se sirven; vacía = el propio portal (ruta relativa). Cuando exista la URL definitiva, ponla aquí sin barra final.",
+  "cdn": {
+    "destino": "cdn",
+    "base": "https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn"
+  },
+
   "$sincronizacion": "Archivos que los prototipos copian del sistema de diseño (lo hace flujos/scripts/sync-flows.mjs). El portal compara versiones y avisa si están desactualizados.",
   "sincronizacion": {
     "archivos": [

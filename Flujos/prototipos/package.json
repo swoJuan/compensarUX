@@ -4,6 +4,8 @@
   "private": true,
   "description": "Compensar — Prototipos (flujos ZT y Drupal). Consume el Design System vía sync-flows.",
   "scripts": {
-    "sync-flows": "node scripts/sync-flows.mjs"
+    "sync-flows": "node scripts/sync-flows.mjs",
+    "build:plataformas": "node scripts/build-plataformas.mjs all",
+    "build:zt": "node scripts/build-plataformas.mjs zt"
   }
 }

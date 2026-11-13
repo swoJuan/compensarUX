@@ -919,3 +919,38 @@ code { font-family: var(--font-family-mono, monospace); font-size: var(--body---
 /* Páginas de prototipos (catálogo general, Drupal, ZT, APP y ficha del flujo):
    a todo el ancho disponible, sin tope de --pux-max. */
 body[data-page^="prototipos"] .pux-container { max-width: none; }
+
+/* ---------- Instalar (enlace público, descargas y versiones por flujo) ---------- */
+.pux-inst-nav { display: flex; flex-wrap: wrap; gap: var(--space-8, 8px); margin-top: var(--space-20, 20px); }
+.pux-inst-nav a {
+  padding: 6px 14px; border: 1px solid var(--pux-line); border-radius: var(--radius-pill, 999px);
+  font-size: var(--body---m, .875rem); color: var(--color-text-secondary); background: var(--pux-surface);
+}
+.pux-inst-nav a:hover { color: var(--pux-accent); border-color: var(--pux-accent-line); }
+#cdn, #descargar, #flujos, #versiones { scroll-margin-top: calc(var(--pux-topbar-h) + 16px); }
+.pux-inst-aviso { margin-bottom: var(--space-16, 16px); }
+.pux-inst-form { display: flex; flex-wrap: wrap; gap: var(--space-16, 16px) var(--space-24, 24px); padding: var(--space-20, 20px) var(--space-24, 24px); margin-bottom: var(--space-16, 16px); }
+.pux-inst-campo { display: flex; flex-direction: column; gap: 6px; min-width: 200px; }
+.pux-inst-campo label { font-size: var(--body---m, .875rem); font-weight: var(--font-weight-medium, 500); color: var(--color-text-primary); }
+.pux-select {
+  height: 40px; padding: 0 36px 0 12px; min-width: 180px; max-width: 100%;
+  border: 1px solid var(--color-border-default, #c4c4c4); border-radius: var(--radius-md, 8px);
+  background: var(--pux-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+  color: var(--color-text-primary); font: inherit; font-size: var(--body---m, .875rem); appearance: none; cursor: pointer;
+}
+.pux-select:focus-visible { outline: var(--color-focus-ring-width, 2px) solid var(--color-focus-outline, var(--pux-accent)); outline-offset: 2px; }
+.pux-code { margin-bottom: var(--space-16, 16px); border: 1px solid var(--pux-line); border-radius: var(--radius-lg, 12px); overflow: hidden; background: var(--pux-surface); }
+.pux-code__cab { display: flex; align-items: center; justify-content: space-between; gap: var(--space-12, 12px); padding: 6px 8px 6px 16px; border-bottom: 1px solid var(--pux-line); background: var(--pux-page); }
+.pux-code__tit { font-size: var(--body---m, .875rem); font-weight: var(--font-weight-medium, 500); color: var(--color-text-secondary); }
+.pux-code__pre { margin: 0; padding: var(--space-16, 16px); overflow-x: auto; font-size: .8125rem; line-height: 1.6; }
+.pux-code__pre code { white-space: pre; color: var(--color-text-primary); }
+.pux-inst-plantilla { margin-bottom: var(--space-16, 16px); }
+.pux-inst-plantilla > summary { cursor: pointer; margin-bottom: var(--space-12, 12px); font-weight: var(--font-weight-medium, 500); color: var(--pux-accent); }
+.pux-inst-meta { font-size: var(--body---m, .875rem); }
+.pux-descarga__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-12, 12px); }
+.pux-descarga__acciones .pux-select { min-width: 150px; }
+.pux-inst-politica ul { margin: 0; padding-left: 1.2em; display: grid; gap: var(--space-12, 12px); line-height: 1.6; color: var(--color-text-secondary); }
+.pux-inst-politica strong { color: var(--color-text-primary); }
+.pux-inst-check { justify-content: flex-end; max-width: 320px; }
+.pux-inst-check label { display: flex; align-items: center; gap: 8px; font-weight: var(--font-weight-regular, 400); cursor: pointer; }
+.pux-inst-check .pux-muted { font-size: var(--body---m, .875rem); }

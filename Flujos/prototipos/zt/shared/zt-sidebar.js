@@ -44,7 +44,14 @@
   // Prefijo relativo desde la página actual hasta la raíz zt/.
   // Se deduce del src del propio <script> (…/zt/shared/zt-sidebar.js):
   // el trozo antes de "shared/zt-sidebar.js" es la ruta a zt/.
+  //
+  // Cuando el script va empaquetado (compensar-zt.min.js) el src ya no contiene
+  // "shared/zt-sidebar.js"; en ese caso el flujo declara la ruta a zt/ con
+  // window.ZT_ROOT = '../../' o con data-zt-root="../../" en <nav class="sidebar">.
   function ztRoot() {
+    if (typeof window.ZT_ROOT === 'string') return window.ZT_ROOT;
+    var navEl = document.querySelector('nav.sidebar[data-zt-root]');
+    if (navEl) return navEl.getAttribute('data-zt-root') || '';
     var scripts = document.getElementsByTagName('script');
     for (var i = 0; i < scripts.length; i++) {
       var src = scripts[i].getAttribute('src') || '';

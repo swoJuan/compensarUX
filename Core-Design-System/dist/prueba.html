@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prueba del paquete compensar v2.4.0</title>
+  <!-- Igual que en un flujo, pero con ruta relativa. En producción: {BASE}/compensar/v2.4.0/compensar.min.css -->
+  <link rel="stylesheet" href="compensar/v2.4.0/compensar.min.css">
+  <style>body{padding:32px;max-width:880px;margin:auto}section{margin-bottom:32px}.fila{display:flex;gap:16px;flex-wrap:wrap;align-items:center}</style>
+</head>
+<body>
+  <h1>Paquete compensar v2.4.0</h1>
+  <p>Página de verificación: si ves iconos y estilos del sistema de diseño, el paquete carga bien.</p>
+
+  <section>
+    <h2>Botones</h2>
+    <div class="fila">
+      <button class="mp-btn mp-btn--primario" type="button">Principal</button>
+      <button class="mp-btn mp-btn--secundario" type="button">Secundario</button>
+      <button class="mp-btn mp-btn--terciario" type="button">Terciario</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Iconos (fuente en fonts/)</h2>
+    <div class="fila" id="iconos">
+      <i class="icon icon-heart icon-24" aria-hidden="true"></i>
+      <i class="icon icon-home icon-32" aria-hidden="true"></i>
+      <i class="icon icon-search icon-40" aria-hidden="true"></i>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tabs (mp-tabs.js)</h2>
+    <div class="mp-tabs" role="tablist" aria-label="Ejemplo">
+      <button class="mp-tab is-active" role="tab" id="t1" aria-selected="true" aria-controls="p1">Uno</button>
+      <button class="mp-tab" role="tab" id="t2" aria-selected="false" aria-controls="p2" tabindex="-1">Dos</button>
+    </div>
+    <div role="tabpanel" id="p1" aria-labelledby="t1">Panel uno</div>
+    <div role="tabpanel" id="p2" aria-labelledby="t2" hidden>Panel dos</div>
+  </section>
+
+  <section>
+    <h2>Dropdown (mp-dropdown.js)</h2>
+    <div class="mp-dropdown">
+      <button class="mp-dropdown__trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="lista">Selecciona</button>
+      <div class="mp-dropdown__panel">
+        <div class="mp-dropdown__options" id="lista" role="listbox">
+          <div class="mp-dropdown__option" role="option" aria-selected="false" data-value="a">Opción A</div>
+          <div class="mp-dropdown__option" role="option" aria-selected="false" data-value="b">Opción B</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="compensar/v2.4.0/compensar.min.js" defer></script>
+</body>
+</html>

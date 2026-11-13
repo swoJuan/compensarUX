@@ -1,0 +1,32 @@
+{
+  "paquete": "compensar-app",
+  "version": "1.0.0",
+  "plataforma": "app",
+  "commit": "f6cdff42de04e7a9e59059ae6eb06dcff3fad38e",
+  "commitCorto": "f6cdff4",
+  "arbolSucio": true,
+  "fecha": "2026-11-13T22:25:39.178Z",
+  "fuentes": {
+    "css": [
+      "shared/css/compensar.css",
+      "app/shared/app.css"
+    ],
+    "js": [
+      "shared/js/compensar.js",
+      "app/shared/app-viewer.js"
+    ],
+    "excluidos": {}
+  },
+  "archivos": {
+    "compensar-app.min.css": {
+      "bytes": 14581,
+      "sha256": "3373630ab54f966c5479f804bda6bc6201dd2c580b8403c631c02ce7dc559a06",
+      "integrity": "sha384-v/M6U31qjpPQeinLHcSVX2+Zkid4wMnO+AbhYem46vpzjUMTEwjv7Away9p24CZ7"
+    },
+    "compensar-app.min.js": {
+      "bytes": 481,
+      "sha256": "2cf3ceac4e12a022251c0a7508fd8d94ec82a32bc436eb079b1b69c28da76e50",
+      "integrity": "sha384-YBXP3b9E4frSpmynx5cJ6/StaG9EDNTwofe5RaZnWYyv9gKeMPWAdYV6yDpRkadv"
+    }
+  }
+}

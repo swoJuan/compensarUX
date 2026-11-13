@@ -31,6 +31,8 @@ import { archivosMaui } from './lib/maui.mjs';
 const DIST = process.env.PORTAL_DIST ? path.resolve(process.env.PORTAL_DIST) : path.join(ROOT, 'dist');
 const PORTAL = path.join(ROOT, 'portal');
 const cfg = readJson('fuentes.json');
+// Solo para pruebas locales: PORTAL_DS_REF=WORKTREE lee el sistema de diseño tal cual, sin commit.
+if (process.env.PORTAL_DS_REF) cfg.designSystem.ref = process.env.PORTAL_DS_REF;
 const catalogo = readJson('catalogo.json');
 const depthPrefix = (relFile) => '../'.repeat(relFile.split('/').length - 1);
 const t0 = Date.now();
@@ -277,6 +279,103 @@ for (const f of publicados) {
   descargasFlujos[f.id] = { archivo: `${raiz}.zip`, bytes: datos.length, url: `descargas/flujos/${raiz}.zip` };
 }
 
+/* ---------- 6d. paquetes públicos (CDN) ----------
+   Los paquetes versionados estilo Bootstrap: compensar (sistema de diseño, en
+   Core-Design-System/dist/) y compensar-<plataforma> (prototipos, en
+   Flujos/prototipos/dist/). Cada versión es una carpeta inmutable con manifest.json.
+   Se publican tal cual en cdn/<paquete>/v<x.y.z>/ y, además, como .zip para
+   quien los quiera en local. Los flujos que los enlazan se detectan leyendo su HTML. */
+const cdnCfg = cfg.cdn || {};
+const CDN_DESTINO = cdnCfg.destino || 'cdn';
+const cdnDir = path.join(DIST, CDN_DESTINO);
+const RE_VERSION_DIST = /^dist\/(compensar(?:-[a-z]+)?)\/v(\d+\.\d+\.\d+)\/(.+)$/;
+const semverDesc = (a, b) => b.version.split('.').map(Number).reduce((r, n, i) => r || n - a.version.split('.').map(Number)[i], 0);
+function publicarPaquetes(fuente, soloDs) {
+  const archivos = fuente.listar().filter((f) => {
+    const m = RE_VERSION_DIST.exec(f);
+    return m && (m[1] === 'compensar') === soloDs;
+  });
+  if (!archivos.length) return;
+  const tmp = path.join(DIST, `.cdn-${fuente.id}`);
+  fuente.copiar(archivos, tmp);
+  for (const pkg of fs.readdirSync(path.join(tmp, 'dist'))) {
+    fs.mkdirSync(path.join(cdnDir, pkg), { recursive: true });
+    for (const v of fs.readdirSync(path.join(tmp, 'dist', pkg))) {
+      fs.renameSync(path.join(tmp, 'dist', pkg, v), path.join(cdnDir, pkg, v));
+    }
+  }
+  fs.rmSync(tmp, { recursive: true, force: true });
+}
+publicarPaquetes(ds, true);
+publicarPaquetes(fl, false);
+
+const carpetaCdnZip = path.join(DIST, 'descargas', 'cdn');
+const paquetesCdn = (fs.existsSync(cdnDir) ? fs.readdirSync(cdnDir) : []).sort().map((pkg) => {
+  const plataforma = pkg === 'compensar' ? null : pkg.replace(/^compensar-/, '');
+  const versiones = fs.readdirSync(path.join(cdnDir, pkg)).filter((v) => /^v\d+\.\d+\.\d+$/.test(v)).map((v) => {
+    const dir = path.join(cdnDir, pkg, v);
+    const man = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+    const lista = Object.entries(man.archivos || {}).map(([nombre, a]) => ({ nombre, bytes: a.bytes, integrity: a.integrity }));
+    const raiz = `${pkg}-${v}`;
+    const zip = crearZip([
+      ...walk(dir).sort().map((rel) => ({ nombre: `${raiz}/${rel}`, datos: fs.readFileSync(path.join(dir, rel)) })),
+      { nombre: `${raiz}/LEEME.txt`, datos: [
+        `${pkg} ${v} — paquete compilado de Compensar`,
+        ``,
+        `Copia la carpeta en tu proyecto y enlaza los .min.css y .min.js.`,
+        `Conserva la estructura: el CSS busca sus fuentes y recursos con rutas relativas.`,
+        `manifest.json trae el hash de cada archivo (integrity) para verificarlo.`,
+        `Versión inmutable: no la edites; los cambios llegan como una versión nueva.`,
+        ``,
+      ].join('\n') },
+    ], man.generado ? new Date(man.generado) : new Date());
+    fs.mkdirSync(carpetaCdnZip, { recursive: true });
+    fs.writeFileSync(path.join(carpetaCdnZip, `${raiz}.zip`), zip);
+    return {
+      version: man.version || v.slice(1),
+      fecha: man.generado || null,
+      commit: String((man.ds && man.ds.commit) || man.commit || '').slice(0, 7) || null,
+      ruta: `${CDN_DESTINO}/${pkg}/${v}`,
+      css: lista.find((a) => a.nombre.endsWith('.min.css')) || null,
+      js: lista.find((a) => a.nombre.endsWith('.min.js')) || null,
+      archivos: lista,
+      zip: { archivo: `${raiz}.zip`, bytes: zip.length, url: `descargas/cdn/${raiz}.zip` },
+    };
+  }).sort(semverDesc);
+  return {
+    id: pkg,
+    plataforma,
+    nombre: plataforma ? `Paquete ${(cfg.plataformas[plataforma] || {}).nombreCorto || (cfg.plataformas[plataforma] || {}).nombre || plataforma}` : 'Sistema de diseño',
+    versiones,
+  };
+}).filter((p) => p.versiones.length);
+
+/* Qué consume cada flujo: enlaces a cdn/<paquete>/v<x>/ en su HTML, o la copia local de shared/. */
+const RE_CDN_LINK = /\/(compensar(?:-[a-z]+)?)\/v(\d+\.\d+\.\d+)\/\1\.min\.(?:css|js)/g;
+const todosFl = fl.listar();
+function consumoFlujo(f) {
+  const base = f.ruta.replace(/\/?$/, '/');
+  const htmls = todosFl.filter((x) => x.startsWith(base) && x.endsWith('.html'));
+  const enCdn = {};
+  let locales = 0;
+  for (const h of htmls) {
+    const txt = fl.leer(h) || '';
+    let m;
+    RE_CDN_LINK.lastIndex = 0;
+    while ((m = RE_CDN_LINK.exec(txt))) (enCdn[m[1]] ||= new Set()).add(m[2]);
+    if (/shared\/vendor\/core\.css/.test(txt)) locales++;
+  }
+  const versionesDe = (pkg) => (enCdn[pkg] ? [...enCdn[pkg]].sort() : []);
+  const plat = `compensar-${f.plataforma}`;
+  const modo = Object.keys(enCdn).length ? (locales ? 'mixto' : 'cdn') : 'local';
+  return {
+    modo,
+    pantallas: htmls.length,
+    ds: versionesDe('compensar'),
+    plataforma: versionesDe(plat),
+  };
+}
+
 /* Versiones del sistema de diseño: los tags del repositorio, más las notas que UX
    escribe en versiones.json y la versión que hoy consumen los prototipos. */
 const notasVersiones = fs.existsSync(path.join(ROOT, 'versiones.json')) ? readJson('versiones.json') : {};
@@ -342,6 +441,12 @@ const salida = {
     designSystem: { ...infoDs, version: versionDsCatalogo, versiones: versionesDs, prototipos: dsEnPrototipos, descargas },
     flujos: infoFl,
   },
+  cdn: {
+    /* URL pública de los paquetes. Vacía = el propio portal los sirve en cdn/. */
+    base: (cdnCfg.base || '').replace(/\/+$/, '') || null,
+    ruta: CDN_DESTINO,
+    paquetes: paquetesCdn,
+  },
   plataformas,
   flujos: flujos.map((f) => ({
     id: f.id,
@@ -355,6 +460,7 @@ const salida = {
     publicado: !!f.publicar,
     url: f.publicar ? `${cfg.flujos.destino}/${f.ruta.replace(/\/?$/, '/')}${f.entrada || 'index.html'}` : null,
     descarga: descargasFlujos[f.id] || null,
+    consumo: consumoFlujo(f),
     actualizado: fl.ultimaFecha(f.incluir || [f.ruta]),
     cambios: fl.historial(20, f.incluir || [f.ruta]),
     aprobacionUX: f.aprobacionUX || { aprobado: false, por: null, fecha: null },
@@ -402,6 +508,7 @@ console.log(`  Flujos publicados: ${publicados.map((f) => f.id).join(', ') || 'n
 console.log(`  Sincronización DS → prototipos: ${sincronizacion.estado === 'al-dia' ? 'al día' : 'DESACTUALIZADA (npm run ds:estado)'}`);
 if (stubs.length) console.log(`  Páginas "no publicado": ${stubs.length}`);
 console.log(`  Descargas: ${descargas.map((d) => `${d.archivo} (${(d.bytes / 1024).toFixed(0)} kB)`).join(' · ')}`);
+console.log(`  Paquetes CDN: ${paquetesCdn.length ? paquetesCdn.map((p) => `${p.id} ${p.versiones.map((v) => 'v' + v.version).join('/')}`).join(' · ') : 'ninguno (¿falta commit de Core-Design-System/dist/?)'}`);
 const salidaRel = path.relative(ROOT, DIST) || '.';
 console.log(`  Total en ${salidaRel}/: ${todos.length} archivos`);
 if (process.env.PORTAL_DIST) {

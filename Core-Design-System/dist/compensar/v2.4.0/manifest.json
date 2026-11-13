@@ -1,0 +1,56 @@
+{
+  "paquete": "compensar",
+  "version": "2.4.0",
+  "ds": {
+    "commit": "f6cdff42de04e7a9e59059ae6eb06dcff3fad38e",
+    "arbolSucio": false
+  },
+  "generado": "2026-11-13T22:44:56.474Z",
+  "incluye": {
+    "css": [
+      "css/core.css",
+      "icons/icons.css"
+    ],
+    "js": [
+      "js/mp-tabs.js",
+      "js/mp-dropdown.js"
+    ],
+    "fonts": [
+      "icons/fonts/compensar-icons.woff2",
+      "icons/fonts/compensar-icons.woff",
+      "icons/fonts/compensar-icons.ttf"
+    ]
+  },
+  "excluye": [
+    "css/portal.css (portal de documentación)",
+    "css/themes.css (ya compilado dentro de core.css)",
+    "js de documentación"
+  ],
+  "archivos": {
+    "compensar.min.css": {
+      "bytes": 617165,
+      "sha256": "2f177ef6c358e91c6eed44c82eafd2b2c18e10d71284235023234a02ab331325",
+      "integrity": "sha384-diWlQoDeZx4AmsBElHjKhUpLBnifXq+46Kn8e6AK3Po5SdImWc6IlHIoF70y18hU"
+    },
+    "compensar.min.js": {
+      "bytes": 24070,
+      "sha256": "735b2a0bcdccedf734d7f126934ba90c8c35d0525076bfe10f09bbaba5c35bba",
+      "integrity": "sha384-pddIEcxbFPqZw5rzOper5yRLSDmRf0EKK9afV08pu2EYL/FU1wiLE7g7VR3KvmMw"
+    },
+    "fonts/compensar-icons.woff2": {
+      "bytes": 113980,
+      "sha256": "6ccdcd166154e6fb6570d866535af3f7a1b24caecfaf03e877baf1426e9d03aa",
+      "integrity": "sha384-1VnsDBZI/cgOHeHpr+tBMdgvO3oIPy9depx0dqDKJQKxl+Ul0AcThEaAve9GMN4B"
+    },
+    "fonts/compensar-icons.woff": {
+      "bytes": 261056,
+      "sha256": "3e6c290019c1a20f1f51b3b98608b848ada7b658c6e49b7147bbd21ce0111a63",
+      "integrity": "sha384-bZT2yTe08OwAzcg3inAUx8QRPgXzCV7ZKDymjW2JHIdckvG4FFM3qJRgnsA1I7Dy"
+    },
+    "fonts/compensar-icons.ttf": {
+      "bytes": 432028,
+      "sha256": "17be1f7275be7b87586502cee47c43caae0365b08ecaac829c0c9aab1df92885",
+      "integrity": "sha384-jA1cA1s21YsrqTG9C6q+VZ9aBjRYn5CLjMJMUE5lOv07r38a37I7hEHHnfWr3y7M"
+    }
+  }
+}
