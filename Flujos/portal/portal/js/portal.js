@@ -339,7 +339,7 @@
             '<span><strong>Qué revisar:</strong> ' + esc(actual.revisar) + '</span></p>'
           : '') +
         '<div class="pux-actions">' +
-          '<a class="mp-btn mp-btn--primario" href="sistema-de-diseno.html">Ver todas las versiones</a>' +
+          '<a class="mp-btn mp-btn--primario" href="changelog.html">Ver todas las versiones</a>' +
         '</div>' +
         '<div class="pux-dsres__docs">' +
           '<h3 class="pux-dsres__docs-tit">Consultar los componentes</h3>' +
@@ -919,13 +919,14 @@
    * qué cambió, si el portal la publica, si los prototipos ya la usan y qué debe revisarse.
    * Los commits que incluye quedan plegados, para quien necesite el detalle técnico.
    */
-  function listaVersiones(ds) {
+  function listaVersiones(ds, marcarReciente) {
     var vs = ds.versiones || [];
     if (!vs.length) {
       return vacio('Todavía no hay versiones', 'El sistema de diseño aún no tiene versiones publicadas con una etiqueta.');
     }
-    return '<ol class="pux-versions" role="list">' + vs.map(function (v) {
+    return '<ol class="pux-versions" role="list">' + vs.map(function (v, i) {
       var etiquetas = '';
+      if (marcarReciente && i === 0) etiquetas += tag('Más reciente', 'info');
       if (v.publicada) etiquetas += tag('En el portal', 'success');
       if (v.enPrototipos) etiquetas += tag('En los prototipos', 'orange');
 
@@ -961,6 +962,20 @@
           detalle +
         '</div></li>';
     }).join('') + '</ol>';
+  }
+
+  /** Changelog: la versión más reciente con su fecha y, debajo, todas las versiones. */
+  function initChangelog(cat) {
+    var cont = $('[data-changelog]');
+    if (!cont) return;
+    var ds = dsDe(cat);
+    var vs = ds.versiones || [];
+    var ultima = vs[0];
+    cont.innerHTML = (ultima
+      ? '<p class="pux-dsver pux-changelog__actual">Versión más reciente: <strong>' + esc(ultima.tag) + '</strong>, publicada el ' +
+          '<time datetime="' + esc(ultima.fecha) + '">' + esc(fecha(ultima.fecha)) + '</time>' +
+          ' · ' + (vs.length === 1 ? '1 versión' : vs.length + ' versiones') + ' en total</p>'
+      : '') + listaVersiones(ds, true);
   }
 
   /* ---------- Repositorios y sincronización ---------- */
@@ -1463,7 +1478,7 @@
     estado().then(initEstado).catch(function () {
       $all('[data-estado-componentes]').forEach(function (el) { errorCarga(el); });
     });
-    var necesita = $('[data-historial], [data-ds-accesos], [data-flujos-inicio], [data-ds-resumen], [data-count], [data-catalogo], [data-detalle], [data-entregables], [data-build-info], [data-ds-info], [data-side-flujos], [data-instalar-cdn]');
+    var necesita = $('[data-historial], [data-ds-accesos], [data-flujos-inicio], [data-ds-resumen], [data-count], [data-catalogo], [data-detalle], [data-entregables], [data-build-info], [data-ds-info], [data-side-flujos], [data-instalar-cdn], [data-changelog]');
     if (!necesita) return;
     catalogo().then(function (cat) {
       sidebarFlujos(cat);
@@ -1473,6 +1488,7 @@
       initDetalle(cat);
       initEntregables(cat);
       initInstalar(cat);
+      initChangelog(cat);
       if ($('[data-historial]')) {
         estado().then(function (est) { initHistorial(cat, est); })
           .catch(function () { initHistorial(cat, null); });
@@ -1482,7 +1498,7 @@
           .catch(function () { initDSPagina(cat, null); });
       }
     }).catch(function () {
-      $all('[data-flujos-inicio], [data-ds-resumen], [data-catalogo], [data-detalle], [data-entregables], [data-instalar-cdn], [data-instalar-descargas], [data-instalar-flujos]').forEach(function (el) {
+      $all('[data-flujos-inicio], [data-ds-resumen], [data-catalogo], [data-detalle], [data-entregables], [data-instalar-cdn], [data-instalar-descargas], [data-instalar-flujos], [data-changelog]').forEach(function (el) {
         var inner = el.matches('[data-detalle]') ? document.createElement('div') : el;
         if (inner !== el) { inner.className = 'pux-container pux-section'; el.innerHTML = ''; el.appendChild(inner); }
         errorCarga(inner);
