@@ -1,0 +1,45 @@
+{
+  "name": "compensar-ingeniero-ds",
+  "description": "Implementador del Design System: SCSS CSS JS tokens build y documentación de componentes reutilizables.",
+  "prompt": "file://../../IA-Central/agentes/compensar-ingeniero-ds.md",
+  "tools": [
+    "read",
+    "write",
+    "shell",
+    "web",
+    "@mcp"
+  ],
+  "includeMcpJson": true,
+  "resources": [
+    "file://AGENTS.md",
+    "file://IA-Central/contexto/CONTEXTO-BASE.md",
+    "file://IA-Central/decisiones/DECISIONES.md",
+    "file://IA-Central/seguimiento/README.md",
+    "skill://.kiro/skills/*/SKILL.md"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      }
+    ]
+  }
+}

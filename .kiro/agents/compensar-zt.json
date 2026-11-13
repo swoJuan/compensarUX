@@ -1,0 +1,72 @@
+{
+  "name": "compensar-zt",
+  "description": "Especialista ZT independiente: hoy HTML navegable; preparado para Angular y otras entregas futuras.",
+  "prompt": "file://../../IA-Central/agentes/compensar-zt.md",
+  "tools": [
+    "read",
+    "write",
+    "shell",
+    "web",
+    "@figma/create_session",
+    "@figma/whoami",
+    "@figma/get_metadata",
+    "@figma/get_design_context",
+    "@figma/get_screenshot",
+    "@figma/get_variable_defs",
+    "@figma/search_design_system",
+    "@figma/get_libraries",
+    "@figma/get_code_connect_map",
+    "@figma/get_figjam",
+    "@figma/get_comments"
+  ],
+  "includeMcpJson": true,
+  "resources": [
+    "file://AGENTS.md",
+    "file://IA-Central/contexto/CONTEXTO-BASE.md",
+    "file://IA-Central/decisiones/DECISIONES.md",
+    "file://IA-Central/seguimiento/README.md",
+    "skill://.kiro/skills/*/SKILL.md"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "figma/create_session",
+          "figma/whoami",
+          "figma/get_metadata",
+          "figma/get_design_context",
+          "figma/get_screenshot",
+          "figma/get_variable_defs",
+          "figma/search_design_system",
+          "figma/get_libraries",
+          "figma/get_code_connect_map",
+          "figma/get_figjam",
+          "figma/get_comments"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      }
+    ]
+  }
+}

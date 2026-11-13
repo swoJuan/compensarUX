@@ -1,0 +1,311 @@
+{
+  "schemaVersion": "1.1",
+  "ultimaVerificacion": {
+    "fecha": "2026-11-13",
+    "alcance": "inventario de documentación en Core-Design-System/docs; Figma sin verificar"
+  },
+  "versionDS": "2.4.0",
+  "componentes": [
+    {
+      "id": "web/accordion",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/accordion.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/badges",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/badges.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/breadcrumb",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/breadcrumb.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/empty-state",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/empty-state.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/header",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/header.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/icons-connect",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/icons-connect.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/icons-intro",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/icons-intro.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/icons-library",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/icons-library.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/loading",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/loading.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/sidebar",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/sidebar.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "web/stepper",
+      "ambito": "web",
+      "docs": "Core-Design-System/docs/web/components/stepper.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/web/components"
+    },
+    {
+      "id": "app/bottom-sheet",
+      "ambito": "app",
+      "docs": "Core-Design-System/docs/app/components/bottom-sheet.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/app/components"
+    },
+    {
+      "id": "app/dropdown",
+      "ambito": "app",
+      "docs": "Core-Design-System/docs/app/components/dropdown.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/app/components"
+    },
+    {
+      "id": "app/header",
+      "ambito": "app",
+      "docs": "Core-Design-System/docs/app/components/header.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/app/components"
+    },
+    {
+      "id": "app/tabs",
+      "ambito": "app",
+      "docs": "Core-Design-System/docs/app/components/tabs.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/app/components"
+    },
+    {
+      "id": "transversales/accordion",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/accordion.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/alerts",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/alerts.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/avatar",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/avatar.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/badges",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/badges.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/buttons",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/buttons.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/cards",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/cards.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/dropdown",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/dropdown.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/inputs",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/inputs.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/loading",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/loading.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/modals",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/modals.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/pagination",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/pagination.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/selection-controls",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/selection-controls.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/tables",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/tables.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/tabs",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/tabs.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    },
+    {
+      "id": "transversales/toasts",
+      "ambito": "transversales",
+      "docs": "Core-Design-System/docs/transversales/components/toasts.html",
+      "versionDS": "2.4.0",
+      "figma": null,
+      "estado": "documentado_en_ds",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Core-Design-System/docs/transversales/components"
+    }
+  ],
+  "nota": "Generado por conocimiento.mjs. No editar a mano."
+}

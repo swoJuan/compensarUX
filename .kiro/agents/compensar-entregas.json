@@ -1,0 +1,44 @@
+{
+  "name": "compensar-entregas",
+  "description": "Versionado y publicación de prototipos: valida dependencias, ZIP, registro y catálogo con aprobación.",
+  "prompt": "file://../../IA-Central/agentes/compensar-entregas.md",
+  "tools": [
+    "read",
+    "write",
+    "shell",
+    "web"
+  ],
+  "includeMcpJson": true,
+  "resources": [
+    "file://AGENTS.md",
+    "file://IA-Central/contexto/CONTEXTO-BASE.md",
+    "file://IA-Central/decisiones/DECISIONES.md",
+    "file://IA-Central/seguimiento/README.md",
+    "skill://.kiro/skills/*/SKILL.md"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      }
+    ]
+  }
+}

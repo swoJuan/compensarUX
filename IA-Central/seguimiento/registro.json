@@ -1,0 +1,444 @@
+{
+  "schemaVersion": "1.1",
+  "ultimaVerificacion": {
+    "fecha": "2026-11-13",
+    "alcance": "parcial: derivado de archivos locales; sin verificación contra Figma ni QA"
+  },
+  "estado": "auditado_parcial",
+  "flujos": [
+    {
+      "id": "zt-oficina-virtual",
+      "nombre": "Oficina virtual (inicio ZT)",
+      "plataforma": "zt",
+      "ruta": "Flujos/prototipos/zt/inicio/",
+      "version": "0.1.0",
+      "estado": "aprobado",
+      "aprobadoUX": true,
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12788-94181",
+      "hu": [
+        "HU-256 Navegacion Menu Responsive y Escritorio"
+      ],
+      "publicar": true,
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "zt-agendamiento-de-citas",
+      "nombre": "Agendamiento de citas",
+      "plataforma": "zt",
+      "ruta": "Flujos/prototipos/zt/agendamiento-de-citas/",
+      "version": "0.1.0",
+      "estado": "en-revision",
+      "aprobadoUX": false,
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12842-74756",
+      "hu": [
+        "HU-097 Consultar agenda",
+        "HU-098 Confirmar cita",
+        "HU-198 Validaciones en el flujo de agendamiento"
+      ],
+      "publicar": true,
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "zt-historia-clinica",
+      "nombre": "Solicitud de historia clínica",
+      "plataforma": "zt",
+      "ruta": "Flujos/prototipos/zt/historia-clinica/",
+      "version": "0.1.0",
+      "estado": "en-revision",
+      "aprobadoUX": false,
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=15673-157601",
+      "hu": [
+        "HU-297 Mis solicitudes de historia clínica MP - ZT"
+      ],
+      "publicar": true,
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "zt-ventas-y-afiliacion",
+      "nombre": "Ventas y afiliación",
+      "plataforma": "zt",
+      "ruta": "Flujos/prototipos/zt/ventas-y-afiliacion/",
+      "version": "0.1.0",
+      "estado": "en-revision",
+      "aprobadoUX": false,
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=13542-109534",
+      "hu": [],
+      "publicar": true,
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "drupal-navegacion",
+      "nombre": "Navegación del portal",
+      "plataforma": "drupal",
+      "ruta": "Flujos/prototipos/drupal/navegacion/",
+      "version": "0.1.0",
+      "estado": "aprobado",
+      "aprobadoUX": true,
+      "figma": "https://www.figma.com/design/UnZnt99aWWFcQTmGxWDDEU/Compensar-Fase-2?node-id=14882-48334&m=dev",
+      "hu": [
+        "HU-256 Navegacion Menu Responsive y Escritorio"
+      ],
+      "publicar": true,
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "app-inicio",
+      "nombre": "Inicio de la APP",
+      "plataforma": "app",
+      "ruta": "Flujos/prototipos/app/",
+      "version": "0.1.0",
+      "estado": "aprobado",
+      "aprobadoUX": true,
+      "figma": null,
+      "hu": [],
+      "publicar": true,
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "app-historia-clinica",
+      "nombre": "Historia clínica (APP)",
+      "plataforma": "app",
+      "ruta": "Flujos/prototipos/app/historia-clinica/",
+      "version": "0.1.0",
+      "estado": "en-revision",
+      "aprobadoUX": false,
+      "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8336-20380",
+      "hu": [],
+      "publicar": true,
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/portal/catalogo.json"
+    }
+  ],
+  "componentes": [
+    {
+      "id": "web/accordion",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/badges",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/breadcrumb",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/empty-state",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/header",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/icons-connect",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/icons-intro",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/icons-library",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/loading",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/sidebar",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "web/stepper",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "app/bottom-sheet",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "app/dropdown",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "app/header",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "app/tabs",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/accordion",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/alerts",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/avatar",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/badges",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/buttons",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/cards",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/dropdown",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/inputs",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/loading",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/modals",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/pagination",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/selection-controls",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/tables",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/tabs",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    },
+    {
+      "id": "transversales/toasts",
+      "estado": "documentado_en_ds",
+      "versionDS": "2.4.0"
+    }
+  ],
+  "decisiones": [
+    {
+      "id": "DEC-001",
+      "resumen": "Botón corporativo: degradado/colores oficiales protegidos; registrar problema conocido de contraste, no declarar WCAG conforme.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-002",
+      "resumen": "Input borde normal `#E0E0E0` protegido; advertencia de contraste, no alterarlo unilateralmente.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-003",
+      "resumen": "Estados Input Error/Focus/Disabled/Readonly reportados implementados; verificar commit y regresión.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-004",
+      "resumen": "Focus componentes: cambios precisos según Figma aprobado, no inventar color de contorno.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-005",
+      "resumen": "Tipografía y pesos alineados con Figma según informe anterior; verificar fuente real.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-006",
+      "resumen": "Colores/Badges/Chips/Alert: tokens locales aprobados; NO cambiar global `green-2` y `red` por errores puntuales.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-007",
+      "resumen": "Dropdown y Tabs teclado/ARIA reportados implementados; validar navegadores/lectores de pantalla.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-008",
+      "resumen": "Medidas aprobadas Figma: botones 48 px y paginación radio 16 px `border-radius/sm`; comprobar código.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-009",
+      "resumen": "Arquitectura estilos propios: migración gradual sin alterar Bootstrap/vendors.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-010",
+      "resumen": "Tablas, stepper, modal, bottom sheet, accordion: conducta y accesibilidad.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-011",
+      "resumen": "Completar docs Figma/HTML, responsive y recursos.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    },
+    {
+      "id": "DEC-012",
+      "resumen": "Uso `rem`/`em` en CSS propio: progreso histórico, verificar regresión.",
+      "estado": "por_verificar",
+      "nota": "Decisión histórica reportada; verificar contra Core-Design-System/docs/auditoria-design-system y Figma",
+      "verificadoEn": "2026-11-13",
+      "fuente": "IA-Central/decisiones/DECISIONES.md"
+    }
+  ],
+  "pendientes": [
+    {
+      "id": "PI-01",
+      "descripcion": "Header ZT: desborde responsive, chip estirado y buscador angosto — RESUELTO (reglas A, B y C); regla A = SOLUCIÓN PROVISIONAL",
+      "estado": "resuelto_reportado",
+      "fuente": "Core-Design-System/docs/auditoria-design-system/13-Pendientes-Independientes.md",
+      "verificadoEn": "2026-11-13"
+    },
+    {
+      "id": "PI-02",
+      "descripcion": ".mp-chip--lg / .mp-tag--lg tienen el mismo font-size que el chip base",
+      "estado": "por_verificar",
+      "fuente": "Core-Design-System/docs/auditoria-design-system/13-Pendientes-Independientes.md",
+      "verificadoEn": "2026-11-13"
+    },
+    {
+      "id": "PI-03",
+      "descripcion": "Header móvil: el botón de menú se estira como una barra",
+      "estado": "por_verificar",
+      "fuente": "Core-Design-System/docs/auditoria-design-system/13-Pendientes-Independientes.md",
+      "verificadoEn": "2026-11-13"
+    },
+    {
+      "id": "PI-04",
+      "descripcion": "Header a 320 px con texto ampliado ≥ 150 %: desborde horizontal  (introducido por P3; RESUELTO, ver más abajo y 12 §6)",
+      "estado": "resuelto_reportado",
+      "fuente": "Core-Design-System/docs/auditoria-design-system/13-Pendientes-Independientes.md",
+      "verificadoEn": "2026-11-13"
+    },
+    {
+      "id": "APR-zt-agendamiento-de-citas",
+      "descripcion": "Aprobación UX pendiente: Agendamiento de citas",
+      "flujo": "zt-agendamiento-de-citas",
+      "estado": "pendiente_aprobacion",
+      "responsable": "Juan Carlos Soto",
+      "fuente": "Flujos/portal/catalogo.json",
+      "verificadoEn": "2026-11-13"
+    },
+    {
+      "id": "APR-zt-historia-clinica",
+      "descripcion": "Aprobación UX pendiente: Solicitud de historia clínica",
+      "flujo": "zt-historia-clinica",
+      "estado": "pendiente_aprobacion",
+      "responsable": "Juan Carlos Soto",
+      "fuente": "Flujos/portal/catalogo.json",
+      "verificadoEn": "2026-11-13"
+    },
+    {
+      "id": "APR-zt-ventas-y-afiliacion",
+      "descripcion": "Aprobación UX pendiente: Ventas y afiliación",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "pendiente_aprobacion",
+      "responsable": "Juan Carlos Soto",
+      "fuente": "Flujos/portal/catalogo.json",
+      "verificadoEn": "2026-11-13"
+    },
+    {
+      "id": "APR-app-historia-clinica",
+      "descripcion": "Aprobación UX pendiente: Historia clínica (APP)",
+      "flujo": "app-historia-clinica",
+      "estado": "pendiente_aprobacion",
+      "responsable": "Juan Carlos Soto",
+      "fuente": "Flujos/portal/catalogo.json",
+      "verificadoEn": "2026-11-13"
+    }
+  ],
+  "entregas": [],
+  "eventos": [
+    {
+      "id": "EV-2026-11-13-sync",
+      "fecha": "2026-11-13",
+      "tipo": "sincronizacion",
+      "descripcion": "Registro reconstruido desde fuentes: 7 flujos, 30 componentes, 12 decisiones, 8 pendientes",
+      "origen": "conocimiento.mjs"
+    }
+  ]
+}

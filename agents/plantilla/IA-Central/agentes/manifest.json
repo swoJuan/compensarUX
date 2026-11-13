@@ -1,0 +1,79 @@
+[
+  {
+    "id": "01",
+    "slug": "compensar-orquestador",
+    "description": "Orquestador central de Compensar: clasifica solicitudes, delega y controla decisiones, calidad y entregas.",
+    "principal": true,
+    "fase": "1"
+  },
+  {
+    "id": "02",
+    "slug": "compensar-ux-ui",
+    "description": "Diseñador UX/UI senior: conceptúa y mejora pantallas elegantes, claras, modernas y minimalistas en Figma.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "03",
+    "slug": "compensar-arquitecto-ds",
+    "description": "Gobierno visual y accesibilidad del Design System: auditoría Figma, tokens, variaciones y aprobación de componentes.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "04",
+    "slug": "compensar-ingeniero-ds",
+    "description": "Implementador del Design System: SCSS CSS JS tokens build y documentación de componentes reutilizables.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "05",
+    "slug": "compensar-figma-bridge",
+    "description": "Intérprete técnico de Figma: lee nodos, tokens, estados y traduce diseños a handoff verificable.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "06",
+    "slug": "compensar-drupal",
+    "description": "Especialista independiente en prototipos Drupal: HTML CSS JS fiel a Figma con componentes reutilizables.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "07",
+    "slug": "compensar-zt",
+    "description": "Especialista ZT independiente: hoy HTML navegable; preparado para Angular y otras entregas futuras.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "08",
+    "slug": "compensar-app-maui",
+    "description": "Especialista APP: prototipos móviles y handoffs compatibles con .NET MAUI, Android e iOS.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "09",
+    "slug": "compensar-qa",
+    "description": "QA independiente: fidelidad Figma, WCAG 2.2 AA, responsive, reglas funcionales, evidencia y regresión.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "10",
+    "slug": "compensar-entregas",
+    "description": "Versionado y publicación de prototipos: valida dependencias, ZIP, registro y catálogo con aprobación.",
+    "principal": false,
+    "fase": "2+"
+  },
+  {
+    "id": "11",
+    "slug": "compensar-conocimiento",
+    "description": "Gestor de conocimiento: inventario central, decisiones, pendientes, versiones y avisos de desactualización.",
+    "principal": false,
+    "fase": "1"
+  }
+]

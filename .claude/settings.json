@@ -1,0 +1,45 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(Nara/**)",
+      "Write(Nara/**)",
+      "Edit(sitio/**)",
+      "Write(sitio/**)",
+      "Edit(_respaldo-repos/**)",
+      "Write(_respaldo-repos/**)",
+      "Edit(Core-Design-System/package.json)",
+      "Write(Core-Design-System/package.json)",
+      "Bash(git push:*)",
+      "Bash(git tag:*)",
+      "Bash(rm:*)",
+      "Bash(vercel:*)",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__create_new_file",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__upload_assets",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__add_code_connect_map",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__send_code_connect_mappings",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__create_generative_plugin",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__update_generative_plugin",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__create_shader",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__update_shader",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__generate_image",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__generate_vector_illustration",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__export_video",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__weave_run_tool",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__weave_run_model",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__weave_upload_asset",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__weave_cancel_tool_run"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git add:*)",
+      "Bash(git checkout:*)",
+      "Bash(git reset:*)",
+      "Bash(git stash:*)",
+      "Bash(npm publish:*)",
+      "Bash(npm run deploy:*)",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__use_figma",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__send_code_to_figma",
+      "mcp__0411c894-103e-4391-a44d-77cad5a56fc3__generate_diagram"
+    ]
+  }
+}

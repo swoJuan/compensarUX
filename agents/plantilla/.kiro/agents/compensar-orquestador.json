@@ -1,0 +1,55 @@
+{
+  "name": "compensar-orquestador",
+  "description": "Orquestador central de Compensar: clasifica solicitudes, delega y controla decisiones, calidad y entregas.",
+  "prompt": "file://../../IA-Central/agentes/compensar-orquestador.md",
+  "tools": [
+    "read",
+    "write",
+    "shell",
+    "web",
+    "@mcp",
+    "subagent/compensar-ux-ui",
+    "subagent/compensar-arquitecto-ds",
+    "subagent/compensar-ingeniero-ds",
+    "subagent/compensar-figma-bridge",
+    "subagent/compensar-drupal",
+    "subagent/compensar-zt",
+    "subagent/compensar-app-maui",
+    "subagent/compensar-qa",
+    "subagent/compensar-entregas",
+    "subagent/compensar-conocimiento"
+  ],
+  "includeMcpJson": true,
+  "resources": [
+    "file://AGENTS.md",
+    "file://IA-Central/contexto/CONTEXTO-BASE.md",
+    "file://IA-Central/decisiones/DECISIONES.md",
+    "file://IA-Central/seguimiento/README.md",
+    "skill://.kiro/skills/*/SKILL.md"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      }
+    ]
+  }
+}

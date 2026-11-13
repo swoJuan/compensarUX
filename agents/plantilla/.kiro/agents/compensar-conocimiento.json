@@ -1,0 +1,45 @@
+{
+  "name": "compensar-conocimiento",
+  "description": "Gestor de conocimiento: inventario central, decisiones, pendientes, versiones y avisos de desactualización.",
+  "prompt": "file://../../IA-Central/agentes/compensar-conocimiento.md",
+  "tools": [
+    "read",
+    "write",
+    "shell",
+    "web",
+    "@mcp"
+  ],
+  "includeMcpJson": true,
+  "resources": [
+    "file://AGENTS.md",
+    "file://IA-Central/contexto/CONTEXTO-BASE.md",
+    "file://IA-Central/decisiones/DECISIONES.md",
+    "file://IA-Central/seguimiento/README.md",
+    "skill://.kiro/skills/*/SKILL.md"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      }
+    ]
+  }
+}

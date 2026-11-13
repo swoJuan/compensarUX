@@ -1,0 +1,83 @@
+{
+  "name": "compensar-ux-ui",
+  "description": "Diseñador UX/UI senior: conceptúa y mejora pantallas elegantes, claras, modernas y minimalistas en Figma.",
+  "prompt": "file://../../IA-Central/agentes/compensar-ux-ui.md",
+  "tools": [
+    "read",
+    "shell",
+    "web",
+    "@figma/create_session",
+    "@figma/whoami",
+    "@figma/get_metadata",
+    "@figma/get_design_context",
+    "@figma/get_screenshot",
+    "@figma/get_variable_defs",
+    "@figma/search_design_system",
+    "@figma/get_libraries",
+    "@figma/get_code_connect_map",
+    "@figma/get_figjam",
+    "@figma/get_comments",
+    "@figma/use_figma",
+    "@figma/send_code_to_figma",
+    "@figma/generate_diagram"
+  ],
+  "includeMcpJson": true,
+  "resources": [
+    "file://AGENTS.md",
+    "file://IA-Central/contexto/CONTEXTO-BASE.md",
+    "file://IA-Central/decisiones/DECISIONES.md",
+    "file://IA-Central/seguimiento/README.md",
+    "skill://.kiro/skills/*/SKILL.md"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "figma/create_session",
+          "figma/whoami",
+          "figma/get_metadata",
+          "figma/get_design_context",
+          "figma/get_screenshot",
+          "figma/get_variable_defs",
+          "figma/search_design_system",
+          "figma/get_libraries",
+          "figma/get_code_connect_map",
+          "figma/get_figjam",
+          "figma/get_comments"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "figma/use_figma",
+          "figma/send_code_to_figma",
+          "figma/generate_diagram"
+        ],
+        "effect": "ask"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "*"
+        ],
+        "effect": "ask"
+      }
+    ]
+  }
+}
