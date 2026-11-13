@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai">
+<meta name="theme-color" content="#ff6600">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="ds/favicon.ico" type="image/x-icon">
+<script>try{var t=localStorage.getItem('ds-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="stylesheet" href="ds/css/core.css">
+<link rel="stylesheet" href="ds/icons/icons.css">
+<link rel="stylesheet" href="css/portal-ux.css">
+<script src="js/portal.js" defer></script>
+<title>Aplicación móvil · Prototipos · Portal UX Compensar</title>
+<meta name="description" content="Prototipos de Aplicación móvil de Compensar, con su estado y su historia de usuario.">
+</head>
+<body data-page="prototipos-app">
+<a class="pux-skip" href="#contenido">Saltar al contenido</a>
+<header class="pux-topbar">
+  <button class="pux-icon-btn pux-topbar__menu" type="button" aria-expanded="false" aria-controls="pux-sidebar" data-sidebar-toggle>
+    <span class="pux-burger" aria-hidden="true"></span>
+    <span class="visually-hidden" data-sidebar-toggle-label>Abrir navegación</span>
+  </button>
+  <a class="pux-brand" href="index.html">
+    <img class="pux-brand__logo" src="p/shared/assets/logo.svg" alt="Compensar" width="137" height="28">
+    <span class="pux-brand__name">Portal UX</span>
+  </a>
+  <form class="pux-topbar__search" action="prototipos.html" method="get" role="search" aria-label="Buscar flujos">
+    <i class="icon icon-magnifying-glass icon-20" aria-hidden="true"></i>
+    <label class="visually-hidden" for="pux-buscar">Buscar flujos</label>
+    <input type="search" id="pux-buscar" name="q" placeholder="Buscar flujos…" autocomplete="off">
+    <kbd class="pux-kbd" aria-hidden="true">/</kbd>
+  </form>
+  <div class="pux-topbar__actions">
+    <button class="pux-chip-btn" type="button" data-theme-toggle aria-label="Cambiar tema (actual: claro)">
+      <i class="icon icon-circle-half icon-20" aria-hidden="true"></i>
+      <span data-theme-label>Claro</span>
+    </button>
+  </div>
+</header>
+
+<div class="pux-shell">
+  <aside class="pux-sidebar" id="pux-sidebar" aria-label="Navegación del portal">
+    <nav class="pux-side">
+      <a class="pux-side__link" href="index.html" data-tone="orange">
+        <i class="icon icon-house icon-20" aria-hidden="true"></i><span>Inicio</span>
+      </a>
+
+      <p class="pux-side__label">Sistema de diseño</p>
+      <a class="pux-side__link" href="ds/drupal.html" target="_blank" rel="noopener" data-tone="violet">
+        <i class="icon icon-globe icon-20" aria-hidden="true"></i><span>Drupal · ZT</span>
+        <i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span>
+      </a>
+      <a class="pux-side__link" href="ds/app.html" target="_blank" rel="noopener" data-tone="violet">
+        <i class="icon icon-device-mobile icon-20" aria-hidden="true"></i><span>APP</span>
+        <i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span>
+      </a>
+      <a class="pux-side__link" href="sistema-de-diseno.html" data-tone="violet">
+        <i class="icon icon-download-simple icon-20" aria-hidden="true"></i><span>Descargar</span>
+      </a>
+
+      <p class="pux-side__label">Prototipos</p>
+      <div data-side-flujos></div>
+
+      <p class="pux-side__label">Entrega</p>
+      <a class="pux-side__link" href="entregables.html" data-tone="green">
+        <i class="icon icon-package icon-20" aria-hidden="true"></i><span>Entregables</span>
+      </a>
+
+      <p class="pux-side__label">Proyecto</p>
+      <a class="pux-side__link" href="historial.html" data-tone="cyan">
+        <i class="icon icon-clock icon-20" aria-hidden="true"></i><span>Historial</span>
+        <span class="pux-side__alert" data-sync-alert hidden aria-label="Sincronización pendiente"></span>
+      </a>
+      <a class="pux-side__link" href="componentes.html" data-tone="green">
+        <i class="icon icon-stack icon-20" aria-hidden="true"></i><span>Componentes</span>
+      </a>
+    </nav>
+    <p class="pux-side__foot" data-build-info></p>
+  </aside>
+  <div class="pux-backdrop" data-sidebar-backdrop hidden></div>
+
+  <div class="pux-content">
+<main id="contenido" class="pux-main" tabindex="-1">
+
+  <section class="pux-page-head">
+    <div class="pux-container">
+      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><a class="mp-breadcrumb__link" href="prototipos.html">Prototipos</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Aplicación móvil</span></li></ol></nav>
+      <h1 class="pux-page-head__title">Aplicación móvil</h1>
+      <p class="mp-body-xl pux-page-head__lead">Recorrido navegable en web de la aplicación móvil. Es la referencia de UX para el desarrollo en .NET MAUI.</p>
+    </div>
+  </section>
+
+  <section class="pux-section pux-section--tight">
+    <div class="pux-container">
+      <form class="pux-filters" role="search" aria-label="Filtrar prototipos" data-filtros onsubmit="return false">
+        <div class="pux-filters__fields">
+          <div class="mp-input-group pux-filters__search">
+            <label class="mp-input-label" for="filtro-q">Buscar</label>
+            <div class="mp-input-wrapper">
+              <i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>
+              <input class="mp-input-field has-icon-left" type="search" id="filtro-q" placeholder="Nombre, descripción o HU (ej. 256)" autocomplete="off" data-filtro-q>
+            </div>
+          </div>
+          <div class="mp-input-group pux-filters__estado">
+            <label class="mp-input-label" for="filtro-estado">Estado</label>
+            <div class="mp-input-wrapper">
+              <select class="mp-input-field mp-select" id="filtro-estado" data-filtro-estado>
+                <option value="">Todos</option>
+                <option value="borrador">Borrador</option>
+                <option value="en-revision">En revisión</option>
+                <option value="refinado">Refinado</option>
+                <option value="aprobado">Aprobado UX</option>
+                <option value="obsoleto">Obsoleto</option>
+              </select>
+            </div>
+          </div>
+          <label class="mp-choice mp-checkbox">
+            <span class="mp-choice__field">
+              <input class="mp-choice__input" type="checkbox" data-filtro-publicados>
+              <span class="mp-choice__control" aria-hidden="true"></span>
+            </span>
+            <span class="mp-choice__text">
+              <span class="mp-choice__label">Solo publicados</span>
+            </span>
+          </label>
+        </div>
+      </form>
+      <p class="pux-results" aria-live="polite" data-resultados></p>
+    </div>
+  </section>
+
+  <section class="pux-section pux-section--tight">
+    <div class="pux-container" data-catalogo data-plataforma-fija="app">
+      <p class="pux-muted">Cargando los flujos de Aplicación móvil…</p>
+    </div>
+  </section>
+
+</main>
+<footer class="pux-footer">
+      <div class="pux-container pux-footer__inner">
+        <span>Compensar · Portal UX · Uso interno</span>
+        <span>Prototipos de referencia UX · no es código productivo</span>
+      </div>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

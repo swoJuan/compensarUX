@@ -1,6 +1,6 @@
 /* ==============================================================
    NAV-PROTOTYPE.CSS
-   Prueba: Arquitectura de navegación (menu-1 / menu-2)
+   Prueba: Arquitectura de navegación (menu-2)
    Compensar Design System
 
    Regla del proyecto: los componentes productivos viven en `core`
@@ -251,11 +251,11 @@
     right: auto;
     bottom: 0;
     left: 0;
-    width: min(393px, 100vw);
+    width: min(370px, 100vw);
     max-height: none;
-    border-radius: 0 32px 0 0;
+    border-radius: 0 24px 24px 0;
     transform: translateX(-100%);
-    box-shadow: 12px 0 32px rgba(0, 0, 0, .24);
+    box-shadow: 2px 5px 16px rgba(0, 0, 0, .15);
     overflow-y: auto;
   }
 
@@ -264,13 +264,15 @@
   }
 
   .mp-sidebar__header {
-    min-height: 88px;
+    min-height: 72px;
     padding: 0 24px;
     border-bottom: 1px solid var(--use-border-default);
   }
 
   .mp-sidebar__title {
-    font-size: 24px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
   }
 
   .mp-sidebar__close {
@@ -287,7 +289,7 @@
   }
 
   .mp-sidebar__close .icon {
-    font-size: 32px;
+    font-size: 24px;
     line-height: 1;
   }
 
@@ -301,19 +303,23 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
-    padding: 28px 24px 40px;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .proto-sidebar-actions[hidden] {
+    display: none;
   }
 
   .proto-sidebar-search {
     position: relative;
-    width: min(100%, 292px);
+    width: min(100%, 259px);
   }
 
   .proto-sidebar-search__input {
     width: 100%;
     height: 56px;
-    padding: 0 64px 0 24px;
+    padding: 0 56px 0 16px;
     border: 1px solid var(--use-border-default);
     border-radius: 999px;
     background: var(--use-surface-white);
@@ -330,35 +336,19 @@
   .proto-sidebar-search__icon {
     position: absolute;
     top: 50%;
-    right: 24px;
+    right: 16px;
     transform: translateY(-50%);
     color: var(--use-text-primary);
-    font-size: 32px;
+    font-size: 24px;
     pointer-events: none;
   }
 
   .proto-sidebar-actions__btn {
-    min-width: 190px;
-    min-height: 56px;
+    min-width: 0;
+    min-height: 48px;
     justify-content: center;
-    border-radius: 999px;
+    border-radius: 24px;
     font-size: 16px;
-  }
-
-  .proto-page-menu1 .mp-sidebar__panel {
-    height: 100dvh;
-    overflow: hidden;
-  }
-
-  .proto-page-menu1 .mp-sidebar__body {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-  }
-
-  .proto-page-menu1 .proto-sidebar-actions {
-    flex: 0 0 auto;
   }
 }
 
@@ -676,112 +666,43 @@
   max-width: 100%;
 }
 
-/* ── menu-1: acordeón jerárquico ────────────────────────────
+/* ── Acordeón jerárquico del flyout (nav-flyout.js) ────────
    Todo vive dentro de .mp-accordion (core/components/web/_accordion.scss).
    Solo agregamos: ítems tipo link (hojas), indentación anidada y
    el estado "activo" cuando un nivel está abierto. */
-
-.proto-menu1__accordion {
-  --mp-accordion-padding: var(--space-16);
-}
-
-.proto-menu1__accordion .mp-accordion__item,
-.proto-menu1__accordion .mp-accordion__item:not(:last-child),
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion__item:not(:last-child) {
-  border: 0;
-  border-radius: 0;
-}
-
-.proto-menu1__accordion .mp-accordion__trigger {
-  justify-content: space-between;
-  font-size: 16px;
-}
-
-.proto-menu1__accordion .mp-accordion__content--nav {
-  border-top: 0;
-}
-
-.proto-menu1__accordion > .mp-accordion__item:not(:last-child),
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion__item:not(:last-child) {
-  border-bottom: 1px solid var(--use-border-default);
-}
-
-.proto-menu1__accordion .mp-accordion__trigger {
-  min-height: 72px;
-  padding: 24px;
-  font-weight: 400;
-}
-
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion__trigger {
-  background: var(--use-surface-white);
-  padding-left: 40px !important;
-  border-radius: 0;
-}
-
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
-  background: var(--use-surface-white);
-}
-
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__trigger {
-  background: #f5f5f5;
-  padding-left: 56px !important;
-  border-radius: 0 !important;
-}
-
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested,
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__item,
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__panel,
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__content {
-  border-radius: 0 !important;
-}
-
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
-.proto-menu1__accordion .mp-accordion--nested .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
-  background: #f5f5f5;
-}
-
-.proto-page-menu1 .proto-flyout .mp-accordion--nested .mp-accordion--nested .mp-accordion__trigger,
-.proto-page-menu1 .proto-flyout .mp-accordion--nested .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
-.proto-page-menu1 .proto-flyout .mp-accordion--nested .mp-accordion--nested .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
-  background: #f5f5f5;
-  border-radius: 0;
-}
-
-.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__trigger {
-  background: #f5f5f5;
-  border-radius: 0;
-}
-
-.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
-.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
-  background: #f5f5f5;
-}
 
 .mp-accordion__trigger--link {
   text-decoration: none;
 }
 
-/* Hoja del acordeón (sin hijos): al pasar el mouse o enfocar,
-   tinte durazno claro — no relleno naranja sólido, ese se reserva
-   para el trigger del nivel padre cuando está abierto. Mismo
-   componente .mp-accordion en el flyout de escritorio (nav-flyout.js)
-   y en el panel móvil (menu-1.js), así que el estado aplica a ambos. */
+/* Figma (Section 2, "Default"): los ítems no seleccionados se quedan
+   en su fondo por defecto, sin tinte ni subrayado al pasar el mouse.
+   El core trae hover gris en el trigger; se anula. Solo el ítem
+   abierto cambia (naranja sólido, ver más abajo). Para teclado se
+   mantiene un anillo de foco visible (WCAG 2.4.7). */
 .mp-accordion__trigger--link:hover,
-.mp-accordion__trigger--link:focus-visible {
-  background: var(--base-orange-20, #ffe5cc);
-  outline: none;
+.mp-accordion__trigger--link:focus-visible,
+.mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
+.mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
+  background: transparent;
   text-decoration: none;
 }
 
-/* El core trae hover gris por defecto para triggers con hijos
-   (.mp-accordion__trigger:hover). En todo el prototipo el hover
-   debe ser durazno (#ffe5cc), en cualquier nivel — excepto el
-   ítem que ya está abierto, que usa su propio hover naranja más
-   oscuro (ver regla is-open > trigger:hover más arriba). */
-.mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
-.mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
-  background: var(--base-orange-20, #ffe5cc);
+.mp-accordion__trigger:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--use-primary-default);
+}
+
+.mp-accordion__item.is-open > .mp-accordion__trigger:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--use-text-on-dark-primary, #ffffff);
+}
+
+/* Figma (nodo 14884:60710): en escritorio, al pasar el mouse por una
+   opción no abierta del flyout se pinta naranja claro. Solo :hover
+   (puntero); en móvil no aplica porque el flyout no existe ahí. */
+.proto-flyout .mp-accordion__trigger--link:hover,
+.proto-flyout .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover {
+  background: var(--use-surface-theme-orange-20, #ffe5cc);
 }
 
 .mp-accordion__leading {
@@ -872,8 +793,10 @@
 .proto-flyout {
   display: block;
   grid-template-columns: none;
-  width: min(300px, calc(100vw - 32px));
+  width: min(260px, calc(100vw - 32px));
   padding: 0;
+  border: 0;
+  box-shadow: 2px 5px 16px rgba(0, 0, 0, .15);
   overflow: hidden;
   transform-origin: top left;
   opacity: 0;
@@ -914,8 +837,23 @@
    Excluye el ítem abierto (.is-open): en el mockup, cuando "Plan
    Ideal" queda activo con relleno naranja, el texto vuelve a 700 —
    funciona como título de la sección expandida. */
-.proto-flyout__accordion > .mp-accordion__item:not(.is-open) > .mp-accordion__trigger {
+.proto-flyout .mp-accordion__trigger {
+  min-height: 56px;
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+  padding-right: var(--space-16);
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+
+/* Subítems (hijos del ítem abierto): fondo gris claro, sangría de
+   32px (la pone nav-flyout.js) y una sola línea al final del bloque. */
+.proto-flyout .mp-accordion__content--nav {
+  border-top: 0;
+  border-bottom: 1px solid var(--use-border-subtle, #e0e0e0);
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
 }
 
 /* Figma (spec "Item submenú": padding 16, sin borde) muestra el
@@ -940,17 +878,9 @@
   border-radius: 0;
 }
 
-.proto-flyout .mp-accordion__item:not(:last-child) {
-  border-bottom: 1px solid var(--mp-accordion-border);
-}
-
-.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item,
-.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__trigger,
-.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__trigger--link,
-.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:hover,
-.proto-page-menu1 .proto-flyout__accordion > .mp-accordion__item > .mp-accordion__panel .mp-accordion__item:not(.is-open) > .mp-accordion__trigger:focus-visible {
-  background: #f5f5f5 !important;
-  border-radius: 0 !important;
+.proto-flyout .mp-accordion__item:not(:last-child),
+.proto-flyout .mp-accordion--nested .mp-accordion__item:not(:last-child) {
+  border-bottom: 0;
 }
 
 /* ── menu-2: navegación progresiva por niveles ──────────────
@@ -1112,8 +1042,10 @@ a.proto-drill__row {
     overflow: hidden;
   }
 
+  /* El cuerpo ocupa solo lo que mide la lista (Buscar / Oficina virtual /
+     Afíliate quedan justo debajo, como en Figma) y scrollea si no cabe. */
   .proto-page-menu2 .mp-sidebar__body {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1135,6 +1067,9 @@ a.proto-drill__row {
     justify-content: center;
     width: 44px;
     height: 44px;
+    /* Zona táctil de 44 px, pero la flecha queda a 24 px del borde y el
+       título a 58 px, como en Figma. */
+    margin: 0 -12px 0 -10px;
     flex: 0 0 auto;
     border: 0;
     border-radius: 50%;
@@ -1148,10 +1083,6 @@ a.proto-drill__row {
     display: none;
   }
 
-  .menu-mobile-v2__header-back:hover,
-  .menu-mobile-v2__header-back:focus-visible {
-    background: var(--base-orange-20, #ffe5cc);
-  }
 
   .menu-mobile-v2__header-back:focus-visible {
     outline: none;
@@ -1163,14 +1094,20 @@ a.proto-drill__row {
     line-height: 1;
   }
 
+  /* El título solo recibe foco por código (tabindex=-1) para anunciar el
+     nivel; no es interactivo, así que no lleva recuadro. */
+  .proto-page-menu2 .mp-sidebar__title:focus {
+    outline: none;
+  }
+
   .menu-mobile-v2__list {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .menu-mobile-v2__list li:not(:last-child) {
-    border-bottom: 1px solid var(--use-border-default);
+  .menu-mobile-v2__list li {
+    border-bottom: 1px solid var(--use-border-subtle, #e0e0e0);
   }
 
   /* Fila: con hijos (button, avanza de vista) o final (a, va al
@@ -1181,13 +1118,14 @@ a.proto-drill__row {
     align-items: center;
     gap: var(--space-12);
     width: 100%;
-    min-height: 72px;
+    min-height: 71px;
     padding: 24px;
     border: none;
     background: var(--use-surface-white);
     color: var(--use-text-primary);
     font-family: Roboto, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 1.3;
     font-weight: 400;
     text-align: left;
     text-decoration: none;
@@ -1195,9 +1133,24 @@ a.proto-drill__row {
     transition: background-color .15s ease, color .15s ease;
   }
 
+  .menu-mobile-v2__row {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .menu-mobile-v2__row:hover,
-  .menu-mobile-v2__row:focus-visible {
-    background: var(--base-orange-20, #ffe5cc);
+  .menu-mobile-v2__row:active {
+    background: var(--use-surface-white);
+    text-decoration: none;
+  }
+
+  /* Enlace final (sin subnivel): al presionar se pinta naranja con
+     texto blanco, mismo tratamiento que el ítem abierto del flyout de
+     escritorio. .is-pressed lo sostiene ~300 ms tras soltar (lo pone
+     menu-2.js) para que el toque se perciba aunque el enlace sea "#". */
+  a.menu-mobile-v2__row:active,
+  a.menu-mobile-v2__row.is-pressed {
+    background: var(--use-primary-default);
+    color: var(--use-text-on-dark-primary, #ffffff);
   }
 
   .menu-mobile-v2__row:focus-visible {
@@ -1215,33 +1168,10 @@ a.proto-drill__row {
 
   .menu-mobile-v2__row-chevron {
     flex: 0 0 auto;
-    color: var(--use-text-tertiary);
-  }
-
-  .menu-mobile-v2__row-check {
-    flex: 0 0 auto;
-    color: var(--use-primary-default);
-  }
-
-  /* Fila activa (la página donde "está" el usuario en esta prueba):
-     no depende solo del color — suma ícono de check y negrita sobre
-     el mismo tinte durazno del resto del sistema. */
-  .menu-mobile-v2__row--active {
-    background: var(--base-orange-20, #ffe5cc);
-    font-weight: 700;
-  }
-
-  /* Punto discreto junto al nombre de una categoría que contiene la
-     opción activa en un nivel más profundo — ayuda a ubicarse desde
-     Nivel 1/2 sin tener que llegar hasta el final del árbol. */
-  .menu-mobile-v2__row-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    margin-left: var(--space-8);
-    border-radius: 50%;
-    background: var(--use-primary-default);
-    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    color: var(--use-text-primary);
   }
 
   /* Transición horizontal sutil y rápida: avanzar entra desde la

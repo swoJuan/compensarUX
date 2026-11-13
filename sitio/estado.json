@@ -1,22 +1,22 @@
 {
-  "generado": "2026-11-12T17:10:47.544Z",
+  "generado": "2026-11-12T21:31:38.426Z",
   "repositorio": {
     "unico": true,
-    "nombre": "Compensar",
+    "nombre": "compensarUX",
     "rama": "main",
-    "remoto": null,
-    "version": "v2.4.0",
-    "commits": 95,
-    "commitsSinSubir": null,
-    "pendientes": 31,
+    "remoto": "https://github.com/swoJuan/compensarUX.git",
+    "version": null,
+    "commits": 1,
+    "commitsSinSubir": 0,
+    "pendientes": 49,
     "carpetas": [
       {
         "id": "designSystem",
         "nombre": "Sistema de diseño",
         "rol": "Fuente de verdad visual: tokens, estilos y componentes de Compensar.",
         "carpeta": "Core-Design-System",
-        "commit": "9dbf1f0",
-        "fecha": "2026-11-11T21:29:14+00:00",
+        "commit": "d4cefd3",
+        "fecha": "2026-11-12T12:33:17-05:00",
         "pendientes": 0
       },
       {
@@ -24,24 +24,24 @@
         "nombre": "Prototipos",
         "rol": "Flujos navegables de Drupal, ZT y APP. Consumen una copia controlada del sistema de diseño en shared/.",
         "carpeta": "Flujos/prototipos",
-        "commit": "eb66ed5",
-        "fecha": "2026-11-11T21:37:15+00:00",
-        "pendientes": 0
+        "commit": "d4cefd3",
+        "fecha": "2026-11-12T12:33:17-05:00",
+        "pendientes": 11
       },
       {
         "id": "portal",
         "nombre": "Portal UX",
         "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
         "carpeta": "Flujos/portal",
-        "commit": "db85bd0",
-        "fecha": "2026-11-12T16:38:49+00:00",
-        "pendientes": 9
+        "commit": "d4cefd3",
+        "fecha": "2026-11-12T12:33:17-05:00",
+        "pendientes": 13
       }
     ]
   },
   "sincronizacion": {
     "estado": "al-dia",
-    "dsCommit": "9dbf1f0",
+    "dsCommit": "d4cefd3",
     "archivos": [
       {
         "ds": "css/core.css",
@@ -68,7 +68,7 @@
         "versionUsada": null
       }
     ],
-    "version": "v2.4.0",
+    "version": null,
     "comando": "npm run ds:sincronizar"
   },
   "componentes": {

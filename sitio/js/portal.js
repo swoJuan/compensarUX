@@ -15,6 +15,7 @@
   var ESTADOS = {
     'borrador':    { label: 'Borrador',    tag: 'neutral' },
     'en-revision': { label: 'En revisión', tag: 'warning' },
+    'refinado':    { label: 'Refinado',    tag: 'info' },
     'aprobado':    { label: 'Aprobado UX', tag: 'success' },
     'obsoleto':    { label: 'Obsoleto',    tag: 'error' }
   };
@@ -38,7 +39,10 @@
   }
   function fecha(iso) {
     if (!iso) return 'Sin fecha';
-    var d = new Date(iso);
+    // "AAAA-MM-DD" (sin hora) es una fecha de calendario: se lee en hora local.
+    // new Date('2026-11-12') la toma como UTC y en Colombia mostraría el día anterior.
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+    var d = m ? new Date(+m[1], +m[2] - 1, +m[3]) : new Date(iso);
     if (isNaN(d)) return 'Sin fecha';
     return d.toLocaleDateString('es-CO', { day: 'numeric', month: 'short', year: 'numeric' });
   }
@@ -158,45 +162,42 @@
   }
 
   /* Marca en el menú lateral la página actual */
+  /* Página activa del menú lateral. En el catálogo cuenta el filtro de plataforma;
+     en la ficha de un flujo se marca la plataforma a la que pertenece. */
+  var plataformaActual = '';
   function marcarActivo() {
     var archivo = window.location.pathname.split('/').pop() || 'index.html';
     var p = params();
     var actual = archivo;
-    if (archivo === 'flujo.html') actual += '?id=' + (p.get('id') || '');
+    var pl = '';
+    if (archivo === 'flujo.html') pl = plataformaActual;
+    if (pl) actual = pl + '.html';
     $all('.pux-side a').forEach(function (a) {
-      var href = a.getAttribute('href');
-      var on = href === actual;
-      if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      var on = a.getAttribute('href') === actual;
+      // En la ficha de un flujo la plataforma es la sección, no la página exacta.
+      if (on) a.setAttribute('aria-current', archivo === 'flujo.html' ? 'true' : 'page'); else a.removeAttribute('aria-current');
     });
   }
 
+  /* Menú lateral de prototipos: un enlace por plataforma con su número de flujos.
+     No lista cada flujo: el catálogo crece y para eso está la página de prototipos. */
   function sidebarFlujos(cat) {
     var cont = $('[data-side-flujos]');
     if (!cont) return;
-    var actualId = params().get('id');
-    var actualPl = params().get('plataforma');
+    var idActual = params().get('id');
+    var f = idActual && cat.flujos.filter(function (x) { return x.id === idActual; })[0];
+    plataformaActual = f ? f.plataforma : '';
     cont.innerHTML = ORDEN_PLATAFORMAS.map(function (pid) {
-      var items = cat.flujos.filter(function (f) { return f.plataforma === pid; });
-      if (!items.length) return '';
+      var n = cat.flujos.filter(function (x) { return x.plataforma === pid; }).length;
       var pl = cat.plataformas[pid] || {};
-      var abierto = true;
-      return '<details class="pux-side__tree"' + (abierto ? ' open' : '') + '>' +
-        '<summary class="pux-side__summary"><i class="icon icon-caret-right icon-16 pux-side__caret" aria-hidden="true"></i>' +
-          '<span class="pux-swatch pux-swatch--' + pid + '" aria-hidden="true"></span>' +
-          '<span>' + esc(pl.nombreCorto || pid) + '</span><span class="pux-side__count">' + items.length + '</span></summary>' +
-        '<ul class="pux-side__items" role="list">' + items.map(function (f) {
-          var e = ESTADOS[f.estado] || { label: f.estado };
-          return '<li><a class="pux-side__item' + (f.publicado ? '' : ' is-unpublished') + '" href="flujo.html?id=' + encodeURIComponent(f.id) + '">' +
-            '<span class="pux-dot pux-dot--' + esc(f.estado) + '" aria-hidden="true"></span>' +
-            '<span class="pux-side__item-name">' + esc(f.nombre) + '</span>' +
-            '<span class="visually-hidden">, ' + esc(e.label) + (f.publicado ? '' : ', no publicado') + '</span>' +
-          '</a></li>';
-        }).join('') + '</ul></details>';
+      return '<a class="pux-side__link" href="' + pid + '.html" data-tone="' + (TONO_PLATAFORMA[pid] || 'orange') + '">' +
+        '<i class="icon ' + (ICONO_PLATAFORMA[pid] || 'icon-stack') + ' icon-20" aria-hidden="true"></i>' +
+        '<span>' + esc(pl.nombreCorto || pid) + '</span>' +
+        '<span class="pux-side__count" aria-hidden="true">' + n + '</span>' +
+        '<span class="visually-hidden">, ' + n + (n === 1 ? ' flujo' : ' flujos') + '</span>' +
+      '</a>';
     }).join('');
     marcarActivo();
-    var activo = $('.pux-side [aria-current="page"]');
-    if (activo && activo.scrollIntoView && actualId) activo.scrollIntoView({ block: 'nearest' });
-    void actualPl;
   }
 
   /* ---------- visor del sistema de diseño ---------- */
@@ -246,11 +247,66 @@
   }
 
   /* ---------- piezas ---------- */
+  /* Historias de usuario de referencia (Azure DevOps). Un flujo puede tener varias.
+     Solo se enlazan URLs https. */
+  function textoHu(h) {
+    return [h.codigo, h.id].filter(Boolean).join(' · ') + (h.titulo ? ' — ' + h.titulo : '');
+  }
+  function listaHu(f) {
+    var hus = f.hu || [];
+    if (!hus.length) return '<span class="pux-muted">Sin HU registrada</span>';
+    return '<ul class="pux-hu" role="list">' + hus.map(function (h) {
+      var t = esc(textoHu(h));
+      return '<li>' + (/^https:\/\//.test(h.url || '')
+        ? '<a class="pux-link" href="' + esc(h.url) + '" target="_blank" rel="noopener">' + t + '<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>'
+        : t) + '</li>';
+    }).join('') + '</ul>';
+  }
+  /* HU en la ficha del flujo: una fila por HU con código, título, número y enlace. */
+  function huDetalle(f) {
+    var hus = f.hu || [];
+    if (!hus.length) {
+      return '<p class="pux-muted pux-hu-vacio">Este flujo aún no tiene historias de usuario asociadas.</p>';
+    }
+    return '<ul class="pux-hu-lista" role="list">' + hus.map(function (h) {
+      var enlace = /^https:\/\//.test(h.url || '')
+        ? '<a class="mp-btn mp-btn--terciario mp-btn--icon-right pux-hu-item__accion" href="' + esc(h.url) + '" target="_blank" rel="noopener">' +
+            'Abrir en Azure DevOps<span class="visually-hidden"> ' + esc(h.codigo || h.id) + ' (se abre en una pestaña nueva)</span>' +
+            ' <i class="icon icon-arrow-square-out icon-20" aria-hidden="true"></i></a>'
+        : '';
+      return '<li class="pux-hu-item">' +
+        (h.codigo ? '<span class="pux-hu-item__codigo">' + tag(h.codigo, 'info') + '</span>' : '') +
+        '<div class="pux-hu-item__texto">' +
+          '<p class="pux-hu-item__titulo">' + esc(h.titulo || h.codigo || h.id) + '</p>' +
+          (h.id ? '<p class="pux-hu-item__meta">Work item #' + esc(h.id) + ' · Azure DevOps</p>' : '') +
+        '</div>' +
+        enlace +
+      '</li>';
+    }).join('') + '</ul>';
+  }
+
+  /* Texto de búsqueda de un flujo: nombre, descripción e HU (código, número y título). */
+  function textoBusqueda(f) {
+    return [f.nombre, f.descripcion].concat((f.hu || []).map(textoHu)).join(' ');
+  }
+  function normalizar(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+  /* El prototipo siempre se abre en una pestaña nueva, para no perder el portal. */
+  function botonVisualizar(f, texto, clase) {
+    return '<a class="mp-btn ' + (clase || 'mp-btn--secundario') + ' mp-btn--icon-right" href="' + esc(f.url) + '" target="_blank" rel="noopener">' +
+      esc(texto) + '<span class="visually-hidden"> ' + esc(f.nombre) + ' (se abre en una pestaña nueva)</span>' +
+      ' <i class="icon icon-arrow-square-out icon-20" aria-hidden="true"></i></a>';
+  }
+  function noPublicado() {
+    return '<span class="pux-muted pux-unpublished"><i class="icon icon-eye-slash icon-16" aria-hidden="true"></i> No publicado</span>';
+  }
+
   function acciones(f) {
     var detalle = '<a class="mp-btn mp-btn--terciario" href="flujo.html?id=' + encodeURIComponent(f.id) + '">Ver detalle<span class="visually-hidden"> de ' + esc(f.nombre) + '</span></a>';
     var abrir = f.publicado
-      ? '<a class="mp-btn mp-btn--secundario" href="' + esc(f.url) + '">Abrir prototipo<span class="visually-hidden"> ' + esc(f.nombre) + '</span></a>'
-      : '<span class="pux-muted pux-unpublished"><i class="icon icon-eye-slash icon-16" aria-hidden="true"></i> No publicado</span>';
+      ? botonVisualizar(f, 'Abrir prototipo')
+      : noPublicado();
     return detalle + abrir;
   }
   var ICONO_PLATAFORMA = { drupal: 'icon-globe', zt: 'icon-desktop', app: 'icon-device-mobile' };
@@ -434,8 +490,10 @@
     var tabs = $all('[data-filtro-plataforma] [data-plataforma]');
     var res = $('[data-resultados]');
     var p = params();
+    // Las páginas de Drupal, ZT y APP fijan su plataforma; el catálogo general no.
+    var fija = cont.getAttribute('data-plataforma-fija') || '';
     var estado = {
-      plataforma: ORDEN_PLATAFORMAS.indexOf(p.get('plataforma')) >= 0 ? p.get('plataforma') : '',
+      plataforma: fija || (ORDEN_PLATAFORMAS.indexOf(p.get('plataforma')) >= 0 ? p.get('plataforma') : ''),
       q: p.get('q') || '',
       estado: ESTADOS[p.get('estado')] ? p.get('estado') : '',
       publicados: p.get('publicados') === '1'
@@ -457,9 +515,11 @@
       if (estado.estado && f.estado !== estado.estado) return false;
       if (estado.publicados && !f.publicado) return false;
       if (estado.q) {
-        var t = (f.nombre + ' ' + f.descripcion).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-        var b = estado.q.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
-        if (b && t.indexOf(b) < 0) return false;
+        // Cada palabra debe aparecer en nombre, descripción o alguna HU
+        // (ej. "256", "HU-256", "293917", "menu responsive").
+        var t = normalizar(textoBusqueda(f));
+        var palabras = normalizar(estado.q).trim().split(/\s+/).filter(Boolean);
+        if (palabras.some(function (w) { return t.indexOf(w) < 0; })) return false;
       }
       return true;
     }
@@ -472,12 +532,13 @@
       });
       if (actualizarUrl) {
         var u = new URLSearchParams();
-        if (estado.plataforma) u.set('plataforma', estado.plataforma);
+        if (estado.plataforma && !fija) u.set('plataforma', estado.plataforma);
         if (estado.q) u.set('q', estado.q);
         if (estado.estado) u.set('estado', estado.estado);
         if (estado.publicados) u.set('publicados', '1');
         var s = u.toString();
         history.replaceState(null, '', s ? '?' + s : window.location.pathname);
+        marcarActivo();
       }
       var lista = cat.flujos.filter(coincide);
       res.textContent = lista.length + (lista.length === 1 ? ' flujo' : ' flujos');
@@ -485,21 +546,178 @@
         cont.innerHTML = vacio('Sin resultados', 'Prueba con otra búsqueda u otro filtro.');
         return;
       }
-      var grupos = estado.plataforma ? [estado.plataforma] : ORDEN_PLATAFORMAS;
-      cont.innerHTML = grupos.map(function (pid) {
-        var items = lista.filter(function (f) { return f.plataforma === pid; });
-        if (!items.length) return '';
-        var pl = cat.plataformas[pid] || {};
-        return '<section class="pux-platform" aria-labelledby="pl-' + pid + '">' +
-          '<div class="pux-platform__head">' +
-            '<h2 class="mp-h6 pux-section__title" id="pl-' + pid + '">' + esc(pl.nombre || pid) + '</h2>' +
-            '<p class="pux-muted">' + esc(pl.descripcion || '') + ' ' + esc(pl.tecnologia || '') + '.</p>' +
-          '</div>' +
-          '<ul class="pux-rows" role="list">' + items.map(function (f) { return filaFlujo(f, cat, 'h3'); }).join('') + '</ul>' +
-          '</section>';
-      }).join('');
+      if (fija) {
+        cont.innerHTML = tarjetasFlujos(lista, (cat.plataformas[fija] || {}).nombre || fija);
+      } else {
+        var grupos = estado.plataforma ? [estado.plataforma] : ORDEN_PLATAFORMAS;
+        cont.innerHTML = grupos.map(function (pid) {
+          var items = lista.filter(function (f) { return f.plataforma === pid; });
+          if (!items.length) return '';
+          var pl = cat.plataformas[pid] || {};
+          return '<section class="pux-platform" aria-labelledby="pl-' + pid + '">' +
+            '<div class="pux-platform__head">' +
+              '<h2 class="mp-h6 pux-section__title" id="pl-' + pid + '">' + esc(pl.nombre || pid) + '</h2>' +
+              '<p class="pux-muted">' + esc(pl.descripcion || '') + ' ' + esc(pl.tecnologia || '') + '.</p>' +
+              '<a class="pux-link pux-platform__ver" href="' + pid + '.html">Ver solo ' + esc(pl.nombreCorto || pid) + '</a>' +
+            '</div>' +
+            tarjetasFlujos(items, pl.nombre || pid) +
+            '</section>';
+        }).join('');
+      }
+      initMiniaturas(cont);
     }
     pintar(false);
+  }
+
+  /* Acciones del catálogo: "Ver detalle" (botón terciario con texto) y, al lado, el
+     menú de tres puntos con "Visualizar" (abre el prototipo en una pestaña nueva).
+     El menú es un disclosure (botón + lista de enlaces), no role="menu": se recorre
+     con Tab y se cierra con Esc o al hacer clic fuera. */
+  function accionesCatalogo(f) {
+    var detalle = '<a class="mp-btn mp-btn--terciario pux-acc__detalle" href="flujo.html?id=' + encodeURIComponent(f.id) + '">' +
+      'Ver detalle<span class="visually-hidden"> de ' + esc(f.nombre) + '</span></a>';
+    if (!f.publicado) return '<div class="pux-acc">' + detalle + noPublicado() + '</div>';
+    var menuId = 'acciones-' + f.id;
+    var menu =
+      '<div class="pux-menu">' +
+        '<button type="button" class="mp-btn mp-btn--terciario pux-acc__btn pux-acc__btn--neutral pux-menu__trigger" aria-expanded="false" aria-controls="' + esc(menuId) + '">' +
+          '<i class="icon icon-dots-three-vertical icon-20" aria-hidden="true"></i>' +
+          '<span class="visually-hidden">Más acciones de ' + esc(f.nombre) + '</span>' +
+          '<span class="pux-tip" aria-hidden="true">Más acciones</span>' +
+        '</button>' +
+        '<ul class="pux-menu__panel" id="' + esc(menuId) + '" role="list" hidden>' +
+          '<li><a class="pux-menu__item" href="' + esc(f.url) + '" target="_blank" rel="noopener">' +
+            '<i class="icon icon-eye icon-20" aria-hidden="true"></i>' +
+            '<span class="pux-menu__label">Visualizar<span class="visually-hidden"> ' + esc(f.nombre) + ' (se abre en una pestaña nueva)</span></span>' +
+            '<i class="icon icon-arrow-square-out icon-16 pux-menu__ext" aria-hidden="true"></i>' +
+          '</a></li>' +
+        '</ul>' +
+      '</div>';
+    return '<div class="pux-acc">' + detalle + menu + '</div>';
+  }
+
+  /* Menú de acciones: apertura, posición (fixed, para que el scroll de la tabla no lo
+     recorte), cierre con Esc / clic fuera / Tab fuera, y foco al abrir y al cerrar. */
+  function cerrarMenus(excepto, devolverFoco) {
+    $all('.pux-menu.is-open').forEach(function (m) {
+      if (m === excepto) return;
+      m.classList.remove('is-open');
+      var t = $('.pux-menu__trigger', m);
+      t.setAttribute('aria-expanded', 'false');
+      $('.pux-menu__panel', m).hidden = true;
+      if (devolverFoco) t.focus({ preventScroll: true });
+    });
+  }
+  function posicionarMenu(m) {
+    var t = $('.pux-menu__trigger', m).getBoundingClientRect();
+    var p = $('.pux-menu__panel', m);
+    p.style.right = Math.max(8, window.innerWidth - t.right) + 'px';
+    p.style.top = ''; p.style.bottom = '';
+    var alto = p.offsetHeight;
+    if (t.bottom + 4 + alto > window.innerHeight - 8 && t.top - 4 - alto > 8) {
+      p.style.bottom = (window.innerHeight - t.top + 4) + 'px';
+    } else {
+      p.style.top = (t.bottom + 4) + 'px';
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var trigger = e.target.closest && e.target.closest('.pux-menu__trigger');
+    if (trigger) {
+      var m = trigger.closest('.pux-menu');
+      var abrir = !m.classList.contains('is-open');
+      cerrarMenus(m, false);
+      m.classList.toggle('is-open', abrir);
+      trigger.setAttribute('aria-expanded', String(abrir));
+      var panel = $('.pux-menu__panel', m);
+      panel.hidden = !abrir;
+      if (abrir) { posicionarMenu(m); var primero = $('.pux-menu__item', panel); if (primero) primero.focus({ preventScroll: true }); }
+      return;
+    }
+    if (e.target.closest && e.target.closest('.pux-menu__item')) { cerrarMenus(null, false); return; }
+    if (!(e.target.closest && e.target.closest('.pux-menu__panel'))) cerrarMenus(null, false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && $('.pux-menu.is-open')) cerrarMenus(null, true);
+  });
+  document.addEventListener('focusout', function (e) {
+    var m = e.target.closest && e.target.closest('.pux-menu.is-open');
+    if (m && e.relatedTarget && !m.contains(e.relatedTarget)) cerrarMenus(null, false);
+  });
+  window.addEventListener('resize', function () { cerrarMenus(null, false); });
+  window.addEventListener('scroll', function () { cerrarMenus(null, false); }, true);
+
+  /** Catálogo: una fila por flujo con nombre, estado, HU de referencia y acciones. */
+  /* Una tarjeta por flujo. Lo primero es el prototipo mismo, renderizado a escala:
+     quien revisa reconoce la pantalla antes de abrirla. El marco mide 1280x800 y
+     se escala al ancho de la tarjeta (initMiniaturas calcula --pux-escala). */
+  function tarjetaFlujo(f) {
+    var detalle = 'flujo.html?id=' + encodeURIComponent(f.id);
+    var vista = f.publicado
+      ? '<a class="pux-fcard__shot pux-fcard__shot--live" href="' + detalle + '" tabindex="-1" aria-hidden="true">' +
+          '<iframe src="' + esc(f.url) + '" title="" loading="lazy" scrolling="no" tabindex="-1"></iframe>' +
+        '</a>'
+      : '<div class="pux-fcard__shot pux-fcard__shot--vacio">' +
+          '<i class="icon icon-eye-slash icon-32" aria-hidden="true"></i>' +
+          '<span>Todavía no tiene pantallas</span>' +
+        '</div>';
+    var hu = (f.hu || []).length ? '<div class="pux-fcard__hu">' + listaHu(f) + '</div>' : '';
+    return '<li class="pux-fcard' + (f.publicado ? '' : ' is-unpublished') + '" data-tone="' +
+        (TONO_PLATAFORMA[f.plataforma] || 'orange') + '">' +
+      vista +
+      '<div class="pux-fcard__body">' +
+        '<div class="pux-fcard__cab">' +
+          '<h3 class="pux-fcard__title"><a href="' + detalle + '">' + esc(f.nombre) + '</a></h3>' +
+          badgeEstado(f.estado) +
+        '</div>' +
+        '<p class="pux-fcard__desc">' + esc(f.descripcion) + '</p>' + hu +
+        '<p class="pux-fcard__meta">Versión ' + esc(f.version) + ' · actualizado el ' + esc(fecha(f.actualizado)) + '</p>' +
+      '</div>' +
+      '<div class="pux-fcard__pie">' +
+        '<a class="mp-btn mp-btn--terciario pux-fcard__detalle" href="' + detalle + '">' +
+          'Ver detalle<span class="visually-hidden"> de ' + esc(f.nombre) + '</span></a>' +
+        (f.publicado ? botonVisualizar(f, 'Abrir prototipo', 'mp-btn--terciario') : noPublicado()) +
+      '</div>' +
+    '</li>';
+  }
+  function tarjetasFlujos(items, plataforma) {
+    return '<ul class="pux-fcards" role="list" aria-label="Flujos de ' + esc(plataforma) + '">' +
+      items.map(tarjetaFlujo).join('') + '</ul>';
+  }
+
+  /* El iframe se renderiza a 1280 px y se encoge al ancho real de la tarjeta. */
+  var miniaturasObs = null;
+  function initMiniaturas(root) {
+    var shots = $all('.pux-fcard__shot--live', root);
+    if (!shots.length) return;
+    function ajustar(el) {
+      var w = el.clientWidth;
+      if (w) el.style.setProperty('--pux-escala', (w / 1280).toFixed(4));
+    }
+    shots.forEach(ajustar);
+    if (window.ResizeObserver) {
+      if (!miniaturasObs) {
+        miniaturasObs = new ResizeObserver(function (entradas) {
+          entradas.forEach(function (e) { ajustar(e.target); });
+        });
+      }
+      shots.forEach(function (el) { miniaturasObs.observe(el); });
+    }
+  }
+
+  function tablaFlujos(items, plataforma) {
+    return '<div class="mp-table-wrap pux-table pux-catalogo"><table class="mp-table mp-table--hover">' +
+      '<caption class="visually-hidden">Flujos de ' + esc(plataforma) + '</caption>' +
+      '<thead><tr><th scope="col">Flujo</th><th scope="col">Estado</th><th scope="col">HU de referencia</th>' +
+      '<th scope="col" class="mp-table__actions"><span class="visually-hidden">Acciones</span></th></tr></thead><tbody>' +
+      items.map(function (f) {
+        return '<tr' + (f.publicado ? '' : ' class="is-unpublished"') + '>' +
+          '<th scope="row"><a class="pux-catalogo__nombre" href="flujo.html?id=' + encodeURIComponent(f.id) + '">' + esc(f.nombre) + '</a>' +
+            '<span class="pux-catalogo__desc">' + esc(f.descripcion) + '</span></th>' +
+          '<td data-label="Estado">' + badgeEstado(f.estado) + '</td>' +
+          '<td data-label="HU de referencia">' + listaHu(f) + '</td>' +
+          '<td class="mp-table__actions">' + accionesCatalogo(f) + '</td>' +
+        '</tr>';
+      }).join('') + '</tbody></table></div>';
   }
 
   /* ---------- Detalle ---------- */
@@ -516,15 +734,41 @@
     }
     document.title = f.nombre + ' · Portal UX Compensar';
     var pl = cat.plataformas[f.plataforma] || {};
-    var figma = f.figma
+    var figma = /^https:\/\//.test(f.figma || '')
       ? '<a class="mp-btn mp-btn--secundario mp-btn--icon-left" href="' + esc(f.figma) + '" target="_blank" rel="noopener"><i class="icon icon-figma-logo icon-20" aria-hidden="true"></i> Ver en Figma<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>'
       : '<span class="pux-muted">Diseño en Figma no registrado</span>';
-    var abrir = f.publicado
-      ? '<a class="mp-btn mp-btn--primario mp-btn--icon-right" href="' + esc(f.url) + '">Abrir prototipo completo <i class="icon icon-arrow-right icon-20" aria-hidden="true"></i></a>'
-      : '';
-    var aprob = f.aprobacionUX && f.aprobacionUX.aprobado
-      ? 'Aprobado por ' + esc(f.aprobacionUX.por || 'UX') + ' · ' + esc(fecha(f.aprobacionUX.fecha))
+    var abrir = f.publicado ? botonVisualizar(f, 'Abrir prototipo completo', 'mp-btn--primario') : '';
+    var ap = f.aprobacionUX || {};
+    var aprob = ap.aprobado
+      ? '<span class="pux-ok"><i class="icon icon-check-circle icon-20" aria-hidden="true"></i> Aprobado por ' + esc(ap.por || 'UX') + '</span>' +
+        '<span class="pux-datos__sub">' + esc(fecha(ap.fecha)) + '</span>'
       : 'Pendiente';
+    var dato = function (etiqueta, valor) { return '<div><dt>' + esc(etiqueta) + '</dt><dd>' + valor + '</dd></div>'; };
+    var ficha =
+      '<div class="pux-ficha">' +
+        '<section class="pux-ficha__bloque pux-ficha__bloque--hu" aria-labelledby="ficha-hu">' +
+          '<h2 class="mp-h6 pux-ficha__titulo" id="ficha-hu">Historias de usuario' +
+            ((f.hu || []).length ? ' <span class="pux-count">' + f.hu.length + '</span>' : '') + '</h2>' +
+          huDetalle(f) +
+        '</section>' +
+        '<section class="pux-ficha__bloque" aria-labelledby="ficha-estado">' +
+          '<h2 class="mp-h6 pux-ficha__titulo" id="ficha-estado">Aprobación y versión</h2>' +
+          '<dl class="pux-datos">' +
+            dato('Aprobación UX', aprob) +
+            dato('Versión', esc(f.version)) +
+            dato('Última actualización', esc(fecha(f.actualizado))) +
+          '</dl>' +
+        '</section>' +
+        '<section class="pux-ficha__bloque" aria-labelledby="ficha-tecnica">' +
+          '<h2 class="mp-h6 pux-ficha__titulo" id="ficha-tecnica">Información técnica</h2>' +
+          '<dl class="pux-datos">' +
+            dato('Plataforma', esc(pl.nombre || f.plataforma)) +
+            dato('Tecnología de destino', esc(pl.tecnologia || '—')) +
+            dato('Sistema de diseño', esc(dsEnPrototipos(cat) || '—')) +
+            dato('Identificador', '<code>' + esc(f.id) + '</code>') +
+          '</dl>' +
+        '</section>' +
+      '</div>';
 
     var vista = f.publicado
       ? '<section class="pux-section pux-section--tight" aria-labelledby="vista-titulo"><div class="pux-container">' +
@@ -548,23 +792,16 @@
       '<section class="pux-page-head"><div class="pux-container">' +
         '<nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list">' +
           '<li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li>' +
-          '<li class="mp-breadcrumb__item">' + SEP_RUTA + '<a class="mp-breadcrumb__link" href="prototipos.html?plataforma=' + esc(f.plataforma) + '">Prototipos · ' + esc(pl.nombreCorto || f.plataforma) + '</a></li>' +
+          '<li class="mp-breadcrumb__item">' + SEP_RUTA + '<a class="mp-breadcrumb__link" href="' + esc(f.plataforma) + '.html">Prototipos · ' + esc(pl.nombreCorto || f.plataforma) + '</a></li>' +
           '<li class="mp-breadcrumb__item">' + SEP_RUTA + '<span class="mp-breadcrumb__current" aria-current="page">' + esc(f.nombre) + '</span></li>' +
         '</ol></nav>' +
         '<div class="pux-tags">' + tagPlataforma(f.plataforma, cat) + badgeEstado(f.estado) + '</div>' +
         '<h1 class="pux-page-head__title">' + esc(f.nombre) + '</h1>' +
         '<p class="mp-body-xl pux-page-head__lead">' + esc(f.descripcion) + '</p>' +
         '<div class="pux-hero__actions">' + abrir + figma + '</div>' +
-        '<dl class="pux-meta">' +
-          '<div><dt>Plataforma</dt><dd>' + esc(pl.nombre || f.plataforma) + '</dd></div>' +
-          '<div><dt>Tecnología de destino</dt><dd>' + esc(pl.tecnologia || '—') + '</dd></div>' +
-          '<div><dt>Versión</dt><dd>' + esc(f.version) + '</dd></div>' +
-          '<div><dt>Actualizado</dt><dd>' + esc(fecha(f.actualizado)) + '</dd></div>' +
-          '<div><dt>Sistema de diseño</dt><dd>' + esc(dsEnPrototipos(cat) || '—') + '</dd></div>' +
-          '<div><dt>Aprobación UX</dt><dd>' + aprob + '</dd></div>' +
-          '<div><dt>Identificador</dt><dd><code>' + esc(f.id) + '</code></dd></div>' +
-        '</dl>' +
-      '</div></section>' + vista +
+      '</div></section>' +
+      '<section class="pux-section" aria-label="Ficha del flujo"><div class="pux-container">' + ficha + '</div></section>' +
+      vista +
       '<section class="pux-section pux-section--tight" aria-labelledby="cambios-flujo"><div class="pux-container"><div class="pux-panel">' +
         '<h2 class="mp-h6 pux-section__title" id="cambios-flujo">Últimos cambios en este flujo</h2>' + timeline(f.cambios, false) +
       '</div></div></section>';
@@ -735,25 +972,11 @@
     if (!cont) return;
     var ds = dsDe(cat);
     var va = versionActual(ds);
-    var enProto = dsEnPrototipos(cat);
-    cont.innerHTML = '<div class="pux-panel pux-version-hero">' +
-      '<div>' +
-        '<p class="mp-eyebrow pux-eyebrow">Versión publicada</p>' +
-        '<p class="pux-version-hero__tag">' + esc(dsVersion(cat)) + '</p>' +
-        '<p class="pux-version-hero__fecha">' + (va ? 'Publicada el ' + esc(fecha(va.fecha)) : '') + '</p>' +
-      '</div>' +
-      '<div class="pux-version-hero__lado">' +
-        (enProto
-          ? '<p class="pux-version-hero__proto">' +
-              (enProto === ds.version
-                ? '<i class="icon icon-check-circle icon-20" aria-hidden="true"></i> Los prototipos usan esta versión'
-                : '<i class="icon icon-warning icon-20" aria-hidden="true"></i> Los prototipos usan ' + esc(enProto)) +
-            '</p>'
-          : '') +
-        '<a class="mp-btn mp-btn--terciario" href="historial.html">Ver qué ha cambiado</a>' +
-      '</div>' +
-      '</div>';
+    var f = fecha((va && va.fecha) || ds.fecha);
+    cont.innerHTML = '<p class="pux-dsver">Versión <strong>' + esc(dsVersion(cat)) + '</strong>' +
+      (f ? ', publicada el ' + esc(f) : '') + '</p>';
   }
+
 
   /** Las dos puertas, grandes: es a lo que se viene. */
   function accesosDS(cat, est) {
@@ -806,10 +1029,40 @@
       '</div></div>';
   }
 
+  /** 1024 bytes → "1 kB"; en español el separador decimal es la coma. */
+  function peso(bytes) {
+    var b = Number(bytes) || 0;
+    return b >= 1048576 ? (b / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(b / 1024)) + ' kB';
+  }
+  /** Paquetes que el build arma con la versión publicada del sistema de diseño. */
+  function descargasDS(cat) {
+    var cont = $('[data-ds-descargas]');
+    if (!cont) return;
+    var lista = dsDe(cat).descargas || [];
+    if (!lista.length) {
+      cont.innerHTML = vacio('Todavía no hay paquetes', 'Se generan al publicar el portal.');
+      return;
+    }
+    cont.innerHTML = '<ul class="pux-descargas" role="list">' + lista.map(function (d) {
+      return '<li class="pux-panel pux-descarga">' +
+        '<div class="pux-descarga__txt">' +
+          '<h3 class="mp-body-x-l pux-descarga__tit">' + esc(d.nombre) + '</h3>' +
+          '<p class="pux-descarga__desc">' + esc(d.descripcion) + '</p>' +
+          '<p class="pux-descarga__meta">' + esc(d.archivo) + ' · ' + esc(peso(d.bytes)) +
+            ' · ' + d.contenido + ' archivos</p>' +
+        '</div>' +
+        '<a class="mp-btn mp-btn--primario mp-btn--icon-right pux-descarga__btn" href="' + esc(d.url) + '" download>' +
+          'Descargar<span class="visually-hidden"> ' + esc(d.nombre) + ' (' + esc(d.version) + ')</span>' +
+          ' <i class="icon icon-download-simple icon-20" aria-hidden="true"></i></a>' +
+      '</li>';
+    }).join('') + '</ul>';
+  }
+
   function initDSPagina(cat, est) {
     if (!$('[data-ds-accesos]')) return;
     versionDSBloque(cat);
     avisoDS(cat, est);
+    descargasDS(cat);
     accesosDS(cat, est);
   }
 
@@ -938,6 +1191,17 @@
   }
 
   /* ---------- arranque ---------- */
+  /* Tooltips de acciones: Esc los oculta sin mover el foco ni el puntero (WCAG 1.4.13). */
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    $all('.pux-acc__btn:hover, .pux-acc__btn:focus-visible').forEach(function (b) { b.classList.add('is-tip-off'); });
+  });
+  ['mouseleave', 'blur'].forEach(function (tipo) {
+    document.addEventListener(tipo, function (e) {
+      if (e.target && e.target.classList && e.target.classList.contains('pux-acc__btn')) e.target.classList.remove('is-tip-off');
+    }, true);
+  });
+
   document.addEventListener('DOMContentLoaded', function () {
     initTema();
     initSidebar();

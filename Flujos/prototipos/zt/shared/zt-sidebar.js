@@ -14,6 +14,9 @@
  *   - Agendamiento de citas   -> data-active="agendamiento"
  *   - Agendamiento laboratorio -> data-active="agendamiento" (por ahora)
  *
+ * Menú propio por pantalla (opcional): definir window.ZT_MENU_LOCAL antes de
+ * cargar este script, con el mismo formato que ZT_MENU. Lo usa zt/inicio/.
+ *
  * Los estilos (.sidebar, .nav-item, .active, .nav-icon, etc.) viven en
  * ../shared/zt.css. Este archivo solo genera el HTML.
  * ============================================================ */
@@ -25,7 +28,7 @@
   // que lleva desde la página actual hasta zt/ (ver ztRoot()), para que el
   // mismo menú funcione a cualquier profundidad de flujo.
   var ZT_MENU = [
-    { id: 'inicio',       label: 'Inicio',                      icon: 'icon-house',                 href: 'index.html' },
+    { id: 'inicio',       label: 'Inicio',                      icon: 'icon-house',                 href: 'inicio/index.html' },
     { id: 'agendamiento', label: 'Agendamiento',                icon: 'icon-calendar-plus',         href: 'agendamiento-de-citas/index.html' },
     { id: 'ventas',       label: 'Ventas y Afiliación',         icon: 'icon-user-plus',             href: 'ventas-y-afiliacion/index.html' },
     { id: 'resultados',   label: 'Resultados de exámenes',      icon: 'icon-medical-file' },
@@ -54,6 +57,10 @@
   function buildSidebar(nav) {
     var active = nav.getAttribute('data-active') || '';
     var root = ztRoot();
+    // Una pantalla puede declarar su propio menú (window.ZT_MENU_LOCAL, mismo
+    // formato que ZT_MENU). Hoy solo lo usa zt/inicio/, que sigue su Figma.
+    // Si no existe, se usa el menú transversal de siempre.
+    var menu = Array.isArray(window.ZT_MENU_LOCAL) ? window.ZT_MENU_LOCAL : ZT_MENU;
 
     var html = '' +
       '<div class="sidebar-menu-label">' +
@@ -63,7 +70,7 @@
         '</button>' +
       '</div>';
 
-    ZT_MENU.forEach(function (item) {
+    menu.forEach(function (item) {
       var isActive = item.id === active;
       var inner =
         '<span class="nav-icon icon ' + item.icon + ' icon-20 gs-inherit" aria-hidden="true"></span>' +

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<!-- @include head -->
+<title>Drupal · Prototipos · Portal UX Compensar</title>
+<meta name="description" content="Prototipos de Drupal de Compensar, con su estado y su historia de usuario.">
+</head>
+<body data-page="prototipos-drupal">
+<!-- @include header -->
+<main id="contenido" class="pux-main" tabindex="-1">
+
+  <section class="pux-page-head">
+    <div class="pux-container">
+      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><a class="mp-breadcrumb__link" href="prototipos.html">Prototipos</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Drupal</span></li></ol></nav>
+      <h1 class="pux-page-head__title">Drupal</h1>
+      <p class="mp-body-xl pux-page-head__lead">Prototipos del portal web institucional de Compensar. Se entregan en HTML, CSS y JavaScript.</p>
+    </div>
+  </section>
+
+  <section class="pux-section pux-section--tight">
+    <div class="pux-container">
+      <form class="pux-filters" role="search" aria-label="Filtrar prototipos" data-filtros onsubmit="return false">
+        <div class="pux-filters__fields">
+          <div class="mp-input-group pux-filters__search">
+            <label class="mp-input-label" for="filtro-q">Buscar</label>
+            <div class="mp-input-wrapper">
+              <i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>
+              <input class="mp-input-field has-icon-left" type="search" id="filtro-q" placeholder="Nombre, descripción o HU (ej. 256)" autocomplete="off" data-filtro-q>
+            </div>
+          </div>
+          <div class="mp-input-group pux-filters__estado">
+            <label class="mp-input-label" for="filtro-estado">Estado</label>
+            <div class="mp-input-wrapper">
+              <select class="mp-input-field mp-select" id="filtro-estado" data-filtro-estado>
+                <option value="">Todos</option>
+                <option value="borrador">Borrador</option>
+                <option value="en-revision">En revisión</option>
+                <option value="refinado">Refinado</option>
+                <option value="aprobado">Aprobado UX</option>
+                <option value="obsoleto">Obsoleto</option>
+              </select>
+            </div>
+          </div>
+          <label class="mp-choice mp-checkbox">
+            <span class="mp-choice__field">
+              <input class="mp-choice__input" type="checkbox" data-filtro-publicados>
+              <span class="mp-choice__control" aria-hidden="true"></span>
+            </span>
+            <span class="mp-choice__text">
+              <span class="mp-choice__label">Solo publicados</span>
+            </span>
+          </label>
+        </div>
+      </form>
+      <p class="pux-results" aria-live="polite" data-resultados></p>
+    </div>
+  </section>
+
+  <section class="pux-section pux-section--tight">
+    <div class="pux-container" data-catalogo data-plataforma-fija="drupal">
+      <p class="pux-muted">Cargando los flujos de Drupal…</p>
+    </div>
+  </section>
+
+</main>
+<!-- @include footer -->
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-12T17:10:47.544Z",
+  "generado": "2026-11-12T21:31:38.426Z",
   "fuentes": {
     "designSystem": {
       "id": "designSystem",
@@ -7,254 +7,52 @@
       "rol": "Fuente de verdad visual: tokens, estilos y componentes de Compensar.",
       "carpeta": "../../Core-Design-System",
       "repositorioPropuesto": "compensar-ux-design-system",
-      "remoto": null,
+      "remoto": "https://github.com/swoJuan/compensarUX.git",
       "ref": "HEAD",
-      "commit": "9dbf1f0",
-      "version": "v2.4.0",
+      "commit": "d4cefd3",
+      "version": null,
       "cambiosDesdeVersion": 0,
-      "fecha": "2026-11-11T21:29:14+00:00",
+      "fecha": "2026-11-12T12:33:17-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": null,
+      "commitsSinSubir": 0,
       "cambios": [
         {
-          "commit": "9dbf1f0",
-          "fecha": "2026-11-11T21:29:14+00:00",
-          "mensaje": "feat(tabs): menú desplegable por debajo de 768 px",
-          "archivos": 13
-        },
-        {
-          "commit": "120750e",
-          "fecha": "2026-11-11T20:52:26+00:00",
-          "mensaje": "chore: quitar archivo temporal .fuse_hidden versionado por error",
-          "archivos": 1
-        },
-        {
-          "commit": "0ed82ce",
-          "fecha": "2026-11-11T20:51:06+00:00",
-          "mensaje": "chore: mover el paquete nara/ al repositorio de Nara (Nara/v1-copilot)",
-          "archivos": 19
-        },
-        {
-          "commit": "4b47115",
-          "fecha": "2026-11-11T20:50:40+00:00",
-          "mensaje": "wip: resguardo de cambios en curso antes de reorganizar carpetas",
-          "archivos": 8
-        },
-        {
-          "commit": "61721c0",
-          "fecha": "2026-11-11T15:13:15-05:00",
-          "mensaje": "chore(release): v2.3.0",
-          "archivos": 8
-        },
-        {
-          "commit": "a934bac",
-          "fecha": "2026-11-11T15:02:15-05:00",
-          "mensaje": "fix(design-system): estabilización v2.3.0, DEC-010 a11y y responsive residual",
-          "archivos": 35
-        },
-        {
-          "commit": "c400048",
-          "fecha": "2026-11-11T11:52:45-05:00",
-          "mensaje": "fix(design-system): F-1 icono Info y F-2 CTA del Header; docs:css integrado al build",
-          "archivos": 14
-        },
-        {
-          "commit": "1a6e792",
-          "fecha": "2026-11-10T16:48:19-05:00",
-          "mensaje": "docs(design-system): DEC-011 CSS de documentación generado desde core, Header en vivo y responsive",
-          "archivos": 56
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
+          "archivos": 3602
         }
       ],
-      "versiones": [
-        {
-          "tag": "v2.4.0",
-          "fecha": "2026-11-11T21:29:32+00:00",
-          "commit": "1f21a9e",
-          "titulo": "Core Design System v2.4.0 — Tabs: menú desplegable por debajo de 768 px (informe 32)",
-          "cuerpo": "",
-          "publicada": true,
-          "cambios": [
-            {
-              "commit": "1f21a9e",
-              "fecha": "2026-11-11T21:29:14+00:00",
-              "mensaje": "chore(release): v2.4.0"
-            },
-            {
-              "commit": "9dbf1f0",
-              "fecha": "2026-11-11T21:29:14+00:00",
-              "mensaje": "feat(tabs): menú desplegable por debajo de 768 px"
-            },
-            {
-              "commit": "120750e",
-              "fecha": "2026-11-11T20:52:26+00:00",
-              "mensaje": "chore: quitar archivo temporal .fuse_hidden versionado por error"
-            },
-            {
-              "commit": "0ed82ce",
-              "fecha": "2026-11-11T20:51:06+00:00",
-              "mensaje": "chore: mover el paquete nara/ al repositorio de Nara (Nara/v1-copilot)"
-            },
-            {
-              "commit": "4b47115",
-              "fecha": "2026-11-11T20:50:40+00:00",
-              "mensaje": "wip: resguardo de cambios en curso antes de reorganizar carpetas"
-            }
-          ],
-          "totalCambios": 5,
-          "primera": false,
-          "enPrototipos": true,
-          "revisar": "Historia clínica en móvil: por debajo de 768 px las pestañas pasaron a ser un menú desplegable. Confirma que el cambio de sección se entiende."
-        },
-        {
-          "tag": "v2.3.0",
-          "fecha": "2026-11-11T15:13:15-05:00",
-          "commit": "61721c0",
-          "titulo": "v2.3.0: cierre técnico de la estabilización. Verificaciones diferidas: Safari, VoiceOver y revisión visual del equipo.",
-          "cuerpo": "",
-          "publicada": true,
-          "cambios": [
-            {
-              "commit": "61721c0",
-              "fecha": "2026-11-11T15:13:15-05:00",
-              "mensaje": "chore(release): v2.3.0"
-            },
-            {
-              "commit": "a934bac",
-              "fecha": "2026-11-11T15:02:15-05:00",
-              "mensaje": "fix(design-system): estabilización v2.3.0, DEC-010 a11y y responsive residual"
-            },
-            {
-              "commit": "c400048",
-              "fecha": "2026-11-11T11:52:45-05:00",
-              "mensaje": "fix(design-system): F-1 icono Info y F-2 CTA del Header; docs:css integrado al build"
-            },
-            {
-              "commit": "1a6e792",
-              "fecha": "2026-11-10T16:48:19-05:00",
-              "mensaje": "docs(design-system): DEC-011 CSS de documentación generado desde core, Header en vivo y responsive"
-            },
-            {
-              "commit": "46a6bed",
-              "fecha": "2026-11-10T12:11:56-05:00",
-              "mensaje": "feat(design-system): DEC-004/006/008 foco, colores y dimensiones aprobados en Figma"
-            },
-            {
-              "commit": "e9c9491",
-              "fecha": "2026-11-09T09:59:20-05:00",
-              "mensaje": "feat(a11y): DEC-007 teclado y ARIA de Dropdown y Tabs; DEC-003 reflow del apoyo"
-            }
-          ],
-          "totalCambios": 6,
-          "primera": false,
-          "enPrototipos": false,
-          "revisar": "Cambios de color en badges e íconos de advertencia, y títulos de tarjeta en negrita. Pendientes de revisión visual del equipo, Safari y VoiceOver."
-        },
-        {
-          "tag": "v2.2.1",
-          "fecha": "2026-11-06T18:35:45-05:00",
-          "commit": "bb56753",
-          "titulo": "Core Design System v2.2.1 — DEC-003 estados de Inputs (Error, Focus, Disabled, Readonly) conforme a Figma",
-          "cuerpo": "",
-          "publicada": true,
-          "cambios": [
-            {
-              "commit": "bb56753",
-              "fecha": "2026-11-06T18:35:38-05:00",
-              "mensaje": "chore(release): v2.2.1"
-            },
-            {
-              "commit": "1b5b835",
-              "fecha": "2026-11-06T18:35:15-05:00",
-              "mensaje": "fix(inputs): DEC-003 estados Error, Focus y Disabled conforme a Figma"
-            }
-          ],
-          "totalCambios": 2,
-          "primera": false,
-          "enPrototipos": false,
-          "revisar": null
-        },
-        {
-          "tag": "v2.2.0",
-          "fecha": "2026-11-06T22:23:37+00:00",
-          "commit": "c69f2b7",
-          "titulo": "Design System v2.2.0 — campos de solo lectura y deshabilitados",
-          "cuerpo": "",
-          "publicada": true,
-          "cambios": [
-            {
-              "commit": "c69f2b7",
-              "fecha": "2026-11-06T22:23:37+00:00",
-              "mensaje": "chore(release): v2.2.0"
-            },
-            {
-              "commit": "dd68491",
-              "fecha": "2026-11-06T22:23:25+00:00",
-              "mensaje": "feat(inputs): estados de solo lectura y deshabilitado"
-            },
-            {
-              "commit": "82da73a",
-              "fecha": "2026-11-06T15:37:20-05:00",
-              "mensaje": "feat(design-system): DEC-005 tipografía y DEC-012 unidades rem/em"
-            },
-            {
-              "commit": "f6b6eaa",
-              "fecha": "2026-09-04T15:12:45-05:00",
-              "mensaje": "Limpieza: separar prototipos del Design System"
-            },
-            {
-              "commit": "2068ede",
-              "fecha": "2026-09-04T09:04:09-05:00",
-              "mensaje": "pruebas 2"
-            },
-            {
-              "commit": "71e4b93",
-              "fecha": "2026-06-05T17:04:43-05:00",
-              "mensaje": "Update colores"
-            },
-            {
-              "commit": "4dd87f5",
-              "fecha": "2026-06-05T10:21:30-05:00",
-              "mensaje": "Actualizacion de iconos"
-            },
-            {
-              "commit": "027a2c0",
-              "fecha": "2026-05-15T14:12:53-05:00",
-              "mensaje": "Add missing radius tokens and neutral alias"
-            },
-            {
-              "commit": "642e8fe",
-              "fecha": "2026-05-15T11:50:13-05:00",
-              "mensaje": "Add Compensar icon set and demo"
-            },
-            {
-              "commit": "86d9789",
-              "fecha": "2026-05-15T07:58:31-05:00",
-              "mensaje": "Update icon library"
-            },
-            {
-              "commit": "94b590d",
-              "fecha": "2026-05-15T07:48:04-05:00",
-              "mensaje": "Add new icon"
-            },
-            {
-              "commit": "a6562ae",
-              "fecha": "2026-05-13T10:37:44-05:00",
-              "mensaje": "Add .DS_Store files and videoNara.mp4"
-            }
-          ],
-          "totalCambios": 53,
-          "primera": true,
-          "enPrototipos": false,
-          "revisar": null
-        }
-      ],
+      "versiones": [],
       "prototipos": {
         "tag": "v2.4.0",
         "commit": "27767a7",
         "fecha": "2026-11-11T21:29:14+00:00",
         "sincronizado": "2026-11-11T21:36:49.257Z"
-      }
+      },
+      "descargas": [
+        {
+          "id": "core",
+          "nombre": "Core del sistema de diseño",
+          "descripcion": "CSS, iconos y JS tal como los usan los prototipos y el portal. Para Drupal, Angular o cualquier proyecto web.",
+          "archivo": "compensar-core-commit-d4cefd3.zip",
+          "contenido": 15,
+          "bytes": 677038,
+          "version": "commit-d4cefd3",
+          "url": "ds/descargas/compensar-core-commit-d4cefd3.zip"
+        },
+        {
+          "id": "maui",
+          "nombre": "Recursos para .NET MAUI",
+          "descripcion": "Colores y medidas como diccionarios de recursos XAML, generados de los tokens de esta misma versión.",
+          "archivo": "compensar-maui-commit-d4cefd3.zip",
+          "contenido": 3,
+          "bytes": 4876,
+          "version": "commit-d4cefd3",
+          "url": "ds/descargas/compensar-maui-commit-d4cefd3.zip"
+        }
+      ]
     },
     "flujos": {
       "id": "flujos",
@@ -262,51 +60,21 @@
       "rol": "Flujos navegables de Drupal, ZT y APP. Consumen una copia controlada del sistema de diseño en shared/.",
       "carpeta": "../prototipos",
       "repositorioPropuesto": "compensar-ux-prototipos",
-      "remoto": null,
+      "remoto": "https://github.com/swoJuan/compensarUX.git",
       "ref": "HEAD",
-      "commit": "eb66ed5",
-      "version": "v2.4.0",
-      "cambiosDesdeVersion": 6,
-      "fecha": "2026-11-11T21:37:15+00:00",
+      "commit": "d4cefd3",
+      "version": null,
+      "cambiosDesdeVersion": 0,
+      "fecha": "2026-11-12T12:33:17-05:00",
       "cambiosSinCommit": false,
-      "pendientesSinPublicar": 0,
-      "commitsSinSubir": null,
+      "pendientesSinPublicar": 11,
+      "commitsSinSubir": 0,
       "cambios": [
         {
-          "commit": "eb66ed5",
-          "fecha": "2026-11-11T21:37:15+00:00",
-          "mensaje": "DS · Sincronizar con el sistema de diseño v2.4.0",
-          "archivos": 7
-        },
-        {
-          "commit": "d83c452",
-          "fecha": "2026-11-11T20:51:58+00:00",
-          "mensaje": "chore: ajustar rutas a la nueva estructura de carpetas (Flujos/portal, Flujos/prototipos)",
-          "archivos": 2
-        },
-        {
-          "commit": "93994c6",
-          "fecha": "2026-11-11T20:50:41+00:00",
-          "mensaje": "wip: resguardo antes de reorganizar carpetas (app/, zt/historia-clinica y componentes ZT)",
-          "archivos": 79
-        },
-        {
-          "commit": "7ec962b",
-          "fecha": "2026-09-10T14:49:27-05:00",
-          "mensaje": "ZT Ventas y Afiliación: proceso de afiliación (Paso 1→2) y componentes transversales",
-          "archivos": 81
-        },
-        {
-          "commit": "c07d9df",
-          "fecha": "2026-09-04T15:26:28-05:00",
-          "mensaje": "Mover flujo navegacion de ZT a Drupal (incluye nav-* a drupal/shared)",
-          "archivos": 15
-        },
-        {
-          "commit": "b7f45d4",
-          "fecha": "2026-09-04T14:39:53-05:00",
-          "mensaje": "Estructura inicial de prototipos Compensar",
-          "archivos": 70
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
+          "archivos": 179
         }
       ]
     }
@@ -335,26 +103,34 @@
     {
       "id": "zt-oficina-virtual",
       "nombre": "Oficina virtual (inicio ZT)",
-      "descripcion": "Pantalla de inicio de la Zona Transaccional con el menú lateral y los accesos a los flujos.",
+      "descripcion": "Inicio de la Oficina virtual: bienvenida, accesos a los servicios y la red de atención. Es la entrada a todos los flujos de ZT.",
       "plataforma": "zt",
       "version": "0.1.0",
-      "estado": "en-revision",
-      "figma": null,
+      "estado": "aprobado",
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12788-94181",
+      "hu": [
+        {
+          "id": "293917",
+          "codigo": "HU-256",
+          "titulo": "Navegacion Menu Responsive y Escritorio",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/293917"
+        }
+      ],
       "publicado": true,
-      "url": "p/zt/index.html",
-      "actualizado": "2026-09-10T14:49:27-05:00",
+      "url": "p/zt/inicio/index.html",
+      "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
-          "commit": "7ec962b",
-          "fecha": "2026-09-10T14:49:27-05:00",
-          "mensaje": "ZT Ventas y Afiliación: proceso de afiliación (Paso 1→2) y componentes transversales",
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
           "archivos": 1
         }
       ],
       "aprobacionUX": {
-        "aprobado": false,
-        "por": null,
-        "fecha": null
+        "aprobado": true,
+        "por": "Equipo UX",
+        "fecha": "2026-11-12"
       }
     },
     {
@@ -364,15 +140,35 @@
       "plataforma": "zt",
       "version": "0.1.0",
       "estado": "en-revision",
-      "figma": null,
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12842-74756",
+      "hu": [
+        {
+          "id": "261050",
+          "codigo": "HU-097",
+          "titulo": "Consultar agenda",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/261050"
+        },
+        {
+          "id": "261084",
+          "codigo": "HU-098",
+          "titulo": "Confirmar cita",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/261084"
+        },
+        {
+          "id": "278709",
+          "codigo": "HU-198",
+          "titulo": "Validaciones en el flujo de agendamiento",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/278709"
+        }
+      ],
       "publicado": true,
       "url": "p/zt/agendamiento-de-citas/index.html",
-      "actualizado": "2026-09-10T14:49:27-05:00",
+      "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
-          "commit": "7ec962b",
-          "fecha": "2026-09-10T14:49:27-05:00",
-          "mensaje": "ZT Ventas y Afiliación: proceso de afiliación (Paso 1→2) y componentes transversales",
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
           "archivos": 38
         }
       ],
@@ -388,22 +184,24 @@
       "descripcion": "Solicitud de copia de historia clínica, seguimiento en mis solicitudes y confirmación de radicado.",
       "plataforma": "zt",
       "version": "0.1.0",
-      "estado": "borrador",
-      "figma": null,
+      "estado": "en-revision",
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=15673-157601",
+      "hu": [
+        {
+          "id": "305878",
+          "codigo": "HU-297",
+          "titulo": "Mis solicitudes de historia clínica MP - ZT",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/305878"
+        }
+      ],
       "publicado": true,
       "url": "p/zt/historia-clinica/index.html",
-      "actualizado": "2026-11-11T21:37:15+00:00",
+      "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
-          "commit": "eb66ed5",
-          "fecha": "2026-11-11T21:37:15+00:00",
-          "mensaje": "DS · Sincronizar con el sistema de diseño v2.4.0",
-          "archivos": 2
-        },
-        {
-          "commit": "93994c6",
-          "fecha": "2026-11-11T20:50:41+00:00",
-          "mensaje": "wip: resguardo antes de reorganizar carpetas (app/, zt/historia-clinica y componentes ZT)",
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
           "archivos": 11
         }
       ],
@@ -419,23 +217,18 @@
       "descripcion": "Proceso de afiliación en ocho pasos con validación de información y consulta de mis radicados.",
       "plataforma": "zt",
       "version": "0.1.0",
-      "estado": "borrador",
-      "figma": null,
+      "estado": "en-revision",
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=13542-109534",
+      "hu": [],
       "publicado": true,
       "url": "p/zt/ventas-y-afiliacion/index.html",
-      "actualizado": "2026-11-11T20:50:41+00:00",
+      "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
-          "commit": "93994c6",
-          "fecha": "2026-11-11T20:50:41+00:00",
-          "mensaje": "wip: resguardo antes de reorganizar carpetas (app/, zt/historia-clinica y componentes ZT)",
-          "archivos": 43
-        },
-        {
-          "commit": "7ec962b",
-          "fecha": "2026-09-10T14:49:27-05:00",
-          "mensaje": "ZT Ventas y Afiliación: proceso de afiliación (Paso 1→2) y componentes transversales",
-          "archivos": 14
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
+          "archivos": 47
         }
       ],
       "aprobacionUX": {
@@ -447,51 +240,34 @@
     {
       "id": "drupal-navegacion",
       "nombre": "Navegación del portal",
-      "descripcion": "Tres alternativas de menú principal del portal web para pruebas de navegación.",
+      "descripcion": "Menú principal del portal web con navegación progresiva por niveles.",
       "plataforma": "drupal",
       "version": "0.1.0",
-      "estado": "borrador",
-      "figma": null,
+      "estado": "aprobado",
+      "figma": "https://www.figma.com/design/UnZnt99aWWFcQTmGxWDDEU/Compensar-Fase-2?node-id=14882-48334&m=dev",
+      "hu": [
+        {
+          "id": "293917",
+          "codigo": "HU-256",
+          "titulo": "Navegacion Menu Responsive y Escritorio",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/293917"
+        }
+      ],
       "publicado": true,
-      "url": "p/drupal/navegacion/menu-1.html",
-      "actualizado": "2026-09-04T15:26:28-05:00",
+      "url": "p/drupal/navegacion/menu-2.html",
+      "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
-          "commit": "c07d9df",
-          "fecha": "2026-09-04T15:26:28-05:00",
-          "mensaje": "Mover flujo navegacion de ZT a Drupal (incluye nav-* a drupal/shared)",
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
           "archivos": 9
         }
       ],
       "aprobacionUX": {
-        "aprobado": false,
-        "por": null,
-        "fecha": null
-      }
-    },
-    {
-      "id": "drupal-ayudas-diagnosticas",
-      "nombre": "Ayudas diagnósticas",
-      "descripcion": "Flujo reservado. Aún no tiene pantallas.",
-      "plataforma": "drupal",
-      "version": "0.0.0",
-      "estado": "borrador",
-      "figma": null,
-      "publicado": false,
-      "url": null,
-      "actualizado": "2026-09-04T14:39:53-05:00",
-      "cambios": [
-        {
-          "commit": "b7f45d4",
-          "fecha": "2026-09-04T14:39:53-05:00",
-          "mensaje": "Estructura inicial de prototipos Compensar",
-          "archivos": 1
-        }
-      ],
-      "aprobacionUX": {
-        "aprobado": false,
-        "por": null,
-        "fecha": null
+        "aprobado": true,
+        "por": "Equipo UX",
+        "fecha": "2026-11-12"
       }
     },
     {
@@ -500,23 +276,24 @@
       "descripcion": "Pantalla de inicio de la aplicación móvil dentro del marco de dispositivo.",
       "plataforma": "app",
       "version": "0.1.0",
-      "estado": "borrador",
+      "estado": "aprobado",
       "figma": null,
+      "hu": [],
       "publicado": true,
       "url": "p/app/index.html",
-      "actualizado": "2026-11-11T20:50:41+00:00",
+      "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
-          "commit": "93994c6",
-          "fecha": "2026-11-11T20:50:41+00:00",
-          "mensaje": "wip: resguardo antes de reorganizar carpetas (app/, zt/historia-clinica y componentes ZT)",
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
           "archivos": 1
         }
       ],
       "aprobacionUX": {
-        "aprobado": false,
-        "por": null,
-        "fecha": null
+        "aprobado": true,
+        "por": "Equipo UX",
+        "fecha": "2026-11-12"
       }
     },
     {
@@ -525,16 +302,17 @@
       "descripcion": "Solicitud de historia clínica en la aplicación móvil.",
       "plataforma": "app",
       "version": "0.1.0",
-      "estado": "borrador",
-      "figma": null,
+      "estado": "en-revision",
+      "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8336-20380",
+      "hu": [],
       "publicado": true,
       "url": "p/app/historia-clinica/index.html",
-      "actualizado": "2026-11-11T20:50:41+00:00",
+      "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
-          "commit": "93994c6",
-          "fecha": "2026-11-11T20:50:41+00:00",
-          "mensaje": "wip: resguardo antes de reorganizar carpetas (app/, zt/historia-clinica y componentes ZT)",
+          "commit": "d4cefd3",
+          "fecha": "2026-11-12T12:33:17-05:00",
+          "mensaje": "Commit inicial",
           "archivos": 4
         }
       ],

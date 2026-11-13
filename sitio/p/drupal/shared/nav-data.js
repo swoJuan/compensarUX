@@ -1,11 +1,11 @@
 /**
  * ============================================================
  *  NAV-DATA.JS — Árbol de contenidos compartido
- *  Prueba: Arquitectura de navegación (menu-1 / menu-2)
+ *  Prueba: Arquitectura de navegación (menu-2)
  *  Compensar Design System
  *
  *  Fuente única de verdad del árbol de contenidos. Ambas variantes
- *  (menu-1 = acordeón jerárquico, menu-2 = navegación progresiva)
+ *  (menu-2 = navegación progresiva)
  *  consumen exactamente este mismo árbol — solo cambia el patrón
  *  de interacción, nunca el contenido.
  * ============================================================

@@ -32,8 +32,7 @@ flujos/
 │   └── laboratorio/       ← flujo futuro
 ├── drupal/                ← plataforma Drupal
 │   ├── shared/            ← header, drupal.css / drupal.js y nav-* propios de Drupal
-│   ├── navegacion/        ← flujo: pruebas de navegación (menu-1/2/3)
-│   └── ayudas-diagnosticas/ ← flujo futuro
+│   └── navegacion/        ← flujo: prueba de navegación (menu-2)
 ├── scripts/sync-flows.mjs ← sincroniza recursos del Design System hacia shared/
 ├── package.json
 ├── .gitignore

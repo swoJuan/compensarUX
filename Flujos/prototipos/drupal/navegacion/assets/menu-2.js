@@ -4,14 +4,13 @@
  *
  *  Prueba: entre Nivel 1 → Nivel 2 → Nivel 3, cada categoría con
  *  hijos avanza a una vista nueva dentro del mismo panel .mp-sidebar
- *  (core, compartido con menu-1), en vez de expandir un acordeón
+ *  (core), en vez de expandir un acordeón
  *  in-place. Nunca se ven dos niveles abiertos a la vez.
  *
  *  Aislamiento: todo el markup que arma este script usa clases
  *  exclusivas .menu-mobile-v2__* (ver nav-prototype.css, bloque
  *  "menu-2 mobile: menu-mobile-v2" al final del archivo). No toca
- *  .mp-accordion ni .proto-menu1__accordion — esas son de menu-1.js
- *  y siguen intactas. Este archivo solo se carga en menu-2.html.
+ *  .mp-accordion. Este archivo solo se carga en menu-2.html.
  *
  *  Requiere: nav-data.js (NAV_TREE), nav-shell.js
  * ============================================================
@@ -31,20 +30,6 @@
     return Array.isArray(node.children) && node.children.length > 0;
   }
 
-  // Página "actual" simulada para esta prueba de usabilidad (no hay
-  // routing real): Planes → Plan Ideal → Individual. Al abrir el
-  // menú, esa fila debe poder identificarse como activa en el nivel
-  // donde aparece, y sus categorías padre muestran un punto discreto
-  // en Nivel 1/2 para poder responder "¿dónde estoy?" sin necesidad
-  // de llegar hasta el fondo del árbol.
-  var CURRENT_NODE_ID = 'plan-ideal-individual';
-
-  function containsActive(node) {
-    if (node.id === CURRENT_NODE_ID) return true;
-    if (!hasChildren(node)) return false;
-    return node.children.some(containsActive);
-  }
-
   // Pila de pantallas visitadas. Cada entrada = { title, nodes }.
   var stack = [];
   var body = null;
@@ -52,8 +37,7 @@
   var backEl = null;
 
   function rootLevel() {
-    // Mismo contenido que Nivel 1 de menu-1 (menu-1.js también
-    // excluye "Inicio" de la lista del panel móvil).
+    // "Inicio" no aparece en la lista del panel móvil.
     return {
       title: 'Menú',
       nodes: NAV_TREE.filter(function (node) { return node.id !== 'inicio'; })
@@ -64,40 +48,28 @@
     stack = [rootLevel()];
   }
 
-  // Cada fila es de un solo tipo:
+  // Cada fila es de un solo tipo (según el diseño de Figma):
   //  - con hijos  → <button> + chevron: avanza a la siguiente vista.
   //  - sin hijos  → <a> normal: destino final, sin chevron.
-  // La fila que corresponde a CURRENT_NODE_ID se marca activa con
-  // check + negrita + fondo (no depende solo del color).
+  // No hay marca de "página actual" (check ni punto): el diseño no la incluye.
   function renderRow(node) {
-    var isActive = node.id === CURRENT_NODE_ID;
-    var branch = hasChildren(node);
-    var showDot = !isActive && branch && containsActive(node);
+    var label = '<span class="menu-mobile-v2__row-label">' + esc(node.label) + '</span>';
 
-    var classes = 'menu-mobile-v2__row' + (isActive ? ' menu-mobile-v2__row--active' : '');
-    var leading = isActive
-      ? '<i class="icon icon-check icon-20 menu-mobile-v2__row-check" aria-hidden="true"></i>'
-      : '';
-    var dot = showDot ? '<span class="menu-mobile-v2__row-dot" aria-hidden="true"></span>' : '';
-    var label = '<span class="menu-mobile-v2__row-label">' + esc(node.label) + '</span>' + dot;
-
-    if (branch) {
+    if (hasChildren(node)) {
       return (
         '<li>' +
-          '<button type="button" class="' + classes + '" data-drill-into="' + node.id + '">' +
-            leading + label +
-            '<i class="icon icon-caret-right icon-20 menu-mobile-v2__row-chevron" aria-hidden="true"></i>' +
+          '<button type="button" class="menu-mobile-v2__row" data-drill-into="' + node.id + '">' +
+            label +
+            '<i class="icon icon-caret-right icon-16 menu-mobile-v2__row-chevron" aria-hidden="true"></i>' +
           '</button>' +
         '</li>'
       );
     }
 
-    var href = node.href || '#';
-    var current = isActive ? ' aria-current="page"' : '';
     return (
       '<li>' +
-        '<a class="' + classes + '" href="' + href + '"' + current + '>' +
-          leading + label +
+        '<a class="menu-mobile-v2__row" href="' + esc(node.href || '#') + '">' +
+          label +
         '</a>' +
       '</li>'
     );
@@ -123,8 +95,12 @@
 
     // El título del header refleja el nivel actual (Menú / Planes /
     // Plan Ideal...) y, junto con la flecha, es exclusivo de
-    // menu-2.html: no afecta el título ni el header de menu-1.
+    // menu-2.html.
     if (titleEl) titleEl.textContent = current.title;
+
+    // Buscar / Oficina virtual / Afíliate solo van en el primer nivel (Figma).
+    var actions = document.querySelector('#nav-sidebar .proto-sidebar-actions');
+    if (actions) actions.hidden = !isRoot;
 
     if (backEl) {
       if (isRoot) {
@@ -173,7 +149,17 @@
     body.addEventListener('click', function (event) {
       var into = event.target.closest('[data-drill-into]');
       if (into) return goInto(into.getAttribute('data-drill-into'));
+
+      // Enlace final: feedback visible de "presionado" (naranja).
+      var link = event.target.closest('a.menu-mobile-v2__row');
+      if (link) {
+        link.classList.add('is-pressed');
+        setTimeout(function () { link.classList.remove('is-pressed'); }, 300);
+      }
     });
+
+    // iOS Safari solo aplica :active si hay un listener táctil.
+    body.addEventListener('touchstart', function () {}, { passive: true });
 
     // La flecha de regreso vive en el header (.mp-sidebar__header),
     // fuera de #nav-sidebar-body, así que se conecta aparte.

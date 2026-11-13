@@ -1,24 +1,33 @@
 {
-  "$comentario": "Catálogo de flujos. UX edita este archivo. 'publicar: true' copia el flujo al portal. 'incluir' es opcional: por defecto se publica toda la carpeta 'ruta'. 'actualizado' se calcula con git. Descripciones, versiones, estados y enlaces de Figma son valores iniciales: UX debe validarlos.",
+  "$comentario": "Catálogo de flujos. UX edita este archivo. 'publicar: true' copia el flujo al portal. 'incluir' es opcional: por defecto se publica toda la carpeta 'ruta'. 'actualizado' se calcula con git. Descripciones, versiones, estados y enlaces de Figma son valores iniciales. 'hu' lista las historias de usuario de Azure DevOps ({id, codigo, titulo, url}). Estados: borrador, en-revision, refinado, aprobado, obsoleto: UX debe validarlos.",
   "flujos": [
     {
       "id": "zt-oficina-virtual",
       "nombre": "Oficina virtual (inicio ZT)",
-      "descripcion": "Pantalla de inicio de la Zona Transaccional con el menú lateral y los accesos a los flujos.",
+      "descripcion": "Inicio de la Oficina virtual: bienvenida, accesos a los servicios y la red de atención. Es la entrada a todos los flujos de ZT.",
       "plataforma": "zt",
-      "ruta": "zt/",
+      "ruta": "zt/inicio/",
       "entrada": "index.html",
       "incluir": [
+        "zt/inicio/**",
         "zt/index.html"
       ],
       "version": "0.1.0",
-      "estado": "en-revision",
-      "figma": "",
+      "estado": "aprobado",
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12788-94181",
+      "hu": [
+        {
+          "id": "293917",
+          "codigo": "HU-256",
+          "titulo": "Navegacion Menu Responsive y Escritorio",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/293917"
+        }
+      ],
       "publicar": true,
       "aprobacionUX": {
-        "aprobado": false,
-        "por": null,
-        "fecha": null
+        "aprobado": true,
+        "por": "Equipo UX",
+        "fecha": "2026-11-12"
       }
     },
     {
@@ -30,7 +39,27 @@
       "entrada": "index.html",
       "version": "0.1.0",
       "estado": "en-revision",
-      "figma": "",
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12842-74756",
+      "hu": [
+        {
+          "id": "261050",
+          "codigo": "HU-097",
+          "titulo": "Consultar agenda",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/261050"
+        },
+        {
+          "id": "261084",
+          "codigo": "HU-098",
+          "titulo": "Confirmar cita",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/261084"
+        },
+        {
+          "id": "278709",
+          "codigo": "HU-198",
+          "titulo": "Validaciones en el flujo de agendamiento",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/278709"
+        }
+      ],
       "publicar": true,
       "aprobacionUX": {
         "aprobado": false,
@@ -46,8 +75,16 @@
       "ruta": "zt/historia-clinica/",
       "entrada": "index.html",
       "version": "0.1.0",
-      "estado": "borrador",
-      "figma": "",
+      "estado": "en-revision",
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=15673-157601",
+      "hu": [
+        {
+          "id": "305878",
+          "codigo": "HU-297",
+          "titulo": "Mis solicitudes de historia clínica MP - ZT",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/305878"
+        }
+      ],
       "publicar": true,
       "aprobacionUX": {
         "aprobado": false,
@@ -63,8 +100,8 @@
       "ruta": "zt/ventas-y-afiliacion/",
       "entrada": "index.html",
       "version": "0.1.0",
-      "estado": "borrador",
-      "figma": "",
+      "estado": "en-revision",
+      "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=13542-109534",
       "publicar": true,
       "aprobacionUX": {
         "aprobado": false,
@@ -75,35 +112,26 @@
     {
       "id": "drupal-navegacion",
       "nombre": "Navegación del portal",
-      "descripcion": "Tres alternativas de menú principal del portal web para pruebas de navegación.",
+      "descripcion": "Menú principal del portal web con navegación progresiva por niveles.",
       "plataforma": "drupal",
       "ruta": "drupal/navegacion/",
-      "entrada": "menu-1.html",
+      "entrada": "menu-2.html",
       "version": "0.1.0",
-      "estado": "borrador",
-      "figma": "",
+      "estado": "aprobado",
+      "figma": "https://www.figma.com/design/UnZnt99aWWFcQTmGxWDDEU/Compensar-Fase-2?node-id=14882-48334&m=dev",
+      "hu": [
+        {
+          "id": "293917",
+          "codigo": "HU-256",
+          "titulo": "Navegacion Menu Responsive y Escritorio",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/293917"
+        }
+      ],
       "publicar": true,
       "aprobacionUX": {
-        "aprobado": false,
-        "por": null,
-        "fecha": null
-      }
-    },
-    {
-      "id": "drupal-ayudas-diagnosticas",
-      "nombre": "Ayudas diagnósticas",
-      "descripcion": "Flujo reservado. Aún no tiene pantallas.",
-      "plataforma": "drupal",
-      "ruta": "drupal/ayudas-diagnosticas/",
-      "entrada": "index.html",
-      "version": "0.0.0",
-      "estado": "borrador",
-      "figma": "",
-      "publicar": false,
-      "aprobacionUX": {
-        "aprobado": false,
-        "por": null,
-        "fecha": null
+        "aprobado": true,
+        "por": "Equipo UX",
+        "fecha": "2026-11-12"
       }
     },
     {
@@ -117,13 +145,13 @@
         "app/index.html"
       ],
       "version": "0.1.0",
-      "estado": "borrador",
+      "estado": "aprobado",
       "figma": "",
       "publicar": true,
       "aprobacionUX": {
-        "aprobado": false,
-        "por": null,
-        "fecha": null
+        "aprobado": true,
+        "por": "Equipo UX",
+        "fecha": "2026-11-12"
       }
     },
     {
@@ -134,8 +162,8 @@
       "ruta": "app/historia-clinica/",
       "entrada": "index.html",
       "version": "0.1.0",
-      "estado": "borrador",
-      "figma": "",
+      "estado": "en-revision",
+      "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8336-20380",
       "publicar": true,
       "aprobacionUX": {
         "aprobado": false,

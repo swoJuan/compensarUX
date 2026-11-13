@@ -4,7 +4,7 @@
  *  Reutiliza el componente productivo .mp-sidebar (core) como
  *  contenedor del menú en ambas variantes. Este script solo
  *  orquesta abrir/cerrar/foco — el contenido del menú lo arma
- *  menu-1.js o menu-2.js según la página.
+ *  menu-2.js.
  * ============================================================
  */
 

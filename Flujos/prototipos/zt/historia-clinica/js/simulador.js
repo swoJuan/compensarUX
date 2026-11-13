@@ -45,7 +45,9 @@
     for (var i = 0; i < list.length; i++) if (list[i][0] === key) return list[i][1];
     return key;
   }
-  function readOpen() { try { return sessionStorage.getItem(KEY_OPEN) !== '0'; } catch (e) { return true; } }
+  // Cerrado por defecto: el panel tapaba el menú (escritorio) y el formulario (móvil).
+  // Solo se abre si el usuario lo abrió antes en esta sesión.
+  function readOpen() { try { return sessionStorage.getItem(KEY_OPEN) === '1'; } catch (e) { return false; } }
   function writeOpen(v) { try { sessionStorage.setItem(KEY_OPEN, v ? '1' : '0'); } catch (e) {} }
 
   var onMisPage = /mis-solicitudes\.html$/.test(window.location.pathname);

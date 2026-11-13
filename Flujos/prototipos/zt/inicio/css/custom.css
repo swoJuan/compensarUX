@@ -1,0 +1,287 @@
+/* ============================================================
+ * custom.css — Inicio de la Oficina virtual (zt/inicio/)
+ * ------------------------------------------------------------
+ * Cascada: core.css (DS) → ../../shared + ../shared/zt.css (shell ZT) → ESTE archivo
+ *
+ * Este flujo es independiente: además del contenido del Home, ajusta
+ * header, menú lateral y footer al Figma de esta pantalla. Todo lo del
+ * shell va acotado a body.zt-inicio para no afectar a los demás flujos ZT.
+ * Valores del frame Figma "01 Home" de Compensar ZT – Fase 2
+ * (archivo u4bXqFvoAf9re85YN3yfB8, nodo 12788:94181), mapeados a tokens
+ * del Design System / ZT.
+ *
+ * Brecha con el sistema de diseño: Figma usa 32px (título) y 20px
+ * (subtítulos) y el DS no tiene esos tamaños en su escala. Se declaran
+ * como variables locales del Home hasta que el DS los incorpore.
+ *
+ * Tokens usados (existentes):
+ *   spacing: --space-8/12/16/24/32/48  · --space-20 (ZT)
+ *   radius:  --radius-md (24px) · --radius-12 (ZT, 12px) · --radius-pill
+ *   size:    --font-size-2xl (24) · --font-size-xl (18) · --font-size-lg (16) · --font-size-h2 (40, ZT)
+ *   weight:  --font-weight-bold / --font-weight-regular
+ *   color:   --color-primary · --color-text-primary/secondary · --use-text-tertiary
+ *            --use-surface-white · --use-surface-theme-gray-5 · --use-border-default
+ *            --use-surface-violet · --use-border-violet-dark · --use-text-theme-violet
+ * ============================================================ */
+
+/* Tamaños de Figma sin token en el DS (ver nota de cabecera) */
+.home-wrap {
+  --home-title-size: 2rem;        /* 32px · Figma "¡Hola Margarita!" */
+  --home-subtitle-size: 1.25rem;  /* 20px · Figma bienvenida y "La mejor atención…" */
+}
+/* Contenedor del contenido — Figma: padding 32px, gaps entre bloques */
+.home-wrap {
+  padding: var(--space-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  max-width: 1139px;   /* ancho del frame de contenido en Figma */
+}
+
+/* ═══════════════ BIENVENIDA ═══════════════ */
+.home-welcome { display: flex; flex-direction: column; gap: var(--space-8); }
+/* Título — Figma: 32px, bold, lh 1.3 */
+.home-title {
+  font-size: var(--home-title-size);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3; margin: 0;
+  color: var(--color-text-primary);
+}
+.home-title__hi   { color: var(--color-primary); }
+.home-title__name { color: var(--color-text-primary); }
+/* Descripción — Figma: 20px, regular, lh 30px */
+.home-desc {
+  font-size: var(--home-subtitle-size);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5; margin: 0;
+  color: var(--color-text-secondary);
+}
+.home-desc strong { font-weight: var(--font-weight-bold); }
+
+/* ═══════════════ CARDS DE SERVICIOS (grid 3 col) ═══════════════ */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-20);          /* Spacing/spacing-5 = 20px */
+}
+.home-card {
+  display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-8);
+  min-height: 114px;             /* altura de card en Figma (114px con 2 líneas de descripción) */
+  background: var(--use-surface-white);
+  border: 2px solid transparent; /* reservado para el borde del hover (sin salto de layout) */
+  border-radius: var(--radius-md);/* radius/radius-9 = 24px */
+  /* padding 16/24 menos 2px del borde para conservar tamaño visual */
+  padding: calc(var(--space-16) - 2px) calc(var(--space-24) - 2px);
+  text-decoration: none;
+  transition: background-color .2s ease-in-out, border-color .2s ease-in-out, color .2s ease-in-out;
+  cursor: pointer;
+}
+/* Hover — Figma Fase 2 (card "Agendamiento de citas"): fondo blanco,
+   borde 2px violeta 700 (#4e3199) y título violeta 700. */
+.home-card, .home-card:hover, .home-card:focus { text-decoration: none; }
+.home-card:hover {
+  border-color: var(--product-violet-70);
+}
+.home-card:hover .home-card__title { color: var(--use-text-theme-violet); }
+.home-card:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+/* Tarjetas sin pantalla en el prototipo: el core atenúa todo [aria-disabled]
+   (opacity .5, sin puntero). En Figma se ven normales, así que se restablece
+   el aspecto; el clic lo bloquea index.html. Los lectores siguen anunciando
+   que no están disponibles. */
+.home-card[aria-disabled="true"] { opacity: 1; pointer-events: auto; cursor: default; }
+
+.home-card__head { display: flex; align-items: center; gap: var(--space-12); }
+.home-card__icon { flex-shrink: 0; transition: color .2s ease-in-out; }   /* icon 32px vía .icon-32 */
+/* Título = body/XL bold: 18px, lh 1.3 */
+.home-card__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color .2s ease-in-out;
+}
+/* Descripción = body/L: 16px, regular, lh 1.3 */
+.home-card__desc {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3; margin: 0;
+  color: var(--use-text-tertiary);
+  transition: color .2s ease-in-out;
+}
+
+/* ═══════════════ LA MEJOR ATENCIÓN MÉDICA ═══════════════ */
+.home-atencion { display: flex; flex-direction: column; gap: var(--space-16); }
+/* Título — Figma: 20px, bold, lh 30px */
+.home-atencion__title {
+  font-size: var(--home-subtitle-size);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.5; margin: 0;
+  color: var(--color-text-secondary);
+}
+.home-atencion__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-20);
+}
+
+/* Card horizontal: imagen izquierda + contenido derecha (Figma) */
+.home-hcard {
+  display: flex; align-items: stretch;
+  background: var(--use-surface-white);
+  border: 1px solid var(--use-border-default);
+  border-radius: var(--radius-12);   /* 12px */
+  overflow: hidden;
+}
+.home-hcard__media { flex: 0 0 50%; min-width: 0; aspect-ratio: 1448 / 1086; }  /* Figma: mitad de la card, proporción de la imagen */
+.home-hcard__media img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover;
+}
+.home-hcard__body {
+  flex: 1 1 50%; min-width: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--space-8);
+  padding: var(--space-16) var(--space-24);
+}
+/* Título = body/XL bold: 18px, lh 1.3 */
+.home-hcard__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3; margin: 0;
+  color: var(--color-text-primary);
+}
+/* Descripción = body/L: 16px, lh 1.3 */
+.home-hcard__desc {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3; margin: 0;
+  color: var(--use-text-tertiary);
+}
+.home-hcard .mp-btn { align-self: flex-start; margin-top: var(--space-4); }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+/* Tablet: cards en 2 columnas */
+@media (max-width: 1024px) {
+  .home-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* Mobile: una sola columna, sin scroll horizontal */
+@media (max-width: 680px) {
+  .home-wrap { padding: var(--space-20); gap: var(--space-24); }
+  .home-title { font-size: var(--font-size-3xl); }   /* 28px en mobile */
+  .home-desc { font-size: var(--font-size-lg); }
+  .home-hcard__media { flex-basis: auto; aspect-ratio: 16 / 9; }
+  .home-cards { grid-template-columns: 1fr; }
+  .home-atencion__row { grid-template-columns: 1fr; }
+  /* Card horizontal → apilada en mobile */
+  .home-hcard { flex-direction: column; }
+  .home-hcard__media { width: 100%; min-height: 160px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SHELL DEL INICIO (Figma "Navegador ZT", "SideBar", "mp footer")
+   Acotado a body.zt-inicio: no cambia el shell de los demás flujos.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Saltar al contenido (teclado) */
+.zt-inicio .zt-skip {
+  position: absolute; z-index: 100; top: var(--space-8); left: var(--space-8);
+  padding: var(--space-8) var(--space-16); border-radius: var(--radius-xs, 8px);
+  background: var(--use-surface-white); color: var(--color-text-primary); font-weight: var(--font-weight-bold);
+}
+/* Fondo gris de Figma en toda la página (también bajo el menú flotante) */
+body.zt-inicio, .zt-inicio .layout { background: var(--use-surface-theme-gray-5); }
+.zt-inicio .main { background: transparent; outline: none; }
+
+/* ── Header: nombre + plan + ícono de cuenta naranja; Salida con ícono 32px ── */
+.zt-inicio .hd-person__plan { font-size: var(--font-size-lg); color: #777; }  /* Figma: 16px #777 (mismo gris del shell) */
+.zt-inicio .hd-person__trigger { gap: var(--space-12); }
+.zt-inicio .hd-person__avatar { flex-shrink: 0; }
+.zt-inicio .hd-divider { height: 57px; background: var(--use-border-default); }
+.zt-inicio .hd-exit { padding: var(--space-8) 0; gap: var(--space-8); }
+.zt-inicio .hd-exit:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: var(--radius-xs, 8px); }
+
+/* ── Menú lateral: tarjeta flotante (Figma 227×680) en lugar de columna completa ── */
+@media (min-width: 768px) {
+  .zt-inicio .layout { align-items: flex-start; }
+  .zt-inicio .sidebar {
+    height: auto; min-height: 680px; max-height: calc(100vh - 88px);
+    align-self: flex-start;
+  }
+}
+.zt-inicio .sidebar { gap: var(--space-4); }                        /* Figma: una opción cada 52px */
+.zt-inicio .nav-item { gap: var(--space-8); align-items: center; }  /* Figma: ícono 24 + 8px + texto */
+.zt-inicio .nav-icon { font-size: 24px; }
+
+/* ── Footer: ancho completo bajo el menú (Figma "mp footer") ── */
+.ini-footer {
+  border-top: 1px solid var(--use-text-tertiary);
+  background: var(--use-surface-surface);
+  color: var(--color-text-primary);
+}
+.ini-footer__container {
+  display: grid; grid-template-columns: minmax(0, 348px) minmax(0, 268px) minmax(0, 438px); gap: var(--space-16);  /* anchos de columna de Figma */
+  width: 100%; max-width: 1140px; margin: 0 auto;
+  padding: var(--space-48) var(--space-16);
+}
+.ini-footer__col { display: flex; flex-direction: column; gap: var(--space-24); min-width: 0; }
+.ini-footer__col--3 { gap: var(--space-32); }
+.ini-footer__title {
+  margin: 0; font-size: var(--font-size-xl); font-weight: var(--font-weight-bold);
+  line-height: 1.5; letter-spacing: .01em; color: var(--color-text-primary);
+}
+.ini-footer__links { margin: 0; padding: 0 0 0 var(--space-24); display: flex; flex-direction: column; gap: var(--space-12); list-style: disc; }
+.ini-footer__links a {
+  font-size: var(--font-size-lg); line-height: 1.5; color: var(--color-text-primary);
+  text-decoration: underline; text-underline-position: from-font;
+}
+.ini-footer__links a:hover { color: var(--brand); }
+.ini-footer__social { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-24); }
+.ini-footer__social a { display: inline-flex; color: var(--color-text-primary); border-radius: var(--radius-xs, 8px); }
+.ini-footer__social a:hover { color: var(--brand); }
+.ini-footer__address { display: flex; flex-direction: column; gap: var(--space-12); font-style: normal; font-size: var(--font-size-lg); line-height: 1.3; }
+.ini-footer__org { font-size: var(--font-size-xl); line-height: 1.5; font-weight: var(--font-weight-bold); }
+.ini-footer a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+/* Franja inferior blanca con los logos de vigilancia */
+.ini-footer__vigilados {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--space-64);
+  padding: var(--space-24) var(--space-16); background: var(--use-surface-white);
+}
+.ini-footer__vigilados img { display: block; height: auto; max-width: 100%; }
+
+/* ── Botones flotantes: accesibilidad (borde derecho) y volver arriba ── */
+.ini-a11y {
+  position: fixed; z-index: 40; right: 0; top: 70%;
+  display: flex; align-items: center; justify-content: center;
+  width: var(--space-48); height: var(--space-48);
+  border: 0; border-radius: var(--radius-md) 0 0 var(--radius-md);
+  background: var(--use-surface-white); color: var(--color-text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .24);              /* SombraPrincipal de Figma */
+}
+.ini-top {
+  position: fixed; z-index: 40; right: var(--space-80, 80px); bottom: var(--space-24);
+  display: flex; align-items: center; justify-content: center;
+  width: var(--space-64); height: var(--space-64); border: 0; border-radius: 50%;
+  background: var(--brand); color: var(--use-surface-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .24);
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+.ini-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.ini-top:hover { background: var(--brand-hover); }
+.ini-a11y:focus-visible, .ini-top:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ini-top { transition: none; }
+}
+
+/* ── Responsive del shell del Inicio ── */
+@media (max-width: 1024px) {
+  .ini-footer__container { grid-template-columns: 1fr 1fr; }
+  .ini-footer__col--3 { grid-column: 1 / -1; }
+}
+@media (max-width: 680px) {
+  .ini-footer__container { grid-template-columns: 1fr; gap: var(--space-32); padding: var(--space-32) var(--space-16); }
+  .ini-footer__col--3 { grid-column: auto; }
+  .ini-footer__vigilados { gap: var(--space-32); }
+  .ini-top { right: var(--space-16); bottom: var(--space-16); width: var(--space-48); height: var(--space-48); }
+}

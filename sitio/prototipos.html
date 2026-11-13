@@ -49,9 +49,6 @@
       </a>
 
       <p class="pux-side__label">Sistema de diseño</p>
-      <a class="pux-side__link" href="sistema-de-diseno.html" data-tone="violet">
-        <i class="icon icon-palette icon-20" aria-hidden="true"></i><span>Versión actual</span>
-      </a>
       <a class="pux-side__link" href="ds/drupal.html" target="_blank" rel="noopener" data-tone="violet">
         <i class="icon icon-globe icon-20" aria-hidden="true"></i><span>Drupal · ZT</span>
         <i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span>
@@ -60,11 +57,11 @@
         <i class="icon icon-device-mobile icon-20" aria-hidden="true"></i><span>APP</span>
         <i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span>
       </a>
+      <a class="pux-side__link" href="sistema-de-diseno.html" data-tone="violet">
+        <i class="icon icon-download-simple icon-20" aria-hidden="true"></i><span>Descargar</span>
+      </a>
 
       <p class="pux-side__label">Prototipos</p>
-      <a class="pux-side__link" href="prototipos.html" data-tone="orange">
-        <i class="icon icon-stack icon-20" aria-hidden="true"></i><span>Todos los prototipos</span>
-      </a>
       <div data-side-flujos></div>
 
       <p class="pux-side__label">Entrega</p>
@@ -110,7 +107,7 @@
             <label class="mp-input-label" for="filtro-q">Buscar</label>
             <div class="mp-input-wrapper">
               <i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>
-              <input class="mp-input-field has-icon-left" type="search" id="filtro-q" placeholder="Nombre o descripción" autocomplete="off" data-filtro-q>
+              <input class="mp-input-field has-icon-left" type="search" id="filtro-q" placeholder="Nombre, descripción o HU (ej. 256)" autocomplete="off" data-filtro-q>
             </div>
           </div>
           <div class="mp-input-group pux-filters__estado">
@@ -120,6 +117,7 @@
                 <option value="">Todos</option>
                 <option value="borrador">Borrador</option>
                 <option value="en-revision">En revisión</option>
+                <option value="refinado">Refinado</option>
                 <option value="aprobado">Aprobado UX</option>
                 <option value="obsoleto">Obsoleto</option>
               </select>
