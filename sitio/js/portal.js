@@ -660,24 +660,78 @@
           '<i class="icon icon-eye-slash icon-32" aria-hidden="true"></i>' +
           '<span>Todavía no tiene pantallas</span>' +
         '</div>';
-    var hu = (f.hu || []).length ? '<div class="pux-fcard__hu">' + listaHu(f) + '</div>' : '';
+    var hu = huFila(f);
     return '<li class="pux-fcard' + (f.publicado ? '' : ' is-unpublished') + '" data-tone="' +
         (TONO_PLATAFORMA[f.plataforma] || 'orange') + '">' +
       vista +
       '<div class="pux-fcard__body">' +
-        '<div class="pux-fcard__cab">' +
-          '<h3 class="pux-fcard__title"><a href="' + detalle + '">' + esc(f.nombre) + '</a></h3>' +
-          badgeEstado(f.estado) +
-        '</div>' +
+        '<h3 class="pux-fcard__title"><a href="' + detalle + '">' + esc(f.nombre) + '</a></h3>' +
         '<p class="pux-fcard__desc">' + esc(f.descripcion) + '</p>' + hu +
         '<p class="pux-fcard__meta">Versión ' + esc(f.version) + ' · actualizado el ' + esc(fecha(f.actualizado)) + '</p>' +
       '</div>' +
-      '<div class="pux-fcard__pie">' +
-        '<a class="mp-btn mp-btn--terciario pux-fcard__detalle" href="' + detalle + '">' +
-          'Ver detalle<span class="visually-hidden"> de ' + esc(f.nombre) + '</span></a>' +
-        (f.publicado ? botonVisualizar(f, 'Abrir prototipo', 'mp-btn--terciario') : noPublicado()) +
+      '<div class="pux-fcard__lado">' +
+        '<div class="pux-fcard__estado">' + badgeEstado(f.estado) + '</div>' +
+        '<div class="pux-fcard__pie">' +
+          (f.publicado ? '' : noPublicado()) + menuFila(f, detalle) +
+        '</div>' +
       '</div>' +
     '</li>';
+  }
+  /* HU en la fila: la primera siempre visible; las demás, en un desplegable nativo
+     (<details>) para que la fila no crezca. Accesible por teclado sin JS. */
+  function itemHu(h) {
+    var t = esc(textoHu(h));
+    return '<li>' + (/^https:\/\//.test(h.url || '')
+      ? '<a class="pux-link" href="' + esc(h.url) + '" target="_blank" rel="noopener">' + t + '<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>'
+      : t) + '</li>';
+  }
+  function huFila(f) {
+    var hus = f.hu || [];
+    if (!hus.length) return '';
+    var resto = hus.slice(1);
+    return '<div class="pux-fcard__hu">' +
+      '<ul class="pux-hu" role="list">' + itemHu(hus[0]) + '</ul>' +
+      (resto.length
+        ? '<details class="pux-hu-mas">' +
+            '<summary><span class="pux-hu-mas__abrir">Ver ' + resto.length + ' HU más</span>' +
+              '<span class="pux-hu-mas__cerrar">Ocultar HU</span>' +
+              '<i class="icon icon-caret-down icon-16" aria-hidden="true"></i></summary>' +
+            '<ul class="pux-hu" role="list">' + resto.map(itemHu).join('') + '</ul>' +
+          '</details>'
+        : '') +
+    '</div>';
+  }
+  /* Acciones de la fila en un menú ⋮ (mismo disclosure que el catálogo en tabla):
+     Visualizar, Ver detalle y Descargar para desarrollo. Las que no aplican
+     (flujo no publicado, sin paquete) no aparecen. */
+  function itemMenu(href, icono, texto, oculto, extra, fin) {
+    return '<li><a class="pux-menu__item" href="' + esc(href) + '"' + (extra || '') + '>' +
+      '<i class="icon ' + icono + ' icon-20" aria-hidden="true"></i>' +
+      '<span class="pux-menu__label">' + texto + (oculto ? '<span class="visually-hidden"> ' + oculto + '</span>' : '') + '</span>' +
+      (fin || '') +
+    '</a></li>';
+  }
+  function menuFila(f, detalle) {
+    var menuId = 'acciones-' + f.id;
+    var items = [];
+    if (f.publicado) {
+      items.push(itemMenu(f.url, 'icon-eye', 'Visualizar', esc(f.nombre) + ' (se abre en una pestaña nueva)', ' target="_blank" rel="noopener"',
+        '<i class="icon icon-arrow-square-out icon-16 pux-menu__ext" aria-hidden="true"></i>'));
+    }
+    items.push(itemMenu(detalle, 'icon-info', 'Ver detalle', 'de ' + esc(f.nombre)));
+    if (f.descarga && f.descarga.url) {
+      items.push(itemMenu(f.descarga.url, 'icon-download-simple',
+        'Descargar para desarrollo <span class="pux-menu__peso">' + esc(peso(f.descarga.bytes)) + '</span>',
+        esc(f.nombre) + ', archivo ZIP', ' download="' + esc(f.descarga.archivo) + '"'));
+    }
+    return '<div class="pux-menu">' +
+      '<button type="button" class="mp-btn mp-btn--terciario pux-acc__btn pux-acc__btn--neutral pux-menu__trigger" aria-expanded="false" aria-controls="' + esc(menuId) + '">' +
+        '<i class="icon icon-dots-three-vertical icon-20" aria-hidden="true"></i>' +
+        '<span class="visually-hidden">Acciones de ' + esc(f.nombre) + '</span>' +
+        '<span class="pux-tip" aria-hidden="true">Acciones</span>' +
+      '</button>' +
+      '<ul class="pux-menu__panel" id="' + esc(menuId) + '" role="list" hidden>' + items.join('') + '</ul>' +
+    '</div>';
   }
   function tarjetasFlujos(items, plataforma) {
     return '<ul class="pux-fcards" role="list" aria-label="Flujos de ' + esc(plataforma) + '">' +
@@ -690,8 +744,10 @@
     var shots = $all('.pux-fcard__shot--live', root);
     if (!shots.length) return;
     function ajustar(el) {
-      var w = el.clientWidth;
-      if (w) el.style.setProperty('--pux-escala', (w / 1280).toFixed(4));
+      // Cubre el marco (como object-fit: cover): en la fila la miniatura puede ser
+      // más alta que 16:10, y así no queda franja vacía debajo.
+      var w = el.clientWidth, h = el.clientHeight;
+      if (w) el.style.setProperty('--pux-escala', Math.max(w / 1280, h / 800).toFixed(4));
     }
     shots.forEach(ajustar);
     if (window.ResizeObserver) {

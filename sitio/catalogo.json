@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-12T21:31:38.426Z",
+  "generado": "2026-11-13T20:55:42.802Z",
   "fuentes": {
     "designSystem": {
       "id": "designSystem",
@@ -62,14 +62,20 @@
       "repositorioPropuesto": "compensar-ux-prototipos",
       "remoto": "https://github.com/swoJuan/compensarUX.git",
       "ref": "HEAD",
-      "commit": "d4cefd3",
+      "commit": "d983b20",
       "version": null,
       "cambiosDesdeVersion": 0,
-      "fecha": "2026-11-12T12:33:17-05:00",
+      "fecha": "2026-11-13T10:18:37-05:00",
       "cambiosSinCommit": false,
-      "pendientesSinPublicar": 11,
+      "pendientesSinPublicar": 0,
       "commitsSinSubir": 0,
       "cambios": [
+        {
+          "commit": "d983b20",
+          "fecha": "2026-11-13T10:18:37-05:00",
+          "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+          "archivos": 18
+        },
         {
           "commit": "d4cefd3",
           "fecha": "2026-11-12T12:33:17-05:00",
@@ -118,8 +124,19 @@
       ],
       "publicado": true,
       "url": "p/zt/inicio/index.html",
-      "actualizado": "2026-11-12T12:33:17-05:00",
+      "descarga": {
+        "archivo": "zt-oficina-virtual-v0.1.0.zip",
+        "bytes": 5799179,
+        "url": "descargas/flujos/zt-oficina-virtual-v0.1.0.zip"
+      },
+      "actualizado": "2026-11-13T10:18:37-05:00",
       "cambios": [
+        {
+          "commit": "d983b20",
+          "fecha": "2026-11-13T10:18:37-05:00",
+          "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+          "archivos": 3
+        },
         {
           "commit": "d4cefd3",
           "fecha": "2026-11-12T12:33:17-05:00",
@@ -163,6 +180,11 @@
       ],
       "publicado": true,
       "url": "p/zt/agendamiento-de-citas/index.html",
+      "descarga": {
+        "archivo": "zt-agendamiento-de-citas-v0.1.0.zip",
+        "bytes": 6821730,
+        "url": "descargas/flujos/zt-agendamiento-de-citas-v0.1.0.zip"
+      },
       "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
@@ -196,8 +218,19 @@
       ],
       "publicado": true,
       "url": "p/zt/historia-clinica/index.html",
-      "actualizado": "2026-11-12T12:33:17-05:00",
+      "descarga": {
+        "archivo": "zt-historia-clinica-v0.1.0.zip",
+        "bytes": 5817057,
+        "url": "descargas/flujos/zt-historia-clinica-v0.1.0.zip"
+      },
+      "actualizado": "2026-11-13T10:18:37-05:00",
       "cambios": [
+        {
+          "commit": "d983b20",
+          "fecha": "2026-11-13T10:18:37-05:00",
+          "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+          "archivos": 1
+        },
         {
           "commit": "d4cefd3",
           "fecha": "2026-11-12T12:33:17-05:00",
@@ -222,6 +255,11 @@
       "hu": [],
       "publicado": true,
       "url": "p/zt/ventas-y-afiliacion/index.html",
+      "descarga": {
+        "archivo": "zt-ventas-y-afiliacion-v0.1.0.zip",
+        "bytes": 5978296,
+        "url": "descargas/flujos/zt-ventas-y-afiliacion-v0.1.0.zip"
+      },
       "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
@@ -255,8 +293,19 @@
       ],
       "publicado": true,
       "url": "p/drupal/navegacion/menu-2.html",
-      "actualizado": "2026-11-12T12:33:17-05:00",
+      "descarga": {
+        "archivo": "drupal-navegacion-v0.1.0.zip",
+        "bytes": 836285,
+        "url": "descargas/flujos/drupal-navegacion-v0.1.0.zip"
+      },
+      "actualizado": "2026-11-13T10:18:37-05:00",
       "cambios": [
+        {
+          "commit": "d983b20",
+          "fecha": "2026-11-13T10:18:37-05:00",
+          "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+          "archivos": 7
+        },
         {
           "commit": "d4cefd3",
           "fecha": "2026-11-12T12:33:17-05:00",
@@ -281,6 +330,11 @@
       "hu": [],
       "publicado": true,
       "url": "p/app/index.html",
+      "descarga": {
+        "archivo": "app-inicio-v0.1.0.zip",
+        "bytes": 818009,
+        "url": "descargas/flujos/app-inicio-v0.1.0.zip"
+      },
       "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
@@ -307,6 +361,11 @@
       "hu": [],
       "publicado": true,
       "url": "p/app/historia-clinica/index.html",
+      "descarga": {
+        "archivo": "app-historia-clinica-v0.1.0.zip",
+        "bytes": 837014,
+        "url": "descargas/flujos/app-historia-clinica-v0.1.0.zip"
+      },
       "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {

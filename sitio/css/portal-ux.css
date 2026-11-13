@@ -830,14 +830,12 @@ code { font-family: var(--font-family-mono, monospace); font-size: var(--body---
 .pux-ficha__bloque .pux-hu-item:last-child, .pux-ficha__bloque .pux-datos > div:last-child { padding-bottom: 0; }
 .pux-datos > div { padding: 10px 0; }
 
-/* ---------- Catálogo en tarjetas ----------
-   Un prototipo se reconoce mirándolo, no leyendo su nombre: cada tarjeta abre
-   con el flujo renderizado a escala. El resto (estado, HU, versión) se lee
-   debajo, en el orden en que se revisa. */
-.pux-fcards { display: grid; gap: var(--space-24, 24px); margin: 0; padding: 0; list-style: none; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 760px) { .pux-fcards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* ---------- Catálogo en filas ----------
+   Una fila por flujo: miniatura para reconocer la pantalla, contenido al centro
+   y estado + acciones alineados a la derecha, siempre en el mismo lugar. */
+.pux-fcards { display: grid; gap: var(--space-16, 16px); margin: 0; padding: 0; list-style: none; grid-template-columns: minmax(0, 1fr); }
 .pux-fcard {
-  display: flex; flex-direction: column; min-width: 0; overflow: hidden;
+  display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; overflow: hidden;
   background: var(--pux-surface); border: 1px solid var(--color-border-subtle, #e3e3e3); border-radius: 16px;
 }
 .pux-fcard__shot {
@@ -848,32 +846,59 @@ code { font-family: var(--font-family-mono, monospace); font-size: var(--body---
   position: absolute; top: 0; left: 0; width: 1280px; height: 800px; max-width: none; border: 0;
   transform-origin: 0 0; transform: scale(var(--pux-escala, .32)); pointer-events: none;
 }
-.pux-fcard__shot--vacio { display: grid; place-content: center; justify-items: center; gap: var(--space-8, 8px); color: var(--tone-fg); font-size: var(--body---m, .875rem); }
-.pux-fcard__body { flex: 1 1 auto; padding: var(--space-20, 20px); }
-.pux-fcard__cab { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-8, 8px); }
+.pux-fcard__shot--vacio { display: grid; place-content: center; justify-items: center; gap: var(--space-8, 8px); padding: var(--space-12, 12px); text-align: center; color: var(--tone-fg); font-size: var(--body---m, .875rem); }
+.pux-fcard__body { min-width: 0; padding: var(--space-20, 20px) var(--space-20, 20px) 0; }
 .pux-fcard__title { margin: 0; font-size: var(--body---x-l, 1.125rem); font-weight: var(--font-weight-bold, 700); line-height: 1.3; }
 .pux-fcard__title a { color: var(--color-text-primary); text-decoration: none; }
 .pux-fcard__title a:hover { color: var(--pux-accent); text-decoration: underline; }
-.pux-fcard__desc { margin: var(--space-8, 8px) 0 0; max-width: 56ch; color: var(--color-text-secondary); font-size: var(--body---m, .875rem); line-height: 1.55; }
+.pux-fcard__desc {
+  margin: var(--space-4, 4px) 0 0; max-width: 72ch; color: var(--color-text-secondary); font-size: var(--body---m, .875rem); line-height: 1.55;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+}
 .pux-fcard__hu { margin: var(--space-12, 12px) 0 0; font-size: var(--body---m, .875rem); }
 .pux-fcard__hu .pux-hu { min-width: 0; }
-.pux-fcard__pie {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-8, 8px);
-  padding: var(--space-8, 8px) var(--space-12, 12px) var(--space-8, 8px) var(--space-20, 20px);
-  border-top: 1px solid var(--pux-line);
+.pux-fcard__meta { display: block; margin: var(--space-12, 12px) 0 0; font-size: var(--body---m, .875rem); color: var(--color-text-tertiary, #8a8a8a); }
+.pux-fcard__lado {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-12, 12px);
+  padding: var(--space-16, 16px) var(--space-20, 20px) var(--space-20, 20px);
 }
-.pux-fcard__meta { font-size: var(--body---m, .875rem); color: var(--color-text-tertiary, #8a8a8a); }
+.pux-fcard__pie { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-8, 8px); }
+.pux-fcard__detalle { text-decoration: none; }
 .pux-fcard.is-unpublished .pux-fcard__title a { color: var(--color-text-tertiary, #8a8a8a); }
-.pux-fcard.is-unpublished .pux-fcard__pie { padding-right: var(--space-20, 20px); }
+
+/* Fila horizontal desde tablet: miniatura | contenido | estado y acciones. */
+@media (min-width: 760px) {
+  .pux-fcard { grid-template-columns: 200px minmax(0, 1fr) auto; align-items: stretch; }
+  .pux-fcard__shot { aspect-ratio: auto; min-height: 125px; border-bottom: 0; border-right: 1px solid var(--color-border-subtle, #e3e3e3); }
+  .pux-fcard__body { padding: var(--space-20, 20px); }
+  .pux-fcard__lado {
+    flex-direction: column; flex-wrap: nowrap; align-items: flex-end; justify-content: space-between;
+    padding: var(--space-20, 20px); border-left: 1px solid var(--pux-line);
+  }
+  .pux-fcard__pie { flex-direction: column; align-items: flex-end; }
+}
+@media (min-width: 1100px) { .pux-fcard { grid-template-columns: 240px minmax(0, 1fr) auto; } }
+
+/* HU adicionales: desplegable nativo, sin modal. */
+.pux-hu-mas { margin-top: var(--space-4, 4px); }
+.pux-hu-mas > summary {
+  display: inline-flex; align-items: center; gap: var(--space-4, 4px); min-height: 24px; cursor: pointer; list-style: none;
+  color: var(--color-text-secondary); font-weight: var(--font-weight-medium, 500); border-radius: 4px;
+}
+.pux-hu-mas > summary::-webkit-details-marker { display: none; }
+.pux-hu-mas > summary:hover { color: var(--pux-accent); text-decoration: underline; }
+.pux-hu-mas > summary:focus-visible { outline: 2px solid var(--pux-accent); outline-offset: 2px; }
+.pux-hu-mas > summary .icon { transition: transform .15s ease; }
+.pux-hu-mas[open] > summary .icon { transform: rotate(180deg); }
+.pux-hu-mas__cerrar, .pux-hu-mas[open] .pux-hu-mas__abrir { display: none; }
+.pux-hu-mas[open] .pux-hu-mas__cerrar { display: inline; }
+.pux-hu-mas > .pux-hu { margin-top: var(--space-4, 4px); }
+@media (prefers-reduced-motion: reduce) { .pux-hu-mas > summary .icon { transition: none; } }
 .pux-platform__ver { white-space: nowrap; }
 .pux-platform__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-4, 4px) var(--space-16, 16px); }
 .pux-platform__head .pux-section__title { margin-bottom: 0; }
 .pux-platform__head p { flex: 1 1 24ch; }
 .pux-platform + .pux-platform { margin-top: var(--space-40, 40px); }
-.pux-fcard__meta { display: block; margin: var(--space-16, 16px) 0 0; }
-.pux-fcard__pie { padding: var(--space-8, 8px) var(--space-12, 12px); }
-.pux-fcard.is-unpublished .pux-fcard__pie { padding-right: var(--space-16, 16px); }
-.pux-fcard__detalle { text-decoration: none; }
 
 /* ---------- Descargas del sistema de diseño ---------- */
 .pux-descargas { display: grid; gap: var(--space-16, 16px); margin: 0; padding: 0; list-style: none; }
@@ -886,3 +911,11 @@ code { font-family: var(--font-family-mono, monospace); font-size: var(--body---
 /* Versión del sistema de diseño: una línea, sin tarjeta. */
 .pux-dsver { margin: 0; font-size: var(--body---x-l, 1.125rem); line-height: 1.5; color: var(--color-text-secondary); }
 .pux-dsver strong { color: var(--color-text-primary); font-variant-numeric: tabular-nums; }
+
+/* Peso del paquete en el menú ⋮ de la fila. */
+.pux-menu__peso { margin-left: var(--space-4, 4px); color: var(--color-text-tertiary, #8a8a8a); font-size: var(--body---m, .875rem); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pux-fcard__pie .pux-unpublished { white-space: nowrap; }
+
+/* Páginas de prototipos (catálogo general, Drupal, ZT, APP y ficha del flujo):
+   a todo el ancho disponible, sin tope de --pux-max. */
+body[data-page^="prototipos"] .pux-container { max-width: none; }

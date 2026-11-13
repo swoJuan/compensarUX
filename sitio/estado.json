@@ -1,14 +1,14 @@
 {
-  "generado": "2026-11-12T21:31:38.426Z",
+  "generado": "2026-11-13T20:55:42.802Z",
   "repositorio": {
     "unico": true,
     "nombre": "compensarUX",
     "rama": "main",
     "remoto": "https://github.com/swoJuan/compensarUX.git",
     "version": null,
-    "commits": 1,
+    "commits": 4,
     "commitsSinSubir": 0,
-    "pendientes": 49,
+    "pendientes": 13,
     "carpetas": [
       {
         "id": "designSystem",
@@ -24,18 +24,18 @@
         "nombre": "Prototipos",
         "rol": "Flujos navegables de Drupal, ZT y APP. Consumen una copia controlada del sistema de diseño en shared/.",
         "carpeta": "Flujos/prototipos",
-        "commit": "d4cefd3",
-        "fecha": "2026-11-12T12:33:17-05:00",
-        "pendientes": 11
+        "commit": "d983b20",
+        "fecha": "2026-11-13T10:18:37-05:00",
+        "pendientes": 0
       },
       {
         "id": "portal",
         "nombre": "Portal UX",
         "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
         "carpeta": "Flujos/portal",
-        "commit": "d4cefd3",
-        "fecha": "2026-11-12T12:33:17-05:00",
-        "pendientes": 13
+        "commit": "d983b20",
+        "fecha": "2026-11-13T10:18:37-05:00",
+        "pendientes": 3
       }
     ]
   },
@@ -197,13 +197,13 @@
     "usoDs": [
       {
         "bloque": "mp-btn",
-        "archivos": 39,
+        "archivos": 37,
         "flujos": [
           "app/historia-clinica",
           "drupal/navegacion",
           "zt/agendamiento-de-citas",
           "zt/historia-clinica",
-          "zt/index.html",
+          "zt/inicio",
           "zt/ventas-y-afiliacion"
         ]
       },
@@ -222,15 +222,6 @@
         "archivos": 14,
         "flujos": [
           "app/historia-clinica",
-          "zt/agendamiento-de-citas",
-          "zt/historia-clinica"
-        ]
-      },
-      {
-        "bloque": "mp-sidebar",
-        "archivos": 14,
-        "flujos": [
-          "drupal/navegacion",
           "zt/agendamiento-de-citas",
           "zt/historia-clinica"
         ]
@@ -257,6 +248,15 @@
         "flujos": [
           "zt/historia-clinica",
           "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-sidebar",
+        "archivos": 12,
+        "flujos": [
+          "drupal/navegacion",
+          "zt/agendamiento-de-citas",
+          "zt/historia-clinica"
         ]
       },
       {
@@ -328,14 +328,6 @@
         ]
       },
       {
-        "bloque": "tipografía (mp-h*, mp-body-*)",
-        "archivos": 8,
-        "flujos": [
-          "drupal/navegacion",
-          "zt/ventas-y-afiliacion"
-        ]
-      },
-      {
         "bloque": "mp-dropdown-group",
         "archivos": 8,
         "flujos": [
@@ -375,22 +367,23 @@
         ]
       },
       {
-        "bloque": "mp-web-header",
+        "bloque": "tipografía (mp-h*, mp-body-*)",
         "archivos": 6,
         "flujos": [
-          "drupal/navegacion"
+          "drupal/navegacion",
+          "zt/ventas-y-afiliacion"
         ]
       },
       {
         "bloque": "mp-accordion",
-        "archivos": 3,
+        "archivos": 2,
         "flujos": [
           "drupal/navegacion"
         ]
       },
       {
-        "bloque": "mp-card",
-        "archivos": 3,
+        "bloque": "mp-web-header",
+        "archivos": 2,
         "flujos": [
           "drupal/navegacion"
         ]
@@ -414,6 +407,13 @@
         "archivos": 1,
         "flujos": [
           "app/historia-clinica"
+        ]
+      },
+      {
+        "bloque": "mp-card",
+        "archivos": 1,
+        "flujos": [
+          "drupal/navegacion"
         ]
       }
     ],

@@ -240,6 +240,43 @@ const descargas = [
   return { ...meta, version: versionDs, url: `${cfg.designSystem.destino}/descargas/${meta.archivo}` };
 });
 
+/* ---------- 6c. paquete de desarrollo por flujo ----------
+   Cada flujo publicado se descarga con lo mismo que se publica: su carpeta y las
+   dependencias comunes (shared/ y las de su plataforma), con la misma estructura,
+   para que abra igual fuera del portal. */
+const carpetaFlujosZip = path.join(DIST, 'descargas', 'flujos');
+const fechaFl = infoFl.fecha ? new Date(infoFl.fecha) : new Date();
+const descargasFlujos = {};
+for (const f of publicados) {
+  const incluye = matcher([
+    ...(cfg.flujos.comun || []),
+    ...(cfg.plataformas[f.plataforma].comun || []),
+    ...(f.incluir || [f.ruta.replace(/\/?$/, '/') + '**']),
+  ]);
+  const archivos = flArchivos.filter(incluye).sort();
+  const raiz = `${f.id}-v${f.version}`;
+  const entradaFl = `${f.ruta.replace(/\/?$/, '/')}${f.entrada || 'index.html'}`;
+  const leeme = [
+    `${f.nombre} — prototipo de referencia UX (${cfg.plataformas[f.plataforma].nombre})`,
+    `Versión ${f.version} · commit ${String(infoFl.commit || '').slice(0, 7)}`,
+    ``,
+    `Cómo abrirlo`,
+    `  Abre ${entradaFl} en el navegador. Conserva la estructura de carpetas:`,
+    `  las pantallas cargan estilos, iconos y scripts desde shared/.`,
+    ``,
+    `Es una referencia de UX, no código productivo. No lo edites aquí: los cambios`,
+    `se hacen en el prototipo y vuelven a bajar en la siguiente publicación.`,
+    ``,
+  ].join('\n');
+  const datos = crearZip([
+    ...archivos.map((rel) => ({ nombre: `${raiz}/${rel}`, datos: fs.readFileSync(path.join(DIST, cfg.flujos.destino, rel)) })),
+    { nombre: `${raiz}/LEEME.txt`, datos: leeme },
+  ], fechaFl);
+  fs.mkdirSync(carpetaFlujosZip, { recursive: true });
+  fs.writeFileSync(path.join(carpetaFlujosZip, `${raiz}.zip`), datos);
+  descargasFlujos[f.id] = { archivo: `${raiz}.zip`, bytes: datos.length, url: `descargas/flujos/${raiz}.zip` };
+}
+
 /* Versiones del sistema de diseño: los tags del repositorio, más las notas que UX
    escribe en versiones.json y la versión que hoy consumen los prototipos. */
 const notasVersiones = fs.existsSync(path.join(ROOT, 'versiones.json')) ? readJson('versiones.json') : {};
@@ -308,6 +345,7 @@ const salida = {
     hu: f.hu || [],
     publicado: !!f.publicar,
     url: f.publicar ? `${cfg.flujos.destino}/${f.ruta.replace(/\/?$/, '/')}${f.entrada || 'index.html'}` : null,
+    descarga: descargasFlujos[f.id] || null,
     actualizado: fl.ultimaFecha(f.incluir || [f.ruta]),
     cambios: fl.historial(20, f.incluir || [f.ruta]),
     aprobacionUX: f.aprobacionUX || { aprobado: false, por: null, fecha: null },
