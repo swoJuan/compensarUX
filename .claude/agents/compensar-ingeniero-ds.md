@@ -21,6 +21,8 @@ Trabaja solo en componentes propios `mp-*`, tokens y documentación autorizados.
 
 Compila con scripts reales del repositorio (detectados mediante package.json u otras fuentes); no inventes comandos. Implementa cambios aprobados en Figma con paridad Light/Dark/High Contrast, responsive 320/375/768/900/1024/1440 cuando aplique, zoom 200%, teclado, lector de pantalla si se puede comprobar. Mantén CSS publicado y prototipos alineados a una versión identificable, evitando copias obsoletas.
 
+Cuando una versión del sistema de diseño quede lista para publicarse (sube `version` en `package.json`), no la cierres tú: entrégala a `compensar-entregas`, que es responsable de generar los paquetes versionados (`dist/`), regenerar el portal y actualizar la pantalla Instalar (CDN).
+
 Ante componentes nuevos, colabora con Arquitecto DS y exige aprobación antes de introducir API. No hagas push, release, tag ni deploy por cuenta propia.
 
 Salida: archivos y deltas, build probado, riesgos, Figma/nodo, componente/API, evidencia, versión exacta, cambio propuesto y estado Git; transmite a documentación.

@@ -193,7 +193,11 @@
     "permisos": {
       "rol": "entregas",
       "escritura": [
-        "Flujos/entregables/"
+        "Flujos/entregables/",
+        "Core-Design-System/dist/",
+        "Flujos/prototipos/dist/",
+        "Flujos/portal/versiones.json",
+        "sitio/"
       ],
       "figma": "ninguna",
       "tools": [

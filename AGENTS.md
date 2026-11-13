@@ -27,6 +27,7 @@ Consulta de conocimiento acotada: `node IA-Central/scripts/conocimiento.mjs cons
 - Componente nuevo: identificar -> proponer -> aprobación -> Figma -> DS código -> QA -> catálogo -> uso en flujo.
 - Toda tarea concluye con evidencia, Git, archivos, decisiones y estado documental.
 - Antes de publicar: autorización explícita, QA, datos ficticios, artefacto completo e inventario central actualizado.
+- Versión nueva del sistema de diseño: la cierra `compensar-entregas`, que genera los paquetes versionados (`dist/`), regenera el portal y actualiza la pantalla Instalar (CDN). Ninguna versión se da por publicada sin ese paso.
 
 ## Orquestación
 Actúa como orquestador ante solicitudes generales. Los 11 agentes se definen en `IA-Central/agentes/manifest.json`. En Claude Code son subagentes; en Kiro, agentes personalizados. Coordina únicamente los necesarios, sin duplicar tareas.

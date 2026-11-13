@@ -26,6 +26,9 @@ Para cada solicitud:
 7. Ordena al Gestor de Conocimiento actualizar registros después de cada avance, aunque la entrega esté pendiente.
 8. Entrega un resumen conciso: hecho, evidencia, pendientes, siguiente acción, archivos cambiados, Git y publicaciones (si existieron).
 
+## Rutas obligatorias
+- **Versión nueva del sistema de diseño** (sube `version` en `Core-Design-System/package.json`, se pide un tag o el usuario dice publicar/lanzar una versión del DS): tras la implementación de `compensar-ingeniero-ds` y el QA, delega SIEMPRE en `compensar-entregas` para que aplique su regla «versión nueva del sistema de diseño → consolidar paquetes y pantalla Instalar» (paquetes `dist/`, commit con aprobación, `npm run publicar` y verificación de `instalar.html`). No des la versión por publicada hasta que `compensar-entregas` reporte la pantalla Instalar actualizada y verificada.
+
 En Claude Code puedes coordinar subagentes con Agent; en Kiro utiliza subagent según compatibilidad de la versión. Si no está disponible la delegación, ejecuta el contrato secuencialmente, sin afirmar que se utilizó un subagente.
 
 ## Contrato transversal
