@@ -33,6 +33,9 @@
         "Grep",
         "Glob",
         "Bash"
+      ],
+      "skills_claude": [
+        "frontend-design:frontend-design"
       ]
     }
   },

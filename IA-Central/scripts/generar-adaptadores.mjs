@@ -23,7 +23,9 @@ const FIGMA_R=lecturaF.map(cn), FIGMA_W=escrituraF.map(cn), FIGMA_BLOCK=bloquead
 const leeFigma=(p)=>p.figma==='lectura'||p.figma==='escritura_con_aprobacion';
 const escribeFigma=(p)=>p.figma==='escritura_con_aprobacion';
 // ToolSearch: necesario para cargar herramientas MCP diferidas; solo expone las del propio allowlist.
-const claudeTools=(p)=>[...p.tools,...(leeFigma(p)?['ToolSearch',...FIGMA_R]:[]),...(escribeFigma(p)?FIGMA_W:[])];
+// Skill: solo para agentes que declaran skills_claude (habilidades/plugins de Claude Code). Kiro no las recibe.
+const skillsClaude=(p)=>Array.isArray(p.skills_claude)?p.skills_claude:[];
+const claudeTools=(p)=>[...p.tools,...(skillsClaude(p).length?['Skill']:[]),...(leeFigma(p)?['ToolSearch',...FIGMA_R]:[]),...(escribeFigma(p)?FIGMA_W:[])];
 // Kiro: herramientas integradas según las herramientas Claude declaradas en el manifest
 const kiroBuiltins=(p)=>['read',...(p.tools.some(t=>t==='Write'||t==='Edit')&&p.escritura.length?['write']:[]),...(p.tools.includes('Bash')?['shell']:[]),'web'];
 const kiroFigmaTools=(p)=>[...(leeFigma(p)?lecturaF:[]),...(escribeFigma(p)?escrituraF:[])].map(t=>'@'+KIRO_FIGMA+'/'+t);
@@ -34,7 +36,7 @@ const kiroRules=(p)=>[
  ...(escribeFigma(p)?[{capability:'mcp',match:escrituraF.map(t=>KIRO_FIGMA+'/'+t),effect:'ask'}]:[]),
  {capability:'mcp',match:['*'],effect:'ask'}
 ];
-const permisosTexto=(p)=>'## Permisos de este agente (generado desde manifest.json)\n- Rol: '+p.rol+'. Figma: '+p.figma+'.\n- Escritura local autorizada: '+(p.escritura.length?p.escritura.join(', '):'ninguna')+'. Fuera de esas rutas no modifiques archivos; propón el cambio al orquestador.\n'+(leeFigma(p)?'- Figma MCP: antes de leer un archivo llama a create_session (fileKey + descripción) y reutiliza el sessionId en cada consulta. '+(escribeFigma(p)?'Las herramientas de escritura piden aprobación del usuario.':'Solo consultas; no tienes herramientas de escritura en Figma.')+'\n':'')+'- Commits, push, despliegues, borrados y cambios en Figma requieren aprobación expresa del usuario.\n\n';
+const permisosTexto=(p)=>'## Permisos de este agente (generado desde manifest.json)\n- Rol: '+p.rol+'. Figma: '+p.figma+'.\n- Escritura local autorizada: '+(p.escritura.length?p.escritura.join(', '):'ninguna')+'. Fuera de esas rutas no modifiques archivos; propón el cambio al orquestador.\n'+(leeFigma(p)?'- Figma MCP: antes de leer un archivo llama a create_session (fileKey + descripción) y reutiliza el sessionId en cada consulta. '+(escribeFigma(p)?'Las herramientas de escritura piden aprobación del usuario.':'Solo consultas; no tienes herramientas de escritura en Figma.')+'\n':'')+(skillsClaude(p).length?'- Habilidades Claude Code habilitadas (herramienta Skill): '+skillsClaude(p).join(', ')+'. Invócalas con Skill solo cuando la tarea lo justifique; si la invocación falla o no aparece en la lista de skills, continúa sin ella e informa la limitación. Las figma:* (p. ej. figma-use antes de use_figma) siguen siendo obligatorias cuando aplique.\n':'')+'- Commits, push, despliegues, borrados y cambios en Figma requieren aprobación expresa del usuario.\n\n';
 function compare(output,text){
  checked++;
  if(fs.existsSync(output) && sourceText(output)===text)return;

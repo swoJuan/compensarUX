@@ -36,5 +36,17 @@ test('Restricciones Figma MCP (nombres reales)',()=>{
  const fb=fs.readFileSync(path.join(root,'.claude/agents/compensar-figma-bridge.md'),'utf8');
  if(/^tools:.*\b(Bash|Write|Edit|Agent)\b/m.test(fb))throw Error('compensar-figma-bridge debe ser solo consulta');
 });
+test('Habilidades Claude (Skill) por agente',()=>{
+ for(const a of m){
+  const sk=Array.isArray(a.permisos.skills_claude)?a.permisos.skills_claude:[];
+  const md=fs.readFileSync(path.join(root,'.claude/agents',a.slug+'.md'),'utf8');const tools=(md.match(/^tools: (.*)$/m)||[,''])[1].split(', ');
+  if(sk.length&&!tools.includes('Skill'))throw Error(a.slug+' declara skills_claude pero no tiene la herramienta Skill');
+  if(!sk.length&&tools.includes('Skill'))throw Error(a.slug+' tiene Skill sin declarar skills_claude');
+  if(read('.kiro/agents/'+a.slug+'.json').tools.some(t=>/skill/i.test(t)))throw Error(a.slug+' (Kiro) no debe recibir herramientas de habilidades Claude');
+  for(const s of sk){const [plug,name]=s.split(':');const home=process.env.HOME||'';
+   const found=[path.join(home,'.claude/plugins/marketplaces')].some(d=>fs.existsSync(d)&&fs.readdirSync(d).some(mk=>fs.existsSync(path.join(d,mk,'plugins',plug,'skills',name||plug,'SKILL.md'))));
+   if(!found)console.warn('AVISO',a.slug+': no se encontró localmente el plugin '+s+' (puede estar deshabilitado; el agente debe informar la limitación)');}
+ }
+});
 console.log(`\n${failures?'FALLÓ':'APROBADO'}: ${failures} validaciones fallidas`);
 process.exitCode=failures?1:0;
