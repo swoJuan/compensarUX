@@ -108,15 +108,24 @@ export function verificarAlmacen() {
   return errores;
 }
 
-/** C5: la versión del catálogo nunca puede quedar por debajo de la última publicada. */
+/** Consistencia catálogo ↔ manifiestos: si un flujo tiene versiones publicadas, la versión
+ *  declarada en catalogo.json es exactamente la última publicada. */
 export function verificarCatalogo(catalogo) {
   const errores = [];
+  const ids = new Set(catalogo.flujos.map((f) => f.id));
   for (const f of catalogo.flujos) {
-    const ultima = listarVersiones(f.id)[0];
-    if (ultima && cmpSemver(f.version, ultima.version) < 0) {
-      errores.push(`${f.id}: catalogo.json declara ${f.version}, pero ya está publicada la v${ultima.version}`);
+    const lista = listarVersiones(f.id);
+    if (!lista.length) continue;
+    const ultima = lista[0];
+    if (f.version !== ultima.version) {
+      errores.push(`${f.id}: catalogo.json declara ${f.version}, pero la última versión publicada es la v${ultima.version}. Publícala con "npm run version-flujo" o corrige el catálogo.`);
+    }
+    for (const m of lista) {
+      if (m.plataforma !== f.plataforma) errores.push(`${f.id} v${m.version}: el manifiesto dice plataforma "${m.plataforma}" y el catálogo "${f.plataforma}"`);
+      if (m.id !== f.id) errores.push(`${f.id} v${m.version}: el manifiesto pertenece a "${m.id}"`);
     }
   }
+  for (const id of idsAlmacen()) if (!ids.has(id)) errores.push(`${id}: hay versiones en el almacén, pero el flujo no está en catalogo.json`);
   return errores;
 }
 

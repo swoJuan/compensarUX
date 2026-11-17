@@ -111,6 +111,7 @@ try {
   let nv = 0;
   for (const fl of cat.flujos) for (const v of fl.versiones || []) {
     nv++;
+    if (v === fl.versiones[0] && !v.vigente) errores.push(`catalogo.json → ${fl.id}: la última versión publicada (v${v.version}) no es la vigente declarada (${fl.version})`);
     if (!fs.existsSync(path.join(DIST, v.url))) errores.push(`catalogo.json → ${fl.id} v${v.version}: no existe ${v.url}`);
   }
   console.log(`Versiones publicadas verificadas: ${nv}.`);
