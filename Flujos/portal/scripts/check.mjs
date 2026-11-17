@@ -92,6 +92,16 @@ for (const f of archivos) {
   }
 }
 
+// Versiones publicadas: cada URL del catálogo debe existir en la salida.
+try {
+  const cat = JSON.parse(fs.readFileSync(path.join(DIST, 'catalogo.json'), 'utf8'));
+  let nv = 0;
+  for (const fl of cat.flujos) for (const v of fl.versiones || []) {
+    nv++;
+    if (!fs.existsSync(path.join(DIST, v.url))) errores.push(`catalogo.json → ${fl.id} v${v.version}: no existe ${v.url}`);
+  }
+  console.log(`Versiones publicadas verificadas: ${nv}.`);
+} catch { /* sin catálogo */ }
 console.log(`Revisión de ${path.basename(DIST)}/: ${archivos.length} archivos, ${refs} referencias locales.`);
 if (externos.size) {
   console.log('Dominios externos:');

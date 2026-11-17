@@ -984,3 +984,6 @@ body[data-page^="prototipos"] .pux-container { max-width: none; }
 .pux-otros__lista li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-8, 8px) var(--space-16, 16px); padding: var(--space-12, 12px) 0; border-bottom: 1px solid var(--pux-line); font-size: var(--body---m, .875rem); line-height: 1.5; }
 .pux-otros__lista li > div { flex: 1 1 320px; }
 .pux-otros__meta { display: block; color: var(--color-text-tertiary, #8a8a8a); font-variant-numeric: tabular-nums; }
+
+/* Versiones publicadas de un flujo */
+.pux-version__acciones { display: flex; flex-wrap: wrap; gap: var(--space-12, 12px); margin-top: var(--space-12, 12px); }

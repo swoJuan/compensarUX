@@ -27,6 +27,7 @@ import path from 'node:path';
 import { ROOT, readJson, matcher, walk, Fuente, estadoSincronizacion, mapaComponentes } from './lib/fuentes.mjs';
 import { crearZip } from './lib/zip.mjs';
 import { archivosMaui } from './lib/maui.mjs';
+import { ALMACEN, idsAlmacen, listarVersiones, verificarAlmacen, verificarCatalogo, materializar, commitsDesde } from './lib/versiones.mjs';
 
 const DIST = process.env.PORTAL_DIST ? path.resolve(process.env.PORTAL_DIST) : path.join(ROOT, 'dist');
 const PORTAL = path.join(ROOT, 'portal');
@@ -37,6 +38,14 @@ const catalogo = readJson('catalogo.json');
 const depthPrefix = (relFile) => '../'.repeat(relFile.split('/').length - 1);
 const t0 = Date.now();
 
+/* ---------- 0. versiones publicadas: guardia ----------
+   Las versiones históricas viven en Flujos/versiones/ (fuera de la salida). El build solo las
+   LEE: se niega a correr si la salida y el almacén se solapan, y se detiene ANTES de borrar
+   la salida si alguna versión publicada fue alterada. */
+const solapa = (a, b) => { const r = path.relative(a, b); return !r.startsWith('..') && !path.isAbsolute(r); };
+if (solapa(ALMACEN, DIST) || solapa(DIST, ALMACEN)) throw new Error(`La salida (${DIST}) y el almacén de versiones (${ALMACEN}) no pueden solaparse: el build borraría versiones publicadas.`);
+const problemasVersiones = [...verificarAlmacen(), ...verificarCatalogo(catalogo)];
+if (problemasVersiones.length) throw new Error('Versiones publicadas con problemas (build cancelado, la salida actual no se tocó):\n  ' + problemasVersiones.join('\n  '));
 /* ---------- 1. limpiar ---------- */
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
@@ -73,6 +82,32 @@ for (const f of publicados) {
   if (!fs.existsSync(entrada)) throw new Error(`El flujo ${f.id} no tiene su entrada en ${cfg.flujos.ref}: ${f.ruta}${f.entrada || 'index.html'}`);
 }
 
+/* ---------- 3b. versiones publicadas de cada flujo ----------
+   Cada versión se arma con sus recursos exactos (los de su huella) y sus archivos propios,
+   con la estructura original, en versiones/<flujo>/v<x.y.z>/. No toca p/ (la vigente). */
+const versionesFlujo = {};
+for (const f of flujos) {
+  const lista = listarVersiones(f.id);
+  if (!lista.length) continue;
+  versionesFlujo[f.id] = lista.map((m) => {
+    materializar(m, path.join(DIST, 'versiones', f.id, `v${m.version}`));
+    return {
+      version: m.version,
+      publicadaEl: m.publicadaEl,
+      commit: m.commit.corto,
+      fechaCommit: m.commit.fecha,
+      notas: m.notas,
+      estadoUX: m.estadoUX,
+      ds: m.ds,
+      paquetesCdn: m.paquetesCdn,
+      recursos: m.recursos,
+      url: `versiones/${f.id}/v${m.version}/${m.entrada}`,
+      vigente: m.version === f.version,
+      cambiosSinVersion: commitsDesde(fl, m.commit.completo, f.incluir || [f.ruta]),
+    };
+  });
+}
+for (const id of idsAlmacen()) if (!ids.has(id)) console.warn(`  Aviso: hay versiones de "${id}" en el almacén, pero el flujo ya no está en catalogo.json (no se publican).`);
 /* ---------- 4. páginas "no publicado" ---------- */
 const stubs = [];
 for (const f of flujos.filter((x) => !x.publicar && plataformasUsadas.includes(x.plataforma))) {
@@ -515,6 +550,7 @@ const salida = {
     url: f.publicar ? `${cfg.flujos.destino}/${f.ruta.replace(/\/?$/, '/')}${f.entrada || 'index.html'}` : null,
     descarga: descargasFlujos[f.id] || null,
     consumo: consumoFlujo(f),
+    versiones: versionesFlujo[f.id] || [],
     actualizado: fl.ultimaFecha(f.incluir || [f.ruta]),
     cambios: fl.historial(20, f.incluir || [f.ruta]),
     aprobacionUX: f.aprobacionUX || { aprobado: false, por: null, fecha: null },
@@ -559,6 +595,7 @@ console.log(`  ${infoDs.nombre}: ${dsArchivos.length} archivos (${infoDs.version
 console.log(`  Versiones publicadas: ${versionesDs.length ? versionesDs.map((v) => v.tag).join(', ') : 'ninguna'}${dsEnPrototipos?.tag ? ` · prototipos en ${dsEnPrototipos.tag}` : ''}`);
 console.log(`  ${infoFl.nombre}: ${flArchivos.length} archivos (ref ${infoFl.ref} → ${infoFl.commit}, ${infoFl.fecha?.slice(0, 10)})`);
 console.log(`  Flujos publicados: ${publicados.map((f) => f.id).join(', ') || 'ninguno'}`);
+console.log(`  Versiones históricas: ${Object.entries(versionesFlujo).map(([id, v]) => `${id} ${v.map((x) => 'v' + x.version).join('/')}`).join(' · ') || 'ninguna'}`);
 console.log(`  Sincronización DS → prototipos: ${sincronizacion.estado === 'al-dia' ? 'al día' : 'DESACTUALIZADA (npm run ds:estado)'}`);
 if (stubs.length) console.log(`  Páginas "no publicado": ${stubs.length}`);
 console.log(`  Descargas: ${descargas.map((d) => `${d.archivo} (${(d.bytes / 1024).toFixed(0)} kB)`).join(' · ')}`);

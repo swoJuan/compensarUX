@@ -9,6 +9,8 @@
     "build": "node scripts/build.mjs",
     "publicar": "PORTAL_DIST=../../sitio node scripts/build.mjs",
     "check": "node scripts/check.mjs",
+    "versiones:verificar": "node scripts/versiones-verificar.mjs",
+    "version-flujo": "node scripts/version-flujo.mjs",
     "serve": "node scripts/serve.mjs",
     "ds:estado": "node scripts/ds-sincronizar.mjs",
     "ds:sincronizar": "node scripts/ds-sincronizar.mjs --aplicar"
