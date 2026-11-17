@@ -127,3 +127,18 @@ vercel.json          Configuración para el despliegue (aún no se usa)
 
 - Solo se copia lo que coincide con `incluir` y no coincide con `excluir`.
 - `prohibidos` es una red de seguridad: si algún archivo de `dist/` coincide (`*.md`, `nara/`, auditorías, `.env`…), el build falla.
+
+
+## Versiones publicadas por flujo
+
+Cada flujo tiene su propio historial de versiones en `Flujos/versiones/` (ver su `LEEME.md`).
+
+```
+npm run version-flujo -- <id-flujo> <x.y.z> --notas "Qué cambió" [--ref <commit>] [--simular]
+npm run versiones:verificar
+```
+
+- La versión se congela desde un commit y es inmutable; un commit de desarrollo no la crea.
+- El build la copia a `versiones/<id>/v<x.y.z>/` (navegable) sin tocar la vigente en `p/`.
+- `catalogo.json → version` no puede quedar por debajo de la última versión publicada.
+- El detalle de cada flujo en el portal lista sus versiones y permite abrirlas.

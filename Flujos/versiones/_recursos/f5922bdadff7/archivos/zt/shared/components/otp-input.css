@@ -1,0 +1,93 @@
+/* ============================================================
+ * otp-input.css — Componente transversal ZT "OTP Input / Verification Code"
+ * ------------------------------------------------------------
+ * Grupo de N campos de un dígito para códigos de verificación (OTP). Reutilizable
+ * en cualquier flujo ZT (afiliación, cambios de datos, login, etc.). NO es un
+ * componente por flujo (no crear afiliacion-otp).
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ * Token-first: usa tokens del sistema (surface, border, text, estados).
+ *
+ * Anatomía:
+ *   .zt-otp                 contenedor (grid de N columnas iguales)
+ *     .zt-otp__cell         input de un dígito (56px, radius 16, número 24px)
+ *   Estados (clase en .zt-otp): .is-success | .is-error → borde de todas las celdas.
+ *   Estado por celda: [data-filled] (borde strong) vs vacío (borde subtle).
+ * ============================================================ */
+
+.zt-otp {
+  display: grid;
+  grid-template-columns: repeat(var(--zt-otp-len, 6), 1fr);
+  gap: var(--space-16, 1rem);
+  width: 100%;
+  max-width: 480px;              /* Figma: contenedor ~480px; no width fijo por input */
+  margin-inline: auto;          /* centrado dentro de la card */
+}
+
+/* Cada celda: cuadrada-ish, número grande centrado. */
+.zt-otp__cell {
+  width: 100%;
+  min-width: 0;
+  min-height: 56px;             /* Figma: 56px mínimo */
+  padding: var(--space-16, 1rem);
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;              /* número 24px */
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1;
+  color: var(--use-text-primary, #111);
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);   /* vacío → subtle */
+  border-radius: var(--radius-16, 1rem);
+  transition: border-color .12s ease-in-out, box-shadow .12s ease-in-out;
+  -moz-appearance: textfield;
+}
+/* Ocultar spinners numéricos (por si el navegador los muestra). */
+.zt-otp__cell::-webkit-outer-spin-button,
+.zt-otp__cell::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Celda con valor → borde strong (Figma). */
+.zt-otp__cell[data-filled] { border-color: var(--use-border-strong, #7f7f7f); }
+
+/* Foco visible. */
+.zt-otp__cell:focus,
+.zt-otp__cell:focus-visible {
+  outline: none;
+  border-color: var(--use-primary-default, #ff6600);
+  box-shadow: 0 0 0 .1875rem
+    color-mix(in srgb, var(--use-primary-default, #ff6600) 18%, transparent);
+}
+
+.zt-otp__cell:disabled {
+  background: var(--use-surface-surface, #f8f7f7);
+  color: var(--use-text-tertiary, #a4a4a4);
+  cursor: not-allowed;
+}
+
+/* ── Estado SUCCESS: todas las celdas con borde de éxito ── */
+.zt-otp.is-success .zt-otp__cell,
+.zt-otp.is-success .zt-otp__cell[data-filled] {
+  border-color: var(--use-state-success-border, #44bd75);
+}
+.zt-otp.is-success .zt-otp__cell:focus {
+  box-shadow: 0 0 0 .1875rem
+    color-mix(in srgb, var(--use-state-success-border, #44bd75) 22%, transparent);
+}
+
+/* ── Estado ERROR: todas las celdas con borde de error ── */
+.zt-otp.is-error .zt-otp__cell,
+.zt-otp.is-error .zt-otp__cell[data-filled] {
+  border-color: var(--use-state-error-border, #d92d20);
+}
+.zt-otp.is-error .zt-otp__cell:focus {
+  box-shadow: 0 0 0 .1875rem
+    color-mix(in srgb, var(--use-state-error-border, #d92d20) 22%, transparent);
+}
+
+/* ── Responsive: los 6 dígitos permanecen en una fila (columnas 1fr).
+   En pantallas muy angostas se reduce el gap para no provocar overflow. ── */
+@media (max-width: 480px) {
+  .zt-otp { gap: var(--space-8, 0.5rem); }
+  .zt-otp__cell { padding: var(--space-8, 0.5rem); font-size: 20px; }
+}

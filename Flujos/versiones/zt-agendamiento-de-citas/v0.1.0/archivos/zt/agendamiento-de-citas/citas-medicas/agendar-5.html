@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Compensar – Laboratorios clínicos</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="css/custom.css">
+<script>
+(function (m, a, z, e) {
+  var s, t, u, v;
+  try {
+    t = m.sessionStorage.getItem('maze-us');
+  } catch (err) {}
+
+  if (!t) {
+    t = new Date().getTime();
+    try {
+      m.sessionStorage.setItem('maze-us', t);
+    } catch (err) {}
+  }
+
+  u = document.currentScript || (function () {
+    var w = document.getElementsByTagName('script');
+    return w[w.length - 1];
+  })();
+  v = u && u.nonce;
+
+  s = a.createElement('script');
+  s.src = z + '?apiKey=' + e;
+  s.async = true;
+  if (v) s.setAttribute('nonce', v);
+  a.getElementsByTagName('head')[0].appendChild(s);
+  m.mazeUniversalSnippetApiKey = e;
+})(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '91229964-c105-482c-bdda-48610b6c5d69');
+</script>
+<style>
+/* ─── STEP PROGRESS ─── */
+.step-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.step-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+}
+.step-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #111;
+  line-height: 1.2;
+  margin: 0;
+}
+.step-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+  margin: 0;
+  line-height: 1.3;
+}
+.step-bar {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+.step-bar__track {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: #e0e0e0;
+}
+.step-bar__track.active {
+  background: var(--color-primary, #ff6600);
+}
+
+#s-home .scroller {
+  padding: 0 20px 100px;
+}
+
+#s-home .breadcrumb {
+  padding: 20px 0 0;
+}
+
+/* ─── TWO COLUMN LAYOUT ─── */
+.lab-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-top: 28px;
+}
+.lab-col-left {
+  flex: 1;
+  min-width: 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.lab-col-right {
+  width: 387px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── SECTION HEADINGS ─── */
+.lab-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.3;
+  margin: 0;
+}
+.lab-section-sub {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ─── BADGES ─── */
+.lab-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lab-badge-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.mp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.mp-chip--violet {
+  background: #efecf9;
+  color: #4e3199;
+}
+.mp-chip--info {
+  background: #e6f1fb;
+  color: #2d4a67;
+}
+.mp-chip,
+.mp-chip:hover,
+.mp-chip:focus,
+.mp-chip:focus-visible,
+.mp-chip:active {
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+  transform: none;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+.mp-chip--violet:hover,
+.mp-chip--violet:focus,
+.mp-chip--violet:focus-visible,
+.mp-chip--violet:active {
+  background: #efecf9 !important;
+  color: #4e3199 !important;
+}
+.mp-chip--info:hover,
+.mp-chip--info:focus,
+.mp-chip--info:focus-visible,
+.mp-chip--info:active {
+  background: #e6f1fb !important;
+  color: #2d4a67 !important;
+}
+.mp-chip--close {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+.mp-chip--close .chip-x {
+  width: 12px;
+  height: 12px;
+  opacity: 0.6;
+}
+
+/* ─── SEARCH / FILTER BAR ─── */
+.lab-filters {
+  display: flex;
+  gap: 12px;
+}
+.lab-input-wrap {
+  flex: 1;
+  position: relative;
+}
+.lab-input-wrap .icon-inside {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
+.lab-input {
+  width: 100%;
+  height: 56px;
+  padding: 0 44px 0 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #666;
+  background: #fff;
+  box-sizing: border-box;
+  appearance: none;
+  cursor: pointer;
+}
+.lab-input:focus {
+  outline: none;
+  border-color: #ff6600;
+}
+.lab-input::placeholder {
+  color: #999;
+}
+
+/* ─── ORDER ACCORDION LIST ─── */
+.lab-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* ─── COMPACT CHECKBOX (usa componente DS mp-choice) ─── */
+.lab-chk-compact {
+  flex: 0 0 32px !important;
+  width: 32px !important;
+  height: 32px !important;
+  flex-shrink: 0;
+}
+.lab-chk-compact .mp-choice__input {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+/* ─── ORDER ITEM ─── */
+.order-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.order-item__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px 16px 12px;
+  background: #fff;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s;
+}
+.order-item__head:hover {
+  background: #fafafa;
+}
+.order-item.is-expanded .order-item__head {
+  border-bottom-color: #e0e0e0;
+}
+
+
+
+/* order icon */
+.order-icon {
+  width: 40px;
+  height: 40px;
+  background: #fff2e3;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.order-icon .icon {
+  color: #ff6600;
+}
+.order-item__info {
+  flex: 1;
+  min-width: 0;
+}
+.order-item__name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.3;
+}
+.order-item__count {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.order-item__count .meta-dot {
+  opacity: 0.4;
+}
+.order-item__count .meta-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.order-item__count .meta-date .icon {
+  font-size: 13px;
+  vertical-align: -1px;
+}
+.order-item__arrow {
+  flex-shrink: 0;
+  color: #666;
+  transition: transform 0.2s;
+}
+.order-item.is-expanded .order-item__arrow {
+  transform: rotate(90deg);
+}
+
+/* expanded exams list */
+.order-item__content {
+  display: none;
+  background: #fff;
+  padding: 20px 24px;
+  border-top: 1px solid #ccc;
+}
+.order-item.is-expanded .order-item__content {
+  display: block;
+}
+.exam-list {
+  display: flex;
+  flex-direction: column;
+}
+.exam-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 0;
+  border-bottom: 1px dashed #ccc;
+}
+.exam-item:last-child {
+  border-bottom: none;
+}
+.exam-item__name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.3;
+}
+.exam-item__desc {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ─── CENTROS MÉDICOS ─── */
+.centros-badge-row {
+  display: flex;
+  justify-content: flex-end;
+}
+.centros-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 540px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #b8b8b8 #f5f5f5;
+}
+.centros-list::-webkit-scrollbar {
+  width: 6px;
+}
+.centros-list::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 12px;
+}
+.centros-list::-webkit-scrollbar-thumb {
+  background: #b8b8b8;
+  border-radius: 12px;
+}
+.centros-section-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 0 4px 0;
+}
+.centros-section-label.has-top-gap {
+  padding-top: 24px;
+}
+.centro-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+.centro-item:last-child {
+  border-bottom: none;
+}
+.centro-item__text {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+.centro-item__name {
+  font-size: 16px;
+  font-weight: 400;
+  color: #111;
+  line-height: 1.3;
+}
+.centro-item__addr {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ─── BOTTOM SUMMARY BAR ─── */
+.lab-summary-bar {
+  position: fixed;
+  bottom: 0;
+  left: var(--sidebar-w, 227px);
+  right: 0;
+  z-index: 100;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+.lab-summary-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lab-summary-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.3;
+}
+.lab-summary-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.lab-summary-right {
+  flex-shrink: 0;
+}
+
+#s-home .footer {
+  margin-top: 56px;
+}
+
+/* ─── SELECT ALL ROW ─── */
+.select-all-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 0;
+}
+.select-all-row label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.orders-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+}
+
+
+/* ─── CENTRO DISABLED STATE (max 3 seleccionados) ─── */
+.centro-item.is-disabled {
+  opacity: 0.4;
+}
+.centro-item.is-disabled .mp-choice__control::before {
+  border-color: #ccc !important;
+  background: #f5f5f5 !important;
+}
+.centro-item.is-disabled .mp-choice__input {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.centro-item.is-disabled .centro-item__name,
+.centro-item.is-disabled .centro-item__addr {
+  color: #aaa;
+}
+.centro-item.is-disabled .centro-item__text {
+  cursor: not-allowed;
+}
+
+
+/* ─── PANTALLA CARGANDO ─── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+.loading-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px 120px;
+  min-height: 60vh;
+}
+.loading-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 48px 36px;
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+.loading-icon-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.loading-search-icon {
+  position: relative;
+  width: 72px;
+  height: 72px;
+}
+.loading-search-icon .circle {
+  width: 52px;
+  height: 52px;
+  background: #ff6600;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: pulse-search 1.6s ease-in-out infinite;
+}
+.loading-search-icon .handle {
+  width: 24px;
+  height: 6px;
+  background: #ff6600;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+  transform: rotate(45deg);
+  transform-origin: left center;
+  animation: pulse-search 1.6s ease-in-out infinite;
+}
+@keyframes pulse-search {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.loading-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 6px;
+}
+.loading-card-sub {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 28px;
+}
+.loading-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.loading-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+  font-size: 15px;
+  color: #333;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+.loading-step:last-child { border-bottom: none; }
+.loading-step.is-done { opacity: 1; }
+.loading-step.is-active { opacity: 1; }
+.loading-step__icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-step.is-done .loading-step__icon {
+  background: #2e7d32;
+}
+.loading-step.is-done .loading-step__icon .icon {
+  color: #fff;
+  font-size: 13px;
+}
+.loading-step.is-active .loading-step__icon {
+  border: 2px solid #e0e0e0;
+  background: transparent;
+}
+.step-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ccc;
+  border-top-color: #ff6600;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-step:not(.is-done):not(.is-active) .loading-step__icon {
+  border: 2px solid #e0e0e0;
+  background: transparent;
+}
+
+/* ─── MOBILE OVERRIDES ─── */
+@media (max-width: 900px) {
+  #s-home .scroller {
+    padding: 0 16px 20px;
+  }
+
+  #s-home .breadcrumb {
+    padding: 16px 0 0;
+  }
+
+  .step-header {
+    gap: 10px;
+  }
+
+  .lab-row {
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .lab-col-left,
+  .lab-col-right {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .lab-col-right {
+    width: 100%;
+  }
+
+  .lab-filters {
+    flex-direction: column;
+  }
+
+  .orders-list-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .lab-summary-bar {
+    left: 0;
+    padding: 12px 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  #s-home .scroller {
+    padding-bottom: 120px;
+  }
+
+  .lab-summary-right {
+    width: 100%;
+  }
+
+  .lab-summary-right .btn-primary {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  #s-home .scroller {
+    padding: 0 32px 32px;
+  }
+
+  #s-home .breadcrumb {
+    padding: 22px 0 0;
+  }
+}
+
+/* ─── VALIDACIÓN — estados de error ─── */
+.lab-col-left.has-val-error .lab-orders-list,
+.lab-col-left.has-val-error .lab-filters {
+  border: 2px solid #d32f2f !important;
+  border-radius: 12px;
+}
+.lab-col-right.has-val-error .centros-list {
+  border: 2px solid #d32f2f !important;
+  border-radius: 12px;
+}
+.val-error-alert {
+  margin-bottom: 8px;
+}
+
+/* ─── APPOINTMENT SCREEN — Filter bar ─── */
+.resultados-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.filter-btn {
+  flex: 1;
+  padding: 12px 16px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  transition: background 0.2s;
+}
+.filter-btn:hover {
+  background: #f5f5f5;
+}
+.filter-sep {
+  width: 1px;
+  height: 24px;
+  background: #e0e0e0;
+}
+
+/* ─── Appointment list ─── */
+.date-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+.date-bar-left {
+  display: flex;
+  gap: 8px;
+}
+.btn-small {
+  background: transparent;
+  border: none;
+  color: #ff6600;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.btn-small:hover {
+  opacity: 0.8;
+}
+
+.appt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.appt-item {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.appt-item:hover {
+  border-color: #ff6600;
+  box-shadow: 0 2px 8px rgba(255, 102, 0, 0.12);
+}
+
+.appt-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  background: #f9f9f9;
+  border-right: 1px solid #e0e0e0;
+  min-width: 60px;
+}
+.appt-time-hour {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1;
+}
+.appt-time-am {
+  font-size: 12px;
+  font-weight: 400;
+  color: #888;
+  margin-top: 4px;
+}
+
+.appt-div {
+  width: 1px;
+  background: #e0e0e0;
+}
+
+.appt-body {
+  flex: 1;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.appt-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+.appt-spec {
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+}
+.appt-loc {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #888;
+}
+.appt-badges {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.badge-orange {
+  background: #ffebd5;
+  color: #cc5200;
+}
+.badge-blue {
+  background: #d5e8ff;
+  color: #1f53b5;
+}
+
+.appt-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  color: #ddd;
+  font-size: 24px;
+}
+.appt-item:hover .appt-arrow {
+  color: #ff6600;
+}
+
+.appt-more {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.btn-outline {
+  padding: 12px 32px;
+  border: 2px solid #ff6600;
+  background: transparent;
+  color: #ff6600;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-outline:hover {
+  background: #ff6600;
+  color: #fff;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .filter-bar {
+    flex-wrap: wrap;
+  }
+  .appt-item {
+    flex-direction: column;
+  }
+  .appt-time {
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px;
+    flex-direction: row;
+    gap: 8px;
+    min-width: auto;
+  }
+  .appt-arrow {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* ─── ALINEACIÓN FIGMA ─── */
+.orange { color: var(--color-primary, #ff6600); }
+.mp-chip--orange {
+  background: var(--color-primary, #ff6600);
+  color: #fff;
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
+}
+.centros-col-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.centros-col-head__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: var(--color-primary, #ff6600);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.lab-summary-detail {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.5;
+}
+.lab-fab {
+  position: fixed;
+  bottom: 80px;
+  right: 28px;
+  z-index: 200;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-primary, #ff6600);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(255, 102, 0, 0.35);
+  transition: background 0.2s, transform 0.2s;
+}
+.lab-fab:hover {
+  background: #e63f0c;
+  transform: translateY(-2px);
+}
+.orders-sort-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.orders-sort-btn:hover {
+  background: #f5f5f5;
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Familiar</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT ── -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar" data-active="agendamiento"></nav>
+
+    <!-- MAIN -->
+    <main class="main">
+
+<!-- ═══════════════════════════════════════
+     SCREEN: LAB PASO 1
+═══════════════════════════════════════ -->
+<div id="s-home" class="screen active">
+  <div class="scroller">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+      <a href="prueba-5.html">Inicio</a>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="bc-muted">Laboratorios</span>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="current">Agendar exámenes</span>
+    </nav>
+
+    <!-- STEP HEADER -->
+    <div class="step-header" style="margin-bottom: 8px;">
+      <h1 class="step-title"><span class="orange">Agenda</span> tus exámenes</h1>
+      <p class="step-subtitle">Selecciona tus órdenes y elige hasta 3 sedes.</p>
+    </div>
+
+    <!-- TWO-COLUMN ROW -->
+    <div class="lab-row">
+
+      <!-- ═══ COLUMNA IZQUIERDA: ÓRDENES ═══ -->
+      <div class="lab-col-left">
+
+        <!-- Head + Búsqueda en la misma fila -->
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px;">
+          <div>
+            <p class="lab-section-title">Selecciona tus órdenes</p>
+            <p class="lab-section-sub" style="margin-top:8px;">Cada orden puede generar un bono independiente.</p>
+          </div>
+
+          <!-- Filtros / búsqueda -->
+          <div class="lab-filters" style="flex-shrink:0; margin-top:0;">
+            <div class="lab-input-wrap">
+              <input class="lab-input" type="text" placeholder="Buscar orden" aria-label="Buscar orden">
+              <span class="icon icon-magnifying-glass icon-20 gs-muted icon-inside" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Validación órdenes -->
+        <div class="mp-alert mp-alert--error val-error-alert" id="val-error-ordenes" role="alert" style="display:none;">
+          <span class="mp-alert__icon"><span class="icon icon-warning icon-24" aria-hidden="true" style="font-size:24px;"></span></span>
+          <div class="mp-alert__content">
+            <p class="mp-alert__title">Selecciona al menos una orden médica</p>
+            <p class="mp-alert__body">Debes elegir una o más órdenes para continuar con el proceso.</p>
+          </div>
+        </div>
+
+        <!-- Lista de órdenes -->
+        <div class="lab-orders-list" id="orders-list">
+
+          <div class="orders-list-head">
+            <div class="select-all-row">
+              <div class="mp-choice__field lab-chk-compact" id="select-all-field">
+                <input type="checkbox" class="mp-choice__input" id="chk-select-all" aria-label="Seleccionar todas las órdenes">
+                <div class="mp-choice__control"></div>
+              </div>
+              <label for="chk-select-all">Selecciona todo</label>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="mp-chip mp-chip--orange" id="sel-ordenes" style="display:none;">0 seleccionadas</span>
+              <button class="orders-sort-btn" id="order-sort-btn" type="button" aria-label="Ordenar órdenes">
+                <span class="material-icons" id="sort-icon" style="font-size:18px;" aria-hidden="true">south</span>
+                <span id="sort-label">Más recientes</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Orden 1 -->
+          <div class="order-item" id="order-985950">
+            <div class="order-item__head" onclick="toggleOrder('order-985950')" role="button" aria-expanded="false">
+              <div class="mp-choice__field lab-chk-compact">
+                <input type="checkbox" class="mp-choice__input" id="chk-985950">
+                <div class="mp-choice__control"></div>
+              </div>
+              <div class="order-icon">
+                <span class="icon icon-article icon-24" style="color:#ff6600;" aria-hidden="true"></span>
+              </div>
+              <div class="order-item__info">
+                <div class="order-item__name">Orden médica #985950</div>
+                <div class="order-item__count">5 exámenes</div>
+              </div>
+              <div class="order-item__arrow">
+                <span class="icon icon-caret-right icon-24 gs-muted" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="order-item__content">
+              <div class="exam-list">
+                <div class="exam-item">
+                  <div class="exam-item__name">Glucosa en ayunas</div>
+                  <div class="exam-item__desc">Mide el nivel de azúcar en la sangre después de un periodo sin comer.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Colesterol total</div>
+                  <div class="exam-item__desc">Mide la cantidad total de colesterol en la sangre.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Triglicéridos</div>
+                  <div class="exam-item__desc">Mide el nivel de grasas en la sangre.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Perfil lipídico</div>
+                  <div class="exam-item__desc">Evalúa diferentes tipos de grasas en la sangre, como colesterol y triglicéridos.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Hemograma completo</div>
+                  <div class="exam-item__desc">Analiza los componentes de la sangre: glóbulos rojos, blancos y plaquetas.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Orden 2 -->
+          <div class="order-item" id="order-2324">
+            <div class="order-item__head" onclick="toggleOrder('order-2324')" role="button" aria-expanded="false">
+              <div class="mp-choice__field lab-chk-compact">
+                <input type="checkbox" class="mp-choice__input" id="chk-2324">
+                <div class="mp-choice__control"></div>
+              </div>
+              <div class="order-icon">
+                <span class="icon icon-article icon-24" style="color:#ff6600;" aria-hidden="true"></span>
+              </div>
+              <div class="order-item__info">
+                <div class="order-item__name">Orden médica #2324</div>
+                <div class="order-item__count">5 exámenes</div>
+              </div>
+              <div class="order-item__arrow">
+                <span class="icon icon-caret-right icon-24 gs-muted" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="order-item__content">
+              <div class="exam-list">
+                <div class="exam-item">
+                  <div class="exam-item__name">Parcial de orina</div>
+                  <div class="exam-item__desc">Analiza las características físicas, químicas y microscópicas de la orina.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Creatinina</div>
+                  <div class="exam-item__desc">Evalúa la función renal midiendo los niveles de creatinina en sangre.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Ácido úrico</div>
+                  <div class="exam-item__desc">Mide la concentración de ácido úrico en la sangre.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Proteína C reactiva</div>
+                  <div class="exam-item__desc">Detecta inflamación o infección en el organismo.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">TSH (Hormona estimulante tiroidea)</div>
+                  <div class="exam-item__desc">Evalúa el funcionamiento de la glándula tiroides.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Orden 3 -->
+          <div class="order-item" id="order-9585">
+            <div class="order-item__head" onclick="toggleOrder('order-9585')" role="button" aria-expanded="false">
+              <div class="mp-choice__field lab-chk-compact">
+                <input type="checkbox" class="mp-choice__input" id="chk-9585">
+                <div class="mp-choice__control"></div>
+              </div>
+              <div class="order-icon">
+                <span class="icon icon-article icon-24" style="color:#ff6600;" aria-hidden="true"></span>
+              </div>
+              <div class="order-item__info">
+                <div class="order-item__name">Orden médica #9585</div>
+                <div class="order-item__count">5 exámenes</div>
+              </div>
+              <div class="order-item__arrow">
+                <span class="icon icon-caret-right icon-24 gs-muted" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="order-item__content">
+              <div class="exam-list">
+                <div class="exam-item">
+                  <div class="exam-item__name">Electrocardiograma</div>
+                  <div class="exam-item__desc">Registra la actividad eléctrica del corazón.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Enzimas cardíacas</div>
+                  <div class="exam-item__desc">Detecta daño al músculo cardíaco.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Ferritina</div>
+                  <div class="exam-item__desc">Mide los niveles de hierro almacenado en el organismo.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Vitamina D</div>
+                  <div class="exam-item__desc">Evalúa los niveles de vitamina D en la sangre.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Vitamina B12</div>
+                  <div class="exam-item__desc">Mide los niveles de vitamina B12 en la sangre.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Orden 4 -->
+          <div class="order-item" id="order-094857">
+            <div class="order-item__head" onclick="toggleOrder('order-094857')" role="button" aria-expanded="false">
+              <div class="mp-choice__field lab-chk-compact">
+                <input type="checkbox" class="mp-choice__input" id="chk-094857">
+                <div class="mp-choice__control"></div>
+              </div>
+              <div class="order-icon">
+                <span class="icon icon-article icon-24" style="color:#ff6600;" aria-hidden="true"></span>
+              </div>
+              <div class="order-item__info">
+                <div class="order-item__name">Orden médica #094857</div>
+                <div class="order-item__count">5 exámenes</div>
+              </div>
+              <div class="order-item__arrow">
+                <span class="icon icon-caret-right icon-24 gs-muted" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="order-item__content">
+              <div class="exam-list">
+                <div class="exam-item">
+                  <div class="exam-item__name">Glicohemoglobina (HbA1c)</div>
+                  <div class="exam-item__desc">Mide el control del azúcar en sangre de los últimos 3 meses.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Insulina basal</div>
+                  <div class="exam-item__desc">Evalúa la producción de insulina en ayunas.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Microalbuminuria</div>
+                  <div class="exam-item__desc">Detecta cantidades pequeñas de proteína en la orina.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Urea en sangre</div>
+                  <div class="exam-item__desc">Evalúa la función renal y el metabolismo de proteínas.</div>
+                </div>
+                <div class="exam-item">
+                  <div class="exam-item__name">Calcio sérico</div>
+                  <div class="exam-item__desc">Mide los niveles de calcio en la sangre.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /lab-orders-list -->
+      </div><!-- /lab-col-left -->
+
+      <!-- ═══ COLUMNA DERECHA: CENTROS MÉDICOS ═══ -->
+      <div class="lab-col-right">
+
+        <!-- Title -->
+        <div class="centros-col-head">
+          <div>
+            <p class="lab-section-title">Elige las sedes</p>
+            <p class="lab-section-sub" style="margin-top:6px;">Selecciona hasta 3</p>
+          </div>
+          <span class="centros-col-head__badge" id="centros-count-top">0 de 3</span>
+        </div>
+
+        <!-- Búsqueda centro -->
+        <div class="lab-input-wrap">
+          <input class="lab-input" type="text" placeholder="Buscar sede" id="search-centros" oninput="filterCentros()" aria-label="Buscar sede">
+          <span class="icon icon-magnifying-glass icon-20 gs-muted icon-inside" aria-hidden="true"></span>
+        </div>
+
+
+        <!-- Validación centros -->
+        <div class="mp-alert mp-alert--error val-error-alert" id="val-error-centros" role="alert" style="display:none;">
+          <span class="mp-alert__icon"><span class="icon icon-warning icon-24" aria-hidden="true" style="font-size:24px;"></span></span>
+          <div class="mp-alert__content">
+            <p class="mp-alert__title">Selecciona al menos un centro médico</p>
+            <p class="mp-alert__body">Elige el lugar donde deseas realizarte los exámenes.</p>
+          </div>
+        </div>
+
+        <!-- Lista centros con scroll -->
+        <div class="centros-list" id="centros-list">
+
+          <div class="centro-item">
+            <div class="mp-choice__field lab-chk-compact" style="margin-top:2px;">
+            <input type="checkbox" class="mp-choice__input" id="chk-sanroque1">
+            <div class="mp-choice__control"></div>
+          </div>
+            <div class="centro-item__text">
+              <div class="centro-item__name">San Roque</div>
+              <div class="centro-item__addr">Km 7 vía Cajicá - Chía, Centro Comercial Distrito San Roque</div>
+            </div>
+          </div>
+
+          <div class="centro-item">
+            <div class="mp-choice__field lab-chk-compact" style="margin-top:2px;">
+            <input type="checkbox" class="mp-choice__input" id="chk-sanroque2">
+            <div class="mp-choice__control"></div>
+          </div>
+            <div class="centro-item__text">
+              <div class="centro-item__name">Calle 94</div>
+              <div class="centro-item__addr">Calle 94 # 23 - 43, Bogotá</div>
+            </div>
+          </div>
+
+          <div class="centro-item">
+            <div class="mp-choice__field lab-chk-compact" style="margin-top:2px;">
+            <input type="checkbox" class="mp-choice__input" id="chk-calle26">
+            <div class="mp-choice__control"></div>
+          </div>
+            <div class="centro-item__text">
+              <div class="centro-item__name">Calle 26</div>
+              <div class="centro-item__addr">Avenida Calle 26 # 66 A - 48, Bogotá</div>
+            </div>
+          </div>
+
+          <div class="centro-item">
+            <div class="mp-choice__field lab-chk-compact" style="margin-top:2px;">
+            <input type="checkbox" class="mp-choice__input" id="chk-suba139">
+            <div class="mp-choice__control"></div>
+          </div>
+            <div class="centro-item__text">
+              <div class="centro-item__name">Suba Calle 139</div>
+              <div class="centro-item__addr">Calle 139 # 94 - 55, Bogotá</div>
+            </div>
+          </div>
+
+          <div class="centro-item">
+            <div class="mp-choice__field lab-chk-compact" style="margin-top:2px;">
+            <input type="checkbox" class="mp-choice__input" id="chk-carrera60">
+            <div class="mp-choice__control"></div>
+          </div>
+            <div class="centro-item__text">
+              <div class="centro-item__name">Centro de Bienestar Integral Carrera 60</div>
+              <div class="centro-item__addr">Carrera 60 # 66 B - 05, Bogotá</div>
+            </div>
+          </div>
+
+          <div class="centro-item">
+            <div class="mp-choice__field lab-chk-compact" style="margin-top:2px;">
+            <input type="checkbox" class="mp-choice__input" id="chk-chia">
+            <div class="mp-choice__control"></div>
+          </div>
+            <div class="centro-item__text">
+              <div class="centro-item__name">Chía</div>
+              <div class="centro-item__addr">Carrera 3E # 20 - 84, Av. Pradilla, Chía, Cundinamarca</div>
+            </div>
+          </div>
+
+          <div class="centro-item">
+            <div class="mp-choice__field lab-chk-compact" style="margin-top:2px;">
+            <input type="checkbox" class="mp-choice__input" id="chk-soacha">
+            <div class="mp-choice__control"></div>
+          </div>
+            <div class="centro-item__text">
+              <div class="centro-item__name">Soacha</div>
+              <div class="centro-item__addr">Calle 49 # 7 - 21, Soacha</div>
+            </div>
+          </div>
+
+        </div><!-- /centros-list -->
+      </div><!-- /lab-col-right -->
+    </div><!-- /lab-row -->
+
+    <!-- ═══ BARRA RESUMEN INFERIOR — fixed bottom ═══ -->
+    <div class="lab-summary-bar">
+      <div class="lab-summary-left">
+        <span class="lab-summary-title">Resumen de selección</span>
+        <span class="lab-summary-detail" id="summary-detail">0 órdenes · 0 exámenes · 0 sedes</span>
+      </div>
+      <div class="lab-summary-right">
+        <button class="btn-primary" style="height:48px; padding:0 28px; font-size:16px;" onclick="irACargando()">
+          Continuar
+        </button>
+      </div>
+    </div>
+
+    <!-- FAB: subir -->
+    <button class="lab-fab" type="button" onclick="document.querySelector('.scroller').scrollTo({top:0,behavior:'smooth'})" aria-label="Subir al inicio">
+      <span class="icon icon-caret-up icon-20" style="color:#fff;" aria-hidden="true"></span>
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div>
+        <div class="footer-col-title">Te puede interesar</div>
+        <a class="footer-link" href="javascript:void(0)">Derechos y deberes</a>
+        <a class="footer-link" href="javascript:void(0)">Notificaciones judiciales</a>
+        <a class="footer-link" href="javascript:void(0)">Políticas de privacidad y condiciones de uso</a>
+        <a class="footer-link" href="javascript:void(0)">Transparencia y acceso a la información pública</a>
+        <a class="footer-link" href="javascript:void(0)">Canal de denuncia</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Conoce más</div>
+        <a class="footer-link" href="javascript:void(0)">Nuestra organización</a>
+        <a class="footer-link" href="javascript:void(0)">Radicar PQRS</a>
+        <a class="footer-link" href="javascript:void(0)">Consultar PQRS</a>
+        <a class="footer-link" href="javascript:void(0)">Proveedores</a>
+        <a class="footer-link" href="javascript:void(0)">Términos y condiciones</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Síguenos</div>
+        <div class="footer-social" aria-label="Redes sociales">
+          <span class="icon icon-facebook-logo icon-20 gs-muted" aria-hidden="true"></span>
+          <span class="icon icon-x-logo icon-20 gs-muted" aria-hidden="true"></span>
+          <span class="icon icon-youtube-logo icon-20 gs-muted" aria-hidden="true"></span>
+          <span class="icon icon-linkedin-logo icon-20 gs-muted" aria-hidden="true"></span>
+          <span class="icon icon-instagram-logo icon-20 gs-muted" aria-hidden="true"></span>
+          <span class="icon icon-tiktok-logo icon-20 gs-muted" aria-hidden="true"></span>
+        </div>
+        <div class="footer-address">
+          <strong>Caja de Compensación Familiar Sede Principal</strong><br>
+          Av. 68 # 49A - 47, Bogotá D.C.<br>
+          Bogotá 601 3077001, Línea nacional 01 8000 967070
+        </div>
+      </div>
+    </footer>
+    <div class="footer-bottom">
+      <div class="footer-badge"><img src="../../../shared/assets/logo-supervigilado.svg" alt="" width="140"></div>
+      <div class="footer-badge"><img src="../../../shared/assets/logo-vigilado.svg" alt="" width="180"></div>
+    </div>
+
+  </div><!-- /scroller -->
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: CARGANDO / BUSCANDO AGENDA
+═══════════════════════════════════════ -->
+<div id="s-loading" class="screen">
+  <div class="scroller">
+    <nav class="breadcrumb">
+      <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+      <a href="javascript:void(0)" onclick="goTo('s-home');return false;">Inicio</a>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="bc-muted">Laboratorios</span>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="current">Agendar exámenes</span>
+    </nav>
+
+    <h1 class="page-title">
+      <span class="orange">Buscando </span><span class="dark">agenda</span>
+    </h1>
+
+    <div class="loading-wrap">
+      <div class="loading-card">
+
+        <p class="loading-card-title">Analizando tus exámenes</p>
+
+        <div class="loading-icon-wrap">
+          <div class="loading-search-icon">
+            <div class="circle"></div>
+            <div class="handle"></div>
+          </div>
+        </div>
+
+        <p class="loading-card-sub">
+          <strong>Estamos revisando tus exámenes</strong><br>
+          para organizarlos de la mejor manera.
+        </p>
+
+        <ul class="loading-steps" id="loading-steps">
+          <li class="loading-step" data-step="0">
+            <div class="loading-step__icon">
+              <span class="icon icon-check icon-12" aria-hidden="true"></span>
+            </div>
+            <span>Validando requisitos</span>
+          </li>
+          <li class="loading-step" data-step="1">
+            <div class="loading-step__icon">
+              <span class="icon icon-check icon-12" aria-hidden="true"></span>
+            </div>
+            <span>Verificando compatibilidades</span>
+          </li>
+          <li class="loading-step" data-step="2">
+            <div class="loading-step__icon">
+              <span class="icon icon-check icon-12" aria-hidden="true"></span>
+            </div>
+            <span>Calculando tiempos y duración</span>
+          </li>
+          <li class="loading-step" data-step="3">
+            <div class="loading-step__icon">
+              <span class="icon icon-check icon-12" aria-hidden="true"></span>
+            </div>
+            <span>Buscando sedes disponibles</span>
+          </li>
+          <li class="loading-step" data-step="4">
+            <div class="loading-step__icon">
+              <span class="icon icon-check icon-12" aria-hidden="true"></span>
+            </div>
+            <span>Esto puede tomar unos segundos...</span>
+          </li>
+        </ul>
+
+        <div class="mp-alert mp-alert--error" id="loading-alert" style="margin-bottom:0; text-align:left;">
+          <span class="mp-alert__icon">
+            <span class="icon icon-warning icon-20" aria-hidden="true"></span>
+          </span>
+          <div class="mp-alert__content">
+            <p class="mp-alert__title">Esto puede tomar unos segundos...</p>
+            <p class="mp-alert__body">Por favor, espera un momento</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN: CITAS DISPONIBLES
+═══════════════════════════════════════ -->
+<div id="s-agenda" class="screen">
+  <div class="scroller">
+    <nav class="breadcrumb">
+      <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+      <a href="javascript:void(0)">Inicio</a>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="bc-muted">Citas médicas</span>
+      <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+      <span class="current">Disponibles</span>
+    </nav>
+
+    <h1 class="page-title"><span class="orange">Citas disponibles</span></h1>
+
+    <!-- Filtros: Centro, Fecha, Médico -->
+    <div class="resultados-wrap">
+      <div class="filter-bar">
+        <button class="filter-btn">
+          <span class="icon icon-calendar icon-16" aria-hidden="true"></span>
+          Fecha
+        </button>
+        <div class="filter-sep"></div>
+        <button class="filter-btn">
+          <span class="icon icon-map-pin icon-16" aria-hidden="true"></span>
+          Centro
+        </button>
+        <div class="filter-sep"></div>
+        <button class="filter-btn">
+          <span class="icon icon-user icon-16" aria-hidden="true"></span>
+          Médico
+        </button>
+      </div>
+
+      <!-- Listado de citas -->
+      <div class="date-bar">
+        <div class="date-bar-left">
+          <span>Mañana · 14 may</span>
+        </div>
+        <button class="btn-small">Ver más</button>
+      </div>
+
+      <div class="appt-list">
+        <div class="appt-item">
+          <div class="appt-time">
+            <div class="appt-time-hour">08:30</div>
+            <div class="appt-time-am">a.m.</div>
+          </div>
+          <div class="appt-div"></div>
+          <div class="appt-body">
+            <div class="appt-name">Medicina General</div>
+            <div class="appt-spec">Dr. Juan Pérez</div>
+            <div class="appt-loc">
+              <span class="icon icon-map-pin icon-16" aria-hidden="true"></span>
+              Centro San Roque
+            </div>
+            <div class="appt-badges">
+              <span class="badge badge-orange">Presencial</span>
+            </div>
+          </div>
+          <div class="appt-arrow">
+            <span class="icon icon-caret-right icon-24" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="appt-item">
+          <div class="appt-time">
+            <div class="appt-time-hour">10:00</div>
+            <div class="appt-time-am">a.m.</div>
+          </div>
+          <div class="appt-div"></div>
+          <div class="appt-body">
+            <div class="appt-name">Medicina General</div>
+            <div class="appt-spec">Dr. María López</div>
+            <div class="appt-loc">
+              <span class="icon icon-map-pin icon-16" aria-hidden="true"></span>
+              Centro Calle 26
+            </div>
+            <div class="appt-badges">
+              <span class="badge badge-blue">Virtual</span>
+            </div>
+          </div>
+          <div class="appt-arrow">
+            <span class="icon icon-caret-right icon-24" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <div class="appt-item">
+          <div class="appt-time">
+            <div class="appt-time-hour">14:30</div>
+            <div class="appt-time-am">p.m.</div>
+          </div>
+          <div class="appt-div"></div>
+          <div class="appt-body">
+            <div class="appt-name">Medicina General</div>
+            <div class="appt-spec">Dr. Carlos Rodríguez</div>
+            <div class="appt-loc">
+              <span class="icon icon-map-pin icon-16" aria-hidden="true"></span>
+              Centro Chía
+            </div>
+            <div class="appt-badges">
+              <span class="badge badge-orange">Presencial</span>
+            </div>
+          </div>
+          <div class="appt-arrow">
+            <span class="icon icon-caret-right icon-24" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="appt-more">
+        <button class="btn-outline">Ver más citas</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div>
+        <div class="footer-col-title">Te puede interesar</div>
+        <a class="footer-link" href="javascript:void(0)">Derechos y deberes</a>
+        <a class="footer-link" href="javascript:void(0)">Notificaciones judiciales</a>
+        <a class="footer-link" href="javascript:void(0)">Políticas de privacidad y condiciones de uso</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Conoce más</div>
+        <a class="footer-link" href="javascript:void(0)">Nuestra organización</a>
+        <a class="footer-link" href="javascript:void(0)">Radicar PQRS</a>
+        <a class="footer-link" href="javascript:void(0)">Consultar PQRS</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Síguenos</div>
+        <div class="footer-social">
+          <span class="icon icon-facebook-logo icon-20 gs-muted" aria-hidden="true"></span>
+          <span class="icon icon-instagram-logo icon-20 gs-muted" aria-hidden="true"></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+</div><!-- /screen -->
+
+    </main>
+  </div><!-- /layout -->
+</div><!-- /app -->
+
+<script>
+/* ══════════════════════════════════════════
+   PRUEBA-5 — Lógica interactiva laboratorios
+══════════════════════════════════════════ */
+
+/* ─── POOL DE EXÁMENES POR ORDEN ─── */
+var EXAM_POOLS = {
+  'order-985950': [
+    { name: 'Glucosa en ayunas', desc: 'Mide el nivel de azúcar en la sangre después de un periodo sin comer.', cat: 'ayuno' },
+    { name: 'Colesterol total', desc: 'Mide la cantidad total de colesterol en la sangre.', cat: 'ayuno' },
+    { name: 'Triglicéridos', desc: 'Mide el nivel de grasas circulantes en la sangre.', cat: 'ayuno' },
+    { name: 'Perfil lipídico', desc: 'Evalúa diferentes tipos de grasas en la sangre: colesterol y triglicéridos.', cat: 'ayuno' },
+    { name: 'Hemograma completo', desc: 'Analiza glóbulos rojos, blancos y plaquetas.', cat: 'sin-ayuno' }
+  ],
+  'order-2324': [
+    { name: 'Parcial de orina', desc: 'Analiza características físicas, químicas y microscópicas de la orina.', cat: 'toma' },
+    { name: 'Creatinina', desc: 'Evalúa la función renal midiendo niveles en sangre.', cat: 'sin-ayuno' },
+    { name: 'Ácido úrico', desc: 'Mide la concentración de ácido úrico en la sangre.', cat: 'sin-ayuno' },
+    { name: 'Coprológico', desc: 'Analiza una muestra de materia fecal para detectar parásitos o infecciones.', cat: 'sin-sangre' },
+    { name: 'TSH', desc: 'Evalúa el funcionamiento de la glándula tiroides.', cat: 'sin-ayuno' }
+  ],
+  'order-9585': [
+    { name: 'Vitamina D', desc: 'Evalúa los niveles de vitamina D en la sangre.', cat: 'sin-ayuno' },
+    { name: 'Vitamina B12', desc: 'Mide los niveles de vitamina B12 en la sangre.', cat: 'sin-ayuno' },
+    { name: 'Cortisol a.m.', desc: 'Debe tomarse en la franja matutina indicada por el laboratorio.', cat: 'horario' },
+    { name: 'Prolactina', desc: 'Requiere reposo previo y toma en horario específico.', cat: 'horario' },
+    { name: 'Insulina basal', desc: 'Evalúa la producción de insulina siguiendo la preparación indicada.', cat: 'horario' }
+  ],
+  'order-094857': [
+    { name: 'Glucosa en ayunas', desc: 'Mide el nivel de azúcar en la sangre después de un periodo sin comer.', cat: 'ayuno' },
+    { name: 'Hemograma completo', desc: 'Analiza glóbulos rojos, blancos y plaquetas.', cat: 'sin-ayuno' },
+    { name: 'Microalbuminuria', desc: 'Detecta cantidades pequeñas de proteína en la orina.', cat: 'toma' },
+    { name: 'Curva de tolerancia a la glucosa', desc: 'Requiere disponibilidad durante varias horas para tomas múltiples.', cat: 'coordinacion' },
+    { name: 'Creatinina', desc: 'Evalúa la función renal midiendo niveles en sangre.', cat: 'sin-ayuno' },
+    { name: 'Uroanálisis', desc: 'Evaluación completa de la orina sin extracción de sangre.', cat: 'sin-sangre' }
+  ]
+};
+
+/* ─── LOOKUP PLANO: nombre → {name, desc, cat} ─── */
+var EXAM_LOOKUP = (function buildLookup() {
+  var lookup = {};
+  Object.keys(EXAM_POOLS).forEach(function(orderId) {
+    EXAM_POOLS[orderId].forEach(function(exam) {
+      lookup[exam.name.toLowerCase()] = exam;
+    });
+  });
+  return lookup;
+}());
+
+/* ─── UTILIDADES ─── */
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/* ─── FECHA ALEATORIA DE ORDEN (últimos 12 meses) ─── */
+function randomOrderDate() {
+  var months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  var now = new Date();
+  var past = new Date(now.getFullYear(), now.getMonth() - Math.floor(Math.random() * 12), 1);
+  var day = Math.floor(Math.random() * 28) + 1;
+  var dateObj = new Date(past.getFullYear(), past.getMonth(), day);
+  return {
+    label: day + ' ' + months[past.getMonth()] + ' ' + past.getFullYear(),
+    ts: dateObj.getTime()
+  };
+}
+
+/* ─── INICIALIZAR EXÁMENES ALEATORIOS ─── */
+function initExams() {
+  document.querySelectorAll('#orders-list .order-item').forEach(function(orderEl) {
+    var pool = EXAM_POOLS[orderEl.id] || [];
+    var count = pool.length;
+    orderEl.dataset.exams = count;
+
+    // Actualizar texto de conteo
+    var countEl = orderEl.querySelector('.order-item__count');
+    if (countEl) {
+      var examStr = count + (count === 1 ? ' examen' : ' exámenes');
+      var dateMeta = randomOrderDate();
+      countEl.innerHTML = '<span>' + examStr + '</span>'
+        + '<span class="meta-dot">·</span>'
+        + '<span class="meta-date">'
+        + '<span class="icon icon-calendar icon-14 gs-muted" aria-hidden="true"></span>'
+        + ' ' + dateMeta.label
+        + '</span>';
+      orderEl.dataset.date = dateMeta.label;
+      orderEl.dataset.dateTs = String(dateMeta.ts);
+    }
+
+    // Renderizar lista de exámenes
+    var examList = orderEl.querySelector('.exam-list');
+    if (!examList) return;
+    var html = '';
+    for (var i = 0; i < count; i++) {
+      var exam = pool[i];
+      html += '<div class="exam-item">'
+        + '<div class="exam-item__name">' + exam.name + '</div>'
+        + '<div class="exam-item__desc">' + exam.desc + '</div>'
+        + '</div>';
+    }
+    examList.innerHTML = html;
+  });
+}
+
+/* ─── COMPAT: SINCRONIZAR CHECK VISUAL ─── */
+function syncVisual(chk) {
+  // Con mp-choice el estado visual lo maneja CSS nativo del componente.
+  return chk;
+}
+
+function syncSelectAllState() {
+  var master = document.getElementById('chk-select-all');
+  if (!master) return;
+
+  var orderChecks = document.querySelectorAll('#orders-list .order-item .mp-choice__input');
+  var total = orderChecks.length;
+  var selected = 0;
+
+  orderChecks.forEach(function(chk) {
+    if (chk.checked) selected++;
+  });
+
+  master.indeterminate = selected > 0 && selected < total;
+  master.checked = total > 0 && selected === total;
+}
+
+/* ─── ORDENAR ÓRDENES POR FECHA ─── */
+function sortOrdersByDate(direction) {
+  var list = document.getElementById('orders-list');
+  if (!list) return;
+
+  var items = Array.prototype.slice.call(list.querySelectorAll('.order-item'));
+  items.sort(function(a, b) {
+    var aTs = parseInt(a.dataset.dateTs || '0', 10);
+    var bTs = parseInt(b.dataset.dateTs || '0', 10);
+    return direction === 'oldest' ? (aTs - bTs) : (bTs - aTs);
+  });
+
+  items.forEach(function(item) {
+    list.appendChild(item);
+  });
+}
+
+/* ─── RESUMEN BARRA INFERIOR ─── */
+function updateSummaryBar() {
+  var totalOrdenes = 0;
+  var totalExamenes = 0;
+  document.querySelectorAll('#orders-list .order-item').forEach(function(orderEl) {
+    var chk = orderEl.querySelector('.mp-choice__input');
+    if (chk && chk.checked) {
+      totalOrdenes++;
+      totalExamenes += parseInt(orderEl.dataset.exams || 0, 10);
+    }
+  });
+  var centrosSelected = document.querySelectorAll('#centros-list .mp-choice__input:checked').length;
+  var detail = document.getElementById('summary-detail');
+  if (detail) {
+    detail.textContent =
+      totalOrdenes + ' ' + (totalOrdenes === 1 ? 'orden' : 'órdenes') + ' · ' +
+      totalExamenes + ' ' + (totalExamenes === 1 ? 'examen' : 'exámenes') + ' · ' +
+      centrosSelected + ' ' + (centrosSelected === 1 ? 'sede' : 'sedes');
+  }
+}
+
+/* ─── ACTUALIZAR "SELECCIÓN ACTUAL" Y RESUMEN ─── */
+function updateSeleccion() {
+  var totalOrdenes = 0;
+  document.querySelectorAll('#orders-list .order-item').forEach(function(orderEl) {
+    var chk = orderEl.querySelector('.mp-choice__input');
+    if (chk && chk.checked) totalOrdenes++;
+  });
+
+  // Chip naranja en cabecera de órdenes
+  var selOrdenes = document.getElementById('sel-ordenes');
+  if (selOrdenes) {
+    selOrdenes.textContent = totalOrdenes + ' seleccionadas';
+    selOrdenes.style.display = totalOrdenes > 0 ? '' : 'none';
+  }
+
+  updateSummaryBar();
+  syncSelectAllState();
+}
+
+/* ─── CENTROS MÉDICOS — máximo 3, deshabilitar el resto ─── */
+function updateCentros() {
+  var centroItems = document.querySelectorAll('#centros-list .centro-item');
+  var selected = 0;
+
+  centroItems.forEach(function(item) {
+    var chk = item.querySelector('.mp-choice__input');
+    if (chk && chk.checked) selected++;
+  });
+
+  var atMax = selected >= 3;
+
+  centroItems.forEach(function(item) {
+    var chk = item.querySelector('.mp-choice__input');
+    if (!chk) return;
+    if (atMax && !chk.checked) {
+      item.classList.add('is-disabled');
+      chk.disabled = true;
+    } else {
+      item.classList.remove('is-disabled');
+      chk.disabled = false;
+    }
+  });
+
+  // Badge "X de 3" en cabecera del panel derecho
+  var topBadge = document.getElementById('centros-count-top');
+  if (topBadge) topBadge.textContent = selected + ' de 3';
+
+  updateSummaryBar();
+}
+
+function clearCentrosErrorIfSelected() {
+  var sel = document.querySelectorAll('#centros-list .mp-choice__input:checked').length;
+  if (sel > 0) {
+    var colRight = document.querySelector('.lab-col-right');
+    if (colRight) colRight.classList.remove('has-val-error');
+    var errorCentros = document.getElementById('val-error-centros');
+    if (errorCentros) errorCentros.style.display = 'none';
+  }
+}
+
+/* ─── ACORDEÓN ─── */
+function toggleOrder(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var expanded = el.classList.toggle('is-expanded');
+  var head = el.querySelector('.order-item__head');
+  if (head) head.setAttribute('aria-expanded', String(expanded));
+}
+
+/* ─── BUSCAR CENTROS ─── */
+function filterCentros() {
+  var q = (document.getElementById('search-centros').value || '').toLowerCase().trim();
+  document.querySelectorAll('#centros-list .centro-item').forEach(function(item) {
+    item.style.display = (!q || item.textContent.toLowerCase().indexOf(q) > -1) ? '' : 'none';
+  });
+}
+
+function getAgendaCenterIdFromLabCheckbox(id) {
+  var map = {
+    'chk-sanroque1': 'sanroque',
+    'chk-sanroque2': 'calle94',
+    'chk-calle26': 'calle26',
+    'chk-suba139': 'suba139',
+    'chk-carrera60': 'av68',
+    'chk-chia': 'sanroque',
+    'chk-soacha': 'kennedy'
+  };
+  return map[id] || id.replace(/^chk-/, '');
+}
+
+/* ─── CAPTURAR DATOS DE EXÁMENES SELECCIONADOS ─── */
+function collectSelectedExamData() {
+  var exams = [];
+  document.querySelectorAll('#orders-list .order-item').forEach(function(orderEl) {
+    var chk = orderEl.querySelector('.mp-choice__input');
+    if (!chk || !chk.checked) return;
+    orderEl.querySelectorAll('.exam-item').forEach(function(itemEl) {
+      var nameEl = itemEl.querySelector('.exam-item__name');
+      var descEl = itemEl.querySelector('.exam-item__desc');
+      if (!nameEl) return;
+      var name = nameEl.textContent.trim();
+      var desc = descEl ? descEl.textContent.trim() : '';
+      var lookup = EXAM_LOOKUP[name.toLowerCase()];
+      exams.push({ name: name, desc: desc, cat: lookup ? lookup.cat : 'sin-ayuno' });
+    });
+  });
+  return exams;
+}
+
+function saveAgenda5Params() {
+  var centros = [];
+  document.querySelectorAll('#centros-list .centro-item').forEach(function(item) {
+    var chk = item.querySelector('.mp-choice__input');
+    if (!chk || !chk.checked) return;
+
+    var name = item.querySelector('.centro-item__name');
+    var addr = item.querySelector('.centro-item__addr');
+    centros.push({
+      id: getAgendaCenterIdFromLabCheckbox(chk.id),
+      label: name ? name.textContent.trim() : '',
+      address: addr ? addr.textContent.trim() : ''
+    });
+  });
+
+  try {
+    sessionStorage.setItem('compensarAgenda5Params', JSON.stringify({
+      from: 'agendar-5',
+      specialty: 'Laboratorios clínicos',
+      fechaLabel: 'Jueves, 14 mayo 2026',
+      sedes: centros.map(function(centro) { return centro.id; }),
+      centros: centros
+    }));
+  } catch (e) {}
+
+  /* Guardar exámenes seleccionados para pantalla de confirmación */
+  try {
+    sessionStorage.setItem('compensarExamenesData', JSON.stringify(collectSelectedExamData()));
+  } catch (e) {}
+}
+
+/* ─── ESTADO INICIAL FORZADO ─── */
+function resetInitialState() {
+  document.querySelectorAll('.mp-choice__input').forEach(function(chk) {
+    chk.checked = false;
+  });
+
+  document.querySelectorAll('#orders-list .order-item').forEach(function(orderEl) {
+    orderEl.classList.remove('is-expanded');
+    var head = orderEl.querySelector('.order-item__head');
+    if (head) head.setAttribute('aria-expanded', 'false');
+  });
+}
+
+/* ─── INICIALIZACIÓN ─── */
+document.addEventListener('DOMContentLoaded', function() {
+  resetInitialState();
+
+  // Asignar exámenes aleatorios a cada orden
+  initExams();
+
+  var sortDirection = 'recent';
+  sortOrdersByDate(sortDirection);
+  var orderSortBtn = document.getElementById('order-sort-btn');
+  var sortLabel = document.getElementById('sort-label');
+  if (orderSortBtn) {
+    orderSortBtn.addEventListener('click', function() {
+      sortDirection = sortDirection === 'recent' ? 'oldest' : 'recent';
+      sortOrdersByDate(sortDirection);
+      if (sortLabel) {
+        sortLabel.textContent = sortDirection === 'recent' ? 'Más recientes' : 'Más antiguos';
+      }
+      var sortIcon = document.getElementById('sort-icon');
+      if (sortIcon) {
+        sortIcon.textContent = sortDirection === 'recent' ? 'south' : 'north';
+      }
+    });
+  }
+
+  // Wire order checkboxes
+  document.querySelectorAll('#orders-list .mp-choice__field').forEach(function(field) {
+    field.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
+
+  var selectAllField = document.getElementById('select-all-field');
+  var selectAllChk = document.getElementById('chk-select-all');
+  if (selectAllField) {
+    selectAllField.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  }
+  if (selectAllChk) {
+    selectAllChk.addEventListener('change', function() {
+      var checked = this.checked;
+      document.querySelectorAll('#orders-list .order-item .mp-choice__input').forEach(function(chk) {
+        chk.checked = checked;
+        syncVisual(chk);
+      });
+      updateSeleccion();
+    });
+  }
+
+  document.querySelectorAll('#orders-list .mp-choice__input').forEach(function(chk) {
+    syncVisual(chk);
+    chk.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    chk.addEventListener('change', function() {
+      syncVisual(this);
+      updateSeleccion();
+      // Limpiar error de órdenes si hay al menos una seleccionada
+      var sel = document.querySelectorAll('#orders-list .order-item .mp-choice__input:checked').length;
+      if (sel > 0) {
+        document.querySelector('.lab-col-left').classList.remove('has-val-error');
+        document.getElementById('val-error-ordenes').style.display = 'none';
+      }
+    });
+  });
+
+  // Wire centro checkboxes
+  document.querySelectorAll('#centros-list .mp-choice__input').forEach(function(chk) {
+    chk.addEventListener('change', function() {
+      updateCentros();
+      clearCentrosErrorIfSelected();
+    });
+  });
+
+  document.querySelectorAll('#centros-list .centro-item__text').forEach(function(label) {
+    label.addEventListener('click', function() {
+      var item = this.closest('.centro-item');
+      var chk = item ? item.querySelector('.mp-choice__input') : null;
+      if (!chk || chk.disabled) return;
+      chk.checked = !chk.checked;
+      chk.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  });
+
+  // Estado inicial
+  updateSeleccion();
+  updateCentros();
+});
+/* ─── NAVEGACIÓN ENTRE SCREENS ─── */
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  var target = document.getElementById(id);
+  if (target) target.classList.add('active');
+}
+
+
+/* ─── ANIMACIÓN PANTALLA DE CARGA ─── */
+function irACargando() {
+  /* ─── Validación ─── */
+  var colLeft  = document.querySelector('.lab-col-left');
+  var colRight = document.querySelector('.lab-col-right');
+  var errOrdenes = document.getElementById('val-error-ordenes');
+  var errCentros = document.getElementById('val-error-centros');
+
+  var ordenesChecked = document.querySelectorAll('#orders-list .order-item .mp-choice__input:checked').length;
+  var centrosChecked = document.querySelectorAll('#centros-list .mp-choice__input:checked').length;
+
+  var hayError = false;
+
+  // Reset estados previos
+  colLeft.classList.remove('has-val-error');
+  colRight.classList.remove('has-val-error');
+  errOrdenes.style.display = 'none';
+  errCentros.style.display = 'none';
+
+  if (ordenesChecked === 0) {
+    colLeft.classList.add('has-val-error');
+    errOrdenes.style.display = 'flex';
+    hayError = true;
+  }
+  if (centrosChecked === 0) {
+    colRight.classList.add('has-val-error');
+    errCentros.style.display = 'flex';
+    hayError = true;
+  }
+
+  if (hayError) {
+    // Scroll al primer error visible
+    var firstErr = document.querySelector('.val-error-banner.is-visible');
+    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  saveAgenda5Params();
+  window.location.href = 'agendar-5-cargando.html';
+}
+
+function animarSteps() {
+  var steps = document.querySelectorAll('#loading-steps .loading-step');
+  var current = 0;
+
+  // Reset all
+  steps.forEach(function(s) {
+    s.classList.remove('is-done', 'is-active');
+    var icon = s.querySelector('.loading-step__icon');
+    icon.innerHTML = '';
+  });
+
+  function activar(i) {
+    if (i >= steps.length) return;
+    var step = steps[i];
+    step.classList.add('is-active');
+    var icon = step.querySelector('.loading-step__icon');
+    icon.innerHTML = '<div class="step-spinner"></div>';
+
+    setTimeout(function() {
+      step.classList.remove('is-active');
+      step.classList.add('is-done');
+      icon.innerHTML = '<span class="icon icon-check icon-12" aria-hidden="true"></span>';
+      setTimeout(function() { activar(i + 1); }, 300);
+    }, 900 + Math.random() * 400);
+  }
+
+  activar(0);
+}
+
+</script>
+  <script src="../../shared/zt-sidebar.js"></script>
+</body>
+</html>

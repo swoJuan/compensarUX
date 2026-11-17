@@ -1,0 +1,76 @@
+{
+  "id": "zt-agendamiento-de-citas",
+  "version": "0.1.0",
+  "nombre": "Agendamiento de citas",
+  "plataforma": "zt",
+  "publicadaEl": "2026-11-17T16:23:27.873Z",
+  "commit": {
+    "completo": "b49f7b740fb03b69ebc8efe47c5234aa7d40fe70",
+    "corto": "b49f7b7",
+    "fecha": "2026-11-17T11:23:27-05:00",
+    "mensaje": "feat(portal): registrar enlaces a otros flujos en cada versión y tratarlos como aviso en check"
+  },
+  "entrada": "zt/agendamiento-de-citas/index.html",
+  "notas": "Primera versión publicada del flujo de agendamiento de citas médicas y de laboratorio (ZT), con el sistema de diseño v2.4.0.",
+  "estadoUX": {
+    "estado": "en-revision",
+    "aprobacionUX": {
+      "aprobado": false,
+      "por": null,
+      "fecha": null
+    }
+  },
+  "ds": {
+    "tag": "v2.4.0",
+    "commit": "27767a7",
+    "fecha": "2026-11-11T21:29:14+00:00"
+  },
+  "paquetesCdn": {},
+  "recursos": {
+    "hash": "f5922bdadff7",
+    "archivos": 48
+  },
+  "enlacesExternos": [
+    {
+      "desde": "zt/agendamiento-de-citas/index.html",
+      "hacia": "zt/index.html"
+    }
+  ],
+  "archivos": {
+    "zt/agendamiento-de-citas/citas-medicas/agenda-1.html": "e06dbeef9f978812010c71d3315f4947ed2d3ff925bd4c02482ec90b02ce6292",
+    "zt/agendamiento-de-citas/citas-medicas/agenda-2.html": "254b823fc58242e959a06a2d50db11c76c900f5a4add9a010b7de177913b2512",
+    "zt/agendamiento-de-citas/citas-medicas/agenda-3.html": "7842c5572f879c07b120b9c9bb265cca313770e4a9a5b3a3be824dd2cd1a64bf",
+    "zt/agendamiento-de-citas/citas-medicas/agenda-5.html": "97226d6fe4535dd1a330d1cdcc26d9f6fe80cf9a7759e5038044acfba2534f7c",
+    "zt/agendamiento-de-citas/citas-medicas/agendar-5-cargando.html": "7cb7a9784792178d7525565323954d4755f77bec0b356e703bfe743e158356cb",
+    "zt/agendamiento-de-citas/citas-medicas/agendar-5.html": "87b103d3847993060db1c2afccd78dce4ea4c3f7802a1215956f448921f95b6e",
+    "zt/agendamiento-de-citas/citas-medicas/assets/IconCargando-5.svg": "da59061598168018392bf4303bc055ba49b4b34f4d16f209f04717397c383417",
+    "zt/agendamiento-de-citas/citas-medicas/assets/data-1/demo-agenda.json": "c1b846822dfef9a00ff76f99426bf34159032d11a9cf30c8313184f16f89d547",
+    "zt/agendamiento-de-citas/citas-medicas/assets/data-1/demo-agendamiento-helper.js": "f19cd971587124eae23b122caf61472a7c1bb6a3a1572f927b60d5cd88adf808",
+    "zt/agendamiento-de-citas/citas-medicas/assets/data-2/demo-agenda.json": "c8f25288eeadd084cfcfe13d4d426cdb2723113350386a3d0dc3e0e2fcf0b20e",
+    "zt/agendamiento-de-citas/citas-medicas/assets/data-3/demo-agenda.json": "3791611c220f895855437434451bbae62a8f152f5daabcf5718d8b90567b0235",
+    "zt/agendamiento-de-citas/citas-medicas/assets/data-4/demo-agenda.json": "05193b173764aea62af580df4aea69f96c08d8e9939b40cd78cd179c246a5532",
+    "zt/agendamiento-de-citas/citas-medicas/assets/finalizar-tarea.png": "49fe96cebbfc0202007110c449a700869fda83fc548bb2ac79eaed45eac88463",
+    "zt/agendamiento-de-citas/citas-medicas/css/custom.css": "c7418c79c9c213937a54d0a0f371c202a51345ea5554832720ce238d4c28f159",
+    "zt/agendamiento-de-citas/citas-medicas/favicon.ico": "5193e66c8ba1e60c31bf4485378deb80ac0317a6498c247d1d8011a3febb861f",
+    "zt/agendamiento-de-citas/citas-medicas/final-1.html": "9975b4f9af5191066c439ccdc99271ac601467271bd1b3ce95807f58ce8925f3",
+    "zt/agendamiento-de-citas/citas-medicas/final-2.html": "a4ff3b79423c9ba56de40917bb8b78f8e8abd03b6ea5393f9b164ff86158b10d",
+    "zt/agendamiento-de-citas/citas-medicas/final-3.html": "a39c509c597221357ce5d60c0327759a5700732453d40b9431888a93101eae14",
+    "zt/agendamiento-de-citas/citas-medicas/final-4.html": "655877ce502842dc9f8646f5204ad630fe522540b0b0c9e5c9eb95e8c59a4dfe",
+    "zt/agendamiento-de-citas/citas-medicas/final-5.html": "fb7fa5b060a0670e4e9cbed39f89906800b9cafa59d1221c19859b57151d64a6",
+    "zt/agendamiento-de-citas/citas-medicas/index.html": "beb69beaa45c9f74f8ef1a26c625edf408faaccf0ce8a1c83110c29c8235fe3b",
+    "zt/agendamiento-de-citas/citas-medicas/js/app-prueba-2.js": "697ce9508c03632997c55edbcb9abe30285f5d18f31bddad31d36ad16f145cee",
+    "zt/agendamiento-de-citas/citas-medicas/js/app-prueba-3.js": "a0668f0acc48171059660a80c39ccbe6552eb6b9ee5055cfb1cb0c32b986b990",
+    "zt/agendamiento-de-citas/citas-medicas/js/app-prueba-4.js": "143acad6b084af3b1730b1a8228f796e689b8bc49391fc45b1e3538aeca3ca71",
+    "zt/agendamiento-de-citas/citas-medicas/js/app.js": "a2307ecc15d9f0d2e71940319811f0151f95ea69eb19df4e0a578de913833f1c",
+    "zt/agendamiento-de-citas/citas-medicas/prueba-2.html": "4eddf7b825895eacde86f7bb4e02d20fe6c471871cc534594b5d70c7b9d30460",
+    "zt/agendamiento-de-citas/citas-medicas/prueba-3.html": "78cdc46628798803c33734b101cb000b8cf3c26c06887392a0e303d6deec105b",
+    "zt/agendamiento-de-citas/citas-medicas/prueba-4.html": "b960e51dad6779c8b272f1f9378980472abcd3f5080ee4448e352e1d976c8c5a",
+    "zt/agendamiento-de-citas/citas-medicas/prueba-5-cargando.html": "52140b3e504e1eb8f07e395c22b777030f9f195dd0cd209d73586fc163cf4337",
+    "zt/agendamiento-de-citas/citas-medicas/prueba-5.html": "69354b9bc73297892e99aeebd38468babb905ba57d7af9e90212b7ddde379a26",
+    "zt/agendamiento-de-citas/favicon.ico": "5193e66c8ba1e60c31bf4485378deb80ac0317a6498c247d1d8011a3febb861f",
+    "zt/agendamiento-de-citas/index.html": "fde5eaf81a1585ffffb112e783cf8167e3180620d4b43049a325ac7d3b195e30",
+    "zt/agendamiento-de-citas/laboratorio/css/custom.css": "979c1e0d08ee2e07e1e0172649a376b69607ea0d72cf5d52b4234c36028d8f3a",
+    "zt/agendamiento-de-citas/laboratorio/favicon.ico": "5193e66c8ba1e60c31bf4485378deb80ac0317a6498c247d1d8011a3febb861f",
+    "zt/agendamiento-de-citas/laboratorio/index.html": "0c82f464bacf1991a9057c6fefde619e64758a4a5a8523243efa446a14dabb42"
+  }
+}

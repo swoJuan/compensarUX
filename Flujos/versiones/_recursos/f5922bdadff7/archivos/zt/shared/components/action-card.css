@@ -1,0 +1,137 @@
+/* ============================================================
+ * action-card.css — Componente transversal ZT: "Action Card"
+ * ------------------------------------------------------------
+ * Catálogo de componentes ZT. Card de navegación/acción compacta:
+ *   [ icono 40 ]  Título            >
+ *                 Descripción (opcional)
+ *
+ * Uso en HTML (enlace):
+ *   <a class="zt-action-card" href="destino.html">
+ *     <img class="zt-action-card__icon" src="..." alt="" aria-hidden="true">
+ *     <span class="zt-action-card__text">
+ *       <span class="zt-action-card__title">Título</span>
+ *       <span class="zt-action-card__desc">Descripción opcional</span>
+ *     </span>
+ *     <span class="zt-action-card__caret icon icon-caret-right icon-24 gs-inherit" aria-hidden="true"></span>
+ *   </a>
+ *
+ * Uso como acción sin navegación: <button class="zt-action-card" type="button">…</button>
+ * Deshabilitado: añadir aria-disabled="true" (no navega, sin pointer).
+ * La descripción es OPCIONAL: si no se incluye .zt-action-card__desc, el
+ * título queda centrado verticalmente (no se reserva espacio vacío).
+ *
+ * VARIANTE de icono "acento" (modificador .zt-action-card__icon--acento):
+ *   Solo para iconos de fuente (<span class="icon icon-*">). Glifo negro
+ *   (--use-text-primary) sobre círculo naranja de 24px (--base-orange-40),
+ *   centrado en el área de 40x40. Funciona con cualquier glifo y tamaño
+ *   icon-40. Figma: u4bXqFvoAf9re85YN3yfB8, nodo 13542:109548.
+ *   <span class="zt-action-card__icon zt-action-card__icon--acento icon icon-user-plus icon-40" aria-hidden="true"></span>
+ *   Sin el modificador el icono conserva su aspecto por defecto (violeta).
+ *   Estados: hover/focus no cambian el icono (círculo naranja sobre fondo
+ *   naranja claro #fff2e3, igual que en Figma 16852:181161); disabled hereda el opacity de la card.
+ *
+ * Requiere: core.css (tokens), icons.css (caret) y zt.css (tokens de flujo).
+ * Depende del prefijo de cascada ZT: Design System → shell ZT → este componente.
+ * ============================================================ */
+
+.zt-action-card {
+  display: flex;
+  align-items: center;                        /* centra el bloque de texto (con o sin descripción) */
+  gap: var(--space-12);                        /* 12px */
+  width: 100%;                                 /* se adapta a su celda del grid */
+  min-height: 64px;                            /* compacto sin descripción; crece con contenido */
+  padding: var(--space-12);                    /* 12px */
+  background: var(--use-surface-white);
+  border: 2px solid transparent;              /* reserva el borde del hover (sin layout shift) */
+  border-radius: var(--radius-xs);            /* 8px */
+  box-shadow: 2px 5px 16px rgba(0,0,0,.15);   /* shadow 1 (Figma) */
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;                        /* reset para <button> */
+  text-align: left;                            /* reset para <button> */
+  transition: background-color .2s ease-in-out,
+              border-color .2s ease-in-out,
+              color .2s ease-in-out,
+              box-shadow .2s ease-in-out;
+}
+
+/* Ícono — espacio reservado de 40x40 para alinear entre cards.
+   Sirve tanto para <img> como para icono de fuente (<span class="icon icon-40">). */
+.zt-action-card__icon {
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  object-fit: contain;                        /* para <img> */
+  display: inline-flex; align-items: center; justify-content: center;  /* para <span> */
+  line-height: 1;
+  color: var(--use-text-theme-violet);        /* icono de fuente en violeta del sistema */
+}
+
+/* Variante "acento" (Figma 13542:109548): glifo negro sobre círculo naranja de 24px.
+   Solo iconos de fuente. El círculo se pinta con gradiente radial (no altera el
+   tamaño 40x40 ni el glifo); el borde 12px→12.5px suaviza el antialias. */
+.zt-action-card__icon--acento {
+  color: var(--use-text-primary);
+  background: radial-gradient(circle at 50% 50%, var(--base-orange-40) 0 12px, transparent 12.5px);
+}
+
+/* Bloque de texto — ocupa el espacio central */
+.zt-action-card__text {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; gap: var(--space-2);
+}
+/* Título = Body 3 Bold: 16px bold, lh 1.3, text primary */
+.zt-action-card__title {
+  font-size: var(--font-size-lg);             /* 16px */
+  font-weight: var(--font-weight-bold);
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+/* Descripción (opcional) = Body M: 14px regular, lh 1.5, text secondary */
+.zt-action-card__desc {
+  font-size: var(--font-size-md);             /* 14px */
+  font-weight: var(--font-weight-regular);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+/* Caret de navegación — 24px, discreto */
+/* .icon.zt-action-card__caret: gana a .icon.gs-inherit (zt.css), que heredaba el negro del título. */
+.zt-action-card__caret,
+.icon.zt-action-card__caret { flex-shrink: 0; color: var(--text-3); }
+
+/* ── HOVER (Figma 16852:181161, Variant2) ──
+   Solo cambia fondo (surface orange #fff2e3) y borde 2px primary (#f60).
+   Título, icono, caret y sombra se mantienen igual que en default. */
+.zt-action-card:hover,
+.zt-action-card:focus,
+.zt-action-card:active { text-decoration: none; }
+.zt-action-card:hover {
+  background: var(--use-surface-orange);       /* #fff2e3 */
+  border-color: var(--use-primary-default);    /* #f60, 2px */
+}
+
+/* ── FOCUS visible (accesible, sistema violeta) ── */
+.zt-action-card:focus-visible {
+  outline: 2px solid var(--use-border-violet-dark);
+  outline-offset: 2px;
+}
+
+/* ── ACTIVE / pressed (sutil) ── */
+.zt-action-card:active {
+  background: var(--use-surface-orange);
+  border-color: var(--use-primary-default);
+  box-shadow: 1px 2px 8px rgba(0,0,0,.18);
+}
+
+/* ── DISABLED ── */
+.zt-action-card[aria-disabled="true"],
+.zt-action-card:disabled {
+  cursor: default;
+  opacity: .55;
+  box-shadow: none;
+  pointer-events: none;                        /* no navega ni recibe hover */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zt-action-card { transition: none; }
+}

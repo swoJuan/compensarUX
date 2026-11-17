@@ -1,0 +1,47 @@
+/* ============================================================
+ * radio.css — Ajuste transversal ZT del Radio Button / Radio Group
+ * ------------------------------------------------------------
+ * El radio es el componente del Design System (.mp-choice.mp-radio).
+ * El DS alinea el label arriba (`.mp-choice{align-items:flex-start}` +
+ * `.mp-choice__text{padding-top:10px}`), pensado para labels multilínea
+ * con helper. En ZT queremos el patrón compacto de una sola línea:
+ *
+ *   [ ○ ] Individual        (círculo y label CENTRADOS verticalmente)
+ *   NO:
+ *   [ ○ ]
+ *         Individual
+ *
+ * Este archivo es TRANSVERSAL: aplica a todos los flujos ZT que usen radios,
+ * no solo a Afiliación. Se acota a `.mp-radio` para no alterar checkboxes
+ * (que sí pueden requerir alineación superior con helper multilínea).
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE ajuste.
+ * Token-first: tipografía y gap con tokens del sistema.
+ * ============================================================ */
+
+/* Centrar verticalmente control + label (una sola área, alineación por flexbox).
+   No se toca el font-size para "cuadrar": la alineación se resuelve con flex. */
+.mp-radio.mp-choice {
+  align-items: center;
+}
+
+/* El label del radio en ZT: Roboto Regular 16px, line-height 1.3, texto primario.
+   Se quita el padding-top del DS (evita el desfase hacia abajo) y se centra. */
+.mp-radio .mp-choice__text {
+  padding-top: 0;
+  align-self: center;
+}
+.mp-radio .mp-choice__label {
+  font-family: var(--font-family-base, "Roboto", sans-serif);
+  font-size: var(--font-size-lg, 1rem);              /* 16px */
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+}
+
+/* Separación consistente entre control y label (token de spacing, no hardcode).
+   El DS deja gap 0 y centra el control dentro de un hit-area de 44px; añadimos
+   el gap en el lado del texto para no descuadrar el área táctil del control. */
+.mp-radio .mp-choice__text {
+  padding-left: var(--space-4, 0.25rem);
+}

@@ -1,0 +1,13 @@
+/* ============================================================
+ * compensar.css — Estilos comunes a TODOS los flujos (ZT y Drupal)
+ * ------------------------------------------------------------
+ * Nivel 2 de la cascada:
+ *   Design System (vendor/core.css) → ESTE archivo → zt/drupal shared → custom del flujo
+ *
+ * Reglas:
+ * - Solo va aquí lo que se reutiliza entre 2+ flujos y NO pertenece al Design System.
+ * - No redefinir tokens ni componentes del Design System.
+ * - Si algo solo lo usa un flujo, va en el custom.css de ese flujo.
+ * ============================================================ */
+
+/* (Vacío por ahora. Añadir utilidades/layouts compartidos entre flujos cuando surjan.) */
