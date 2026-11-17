@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-17T16:24:00.124Z",
+  "generado": "2026-11-17T16:35:28.486Z",
   "fuentes": {
     "designSystem": {
       "id": "designSystem",
@@ -492,6 +492,28 @@
       },
       "versiones": [
         {
+          "salidas": [
+            {
+              "ruta": "zt/index.html",
+              "destino": "portal"
+            },
+            {
+              "ruta": "zt/inicio/index.html",
+              "destino": "portal"
+            },
+            {
+              "ruta": "zt/historia-clinica/index.html",
+              "destino": "vigente"
+            },
+            {
+              "ruta": "zt/ventas-y-afiliacion/index.html",
+              "destino": "vigente"
+            },
+            {
+              "ruta": "zt/ventas-y-afiliacion/inicio-comercial/index.html",
+              "destino": "vigente"
+            }
+          ],
           "version": "0.1.0",
           "publicadaEl": "2026-11-17T16:23:27.873Z",
           "commit": "b49f7b7",
