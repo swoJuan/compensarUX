@@ -54,7 +54,7 @@
     "rol": "Flujos navegables de Drupal, ZT y APP. Consumen una copia controlada del sistema de diseño en shared/.",
     "repositorioPropuesto": "compensar-ux-prototipos",
     "repo": "../prototipos",
-    "ref": "HEAD",
+    "ref": "WORKTREE",
     "destino": "p",
     "comun": [
       "shared/vendor/**",
