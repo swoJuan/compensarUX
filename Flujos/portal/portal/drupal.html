@@ -25,7 +25,7 @@
             <label class="mp-input-label" for="filtro-q">Buscar</label>
             <div class="mp-input-wrapper">
               <i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>
-              <input class="mp-input-field has-icon-left" type="search" id="filtro-q" placeholder="Nombre, descripción o HU (ej. 256)" autocomplete="off" data-filtro-q>
+              <input class="mp-input-field has-icon-left" type="search" id="filtro-q" placeholder="Nombre, plataforma o HU (ej. 256)" autocomplete="off" data-filtro-q>
             </div>
           </div>
           <div class="mp-input-group pux-filters__estado">
@@ -41,6 +41,16 @@
               </select>
             </div>
           </div>
+          <div class="mp-input-group pux-filters__orden">
+            <label class="mp-input-label" for="filtro-orden">Ordenar por</label>
+            <div class="mp-input-wrapper">
+              <select class="mp-input-field mp-select" id="filtro-orden" data-filtro-orden>
+                <option value="recientes">Más recientes</option>
+                <option value="antiguos">Más antiguos</option>
+                <option value="nombre">Nombre (A–Z)</option>
+              </select>
+            </div>
+          </div>
           <label class="mp-choice mp-checkbox">
             <span class="mp-choice__field">
               <input class="mp-choice__input" type="checkbox" data-filtro-publicados>
@@ -52,7 +62,13 @@
           </label>
         </div>
       </form>
-      <p class="pux-results" aria-live="polite" data-resultados></p>
+      <div class="pux-resultbar">
+        <p class="pux-results" aria-live="polite" tabindex="-1" data-resultados></p>
+        <div class="pux-vista" role="group" aria-label="Vista del catálogo">
+          <button class="pux-vista__btn" type="button" data-vista-cat="lista" aria-pressed="true"><i class="icon icon-rows icon-20" aria-hidden="true"></i><span>Lista</span></button>
+          <button class="pux-vista__btn" type="button" data-vista-cat="tarjetas" aria-pressed="false"><i class="icon icon-squares-four icon-20" aria-hidden="true"></i><span>Tarjetas</span></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -60,6 +76,7 @@
     <div class="pux-container" data-catalogo data-plataforma-fija="drupal">
       <p class="pux-muted">Cargando los flujos de Drupal…</p>
     </div>
+    <div class="pux-container pux-paginacion" data-paginacion></div>
   </section>
 
 </main>

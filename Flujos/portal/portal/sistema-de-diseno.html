@@ -1,15 +1,45 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="{{robots}}">
-<meta http-equiv="refresh" content="0; url=changelog.html">
-<link rel="canonical" href="changelog.html">
-<title>Changelog · Portal UX Compensar</title>
+<!-- @include head -->
+<title>Sistema de diseño · Portal UX Compensar</title>
+<meta name="description" content="Última versión del sistema de diseño de Compensar, sus componentes y cómo integrarlo.">
 </head>
-<body>
-<p>Esta página se movió a <a href="changelog.html">Changelog</a>.</p>
-<script>location.replace('changelog.html' + location.hash);</script>
+<body data-page="sistema-de-diseno">
+<!-- @include header -->
+<main id="contenido" class="pux-main" tabindex="-1">
+  <section class="pux-page-head">
+    <div class="pux-container">
+      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Sistema de diseño</span></li></ol></nav>
+      <h1 class="pux-page-head__title">Sistema de diseño</h1>
+      <p class="mp-body-xl pux-page-head__lead">La fuente visual de Compensar: colores, tipografía, iconos y componentes. Los prototipos la consumen en una versión concreta, que se actualiza de forma controlada.</p>
+    </div>
+  </section>
+  <section class="pux-container pux-block" aria-labelledby="ds-version-titulo">
+    <h2 class="visually-hidden" id="ds-version-titulo">Versión vigente</h2>
+    <div data-ds-resumen aria-live="polite"><div class="pux-panel"><p class="pux-muted">Cargando…</p></div></div>
+  </section>
+  <section class="pux-container pux-block pux-block--fin" aria-labelledby="ds-usar-titulo">
+    <h2 class="mp-h6 pux-block__title" id="ds-usar-titulo">Usar el sistema de diseño</h2>
+    <ul class="pux-accesos" role="list">
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-acceso" href="centro-de-recursos.html" data-tone="violet">
+        <span class="pux-acceso__icon" aria-hidden="true"><i class="icon icon-package icon-24"></i></span>
+        <span class="pux-acceso__texto"><span class="pux-acceso__titulo">Centro de recursos</span><span class="pux-acceso__desc">CDN, descargas, documentación para IA y versiones</span></span>
+        <i class="icon icon-arrow-right icon-20 pux-acceso__flecha" aria-hidden="true"></i>
+      </a></li>
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-acceso" href="changelog.html" data-tone="violet">
+        <span class="pux-acceso__icon" aria-hidden="true"><i class="icon icon-clock-counter-clockwise icon-24"></i></span>
+        <span class="pux-acceso__texto"><span class="pux-acceso__titulo">Historial de cambios</span><span class="pux-acceso__desc">Todas las versiones y qué cambió en cada una</span></span>
+        <i class="icon icon-arrow-right icon-20 pux-acceso__flecha" aria-hidden="true"></i>
+      </a></li>
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-acceso" href="componentes.html" data-tone="green">
+        <span class="pux-acceso__icon" aria-hidden="true"><i class="icon icon-squares-four icon-24"></i></span>
+        <span class="pux-acceso__texto"><span class="pux-acceso__titulo">Uso de componentes</span><span class="pux-acceso__desc">Cuánto del sistema usan los prototipos</span></span>
+        <i class="icon icon-arrow-right icon-20 pux-acceso__flecha" aria-hidden="true"></i>
+      </a></li>
+    </ul>
+  </section>
+</main>
+<!-- @include footer -->
 </body>
 </html>

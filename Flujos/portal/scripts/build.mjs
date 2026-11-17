@@ -26,6 +26,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, readJson, matcher, walk, Fuente, estadoSincronizacion, mapaComponentes } from './lib/fuentes.mjs';
 import { crearZip } from './lib/zip.mjs';
+import { generarPaqueteIA } from './lib/ia-docs.mjs';
 import { archivosMaui } from './lib/maui.mjs';
 import { ALMACEN, idsAlmacen, listarVersiones, verificarAlmacen, verificarCatalogo, materializar, commitsDesde, generarSalidas } from './lib/versiones.mjs';
 
@@ -371,12 +372,12 @@ const paquetesCdn = (fs.existsSync(cdnDir) ? fs.readdirSync(cdnDir) : []).sort()
         `Versión inmutable: no la edites; los cambios llegan como una versión nueva.`,
         ``,
       ].join('\n') },
-    ], man.generado ? new Date(man.generado) : new Date());
+    ], (man.generado || man.fecha) ? new Date(man.generado || man.fecha) : new Date());
     fs.mkdirSync(carpetaCdnZip, { recursive: true });
     fs.writeFileSync(path.join(carpetaCdnZip, `${raiz}.zip`), zip);
     return {
       version: man.version || v.slice(1),
-      fecha: man.generado || null,
+      fecha: man.generado || man.fecha || null,
       commit: String((man.ds && man.ds.commit) || man.commit || '').slice(0, 7) || null,
       ruta: `${CDN_DESTINO}/${pkg}/${v}`,
       css: lista.find((a) => a.nombre.endsWith('.min.css')) || null,
@@ -497,6 +498,51 @@ const versionesDs = versionesBase.map((v, i, todas) => ({
 }));
 /* Versión efectiva del sistema de diseño en el catálogo: el tag real o, sin tags, la más reciente del histórico. */
 const versionDsCatalogo = infoDs.version || versionesDs[0]?.tag || null;
+/* Control de la fuente: sin etiquetas de git, la versión sale de versiones.json (histórico manual).
+   Si la del package.json del sistema de diseño no coincide, el histórico se quedó atrás: se avisa
+   para que el inicio no muestre una versión desactualizada. */
+if (!infoDs.version && versionPkgDs && versionDsCatalogo && versionPkgDs !== versionDsCatalogo) {
+  console.warn(`  Aviso: Core-Design-System/package.json está en ${versionPkgDs}, pero la versión más reciente registrada en versiones.json (histórico) es ${versionDsCatalogo}. Actualiza el histórico o etiqueta la versión en git.`);
+}
+/* ---------- 6e. documentación para IA ----------
+   Markdown y JSON generados de las fuentes oficiales del sistema de diseño (docs, tokens,
+   SCSS de tokens y CSS publicado). Solo se publica si la validación no tiene errores. */
+const versionIA = (versionPkgDs || '').replace(/^v/, '');
+let iaCatalogo = null;
+{
+  const flujosPorPlataforma = {};
+  for (const f of publicados) (flujosPorPlataforma[f.plataforma] ||= []).push(f.nombre);
+  const r = generarPaqueteIA({
+    dsDir, leerDs: (rel) => ds.leer(rel), version: versionIA, commit: infoDs.commit, generado: fechaDs.toISOString(),
+    cdnBase: (cdnCfg.base || '').replace(/\/+$/, '') || null, plataformas: cfg.plataformas, paquetes: paquetesCdn,
+    versionesDs, flujosPorPlataforma, maui: { archivos: maui.archivos, leeme: leemeMaui },
+  });
+  for (const a of r.avisos) console.warn(`  Aviso (docs IA): ${a}`);
+  if (r.errores.length) {
+    console.warn(`  Docs IA NO publicadas: ${r.errores.length} errores de validación:\n    ${r.errores.slice(0, 10).join('\n    ')}`);
+  } else {
+    const carpetaIA = path.join(DIST, 'descargas', 'ia');
+    fs.mkdirSync(carpetaIA, { recursive: true });
+    const nombreIA = `compensar-design-system-ia-v${versionIA}`;
+    const zipIA = crearZip([...r.archivos].map(([ruta, texto]) => ({ nombre: `${r.raiz}/${ruta}`, datos: texto })), fechaDs);
+    fs.writeFileSync(path.join(carpetaIA, `${nombreIA}.zip`), zipIA);
+    fs.writeFileSync(path.join(carpetaIA, `${nombreIA}.md`), r.completo);
+    iaCatalogo = {
+      version: versionIA,
+      generado: fechaDs.toISOString(),
+      commit: String(infoDs.commit || '').slice(0, 7),
+      componentes: r.componentes,
+      tokens: r.tokens,
+      completo: { archivo: `${nombreIA}.md`, bytes: Buffer.byteLength(r.completo), url: `descargas/ia/${nombreIA}.md` },
+      paquete: { archivo: `${nombreIA}.zip`, bytes: zipIA.length, url: `descargas/ia/${nombreIA}.zip` },
+      arbol: r.arbol,
+      pendientes: r.pendientes,
+      avisos: r.avisos,
+      instrucciones: r.instrucciones,
+    };
+  }
+}
+
 /* El sistema de diseño, los prototipos y el portal viven en un solo repositorio,
    cada uno en su carpeta. Se informa el repositorio una vez y, dentro, cada carpeta
    con su último cambio. Si alguna vez volvieran a estar separados, `unico` lo dice. */
@@ -531,16 +577,19 @@ const plataformas = Object.fromEntries(Object.entries(cfg.plataformas).map(([id,
 const salida = {
   generado: new Date().toISOString(),
   fuentes: {
-    designSystem: { ...infoDs, version: versionDsCatalogo, versiones: versionesDs, prototipos: dsEnPrototipos, descargas },
+    designSystem: { ...infoDs, version: versionDsCatalogo, versionPaquete: versionPkgDs, versiones: versionesDs, prototipos: dsEnPrototipos, descargas },
     flujos: infoFl,
   },
   cdn: {
     /* URL pública de los paquetes. Vacía = el propio portal los sirve en cdn/. */
     base: (cdnCfg.base || '').replace(/\/+$/, '') || null,
     ruta: CDN_DESTINO,
+    /* ¿El servidor público envía CORS? Sin él, el navegador bloquea los archivos con SRI. */
+    cors: cdnCfg.cors === true,
     paquetes: paquetesCdn,
     kits: kitsCdn,
   },
+  ia: iaCatalogo,
   plataformas,
   flujos: flujos.map((f) => ({
     id: f.id,
@@ -588,7 +637,8 @@ fs.writeFileSync(path.join(DIST, 'robots.txt'), robots.join('\n'));
 
 /* ---------- 8. red de seguridad ---------- */
 const todos = walk(DIST);
-const violaciones = todos.filter(prohibido);
+/* Los .md prohibidos son documentos internos; la documentación para IA es un entregable. */
+const violaciones = todos.filter((f) => prohibido(f) && !/^descargas\/ia\/[^/]+\.md$/.test(f.split(path.sep).join('/')));
 if (violaciones.length) {
   fs.rmSync(DIST, { recursive: true, force: true });
   throw new Error('Build cancelado: archivos prohibidos en la salida:\n  ' + violaciones.join('\n  '));

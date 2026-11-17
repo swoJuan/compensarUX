@@ -2,79 +2,102 @@
 <html lang="es" data-theme="light">
 <head>
 <!-- @include head -->
-<title>Inicio · Portal UX Compensar</title>
-<meta name="description" content="Sistema de diseño y prototipos de Compensar para revisión de UX, desarrollo, QA y negocio.">
+<title>Panel de inicio · Portal UX Compensar</title>
+<meta name="description" content="Explora los prototipos, consulta su estado y accede a los recursos de diseño de Compensar.">
 </head>
 <body data-page="inicio">
 <!-- @include header -->
-<main id="contenido" class="pux-main" tabindex="-1">
-
-  <section class="pux-page-head pux-page-head--inicio" aria-labelledby="hero-titulo">
-    <div class="pux-container">
-      <h1 class="pux-page-head__title" id="hero-titulo">Diseño y prototipos de Compensar</h1>
-      <p class="mp-body-xl pux-page-head__lead">El sistema de diseño y los prototipos de Drupal, Zona Transaccional y APP en un solo lugar, para revisarlos y comentarlos sobre la misma versión.</p>
-      <div class="pux-actions">
-        <a class="mp-btn mp-btn--primario mp-btn--icon-right" href="prototipos.html">Ver prototipos <i class="icon icon-arrow-right icon-20" aria-hidden="true"></i></a>
-        <a class="mp-btn mp-btn--secundario" href="changelog.html">Ver el changelog</a>
-      </div>
+<main id="contenido" class="pux-main" tabindex="-1" data-dash>
+  <!-- A. Encabezado y buscador -->
+  <section class="pux-container pux-dash-head" aria-labelledby="inicio-titulo">
+    <div class="pux-dash-head__texto">
+      <p class="pux-dash-head__eyebrow">Panel de inicio</p>
+      <h1 class="pux-dash-head__title" id="inicio-titulo">Bienvenidos</h1>
+      <p class="pux-dash-head__lead">Aquí encontrarás los prototipos de Compensar con su estado de revisión UX, las últimas actualizaciones y los recursos del sistema de diseño.</p>
     </div>
+    <form class="pux-dash-search" action="prototipos.html" method="get" role="search" aria-label="Buscar prototipos">
+      <label class="visually-hidden" for="inicio-buscar">Buscar prototipos por nombre o plataforma</label>
+      <i class="icon icon-magnifying-glass icon-20" aria-hidden="true"></i>
+      <input type="search" id="inicio-buscar" name="q" placeholder="Buscar prototipos" autocomplete="off" data-buscar>
+      <button class="mp-btn mp-btn--primario pux-dash-search__btn" type="submit">Buscar</button>
+    </form>
   </section>
 
-  <section class="pux-container pux-block" aria-labelledby="resumen-titulo">
-    <h2 class="visually-hidden" id="resumen-titulo">Resumen</h2>
-    <dl class="pux-stats">
-      <div class="pux-stat">
-        <div><dt>Flujos publicados</dt><dd data-stat="publicados">—</dd></div>
-      </div>
-      <div class="pux-stat">
-        <div><dt>En revisión</dt><dd data-stat="revision">—</dd></div>
-      </div>
-      <div class="pux-stat">
-        <div><dt>En catálogo</dt><dd data-stat="total">—</dd></div>
-      </div>
-      <div class="pux-stat">
-        <div><dt>Sistema de diseño</dt><dd data-stat="ds">—</dd></div>
-      </div>
-    </dl>
+  <!-- B. Indicadores -->
+  <section class="pux-container pux-block" aria-labelledby="kpis-titulo">
+    <h2 class="visually-hidden" id="kpis-titulo">Indicadores de prototipos</h2>
+    <ul class="pux-kpis" role="list" data-kpis aria-busy="true">
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-kpi" href="prototipos.html" data-tone="violet">
+        <span class="pux-kpi__icon" aria-hidden="true"><i class="icon icon-stack icon-24"></i></span>
+        <span class="pux-kpi__label">Total de prototipos</span>
+        <span class="pux-kpi__valor" data-kpi="total">—</span>
+        <span class="pux-kpi__pie">Ver el catálogo completo <i class="icon icon-arrow-right icon-16" aria-hidden="true"></i></span>
+      </a></li>
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-kpi" href="prototipos.html?estado=en-revision" data-tone="yellow">
+        <span class="pux-kpi__icon" aria-hidden="true"><i class="icon icon-hourglass icon-24"></i></span>
+        <span class="pux-kpi__label">En revisión UX</span>
+        <span class="pux-kpi__valor" data-kpi="revision">—</span>
+        <span class="pux-kpi__pie">Pendientes de validación <i class="icon icon-arrow-right icon-16" aria-hidden="true"></i></span>
+      </a></li>
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-kpi" href="prototipos.html?estado=aprobado" data-tone="green">
+        <span class="pux-kpi__icon" aria-hidden="true"><i class="icon icon-check-circle icon-24"></i></span>
+        <span class="pux-kpi__label">Aprobados UX</span>
+        <span class="pux-kpi__valor" data-kpi="aprobados">—</span>
+        <span class="pux-kpi__pie">Validados por UX, no es producción <i class="icon icon-arrow-right icon-16" aria-hidden="true"></i></span>
+      </a></li>
+    </ul>
   </section>
 
+  <!-- C y D. Pendientes y actividad reciente -->
+  <div class="pux-container pux-dash-par">
+    <section class="mp-card mp-card--flat pux-panel--dash" aria-labelledby="pendientes-titulo">
+      <div class="pux-panel__head">
+        <h2 class="pux-panel__title" id="pendientes-titulo">Pendientes de revisión</h2>
+        <a class="pux-link" href="prototipos.html?estado=en-revision" data-ver-pendientes>Ver todos los pendientes</a>
+      </div>
+      <div data-pendientes aria-live="polite" aria-busy="true"><p class="pux-muted">Cargando…</p></div>
+    </section>
+    <section class="mp-card mp-card--flat pux-panel--dash" aria-labelledby="recientes-titulo">
+      <div class="pux-panel__head">
+        <h2 class="pux-panel__title" id="recientes-titulo">Actividad reciente</h2>
+        <a class="pux-link" href="prototipos.html">Ver todos los prototipos</a>
+      </div>
+      <div data-recientes aria-live="polite" aria-busy="true"><p class="pux-muted">Cargando…</p></div>
+    </section>
+  </div>
+
+  <!-- E. Sistema de diseño -->
   <section class="pux-container pux-block" aria-labelledby="ds-titulo">
-    <div class="pux-panel__head">
-      <h2 class="mp-h6 pux-block__title" id="ds-titulo">Sistema de diseño</h2>
-    </div>
-    <p class="pux-section__intro">La fuente visual de Compensar: colores, tipografía, iconos y componentes. Los prototipos la consumen en una versión concreta, que se actualiza de forma controlada.</p>
-    <div data-ds-resumen aria-live="polite"><div class="pux-panel"><p class="pux-muted">Cargando…</p></div></div>
+    <div class="mp-card mp-card--flat pux-ds" data-ds-card aria-busy="true"><p class="pux-muted">Cargando…</p></div>
   </section>
 
-  <section class="pux-container pux-block" aria-labelledby="flujos-titulo">
-    <div class="pux-panel__head">
-      <h2 class="mp-h6 pux-block__title" id="flujos-titulo">Flujos</h2>
-      <a class="pux-link" href="prototipos.html">Ir al catálogo</a>
-    </div>
-    <p class="pux-section__intro">Cada flujo con su estado, la última vez que cambió y qué cambió. Los prototipos son referencia de UX, no código productivo.</p>
-    <div data-flujos-inicio aria-live="polite"><p class="pux-muted">Cargando…</p></div>
+  <!-- F y G. Accesos rápidos y distribución -->
+  <section class="pux-container pux-block" aria-labelledby="accesos-titulo">
+    <h2 class="pux-block__title pux-block__title--sec" id="accesos-titulo">Accesos rápidos</h2>
+    <ul class="pux-accesos" role="list">
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-acceso" href="prototipos.html" data-tone="cyan">
+        <span class="pux-acceso__icon" aria-hidden="true"><i class="icon icon-stack icon-24"></i></span>
+        <span class="pux-acceso__texto"><span class="pux-acceso__titulo">Prototipos</span><span class="pux-acceso__desc">Explora el catálogo completo</span></span>
+        <i class="icon icon-arrow-right icon-20 pux-acceso__flecha" aria-hidden="true"></i>
+      </a></li>
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-acceso" href="sistema-de-diseno.html" data-tone="violet">
+        <span class="pux-acceso__icon" aria-hidden="true"><i class="icon icon-palette icon-24"></i></span>
+        <span class="pux-acceso__texto"><span class="pux-acceso__titulo">Sistema de diseño</span><span class="pux-acceso__desc">Componentes, patrones y guía de instalación</span></span>
+        <i class="icon icon-arrow-right icon-20 pux-acceso__flecha" aria-hidden="true"></i>
+      </a></li>
+      <li><a class="mp-card mp-card--flat mp-card--interactive pux-acceso" href="documentacion.html" data-tone="green">
+        <span class="pux-acceso__icon" aria-hidden="true"><i class="icon icon-book-open icon-24"></i></span>
+        <span class="pux-acceso__texto"><span class="pux-acceso__titulo">Documentación</span><span class="pux-acceso__desc">Entregables, historial y cómo revisar</span></span>
+        <i class="icon icon-arrow-right icon-20 pux-acceso__flecha" aria-hidden="true"></i>
+      </a></li>
+    </ul>
   </section>
-
-  <section class="pux-container pux-block" aria-labelledby="revisar-titulo">
-    <div class="pux-panel pux-panel--tinted">
-      <div class="pux-panel__head"><h2 class="mp-h6 pux-block__title" id="revisar-titulo">Cómo revisar</h2></div>
-      <ol class="pux-steps pux-steps--fila">
-        <li class="pux-step">
-          <span class="pux-step__num" aria-hidden="true">1</span>
-          <div><h3 class="mp-body-l pux-step__title">Abre el flujo completo</h3><p class="pux-step__text">Navégalo como lo haría un usuario.</p></div>
-        </li>
-        <li class="pux-step">
-          <span class="pux-step__num" aria-hidden="true">2</span>
-          <div><h3 class="mp-body-l pux-step__title">Comenta sobre la pantalla</h3><p class="pux-step__text">Barra de Vercel → <strong>Comment</strong> y clic en el elemento.</p></div>
-        </li>
-        <li class="pux-step">
-          <span class="pux-step__num" aria-hidden="true">3</span>
-          <div><h3 class="mp-body-l pux-step__title">UX consolida y publica</h3><p class="pux-step__text">Solo UX aprueba versiones y entregables.</p></div>
-        </li>
-      </ol>
+  <section class="pux-container pux-block pux-block--fin" aria-labelledby="dist-titulo">
+    <div class="mp-card mp-card--flat pux-panel--dash">
+      <div class="pux-panel__head"><h2 class="pux-panel__title" id="dist-titulo">Prototipos por plataforma</h2></div>
+      <div data-distribucion aria-busy="true"><p class="pux-muted">Cargando…</p></div>
     </div>
   </section>
-
 </main>
 <!-- @include footer -->
 </body>

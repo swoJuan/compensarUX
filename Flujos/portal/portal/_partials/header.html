@@ -8,10 +8,10 @@
     <img class="pux-brand__logo" src="p/shared/assets/logo.svg" alt="Compensar" width="137" height="28">
     <span class="pux-brand__name">Portal UX</span>
   </a>
-  <form class="pux-topbar__search" action="prototipos.html" method="get" role="search" aria-label="Buscar flujos">
+  <form class="pux-topbar__search" action="prototipos.html" method="get" role="search" aria-label="Buscar prototipos">
     <i class="icon icon-magnifying-glass icon-20" aria-hidden="true"></i>
-    <label class="visually-hidden" for="pux-buscar">Buscar flujos</label>
-    <input type="search" id="pux-buscar" name="q" placeholder="Buscar flujos…" autocomplete="off">
+    <label class="visually-hidden" for="pux-buscar">Buscar prototipos por nombre o plataforma</label>
+    <input type="search" id="pux-buscar" name="q" placeholder="Buscar prototipos…" autocomplete="off" data-buscar>
     <kbd class="pux-kbd" aria-hidden="true">/</kbd>
   </form>
   <div class="pux-topbar__actions">
@@ -24,48 +24,49 @@
 
 <div class="pux-shell">
   <aside class="pux-sidebar" id="pux-sidebar" aria-label="Navegación del portal">
-    <nav class="pux-side">
+    <nav class="pux-side" aria-label="Secciones">
       <a class="pux-side__link" href="index.html" data-tone="orange">
         <i class="icon icon-house icon-20" aria-hidden="true"></i><span>Inicio</span>
       </a>
-
-      <p class="pux-side__label">Sistema de diseño</p>
-      <a class="pux-side__link" href="ds/drupal.html" target="_blank" rel="noopener" data-tone="violet">
-        <i class="icon icon-globe icon-20" aria-hidden="true"></i><span>Drupal · ZT</span>
-        <i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span>
-      </a>
-      <a class="pux-side__link" href="ds/app.html" target="_blank" rel="noopener" data-tone="violet">
-        <i class="icon icon-device-mobile icon-20" aria-hidden="true"></i><span>APP</span>
-        <i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span>
-      </a>
-      <a class="pux-side__link" href="instalar.html" data-tone="violet">
-        <i class="icon icon-package icon-20" aria-hidden="true"></i><span>Instalar</span>
-      </a>
-      <ul class="pux-side__items" role="list">
-        <li><a class="pux-side__item" href="instalar-cdn.html"><span class="pux-side__item-name">Enlace público (CDN)</span></a></li>
-        <li><a class="pux-side__item" href="instalar-descargar.html"><span class="pux-side__item-name">Descargar el core</span></a></li>
-        <li><a class="pux-side__item" href="instalar-flujos.html"><span class="pux-side__item-name">Flujos y versiones</span></a></li>
+      <div class="pux-side__row">
+        <button class="pux-side__group pux-side__toggle-all" type="button" data-tone="cyan" aria-expanded="false" aria-controls="nav-prototipos" data-side-toggle>
+          <i class="icon icon-stack icon-20" aria-hidden="true"></i><span>Prototipos</span>
+          <i class="icon icon-caret-down icon-16 pux-side__caret" aria-hidden="true"></i>
+        </button>
+      </div>
+      <ul class="pux-side__items" id="nav-prototipos" role="list" hidden>
+        <li><a class="pux-side__item" href="prototipos.html"><span class="pux-side__item-name">Todos los prototipos</span><span class="pux-side__count" data-side-count="todos"></span></a></li>
+        <li><a class="pux-side__item" href="drupal.html"><span class="pux-side__item-name">Drupal</span><span class="pux-side__count" data-side-count="drupal"></span></a></li>
+        <li><a class="pux-side__item" href="zt.html"><span class="pux-side__item-name">Zona Transaccional</span><span class="pux-side__count" data-side-count="zt"></span></a></li>
+        <li><a class="pux-side__item" href="app.html"><span class="pux-side__item-name">App</span><span class="pux-side__count" data-side-count="app"></span></a></li>
       </ul>
-      <a class="pux-side__link" href="changelog.html" data-tone="violet">
-        <i class="icon icon-clock-counter-clockwise icon-20" aria-hidden="true"></i><span>Changelog</span>
-      </a>
-
-      <p class="pux-side__label">Prototipos</p>
-      <div data-side-flujos></div>
-
-      <p class="pux-side__label">Entrega</p>
-      <a class="pux-side__link" href="entregables.html" data-tone="green">
-        <i class="icon icon-package icon-20" aria-hidden="true"></i><span>Entregables</span>
-      </a>
-
-      <p class="pux-side__label">Proyecto</p>
-      <a class="pux-side__link" href="historial.html" data-tone="cyan">
-        <i class="icon icon-clock icon-20" aria-hidden="true"></i><span>Historial</span>
-        <span class="pux-side__alert" data-sync-alert hidden aria-label="Sincronización pendiente"></span>
-      </a>
-      <a class="pux-side__link" href="componentes.html" data-tone="green">
-        <i class="icon icon-stack icon-20" aria-hidden="true"></i><span>Componentes</span>
-      </a>
+      <div class="pux-side__row">
+        <a class="pux-side__link" href="sistema-de-diseno.html" data-tone="violet">
+          <i class="icon icon-palette icon-20" aria-hidden="true"></i><span>Sistema de diseño</span>
+        </a>
+        <button class="pux-side__toggle" type="button" aria-expanded="false" aria-controls="nav-ds" aria-label="Opciones de Sistema de diseño" data-side-toggle>
+          <i class="icon icon-caret-down icon-16 pux-side__caret" aria-hidden="true"></i>
+        </button>
+      </div>
+      <ul class="pux-side__items" id="nav-ds" role="list" hidden>
+        <li><a class="pux-side__item" href="ds/drupal.html" target="_blank" rel="noopener"><span class="pux-side__item-name">Drupal y ZT</span><i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span></a></li>
+        <li><a class="pux-side__item" href="ds/app.html" target="_blank" rel="noopener"><span class="pux-side__item-name">App</span><i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span></a></li>
+        <li><a class="pux-side__item" href="centro-de-recursos.html"><span class="pux-side__item-name">Centro de recursos</span></a></li>
+        <li><a class="pux-side__item" href="changelog.html"><span class="pux-side__item-name">Historial de cambios</span></a></li>
+      </ul>
+      <div class="pux-side__row">
+        <a class="pux-side__link" href="documentacion.html" data-tone="green">
+          <i class="icon icon-book-open icon-20" aria-hidden="true"></i><span>Documentación</span>
+        </a>
+        <button class="pux-side__toggle" type="button" aria-expanded="false" aria-controls="nav-doc" aria-label="Opciones de Documentación" data-side-toggle>
+          <i class="icon icon-caret-down icon-16 pux-side__caret" aria-hidden="true"></i>
+        </button>
+      </div>
+      <ul class="pux-side__items" id="nav-doc" role="list" hidden>
+        <li><a class="pux-side__item" href="entregables.html"><span class="pux-side__item-name">Entregables</span></a></li>
+        <li><a class="pux-side__item" href="historial.html"><span class="pux-side__item-name">Historial</span><span class="pux-side__alert" data-sync-alert hidden aria-label="Sincronización pendiente"></span></a></li>
+        <li><a class="pux-side__item" href="componentes.html"><span class="pux-side__item-name">Uso de componentes</span></a></li>
+      </ul>
     </nav>
     <p class="pux-side__foot" data-build-info></p>
   </aside>

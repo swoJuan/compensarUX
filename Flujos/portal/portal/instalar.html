@@ -2,52 +2,19 @@
 <html lang="es" data-theme="light">
 <head>
 <!-- @include head -->
-<title>Instalar · Portal UX Compensar</title>
-<meta name="description" content="Cómo instalar el sistema de diseño de Compensar: enlace público por versión, descargas para web, ZT, Drupal y .NET MAUI, y qué versión usa cada flujo.">
+<title>Instalar · Centro de recursos · Portal UX Compensar</title>
+<meta name="description" content="Esta página ahora es parte del Centro de recursos del sistema de diseño.">
+<meta http-equiv="refresh" content="0; url=centro-de-recursos.html#cdn">
 </head>
-<body data-page="instalar">
+<body data-page="centro-de-recursos">
 <!-- @include header -->
 <main id="contenido" class="pux-main" tabindex="-1">
-
   <section class="pux-page-head">
     <div class="pux-container">
-      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Instalar</span></li></ol></nav>
       <h1 class="pux-page-head__title">Instalar</h1>
-      <p class="mp-body-xl pux-page-head__lead">Un CSS y un JS por versión, como Bootstrap: enlázalos desde la URL pública o descárgalos para trabajar en local. Cada versión es fija y nunca cambia.</p>
+      <p class="mp-body-xl pux-page-head__lead">Esta página se movió al <a class="pux-link" href="centro-de-recursos.html#cdn">Centro de recursos</a>. Si no te lleva automáticamente, usa el enlace.</p>
     </div>
   </section>
-
-  <section class="pux-container pux-block" aria-labelledby="secciones-titulo">
-    <h2 class="mp-h5 pux-block__title" id="secciones-titulo">Elige qué necesitas</h2>
-    <ul class="pux-inst-accesos" role="list">
-      <li class="pux-panel pux-inst-acceso">
-        <h3 class="mp-body-l pux-inst-acceso__titulo"><a href="instalar-cdn.html">Enlace público (CDN)</a></h3>
-        <p class="pux-inst-acceso__texto">Elige la versión y la plataforma. Copia los enlaces en el <code>&lt;head&gt;</code> y el script antes de cerrar <code>&lt;/body&gt;</code>. El orden importa: primero el sistema de diseño, luego la plataforma y al final el CSS propio del flujo.</p>
-      </li>
-      <li class="pux-panel pux-inst-acceso">
-        <h3 class="mp-body-l pux-inst-acceso__titulo"><a href="instalar-descargar.html">Descargar el core</a></h3>
-        <p class="pux-inst-acceso__texto">Para trabajar sin conexión o integrarlo al repositorio de tu equipo. Elige tu equipo: cada descarga trae todo lo que necesitas, con un LEEME que dice cómo enlazarlo.</p>
-      </li>
-      <li class="pux-panel pux-inst-acceso">
-        <h3 class="mp-body-l pux-inst-acceso__titulo"><a href="instalar-flujos.html">Flujos y versiones</a></h3>
-        <p class="pux-inst-acceso__texto">Qué versión consume cada flujo. «Copia local» significa que el flujo carga los archivos desde <code>shared/</code> del repositorio de prototipos; «Enlace público», que ya usa los paquetes versionados.</p>
-      </li>
-    </ul>
-  </section>
-
-  <section class="pux-container pux-block" id="versiones" aria-labelledby="versiones-titulo">
-    <h2 class="mp-h5 pux-block__title" id="versiones-titulo">Política de versiones</h2>
-    <div class="pux-panel pux-inst-politica">
-      <ul>
-        <li><strong>Versiones fijas.</strong> Cada versión vive en su propia carpeta (<code>cdn/compensar/v2.4.0/</code>) y nunca se sobrescribe. Un enlace a una versión siempre entrega lo mismo.</li>
-        <li><strong>Numeración semántica.</strong> <code>MAYOR.MENOR.PARCHE</code>: el parche corrige, la menor agrega sin romper y la mayor puede pedir cambios en el HTML.</li>
-        <li><strong>Adopción controlada.</strong> Una versión nueva se publica junto a las anteriores. UX la valida flujo por flujo y solo entonces cambia el enlace de ese flujo.</li>
-        <li><strong>Integridad.</strong> Cada archivo trae su hash <code>integrity</code> (SRI) en <code>manifest.json</code>. Úsalo solo cuando el servidor envíe CORS: sin él, el navegador bloquea el archivo. La fuente de iconos va incrustada en el CSS, así que los iconos cargan aunque no haya CORS.</li>
-        <li><strong>Sin «latest».</strong> No hay enlace a «la última versión»: apunta siempre a una versión exacta.</li>
-      </ul>
-    </div>
-  </section>
-
 </main>
 <!-- @include footer -->
 </body>
