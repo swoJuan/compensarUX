@@ -98,7 +98,7 @@
       "descripcion": "Proceso de afiliación en ocho pasos con validación de información y consulta de mis radicados.",
       "plataforma": "zt",
       "ruta": "zt/ventas-y-afiliacion/",
-      "entrada": "index.html",
+      "entrada": "inicio-comercial/index.html",
       "version": "0.1.0",
       "estado": "en-revision",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=13542-109534",
