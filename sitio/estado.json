@@ -1,14 +1,14 @@
 {
-  "generado": "2026-11-17T16:35:28.486Z",
+  "generado": "2026-11-17T21:30:51.984Z",
   "repositorio": {
     "unico": true,
     "nombre": "compensarUX",
-    "rama": "feat/versiones-visuales",
+    "rama": "main",
     "remoto": "https://github.com/swoJuan/compensarUX.git",
     "version": "v2.4.0",
-    "commits": 24,
-    "commitsSinSubir": null,
-    "pendientes": 12,
+    "commits": 32,
+    "commitsSinSubir": 0,
+    "pendientes": 27,
     "carpetas": [
       {
         "id": "designSystem",
@@ -33,9 +33,9 @@
         "nombre": "Portal UX",
         "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
         "carpeta": "Flujos/portal",
-        "commit": "b5a954e",
-        "fecha": "2026-11-17T11:34:03-05:00",
-        "pendientes": 1
+        "commit": "d33be4d",
+        "fecha": "2026-11-17T16:29:18-05:00",
+        "pendientes": 0
       }
     ]
   },
@@ -47,28 +47,38 @@
         "ds": "css/core.css",
         "flujos": "shared/vendor/core.css",
         "estado": "al-dia",
-        "versionUsada": null
+        "versionUsada": null,
+        "refDs": "2b3b4bb",
+        "refFlujos": "2b3b4bb"
       },
       {
         "ds": "css/portal.css",
         "flujos": "shared/vendor/portal.css",
         "estado": "al-dia",
-        "versionUsada": null
+        "versionUsada": null,
+        "refDs": "db660ac",
+        "refFlujos": "db660ac"
       },
       {
         "ds": "icons/icons.css",
         "flujos": "shared/icons/icons.css",
         "estado": "al-dia",
-        "versionUsada": null
+        "versionUsada": null,
+        "refDs": "c7c4617",
+        "refFlujos": "c7c4617"
       },
       {
         "ds": "js/mp-tabs.js",
         "flujos": "shared/vendor/mp-tabs.js",
         "estado": "al-dia",
-        "versionUsada": null
+        "versionUsada": null,
+        "refDs": "e82a0b6",
+        "refFlujos": "e82a0b6"
       }
     ],
     "version": null,
+    "versionPrototipos": "v2.4.0",
+    "verificado": "2026-11-17T21:30:51.984Z",
     "comando": "npm run ds:sincronizar"
   },
   "componentes": {
@@ -429,7 +439,27 @@
         ],
         "equivalenteDs": "modals",
         "tipo": "existe-en-ds",
-        "paginas": 13
+        "paginas": 13,
+        "rutas": [
+          "zt/shared/components/modal.css",
+          "zt/shared/components/modal.js"
+        ],
+        "usadoEn": [
+          "zt/historia-clinica/index.html",
+          "zt/historia-clinica/mis-solicitudes.html",
+          "zt/historia-clinica/radicada.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html",
+          "zt/ventas-y-afiliacion/mis-radicados/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "alert",
@@ -439,7 +469,22 @@
         ],
         "equivalenteDs": "alerts",
         "tipo": "existe-en-ds",
-        "paginas": 9
+        "paginas": 9,
+        "rutas": [
+          "zt/shared/components/alert.js"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "dropdown",
@@ -450,7 +495,23 @@
         ],
         "equivalenteDs": "dropdown",
         "tipo": "existe-en-ds",
-        "paginas": 9
+        "paginas": 9,
+        "rutas": [
+          "zt/shared/components/dropdown.css",
+          "zt/shared/components/dropdown.js"
+        ],
+        "usadoEn": [
+          "zt/historia-clinica/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+          "zt/ventas-y-afiliacion/mis-radicados/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "form-error",
@@ -460,7 +521,22 @@
         ],
         "equivalenteDs": "inputs",
         "tipo": "existe-en-ds",
-        "paginas": 9
+        "paginas": 9,
+        "rutas": [
+          "zt/shared/components/form-error.css"
+        ],
+        "usadoEn": [
+          "zt/historia-clinica/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "person-summary",
@@ -471,7 +547,23 @@
         ],
         "equivalenteDs": null,
         "tipo": "candidato-transversal",
-        "paginas": 9
+        "paginas": 9,
+        "rutas": [
+          "zt/shared/components/person-summary.css",
+          "zt/shared/components/person-summary.js"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "stepper",
@@ -482,7 +574,23 @@
         ],
         "equivalenteDs": "stepper",
         "tipo": "existe-en-ds",
-        "paginas": 9
+        "paginas": 9,
+        "rutas": [
+          "zt/shared/components/stepper.css",
+          "zt/shared/components/stepper.js"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "datepicker",
@@ -493,7 +601,21 @@
         ],
         "equivalenteDs": null,
         "tipo": "candidato-transversal",
-        "paginas": 7
+        "paginas": 7,
+        "rutas": [
+          "zt/shared/components/datepicker.css",
+          "zt/shared/components/datepicker.js"
+        ],
+        "usadoEn": [
+          "zt/historia-clinica/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/mis-radicados/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "radio",
@@ -503,7 +625,19 @@
         ],
         "equivalenteDs": "selection-controls",
         "tipo": "existe-en-ds",
-        "paginas": 6
+        "paginas": 6,
+        "rutas": [
+          "zt/shared/components/radio.css"
+        ],
+        "usadoEn": [
+          "zt/historia-clinica/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "readonly-field",
@@ -513,7 +647,17 @@
         ],
         "equivalenteDs": "inputs",
         "tipo": "existe-en-ds",
-        "paginas": 4
+        "paginas": 4,
+        "rutas": [
+          "zt/shared/components/readonly-field.css"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "action-card",
@@ -524,7 +668,16 @@
         ],
         "equivalenteDs": "cards",
         "tipo": "existe-en-ds",
-        "paginas": 2
+        "paginas": 2,
+        "rutas": [
+          "zt/shared/components/action-card.css",
+          "zt/shared/components/action-card.js"
+        ],
+        "usadoEn": [
+          "zt/agendamiento-de-citas/index.html",
+          "zt/ventas-y-afiliacion/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "file-upload",
@@ -535,7 +688,16 @@
         ],
         "equivalenteDs": null,
         "tipo": "candidato-transversal",
-        "paginas": 2
+        "paginas": 2,
+        "rutas": [
+          "zt/shared/components/file-upload.css",
+          "zt/shared/components/file-upload.js"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "benef-card",
@@ -546,7 +708,15 @@
         ],
         "equivalenteDs": "cards",
         "tipo": "existe-en-ds",
-        "paginas": 1
+        "paginas": 1,
+        "rutas": [
+          "zt/shared/components/benef-card.css",
+          "zt/shared/components/benef-card.js"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "otp-input",
@@ -557,7 +727,15 @@
         ],
         "equivalenteDs": null,
         "tipo": "candidato-transversal",
-        "paginas": 1
+        "paginas": 1,
+        "rutas": [
+          "zt/shared/components/otp-input.css",
+          "zt/shared/components/otp-input.js"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "status-result",
@@ -568,7 +746,15 @@
         ],
         "equivalenteDs": null,
         "tipo": "candidato-transversal",
-        "paginas": 1
+        "paginas": 1,
+        "rutas": [
+          "zt/shared/components/status-result.css",
+          "zt/shared/components/status-result.js"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html"
+        ],
+        "evaluacion": null
       },
       {
         "nombre": "switch",
@@ -579,7 +765,15 @@
         ],
         "equivalenteDs": "selection-controls",
         "tipo": "existe-en-ds",
-        "paginas": 1
+        "paginas": 1,
+        "rutas": [
+          "zt/shared/components/switch.css",
+          "zt/shared/components/switch.js"
+        ],
+        "usadoEn": [
+          "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html"
+        ],
+        "evaluacion": null
       }
     ],
     "cifras": {

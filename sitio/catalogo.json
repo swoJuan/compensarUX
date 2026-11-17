@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-17T16:35:28.486Z",
+  "generado": "2026-11-17T21:30:51.984Z",
   "fuentes": {
     "designSystem": {
       "id": "designSystem",
@@ -15,7 +15,7 @@
       "fecha": "2026-11-13T17:50:15-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": null,
+      "commitsSinSubir": 0,
       "cambios": [
         {
           "commit": "63bd56e",
@@ -30,6 +30,7 @@
           "archivos": 3602
         }
       ],
+      "versionPaquete": "v2.4.0",
       "versiones": [
         {
           "tag": "v2.4.0",
@@ -42,7 +43,7 @@
           "totalCambios": 0,
           "primera": false,
           "enPrototipos": true,
-          "revisar": "Historia clínica en móvil: por debajo de 768 px las pestañas pasaron a ser un menú desplegable. Confirma que el cambio de sección se entiende."
+          "revisar": null
         },
         {
           "tag": "v2.3.0",
@@ -127,7 +128,7 @@
       "fecha": "2026-11-17T08:29:44-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": null,
+      "commitsSinSubir": 0,
       "cambios": [
         {
           "commit": "50db88b",
@@ -165,6 +166,7 @@
   "cdn": {
     "base": "https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn",
     "ruta": "cdn",
+    "cors": false,
     "paquetes": [
       {
         "id": "compensar",
@@ -228,7 +230,7 @@
         "versiones": [
           {
             "version": "1.0.0",
-            "fecha": null,
+            "fecha": "2026-11-13T22:25:39.178Z",
             "commit": "f6cdff4",
             "ruta": "cdn/compensar-app/v1.0.0",
             "css": {
@@ -268,7 +270,7 @@
         "versiones": [
           {
             "version": "1.0.0",
-            "fecha": null,
+            "fecha": "2026-11-13T22:25:39.114Z",
             "commit": "f6cdff4",
             "ruta": "cdn/compensar-drupal/v1.0.0",
             "css": {
@@ -308,7 +310,7 @@
         "versiones": [
           {
             "version": "1.0.0",
-            "fecha": null,
+            "fecha": "2026-11-13T22:49:54.160Z",
             "commit": "f6cdff4",
             "ruta": "cdn/compensar-zt/v1.0.0",
             "css": {
@@ -377,6 +379,92 @@
       }
     ]
   },
+  "ia": {
+    "version": "2.4.0",
+    "generado": "2026-11-13T22:50:15.000Z",
+    "commit": "63bd56e",
+    "componentes": 29,
+    "tokens": 238,
+    "completo": {
+      "archivo": "compensar-design-system-ia-v2.4.0.md",
+      "bytes": 230536,
+      "url": "descargas/ia/compensar-design-system-ia-v2.4.0.md"
+    },
+    "paquete": {
+      "archivo": "compensar-design-system-ia-v2.4.0.zip",
+      "bytes": 106935,
+      "url": "descargas/ia/compensar-design-system-ia-v2.4.0.zip"
+    },
+    "arbol": [
+      "INSTRUCCIONES-IA.md",
+      "README.md",
+      "accessibility/accessibility.md",
+      "components/app/bottom-sheet.md",
+      "components/app/dropdown.md",
+      "components/app/header.md",
+      "components/app/tabs.md",
+      "components/index.md",
+      "components/transversales/accordion.md",
+      "components/transversales/alerts.md",
+      "components/transversales/avatar.md",
+      "components/transversales/badges.md",
+      "components/transversales/buttons.md",
+      "components/transversales/cards.md",
+      "components/transversales/dropdown.md",
+      "components/transversales/inputs.md",
+      "components/transversales/loading.md",
+      "components/transversales/modals.md",
+      "components/transversales/pagination.md",
+      "components/transversales/selection-controls.md",
+      "components/transversales/tables.md",
+      "components/transversales/tabs.md",
+      "components/transversales/toasts.md",
+      "components/web/accordion.md",
+      "components/web/badges.md",
+      "components/web/breadcrumb.md",
+      "components/web/empty-state.md",
+      "components/web/header.md",
+      "components/web/icons-connect.md",
+      "components/web/icons-intro.md",
+      "components/web/loading.md",
+      "components/web/sidebar.md",
+      "components/web/stepper.md",
+      "foundations/app-layout.md",
+      "foundations/border-radius.md",
+      "foundations/layout.md",
+      "foundations/principles.md",
+      "foundations/shadows.md",
+      "foundations/spacing.md",
+      "foundations/typography.md",
+      "manifest.json",
+      "patterns/dark-mode.md",
+      "patterns/form-patterns.md",
+      "patterns/high-contrast.md",
+      "patterns/motion-animation.md",
+      "patterns/patterns.md",
+      "patterns/responsive-breakpoints.md",
+      "patterns/search-filters.md",
+      "platforms/app.md",
+      "platforms/drupal.md",
+      "platforms/zt.md",
+      "tokens/breakpoints.md",
+      "tokens/colors.md",
+      "tokens/radius-shadows.md",
+      "tokens/spacing.md",
+      "tokens/tokens.json",
+      "tokens/typography.md",
+      "versions/changelog.md"
+    ],
+    "pendientes": [
+      "Catálogo de iconos (icons-library): se consulta en la página del sistema de diseño"
+    ],
+    "avisos": [
+      "tokens.json declara --spacing-Npx (15) pero core.css publica --space-N: se documenta el CSS.",
+      "Sin sección de accesibilidad: Avatar / User chip, Paginación, Cómo conectarlo, Sistema de iconos, Header App, Tabs App.",
+      "23 de 29 componentes tienen secciones pendientes de documentación (ver components/index.md)."
+    ],
+    "instrucciones": "Eres un agente que construye interfaces para Compensar. Usa el sistema de diseño de Compensar v2.4.0 y respeta estas reglas:\n\n1. Antes de escribir código, consulta la documentación del sistema de diseño v2.4.0 (archivo README.md y manifest.json del paquete). Si el usuario indica otra versión, pídele el paquete de esa versión.\n2. Reutiliza los componentes existentes (components/index.md). Antes de crear uno nuevo, verifica que no haya uno equivalente; si no existe, propónlo en lugar de inventarlo.\n3. Usa solo los tokens oficiales (tokens/). No escribas colores, espaciados, radios ni sombras con valores sueltos.\n4. Mantén la accesibilidad: WCAG 2.2 AA, foco visible, navegación por teclado, contraste en modo claro, oscuro y alto contraste, zoom al 200 %.\n5. Respeta los patrones de navegación y de formularios (patterns/).\n6. Considera la plataforma de destino (platforms/): Drupal, Zona Transaccional (ZT) y App no cargan los recursos de la misma manera. No las mezcles.\n7. No sobrescribas estilos globales ni modifiques el CSS del sistema de diseño; añade CSS propio del flujo al final.\n8. Si algo no está documentado, dilo explícitamente («no está documentado en el sistema de diseño») en lugar de suponerlo.\n9. Usa datos ficticios en ejemplos; nunca datos personales reales."
+  },
   "plataformas": {
     "drupal": {
       "nombre": "Drupal",
@@ -411,7 +499,8 @@
           "id": "293917",
           "codigo": "HU-256",
           "titulo": "Navegacion Menu Responsive y Escritorio",
-          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/293917"
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/293917",
+          "pantallas": []
         }
       ],
       "publicado": true,
@@ -428,6 +517,64 @@
         "plataforma": []
       },
       "versiones": [],
+      "pantallas": [],
+      "pantallasDetectadas": [
+        "zt/index.html",
+        "zt/inicio/index.html"
+      ],
+      "relaciones": [],
+      "commits": {
+        "propios": [
+          {
+            "hash": "d983b20d9d03c1fc43914056146c29521efccede",
+            "corto": "d983b20",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T10:18:37-05:00",
+            "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+            "alcance": "propio",
+            "archivos": [
+              "zt/index.html",
+              "zt/inicio/css/custom.css",
+              "zt/inicio/index.html"
+            ],
+            "totalArchivos": 3,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d983b20d9d03c1fc43914056146c29521efccede"
+          },
+          {
+            "hash": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+            "corto": "d4cefd3",
+            "autor": "swoJuan",
+            "fecha": "2026-11-12T12:28:42-05:00",
+            "mensaje": "Commit inicial",
+            "alcance": "propio",
+            "archivos": [
+              "zt/index.html"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
+          }
+        ],
+        "transversales": [
+          {
+            "hash": "63bd56e4bd8be6325e0040291a2972fd70f3ef10",
+            "corto": "63bd56e",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T17:50:15-05:00",
+            "mensaje": "feat(ds): paquetes CSS/JS versionados y página Instalar en el portal",
+            "alcance": "transversal",
+            "archivos": [
+              "zt/shared/zt-sidebar.js"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/63bd56e4bd8be6325e0040291a2972fd70f3ef10"
+          }
+        ],
+        "recursosCompartidosUsados": 7
+      },
+      "despliegues": [],
       "actualizado": "2026-11-13T10:18:37-05:00",
       "cambios": [
         {
@@ -462,19 +609,22 @@
           "id": "261050",
           "codigo": "HU-097",
           "titulo": "Consultar agenda",
-          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/261050"
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/261050",
+          "pantallas": []
         },
         {
           "id": "261084",
           "codigo": "HU-098",
           "titulo": "Confirmar cita",
-          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/261084"
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/261084",
+          "pantallas": []
         },
         {
           "id": "278709",
           "codigo": "HU-198",
           "titulo": "Validaciones en el flujo de agendamiento",
-          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/278709"
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/278709",
+          "pantallas": []
         }
       ],
       "publicado": true,
@@ -517,7 +667,92 @@
           "version": "0.1.0",
           "publicadaEl": "2026-11-17T16:23:27.873Z",
           "commit": "b49f7b7",
+          "commitCompleto": "b49f7b740fb03b69ebc8efe47c5234aa7d40fe70",
+          "commitEnlace": {
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/b49f7b740fb03b69ebc8efe47c5234aa7d40fe70"
+          },
+          "mensajeCommit": "feat(portal): registrar enlaces a otros flujos en cada versión y tratarlos como aviso en check",
           "fechaCommit": "2026-11-17T11:23:27-05:00",
+          "artefacto": "Flujos/versiones/zt-agendamiento-de-citas/v0.1.0",
+          "pantallas": [
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+              "huella": "e06dbeef9f97"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+              "huella": "254b823fc582"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+              "huella": "7842c5572f87"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+              "huella": "97226d6fe453"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/agendar-5-cargando.html",
+              "huella": "7cb7a9784792"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/agendar-5.html",
+              "huella": "87b103d38479"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/final-1.html",
+              "huella": "9975b4f9af51"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/final-2.html",
+              "huella": "a4ff3b79423c"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/final-3.html",
+              "huella": "a39c509c5972"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/final-4.html",
+              "huella": "655877ce5028"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/final-5.html",
+              "huella": "fb7fa5b060a0"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/index.html",
+              "huella": "beb69beaa45c"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+              "huella": "4eddf7b82589"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/prueba-3.html",
+              "huella": "78cdc4662879"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/prueba-4.html",
+              "huella": "b960e51dad67"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/prueba-5-cargando.html",
+              "huella": "52140b3e504e"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/citas-medicas/prueba-5.html",
+              "huella": "69354b9bc732"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/index.html",
+              "huella": "fde5eaf81a15"
+            },
+            {
+              "ruta": "zt/agendamiento-de-citas/laboratorio/index.html",
+              "huella": "0c82f464bacf"
+            }
+          ],
           "notas": "Primera versión publicada del flujo de agendamiento de citas médicas y de laboratorio (ZT), con el sistema de diseño v2.4.0.",
           "estadoUX": {
             "estado": "en-revision",
@@ -542,6 +777,130 @@
           "cambiosSinVersion": 0
         }
       ],
+      "pantallas": [],
+      "pantallasDetectadas": [
+        "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+        "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+        "zt/agendamiento-de-citas/citas-medicas/agendar-5-cargando.html",
+        "zt/agendamiento-de-citas/citas-medicas/agendar-5.html",
+        "zt/agendamiento-de-citas/citas-medicas/final-1.html",
+        "zt/agendamiento-de-citas/citas-medicas/final-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/final-3.html",
+        "zt/agendamiento-de-citas/citas-medicas/final-4.html",
+        "zt/agendamiento-de-citas/citas-medicas/final-5.html",
+        "zt/agendamiento-de-citas/citas-medicas/index.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-3.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-4.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-5-cargando.html",
+        "zt/agendamiento-de-citas/citas-medicas/prueba-5.html",
+        "zt/agendamiento-de-citas/index.html",
+        "zt/agendamiento-de-citas/laboratorio/index.html"
+      ],
+      "relaciones": [],
+      "commits": {
+        "propios": [
+          {
+            "hash": "f6cdff42de04e7a9e59059ae6eb06dcff3fad38e",
+            "corto": "f6cdff4",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T17:09:29-05:00",
+            "mensaje": "feat(zt): actualizar Action Card transversal según Figma",
+            "alcance": "propio",
+            "archivos": [
+              "zt/agendamiento-de-citas/index.html"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/f6cdff42de04e7a9e59059ae6eb06dcff3fad38e"
+          },
+          {
+            "hash": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+            "corto": "d4cefd3",
+            "autor": "swoJuan",
+            "fecha": "2026-11-12T12:28:42-05:00",
+            "mensaje": "Commit inicial",
+            "alcance": "propio",
+            "archivos": [
+              "zt/agendamiento-de-citas/citas-medicas/agenda-1.html",
+              "zt/agendamiento-de-citas/citas-medicas/agenda-2.html",
+              "zt/agendamiento-de-citas/citas-medicas/agenda-3.html",
+              "zt/agendamiento-de-citas/citas-medicas/agenda-5.html",
+              "zt/agendamiento-de-citas/citas-medicas/agendar-5-cargando.html",
+              "zt/agendamiento-de-citas/citas-medicas/agendar-5.html",
+              "zt/agendamiento-de-citas/citas-medicas/assets/IconCargando-5.svg",
+              "zt/agendamiento-de-citas/citas-medicas/assets/data-1/README-demo-agendamiento.md",
+              "zt/agendamiento-de-citas/citas-medicas/assets/data-1/demo-agenda.json",
+              "zt/agendamiento-de-citas/citas-medicas/assets/data-1/demo-agendamiento-helper.js",
+              "zt/agendamiento-de-citas/citas-medicas/assets/data-2/demo-agenda.json",
+              "zt/agendamiento-de-citas/citas-medicas/assets/data-3/demo-agenda.json",
+              "zt/agendamiento-de-citas/citas-medicas/assets/data-4/demo-agenda.json",
+              "zt/agendamiento-de-citas/citas-medicas/assets/finalizar-tarea.png",
+              "zt/agendamiento-de-citas/citas-medicas/css/custom.css",
+              "zt/agendamiento-de-citas/citas-medicas/favicon.ico",
+              "zt/agendamiento-de-citas/citas-medicas/final-1.html",
+              "zt/agendamiento-de-citas/citas-medicas/final-2.html",
+              "zt/agendamiento-de-citas/citas-medicas/final-3.html",
+              "zt/agendamiento-de-citas/citas-medicas/final-4.html",
+              "zt/agendamiento-de-citas/citas-medicas/final-5.html",
+              "zt/agendamiento-de-citas/citas-medicas/index.html",
+              "zt/agendamiento-de-citas/citas-medicas/js/app-prueba-2.js",
+              "zt/agendamiento-de-citas/citas-medicas/js/app-prueba-3.js",
+              "zt/agendamiento-de-citas/citas-medicas/js/app-prueba-4.js",
+              "zt/agendamiento-de-citas/citas-medicas/js/app.js",
+              "zt/agendamiento-de-citas/citas-medicas/prueba-2.html",
+              "zt/agendamiento-de-citas/citas-medicas/prueba-3.html",
+              "zt/agendamiento-de-citas/citas-medicas/prueba-4.html",
+              "zt/agendamiento-de-citas/citas-medicas/prueba-5-cargando.html",
+              "zt/agendamiento-de-citas/citas-medicas/prueba-5.html",
+              "zt/agendamiento-de-citas/favicon.ico",
+              "zt/agendamiento-de-citas/index.html",
+              "zt/agendamiento-de-citas/laboratorio/assets/.gitkeep",
+              "zt/agendamiento-de-citas/laboratorio/css/custom.css",
+              "zt/agendamiento-de-citas/laboratorio/favicon.ico",
+              "zt/agendamiento-de-citas/laboratorio/index.html",
+              "zt/agendamiento-de-citas/laboratorio/js/.gitkeep"
+            ],
+            "totalArchivos": 38,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
+          }
+        ],
+        "transversales": [
+          {
+            "hash": "63bd56e4bd8be6325e0040291a2972fd70f3ef10",
+            "corto": "63bd56e",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T17:50:15-05:00",
+            "mensaje": "feat(ds): paquetes CSS/JS versionados y página Instalar en el portal",
+            "alcance": "transversal",
+            "archivos": [
+              "zt/shared/zt-sidebar.js"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/63bd56e4bd8be6325e0040291a2972fd70f3ef10"
+          },
+          {
+            "hash": "d983b20d9d03c1fc43914056146c29521efccede",
+            "corto": "d983b20",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T10:18:37-05:00",
+            "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+            "alcance": "transversal",
+            "archivos": [
+              "zt/shared/zt-sidebar.js"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d983b20d9d03c1fc43914056146c29521efccede"
+          }
+        ],
+        "recursosCompartidosUsados": 8
+      },
+      "despliegues": [],
       "actualizado": "2026-11-13T17:09:29-05:00",
       "cambios": [
         {
@@ -576,7 +935,8 @@
           "id": "305878",
           "codigo": "HU-297",
           "titulo": "Mis solicitudes de historia clínica MP - ZT",
-          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/305878"
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/305878",
+          "pantallas": []
         }
       ],
       "publicado": true,
@@ -593,6 +953,90 @@
         "plataforma": []
       },
       "versiones": [],
+      "pantallas": [],
+      "pantallasDetectadas": [
+        "zt/historia-clinica/index.html",
+        "zt/historia-clinica/mis-solicitudes.html",
+        "zt/historia-clinica/radicada.html"
+      ],
+      "relaciones": [],
+      "commits": {
+        "propios": [
+          {
+            "hash": "50db88ba32a1da2fb1c35438ad9eee1df1601c2c",
+            "corto": "50db88b",
+            "autor": "swoJuan",
+            "fecha": "2026-11-17T08:29:44-05:00",
+            "mensaje": "feat(zt): inicio Comercial, validación de Iniciar afiliación y alerta del DS",
+            "alcance": "propio",
+            "archivos": [
+              "zt/historia-clinica/css/custom.css",
+              "zt/historia-clinica/index.html",
+              "zt/historia-clinica/js/mis-solicitudes.js",
+              "zt/historia-clinica/mis-solicitudes.html"
+            ],
+            "totalArchivos": 4,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/50db88ba32a1da2fb1c35438ad9eee1df1601c2c"
+          },
+          {
+            "hash": "d983b20d9d03c1fc43914056146c29521efccede",
+            "corto": "d983b20",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T10:18:37-05:00",
+            "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+            "alcance": "propio",
+            "archivos": [
+              "zt/historia-clinica/js/simulador.js"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d983b20d9d03c1fc43914056146c29521efccede"
+          },
+          {
+            "hash": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+            "corto": "d4cefd3",
+            "autor": "swoJuan",
+            "fecha": "2026-11-12T12:28:42-05:00",
+            "mensaje": "Commit inicial",
+            "alcance": "propio",
+            "archivos": [
+              "zt/historia-clinica/css/custom.css",
+              "zt/historia-clinica/index.html",
+              "zt/historia-clinica/js/confirm-drawer.js",
+              "zt/historia-clinica/js/hc-mock.js",
+              "zt/historia-clinica/js/mensajes.js",
+              "zt/historia-clinica/js/mis-solicitudes.js",
+              "zt/historia-clinica/js/nueva-solicitud.js",
+              "zt/historia-clinica/js/radicada.js",
+              "zt/historia-clinica/js/simulador.js",
+              "zt/historia-clinica/mis-solicitudes.html",
+              "zt/historia-clinica/radicada.html"
+            ],
+            "totalArchivos": 11,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
+          }
+        ],
+        "transversales": [
+          {
+            "hash": "63bd56e4bd8be6325e0040291a2972fd70f3ef10",
+            "corto": "63bd56e",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T17:50:15-05:00",
+            "mensaje": "feat(ds): paquetes CSS/JS versionados y página Instalar en el portal",
+            "alcance": "transversal",
+            "archivos": [
+              "zt/shared/zt-sidebar.js"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/63bd56e4bd8be6325e0040291a2972fd70f3ef10"
+          }
+        ],
+        "recursosCompartidosUsados": 14
+      },
+      "despliegues": [],
       "actualizado": "2026-11-17T08:29:44-05:00",
       "cambios": [
         {
@@ -643,6 +1087,163 @@
         "plataforma": []
       },
       "versiones": [],
+      "pantallas": [],
+      "pantallasDetectadas": [
+        "zt/ventas-y-afiliacion/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/_seed.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/_seed.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/_seed.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/_seed.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/_seed.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/_seed.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/_seed.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/_seed.html",
+        "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html",
+        "zt/ventas-y-afiliacion/inicio-comercial/index.html",
+        "zt/ventas-y-afiliacion/mis-radicados/index.html"
+      ],
+      "relaciones": [],
+      "commits": {
+        "propios": [
+          {
+            "hash": "50db88ba32a1da2fb1c35438ad9eee1df1601c2c",
+            "corto": "50db88b",
+            "autor": "swoJuan",
+            "fecha": "2026-11-17T08:29:44-05:00",
+            "mensaje": "feat(zt): inicio Comercial, validación de Iniciar afiliación y alerta del DS",
+            "alcance": "propio",
+            "archivos": [
+              "zt/ventas-y-afiliacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/css/afiliacion.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/js/afiliacion.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html",
+              "zt/ventas-y-afiliacion/inicio-comercial/index.html",
+              "zt/ventas-y-afiliacion/js/menu-comercial.js",
+              "zt/ventas-y-afiliacion/mis-radicados/index.html"
+            ],
+            "totalArchivos": 16,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/50db88ba32a1da2fb1c35438ad9eee1df1601c2c"
+          },
+          {
+            "hash": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+            "corto": "d4cefd3",
+            "autor": "swoJuan",
+            "fecha": "2026-11-12T12:28:42-05:00",
+            "mensaje": "Commit inicial",
+            "alcance": "propio",
+            "archivos": [
+              "zt/ventas-y-afiliacion/favicon.ico",
+              "zt/ventas-y-afiliacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/css/afiliacion.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/css/demo-nav.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/css/proceso-layout.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/favicon.ico",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/js/afiliacion.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/js/demo-nav.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/_seed.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/css/paso-1.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/js/paso-1.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/_seed.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/css/paso-2.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/js/paso-2.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/_seed.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/css/validacion.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/js/validacion.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/css/paso-3.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/js/paso-3.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/_seed.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/css/paso-4.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/js/paso-4.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/_seed.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/css/paso-5.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/js/paso-5.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/_seed.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/css/paso-6.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/js/paso-6.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/_seed.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/css/paso-7.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/js/paso-7.js"
+            ],
+            "totalArchivos": 47,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
+          }
+        ],
+        "transversales": [
+          {
+            "hash": "63bd56e4bd8be6325e0040291a2972fd70f3ef10",
+            "corto": "63bd56e",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T17:50:15-05:00",
+            "mensaje": "feat(ds): paquetes CSS/JS versionados y página Instalar en el portal",
+            "alcance": "transversal",
+            "archivos": [
+              "zt/shared/zt-sidebar.js"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/63bd56e4bd8be6325e0040291a2972fd70f3ef10"
+          },
+          {
+            "hash": "f6cdff42de04e7a9e59059ae6eb06dcff3fad38e",
+            "corto": "f6cdff4",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T17:09:29-05:00",
+            "mensaje": "feat(zt): actualizar Action Card transversal según Figma",
+            "alcance": "transversal",
+            "archivos": [
+              "zt/shared/components/action-card.css"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/f6cdff42de04e7a9e59059ae6eb06dcff3fad38e"
+          },
+          {
+            "hash": "d983b20d9d03c1fc43914056146c29521efccede",
+            "corto": "d983b20",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T10:18:37-05:00",
+            "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+            "alcance": "transversal",
+            "archivos": [
+              "zt/shared/zt-sidebar.js"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d983b20d9d03c1fc43914056146c29521efccede"
+          }
+        ],
+        "recursosCompartidosUsados": 33
+      },
+      "despliegues": [],
       "actualizado": "2026-11-17T08:29:44-05:00",
       "cambios": [
         {
@@ -677,7 +1278,8 @@
           "id": "293917",
           "codigo": "HU-256",
           "titulo": "Navegacion Menu Responsive y Escritorio",
-          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/293917"
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_workitems/edit/293917",
+          "pantallas": []
         }
       ],
       "publicado": true,
@@ -694,6 +1296,60 @@
         "plataforma": []
       },
       "versiones": [],
+      "pantallas": [],
+      "pantallasDetectadas": [
+        "drupal/navegacion/menu-2.html"
+      ],
+      "relaciones": [],
+      "commits": {
+        "propios": [
+          {
+            "hash": "d983b20d9d03c1fc43914056146c29521efccede",
+            "corto": "d983b20",
+            "autor": "swoJuan",
+            "fecha": "2026-11-13T10:18:37-05:00",
+            "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+            "alcance": "propio",
+            "archivos": [
+              "drupal/navegacion/assets/menu-1.js",
+              "drupal/navegacion/assets/menu-2.js",
+              "drupal/navegacion/assets/menu-3-desktop.js",
+              "drupal/navegacion/assets/menu-3.css",
+              "drupal/navegacion/assets/menu-3.js",
+              "drupal/navegacion/menu-1.html",
+              "drupal/navegacion/menu-3.html"
+            ],
+            "totalArchivos": 7,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d983b20d9d03c1fc43914056146c29521efccede"
+          },
+          {
+            "hash": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+            "corto": "d4cefd3",
+            "autor": "swoJuan",
+            "fecha": "2026-11-12T12:28:42-05:00",
+            "mensaje": "Commit inicial",
+            "alcance": "propio",
+            "archivos": [
+              "drupal/navegacion/assets/menu-1.js",
+              "drupal/navegacion/assets/menu-2.js",
+              "drupal/navegacion/assets/menu-3-desktop.js",
+              "drupal/navegacion/assets/menu-3.css",
+              "drupal/navegacion/assets/menu-3.js",
+              "drupal/navegacion/favicon.ico",
+              "drupal/navegacion/menu-1.html",
+              "drupal/navegacion/menu-2.html",
+              "drupal/navegacion/menu-3.html"
+            ],
+            "totalArchivos": 9,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
+          }
+        ],
+        "transversales": [],
+        "recursosCompartidosUsados": 9
+      },
+      "despliegues": [],
       "actualizado": "2026-11-13T10:18:37-05:00",
       "cambios": [
         {
@@ -738,6 +1394,33 @@
         "plataforma": []
       },
       "versiones": [],
+      "pantallas": [],
+      "pantallasDetectadas": [
+        "app/historia-clinica/index.html",
+        "app/index.html"
+      ],
+      "relaciones": [],
+      "commits": {
+        "propios": [
+          {
+            "hash": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+            "corto": "d4cefd3",
+            "autor": "swoJuan",
+            "fecha": "2026-11-12T12:28:42-05:00",
+            "mensaje": "Commit inicial",
+            "alcance": "propio",
+            "archivos": [
+              "app/index.html"
+            ],
+            "totalArchivos": 1,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
+          }
+        ],
+        "transversales": [],
+        "recursosCompartidosUsados": 5
+      },
+      "despliegues": [],
       "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
@@ -776,6 +1459,35 @@
         "plataforma": []
       },
       "versiones": [],
+      "pantallas": [],
+      "pantallasDetectadas": [
+        "app/historia-clinica/index.html"
+      ],
+      "relaciones": [],
+      "commits": {
+        "propios": [
+          {
+            "hash": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+            "corto": "d4cefd3",
+            "autor": "swoJuan",
+            "fecha": "2026-11-12T12:28:42-05:00",
+            "mensaje": "Commit inicial",
+            "alcance": "propio",
+            "archivos": [
+              "app/historia-clinica/css/custom.css",
+              "app/historia-clinica/index.html",
+              "app/historia-clinica/js/hc-app.js",
+              "app/historia-clinica/js/hc-data.js"
+            ],
+            "totalArchivos": 4,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
+          }
+        ],
+        "transversales": [],
+        "recursosCompartidosUsados": 4
+      },
+      "despliegues": [],
       "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {

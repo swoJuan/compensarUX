@@ -9,12 +9,13 @@
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="ds/favicon.ico" type="image/x-icon">
 <script>try{var t=localStorage.getItem('ds-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script>try{var d=document.documentElement,w=function(q){return matchMedia(q).matches};if(w('(min-width:1024px)')){if(localStorage.getItem('pux-panel')==='compacto')d.setAttribute('data-pn','compacto');}else if(w('(min-width:768px)')){d.setAttribute('data-pn','compacto');}}catch(e){}</script>
 <link rel="stylesheet" href="ds/css/core.css">
 <link rel="stylesheet" href="ds/icons/icons.css">
 <link rel="stylesheet" href="css/portal-ux.css">
 <script src="js/portal.js" defer></script>
-<title>Entregables · Portal UX Compensar</title>
-<meta name="description" content="Flujos aprobados por UX y paquetes de referencia para desarrollo.">
+<title>Entregables UX · Portal UX Compensar</title>
+<meta name="description" content="Flujos aprobados por UX y recursos disponibles para desarrollo.">
 </head>
 <body data-page="entregables">
 <a class="pux-skip" href="#contenido">Saltar al contenido</a>
@@ -27,10 +28,10 @@
     <img class="pux-brand__logo" src="p/shared/assets/logo.svg" alt="Compensar" width="137" height="28">
     <span class="pux-brand__name">Portal UX</span>
   </a>
-  <form class="pux-topbar__search" action="prototipos.html" method="get" role="search" aria-label="Buscar flujos">
+  <form class="pux-topbar__search" action="prototipos.html" method="get" role="search" aria-label="Buscar prototipos">
     <i class="icon icon-magnifying-glass icon-20" aria-hidden="true"></i>
-    <label class="visually-hidden" for="pux-buscar">Buscar flujos</label>
-    <input type="search" id="pux-buscar" name="q" placeholder="Buscar flujos…" autocomplete="off">
+    <label class="visually-hidden" for="pux-buscar">Buscar prototipos por nombre o plataforma</label>
+    <input type="search" id="pux-buscar" name="q" placeholder="Buscar prototipos…" autocomplete="off" data-buscar>
     <kbd class="pux-kbd" aria-hidden="true">/</kbd>
   </form>
   <div class="pux-topbar__actions">
@@ -42,84 +43,121 @@
 </header>
 
 <div class="pux-shell">
-  <aside class="pux-sidebar" id="pux-sidebar" aria-label="Navegación del portal">
-    <nav class="pux-side">
-      <a class="pux-side__link" href="index.html" data-tone="orange">
-        <i class="icon icon-house icon-20" aria-hidden="true"></i><span>Inicio</span>
-      </a>
-
-      <p class="pux-side__label">Sistema de diseño</p>
-      <a class="pux-side__link" href="ds/drupal.html" target="_blank" rel="noopener" data-tone="violet">
-        <i class="icon icon-globe icon-20" aria-hidden="true"></i><span>Drupal · ZT</span>
-        <i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span>
-      </a>
-      <a class="pux-side__link" href="ds/app.html" target="_blank" rel="noopener" data-tone="violet">
-        <i class="icon icon-device-mobile icon-20" aria-hidden="true"></i><span>APP</span>
-        <i class="icon icon-arrow-square-out icon-16 pux-side__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span>
-      </a>
-      <a class="pux-side__link" href="instalar.html" data-tone="violet">
-        <i class="icon icon-package icon-20" aria-hidden="true"></i><span>Instalar</span>
-      </a>
-      <ul class="pux-side__items" role="list">
-        <li><a class="pux-side__item" href="instalar-cdn.html"><span class="pux-side__item-name">Enlace público (CDN)</span></a></li>
-        <li><a class="pux-side__item" href="instalar-descargar.html"><span class="pux-side__item-name">Descargar el core</span></a></li>
-        <li><a class="pux-side__item" href="instalar-flujos.html"><span class="pux-side__item-name">Flujos y versiones</span></a></li>
+  <aside class="pux-nav" id="pux-sidebar" aria-label="Navegación del portal" data-nav>
+    <a class="pux-nv__brand" href="index.html" aria-label="Compensar, Medicina prepagada, Portal UX">
+      <span class="pux-nv__logo"><img src="p/shared/assets/logo.svg" alt="" width="137" height="28"></span>
+      <span class="pux-nv__brandtxt"><span class="pux-nv__portal">Portal UX</span></span>
+    </a>
+    <nav class="pux-nv" aria-label="Secciones del portal">
+      <ul class="pux-nv__list" role="list">
+      <li class="pux-nv__item" data-seccion="inicio">
+        <div class="pux-nv__row"><a class="pux-nv__link" href="index.html" data-tip="Inicio"><i class="icon icon-house icon-24" aria-hidden="true"></i><span class="pux-nv__txt">Inicio</span></a></div>
+      </li>
+      <li class="pux-nv__item" data-seccion="prototipos">
+        <div class="pux-nv__row">
+          <a class="pux-nv__link" href="prototipos.html" data-tip="Prototipos"><i class="icon icon-stack icon-24" aria-hidden="true"></i><span class="pux-nv__txt">Prototipos</span></a>
+          <button class="pux-nv__caret" type="button" aria-expanded="false" aria-controls="sub-prototipos" aria-label="Mostrar u ocultar Prototipos" data-sub-toggle><i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button>
+        </div>
+        <div class="pux-nv__sublist" id="sub-prototipos" data-sub>
+          <ul role="list">
+            <li><a class="pux-nv__sub" href="prototipos.html"><span class="pux-nv__subtxt">Todos los prototipos</span><span class="pux-side__count" data-side-count="todos"></span></a></li>
+            <li><a class="pux-nv__sub" href="drupal.html"><span class="pux-nv__subtxt">Drupal</span><span class="pux-side__count" data-side-count="drupal"></span></a></li>
+            <li><a class="pux-nv__sub" href="zt.html"><span class="pux-nv__subtxt">Zona transaccional</span><span class="pux-side__count" data-side-count="zt"></span></a></li>
+            <li><a class="pux-nv__sub" href="app.html"><span class="pux-nv__subtxt">App</span><span class="pux-side__count" data-side-count="app"></span></a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="pux-nv__item" data-seccion="ds">
+        <div class="pux-nv__row">
+          <a class="pux-nv__link" href="sistema-de-diseno.html" data-tip="Sistema de diseño"><i class="icon icon-squares-four icon-24" aria-hidden="true"></i><span class="pux-nv__txt">Sistema de diseño</span><span class="pux-side__alert pux-nv__dot" data-sync-alert hidden aria-label="Sincronización pendiente"></span></a>
+          <button class="pux-nv__caret" type="button" aria-expanded="false" aria-controls="sub-ds" aria-label="Mostrar u ocultar Sistema de diseño" data-sub-toggle><i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button>
+        </div>
+        <div class="pux-nv__sublist" id="sub-ds" data-sub>
+          <ul role="list">
+            <li><a class="pux-nv__sub" href="ds/drupal.html" target="_blank" rel="noopener"><span class="pux-nv__subtxt">Drupal y ZT</span><i class="icon icon-arrow-square-out icon-16 pux-nv__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span></a></li>
+            <li><a class="pux-nv__sub" href="ds/app.html" target="_blank" rel="noopener"><span class="pux-nv__subtxt">App</span><i class="icon icon-arrow-square-out icon-16 pux-nv__ext" aria-hidden="true"></i><span class="visually-hidden"> (pestaña nueva)</span></a></li>
+            <li><a class="pux-nv__sub" href="centro-de-recursos.html"><span class="pux-nv__subtxt">Centro de recursos</span></a></li>
+            <li><a class="pux-nv__sub" href="historial.html"><span class="pux-nv__subtxt">Versiones y actualizaciones</span><span class="pux-side__alert" data-sync-alert hidden aria-label="Sincronización pendiente"></span></a></li>
+            <li><a class="pux-nv__sub" href="componentes.html"><span class="pux-nv__subtxt">Uso de componentes</span></a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="pux-nv__item" data-seccion="doc">
+        <div class="pux-nv__row">
+          <a class="pux-nv__link" href="documentacion.html" data-tip="Documentación"><i class="icon icon-book-open icon-24" aria-hidden="true"></i><span class="pux-nv__txt">Documentación</span></a>
+          <button class="pux-nv__caret" type="button" aria-expanded="false" aria-controls="sub-doc" aria-label="Mostrar u ocultar Documentación" data-sub-toggle><i class="icon icon-caret-down icon-16" aria-hidden="true"></i></button>
+        </div>
+        <div class="pux-nv__sublist" id="sub-doc" data-sub>
+          <ul role="list">
+            <li><a class="pux-nv__sub" href="entregables.html"><span class="pux-nv__subtxt">Entregables UX</span></a></li>
+          </ul>
+        </div>
+      </li>
       </ul>
-      <a class="pux-side__link" href="changelog.html" data-tone="violet">
-        <i class="icon icon-clock-counter-clockwise icon-20" aria-hidden="true"></i><span>Changelog</span>
-      </a>
-
-      <p class="pux-side__label">Prototipos</p>
-      <div data-side-flujos></div>
-
-      <p class="pux-side__label">Entrega</p>
-      <a class="pux-side__link" href="entregables.html" data-tone="green">
-        <i class="icon icon-package icon-20" aria-hidden="true"></i><span>Entregables</span>
-      </a>
-
-      <p class="pux-side__label">Proyecto</p>
-      <a class="pux-side__link" href="historial.html" data-tone="cyan">
-        <i class="icon icon-clock icon-20" aria-hidden="true"></i><span>Historial</span>
-        <span class="pux-side__alert" data-sync-alert hidden aria-label="Sincronización pendiente"></span>
-      </a>
-      <a class="pux-side__link" href="componentes.html" data-tone="green">
-        <i class="icon icon-stack icon-20" aria-hidden="true"></i><span>Componentes</span>
-      </a>
     </nav>
-    <p class="pux-side__foot" data-build-info></p>
+    <div class="pux-nv__foot">
+      <p class="pux-nv__build" data-build-info></p>
+      <button class="pux-nv__collapse" type="button" data-panel-toggle aria-expanded="true" aria-label="Contraer navegación" data-tip="Contraer navegación">
+        <i class="icon icon-caret-double-left icon-24" aria-hidden="true"></i><span class="pux-nv__txt">Contraer</span>
+      </button>
+    </div>
   </aside>
   <div class="pux-backdrop" data-sidebar-backdrop hidden></div>
 
   <div class="pux-content">
 <main id="contenido" class="pux-main" tabindex="-1">
-
-  <section class="pux-page-head">
+  <section class="pux-page-head pux-page-head--compacto">
     <div class="pux-container">
-      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Entregables</span></li></ol></nav>
-      <h1 class="pux-page-head__title">Entregables</h1>
-      <p class="mp-body-xl pux-page-head__lead">Flujos que UX aprobó para entregar a desarrollo, con su versión.</p>
+      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><a class="mp-breadcrumb__link" href="documentacion.html">Documentación</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Entregables UX</span></li></ol></nav>
+      <h1 class="pux-page-head__title">Entregables UX</h1>
+      <p class="mp-body-l pux-page-head__lead">Consulta los flujos aprobados por UX y los recursos disponibles para desarrollo.</p>
     </div>
   </section>
-
   <section class="pux-section pux-section--tight">
     <div class="pux-container">
-      <div class="mp-alert mp-alert--info" role="note">
-        <i class="icon icon-info icon-32 mp-alert__icon" aria-hidden="true"></i>
-        <div class="mp-alert__content">
-          <p class="mp-alert__title">Código de referencia UX, no código productivo</p>
-          <p class="mp-alert__body">Los paquetes contienen el prototipo HTML, CSS y JavaScript como referencia visual y funcional. La implementación en Angular o .NET MAUI la hace cada equipo. La generación de paquetes y la descarga restringida a desarrollo llegan en una fase posterior.</p>
-        </div>
-      </div>
+      <details class="pux-nota">
+        <summary>
+          <i class="icon icon-info icon-20 pux-nota__icono" aria-hidden="true"></i>
+          <span class="pux-nota__texto"><strong>Prototipos de referencia UX.</strong> Los prototipos son referencias visuales y funcionales. No representan código listo para producción.</span>
+          <span class="pux-nota__mas">Más información</span>
+        </summary>
+        <p class="pux-nota__cuerpo">Cada paquete contiene el prototipo HTML, CSS y JavaScript como referencia. La implementación productiva la realizan los equipos de desarrollo en sus tecnologías correspondientes (Angular para Zona Transaccional y .NET MAUI para la App).</p>
+      </details>
     </div>
   </section>
-
   <section class="pux-section pux-section--tight" aria-labelledby="aprobados-titulo">
     <div class="pux-container">
       <h2 class="mp-h6 pux-section__title" id="aprobados-titulo">Flujos aprobados por UX</h2>
-      <div data-entregables aria-live="polite"><p class="pux-muted">Cargando…</p></div>
+      <form class="pux-filters" role="search" aria-label="Filtrar entregables" data-entregables-filtros onsubmit="return false">
+        <div class="pux-filters__fields">
+          <div class="mp-input-group pux-filters__search">
+            <label class="mp-input-label" for="ent-q">Buscar por nombre del flujo</label>
+            <div class="mp-input-wrapper">
+              <i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>
+              <input class="mp-input-field has-icon-left" type="search" id="ent-q" placeholder="Nombre del flujo" autocomplete="off" data-ent-q>
+            </div>
+          </div>
+          <div class="mp-input-group pux-filters__orden">
+            <label class="mp-input-label" for="ent-plat">Plataforma</label>
+            <div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="ent-plat" data-ent-plat>
+              <option value="">Todas</option><option value="drupal">Drupal</option><option value="zt">ZT</option><option value="app">App</option>
+            </select></div>
+          </div>
+          <div class="mp-input-group pux-filters__orden">
+            <label class="mp-input-label" for="ent-orden">Ordenar por</label>
+            <div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="ent-orden" data-ent-orden>
+              <option value="aprobacion-desc">Aprobación más reciente</option>
+              <option value="aprobacion-asc">Aprobación más antigua</option>
+              <option value="nombre">Nombre (A–Z)</option>
+            </select></div>
+          </div>
+        </div>
+      </form>
+      <p class="pux-results" aria-live="polite" tabindex="-1" data-entregables-res></p>
+      <div data-entregables><p class="pux-muted">Cargando…</p></div>
+      <div class="pux-paginacion" data-entregables-pag></div>
     </div>
   </section>
-
 </main>
 <footer class="pux-footer">
       <div class="pux-container pux-footer__inner">
