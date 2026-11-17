@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="../shared/components/dropdown.css">
 <link rel="stylesheet" href="../shared/components/datepicker.css">
 <link rel="stylesheet" href="../shared/components/form-error.css">
-<link rel="stylesheet" href="../shared/components/alert.css">
 <link rel="stylesheet" href="../shared/components/modal.css">
 <link rel="stylesheet" href="css/custom.css">
 </head>
@@ -190,11 +189,11 @@
 
                 <!-- Año anterior -->
                 <div class="hc-period__panel" id="hc-panel-anio" hidden>
-                  <!-- Alerta info del sistema (zt-alert), solo descripción -->
-                  <div class="zt-alert zt-alert--info" role="status" aria-live="polite">
-                    <span class="zt-alert__icon icon icon-info icon-32 gs-inherit" aria-hidden="true"></span>
-                    <div class="zt-alert__content">
-                      <p class="zt-alert__desc" id="hc-anio-note">Incluye la información del 1 de enero al 31 de diciembre.</p>
+                  <!-- Alerta info del sistema (mp-alert del DS), solo descripción -->
+                  <div class="mp-alert mp-alert--info" role="status">
+                    <i class="icon icon-info icon-32 mp-alert__icon" aria-hidden="true"></i>
+                    <div class="mp-alert__content">
+                      <p class="mp-alert__body" id="hc-anio-note">Incluye la información del 1 de enero al 31 de diciembre.</p>
                     </div>
                   </div>
                 </div>

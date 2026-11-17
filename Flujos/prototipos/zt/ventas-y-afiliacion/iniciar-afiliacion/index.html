@@ -12,8 +12,8 @@
 <link rel="stylesheet" href="../../../shared/icons/icons.css">
 <link rel="stylesheet" href="../../shared/zt.css">
 <link rel="stylesheet" href="../../shared/components/dropdown.css">
-<link rel="stylesheet" href="../../shared/components/alert.css">
 <link rel="stylesheet" href="../../shared/components/modal.css">
+<link rel="stylesheet" href="../../shared/components/form-error.css">
 <link rel="stylesheet" href="css/afiliacion.css">
 </head>
 <body>
@@ -25,8 +25,8 @@
       <span class="material-icons" aria-hidden="true">menu</span>
     </button>
     <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
-    <button class="icon-btn" aria-label="Configuración">
-      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    <button class="icon-btn hd-exit-mobile" type="button" aria-label="Salida">
+      <span class="icon icon-sign-out icon-24 gs-primary" aria-hidden="true"></span>
     </button>
   </header>
 
@@ -35,49 +35,33 @@
     <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
     <div class="hd-user">
 
-      <!-- Selector de persona/afiliado (lo cablea zt-sidebar.js → wirePersonSelector) -->
+      <!-- Perfil Comercial: usuario logueado (Figma "Afiliacion01 - Comercial") -->
       <div class="hd-person" data-person-selector>
         <button class="hd-person__trigger" type="button"
-                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu">
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu"
+                aria-label="Usuario actual: Andrés, perfil Comercial">
           <span class="hd-person__info">
-            <span class="hd-person__name" data-person-name>Margarita López Arenas</span>
-            <span class="hd-person__plan" data-person-plan>Plan Ideal</span>
+            <span class="hd-person__name" data-person-name>Andrés</span>
+            <span class="hd-person__plan" data-person-plan>Comercial</span>
           </span>
-          <span class="hd-person__caret icon icon-caret-down icon-20 gs-inherit" aria-hidden="true"></span>
+          <span class="hd-person__avatar icon icon-user-circle icon-32 gs-primary" aria-hidden="true"></span>
         </button>
-
         <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
-          <p class="person-menu__label" id="person-menu-label">Selecciona una persona</p>
-          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Margarita López Arenas" data-plan="Plan Ideal">
+          <p class="person-menu__label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Andrés" data-plan="Comercial">
             <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
             <span class="person-opt__text">
-              <span class="person-opt__name">Margarita López Arenas</span>
-              <span class="person-opt__role">Contratante</span>
-            </span>
-            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
-          </button>
-          <button class="person-opt" type="button" role="menuitemradio" aria-checked="false" data-person="Luis Orejuela" data-plan="Plan Ideal">
-            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
-            <span class="person-opt__text">
-              <span class="person-opt__name">Luis Orejuela</span>
-              <span class="person-opt__role">Beneficiario · Menor de edad</span>
-            </span>
-            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
-          </button>
-          <button class="person-opt" type="button" role="menuitemradio" aria-checked="false" data-person="Ana Orejuela" data-plan="Plan Ideal">
-            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
-            <span class="person-opt__text">
-              <span class="person-opt__name">Ana Orejuela</span>
-              <span class="person-opt__role">Beneficiaria · Menor de edad</span>
+              <span class="person-opt__name">Andrés</span>
+              <span class="person-opt__role">Comercial</span>
             </span>
             <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
           </button>
         </div>
       </div>
 
-      <div class="hd-divider"></div>
-      <button class="hd-exit">
-        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+      <div class="hd-divider" aria-hidden="true"></div>
+      <button class="hd-exit" type="button">
+        <span class="icon icon-sign-out icon-32 gs-primary" aria-hidden="true"></span>
         Salida
       </button>
     </div>
@@ -97,7 +81,7 @@
           <!-- Breadcrumb (shell ZT) — Inicio / Ventas y afiliación / Iniciar afiliación -->
           <nav class="breadcrumb" aria-label="Ruta de navegación">
             <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
-            <a href="../../index.html">Inicio</a>
+            <a href="../inicio-comercial/index.html">Inicio</a>
             <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
             <a href="../index.html">Ventas y afiliación</a>
             <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
@@ -126,7 +110,7 @@
               </div>
 
               <!-- ALERTA CONTEXTUAL INLINE (componente transversal Alert) — la renderiza
-                   afiliacion.js SOLO en estado NO VIABLE. Va entre la descripción y los
+                   afiliacion.js SOLO en estado NO VIABLE (si es viable se avanza al Paso 1 sin mensaje). Va entre la descripción y los
                    campos (orden Figma: icono → título → descripción → alerta → campos).
                    Región anunciable (aria-live). No es modal ni overlay. -->
               <div class="afi-alert" id="afi-alert" aria-live="polite"></div>
@@ -143,7 +127,7 @@
                     <!-- data-zt-dropdown → mejorado por el componente transversal Dropdown List
                          (visual = Dropdown Menu del DS; semántica = select/listbox). Sin buscador (lista corta). -->
                     <select class="mp-input-field mp-select" id="afi-tipo" name="tipo" required
-                            aria-required="true" data-zt-dropdown data-zt-dropdown-search="false">
+                            aria-required="true" aria-describedby="afi-tipo-error" data-zt-dropdown data-zt-dropdown-search="false">
                       <option value="" selected disabled>Seleccionar</option>
                       <option value="CC">Cédula de ciudadanía</option>
                       <option value="TI">Tarjeta de identidad</option>
@@ -152,6 +136,7 @@
                       <option value="PPT">Permiso por Protección Temporal</option>
                     </select>
                   </div>
+                  <p class="mp-input-error" id="afi-tipo-error" role="alert" hidden>Selecciona el tipo de documento.</p>
                 </div>
 
                 <!-- Número de documento (DS: .mp-input-group + .mp-input-field) -->
@@ -162,26 +147,20 @@
                   <div class="mp-input-wrapper">
                     <input class="mp-input-field" id="afi-numero" name="numero" type="text"
                            inputmode="numeric" autocomplete="off" required aria-required="true"
-                           aria-describedby="afi-numero-hint" placeholder="Escriba el número de documento"
+                           aria-describedby="afi-numero-hint afi-numero-error" placeholder="Escriba el número de documento"
                            maxlength="15">
                   </div>
                   <p class="mp-hint" id="afi-numero-hint">Sin puntos ni espacios</p>
+                  <p class="mp-input-error" id="afi-numero-error" role="alert" hidden>Ingresa el número de documento.</p>
                 </div>
 
               </div>
 
-              <!-- Resultado VIABLE (inline, sin modal): persona + acciones. Lo pinta afiliacion.js -->
-              <div class="afi-viable" id="afi-viable" hidden></div>
-
               <!-- Botón (Continuar / Consultar) — DS: .mp-btn--primario -->
-              <button class="mp-btn mp-btn--primario afi-submit" id="afi-submit" type="submit" disabled>
+              <button class="mp-btn mp-btn--primario afi-submit" id="afi-submit" type="submit">
                 <span class="afi-submit__label" id="afi-submit-label">Continuar</span>
                 <span class="afi-submit__spinner icon icon-spinner-gap icon-20 gs-inherit" aria-hidden="true"></span>
               </button>
-
-              <!-- Desenlaces de la consulta de viabilidad:
-                   VIABLE     → modal de éxito sobre overlay oscuro (componente ZT Modal).
-                   NO VIABLE  → alerta warning inline dentro de la card (#afi-alert). -->
 
             </form>
           </section>
@@ -192,6 +171,7 @@
   </div>
 </div>
 
+<script src="../js/menu-comercial.js"></script>
 <script src="../../shared/zt-sidebar.js"></script>
 <script src="../../shared/afiliacion-mock.js"></script>
 <script src="../../shared/components/dropdown.js"></script>

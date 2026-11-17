@@ -339,49 +339,31 @@ ZTModal.open({
 
 ---
 
-## Alert (`zt-alert`)
-
-**Qué es:** **alerta contextual inline** (no modal, no overlay, no bloqueante). Muestra un
-aviso dentro del propio contenido/formulario: ícono de estado (32×32) a la izquierda +
-bloque de título y descripción alineado a la izquierda. El usuario puede seguir trabajando.
-
-**Cuándo usarlo:** para avisos contextuales que NO deben interrumpir la interfaz
-(p. ej. "No es posible continuar" tras una consulta). Es un Alert **general**: no está
-acoplado a ningún flujo. No crear variantes por flujo (`.viability-warning`, etc.).
-
+## Alert (`mp-alert` del Design System)
+**Qué es:** **alerta contextual inline** (no modal, no overlay, no bloqueante). Usa el componente
+oficial `mp-alert` del Design System (Figma 4574:1918, definido en `core.css`). ZT **no** tiene
+estilos propios de alerta: `alert.js` solo es un helper que genera el marcado del DS.
+**Cuándo usarlo:** avisos contextuales que NO deben interrumpir la interfaz
+(p. ej. "No es posible continuar" tras una consulta). Es un Alert **general**: no crear variantes por flujo.
 **Archivos:**
-- `alert.css` — estilos y variantes.
-- `alert.js` — API (`ZTAlert.create/render/clear`).
-
-**Cómo enlazar** (en el `<head>`, tras `zt.css`):
+- `alert.js` — API (`ZTAlert.create/render/clear`). No requiere CSS adicional (viene en `core.css`).
+**Cómo enlazar:**
 ```html
-<link rel="stylesheet" href="../shared/components/alert.css">
 <script src="../shared/components/alert.js"></script>
 ```
 (Ajustar la profundidad `../` según la ubicación de la pantalla.)
-
 ### Propiedades
 | Prop | Obligatorio | Descripción |
 |---|---|---|
 | `type` | no | `warning` (def.) \| `success` \| `info` \| `error`. |
-| `title` | no* | Título (Body L strong — 16px, semibold, lh 1.3). |
-| `description` | no* | Texto de apoyo (Body M — 14px, regular, lh 1.3). |
-
-*Se requiere `title` y/o `description`. Solo-descripción → alerta compacta (p. ej. `info` sin encabezado).
-
-### Variantes
-`warning` (activa — amarillo suave, aviso NO error, ícono `icon-warning`) ·
-`success` · `info` · `error` (preparadas). La arquitectura no está acoplada a "viabilidad".
-
-### Anatomía
-`.zt-alert` (fila, `align-items:flex-start`, gap 16, padding 16, radius 12) ›
-`.zt-alert__icon` (32×32, font-icon del sistema) · `.zt-alert__content` (columna, gap 4) ›
-`.zt-alert__title` · `.zt-alert__desc`.
-
+| `title` | no* | Título (`mp-alert__title`, 16px semibold). |
+| `description` | no* | Texto de apoyo (`mp-alert__body`, 16px regular). |
+*Se requiere `title` y/o `description`.
+### Iconos (los de la documentación del DS)
+`warning` → `icon-warning` · `success` → `icon-check-circle` · `info` → `icon-info` · `error` → `icon-warning-circle`.
 ### Accesibilidad
-- Raíz `role="status"` + `aria-live="polite"` → se anuncia al aparecer **sin** mover el foco.
-- No bloquea la interfaz; el formulario permanece editable.
-
+- `error` → `role="alert"`; las demás → `role="status"`. Se anuncian sin mover el foco.
+- El DS aporta foco visible (`:focus-within`) y los colores por tema (Light, Dark, Alto contraste).
 ### Uso por JS (API)
 ```js
 ZTAlert.render(document.getElementById('afi-alert'), {
@@ -391,23 +373,16 @@ ZTAlert.render(document.getElementById('afi-alert'), {
 });
 // Para limpiarla: ZTAlert.clear(document.getElementById('afi-alert'));
 ```
-
-### Uso en HTML (estático)
+### Uso en HTML (estático) — marcado oficial del DS
 ```html
-<div class="zt-alert zt-alert--warning" role="status" aria-live="polite">
-  <span class="zt-alert__icon icon icon-warning icon-32 gs-inherit" aria-hidden="true"></span>
-  <div class="zt-alert__content">
-    <p class="zt-alert__title">No es posible continuar con la afiliación</p>
-    <p class="zt-alert__desc">La persona no cumple con las condiciones requeridas para continuar con la afiliación a Medicina Prepagada.</p>
+<div class="mp-alert mp-alert--warning" role="status">
+  <i class="icon icon-warning icon-32 mp-alert__icon" aria-hidden="true"></i>
+  <div class="mp-alert__content">
+    <p class="mp-alert__title">No es posible continuar con la afiliación</p>
+    <p class="mp-alert__body">La persona no cumple con las condiciones requeridas para continuar con la afiliación a Medicina Prepagada.</p>
   </div>
 </div>
 ```
-
-### Tokens usados
-`--use-state-warning-bg` (→ `#fff2d9`), `--use-state-warning-border` (→ `#fcce72`),
-`--use-state-warning-text`, `--use-text-primary`, `--space-16`, `--space-4`, `--radius-12`,
-`--font-size-lg` (título, 16px), `--font-size-md` (descripción, 14px), `--line-height-normal` (1.3),
-`--font-weight-semibold/regular`. Icono: font-icon del sistema (`.icon-warning .icon-32`).
 
 ### Notas
 - Ancho `100%` (ocupa el ancho de la card/formulario). Sin dimensiones fijas del Figma.

@@ -37,13 +37,13 @@
 
   /* ── Aviso de vigencia ── */
   function buildNotice() {
-    var a = el('div', 'zt-alert zt-alert--info');
+    var a = el('div', 'mp-alert mp-alert--info');
     a.setAttribute('role', 'note');
     var ai = icon('icon-info', 32);
-    ai.classList.add('zt-alert__icon');
+    ai.classList.add('mp-alert__icon');
     a.appendChild(ai);
-    var c = el('div', 'zt-alert__content');
-    var p = el('p', 'zt-alert__desc');
+    var c = el('div', 'mp-alert__content');
+    var p = el('p', 'mp-alert__body');
     p.appendChild(document.createTextNode('Las historias clínicas del listado solo estarán visibles durante '));
     p.appendChild(el('strong', null, '30 días'));
     p.appendChild(document.createTextNode(' desde tu solicitud.'));
