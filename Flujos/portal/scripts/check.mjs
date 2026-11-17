@@ -53,6 +53,19 @@ const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'fuentes.json'), 'utf8'))
 const DS_DIR = path.join(DIST, cfg.designSystem.destino);
 const FRAG_DIR = path.join(DS_DIR, 'docs') + path.sep;
 const existeRef = (ref, f) => existe(ref, f) || (f.startsWith(FRAG_DIR) && existe(ref, path.join(DS_DIR, 'index.html')));
+// Una versión publicada contiene solo su flujo: un enlace hacia otro flujo (que sí existe en p/)
+// es un aviso, no una referencia rota.
+function rota(f, ref, texto) {
+  const r = rel(f);
+  const m = /^(versiones\/[^/]+\/v\d+\.\d+\.\d+)\//.exec(r);
+  if (m) {
+    const limpio = ref.split('#')[0].split('?')[0];
+    const relRaiz = path.relative(path.join(DIST, m[1]), path.resolve(path.dirname(f), limpio));
+    const equiv = path.join(DIST, 'p', relRaiz);
+    if (!relRaiz.startsWith('..') && fs.existsSync(equiv)) { avisos.push(`${r} (enlace a otro flujo, fuera de esta versión) → ${ref}`); return; }
+  }
+  errores.push(texto);
+}
 const archivos = walk(DIST);
 let refs = 0;
 
@@ -71,7 +84,7 @@ for (const f of archivos) {
       if (/^(?:https?:)?\/\//i.test(ref)) { anotarExterno(ref); continue; }
       if (SKIP.test(ref)) continue;
       refs++;
-      if (!existeRef(ref, f)) errores.push(`${rel(f)} → ${ref}`);
+      if (!existeRef(ref, f)) rota(f, ref, `${rel(f)} → ${ref}`);
     }
     for (const s of txt.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi)) {
       for (const m of s[1].matchAll(/fetch\(\s*['"]([^'"\s]+)['"]/g)) {

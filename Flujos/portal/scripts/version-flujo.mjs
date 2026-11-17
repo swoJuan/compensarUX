@@ -78,6 +78,21 @@ try {
     const txt = fs.readFileSync(path.join(tmp, rel), 'utf8');
     for (const m of txt.matchAll(reCdn)) (cdn[m[1]] ||= new Set()).add(m[2]);
   }
+  /* Enlaces del flujo hacia archivos de OTRO flujo o del nivel de plataforma: no forman parte
+     de la versión (una versión es solo su flujo). Se dejan registrados en el manifiesto. */
+  const enSet = new Set([...comunes, ...propios]);
+  const existentes = new Set(todos);
+  const enlacesExternos = [];
+  for (const rel of propios.filter((x) => x.endsWith('.html'))) {
+    const txt = fs.readFileSync(path.join(tmp, rel), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+    for (const m of txt.matchAll(/\b(?:src|href)\s*=\s*["']([^"']+)["']/gi)) {
+      const ref = m[1].trim().split('#')[0].split('?')[0];
+      if (!ref || /^(?:[a-z][a-z0-9+.-]*:|\/\/|\$|\{)/i.test(ref)) continue;
+      let destino = path.posix.normalize(path.posix.join(path.posix.dirname(rel), ref));
+      if (!existentes.has(destino) && existentes.has(path.posix.join(destino, 'index.html'))) destino = path.posix.join(destino, 'index.html');
+      if (existentes.has(destino) && !enSet.has(destino)) enlacesExternos.push({ desde: rel, hacia: destino });
+    }
+  }
   const info = git(fl.raiz, ['log', '-1', '--format=%H%x1f%cI%x1f%s', commit]).toString().trim().split('\x1f');
   const manifest = {
     id, version,
@@ -91,6 +106,7 @@ try {
     ds,
     paquetesCdn: Object.fromEntries(Object.entries(cdn).map(([k, v]) => [k, [...v].sort()])),
     recursos: { hash, archivos: Object.keys(mapaComun).length },
+    enlacesExternos,
     archivos: mapaPropio,
   };
 
@@ -98,6 +114,7 @@ try {
   console.log(`  commit congelado : ${manifest.commit.corto} (${manifest.commit.fecha.slice(0, 10)})`);
   console.log(`  sistema de diseño: ${ds ? `${ds.tag || 'commit ' + ds.commit}` : 'sin registro'}`);
   console.log(`  archivos propios : ${propios.length}`);
+  if (enlacesExternos.length) console.log(`  enlaces a otros flujos (no incluidos): ${[...new Set(enlacesExternos.map((e) => e.hacia))].join(', ')}`);
   console.log(`  recursos comunes : ${comunes.length} archivos · huella ${hash} · ${reutiliza ? 'REUTILIZADOS (sin duplicar)' : 'nuevos'}`);
   if (reutiliza && !(JSON.stringify(huellas(path.join(rdir, 'archivos'))) === JSON.stringify(Object.fromEntries(Object.keys(mapaComun).sort().map((k) => [k, mapaComun[k]]))))) {
     fallar(`La carpeta de recursos ${hash} existe pero su contenido no coincide: no se toca.`);
