@@ -27,7 +27,7 @@ import path from 'node:path';
 import { ROOT, readJson, matcher, walk, Fuente, estadoSincronizacion, mapaComponentes } from './lib/fuentes.mjs';
 import { crearZip } from './lib/zip.mjs';
 import { archivosMaui } from './lib/maui.mjs';
-import { ALMACEN, idsAlmacen, listarVersiones, verificarAlmacen, verificarCatalogo, materializar, commitsDesde } from './lib/versiones.mjs';
+import { ALMACEN, idsAlmacen, listarVersiones, verificarAlmacen, verificarCatalogo, materializar, commitsDesde, generarSalidas } from './lib/versiones.mjs';
 
 const DIST = process.env.PORTAL_DIST ? path.resolve(process.env.PORTAL_DIST) : path.join(ROOT, 'dist');
 const PORTAL = path.join(ROOT, 'portal');
@@ -91,7 +91,12 @@ for (const f of flujos) {
   if (!lista.length) continue;
   versionesFlujo[f.id] = lista.map((m) => {
     materializar(m, path.join(DIST, 'versiones', f.id, `v${m.version}`));
+    const salidas = generarSalidas({
+      dist: DIST, raizVersion: `versiones/${f.id}/v${m.version}`, plataforma: f.plataforma, flujoId: f.id,
+      flujos: publicados, volverAlPortal: (cfg.versiones?.volverAlPortal || {})[f.plataforma] || [], robots: cfg.robots.meta,
+    });
     return {
+      salidas,
       version: m.version,
       publicadaEl: m.publicadaEl,
       commit: m.commit.corto,

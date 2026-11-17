@@ -106,6 +106,12 @@
   },
 
   "$robots": "Bloqueo de buscadores y rastreadores. Es una indicación que los rastreadores respetan voluntariamente: la protección real es Vercel Authentication cuando se publique.",
+  "versiones": {
+    "$comentario": "Versiones históricas navegables. 'volverAlPortal' lista, por plataforma, las rutas de «Inicio» que dentro de una versión no existen: se resuelven con una página de redirección al portal principal. Es solo salida del build; los archivos congelados no se tocan.",
+    "volverAlPortal": {
+      "zt": ["zt/index.html", "zt/inicio/index.html"]
+    }
+  },
   "robots": {
     "meta": "noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai",
     "bloquear": [

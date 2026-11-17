@@ -142,3 +142,55 @@ export function commitsDesde(fl, commit, rutas) {
     return Number(git(fl.repo, ['rev-list', '--count', `${commit}..HEAD`, '--', ...rutas]).toString().trim()) || 0;
   } catch { return null; }
 }
+
+const html = (txt) => String(txt).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/**
+ * Páginas de salida de una versión. Una versión contiene solo su flujo; los enlaces hacia
+ * fuera (el «Inicio» del breadcrumb, el menú lateral de ZT) apuntan a archivos que ella no
+ * tiene. Se escriben, SOLO en la salida, páginas de redirección en esas rutas:
+ *   - rutas de `volverAlPortal` (Inicio) → portal principal;
+ *   - entrada de otro flujo de la misma plataforma → ese flujo en su versión vigente (p/).
+ * Nunca pisan un archivo de la versión.
+ */
+export function generarSalidas({ dist, raizVersion, plataforma, flujoId, flujos, volverAlPortal, robots }) {
+  const destino = path.join(dist, raizVersion);
+  const profBase = raizVersion.split('/').length;
+  const candidatas = new Map();
+  for (const r of volverAlPortal || []) candidatas.set(r, 'portal');
+  const existeEnP = (r) => fs.existsSync(path.join(dist, 'p', r));
+  const sumar = (r) => { if (!candidatas.has(r) && existeEnP(r)) candidatas.set(r, 'vigente'); };
+  sumar(`${plataforma}/index.html`);
+  for (const g of flujos) {
+    if (g.id === flujoId || g.plataforma !== plataforma) continue;
+    const base = g.ruta.replace(/\/?$/, '/');
+    sumar(`${base}index.html`);
+    sumar(`${base}${g.entrada || 'index.html'}`);
+  }
+  const hechas = [];
+  for (const [ruta, tipo] of candidatas) {
+    const archivo = path.join(destino, ruta);
+    if (fs.existsSync(archivo)) continue;
+    const niveles = profBase + ruta.split('/').length - 1;
+    const sube = '../'.repeat(niveles);
+    const hacia = tipo === 'portal' ? `${sube}index.html` : `${sube}p/${ruta}`;
+    const texto = tipo === 'portal' ? 'Volviendo al portal principal…' : 'Este enlace sale de la versión histórica. Abriendo la versión vigente de ese flujo…';
+    fs.mkdirSync(path.dirname(archivo), { recursive: true });
+    fs.writeFileSync(archivo, `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="${html(robots)}">
+<meta http-equiv="refresh" content="0; url=${html(hacia)}">
+<title>Saliendo de la versión · Portal UX Compensar</title>
+</head>
+<body>
+<p>${texto} <a href="${html(hacia)}">Continuar</a></p>
+<script>location.replace(${JSON.stringify(hacia)});</script>
+</body>
+</html>
+`);
+    hechas.push({ ruta, destino: tipo === 'portal' ? 'portal' : 'vigente' });
+  }
+  return hechas;
+}
