@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "$comentario": "Registro de publicaciones EFECTIVAS de un flujo en un entorno. Un commit no es un despliegue y una versión no es un despliegue. Solo se anota una publicación que se pueda comprobar: cada registro exige 'evidencia' (URL del proceso de publicación, identificador del despliegue o referencia verificable) y el build comprueba que el flujo, la versión y el commit existan. Se agrega con 'npm run despliegue-registrar'; este archivo no se rellena por inferencia. Estados: publicado, en-proceso, fallido, revertido.",
+  "despliegues": []
+}

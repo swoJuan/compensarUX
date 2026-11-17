@@ -233,19 +233,22 @@ export function estadoSincronizacion(ds, fl, pares) {
   const archivos = pares.map(({ ds: dsPath, flujos: flPath }) => {
     const bDs = ds.blob(dsPath);
     const bFl = fl.blob(flPath);
-    if (!bDs || !bFl) return { ds: dsPath, flujos: flPath, estado: 'faltante', versionUsada: null };
-    if (bDs === bFl) return { ds: dsPath, flujos: flPath, estado: 'al-dia', versionUsada: null };
+    const refDs = bDs ? bDs.slice(0, 7) : null;
+    const refFlujos = bFl ? bFl.slice(0, 7) : null;
+    if (!bDs || !bFl) return { ds: dsPath, flujos: flPath, estado: 'faltante', versionUsada: null, refDs, refFlujos };
+    if (bDs === bFl) return { ds: dsPath, flujos: flPath, estado: 'al-dia', versionUsada: null, refDs, refFlujos };
     let versionUsada = null;
     const commits = (gitTxt(ds.repo, ['log', '--format=%h%x1f%cI', '-n60', ds.gitRef, '--', dsPath]) || '').split('\n').filter(Boolean);
     for (const linea of commits) {
       const [c, f] = linea.split('\x1f');
       if (ds.blob(dsPath, c) === bFl) { versionUsada = { commit: c, fecha: f }; break; }
     }
-    return { ds: dsPath, flujos: flPath, estado: 'desactualizado', versionUsada };
+    return { ds: dsPath, flujos: flPath, estado: 'desactualizado', versionUsada, refDs, refFlujos };
   });
   const desact = archivos.filter((a) => a.estado !== 'al-dia');
+  // Sin archivos que comparar no hay nada verificado: no se puede afirmar «al día».
   return {
-    estado: desact.length ? 'desactualizado' : 'al-dia',
+    estado: !archivos.length ? 'no-verificado' : (desact.length ? 'desactualizado' : 'al-dia'),
     dsCommit: ds.ultimoCambio().commit,
     archivos,
   };
@@ -309,6 +312,9 @@ export function mapaComponentes(ds, fl) {
       equivalenteDs: candidato,
       tipo: candidato ? 'existe-en-ds' : 'candidato-transversal',
       paginas: usos.has(l.nombre) ? usos.get(l.nombre).size : 0,
+      // Dónde vive el código y en qué pantallas se enlaza (datos del repositorio, no inferidos).
+      rutas: l.archivos.map((a) => `${l.plataforma}/shared/components/${a}`),
+      usadoEn: usos.has(l.nombre) ? [...usos.get(l.nombre)].sort() : [],
     };
   }).sort((a, b) => b.paginas - a.paginas || a.nombre.localeCompare(b.nombre));
 

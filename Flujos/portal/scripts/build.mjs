@@ -28,6 +28,7 @@ import { ROOT, readJson, matcher, walk, Fuente, estadoSincronizacion, mapaCompon
 import { crearZip } from './lib/zip.mjs';
 import { generarPaqueteIA } from './lib/ia-docs.mjs';
 import { archivosMaui } from './lib/maui.mjs';
+import { contexto as ctxTraz, proyeccion as proyTraz, validarRegistro, validarDespliegues, desplieguesDelFlujo, commitsDelFlujo, pantallasDeVersion, enlaceCommit } from './lib/trazabilidad.mjs';
 import { ALMACEN, idsAlmacen, listarVersiones, verificarAlmacen, verificarCatalogo, materializar, commitsDesde, generarSalidas } from './lib/versiones.mjs';
 
 const DIST = process.env.PORTAL_DIST ? path.resolve(process.env.PORTAL_DIST) : path.join(ROOT, 'dist');
@@ -101,7 +102,12 @@ for (const f of flujos) {
       version: m.version,
       publicadaEl: m.publicadaEl,
       commit: m.commit.corto,
+      commitCompleto: m.commit.completo,
+      commitEnlace: enlaceCommit(fl, m.commit.completo),
+      mensajeCommit: m.commit.mensaje,
       fechaCommit: m.commit.fecha,
+      artefacto: `Flujos/versiones/${f.id}/v${m.version}`,
+      pantallas: pantallasDeVersion(m, f),
       notas: m.notas,
       estadoUX: m.estadoUX,
       ds: m.ds,
@@ -574,6 +580,22 @@ const repositorio = {
 const plataformas = Object.fromEntries(Object.entries(cfg.plataformas).map(([id, p]) => [id, {
   nombre: p.nombre, nombreCorto: p.nombreCorto || p.nombre, tecnologia: p.tecnologia, descripcion: p.descripcion,
 }]));
+/* Trazabilidad por flujo (pantallas, HU, commits, despliegues). Un registro inconsistente cancela el build. */
+const trazCtx = ctxTraz();
+const erroresTraz = [
+  ...flujos.flatMap((f) => validarRegistro(f.id, trazCtx, catalogo)),
+  ...validarDespliegues(trazCtx, fl, catalogo, listarVersiones),
+];
+if (erroresTraz.length) throw new Error('Trazabilidad inconsistente:\n  - ' + erroresTraz.join('\n  - '));
+function trazabilidadFlujo(f) {
+  const p = proyTraz(f.id, trazCtx, catalogo);
+  return {
+    hu: p.hu, pantallas: p.pantallas, pantallasDetectadas: p.pantallasDetectadas, relaciones: p.relaciones,
+    commits: commitsDelFlujo(fl, f, trazCtx),
+    despliegues: desplieguesDelFlujo(trazCtx, f.id, fl),
+  };
+}
+
 const salida = {
   generado: new Date().toISOString(),
   fuentes: {
@@ -605,6 +627,7 @@ const salida = {
     descarga: descargasFlujos[f.id] || null,
     consumo: consumoFlujo(f),
     versiones: versionesFlujo[f.id] || [],
+    ...trazabilidadFlujo(f),
     actualizado: fl.ultimaFecha(f.incluir || [f.ruta]),
     cambios: fl.historial(20, f.incluir || [f.ruta]),
     aprobacionUX: f.aprobacionUX || { aprobado: false, por: null, fecha: null },
@@ -612,8 +635,26 @@ const salida = {
 };
 fs.writeFileSync(path.join(DIST, 'catalogo.json'), JSON.stringify(salida, null, 2));
 
-const sincronizacion = estadoSincronizacion(ds, fl, cfg.sincronizacion.archivos);
+let sincronizacion;
+try {
+  sincronizacion = estadoSincronizacion(ds, fl, cfg.sincronizacion.archivos);
+} catch (e) {
+  // Si la comparación falla no se afirma nada: el portal muestra «Error de verificación».
+  sincronizacion = { estado: 'error', dsCommit: null, archivos: [], mensajeError: String(e.message || e).split('\n')[0] };
+  console.warn(`  Aviso: no se pudo verificar la sincronización: ${sincronizacion.mensajeError}`);
+}
 const componentes = mapaComponentes(ds, fl);
+/* Evaluación de componentes: registro manual de UX (evaluacion-componentes.json).
+   Un componente sin entrada queda «Por validar»: el equivalente que sugiere el nombre
+   NO es una decisión. */
+const ESTADOS_EVAL = ['por-validar', 'reutilizar', 'candidato', 'especifico'];
+const evalReg = fs.existsSync(path.join(ROOT, 'evaluacion-componentes.json')) ? readJson('evaluacion-componentes.json') : {};
+const evals = evalReg.evaluaciones || {};
+for (const [clave, ev] of Object.entries(evals)) {
+  if (!ESTADOS_EVAL.includes(ev.estado)) throw new Error(`evaluacion-componentes.json: estado «${ev.estado}» no válido en ${clave}. Usa: ${ESTADOS_EVAL.join(', ')}.`);
+  if (!componentes.locales.some((l) => `${l.plataforma}/${l.nombre}` === clave)) console.warn(`  Aviso: evaluacion-componentes.json tiene «${clave}», que ya no existe en los prototipos.`);
+}
+componentes.locales = componentes.locales.map((l) => ({ ...l, evaluacion: evals[`${l.plataforma}/${l.nombre}`] || null }));
 
 /* Cifras del sistema de diseño: se cuentan del propio sistema en cada build, para que
    la portada no dependa de una lista escrita a mano que se desactualiza. */
@@ -626,7 +667,13 @@ componentes.cifras = {
 fs.writeFileSync(path.join(DIST, 'estado.json'), JSON.stringify({
   generado: salida.generado,
   repositorio,
-  sincronizacion: { ...sincronizacion, version: infoDs.version, comando: 'npm run ds:sincronizar' },
+  sincronizacion: {
+    ...sincronizacion,
+    version: infoDs.version,
+    versionPrototipos: dsEnPrototipos?.tag || null,
+    verificado: salida.generado,
+    comando: 'npm run ds:sincronizar',
+  },
   componentes,
 }, null, 2));
 

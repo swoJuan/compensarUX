@@ -8,9 +8,6 @@
     { "tag": "v2.2.0", "fecha": "2026-11-06T22:23:37+00:00", "commit": "77696a7", "titulo": "Design System v2.2.0 — campos de solo lectura y deshabilitados" }
   ],
 
-  "v2.4.0": {
-    "revisar": "Historia clínica en móvil: por debajo de 768 px las pestañas pasaron a ser un menú desplegable. Confirma que el cambio de sección se entiende."
-  },
 
   "v2.3.0": {
     "revisar": "Cambios de color en badges e íconos de advertencia, y títulos de tarjeta en negrita. Pendientes de revisión visual del equipo, Safari y VoiceOver."

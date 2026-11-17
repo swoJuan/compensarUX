@@ -10,6 +10,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { manejarApi } from './lib/api-trazabilidad.mjs';
 
 const ROOT = process.env.PORTAL_DIST
   ? path.resolve(process.env.PORTAL_DIST)
@@ -30,7 +31,8 @@ if (!fs.existsSync(ROOT)) {
   process.exit(1);
 }
 
-http.createServer((req, res) => {
+http.createServer(async (req, res) => {
+  if (await manejarApi(req, res, { host: HOST })) return;
   let urlPath;
   try { urlPath = decodeURIComponent(new URL(req.url, 'http://x').pathname); } catch { res.writeHead(400).end(); return; }
   let file = path.join(ROOT, urlPath);

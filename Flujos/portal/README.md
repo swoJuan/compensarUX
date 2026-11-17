@@ -150,3 +150,11 @@ npm test                                               # pruebas (versiones y es
 - `catalogo.json → version` debe coincidir con la última versión publicada.
 - El detalle de cada flujo en el portal lista sus versiones y permite abrirlas.
 - Los commits solo son locales: push y despliegue requieren autorización aparte.
+## Ficha del flujo: pantallas, HU, versiones y despliegues
+`flujo.html?id=<flujo>` tiene cuatro pestañas (Resumen, Pantallas y HU, Versiones, Despliegues). Datos:
+- `catalogo.json` → HU del flujo (una sola vez por flujo; vincular no la duplica).
+- `trazabilidad/<flujo>.json` → pantallas registradas (id estable `scr-…`) y relaciones HU↔pantalla. Se crea al registrar la primera pantalla.
+- `Flujos/versiones/` → versiones publicadas (manifiestos inmutables); las pantallas de cada versión salen de sus huellas.
+- `despliegues.json` → publicaciones efectivas, con evidencia obligatoria. Se agrega con `npm run despliegue-registrar -- --flujo … --entorno … --commit … --estado … --evidencia "…"`. Vacío por defecto: no se infiere nada.
+- Commits: `git log` filtrado por los archivos del flujo (propios) y por los archivos `shared/` que sus pantallas referencian (transversales).
+La edición (registrar pantallas, vincular HU) usa una API local de `npm run dev` / `npm run serve` (solo loopback); el sitio publicado es de solo lectura. Toda validación de URLs está en `scripts/lib/trazabilidad.mjs`.

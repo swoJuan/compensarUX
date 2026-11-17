@@ -132,13 +132,13 @@
     var fondo = $('[data-sidebar-backdrop]');
     if (!btn || !side) return;
     var label = $('[data-sidebar-toggle-label]', btn);
-    var mq = window.matchMedia('(min-width: 1024px)');
+    var mq = window.matchMedia('(min-width: 768px)');
     function set(abierto) {
       btn.setAttribute('aria-expanded', String(abierto));
       document.body.classList.toggle('pux-side-open', abierto);
       if (fondo) fondo.hidden = !abierto;
       if (label) label.textContent = abierto ? 'Cerrar navegación' : 'Abrir navegación';
-      if (abierto) { var first = $('a, summary', side); if (first) first.focus(); }
+      if (abierto) setTimeout(function () { var first = $('a[aria-current], a', side); if (first) first.focus(); }, 30);
     }
     btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
     if (fondo) fondo.addEventListener('click', function () { set(false); btn.focus(); });
@@ -166,47 +166,158 @@
     });
   }
 
-  /* Marca en el menú lateral la página actual */
-  /* Página activa del menú lateral. En el catálogo cuenta el filtro de plataforma;
-     en la ficha de un flujo se marca la plataforma a la que pertenece. */
+  /* ---------- Navegación lateral ----------
+     Una sola barra lateral: secciones con submenús anidados.
+     La sección sale de la ruta, así que funciona igual al entrar por URL directa. */
+  var SECCIONES = {
+    inicio: ['index.html'],
+    prototipos: ['prototipos.html', 'drupal.html', 'zt.html', 'app.html', 'flujo.html'],
+    ds: ['sistema-de-diseno.html', 'centro-de-recursos.html', 'historial.html', 'changelog.html', 'componentes.html'],
+    doc: ['documentacion.html', 'entregables.html']
+  };
+  /* Página activa. En el catálogo cuenta el filtro de plataforma; en la ficha de un
+     flujo se marca la plataforma a la que pertenece. */
   var plataformaActual = '';
+  function seccionDe(archivo) {
+    if (/^instalar(?:-|\.)/.test(archivo)) return 'ds';
+    return Object.keys(SECCIONES).filter(function (k) { return SECCIONES[k].indexOf(archivo) >= 0; })[0] || 'inicio';
+  }
   function marcarActivo() {
     var archivo = window.location.pathname.split('/').pop() || 'index.html';
     var actual = archivo;
     if (archivo === 'flujo.html' && plataformaActual) actual = plataformaActual + '.html';
-    // Las páginas antiguas de Instalar redirigen al Centro de recursos.
+    // Las páginas antiguas de Instalar redirigen al Centro de recursos; changelog, a Versiones.
     if (/^instalar(?:-|\.)/.test(archivo)) actual = 'centro-de-recursos.html';
-    $all('.pux-side a').forEach(function (a) {
+    if (archivo === 'changelog.html') actual = 'historial.html';
+    var sec = seccionDe(archivo);
+    var nav = $('[data-nav]');
+    if (nav) nav.setAttribute('data-seccion', sec);
+    var hijoActivo = false;
+    $all('.pux-nv__sub').forEach(function (a) {
       var on = a.getAttribute('href') === actual;
+      if (on) hijoActivo = true;
       // En la ficha de un flujo la plataforma es la sección, no la página exacta.
       if (on) a.setAttribute('aria-current', archivo === 'flujo.html' ? 'true' : 'page'); else a.removeAttribute('aria-current');
-      a.classList.remove('is-seccion-activa');
     });
-    // Un subitem activo marca también su sección y deja abierto su desplegable.
-    $all('.pux-side__items').forEach(function (lista) {
-      var hijo = $('a[aria-current]', lista);
-      var fila = lista.previousElementSibling;
-      var enlace = fila && (fila.matches('.pux-side__link') ? fila : $('.pux-side__link', fila));
-      if (hijo && enlace) { enlace.setAttribute('aria-current', 'true'); enlace.classList.add('is-seccion-activa'); }
-      var abrir = !!hijo || !!(enlace && enlace.hasAttribute('aria-current'));
-      if (abrir) fijarDesplegable(lista, true);
+    $all('.pux-nv__item').forEach(function (it) {
+      var propia = it.getAttribute('data-seccion') === sec;
+      var link = $('.pux-nv__link', it);
+      if (propia && !hijoActivo) link.setAttribute('aria-current', 'page');
+      else if (propia) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
+      if (propia && !it.hasAttribute('data-abierto-manual')) fijarSub(it, true);
     });
+    ajustarPanel();
   }
-
-  /* Grupos del menú: botón con flecha que muestra u oculta sus opciones. */
-  function fijarDesplegable(lista, abierto) {
-    lista.hidden = !abierto;
-    var fila = lista.previousElementSibling;
-    var b = fila && $('[data-side-toggle]', fila);
-    if (b) b.setAttribute('aria-expanded', String(abierto));
+  /* Submenú dentro de la misma barra: se anima con grid-template-rows (0fr -> 1fr). */
+  function fijarSub(item, abierto) {
+    var btn = $('[data-sub-toggle]', item);
+    if (!btn) return;
+    item.classList.toggle('is-open', abierto);
+    btn.setAttribute('aria-expanded', String(abierto));
+    var sub = $('[data-sub]', item);
+    if (sub) { if ('inert' in sub) sub.inert = !abierto; }
   }
-  function initDesplegables() {
-    $all('[data-side-toggle]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var lista = document.getElementById(b.getAttribute('aria-controls'));
-        if (lista) fijarDesplegable(lista, lista.hidden);
+  function initSubmenus() {
+    $all('.pux-nv__item').forEach(function (it) {
+      var btn = $('[data-sub-toggle]', it);
+      if (!btn) return;
+      fijarSub(it, false);
+      btn.addEventListener('click', function () {
+        it.setAttribute('data-abierto-manual', '');
+        fijarSub(it, !it.classList.contains('is-open'));
       });
     });
+  }
+  /* Panel contextual: expandido (texto completo) o compacto (textos cortos). En escritorio
+     nunca se oculta y la elección se recuerda. En tableta nace compacto y, al expandirlo,
+     flota sobre el contenido. En móvil es un cajón y siempre muestra el texto completo. */
+  var mqEscritorio = window.matchMedia('(min-width: 1024px)');
+  var mqMovil = window.matchMedia('(max-width: 767.98px)');
+  function modoPanel() { return document.documentElement.getAttribute('data-pn') === 'compacto' ? 'compacto' : 'expandido'; }
+  function fijarModo(modo) {
+    document.documentElement.setAttribute('data-pn', modo);
+    var btn = $('[data-panel-toggle]');
+    if (!btn) return;
+    var exp = modo === 'expandido';
+    btn.setAttribute('aria-expanded', String(exp));
+    btn.setAttribute('aria-label', (exp ? 'Contraer' : 'Expandir') + ' navegación');
+    btn.setAttribute('data-tip', exp ? 'Contraer navegación' : 'Expandir navegación');
+  }
+  function modoInicial() {
+    if (mqMovil.matches) return 'expandido';
+    if (mqEscritorio.matches) return store('pux-panel') === 'compacto' ? 'compacto' : 'expandido';
+    return 'compacto';
+  }
+  function ajustarPanel() { fijarModo(modoPanel()); }
+  function initNav() {
+    var nav = $('[data-nav]');
+    var btn = $('[data-panel-toggle]');
+    if (!nav || !btn) return;
+    fijarModo(modoInicial());
+    initSubmenus();
+    marcarActivo();
+    btn.addEventListener('click', function () {
+      var nuevo = modoPanel() === 'expandido' ? 'compacto' : 'expandido';
+      if (mqEscritorio.matches) store('pux-panel', nuevo);
+      fijarModo(nuevo);
+    });
+    // Tableta: el panel expandido flota; Esc o un clic fuera lo devuelven a compacto.
+    function replegar(foco) {
+      if (mqEscritorio.matches || mqMovil.matches || modoPanel() !== 'expandido') return;
+      fijarModo('compacto');
+      if (foco) btn.focus();
+    }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') replegar(true); });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target)) replegar(false); });
+    [mqEscritorio, mqMovil].forEach(function (m) { m.addEventListener('change', function () { fijarModo(modoInicial()); }); });
+    initTips();
+  }
+
+  /* Tooltips de la navegación. Un solo elemento fijo, fuera dla barra (que hace scroll y
+     recortaría un tooltip propio). Aparece con puntero y con foco de teclado, se puede pasar
+     el puntero por encima y Esc lo descarta (WCAG 1.4.13). Solo se muestra con la barra colapsada, donde no hay texto. */
+  function initTips() {
+    var tip = document.createElement('div');
+    tip.className = 'pux-tip';
+    tip.setAttribute('aria-hidden', 'true');
+    tip.hidden = true;
+    document.body.appendChild(tip);
+    var tmr = null, descartado = null;
+    function aplica(el) {
+      if (mqMovil.matches || !el.getAttribute('data-tip')) return false;
+      return modoPanel() === 'compacto';
+    }
+    function mostrar(el) {
+      if (!aplica(el) || descartado === el) return;
+      clearTimeout(tmr);
+      var r = el.getBoundingClientRect();
+      tip.textContent = el.getAttribute('data-tip');
+      tip.style.left = Math.round(r.right + 8) + 'px';
+      tip.style.top = Math.round(r.top + r.height / 2) + 'px';
+      tip.hidden = false;
+    }
+    function ocultar(demora) { clearTimeout(tmr); tmr = setTimeout(function () { tip.hidden = true; }, demora || 0); }
+    var sel = '.pux-nv__link, .pux-nv__collapse';
+    document.addEventListener('mouseover', function (e) {
+      var el = e.target.closest && e.target.closest(sel);
+      if (el) mostrar(el); else if (e.target.closest && e.target.closest('.pux-tip')) clearTimeout(tmr);
+    });
+    document.addEventListener('mouseout', function (e) {
+      var el = e.target.closest && e.target.closest(sel);
+      if (el) { descartado = null; ocultar(120); }
+    });
+    document.addEventListener('focusin', function (e) {
+      var el = e.target.closest && e.target.closest(sel);
+      if (el && el.matches(':focus-visible')) mostrar(el);
+    });
+    document.addEventListener('focusout', function (e) { if (e.target.closest && e.target.closest(sel)) { descartado = null; ocultar(0); } });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || tip.hidden) return;
+      descartado = document.activeElement.closest ? document.activeElement.closest(sel) : null;
+      tip.hidden = true;
+    });
+    window.addEventListener('scroll', function () { tip.hidden = true; }, true);
   }
 
   /* Menú lateral: cuántos prototipos hay en cada plataforma. No lista cada uno:
@@ -362,7 +473,7 @@
             '<span><strong>Qué revisar:</strong> ' + esc(actual.revisar) + '</span></p>'
           : '') +
         '<div class="pux-actions">' +
-          '<a class="mp-btn mp-btn--primario" href="changelog.html">Ver todas las versiones</a>' +
+          '<a class="mp-btn mp-btn--primario" href="historial.html">Ver todas las versiones</a>' +
         '</div>' +
         '<div class="pux-dsres__docs">' +
           '<h3 class="pux-dsres__docs-tit">Consultar los componentes</h3>' +
@@ -477,7 +588,7 @@
       '</div>' +
       '<div class="pux-ds__acciones">' +
         '<a class="mp-btn mp-btn--primario" href="sistema-de-diseno.html">Consultar sistema de diseño</a>' +
-        (hayCambios ? '<a class="pux-link" href="changelog.html">Ver cambios</a>' : '') +
+        (hayCambios ? '<a class="pux-link" href="historial.html">Ver cambios</a>' : '') +
       '</div>';
   }
 
@@ -538,7 +649,7 @@
     nums.forEach(function (n, i) { if (i && n - nums[i - 1] > 1) out.push(0); out.push(n); });
     return out;
   }
-  function htmlPaginacion(actual, total, href) {
+  function htmlPaginacion(actual, total, href, etiqueta) {
     if (total <= 1) return '';
     function enlace(n, contenido, extra) {
       return '<li class="mp-pagination__item"><a class="mp-pagination__link' + (n === actual ? ' is-active' : '') + '" href="' + esc(href(n)) + '" data-pagina="' + n + '"' +
@@ -552,7 +663,7 @@
         : enlace(n, String(n), ' aria-label="Página ' + n + (n === actual ? ', página actual' : '') + '"'));
     });
     if (actual < total) items.push(enlace(actual + 1, '<i class="icon icon-caret-right mp-pagination__icon" aria-hidden="true"></i>', ' aria-label="Página siguiente"'));
-    return '<nav class="mp-pagination mp-pagination--center" aria-label="Paginación del catálogo"><ul class="mp-pagination__list">' + items.join('') + '</ul></nav>';
+    return '<nav class="mp-pagination mp-pagination--center" aria-label="' + esc(etiqueta || 'Paginación del catálogo') + '"><ul class="mp-pagination__list">' + items.join('') + '</ul></nav>';
   }
 
   function initPrototipos(cat) {
@@ -941,6 +1052,15 @@
       return;
     }
     document.title = f.nombre + ' · Portal UX Compensar';
+    /* Ficha completa (resumen, pantallas y HU, versiones, despliegues): js/ficha-flujo.js. */
+    if (window.PortalFicha) {
+      window.PortalFicha.render(cont, f, cat, {
+        esc: esc, $: $, $all: $all, fecha: fecha, fechaHora: fechaHora, tag: tag, vacio: vacio, badgeEstado: badgeEstado,
+        tagPlataforma: tagPlataforma, botonVisualizar: botonVisualizar, abrirDrawer: abrirDrawer, cerrarDrawer: cerrarDrawer,
+        initPreview: initPreview, dsEnPrototipos: dsEnPrototipos, sinV: sinV, ESTADOS: ESTADOS, SEP_RUTA: SEP_RUTA, params: params
+      });
+      return;
+    }
     var pl = cat.plataformas[f.plataforma] || {};
     var figma = /^https:\/\//.test(f.figma || '')
       ? '<a class="mp-btn mp-btn--secundario mp-btn--icon-left" href="' + esc(f.figma) + '" target="_blank" rel="noopener"><i class="icon icon-figma-logo icon-20" aria-hidden="true"></i> Ver en Figma<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>'
@@ -1066,69 +1186,59 @@
     }).join('') + '</ol>';
   }
 
-  /* ---------- Sistema de diseño: changelog por versión ---------- */
-  /**
-   * Una entrada por versión publicada (tag del repositorio), no por commit:
-   * qué cambió, si el portal la publica, si los prototipos ya la usan y qué debe revisarse.
-   * Los commits que incluye quedan plegados, para quien necesite el detalle técnico.
-   */
-  function listaVersiones(ds, marcarReciente) {
-    var vs = ds.versiones || [];
-    if (!vs.length) {
-      return vacio('Todavía no hay versiones', 'El sistema de diseño aún no tiene versiones publicadas con una etiqueta.');
-    }
-    return '<ol class="pux-versions" role="list">' + vs.map(function (v, i) {
-      var etiquetas = '';
-      if (marcarReciente && i === 0) etiquetas += tag('Más reciente', 'info');
-      if (v.publicada) etiquetas += tag('En el portal', 'success');
-      if (v.enPrototipos) etiquetas += tag('En los prototipos', 'orange');
-
-      var detalle = '';
-      if (v.cambios && v.cambios.length) {
-        var resumen = v.primera
-          ? 'Primera versión etiquetada · ' + v.totalCambios + ' commits'
-          : (v.totalCambios === 1 ? '1 cambio' : v.totalCambios + ' cambios');
-        detalle = '<details class="pux-version__det"><summary>' + esc(resumen) + '</summary>' +
-          '<ul class="pux-version__commits" role="list">' + v.cambios.map(function (c) {
-            return '<li><span>' + esc(mensajeCambio(c.mensaje)) + '</span> <code>' + esc(c.commit) + '</code></li>';
-          }).join('') + '</ul>' +
-          (v.totalCambios > v.cambios.length
-            ? '<p class="pux-muted pux-note">y ' + (v.totalCambios - v.cambios.length) + ' más</p>'
-            : '') +
-          '</details>';
-      }
-
-      return '<li class="pux-version' + (v.publicada ? ' is-publicada' : '') + '">' +
-        '<span class="pux-version__dot" aria-hidden="true"></span>' +
-        '<div class="pux-version__body">' +
-          '<div class="pux-version__head">' +
-            '<h3 class="pux-version__tag">' + esc(v.tag) + '</h3>' +
-            (etiquetas ? '<span class="pux-tags">' + etiquetas + '</span>' : '') +
-            '<time class="pux-version__fecha" datetime="' + esc(v.fecha) + '">' + esc(fecha(v.fecha)) + '</time>' +
-          '</div>' +
-          '<p class="pux-version__titulo">' + esc(tituloVersion(v)) + '</p>' +
-          (v.cuerpo ? '<p class="pux-version__cuerpo">' + esc(v.cuerpo) + '</p>' : '') +
-          (v.revisar
-            ? '<p class="pux-version__revisar"><i class="icon icon-eye icon-20" aria-hidden="true"></i>' +
-              '<span><strong>Qué revisar:</strong> ' + esc(v.revisar) + '</span></p>'
-            : '') +
-          detalle +
-        '</div></li>';
-    }).join('') + '</ol>';
-  }
-
-  /** Changelog: la versión más reciente con su fecha y, debajo, todas las versiones. */
-  function initChangelog(cat) {
-    var cont = $('[data-changelog]');
-    if (!cont) return;
+  /* ---------- Versiones del sistema de diseño (una sola fuente) ----------
+     El Centro de recursos y «Versiones del sistema de diseño» pintan esta misma lista:
+     las etiquetas (tags) del repositorio unidas a lo que está publicado en el CDN.
+     Cada página solo decide qué acciones muestra en cada versión. */
+  function entradasVersiones(cat) {
     var ds = dsDe(cat);
-    var vs = ds.versiones || [];
-    var ultima = vs[0];
-    cont.innerHTML = (ultima
-      ? '<p class="pux-dsver pux-changelog__actual">Versión más reciente: <strong>' + esc(ultima.tag) + '</strong>, publicada el ' +
-          '<time datetime="' + esc(ultima.fecha) + '">' + esc(fecha(ultima.fecha)) + '</time>' +
-          ' · ' + (vs.length === 1 ? '1 versión' : vs.length + ' versiones') + ' en total</p>'
-      : '') + listaVersiones(ds, true);
+    var paq = paqueteCdn(cat, 'compensar');
+    var cdn = (paq && paq.versiones) || [];
+    var vistos = {};
+    var todas = (ds.versiones || []).map(function (t) { vistos[sinV(t.tag)] = 1; return { ver: sinV(t.tag), t: t }; });
+    cdn.forEach(function (c) { if (!vistos[c.version]) todas.push({ ver: c.version, t: null }); });
+    todas.forEach(function (e) { e.cdn = cdn.filter(function (c) { return c.version === e.ver; })[0] || null; });
+    todas.sort(function (a, b) {
+      var x = a.ver.split('.').map(Number), y = b.ver.split('.').map(Number);
+      for (var i = 0; i < 3; i++) if (x[i] !== y[i]) return y[i] - x[i];
+      return 0;
+    });
+    return todas;
+  }
+  function htmlVersiones(cat, acciones) {
+    var todas = entradasVersiones(cat);
+    if (!todas.length) return vacio('Todavía no hay versiones', 'El sistema de diseño aún no tiene versiones publicadas con una etiqueta.');
+    var ia = cat.ia || null;
+    return '<ol class="pux-versions" role="list">' + todas.map(function (e, i) {
+      var v = e.t || {};
+      var cdnV = e.cdn;
+      var anterior = todas[i + 1];
+      var etq = (i === 0 ? tag('Más reciente', 'info') : tag('Anterior', 'neutral')) +
+        (cdnV ? ' ' + tag('En el CDN', 'success') : ' ' + tag('Sin paquete publicado', 'neutral')) +
+        (v.enPrototipos ? ' ' + tag('En los prototipos', 'orange') : '');
+      var compat = '';
+      if (cdnV) {
+        var iguales = ORDEN_PLATAFORMAS.map(function (p) {
+          var pq = paqueteCdn(cat, 'compensar-' + p);
+          return pq && pq.versiones[0].commit && pq.versiones[0].commit === cdnV.commit ? nombrePlataforma(p, cat) + ' v' + pq.versiones[0].version : null;
+        }).filter(Boolean);
+        compat = '<p class="pux-version__cuerpo"><strong>Compatibilidad:</strong> ' + (iguales.length ? 'paquetes generados con el mismo commit: ' + esc(iguales.join(', ')) + '.' : 'no hay paquetes de plataforma generados con el mismo commit.') + '</p>';
+      }
+      var cambios = v.cambios && v.cambios.length
+        ? '<ul class="pux-version__commits" role="list">' + v.cambios.map(function (c) { return '<li><span>' + esc(mensajeCambio(c.mensaje)) + '</span> <code>' + esc(c.commit) + '</code></li>'; }).join('') + '</ul>'
+        : '<p class="pux-muted pux-note">' + (anterior ? 'No hay commits registrados entre v' + esc(anterior.ver) + ' y v' + esc(e.ver) + '.' : 'Es la primera versión registrada.') + '</p>';
+      var acc = acciones ? acciones(e, ia) : '';
+      var f = v.fecha || (cdnV && cdnV.fecha);
+      return '<li class="pux-version' + (cdnV ? ' is-publicada' : '') + '"><span class="pux-version__dot" aria-hidden="true"></span><div class="pux-version__body">' +
+        '<div class="pux-version__head"><h3 class="pux-version__tag">v' + esc(e.ver) + '</h3><span class="pux-tags">' + etq + '</span>' +
+          (f ? '<time class="pux-version__fecha" datetime="' + esc(f) + '">' + esc(fecha(f)) + '</time>' : '') + '</div>' +
+        (v.titulo ? '<p class="pux-version__titulo">' + esc(tituloVersion(v)) + '</p>' : '') +
+        (v.revisar ? '<p class="pux-version__revisar"><i class="icon icon-eye icon-20" aria-hidden="true"></i><span><strong>Qué revisar:</strong> ' + esc(v.revisar) + '</span></p>' : '') +
+        '<details class="pux-version__det"><summary>Ver detalles<span class="visually-hidden"> de la versión ' + esc(e.ver) + '</span></summary>' + compat +
+          '<p class="pux-version__cuerpo"><strong>Cambios respecto a ' + (anterior ? 'v' + esc(anterior.ver) : 'la versión anterior') + ':</strong></p>' + cambios + '</details>' +
+        (acc ? '<div class="pux-version__acciones">' + acc + '</div>' : '') +
+      '</div></li>';
+    }).join('') + '</ol>';
   }
 
   /* ---------- Repositorios y sincronización ---------- */
@@ -1148,42 +1258,8 @@
     return '<div class="pux-kv' + (extra ? ' ' + extra : '') + '"><dt>' + esc(etiqueta) + '</dt><dd>' + valor + '</dd></div>';
   }
   function initEstado(est) {
-    var alerta = $('[data-sync-alert]');
-    if (alerta) alerta.hidden = est.sincronizacion.estado === 'al-dia';
+    $all('[data-sync-alert]').forEach(function (a) { a.hidden = est.sincronizacion.estado === 'al-dia'; });
 
-    var comp = $('[data-estado-componentes]');
-    if (comp) {
-      var c = est.componentes;
-      var dup = c.locales.filter(function (l) { return l.tipo === 'existe-en-ds'; });
-      var cand = c.locales.filter(function (l) { return l.tipo !== 'existe-en-ds'; });
-      function filaLocal(l) {
-        return '<tr><td><strong>' + esc(l.nombre) + '</strong></td><td>' + tag(({ drupal: 'Drupal', zt: 'ZT', app: 'APP' })[l.plataforma] || l.plataforma, PLATAFORMA_TAG[l.plataforma] || 'neutral') + '</td>' +
-          '<td>' + (l.equivalenteDs ? '<code>' + esc(l.equivalenteDs) + '</code>' : '—') + '</td>' +
-          '<td class="pux-num">' + l.paginas + '</td></tr>';
-      }
-      comp.innerHTML =
-        '<dl class="pux-stats pux-stats--3">' +
-          '<div class="pux-stat"><div><dt>Componentes documentados en el sistema de diseño</dt><dd>' + c.ds.length + '</dd></div></div>' +
-          '<div class="pux-stat"><div><dt>Propios que duplican uno del sistema</dt><dd>' + dup.length + '</dd></div></div>' +
-          '<div class="pux-stat"><div><dt>Candidatos a transversal</dt><dd>' + cand.length + '</dd></div></div>' +
-        '</dl>' +
-        '<div class="pux-split pux-split--even">' +
-          '<section class="pux-panel"><h3 class="mp-h6 pux-panel__title">Componentes propios de las plataformas</h3>' +
-            '<div class="mp-table-wrap pux-table"><table class="mp-table"><caption class="visually-hidden">Componentes propios</caption>' +
-            '<thead><tr><th scope="col">Componente</th><th scope="col">Plataforma</th><th scope="col">Equivalente en el sistema</th><th scope="col" class="pux-num">Páginas</th></tr></thead><tbody>' +
-            dup.concat(cand).map(filaLocal).join('') + '</tbody></table></div>' +
-            '<p class="pux-muted pux-note">Los duplicados deberían usar el componente del sistema de diseño. Los candidatos se pueden llevar al sistema para reutilizarlos en Drupal, ZT y APP.</p>' +
-          '</section>' +
-          '<section class="pux-panel"><h3 class="mp-h6 pux-panel__title">Uso del sistema de diseño en los prototipos</h3>' +
-            '<ul class="pux-bars" role="list">' + c.usoDs.slice(0, 14).map(function (u) {
-              var max = c.usoDs[0].archivos || 1;
-              return '<li class="pux-bars__item"><span class="pux-bars__label"><code>' + esc(u.bloque) + '</code></span>' +
-                '<span class="pux-bars__track" aria-hidden="true"><span class="pux-bars__fill" style="width:' + Math.max(4, Math.round(u.archivos / max * 100)) + '%"></span></span>' +
-                '<span class="pux-bars__val">' + u.archivos + ' archivos</span></li>';
-            }).join('') + '</ul>' +
-          '</section>' +
-        '</div>';
-    }
   }
 
   /* ---------- Página del sistema de diseño ----------
@@ -1599,40 +1675,11 @@
 
     /* ---- Versiones ---- */
     function pintarVersiones() {
-      var tags = dsi.versiones || [];
-      var vistos = {};
-      var todas = tags.map(function (t) { vistos[sinV(t.tag)] = 1; return { ver: sinV(t.tag), t: t }; });
-      ds.versiones.forEach(function (c) { if (!vistos[c.version]) todas.push({ ver: c.version, t: null }); });
-      todas.sort(function (a, b) {
-        var x = a.ver.split('.').map(Number), y = b.ver.split('.').map(Number);
-        for (var i = 0; i < 3; i++) if (x[i] !== y[i]) return y[i] - x[i];
-        return 0;
-      });
-      var items = todas.map(function (e, i) {
-        var v = e.t || {};
-        var cdnV = ds.versiones.filter(function (c) { return c.version === e.ver; })[0] || null;
-        var anterior = todas[i + 1];
-        var etq = (i === 0 ? tag('Más reciente', 'info') : tag('Anterior', 'neutral')) + (cdnV ? ' ' + tag('En el CDN', 'success') : ' ' + tag('Sin paquete publicado', 'neutral')) + (v.enPrototipos ? ' ' + tag('En los prototipos', 'orange') : '');
-        var compat = '';
-        if (cdnV) {
-          var iguales = ORDEN_PLATAFORMAS.map(function (p) { var pq = paqueteCdn(cat, 'compensar-' + p); return pq && pq.versiones[0].commit && pq.versiones[0].commit === cdnV.commit ? nombrePlat(p) + ' v' + pq.versiones[0].version : null; }).filter(Boolean);
-          compat = '<p class="pux-version__cuerpo"><strong>Compatibilidad:</strong> ' + (iguales.length ? 'paquetes generados con el mismo commit: ' + esc(iguales.join(', ')) + '.' : 'no hay paquetes de plataforma generados con el mismo commit.') + '</p>';
-        }
-        var cambios = v.cambios && v.cambios.length
-          ? '<ul class="pux-version__commits" role="list">' + v.cambios.map(function (c) { return '<li><span>' + esc(mensajeCambio(c.mensaje)) + '</span> <code>' + esc(c.commit) + '</code></li>'; }).join('') + '</ul>'
-          : '<p class="pux-muted pux-note">' + (anterior ? 'No hay commits registrados entre v' + esc(anterior.ver) + ' y v' + esc(e.ver) + '.' : 'Es la primera versión registrada.') + '</p>';
-        var acc = (cdnV ? '<button class="mp-btn mp-btn--secundario mp-btn--sm" type="button" data-ir="cdn" data-ir-v="' + esc(e.ver) + '">Ver CDN</button>' +
+      var items = htmlVersiones(cat, function (e, iaDoc) {
+        return (e.cdn ? '<button class="mp-btn mp-btn--secundario mp-btn--sm" type="button" data-ir="cdn" data-ir-v="' + esc(e.ver) + '">Ver CDN</button>' +
           '<button class="mp-btn mp-btn--secundario mp-btn--sm" type="button" data-ir="descargas" data-ir-v="' + esc(e.ver) + '">Descargar recursos</button>' : '') +
-          (ia && ia.version === e.ver ? '<button class="mp-btn mp-btn--secundario mp-btn--sm" type="button" data-ir="ia">Documentación para IA</button>' : '');
-        return '<li class="pux-version' + (cdnV ? ' is-publicada' : '') + '"><span class="pux-version__dot" aria-hidden="true"></span><div class="pux-version__body">' +
-          '<div class="pux-version__head"><h3 class="pux-version__tag">v' + esc(e.ver) + '</h3><span class="pux-tags">' + etq + '</span>' +
-            ((v.fecha || (cdnV && cdnV.fecha)) ? '<time class="pux-version__fecha" datetime="' + esc(v.fecha || cdnV.fecha) + '">' + esc(fecha(v.fecha || cdnV.fecha)) + '</time>' : '') + '</div>' +
-          (v.titulo ? '<p class="pux-version__titulo">' + esc(tituloVersion(v)) + '</p>' : '') +
-          (v.revisar ? '<p class="pux-version__revisar"><i class="icon icon-eye icon-20" aria-hidden="true"></i><span><strong>Qué revisar:</strong> ' + esc(v.revisar) + '</span></p>' : '') +
-          '<details class="pux-version__det"><summary>Ver detalles</summary>' + compat + '<p class="pux-version__cuerpo"><strong>Cambios respecto a ' + (anterior ? 'v' + esc(anterior.ver) : 'la versión anterior') + ':</strong></p>' + cambios + '</details>' +
-          (acc ? '<div class="pux-version__acciones">' + acc + '</div>' : '') +
-        '</div></li>';
-      }).join('');
+          (iaDoc && iaDoc.version === e.ver ? '<button class="mp-btn mp-btn--secundario mp-btn--sm" type="button" data-ir="ia">Documentación para IA</button>' : '');
+      });
       var paquetes = (cat.cdn.paquetes || []).filter(function (p) { return p.id !== 'compensar'; }).map(function (p) {
         return p.versiones.map(function (v) {
           return '<tr><th scope="row">' + esc(nombrePlat(p.plataforma)) + '</th><td>v' + esc(v.version) + '</td><td>' + (v.fecha ? esc(fecha(v.fecha)) : 'Sin fecha') + '</td><td>' + (v.commit ? '<code>' + esc(v.commit) + '</code>' : '—') + '</td>' +
@@ -1640,12 +1687,13 @@
         }).join('');
       }).join('');
       $('[data-ver-res]', root).innerHTML =
-        '<h3 class="mp-h6 pux-section__title">Sistema de diseño</h3><ol class="pux-versions" role="list">' + items + '</ol>' +
+        '<h3 class="mp-h6 pux-section__title">Sistema de diseño</h3>' + items +
+        '<p class="pux-muted pux-note">La misma lista aparece, con el estado de sincronización de los prototipos, en <a class="pux-link" href="historial.html">Versiones del sistema de diseño</a>.</p>' +
         '<section class="pux-block" aria-labelledby="ver-plat"><h3 class="mp-h6 pux-section__title" id="ver-plat">Paquetes de plataforma</h3>' +
           (paquetes ? '<div class="mp-table-wrap pux-table"><table class="mp-table"><caption class="visually-hidden">Versiones publicadas de los paquetes de plataforma</caption><thead><tr><th scope="col">Plataforma</th><th scope="col">Versión</th><th scope="col">Fecha</th><th scope="col">Commit</th><th scope="col">Descarga</th></tr></thead><tbody>' + paquetes + '</tbody></table></div>' : vacio('Sin paquetes de plataforma', 'Todavía no se han publicado.')) +
         '</section>' +
         '<section class="pux-block" aria-labelledby="ver-flujos"><h3 class="mp-h6 pux-section__title" id="ver-flujos">Qué versión usa cada flujo</h3>' +
-          '<p class="pux-muted">«Copia local»: el flujo carga los archivos desde <code>shared/</code> del repositorio de prototipos. «Enlace público»: ya usa los paquetes versionados.</p>' + tablaFlujos(cat) + '</section>' +
+          '<p class="pux-muted">«Copia local»: el flujo carga los archivos desde <code>shared/</code> del repositorio de prototipos. «Enlace público»: ya usa los paquetes versionados.</p>' + tablaVersionesFlujos(cat) + '</section>' +
         '<section class="pux-block" id="politica" aria-labelledby="ver-pol"><h3 class="mp-h6 pux-section__title" id="ver-pol">Política de versiones</h3><div class="pux-panel pux-inst-politica"><ul>' +
           '<li><strong>Versiones fijas.</strong> Cada versión vive en su propia carpeta (<code>cdn/compensar/v' + esc(ultima.version) + '/</code>) y nunca se sobrescribe. Un enlace a una versión siempre entrega lo mismo.</li>' +
           '<li><strong>Numeración semántica.</strong> <code>MAYOR.MENOR.PARCHE</code>: el parche corrige, la menor agrega sin romper y la mayor puede pedir cambios en el HTML.</li>' +
@@ -1739,7 +1787,7 @@
   }
 
   /** Tabla de la versión del sistema de diseño y del paquete de plataforma que usa cada flujo. */
-  function tablaFlujos(cat) {
+  function tablaVersionesFlujos(cat) {
     var local = dsEnPrototipos(cat);
     var ultimo = (paqueteCdn(cat, 'compensar') || { versiones: [{}] }).versiones[0].version;
     var filas = ORDEN_PLATAFORMAS.map(function (pid) {
@@ -1766,114 +1814,587 @@
   }
 
   /* ---------- Historial: sistema de diseño y plataformas ---------- */
-  /** El estado de la copia que los prototipos tienen del sistema de diseño. */
-  function bloqueSincronizacion(est) {
-    var s = est.sincronizacion;
-    var ok = s.estado === 'al-dia';
-    var usada = (s.archivos.filter(function (a) { return a.versionUsada; })[0] || {}).versionUsada;
-    return '<div class="mp-alert ' + (ok ? 'mp-alert--success' : 'mp-alert--warning') + '" role="status">' +
-        '<i class="icon ' + (ok ? 'icon-check-circle' : 'icon-warning') + ' icon-32 mp-alert__icon" aria-hidden="true"></i>' +
-        '<div class="mp-alert__content">' +
-          '<p class="mp-alert__title">' + (ok ? 'Los prototipos usan la versión actual del sistema de diseño' : 'Los prototipos usan una versión anterior del sistema de diseño') + '</p>' +
-          '<p class="mp-alert__body">' + (ok
-            ? 'Tienen la versión ' + esc(s.version || s.dsCommit) + '. No hay nada que sincronizar.'
-            : 'El sistema de diseño está en ' + esc(s.version || s.dsCommit) + (usada ? ' y los prototipos usan la copia del ' + esc(fecha(usada.fecha)) : ', pero los prototipos tienen una copia que no coincide con ninguna versión guardada') +
-              '. La actualización es controlada: no ocurre sola. Desde la carpeta del portal ejecuta <code>' + esc(s.comando) + '</code>, revisa los prototipos y haz commit si todo se ve bien.') + '</p>' +
-        '</div></div>' +
-      '<div class="mp-table-wrap pux-table"><table class="mp-table">' +
+  /** Estado de la copia que los prototipos tienen del sistema de diseño. Sale de una comparación real (estado.json). */
+  var SYNC = {
+    'al-dia':         { titulo: 'Al día', tag: 'success', icono: 'icon-check-circle' },
+    'desactualizado': { titulo: 'Desactualizado', tag: 'warning', icono: 'icon-warning' },
+    'no-verificado':  { titulo: 'No verificado', tag: 'neutral', icono: 'icon-question' },
+    'error':          { titulo: 'Error de verificación', tag: 'error', icono: 'icon-x-circle' }
+  };
+  function fechaHora(iso) {
+    var d = iso ? new Date(iso) : null;
+    if (!d || isNaN(d)) return null;
+    return d.toLocaleString('es-CO', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' });
+  }
+  /** Resumen compacto: versión vigente y estado de los archivos de referencia (no el de cada flujo). */
+  function resumenSincronizacion(cat, est) {
+    var s = est && est.sincronizacion;
+    var clave = !s ? 'error' : (SYNC[s.estado] ? s.estado : 'no-verificado');
+    var m = SYNC[clave];
+    var archivos = (s && s.archivos) || [];
+    var msg;
+    if (clave === 'al-dia') {
+      msg = 'Los ' + archivos.length + ' archivos de referencia de los prototipos coinciden con el sistema de diseño. La versión que usa cada flujo se ve en la tabla de más abajo.';
+    } else if (clave === 'desactualizado') {
+      var usada = (archivos.filter(function (a) { return a.versionUsada; })[0] || {}).versionUsada;
+      msg = 'Al menos un archivo de referencia de los prototipos no coincide con el sistema de diseño' +
+        (usada ? ' (la copia de los prototipos corresponde al ' + fecha(usada.fecha) + ')' : '') +
+        '. La actualización es controlada: no ocurre sola. Desde la carpeta del portal ejecuta <code>' + esc(s.comando || 'npm run ds:sincronizar') + '</code>, revisa los prototipos y haz commit si todo se ve bien.';
+    } else if (clave === 'no-verificado') {
+      msg = 'No hay archivos de referencia para comparar, así que no se puede afirmar que los prototipos estén al día.';
+    } else {
+      msg = !s ? 'No se pudo leer el resultado de la verificación (estado.json). Vuelve a construir el portal.'
+        : 'La comparación no pudo completarse' + (s.mensajeError ? ': ' + s.mensajeError : '') + '. No se puede afirmar que los prototipos estén al día.';
+    }
+    var vProto = s && s.versionPrototipos;
+    var vDs = dsVersion(cat);
+    var nota = (clave === 'al-dia' && vProto && vDs && vProto !== vDs)
+      ? '<p class="pux-resumen__nota"><i class="icon icon-warning icon-16" aria-hidden="true"></i> Los archivos coinciden, pero la versión registrada en los prototipos (' + esc(vProto) + ') no es la vigente (' + esc(vDs) + ').</p>' : '';
+    var verif = fechaHora(s && (s.verificado || (est && est.generado)));
+    var datos = '<dl class="pux-resumen__datos">' +
+      filaDato('Versión actual', '<strong class="pux-resumen__ver">' + esc(vDs) + '</strong>') +
+      filaDato('Archivos de referencia', '<span class="pux-resumen__estado"><i class="icon ' + m.icono + ' icon-16" aria-hidden="true"></i>' + tag(m.titulo, m.tag) + '</span>') +
+      filaDato('Última verificación', verif ? esc(verif) : 'Sin fecha') +
+      filaDato('Referencia técnica', s && s.dsCommit ? '<code>' + esc(s.dsCommit) + '</code>' : '—') +
+    '</dl>';
+    var tabla = '';
+    if (archivos.length) {
+      tabla = '<details class="pux-acordeon"><summary>Ver archivos comparados <span class="pux-count" aria-hidden="true">' + archivos.length + '</span><span class="visually-hidden"> (' + archivos.length + ')</span></summary>' +
+        '<div class="mp-table-wrap pux-table pux-tabla-resp"><table class="mp-table">' +
         '<caption class="visually-hidden">Archivos que los prototipos copian del sistema de diseño</caption>' +
-        '<thead><tr><th scope="col">Archivo en los prototipos</th><th scope="col">Origen en el sistema de diseño</th><th scope="col">Estado</th></tr></thead><tbody>' +
-        s.archivos.map(function (a) {
+        '<thead><tr><th scope="col">Archivo del prototipo</th><th scope="col">Archivo de origen</th><th scope="col">Versión o referencia comprobada</th><th scope="col">Resultado</th></tr></thead><tbody>' +
+        archivos.map(function (a) {
           var t = a.estado === 'al-dia' ? tag('Al día', 'success') : (a.estado === 'faltante' ? tag('Falta', 'error') : tag('Desactualizado', 'warning'));
-          return '<tr><td><code>' + esc(a.flujos) + '</code></td><td><code>' + esc(a.ds) + '</code></td><td>' + t + '</td></tr>';
-        }).join('') + '</tbody></table></div>';
+          var ref = a.estado === 'al-dia' ? (a.refFlujos ? 'Ref. <code>' + esc(a.refFlujos) + '</code>' : '—')
+            : (a.estado === 'faltante' ? '—' : 'Prototipo <code>' + esc(a.refFlujos || '—') + '</code> · origen <code>' + esc(a.refDs || '—') + '</code>' +
+              (a.versionUsada ? ' <span class="pux-muted">(copia del ' + esc(fecha(a.versionUsada.fecha)) + ')</span>' : ''));
+          return '<tr><td data-label="Archivo del prototipo"><code>' + esc(a.flujos) + '</code></td><td data-label="Archivo de origen"><code>' + esc(a.ds) + '</code></td>' +
+            '<td data-label="Referencia comprobada">' + ref + '</td><td data-label="Resultado">' + t + '</td></tr>';
+        }).join('') + '</tbody></table></div></details>';
+    }
+    return '<section class="pux-resumen" data-sync="' + clave + '" aria-labelledby="resumen-tit">' +
+      '<h2 class="visually-hidden" id="resumen-tit">Resumen del estado actual</h2>' +
+      datos + '<p class="pux-resumen__msg" role="status">' + msg + '</p>' + nota + tabla +
+    '</section>';
   }
 
-  /** El historial de una plataforma: cada flujo con su estado y todos sus cambios. */
-  function historialPlataforma(cat, pid) {
-    var pl = cat.plataformas[pid] || {};
-    var flujos = cat.flujos.filter(function (f) { return f.plataforma === pid; });
-    if (!flujos.length) return vacio('Sin flujos', 'Esta plataforma todavía no tiene flujos en el catálogo.');
-    return flujos.map(function (f) {
-      return '<section class="pux-hist" aria-labelledby="h-' + esc(f.id) + '">' +
-        '<div class="pux-hist__cab">' +
-          '<h2 class="mp-h6 pux-hist__tit" id="h-' + esc(f.id) + '"><a href="flujo.html?id=' + encodeURIComponent(f.id) + '">' + esc(f.nombre) + '</a></h2>' +
-          badgeEstado(f.estado) +
-          '<span class="pux-muted pux-hist__meta">Versión ' + esc(f.version) + ' · ' +
-            (f.publicado ? 'publicado' : 'no publicado') + '</span>' +
-        '</div>' +
-        timeline(f.cambios, false) +
-      '</section>';
-    }).join('');
+  /** Validación UX de una versión: solo lo que está registrado en el repositorio (campo «revisar»). */
+  function validacionUX(v, actual) {
+    if (!v.revisar) return '';
+    return '<div class="pux-valid"><p class="pux-valid__tit"><i class="icon icon-eye icon-20" aria-hidden="true"></i>Validación UX requerida</p>' +
+      '<dl class="pux-valid__lista">' +
+        (v.titulo ? '<div><dt>Cambio a evaluar</dt><dd>' + esc(tituloVersion(v)) + '</dd></div>' : '') +
+        '<div><dt>Flujo o componente y comportamiento esperado</dt><dd>' + esc(v.revisar) + '</dd></div>' +
+      '</dl></div>';
   }
 
+  /** Historial cronológico: la versión actual abierta, las anteriores contraídas. */
+  function historialVersiones(cat, acciones) {
+    var todas = entradasVersiones(cat);
+    if (!todas.length) return vacio('Todavía no hay versiones', 'El sistema de diseño aún no tiene versiones publicadas con una etiqueta.');
+    var ia = cat.ia || null;
+    var vigente = sinV(dsDe(cat).version);
+    var hayVigente = todas.some(function (e) { return e.ver === vigente; });
+    return '<ol class="pux-versions pux-hv" role="list">' + todas.map(function (e, i) {
+      var v = e.t || {};
+      var cdnV = e.cdn;
+      var anterior = todas[i + 1];
+      var actual = hayVigente ? e.ver === vigente : i === 0;
+      var f = v.fecha || (cdnV && cdnV.fecha);
+      var compat = '';
+      if (cdnV) {
+        var iguales = ORDEN_PLATAFORMAS.map(function (p) {
+          var pq = paqueteCdn(cat, 'compensar-' + p);
+          return pq && pq.versiones[0].commit && pq.versiones[0].commit === cdnV.commit ? nombrePlataforma(p, cat) + ' v' + pq.versiones[0].version : null;
+        }).filter(Boolean);
+        compat = '<p class="pux-version__cuerpo"><strong>Compatibilidad:</strong> ' + (iguales.length ? 'paquetes generados con el mismo commit: ' + esc(iguales.join(', ')) + '.' : 'no hay paquetes de plataforma generados con el mismo commit.') + '</p>';
+      }
+      var cambios = v.cambios && v.cambios.length
+        ? '<ul class="pux-version__commits" role="list">' + v.cambios.map(function (c) { return '<li><span>' + esc(mensajeCambio(c.mensaje)) + '</span> <code>' + esc(c.commit) + '</code></li>'; }).join('') + '</ul>'
+        : '<p class="pux-muted pux-note">' + (anterior ? 'No hay commits registrados entre v' + esc(anterior.ver) + ' y v' + esc(e.ver) + '.' : 'Es la primera versión registrada.') + '</p>';
+      var estados = [cdnV ? 'Publicada en el CDN' : 'Sin paquete publicado en el CDN'];
+      if (v.enPrototipos) estados.push('copia registrada en los prototipos');
+      var acc = acciones ? acciones(e, ia) : '';
+      return '<li class="pux-version' + (actual ? ' is-actual' : '') + (cdnV ? ' is-publicada' : '') + '"><span class="pux-version__dot" aria-hidden="true"></span>' +
+        '<details class="pux-vh"' + (actual ? ' open' : '') + '>' +
+          '<summary class="pux-vh__sum"><span class="pux-vh__cab">' +
+            '<span class="pux-vh__tag">v' + esc(e.ver) + '</span>' +
+            (actual ? tag('Actual', 'orange') : '') +
+            (f ? '<time class="pux-vh__fecha" datetime="' + esc(f) + '">' + esc(fecha(f)) + '</time>' : '') +
+          '</span>' +
+          (v.titulo ? '<span class="pux-vh__resumen">' + esc(tituloVersion(v)) + '</span>' : '') +
+          '<span class="visually-hidden">' + (actual ? ' Versión actual.' : '') + ' Mostrar u ocultar los detalles de la versión ' + esc(e.ver) + '.</span>' +
+        '</summary>' +
+        '<div class="pux-vh__cuerpo">' +
+          validacionUX(v, actual) +
+          '<p class="pux-version__cuerpo pux-vh__estado">' + esc(estados.join(' · ')) + '.</p>' +
+          compat +
+          '<p class="pux-version__cuerpo"><strong>Cambios respecto a ' + (anterior ? 'v' + esc(anterior.ver) : 'la versión anterior') + ':</strong></p>' + cambios +
+          (acc ? '<div class="pux-version__acciones">' + acc + '</div>' : '') +
+        '</div></details></li>';
+    }).join('') + '</ol>';
+  }
+
+  /** Una sola tabla con todos los flujos; los datos técnicos viven en el detalle de cada fila. */
+  function tablaPrototipos(cat, est) {
+    var local = dsEnPrototipos(cat);
+    var ultimo = (paqueteCdn(cat, 'compensar') || { versiones: [{}] }).versiones[0].version;
+    var flujos = ORDEN_PLATAFORMAS.map(function (pid) {
+      return cat.flujos.filter(function (f) { return f.plataforma === pid; });
+    }).reduce(function (a, b) { return a.concat(b); }, []);
+    if (!flujos.length) return vacio('Sin flujos', 'Todavía no hay flujos en el catálogo.');
+    var plats = ORDEN_PLATAFORMAS.filter(function (p) { return flujos.some(function (f) { return f.plataforma === p; }); });
+    var ests = Object.keys(ESTADOS).filter(function (k) { return flujos.some(function (f) { return f.estado === k; }); });
+    var filtros =
+      '<form class="pux-filters" role="search" aria-label="Filtrar flujos" onsubmit="return false"><div class="pux-filters__fields">' +
+        '<div class="mp-input-group pux-filters__search"><label class="mp-input-label" for="pv-q">Buscar flujo</label>' +
+          '<div class="mp-input-wrapper"><i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>' +
+          '<input class="mp-input-field has-icon-left" type="search" id="pv-q" placeholder="Nombre del flujo" autocomplete="off" data-pv-q></div></div>' +
+        '<div class="mp-input-group pux-filters__orden"><label class="mp-input-label" for="pv-plat">Plataforma</label>' +
+          '<div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="pv-plat" data-pv-plat><option value="">Todas</option>' +
+            plats.map(function (p) { return '<option value="' + esc(p) + '">' + esc(nombrePlataforma(p, cat)) + '</option>'; }).join('') + '</select></div></div>' +
+        '<div class="mp-input-group pux-filters__estado"><label class="mp-input-label" for="pv-est">Estado UX</label>' +
+          '<div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="pv-est" data-pv-est><option value="">Todos</option>' +
+            ests.map(function (k) { return '<option value="' + esc(k) + '">' + esc(ESTADOS[k].label) + '</option>'; }).join('') + '</select></div></div>' +
+      '</div></form>' +
+      '<p class="pux-results" aria-live="polite" data-pv-res></p>';
+    var filas = flujos.map(function (f) {
+      var c = f.consumo || { modo: 'local', ds: [], plataforma: [] };
+      var carga = c.modo === 'local' ? tag('Copia local', 'neutral') : (c.modo === 'cdn' ? tag('Enlace público', 'success') : tag('Mixto', 'warning'));
+      var vds = c.ds.length ? c.ds.map(function (v) { return 'v' + esc(v); }).join(', ') : (local ? esc(local) + ' <span class="pux-muted">(copia)</span>' : '—');
+      var vpl = c.plataforma.length ? c.plataforma.map(function (v) { return 'v' + esc(v); }).join(', ') : '<span class="pux-muted">shared/ local</span>';
+      var alDia = c.ds.length && ultimo && c.ds.indexOf(ultimo) < 0 ? ' ' + tag('Disponible v' + ultimo, 'info') : '';
+      var did = 'pv-det-' + f.id;
+      var url = 'flujo.html?id=' + encodeURIComponent(f.id);
+      var detalle = '<dl class="pux-pv__det">' +
+        filaDato('Cómo carga', carga) +
+        filaDato('Paquete de plataforma', vpl) +
+        filaDato('Versión del flujo', esc(f.version || '—') + ' · ' + (f.publicado ? 'publicado' : 'no publicado')) +
+      '</dl>' +
+      (f.cambios && f.cambios.length
+        ? '<details class="pux-acordeon pux-pv__cambios"><summary>Cambios del flujo <span class="pux-count" aria-hidden="true">' + f.cambios.length + '</span><span class="visually-hidden"> (' + f.cambios.length + ')</span></summary>' + timeline(f.cambios, false) + '</details>'
+        : '');
+      return '<tr data-pv-fila data-plat="' + esc(f.plataforma) + '" data-est="' + esc(f.estado) + '" data-q="' + esc((f.nombre || '').toLowerCase()) + '">' +
+        '<th scope="row" data-label="Flujo"><a class="pux-link" href="' + url + '">' + esc(f.nombre) + '</a></th>' +
+        '<td data-label="Plataforma">' + tagPlataforma(f.plataforma, cat) + '</td>' +
+        '<td data-label="Versión del sistema de diseño">' + vds + alDia + '</td>' +
+        '<td data-label="Estado UX">' + badgeEstado(f.estado) + '</td>' +
+        '<td data-label="Acciones"><div class="pux-acciones-fila">' +
+          '<button class="mp-btn mp-btn--secundario mp-btn--sm" type="button" aria-expanded="false" aria-controls="' + esc(did) + '" data-pv-toggle>Detalles<span class="visually-hidden"> de ' + esc(f.nombre) + '</span></button>' +
+          '<a class="mp-btn mp-btn--terciario mp-btn--sm" href="' + url + '">Abrir<span class="visually-hidden"> ' + esc(f.nombre) + '</span></a>' +
+        '</div></td></tr>' +
+        '<tr class="pux-pv__fila-det" id="' + esc(did) + '" hidden><td class="pux-detrow" colspan="5">' + detalle + '</td></tr>';
+    });
+    return filtros +
+      '<div class="mp-table-wrap pux-table pux-tabla-resp"><table class="mp-table" data-pv-tabla>' +
+      '<caption class="visually-hidden">Versión del sistema de diseño y estado UX de cada flujo</caption>' +
+      '<thead><tr><th scope="col">Flujo</th><th scope="col">Plataforma</th><th scope="col">Versión del sistema de diseño</th><th scope="col">Estado UX</th><th scope="col">Acciones</th></tr></thead>' +
+      '<tbody>' + filas.join('') + '</tbody></table></div>' +
+      '<div data-pv-vacio hidden>' + vacio('Sin resultados', 'Ningún flujo coincide con los filtros. Cambia la búsqueda o quita un filtro.') + '</div>';
+  }
+  function activarTablaPrototipos(cont) {
+    var q = $('[data-pv-q]', cont), plat = $('[data-pv-plat]', cont), est = $('[data-pv-est]', cont);
+    var res = $('[data-pv-res]', cont), vacioEl = $('[data-pv-vacio]', cont), tabla = $('[data-pv-tabla]', cont);
+    if (!q || !tabla) return;
+    var filas = $all('[data-pv-fila]', cont);
+    function aplicar() {
+      var t = q.value.trim().toLowerCase(), n = 0;
+      filas.forEach(function (tr) {
+        var ok = (!t || tr.getAttribute('data-q').indexOf(t) >= 0) &&
+          (!plat.value || tr.getAttribute('data-plat') === plat.value) &&
+          (!est.value || tr.getAttribute('data-est') === est.value);
+        var det = tr.nextElementSibling;
+        var abierto = tr.querySelector('[data-pv-toggle]').getAttribute('aria-expanded') === 'true';
+        tr.hidden = !ok;
+        det.hidden = !(ok && abierto);
+        if (ok) n++;
+      });
+      res.textContent = n === filas.length ? filas.length + (filas.length === 1 ? ' flujo' : ' flujos') : n + ' de ' + filas.length + ' flujos';
+      tabla.parentNode.hidden = n === 0;
+      vacioEl.hidden = n !== 0;
+    }
+    [q, plat, est].forEach(function (el) { el.addEventListener('input', aplicar); el.addEventListener('change', aplicar); });
+    cont.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-pv-toggle]');
+      if (!b) return;
+      var abre = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', String(abre));
+      document.getElementById(b.getAttribute('aria-controls')).hidden = !abre;
+    });
+    aplicar();
+  }
+
+  /** Versiones del sistema de diseño: una sola vista con resumen, historial y uso en los prototipos. */
   function initHistorial(cat, est) {
     var cont = $('[data-historial]');
-    var tabs = $('[data-historial-tabs]');
-    if (!cont || !tabs) return;
-    var opciones = [{ id: 'ds', nombre: 'Sistema de diseño' }].concat(
-      ORDEN_PLATAFORMAS.filter(function (p) {
-        return cat.flujos.some(function (f) { return f.plataforma === p; });
-      }).map(function (p) { return { id: p, nombre: (cat.plataformas[p] || {}).nombre || p }; })
-    );
-    var actual = params().get('ver') && opciones.some(function (o) { return o.id === params().get('ver'); })
-      ? params().get('ver') : 'ds';
-
-    tabs.innerHTML = opciones.map(function (o) {
-      return '<button class="mp-tab' + (o.id === actual ? ' is-active' : '') + '" type="button" ' +
-        'data-ver="' + esc(o.id) + '" aria-pressed="' + (o.id === actual) + '">' + esc(o.nombre) + '</button>';
-    }).join('');
-
-    function pintar() {
-      if (actual === 'ds') {
-        var ds = dsDe(cat);
-        cont.innerHTML =
-          '<section aria-labelledby="hist-sync"><h2 class="mp-h6 pux-section__title" id="hist-sync">Qué versión usan los prototipos</h2>' +
-            (est ? bloqueSincronizacion(est) : '<p class="pux-muted">No se pudo leer el estado de sincronización.</p>') +
-          '</section>' +
-          '<section class="pux-block" aria-labelledby="hist-vers"><h2 class="mp-h6 pux-section__title" id="hist-vers">Versiones publicadas</h2>' +
-            listaVersiones(ds) +
-          '</section>';
-      } else {
-        cont.innerHTML = historialPlataforma(cat, actual);
-      }
+    if (!cont) return;
+    function accionesPagina(e, ia) {
+      var q = '?v=' + encodeURIComponent(e.ver);
+      return (e.cdn ? '<a class="mp-btn mp-btn--secundario mp-btn--sm" href="centro-de-recursos.html' + q + '#cdn">Ver CDN<span class="visually-hidden"> de la versión ' + esc(e.ver) + '</span></a>' +
+        '<a class="mp-btn mp-btn--secundario mp-btn--sm" href="centro-de-recursos.html' + q + '#descargas">Descargar recursos<span class="visually-hidden"> de la versión ' + esc(e.ver) + '</span></a>' : '') +
+        (ia && ia.version === e.ver ? '<a class="mp-btn mp-btn--secundario mp-btn--sm" href="centro-de-recursos.html#ia">Documentación para IA</a>' : '');
     }
-    $all('[data-ver]', tabs).forEach(function (b) {
-      b.addEventListener('click', function () {
-        actual = b.getAttribute('data-ver');
-        $all('[data-ver]', tabs).forEach(function (x) {
-          var on = x === b;
-          x.classList.toggle('is-active', on);
-          x.setAttribute('aria-pressed', String(on));
-        });
-        var u = new URL(window.location.href);
-        if (actual === 'ds') u.searchParams.delete('ver'); else u.searchParams.set('ver', actual);
-        window.history.replaceState({}, '', u);
-        pintar();
+    cont.innerHTML =
+      resumenSincronizacion(cat, est) +
+      '<section class="pux-block" id="versiones" aria-labelledby="hist-vers"><h2 class="mp-h6 pux-section__title" id="hist-vers">Historial de versiones</h2>' +
+        historialVersiones(cat, accionesPagina) +
+      '</section>' +
+      '<section class="pux-block" id="prototipos" aria-labelledby="hist-flujos"><h2 class="mp-h6 pux-section__title" id="hist-flujos">Versiones utilizadas por los prototipos</h2>' +
+        '<p class="pux-muted pux-note">El estado UX indica la revisión del flujo; es independiente de la versión del sistema de diseño que usa. «Copia local»: el flujo carga los archivos desde <code>shared/</code>. «Enlace público»: usa los paquetes versionados.</p>' +
+        tablaPrototipos(cat, est) + '</section>';
+    activarTablaPrototipos(cont);
+  }
+
+  /* ---------- Detalle lateral (drawer) ----------
+     Un solo panel reutilizable para el detalle de un componente y de un entregable.
+     Diálogo modal: atrapa el foco, se cierra con Esc, con el fondo o con el botón,
+     y devuelve el foco al control que lo abrió. */
+  var drawerEl = null;
+  var drawerDisparador = null;
+  function enfocables(raiz) {
+    return $all('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), summary, [tabindex]:not([tabindex="-1"])', raiz)
+      .filter(function (el) { return el.offsetParent !== null; });
+  }
+  function cerrarDrawer() {
+    if (!drawerEl || drawerEl.hidden) return;
+    drawerEl.hidden = true;
+    document.body.classList.remove('pux-drawer-abierto');
+    if (drawerDisparador && document.contains(drawerDisparador)) drawerDisparador.focus();
+    drawerDisparador = null;
+  }
+  function abrirDrawer(o, disparador) {
+    if (!drawerEl) {
+      drawerEl = document.createElement('div');
+      drawerEl.className = 'pux-drawer';
+      drawerEl.hidden = true;
+      drawerEl.innerHTML = '<div class="pux-drawer__fondo" data-drawer-cerrar></div>' +
+        '<section class="pux-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="pux-drawer-tit" tabindex="-1">' +
+          '<header class="pux-drawer__cab"><div class="pux-drawer__titulos"><p class="pux-drawer__sup" data-drawer-sup></p>' +
+            '<h2 class="pux-drawer__tit" id="pux-drawer-tit" data-drawer-tit></h2></div>' +
+            '<button class="pux-icon-btn" type="button" data-drawer-cerrar aria-label="Cerrar detalle"><i class="icon icon-x icon-20" aria-hidden="true"></i></button></header>' +
+          '<div class="pux-drawer__cuerpo" data-drawer-cuerpo></div></section>';
+      document.body.appendChild(drawerEl);
+      drawerEl.addEventListener('click', function (e) { if (e.target.closest('[data-drawer-cerrar]')) cerrarDrawer(); });
+      document.addEventListener('keydown', function (e) {
+        if (!drawerEl || drawerEl.hidden) return;
+        if (e.key === 'Escape') { e.preventDefault(); cerrarDrawer(); return; }
+        if (e.key !== 'Tab') return;
+        var panel = $('.pux-drawer__panel', drawerEl);
+        var f = enfocables(panel);
+        if (!f.length) { e.preventDefault(); panel.focus(); return; }
+        var primero = f[0], ultimo = f[f.length - 1];
+        if (e.shiftKey && (document.activeElement === primero || document.activeElement === panel)) { e.preventDefault(); ultimo.focus(); }
+        else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
       });
+    }
+    drawerDisparador = disparador || document.activeElement;
+    $('[data-drawer-sup]', drawerEl).textContent = o.sup || '';
+    $('[data-drawer-tit]', drawerEl).textContent = o.titulo;
+    $('[data-drawer-cuerpo]', drawerEl).innerHTML = o.html;
+    $('.pux-drawer__cuerpo', drawerEl).scrollTop = 0;
+    drawerEl.hidden = false;
+    document.body.classList.add('pux-drawer-abierto');
+    $('.pux-drawer__panel', drawerEl).focus();
+  }
+  /** Fila de un detalle: término y valor. El valor ya viene escapado. */
+  function filaDet(titulo, valor) {
+    return '<div class="pux-det__fila"><dt>' + esc(titulo) + '</dt><dd>' + valor + '</dd></div>';
+  }
+  function pendiente() { return '<span class="pux-muted">Pendiente de evaluación</span>'; }
+
+  /* ---------- Uso de componentes ---------- */
+  /* Estados de evaluación. «Por validar» es el valor por omisión: ningún componente se
+     clasifica por parecerse en el nombre a uno del sistema; la decisión la registra UX en
+     evaluacion-componentes.json. */
+  var EVAL = {
+    'por-validar': { label: 'Por validar', tag: 'warning' },
+    'reutilizar':  { label: 'Reutilizar componente existente', tag: 'success' },
+    'candidato':   { label: 'Candidato para el sistema de diseño', tag: 'info' },
+    'especifico':  { label: 'Mantener como componente específico', tag: 'neutral' }
+  };
+  var PLAT_CORTO = { drupal: 'Drupal', zt: 'ZT', app: 'App' };
+  function estadoEval(l) { return l.evaluacion && EVAL[l.evaluacion.estado] ? l.evaluacion.estado : 'por-validar'; }
+  function equivalente(l) { return (l.evaluacion && l.evaluacion.equivalenteDs) || l.equivalenteDs || null; }
+  /** El flujo del catálogo al que pertenece una pantalla, por su carpeta en p/. */
+  function flujoDePagina(cat, ruta) {
+    var mejor = null, puntos = 0;
+    cat.flujos.forEach(function (f) {
+      if (!f.url) return;
+      var dir = f.url.replace(/^p\//, '').replace(/\/[^/]*$/, '');
+      var p = 0;
+      if (ruta.indexOf(dir + '/') === 0) p = dir.length + 10;
+      else if (dir.split('/').length >= 2 && ruta.split('/').slice(0, 2).join('/') === dir.split('/').slice(0, 2).join('/')) p = 1;
+      if (p > puntos) { puntos = p; mejor = f; }
     });
-    pintar();
+    return mejor;
+  }
+  function detalleComponente(l, cat) {
+    var ev = l.evaluacion;
+    var clave = estadoEval(l);
+    var grupos = [], idx = {};
+    (l.usadoEn || []).forEach(function (ruta) {
+      var f = flujoDePagina(cat, ruta);
+      var k = f ? f.id : '—';
+      if (!(k in idx)) { idx[k] = grupos.length; grupos.push({ f: f, rutas: [] }); }
+      grupos[idx[k]].rutas.push(ruta);
+    });
+    var pantallas = grupos.length ? '<ul class="pux-det__lista" role="list">' + grupos.map(function (g) {
+      return '<li><strong>' + (g.f ? '<a class="pux-link" href="flujo.html?id=' + encodeURIComponent(g.f.id) + '">' + esc(g.f.nombre) + '</a>' : 'Sin flujo asociado en el catálogo') + '</strong>' +
+        '<ul role="list">' + g.rutas.map(function (r) {
+          return '<li>' + (g.f && g.f.publicado ? '<a class="pux-link" href="p/' + esc(r) + '" target="_blank" rel="noopener"><code>' + esc(r) + '</code><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>' : '<code>' + esc(r) + '</code>') + '</li>';
+        }).join('') + '</ul></li>';
+    }).join('') + '</ul>' : '<span class="pux-muted">Ninguna pantalla enlaza este componente.</span>';
+    var eq = equivalente(l);
+    var eqHtml = eq
+      ? '<code>' + esc(eq) + '</code>' + (ev && ev.equivalenteDs ? '' : '<br><span class="pux-muted">Sugerido por coincidencia de nombre. No está validado.</span>')
+      : '<span class="pux-muted">Sin equivalente por nombre.</span> ' + pendiente();
+    var decision = ev && ev.decision
+      ? esc(ev.decision) + ((ev.por || ev.fecha) ? '<br><span class="pux-muted">' + esc([ev.por, ev.fecha ? fecha(ev.fecha) : ''].filter(Boolean).join(' · ')) + '</span>' : '')
+      : pendiente();
+    return '<dl class="pux-det">' +
+      filaDet('Plataforma', esc(PLAT_CORTO[l.plataforma] || l.plataforma)) +
+      filaDet('Estado de evaluación', tag(EVAL[clave].label, EVAL[clave].tag)) +
+      filaDet('Prototipos y pantallas donde aparece', pantallas) +
+      filaDet('Equivalente en el sistema de diseño', eqHtml) +
+      filaDet('Diferencias identificadas', ev && ev.diferencias ? esc(ev.diferencias) : pendiente()) +
+      filaDet('Archivos', '<ul class="pux-det__lista" role="list">' + (l.rutas || l.archivos).map(function (r) { return '<li><code>' + esc(r) + '</code></li>'; }).join('') + '</ul>' +
+        '<span class="pux-muted">Rutas dentro de Flujos/prototipos/.</span>') +
+      filaDet('Recomendación o decisión documentada', decision) +
+    '</dl>';
+  }
+
+  function initComponentes(est, cat) {
+    var cont = $('[data-estado-componentes]');
+    if (!cont) return;
+    var c = est.componentes;
+    var locales = c.locales || [];
+    var dup = locales.filter(function (l) { return l.tipo === 'existe-en-ds'; }).length;
+    var cand = locales.filter(function (l) { return l.tipo !== 'existe-en-ds'; }).length;
+    cont.innerHTML =
+      '<dl class="pux-stats pux-stats--3 pux-stats--compacto">' +
+        '<div class="pux-stat"><div><dt>Componentes documentados en el sistema de diseño</dt><dd>' + c.ds.length + '</dd></div></div>' +
+        '<div class="pux-stat"><div><dt>Posibles duplicaciones <span class="pux-stat__nota">Equivalente sugerido por nombre, sin validar</span></dt><dd>' + dup + '</dd></div></div>' +
+        '<div class="pux-stat"><div><dt>Candidatos a evaluación <span class="pux-stat__nota">Sin equivalente por nombre</span></dt><dd>' + cand + '</dd></div></div>' +
+      '</dl>' +
+      '<section class="pux-panel pux-panel--tabla" aria-labelledby="comp-tabla-tit">' +
+        '<h2 class="mp-h6 pux-panel__title" id="comp-tabla-tit">Componentes identificados en los prototipos</h2>' +
+        '<form class="pux-filters" role="search" aria-label="Filtrar componentes" onsubmit="return false">' +
+          '<div class="pux-filters__fields">' +
+            '<div class="mp-input-group pux-filters__search"><label class="mp-input-label" for="comp-q">Buscar por nombre</label>' +
+              '<div class="mp-input-wrapper"><i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>' +
+              '<input class="mp-input-field has-icon-left" type="search" id="comp-q" placeholder="Nombre del componente" autocomplete="off" data-comp-q></div></div>' +
+            '<div class="mp-input-group pux-filters__orden"><label class="mp-input-label" for="comp-plat">Plataforma</label>' +
+              '<div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="comp-plat" data-comp-plat>' +
+                '<option value="">Todas</option><option value="drupal">Drupal</option><option value="zt">ZT</option><option value="app">App</option></select></div></div>' +
+            '<div class="mp-input-group pux-filters__estado"><label class="mp-input-label" for="comp-estado">Estado de evaluación</label>' +
+              '<div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="comp-estado" data-comp-estado><option value="">Todos</option>' +
+                Object.keys(EVAL).map(function (k) { return '<option value="' + k + '">' + esc(EVAL[k].label) + '</option>'; }).join('') + '</select></div></div>' +
+          '</div>' +
+        '</form>' +
+        '<p class="pux-results" aria-live="polite" data-comp-res></p>' +
+        '<div data-comp-tabla></div>' +
+      '</section>';
+
+    var q = $('[data-comp-q]', cont), plat = $('[data-comp-plat]', cont), estSel = $('[data-comp-estado]', cont);
+    var res = $('[data-comp-res]', cont), tabla = $('[data-comp-tabla]', cont);
+    var p = params();
+    q.value = p.get('q') || '';
+    if (PLAT_CORTO[p.get('plataforma')]) plat.value = p.get('plataforma');
+    if (EVAL[p.get('estado')]) estSel.value = p.get('estado');
+
+    function filtradas() {
+      var palabras = normalizar(q.value).trim().split(/\s+/).filter(Boolean);
+      return locales.filter(function (l) {
+        if (plat.value && l.plataforma !== plat.value) return false;
+        if (estSel.value && estadoEval(l) !== estSel.value) return false;
+        var t = normalizar(l.nombre + ' ' + (equivalente(l) || ''));
+        return palabras.every(function (w) { return t.indexOf(w) >= 0; });
+      });
+    }
+    function pintar(url) {
+      var lista = filtradas();
+      if (url) {
+        var u = new URLSearchParams();
+        if (q.value.trim()) u.set('q', q.value.trim());
+        if (plat.value) u.set('plataforma', plat.value);
+        if (estSel.value) u.set('estado', estSel.value);
+        try { history.replaceState(null, '', window.location.pathname + (u.toString() ? '?' + u : '')); } catch (e) { /* file:// */ }
+      }
+      res.textContent = lista.length === locales.length ? locales.length + (locales.length === 1 ? ' componente' : ' componentes')
+        : lista.length + ' de ' + locales.length + ' componentes';
+      if (!lista.length) {
+        tabla.innerHTML = vacio(locales.length ? 'Sin resultados' : 'Sin componentes propios', locales.length
+          ? 'Ningún componente coincide con la búsqueda o los filtros. Prueba con otro nombre o quita algún filtro.'
+          : 'Los prototipos no tienen componentes propios en shared/components.',
+          locales.length ? '<button type="button" class="mp-btn mp-btn--secundario" data-comp-limpiar>Limpiar filtros</button>' : '');
+        return;
+      }
+      tabla.innerHTML = '<div class="mp-table-wrap pux-table pux-tabla-resp"><table class="mp-table">' +
+        '<caption class="visually-hidden">Componentes propios de las plataformas, con su equivalente sugerido y su estado de evaluación</caption>' +
+        '<thead><tr><th scope="col">Componente</th><th scope="col">Plataforma</th><th scope="col">Equivalente en el sistema de diseño</th><th scope="col">Estado de evaluación</th><th scope="col">Acción</th></tr></thead><tbody>' +
+        lista.map(function (l) {
+          var k = estadoEval(l), eq = equivalente(l);
+          return '<tr><th scope="row" data-label="Componente"><strong>' + esc(l.nombre) + '</strong></th>' +
+            '<td data-label="Plataforma">' + tag(PLAT_CORTO[l.plataforma] || l.plataforma, PLATAFORMA_TAG[l.plataforma] || 'neutral') + '</td>' +
+            '<td data-label="Equivalente">' + (eq ? '<code>' + esc(eq) + '</code>' + (l.evaluacion && l.evaluacion.equivalenteDs ? '' : '<span class="pux-sub">Sugerido por nombre</span>') : '<span class="pux-muted">Sin equivalente por nombre</span>') + '</td>' +
+            '<td data-label="Estado">' + tag(EVAL[k].label, EVAL[k].tag) + '</td>' +
+            '<td data-label="Acción"><button class="mp-btn mp-btn--terciario mp-btn--sm" type="button" data-comp-detalle="' + esc(l.plataforma + '/' + l.nombre) + '">Ver detalle<span class="visually-hidden"> de ' + esc(l.nombre) + ' (' + esc(PLAT_CORTO[l.plataforma] || l.plataforma) + ')</span></button></td></tr>';
+        }).join('') + '</tbody></table></div>';
+    }
+    q.addEventListener('input', function () { pintar(true); });
+    plat.addEventListener('change', function () { pintar(true); });
+    estSel.addEventListener('change', function () { pintar(true); });
+    cont.addEventListener('click', function (e) {
+      if (e.target.closest('[data-comp-limpiar]')) { q.value = ''; plat.value = ''; estSel.value = ''; pintar(true); q.focus(); return; }
+      var b = e.target.closest('[data-comp-detalle]');
+      if (!b) return;
+      var l = locales.filter(function (x) { return x.plataforma + '/' + x.nombre === b.getAttribute('data-comp-detalle'); })[0];
+      if (l) abrirDrawer({ sup: 'Componente · ' + (PLAT_CORTO[l.plataforma] || l.plataforma), titulo: l.nombre, html: detalleComponente(l, cat) }, b);
+    });
+    pintar(false);
   }
 
   /* ---------- Entregables ---------- */
+  var TAM_ENTREGABLES = 10;
+  var ORDEN_ENTREGABLES = {
+    'aprobacion-desc': function (a, b) { return String(b.aprobacionUX.fecha || '').localeCompare(String(a.aprobacionUX.fecha || '')) || String(a.nombre).localeCompare(String(b.nombre), 'es'); },
+    'aprobacion-asc':  function (a, b) { return String(a.aprobacionUX.fecha || '9999').localeCompare(String(b.aprobacionUX.fecha || '9999')) || String(a.nombre).localeCompare(String(b.nombre), 'es'); },
+    'nombre':          function (a, b) { return String(a.nombre).localeCompare(String(b.nombre), 'es'); }
+  };
+  /** Versión del sistema de diseño de un flujo, solo si está registrada; si no, null. Nunca se supone la más reciente. */
+  function dsDeFlujo(f) {
+    var vig = (f.versiones || []).filter(function (v) { return v.vigente; })[0];
+    if (vig && vig.ds && (vig.ds.tag || vig.ds.commit)) return vig.ds.tag || ('commit ' + vig.ds.commit);
+    if (f.consumo && f.consumo.ds && f.consumo.ds.length) return f.consumo.ds.map(function (v) { return 'v' + v; }).join(', ');
+    return null;
+  }
+  function detalleEntregable(f, cat) {
+    var ap = f.aprobacionUX || {};
+    var dsv = dsDeFlujo(f);
+    var enlaces = [];
+    if (f.publicado && f.url) enlaces.push('<a class="pux-link" href="' + esc(f.url) + '" target="_blank" rel="noopener">Prototipo aprobado<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>');
+    if (f.figma) enlaces.push('<a class="pux-link" href="' + esc(f.figma) + '" target="_blank" rel="noopener">Diseño en Figma<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>');
+    enlaces.push('<a class="pux-link" href="flujo.html?id=' + encodeURIComponent(f.id) + '">Ficha del flujo en el portal</a>');
+    var hus = (f.hu || []).filter(function (h) { return /^https:\/\//.test(h.url || ''); });
+    var docs = (hus.length ? hus.map(function (h) {
+      return '<li><a class="pux-link" href="' + esc(h.url) + '" target="_blank" rel="noopener">' + esc(h.codigo || h.id) + (h.titulo ? ' · ' + esc(h.titulo) : '') + '<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a></li>';
+    }).join('') : '');
+    var paquete = f.descarga && f.descarga.url
+      ? '<a class="mp-btn mp-btn--primario mp-btn--sm mp-btn--icon-right" href="' + esc(f.descarga.url) + '" download="' + esc(f.descarga.archivo) + '">Descargar paquete <i class="icon icon-download-simple icon-20" aria-hidden="true"></i></a>' +
+        '<br><span class="pux-muted">' + esc(f.descarga.archivo) + ' · ' + esc(peso(f.descarga.bytes)) + '</span>'
+      : '<span class="pux-muted">Disponible en una fase posterior</span>';
+    return '<dl class="pux-det">' +
+      (f.descripcion ? filaDet('Descripción', esc(f.descripcion)) : '') +
+      filaDet('Plataforma', esc(nombrePlataforma(f.plataforma, cat))) +
+      filaDet('Versión del flujo', esc(f.version)) +
+      filaDet('Estado', badgeEstado(f.estado)) +
+      filaDet('Fecha de aprobación', ap.fecha ? '<time datetime="' + esc(ap.fecha) + '">' + esc(fecha(ap.fecha)) + '</time>' : 'Sin fecha') +
+      filaDet('Aprobado por', ap.por ? esc(ap.por) : '<span class="pux-muted">No registrado</span>') +
+      filaDet('Versión del sistema de diseño', dsv ? esc(dsv) : '<span class="pux-muted">No registrada</span>') +
+      filaDet('Enlaces', '<ul class="pux-det__lista" role="list"><li>' + enlaces.join('</li><li>') + '</li></ul>') +
+      filaDet('Documentación asociada', docs ? '<ul class="pux-det__lista" role="list">' + docs + '</ul>' : '<span class="pux-muted">Sin historias de usuario registradas</span>') +
+      filaDet('Paquete para desarrollo', paquete) +
+    '</dl>';
+  }
   function initEntregables(cat) {
     var cont = $('[data-entregables]');
     if (!cont) return;
+    var barra = $('[data-entregables-filtros]');
+    var res = $('[data-entregables-res]');
+    var pag = $('[data-entregables-pag]');
     var ap = cat.flujos.filter(function (f) { return f.aprobacionUX && f.aprobacionUX.aprobado; });
     if (!ap.length) {
-      cont.innerHTML = vacio('Aún no hay flujos aprobados', 'Cuando UX apruebe un flujo, aparecerá aquí con su versión y su paquete de referencia.',
+      if (barra) barra.hidden = true;
+      cont.innerHTML = vacio('Aún no hay flujos aprobados', 'Cuando UX apruebe un flujo, aparecerá aquí con su versión y sus recursos para desarrollo.',
         '<a class="mp-btn mp-btn--secundario" href="prototipos.html">Ver prototipos</a>');
       return;
     }
-    cont.innerHTML = '<div class="mp-table-wrap"><table class="mp-table mp-table--hover">' +
-      '<caption class="visually-hidden">Flujos aprobados por UX</caption>' +
-      '<thead><tr><th scope="col">Flujo</th><th scope="col">Plataforma</th><th scope="col">Versión</th><th scope="col">Aprobado</th><th scope="col">Paquete</th></tr></thead><tbody>' +
-      ap.map(function (f) {
-        return '<tr><td><a href="flujo.html?id=' + encodeURIComponent(f.id) + '">' + esc(f.nombre) + '</a></td>' +
-          '<td>' + tagPlataforma(f.plataforma, cat) + '</td><td>' + esc(f.version) + '</td>' +
-          '<td>' + esc(f.aprobacionUX.por || 'UX') + ' · ' + esc(fecha(f.aprobacionUX.fecha)) + '</td>' +
-          '<td><span class="pux-muted">Disponible en una fase posterior</span></td></tr>';
-      }).join('') + '</tbody></table></div>';
+    var q = $('[data-ent-q]'), plat = $('[data-ent-plat]'), ord = $('[data-ent-orden]');
+    var p = params();
+    var st = { pagina: Math.max(1, parseInt(p.get('pagina'), 10) || 1) };
+    q.value = p.get('q') || '';
+    if (PLAT_CORTO[p.get('plataforma')]) plat.value = p.get('plataforma');
+    if (ORDEN_ENTREGABLES[p.get('orden')]) ord.value = p.get('orden');
+
+    function filtrados() {
+      var palabras = normalizar(q.value).trim().split(/\s+/).filter(Boolean);
+      return ap.filter(function (f) {
+        if (plat.value && f.plataforma !== plat.value) return false;
+        var t = normalizar(f.nombre + ' ' + f.id);
+        return palabras.every(function (w) { return t.indexOf(w) >= 0; });
+      }).sort(ORDEN_ENTREGABLES[ord.value]);
+    }
+    function url(n) {
+      var u = new URLSearchParams();
+      if (q.value.trim()) u.set('q', q.value.trim());
+      if (plat.value) u.set('plataforma', plat.value);
+      if (ord.value !== 'aprobacion-desc') u.set('orden', ord.value);
+      if (n > 1) u.set('pagina', n);
+      return window.location.pathname.split('/').pop() + (u.toString() ? '?' + u : '');
+    }
+    function recursos(f) {
+      var r = [];
+      if (f.publicado) r.push('Prototipo');
+      if (f.figma) r.push('Figma');
+      if ((f.hu || []).length) r.push('HU (' + f.hu.length + ')');
+      var lista = r.length ? '<ul class="pux-chips" role="list">' + r.map(function (t) { return '<li>' + tag(t, 'neutral') + '</li>'; }).join('') + '</ul>' : '';
+      var paquete = f.descarga && f.descarga.url
+        ? '<a class="pux-link pux-paquete" href="' + esc(f.descarga.url) + '" download="' + esc(f.descarga.archivo) + '">Descargar paquete<span class="visually-hidden"> de ' + esc(f.nombre) + '</span> <span class="pux-muted">(ZIP, ' + esc(peso(f.descarga.bytes)) + ')</span></a>'
+        : '<span class="pux-muted pux-paquete">Paquete: disponible en una fase posterior</span>';
+      return lista + paquete;
+    }
+    function pintar(actualizarUrl, moverFoco) {
+      var lista = filtrados();
+      var paginas = Math.max(1, Math.ceil(lista.length / TAM_ENTREGABLES));
+      st.pagina = Math.min(st.pagina, paginas);
+      if (actualizarUrl) { try { history.replaceState(null, '', url(st.pagina)); } catch (e) { /* file:// */ } }
+      var desde = (st.pagina - 1) * TAM_ENTREGABLES;
+      var visibles = lista.slice(desde, desde + TAM_ENTREGABLES);
+      res.textContent = !lista.length ? '0 entregables'
+        : (paginas > 1 ? 'Mostrando ' + (desde + 1) + '–' + (desde + visibles.length) + ' de ' + lista.length + ' entregables'
+          : lista.length + (lista.length === 1 ? ' entregable' : ' entregables'));
+      if (!lista.length) {
+        cont.innerHTML = vacio('Sin resultados', 'Ningún entregable coincide con la búsqueda o el filtro. Prueba con otro nombre o quita el filtro.',
+          '<button type="button" class="mp-btn mp-btn--secundario" data-ent-limpiar>Limpiar filtros</button>');
+        pag.innerHTML = '';
+        return;
+      }
+      cont.innerHTML = '<div class="mp-table-wrap pux-table pux-tabla-resp"><table class="mp-table">' +
+        '<caption class="visually-hidden">Flujos aprobados por UX y recursos disponibles para desarrollo</caption>' +
+        '<thead><tr><th scope="col">Flujo</th><th scope="col">Plataforma</th><th scope="col">Versión del flujo</th><th scope="col">Fecha de aprobación</th><th scope="col">Recursos disponibles</th><th scope="col">Acción</th></tr></thead><tbody>' +
+        visibles.map(function (f) {
+          var a = f.aprobacionUX;
+          return '<tr><th scope="row" data-label="Flujo"><a class="pux-link" href="flujo.html?id=' + encodeURIComponent(f.id) + '">' + esc(f.nombre) + '</a></th>' +
+            '<td data-label="Plataforma">' + tagPlataforma(f.plataforma, cat) + '</td>' +
+            '<td data-label="Versión del flujo" class="pux-nowrap">' + esc(f.version) + '</td>' +
+            '<td data-label="Fecha de aprobación" class="pux-nowrap">' + (a.fecha ? '<time datetime="' + esc(a.fecha) + '">' + esc(fecha(a.fecha)) + '</time>' : 'Sin fecha') + '</td>' +
+            '<td data-label="Recursos">' + recursos(f) + '</td>' +
+            '<td data-label="Acción"><div class="pux-acciones-fila">' +
+              (f.publicado && f.url ? '<a class="mp-btn mp-btn--terciario mp-btn--sm" href="' + esc(f.url) + '" target="_blank" rel="noopener">Ver prototipo<span class="visually-hidden"> de ' + esc(f.nombre) + ' (se abre en una pestaña nueva)</span></a>' : '<span class="pux-muted">No publicado</span>') +
+              '<button class="mp-btn mp-btn--terciario mp-btn--sm" type="button" data-ent-detalle="' + esc(f.id) + '">Ver detalle<span class="visually-hidden"> de ' + esc(f.nombre) + '</span></button>' +
+            '</div></td></tr>';
+        }).join('') + '</tbody></table></div>';
+      pag.innerHTML = htmlPaginacion(st.pagina, paginas, url, 'Paginación de entregables');
+      $all('[data-pagina]', pag).forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          st.pagina = parseInt(a.getAttribute('data-pagina'), 10);
+          pintar(true, true);
+        });
+      });
+      if (moverFoco) { res.focus({ preventScroll: true }); res.scrollIntoView({ block: 'start' }); }
+    }
+    q.addEventListener('input', function () { st.pagina = 1; pintar(true); });
+    plat.addEventListener('change', function () { st.pagina = 1; pintar(true); });
+    ord.addEventListener('change', function () { st.pagina = 1; pintar(true); });
+    cont.addEventListener('click', function (e) {
+      if (e.target.closest('[data-ent-limpiar]')) { q.value = ''; plat.value = ''; st.pagina = 1; pintar(true); q.focus(); return; }
+      var b = e.target.closest('[data-ent-detalle]');
+      if (!b) return;
+      var f = ap.filter(function (x) { return x.id === b.getAttribute('data-ent-detalle'); })[0];
+      if (f) abrirDrawer({ sup: 'Entregable UX', titulo: f.nombre, html: detalleEntregable(f, cat) }, b);
+    });
+    pintar(false);
   }
 
   /* ---------- Datos de publicación ---------- */
@@ -1904,14 +2425,17 @@
   document.addEventListener('DOMContentLoaded', function () {
     initTema();
     initSidebar();
-    initDesplegables();
+    initNav();
     initBuscar();
     initVisor();
     marcarActivo();
-    estado().then(initEstado).catch(function () {
-      $all('[data-estado-componentes]').forEach(function (el) { errorCarga(el); });
-    });
-    var necesita = $('[data-historial], [data-ds-accesos], [data-dash], [data-ds-resumen], [data-count], [data-catalogo], [data-detalle], [data-entregables], [data-build-info], [data-ds-info], [data-side-count], [data-centro], [data-changelog]');
+    estado().then(initEstado).catch(function () { /* sin estado no hay aviso en el menú */ });
+    if ($('[data-estado-componentes]')) {
+      Promise.all([estado(), catalogo()]).then(function (r) { initComponentes(r[0], r[1]); }).catch(function () {
+        $all('[data-estado-componentes]').forEach(function (el) { errorCarga(el); });
+      });
+    }
+    var necesita = $('[data-historial], [data-ds-accesos], [data-dash], [data-ds-resumen], [data-count], [data-catalogo], [data-detalle], [data-entregables], [data-build-info], [data-ds-info], [data-side-count], [data-centro]');
     if (!necesita) return;
     catalogo().then(function (cat) {
       sidebarFlujos(cat);
@@ -1922,7 +2446,6 @@
       initDetalle(cat);
       initEntregables(cat);
       initCentro(cat);
-      initChangelog(cat);
       if ($('[data-historial]')) {
         estado().then(function (est) { initHistorial(cat, est); })
           .catch(function () { initHistorial(cat, null); });
@@ -1932,7 +2455,7 @@
           .catch(function () { initDSPagina(cat, null); });
       }
     }).catch(function () {
-      $all('[data-pendientes], [data-recientes], [data-ds-card], [data-distribucion], [data-ds-resumen], [data-catalogo], [data-detalle], [data-entregables], [data-centro], [data-changelog]').forEach(function (el) {
+      $all('[data-pendientes], [data-recientes], [data-ds-card], [data-distribucion], [data-ds-resumen], [data-catalogo], [data-detalle], [data-entregables], [data-centro]').forEach(function (el) {
         var inner = el.matches('[data-detalle]') ? document.createElement('div') : el;
         if (inner !== el) { inner.className = 'pux-container pux-section'; el.innerHTML = ''; el.appendChild(inner); }
         errorCarga(inner);

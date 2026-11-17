@@ -13,14 +13,15 @@
 import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, readJson, Fuente, walk } from './lib/fuentes.mjs';
+import { ROOT, readJson, Fuente, walk as recorrer } from './lib/fuentes.mjs';
+const walk = (d) => (fs.existsSync(d) ? recorrer(d) : []);
 
 const DIST = process.env.PORTAL_DIST ? path.resolve(process.env.PORTAL_DIST) : path.join(ROOT, 'dist');
 const NEXT = DIST + '.next';
 const INTERVALO = Number(process.env.PORTAL_WATCH_MS || 4000);
 
 function firmaPortal() {
-  const rutas = ['fuentes.json', 'catalogo.json', ...walk(path.join(ROOT, 'portal')).map((f) => 'portal/' + f), ...walk(path.join(ROOT, 'scripts')).map((f) => 'scripts/' + f)];
+  const rutas = ['fuentes.json', 'catalogo.json', 'despliegues.json', ...walk(path.join(ROOT, 'trazabilidad')).map((f) => 'trazabilidad/' + f), ...walk(path.join(ROOT, 'portal')).map((f) => 'portal/' + f), ...walk(path.join(ROOT, 'scripts')).map((f) => 'scripts/' + f)];
   return rutas.map((r) => { try { return fs.statSync(path.join(ROOT, r)).mtimeMs; } catch { return 0; } }).join(',');
 }
 function firma() {

@@ -1,0 +1,4 @@
+{
+  "$comentario": "Registro de evaluación de componentes propios de las plataformas (lo escribe UX). Un componente sin entrada aparece como «Por validar» en Uso de componentes. El equivalente que sugiere el nombre NO es una decisión: aquí se registra la decisión real. Clave: «plataforma/nombre», por ejemplo «zt/modal». Estados válidos: por-validar, reutilizar (reutilizar componente existente), candidato (candidato para el sistema de diseño), especifico (mantener como componente específico). Campos opcionales: equivalenteDs, diferencias, decision, fecha (AAAA-MM-DD), por.",
+  "evaluaciones": {}
+}

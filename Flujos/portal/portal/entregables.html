@@ -2,40 +2,64 @@
 <html lang="es" data-theme="light">
 <head>
 <!-- @include head -->
-<title>Entregables · Portal UX Compensar</title>
-<meta name="description" content="Flujos aprobados por UX y paquetes de referencia para desarrollo.">
+<title>Entregables UX · Portal UX Compensar</title>
+<meta name="description" content="Flujos aprobados por UX y recursos disponibles para desarrollo.">
 </head>
 <body data-page="entregables">
 <!-- @include header -->
 <main id="contenido" class="pux-main" tabindex="-1">
-
-  <section class="pux-page-head">
+  <section class="pux-page-head pux-page-head--compacto">
     <div class="pux-container">
-      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Entregables</span></li></ol></nav>
-      <h1 class="pux-page-head__title">Entregables</h1>
-      <p class="mp-body-xl pux-page-head__lead">Flujos que UX aprobó para entregar a desarrollo, con su versión.</p>
+      <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><a class="mp-breadcrumb__link" href="documentacion.html">Documentación</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Entregables UX</span></li></ol></nav>
+      <h1 class="pux-page-head__title">Entregables UX</h1>
+      <p class="mp-body-l pux-page-head__lead">Consulta los flujos aprobados por UX y los recursos disponibles para desarrollo.</p>
     </div>
   </section>
-
   <section class="pux-section pux-section--tight">
     <div class="pux-container">
-      <div class="mp-alert mp-alert--info" role="note">
-        <i class="icon icon-info icon-32 mp-alert__icon" aria-hidden="true"></i>
-        <div class="mp-alert__content">
-          <p class="mp-alert__title">Código de referencia UX, no código productivo</p>
-          <p class="mp-alert__body">Los paquetes contienen el prototipo HTML, CSS y JavaScript como referencia visual y funcional. La implementación en Angular o .NET MAUI la hace cada equipo. La generación de paquetes y la descarga restringida a desarrollo llegan en una fase posterior.</p>
-        </div>
-      </div>
+      <details class="pux-nota">
+        <summary>
+          <i class="icon icon-info icon-20 pux-nota__icono" aria-hidden="true"></i>
+          <span class="pux-nota__texto"><strong>Prototipos de referencia UX.</strong> Los prototipos son referencias visuales y funcionales. No representan código listo para producción.</span>
+          <span class="pux-nota__mas">Más información</span>
+        </summary>
+        <p class="pux-nota__cuerpo">Cada paquete contiene el prototipo HTML, CSS y JavaScript como referencia. La implementación productiva la realizan los equipos de desarrollo en sus tecnologías correspondientes (Angular para Zona Transaccional y .NET MAUI para la App).</p>
+      </details>
     </div>
   </section>
-
   <section class="pux-section pux-section--tight" aria-labelledby="aprobados-titulo">
     <div class="pux-container">
       <h2 class="mp-h6 pux-section__title" id="aprobados-titulo">Flujos aprobados por UX</h2>
-      <div data-entregables aria-live="polite"><p class="pux-muted">Cargando…</p></div>
+      <form class="pux-filters" role="search" aria-label="Filtrar entregables" data-entregables-filtros onsubmit="return false">
+        <div class="pux-filters__fields">
+          <div class="mp-input-group pux-filters__search">
+            <label class="mp-input-label" for="ent-q">Buscar por nombre del flujo</label>
+            <div class="mp-input-wrapper">
+              <i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>
+              <input class="mp-input-field has-icon-left" type="search" id="ent-q" placeholder="Nombre del flujo" autocomplete="off" data-ent-q>
+            </div>
+          </div>
+          <div class="mp-input-group pux-filters__orden">
+            <label class="mp-input-label" for="ent-plat">Plataforma</label>
+            <div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="ent-plat" data-ent-plat>
+              <option value="">Todas</option><option value="drupal">Drupal</option><option value="zt">ZT</option><option value="app">App</option>
+            </select></div>
+          </div>
+          <div class="mp-input-group pux-filters__orden">
+            <label class="mp-input-label" for="ent-orden">Ordenar por</label>
+            <div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="ent-orden" data-ent-orden>
+              <option value="aprobacion-desc">Aprobación más reciente</option>
+              <option value="aprobacion-asc">Aprobación más antigua</option>
+              <option value="nombre">Nombre (A–Z)</option>
+            </select></div>
+          </div>
+        </div>
+      </form>
+      <p class="pux-results" aria-live="polite" tabindex="-1" data-entregables-res></p>
+      <div data-entregables><p class="pux-muted">Cargando…</p></div>
+      <div class="pux-paginacion" data-entregables-pag></div>
     </div>
   </section>
-
 </main>
 <!-- @include footer -->
 </body>

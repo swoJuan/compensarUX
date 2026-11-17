@@ -18,7 +18,8 @@
     "guardar": "node scripts/guardar.mjs",
     "serve": "node scripts/serve.mjs",
     "ds:estado": "node scripts/ds-sincronizar.mjs",
-    "ds:sincronizar": "node scripts/ds-sincronizar.mjs --aplicar"
+    "ds:sincronizar": "node scripts/ds-sincronizar.mjs --aplicar",
+    "despliegue-registrar": "node scripts/despliegue-registrar.mjs"
   },
   "engines": {
     "node": ">=18"

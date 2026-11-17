@@ -106,6 +106,13 @@
     }
   },
 
+  "trazabilidad": {
+    "$comentario": "Entornos desde los que se aceptan URLs de pantallas al vincular una HU. La validación nunca se basa solo en el dominio: además se exige que la ruta pertenezca a un flujo del catálogo. Cuando se publique el portal, agrega aquí su origen (hosts + https). 'hostsAzure' limita las URLs de work items.",
+    "entornos": [
+      { "id": "local", "nombre": "Local", "hosts": ["localhost", "127.0.0.1"], "protocolos": ["http:"], "base": "/" }
+    ],
+    "hostsAzure": ["dev.azure.com"]
+  },
   "$robots": "Bloqueo de buscadores y rastreadores. Es una indicación que los rastreadores respetan voluntariamente: la protección real es Vercel Authentication cuando se publique.",
   "versiones": {
     "$comentario": "Versiones históricas navegables. 'volverAlPortal' lista, por plataforma, las rutas de «Inicio» que dentro de una versión no existen: se resuelven con una página de redirección al portal principal. Es solo salida del build; los archivos congelados no se tocan.",
