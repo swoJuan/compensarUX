@@ -25,8 +25,8 @@
       <span class="material-icons" aria-hidden="true">menu</span>
     </button>
     <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
-    <button class="icon-btn" aria-label="Configuración">
-      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    <button class="icon-btn hd-exit-mobile" type="button" aria-label="Salida">
+      <span class="icon icon-sign-out icon-24 gs-primary" aria-hidden="true"></span>
     </button>
   </header>
 
@@ -34,16 +34,34 @@
   <header class="header-desktop">
     <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
     <div class="hd-user">
-      <div class="hd-user-info">
-        <div class="hd-user-name">Margarita López Arenas</div>
-        <div class="hd-user-plan">Plan Ideal</div>
+
+      <!-- Perfil Comercial: usuario logueado (Figma "Afiliacion01 - Comercial") -->
+      <div class="hd-person" data-person-selector>
+        <button class="hd-person__trigger" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu"
+                aria-label="Usuario actual: Andrés, perfil Comercial">
+          <span class="hd-person__info">
+            <span class="hd-person__name" data-person-name>Andrés</span>
+            <span class="hd-person__plan" data-person-plan>Comercial</span>
+          </span>
+          <span class="hd-person__avatar icon icon-user-circle icon-32 gs-primary" aria-hidden="true"></span>
+        </button>
+        <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
+          <p class="person-menu__label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Andrés" data-plan="Comercial">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Andrés</span>
+              <span class="person-opt__role">Comercial</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
-      <div class="hd-avatar">
-        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
-      </div>
-      <div class="hd-divider"></div>
-      <button class="hd-exit">
-        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+
+      <div class="hd-divider" aria-hidden="true"></div>
+      <button class="hd-exit" type="button">
+        <span class="icon icon-sign-out icon-32 gs-primary" aria-hidden="true"></span>
         Salida
       </button>
     </div>
@@ -63,7 +81,7 @@
           <!-- Breadcrumb — Inicio / Ventas y afiliación / Mis radicados -->
           <nav class="breadcrumb" aria-label="Ruta de navegación">
             <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
-            <a href="../../index.html">Inicio</a>
+            <a href="../inicio-comercial/index.html">Inicio</a>
             <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
             <a href="../index.html">Ventas y afiliación</a>
             <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
@@ -147,6 +165,7 @@
   </div>
 </div>
 
+<script src="../js/menu-comercial.js"></script>
 <script src="../../shared/zt-sidebar.js"></script>
 <script src="../../shared/afiliacion-mock.js"></script>
 <script src="../../shared/components/dropdown.js"></script>

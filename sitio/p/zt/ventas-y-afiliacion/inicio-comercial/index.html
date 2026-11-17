@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Inicio · Comercial · Compensar</title>
+<link rel="icon" href="../../favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!--
+  Inicio Comercial (ZT) — Figma "Compensar ZT – Fase 2", frame "Afiliacion01 - Comercial"
+  https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=16844-24681
+
+  Primera pantalla del flujo Ventas y afiliación para el perfil Comercial.
+  Reutiliza el CSS del Inicio (../../inicio/css/custom.css, acotado a body.zt-inicio);
+  no define estilos propios. Menú lateral: Inicio + Ventas y afiliación.
+  Cascada: Design System → iconos → shell ZT → custom del Inicio
+-->
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="../../inicio/css/custom.css">
+</head>
+<body class="zt-inicio">
+<a class="visually-hidden-focusable zt-skip" href="#contenido">Saltar al contenido</a>
+<div class="app">
+
+  <!-- ── HEADER MOBILE ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" type="button" aria-label="Abrir menú">
+      <span class="icon icon-hamburger icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn hd-exit-mobile" type="button" aria-label="Salida">
+      <span class="icon icon-sign-out icon-24 gs-primary" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP (Figma "Navegador ZT": 88px) ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <div class="hd-user">
+
+      <!-- Perfil Comercial: Figma muestra solo el nombre del usuario -->
+      <div class="hd-person" data-person-selector>
+        <button class="hd-person__trigger" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="person-menu"
+                aria-label="Usuario actual: Andrés, perfil Comercial">
+          <span class="hd-person__info">
+            <span class="hd-person__name" data-person-name>Andrés</span>
+            <span class="hd-person__plan" data-person-plan>Comercial</span>
+          </span>
+          <span class="hd-person__avatar icon icon-user-circle icon-32 gs-primary" aria-hidden="true"></span>
+        </button>
+        <div class="person-menu" id="person-menu" role="menu" aria-label="Selecciona una persona" hidden>
+          <p class="person-menu__label">Selecciona una persona</p>
+          <button class="person-opt is-selected" type="button" role="menuitemradio" aria-checked="true" data-person="Andrés" data-plan="Comercial">
+            <span class="person-opt__avatar" aria-hidden="true"><span class="icon icon-user icon-24 gs-violet"></span></span>
+            <span class="person-opt__text">
+              <span class="person-opt__name">Andrés</span>
+              <span class="person-opt__role">Comercial</span>
+            </span>
+            <span class="person-opt__check icon icon-check icon-20" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hd-divider" aria-hidden="true"></div>
+      <button class="hd-exit" type="button">
+        <span class="icon icon-sign-out icon-32 gs-primary" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <!-- ── LAYOUT ── -->
+  <div class="layout">
+
+    <!-- Menú lateral: opciones de Figma (ver ZT_MENU_LOCAL al final) -->
+    <nav class="sidebar" data-active="inicio" aria-label="Menú principal"></nav>
+
+    <main class="main" id="contenido" tabindex="-1">
+      <div class="home-wrap">
+
+        <!-- ═══ BIENVENIDA ═══ -->
+        <section class="home-welcome" aria-labelledby="home-title">
+          <h1 class="home-title" id="home-title">
+            <span class="home-title__hi">¡Hola</span> <span class="home-title__name">Andrés!</span>
+          </h1>
+          <p class="home-desc">
+            Te damos la bienvenida a nuestra oficina virtual. <strong>¿Qué quieres hacer hoy?</strong>
+          </p>
+        </section>
+
+        <!-- ═══ CARDS DE SERVICIOS (Figma "Afiliacion01 - Comercial": 1 card, fila de 3) ═══ -->
+        <section class="home-cards" aria-label="Servicios">
+          <a class="home-card" href="../index.html">
+            <div class="home-card__head">
+              <span class="home-card__icon icon icon-handshake icon-32 gs-violet" aria-hidden="true"></span>
+              <span class="home-card__title">Ventas y afiliación</span>
+            </div>
+            <p class="home-card__desc">Inicia afiliaciones, gestiona tus ventas y consulta tus radicados.</p>
+          </a>
+        </section>
+
+        <!-- ═══ LA MEJOR ATENCIÓN MÉDICA ═══ -->
+        <section class="home-atencion" aria-labelledby="home-atencion-title">
+          <h2 class="home-atencion__title" id="home-atencion-title">La mejor atención médica, cerca de ti</h2>
+          <div class="home-atencion__row">
+            <article class="home-hcard">
+              <div class="home-hcard__media">
+                <img src="../../assets/red-atencion.png" alt="Equipo médico de la red de atención de Compensar">
+              </div>
+              <div class="home-hcard__body">
+                <h3 class="home-hcard__title">Red de atención</h3>
+                <p class="home-hcard__desc">Conoce las instituciones y profesionales con los que podrás recibir atención.</p>
+                <a class="mp-btn mp-btn--primario" href="#">Consulta aquí</a>
+              </div>
+            </article>
+            <article class="home-hcard">
+              <div class="home-hcard__media">
+                <img src="../../assets/medicamentos.png" alt="Persona consultando medicamentos en una farmacia">
+              </div>
+              <div class="home-hcard__body">
+                <h3 class="home-hcard__title">Medicamentos</h3>
+                <p class="home-hcard__desc">Consulta las alternativas que tienes para acceder al servicio.</p>
+                <a class="mp-btn mp-btn--primario" href="#">Ingresa aquí</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══ FOOTER (Figma "mp footer": ancho completo, debajo del menú) ═══ -->
+  <footer class="ini-footer">
+    <div class="ini-footer__container">
+      <div class="ini-footer__col ini-footer__col--1">
+        <h2 class="ini-footer__title">Te puede interesar</h2>
+        <ul class="ini-footer__links">
+          <li><a href="javascript:void(0)">Derechos y deberes</a></li>
+          <li><a href="javascript:void(0)">Notificaciones judiciales</a></li>
+          <li><a href="javascript:void(0)">Políticas de privacidad y condiciones de uso</a></li>
+          <li><a href="javascript:void(0)">Transparencia y acceso a la información pública</a></li>
+          <li><a href="javascript:void(0)">Canal de denuncia</a></li>
+        </ul>
+      </div>
+      <div class="ini-footer__col ini-footer__col--2">
+        <h2 class="ini-footer__title">Conoce más</h2>
+        <ul class="ini-footer__links">
+          <li><a href="javascript:void(0)">Nuestra organización</a></li>
+          <li><a href="javascript:void(0)">Radicar PQRS</a></li>
+          <li><a href="javascript:void(0)">Consultar PQRS</a></li>
+          <li><a href="javascript:void(0)">Proveedores</a></li>
+          <li><a href="javascript:void(0)">Términos y condiciones</a></li>
+        </ul>
+      </div>
+      <div class="ini-footer__col ini-footer__col--3">
+        <h2 class="ini-footer__title">Síguenos</h2>
+        <ul class="ini-footer__social" aria-label="Redes sociales">
+          <li><a href="javascript:void(0)" aria-label="Facebook"><span class="icon icon-facebook-logo icon-32" aria-hidden="true"></span></a></li>
+          <li><a href="javascript:void(0)" aria-label="X"><span class="icon icon-x-logo icon-32" aria-hidden="true"></span></a></li>
+          <li><a href="javascript:void(0)" aria-label="YouTube"><span class="icon icon-youtube-logo icon-32" aria-hidden="true"></span></a></li>
+          <li><a href="javascript:void(0)" aria-label="LinkedIn"><span class="icon icon-linkedin-logo icon-32" aria-hidden="true"></span></a></li>
+          <li><a href="javascript:void(0)" aria-label="Instagram"><span class="icon icon-instagram-logo icon-32" aria-hidden="true"></span></a></li>
+          <li><a href="javascript:void(0)" aria-label="Spotify"><span class="icon icon-spotify-logo icon-32" aria-hidden="true"></span></a></li>
+          <li><a href="javascript:void(0)" aria-label="TikTok"><span class="icon icon-tiktok-logo icon-32" aria-hidden="true"></span></a></li>
+        </ul>
+        <address class="ini-footer__address">
+          <strong class="ini-footer__org">Caja de Compensación Familiar<br>Sede Principal</strong>
+          <span>Av. 68 # 49A - 47, Bogotá D.C.<br>Bogotá 601 3077001, Línea nacional 01 8000 967070</span>
+        </address>
+      </div>
+    </div>
+    <div class="ini-footer__vigilados">
+      <img src="../../../shared/assets/logo-supervigilado.svg" alt="Vigilado Supersalud" width="141" height="42">
+      <img src="../../../shared/assets/logo-vigilado.svg" alt="Vigilado Supersubsidio" width="209" height="30">
+    </div>
+  </footer>
+
+  <!-- Botones flotantes (Figma): accesibilidad y volver arriba -->
+  <button class="ini-a11y" type="button" aria-label="Opciones de accesibilidad">
+    <span class="icon icon-person icon-32" aria-hidden="true"></span>
+  </button>
+  <button class="ini-top" type="button" aria-label="Volver arriba" data-ini-top>
+    <span class="icon icon-arrow-up icon-32" aria-hidden="true"></span>
+  </button>
+</div>
+
+<script>
+  /* Menú lateral del Inicio (Figma "SideBar"). zt-sidebar.js lo usa en lugar del
+     menú transversal solo en esta página. href relativo a la raíz zt/. */
+  window.ZT_MENU_LOCAL = [
+    { id: 'inicio', label: 'Inicio',              icon: 'icon-house',     href: 'ventas-y-afiliacion/inicio-comercial/index.html' },
+    { id: 'ventas', label: 'Ventas y afiliación', icon: 'icon-handshake', href: 'ventas-y-afiliacion/index.html' }
+  ];
+</script>
+<script src="../../shared/zt-sidebar.js"></script>
+<script>
+  // Volver arriba: aparece al bajar y respeta "reducir movimiento".
+  (function () {
+    var btn = document.querySelector('[data-ini-top]');
+    if (!btn) return;
+    var reducir = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function actualizar() { btn.classList.toggle('is-visible', window.scrollY > 300); }
+    window.addEventListener('scroll', actualizar, { passive: true });
+    actualizar();
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reducir.matches ? 'auto' : 'smooth' });
+      document.getElementById('contenido').focus({ preventScroll: true });
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "paquete": "compensar-zt",
+  "version": "1.0.0",
+  "plataforma": "zt",
+  "commit": "f6cdff42de04e7a9e59059ae6eb06dcff3fad38e",
+  "commitCorto": "f6cdff4",
+  "arbolSucio": true,
+  "fecha": "2026-11-13T22:49:54.160Z",
+  "fuentes": {
+    "css": [
+      "shared/css/compensar.css",
+      "zt/shared/zt.css",
+      "zt/shared/components/stepper.css",
+      "zt/shared/components/radio.css",
+      "zt/shared/components/dropdown.css",
+      "zt/shared/components/datepicker.css",
+      "zt/shared/components/form-error.css",
+      "zt/shared/components/readonly-field.css",
+      "zt/shared/components/person-summary.css",
+      "zt/shared/components/modal.css",
+      "zt/shared/components/file-upload.css",
+      "zt/shared/components/action-card.css",
+      "zt/shared/components/switch.css",
+      "zt/shared/components/status-result.css",
+      "zt/shared/components/otp-input.css",
+      "zt/shared/components/benef-card.css"
+    ],
+    "js": [
+      "shared/js/compensar.js",
+      "zt/shared/zt-sidebar.js",
+      "zt/shared/zt.js",
+      "zt/shared/components/stepper.js",
+      "zt/shared/components/dropdown.js",
+      "zt/shared/components/datepicker.js",
+      "zt/shared/components/alert.js",
+      "zt/shared/components/person-summary.js",
+      "zt/shared/components/modal.js",
+      "zt/shared/components/file-upload.js",
+      "zt/shared/components/action-card.js",
+      "zt/shared/components/switch.js",
+      "zt/shared/components/status-result.js",
+      "zt/shared/components/otp-input.js",
+      "zt/shared/components/benef-card.js"
+    ],
+    "excluidos": {
+      "zt/shared/afiliacion-mock.js": "datos ficticios del flujo de afiliación, no de la plataforma",
+      "zt/shared/components/README.md": "documentación",
+      "zt/shared/header/.gitkeep": "placeholder"
+    }
+  },
+  "archivos": {
+    "compensar-zt.min.css": {
+      "bytes": 44211,
+      "sha256": "1be1415be50559082c28986539d4b130d2b2e53e3d504e076660d37da476d75e",
+      "integrity": "sha384-zm+LVARNDZaP0Fqc3AZZVX2LDoG1V9mk4H19LE5NPwW9Rb5uTilHw8CuQd5i+qop"
+    },
+    "compensar-zt.min.js": {
+      "bytes": 65761,
+      "sha256": "8a0c8c843de2964471081fef61df36b1e4205252bc3188e9fb75a54b7b33e4e3",
+      "integrity": "sha384-XQOUfsZ/RG/bm4k+bog/uBzC0cLK6g/gKOf8sywcBdAnSRudejRvBgMarmUl/50T"
+    }
+  }
+}

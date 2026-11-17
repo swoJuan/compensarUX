@@ -1,22 +1,22 @@
 {
-  "generado": "2026-11-13T21:17:20.007Z",
+  "generado": "2026-11-17T13:34:46.273Z",
   "repositorio": {
     "unico": true,
     "nombre": "compensarUX",
     "rama": "main",
     "remoto": "https://github.com/swoJuan/compensarUX.git",
     "version": "v2.4.0",
-    "commits": 6,
-    "commitsSinSubir": 1,
-    "pendientes": 5,
+    "commits": 12,
+    "commitsSinSubir": 5,
+    "pendientes": 77,
     "carpetas": [
       {
         "id": "designSystem",
         "nombre": "Sistema de diseño",
         "rol": "Fuente de verdad visual: tokens, estilos y componentes de Compensar.",
         "carpeta": "Core-Design-System",
-        "commit": "d4cefd3",
-        "fecha": "2026-11-12T12:33:17-05:00",
+        "commit": "63bd56e",
+        "fecha": "2026-11-13T17:50:15-05:00",
         "pendientes": 0
       },
       {
@@ -24,8 +24,8 @@
         "nombre": "Prototipos",
         "rol": "Flujos navegables de Drupal, ZT y APP. Consumen una copia controlada del sistema de diseño en shared/.",
         "carpeta": "Flujos/prototipos",
-        "commit": "d983b20",
-        "fecha": "2026-11-13T10:18:37-05:00",
+        "commit": "50db88b",
+        "fecha": "2026-11-17T08:29:44-05:00",
         "pendientes": 0
       },
       {
@@ -33,15 +33,15 @@
         "nombre": "Portal UX",
         "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
         "carpeta": "Flujos/portal",
-        "commit": "57db996",
-        "fecha": "2026-11-13T15:59:17-05:00",
-        "pendientes": 2
+        "commit": "b280506",
+        "fecha": "2026-11-13T17:59:02-05:00",
+        "pendientes": 12
       }
     ]
   },
   "sincronizacion": {
     "estado": "al-dia",
-    "dsCommit": "d4cefd3",
+    "dsCommit": "63bd56e",
     "archivos": [
       {
         "ds": "css/core.css",
@@ -197,7 +197,7 @@
     "usoDs": [
       {
         "bloque": "mp-btn",
-        "archivos": 37,
+        "archivos": 40,
         "flujos": [
           "app/historia-clinica",
           "drupal/navegacion",
@@ -218,8 +218,18 @@
         ]
       },
       {
+        "bloque": "mp-alert",
+        "archivos": 16,
+        "flujos": [
+          "app/historia-clinica",
+          "zt/agendamiento-de-citas",
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
         "bloque": "mp-badge",
-        "archivos": 14,
+        "archivos": 15,
         "flujos": [
           "app/historia-clinica",
           "zt/agendamiento-de-citas",
@@ -227,10 +237,35 @@
         ]
       },
       {
+        "bloque": "mp-input-field",
+        "archivos": 14,
+        "flujos": [
+          "zt/historia-clinica",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
         "bloque": "mp-modal",
-        "archivos": 13,
+        "archivos": 14,
         "flujos": [
           "zt/agendamiento-de-citas",
+          "zt/ventas-y-afiliacion"
+        ]
+      },
+      {
+        "bloque": "mp-sidebar",
+        "archivos": 13,
+        "flujos": [
+          "drupal/navegacion",
+          "zt/agendamiento-de-citas",
+          "zt/historia-clinica"
+        ]
+      },
+      {
+        "bloque": "mp-select",
+        "archivos": 13,
+        "flujos": [
+          "zt/historia-clinica",
           "zt/ventas-y-afiliacion"
         ]
       },
@@ -243,23 +278,6 @@
         ]
       },
       {
-        "bloque": "mp-input-field",
-        "archivos": 13,
-        "flujos": [
-          "zt/historia-clinica",
-          "zt/ventas-y-afiliacion"
-        ]
-      },
-      {
-        "bloque": "mp-sidebar",
-        "archivos": 12,
-        "flujos": [
-          "drupal/navegacion",
-          "zt/agendamiento-de-citas",
-          "zt/historia-clinica"
-        ]
-      },
-      {
         "bloque": "mp-dropdown",
         "archivos": 12,
         "flujos": [
@@ -267,19 +285,11 @@
         ]
       },
       {
-        "bloque": "mp-select",
+        "bloque": "mp-input-error",
         "archivos": 12,
         "flujos": [
           "zt/historia-clinica",
           "zt/ventas-y-afiliacion"
-        ]
-      },
-      {
-        "bloque": "mp-alert",
-        "archivos": 11,
-        "flujos": [
-          "app/historia-clinica",
-          "zt/agendamiento-de-citas"
         ]
       },
       {
@@ -299,14 +309,6 @@
       },
       {
         "bloque": "mp-input-wrapper",
-        "archivos": 11,
-        "flujos": [
-          "zt/historia-clinica",
-          "zt/ventas-y-afiliacion"
-        ]
-      },
-      {
-        "bloque": "mp-input-error",
         "archivos": 11,
         "flujos": [
           "zt/historia-clinica",
@@ -376,14 +378,14 @@
       },
       {
         "bloque": "mp-accordion",
-        "archivos": 2,
+        "archivos": 3,
         "flujos": [
           "drupal/navegacion"
         ]
       },
       {
         "bloque": "mp-web-header",
-        "archivos": 2,
+        "archivos": 3,
         "flujos": [
           "drupal/navegacion"
         ]
@@ -433,12 +435,11 @@
         "nombre": "alert",
         "plataforma": "zt",
         "archivos": [
-          "alert.css",
           "alert.js"
         ],
         "equivalenteDs": "alerts",
         "tipo": "existe-en-ds",
-        "paginas": 11
+        "paginas": 9
       },
       {
         "nombre": "dropdown",
@@ -448,6 +449,16 @@
           "dropdown.js"
         ],
         "equivalenteDs": "dropdown",
+        "tipo": "existe-en-ds",
+        "paginas": 9
+      },
+      {
+        "nombre": "form-error",
+        "plataforma": "zt",
+        "archivos": [
+          "form-error.css"
+        ],
+        "equivalenteDs": "inputs",
         "tipo": "existe-en-ds",
         "paginas": 9
       },
@@ -472,16 +483,6 @@
         "equivalenteDs": "stepper",
         "tipo": "existe-en-ds",
         "paginas": 9
-      },
-      {
-        "nombre": "form-error",
-        "plataforma": "zt",
-        "archivos": [
-          "form-error.css"
-        ],
-        "equivalenteDs": "inputs",
-        "tipo": "existe-en-ds",
-        "paginas": 8
       },
       {
         "nombre": "datepicker",

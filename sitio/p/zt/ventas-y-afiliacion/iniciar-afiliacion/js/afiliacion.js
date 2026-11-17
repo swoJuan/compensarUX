@@ -6,22 +6,24 @@
  *     Afiliación / Consultar viabilidad): la viabilidad se consulta
  *     internamente al presionar "Continuar".
  *   - Campo "Número de documento": acepta SOLO dígitos (sanitiza en input).
- *   - Botón deshabilitado hasta que haya tipo + número válido.
+ *   - Botón SIEMPRE habilitado: al enviar se validan tipo y número y los
+ *     errores se muestran inline por campo (patrón Form Error), con foco al
+ *     primer campo inválido.
  *   - Consulta de viabilidad simulada con estado de carga.
- *   - VIABLE   → resultado INLINE en la misma card (sin modal: un clic menos):
- *     persona + "Comenzar afiliación". Si ese documento tiene una afiliación
- *     en curso guardada, la acción es "Retomar en el Paso N".
+ *   - VIABLE   → SIN mensaje de éxito: avanza directo al Paso 1. Si ese
+ *     documento tiene una afiliación en curso, retoma en su paso. Si hay otra
+ *     en curso (otra persona), pide confirmar antes de descartarla.
  *   - AFILIACIÓN EN CURSO: al entrar, si hay un borrador guardado se muestra
  *     arriba "Retomar" / "Descartar" (el borrador no se pierde al cerrar la pestaña).
  *   - NO VIABLE → alerta warning contextual inline (componente transversal
- *     Alert, .zt-alert--warning) DENTRO de la card, entre la descripción y los
+ *     Alert, .mp-alert--warning) DENTRO de la card, entre la descripción y los
  *     campos. NO hay modal, overlay, navegación ni bloqueo: los campos siguen
  *     editables y se permite reconsultar. La alerta se limpia al cambiar
  *     tipo/número de documento (no se arrastra un resultado viejo a datos nuevos).
  *
  * ⚠️  MOCK DE PROTOTIPO — REEMPLAZAR POR SERVICIO REAL:
- *     La viabilidad se decide por la paridad del último dígito del
- *     documento (par = viable, impar = no viable). Esta regla vive
+ *     La viabilidad se decide por el número de documento: solo el 0 es
+ *     documento (número 0 = no viable; cualquier otro = viable). Esta regla vive
  *     aislada en consultarViabilidadMock() y NO se mezcla con la
  *     presentación. Sustituir esa función por la llamada al backend.
  * ============================================================ */
@@ -44,7 +46,8 @@
   var submitEl  = document.getElementById('afi-submit');
   var submitLbl = document.getElementById('afi-submit-label');
   var alertEl   = document.getElementById('afi-alert');    // host de la alerta warning (NO VIABLE)
-  var viableEl  = document.getElementById('afi-viable');   // resultado VIABLE inline
+  var tipoErrEl   = document.getElementById('afi-tipo-error');
+  var numeroErrEl = document.getElementById('afi-numero-error');
   var resumeEl  = document.getElementById('afi-resume');   // afiliación en curso
   var Z = window.ZTAfiliacion;
 
@@ -79,8 +82,31 @@
     return tipoEl.value !== '' && /^\d+$/.test(numeroEl.value);
   }
 
-  function refreshSubmit() {
-    submitEl.disabled = !isValid();
+  /* Error inline por campo (patrón transversal Form Error): marca `.error` en el
+   * campo (o en `.zt-dropdown` si el <select> está mejorado) y revela su mensaje. */
+  function setError(el, errEl, on, msg) {
+    var host = el.closest('.zt-dropdown');
+    (host || el).classList.toggle('error', !!on);
+    el.setAttribute('aria-invalid', on ? 'true' : 'false');
+    if (errEl) { if (msg) errEl.textContent = msg; errEl.hidden = !on; }
+  }
+  function clearErrors() {
+    setError(tipoEl, tipoErrEl, false);
+    setError(numeroEl, numeroErrEl, false);
+  }
+  // Devuelve el primer campo inválido (o null si todo está bien).
+  function validar() {
+    var first = null;
+    if (!tipoEl.value) { setError(tipoEl, tipoErrEl, true, 'Selecciona el tipo de documento.'); first = tipoEl; }
+    else setError(tipoEl, tipoErrEl, false);
+    if (!numeroEl.value) { setError(numeroEl, numeroErrEl, true, 'Ingresa el número de documento.'); first = first || numeroEl; }
+    else setError(numeroEl, numeroErrEl, false);
+    return first;
+  }
+  function focusInvalid(el) {
+    var dd = el.closest('.zt-dropdown');
+    var target = (dd && dd.querySelector('.zt-dropdown__trigger')) || el;
+    try { target.focus(); } catch (e) {}
   }
 
   /* ─────────── Desenlaces de la consulta ─────────── */
@@ -88,8 +114,6 @@
   // Limpia el resultado previo (al cambiar datos o al reconsultar).
   function clearResult() {
     if (alertEl) ZTAlert.clear(alertEl);
-    form.classList.remove('is-viable');
-    viableEl.hidden = true; viableEl.innerHTML = '';
   }
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
@@ -137,60 +161,45 @@
   });
 
 
-  // VIABLE → resultado inline (sin modal). Si el documento tiene una afiliación
-  // en curso, se ofrece retomarla; si hay otra en curso (otra persona), se avisa
-  // que se descartará al comenzar.
-  function renderViable(tipo, numero) {
+  // VIABLE → sin mensaje de éxito: se avanza directo. Si el documento tiene una
+  // afiliación en curso se retoma en su paso; si hay otra en curso (otra persona)
+  // se pide confirmar antes de descartarla (no se pierde trabajo en silencio).
+  function continuarConViable(tipo, numero) {
     var nombre = candidatoNombre(numero);
     var draft = Z && Z.draftSummary();
     var mismo = draft && draft.documentType === tipo && String(draft.documentNumber) === String(numero);
     var otro = draft && !mismo;
 
-    function guardarCandidato(limpiar) {
-      if (!Z) return;
-      if (limpiar) Z.clearAll();     // persona nueva → no arrastrar pasos de otra afiliación
-      var persona = Z.personaMock(numero);
-      Z.saveCandidate({
-        documentType: tipo,
-        documentNumber: numero,      // valor limpio (sin puntos)
-        name: nombre,
-        firstName: persona.firstName,
-        secondName: persona.secondName,
-        firstSurname: persona.firstSurname,
-        secondSurname: persona.secondSurname,
-        viable: true
-      });
+    function guardarYContinuar() {
+      if (Z) {
+        Z.clearAll();                // persona nueva → no arrastrar pasos de otra afiliación
+        var persona = Z.personaMock(numero);
+        Z.saveCandidate({
+          documentType: tipo,
+          documentNumber: numero,    // valor limpio (sin puntos)
+          name: nombre,
+          firstName: persona.firstName,
+          secondName: persona.secondName,
+          firstSurname: persona.firstSurname,
+          secondSurname: persona.secondSurname,
+          viable: true
+        });
+      }
+      continuarAfiliacion();
     }
 
-    ZTAlert.render(alertEl, {
-      type: 'success',
-      title: 'La afiliación puede continuar',
-      description: 'No encontramos condiciones que impidan continuar con la afiliación a Medicina Prepagada.'
-    });
-    form.classList.add('is-viable');
-    viableEl.hidden = false;
-    viableEl.innerHTML =
-      '<div class="afi-viable__person">' +
-        '<span class="icon icon-user icon-24 gs-inherit" aria-hidden="true"></span>' +
-        '<span><span class="afi-viable__name">' + esc(nombre) + '</span><span class="afi-viable__doc">' + esc(personaLinea(tipo, numero)) + '</span></span>' +
-      '</div>' +
-      (otro ? '<p class="afi-viable__note">Al comenzar se descarta la afiliación en curso de ' + esc(draft.name) + '.</p>' : '') +
-      '<div class="afi-viable__actions">' +
-        (mismo
-          ? '<a class="mp-btn mp-btn--primario" id="afi-go" href="' + draft.href + '">Retomar en el Paso ' + draft.step + ' · ' + esc(draft.stepLabel) + '</a>' +
-            '<button type="button" class="afi-link" data-act="restart">Empezar de nuevo</button>'
-          : '<button type="button" class="mp-btn mp-btn--primario" id="afi-go" data-act="start">Comenzar afiliación</button>') +
-        '<button type="button" class="afi-link" data-act="other">Consultar otro documento</button>' +
-      '</div>';
-
-    viableEl.onclick = function (e) {
-      var b = e.target.closest('[data-act]'); if (!b) return;
-      var act = b.getAttribute('data-act');
-      if (act === 'start' || act === 'restart') { guardarCandidato(true); continuarAfiliacion(); }
-      else if (act === 'other') { clearResult(); numeroEl.value = ''; refreshSubmit(); numeroEl.focus(); }
-    };
-    var go = document.getElementById('afi-go');
-    if (go) go.focus();
+    if (mismo) { window.location.href = draft.href; return; }
+    if (otro) {
+      ZTModal.open({
+        type: 'warning',
+        title: '¿Descartar la afiliación en curso?',
+        body: ['Tienes una afiliación en curso de ' + draft.name + '. Si continúas, se descartará y comenzarás una nueva.'],
+        primaryAction: { label: 'Continuar', onClick: function () { ZTModal.close(); guardarYContinuar(); } },
+        secondaryAction: { label: 'Cancelar', onClick: function () { ZTModal.close(); } }
+      });
+      return;
+    }
+    guardarYContinuar();
   }
 
   // NO VIABLE → alerta warning contextual inline (componente transversal Alert),
@@ -222,7 +231,7 @@
     // Deshabilita el formulario completo durante la consulta
     tipoEl.disabled = on;
     numeroEl.disabled = on;
-    submitEl.disabled = on ? true : !isValid();
+    submitEl.disabled = on;
     if (on) {
       submitLbl.textContent = 'Consultando...';
     } else {
@@ -231,13 +240,12 @@
   }
 
   /* ─────────── MOCK de viabilidad (reemplazar por servicio real) ─────────── */
-  // Regla de prototipo: último dígito par → viable; impar → no viable.
+  // Regla de prototipo: documento 0 (solo ceros) → no viable; cualquier otro → viable.
   // Devuelve una promesa para simular latencia de red.
   function consultarViabilidadMock(numero) {
     return new Promise(function (resolve) {
       window.setTimeout(function () {
-        var ultimo = parseInt(numero.charAt(numero.length - 1), 10);
-        resolve({ viable: ultimo % 2 === 0 });
+        resolve({ viable: !/^0+$/.test(numero) });
       }, 700);
     });
   }
@@ -245,18 +253,19 @@
   /* ─────────── Envío del formulario ─────────── */
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!isValid()) return;
+    clearResult();
+    var invalido = validar();
+    if (invalido) { focusInvalid(invalido); return; }
 
     var tipo = tipoEl.value;
     var numero = numeroEl.value;
 
-    clearResult();
     setLoading(true);
 
     consultarViabilidadMock(numero).then(function (res) {
       setLoading(false);
       if (res.viable) {
-        renderViable(tipo, numero);      // resultado inline: Comenzar o Retomar
+        continuarConViable(tipo, numero);   // sin mensaje de éxito: avanza al Paso 1
       } else {
         renderNoViable(tipo, numero);    // alerta warning inline (dentro de la card), permanece en pantalla
       }
@@ -267,18 +276,17 @@
   numeroEl.addEventListener('input', function () {
     sanitizeNumero();
     clearResult();     // modificar el documento limpia el resultado previo
-    refreshSubmit();
+    setError(numeroEl, numeroErrEl, false);
   });
   // Bloquea el pegado de contenido no numérico
   numeroEl.addEventListener('paste', function () {
-    window.setTimeout(function () { sanitizeNumero(); refreshSubmit(); }, 0);
+    window.setTimeout(function () { sanitizeNumero(); setError(numeroEl, numeroErrEl, false); }, 0);
   });
   tipoEl.addEventListener('change', function () {
     clearResult();     // cambiar el tipo limpia el resultado previo
-    refreshSubmit();
+    setError(tipoEl, tipoErrEl, false);
   });
 
   /* ─────────── Init ─────────── */
-  refreshSubmit();
   renderResume();
 })();

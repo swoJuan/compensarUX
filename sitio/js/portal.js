@@ -177,6 +177,11 @@
       // En la ficha de un flujo la plataforma es la sección, no la página exacta.
       if (on) a.setAttribute('aria-current', archivo === 'flujo.html' ? 'true' : 'page'); else a.removeAttribute('aria-current');
     });
+    // Un subitem activo (página propia) marca también su sección padre.
+    var sub = $('.pux-side__item[aria-current="page"]');
+    var lista = sub && sub.closest('.pux-side__items');
+    var padre = lista && lista.previousElementSibling;
+    if (padre && padre.matches('.pux-side__link')) { padre.setAttribute('aria-current', 'true'); padre.classList.add('is-seccion-activa'); }
   }
 
   /* Menú lateral de prototipos: un enlace por plataforma con su número de flujos.
@@ -339,7 +344,7 @@
             '<span><strong>Qué revisar:</strong> ' + esc(actual.revisar) + '</span></p>'
           : '') +
         '<div class="pux-actions">' +
-          '<a class="mp-btn mp-btn--primario" href="sistema-de-diseno.html">Ver todas las versiones</a>' +
+          '<a class="mp-btn mp-btn--primario" href="changelog.html">Ver todas las versiones</a>' +
         '</div>' +
         '<div class="pux-dsres__docs">' +
           '<h3 class="pux-dsres__docs-tit">Consultar los componentes</h3>' +
@@ -919,13 +924,14 @@
    * qué cambió, si el portal la publica, si los prototipos ya la usan y qué debe revisarse.
    * Los commits que incluye quedan plegados, para quien necesite el detalle técnico.
    */
-  function listaVersiones(ds) {
+  function listaVersiones(ds, marcarReciente) {
     var vs = ds.versiones || [];
     if (!vs.length) {
       return vacio('Todavía no hay versiones', 'El sistema de diseño aún no tiene versiones publicadas con una etiqueta.');
     }
-    return '<ol class="pux-versions" role="list">' + vs.map(function (v) {
+    return '<ol class="pux-versions" role="list">' + vs.map(function (v, i) {
       var etiquetas = '';
+      if (marcarReciente && i === 0) etiquetas += tag('Más reciente', 'info');
       if (v.publicada) etiquetas += tag('En el portal', 'success');
       if (v.enPrototipos) etiquetas += tag('En los prototipos', 'orange');
 
@@ -961,6 +967,20 @@
           detalle +
         '</div></li>';
     }).join('') + '</ol>';
+  }
+
+  /** Changelog: la versión más reciente con su fecha y, debajo, todas las versiones. */
+  function initChangelog(cat) {
+    var cont = $('[data-changelog]');
+    if (!cont) return;
+    var ds = dsDe(cat);
+    var vs = ds.versiones || [];
+    var ultima = vs[0];
+    cont.innerHTML = (ultima
+      ? '<p class="pux-dsver pux-changelog__actual">Versión más reciente: <strong>' + esc(ultima.tag) + '</strong>, publicada el ' +
+          '<time datetime="' + esc(ultima.fecha) + '">' + esc(fecha(ultima.fecha)) + '</time>' +
+          ' · ' + (vs.length === 1 ? '1 versión' : vs.length + ' versiones') + ' en total</p>'
+      : '') + listaVersiones(ds, true);
   }
 
   /* ---------- Repositorios y sincronización ---------- */
@@ -1122,6 +1142,236 @@
     accesosDS(cat, est);
   }
 
+  /* ---------- Instalar: enlace público, descargas y versiones por flujo ---------- */
+  /** URL pública de los paquetes: la configurada en fuentes.json o, si no hay, la del propio portal. */
+  function baseCdn(cat) {
+    var c = cat.cdn || {};
+    if (c.base) return c.base;
+    return new URL((c.ruta || 'cdn') + '/', window.location.href).href.replace(/\/$/, '');
+  }
+  function paqueteCdn(cat, id) {
+    return ((cat.cdn && cat.cdn.paquetes) || []).filter(function (p) { return p.id === id; })[0] || null;
+  }
+  function versionDe(paq, v) {
+    return paq ? (paq.versiones.filter(function (x) { return x.version === v; })[0] || paq.versiones[0]) : null;
+  }
+  /* integrity + crossorigin solo si se pide: sin CORS en el servidor, el navegador
+     bloquea el archivo completo. El sitio estático de Azure hoy no envía CORS. */
+  function etiquetaLink(url, a, sri) {
+    return '<link rel="stylesheet" href="' + url + '/' + a.nombre + '"' +
+      (sri ? '\n      integrity="' + a.integrity + '" crossorigin="anonymous"' : '') + '>';
+  }
+  function etiquetaScript(url, a, sri) {
+    return '<script src="' + url + '/' + a.nombre + '"' +
+      (sri ? '\n        integrity="' + a.integrity + '" crossorigin="anonymous"' : '') + ' defer></' + 'script>';
+  }
+  function bloqueCodigo(id, titulo, codigo) {
+    return '<div class="pux-code">' +
+      '<div class="pux-code__cab"><span class="pux-code__tit" id="' + id + '-t">' + esc(titulo) + '</span>' +
+        '<button class="mp-btn mp-btn--terciario mp-btn--sm pux-code__copiar" type="button" data-copiar="' + id + '" aria-describedby="' + id + '-t">Copiar</button></div>' +
+      '<pre class="pux-code__pre" id="' + id + '" tabindex="0"><code>' + esc(codigo) + '</code></pre>' +
+    '</div>';
+  }
+  function opcionesVersion(paq, actual) {
+    return paq.versiones.map(function (v, i) {
+      return '<option value="' + esc(v.version) + '"' + (v.version === actual ? ' selected' : '') + '>v' + esc(v.version) + (i === 0 ? ' (más reciente)' : '') + '</option>';
+    }).join('');
+  }
+
+  function instalarCdn(cat) {
+    var cont = $('[data-instalar-cdn]');
+    var ds = paqueteCdn(cat, 'compensar');
+    if (!ds) {
+      cont.innerHTML = vacio('Todavía no hay paquetes publicados', 'Se generan con node scripts/build-dist.mjs en el sistema de diseño y se publican con el portal.');
+      return;
+    }
+    var plats = ORDEN_PLATAFORMAS.filter(function (p) { return paqueteCdn(cat, 'compensar-' + p); });
+    var base = baseCdn(cat);
+    var st = { ds: ds.versiones[0].version, plat: '', platV: '', sri: false };
+
+    cont.innerHTML =
+      (cat.cdn && cat.cdn.base ? '' :
+        '<div class="mp-alert mp-alert--warning pux-inst-aviso" role="note"><i class="icon icon-info icon-32 mp-alert__icon" aria-hidden="true"></i><div class="mp-alert__content">' +
+        '<p class="mp-alert__title">URL pública provisional</p><p class="mp-alert__body">Mientras no se configure la URL definitiva (<code>cdn.base</code> en <code>fuentes.json</code>), los enlaces apuntan a este mismo portal. Funcionan, pero cambiarán cuando exista la URL pública.</p></div></div>') +
+      '<div class="pux-panel pux-inst-form">' +
+        '<div class="pux-inst-campo"><label for="inst-ds">Sistema de diseño</label>' +
+          '<select id="inst-ds" class="pux-select" data-inst="ds">' + opcionesVersion(ds, st.ds) + '</select></div>' +
+        '<div class="pux-inst-campo"><label for="inst-plat">Plataforma</label>' +
+          '<select id="inst-plat" class="pux-select" data-inst="plat"><option value="">Ninguna (solo sistema de diseño)</option>' +
+            plats.map(function (p) { return '<option value="' + p + '">' + esc((cat.plataformas[p] || {}).nombreCorto || p) + '</option>'; }).join('') +
+          '</select></div>' +
+        '<div class="pux-inst-campo" data-inst-platv hidden><label for="inst-platv">Versión del paquete</label>' +
+          '<select id="inst-platv" class="pux-select" data-inst="platV"></select></div>' +
+        '<div class="pux-inst-campo pux-inst-check">' +
+          '<label><input type="checkbox" data-inst="sri"> Incluir verificación de integridad (SRI)</label>' +
+          '<span class="pux-muted">Solo si el servidor envía CORS. Hoy no lo envía: déjala apagada.</span></div>' +
+      '</div>' +
+      '<div data-inst-codigo></div>';
+
+    function pintar() {
+      var vDs = versionDe(ds, st.ds);
+      var urlDs = base + '/compensar/v' + vDs.version;
+      var css = [etiquetaLink(urlDs, vDs.css, st.sri)];
+      var js = [etiquetaScript(urlDs, vDs.js, st.sri)];
+      var paqP = st.plat ? paqueteCdn(cat, 'compensar-' + st.plat) : null;
+      var vP = paqP ? versionDe(paqP, st.platV) : null;
+      if (vP) {
+        var urlP = base + '/' + paqP.id + '/v' + vP.version;
+        if (vP.css) css.push(etiquetaLink(urlP, vP.css, st.sri));
+        if (vP.js && vP.js.bytes > 0) js.push(etiquetaScript(urlP, vP.js, st.sri));
+      }
+      var head = '<!-- Sistema de diseño' + (vP ? ' y paquete ' + paqP.id.replace('compensar-', '').toUpperCase() : '') + ' -->\n' + css.join('\n');
+      var plantilla = '<!doctype html>\n<html lang="es" data-theme="light">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>Mi pantalla</title>\n  ' +
+        css.join('\n').replace(/\n/g, '\n  ') + '\n  <link rel="stylesheet" href="css/mi-pantalla.css">\n</head>\n<body>\n  <button class="mp-btn mp-btn--primario" type="button">Hola Compensar</button>\n  <i class="icon icon-heart icon-24" aria-hidden="true"></i>\n\n  ' +
+        js.join('\n').replace(/\n/g, '\n  ') + '\n</body>\n</html>';
+      $('[data-inst-codigo]', cont).innerHTML =
+        bloqueCodigo('inst-css', 'CSS — dentro de <head>', head) +
+        bloqueCodigo('inst-js', 'JS — antes de </body>', js.join('\n')) +
+        '<details class="pux-inst-plantilla"><summary>Plantilla de inicio completa</summary>' + bloqueCodigo('inst-tpl', 'index.html', plantilla) + '</details>' +
+        '<p class="pux-muted pux-inst-meta">Sistema de diseño v' + esc(vDs.version) + ' · ' + esc(peso(vDs.css.bytes)) + ' CSS · ' + esc(peso(vDs.js.bytes)) + ' JS' +
+          (vP ? ' · Paquete ' + esc(paqP.id.replace('compensar-', '').toUpperCase()) + ' v' + esc(vP.version) : '') +
+          '. La letra Roboto se carga desde Google Fonts.</p>';
+    }
+    cont.addEventListener('change', function (e) {
+      var k = e.target.getAttribute('data-inst');
+      if (!k) return;
+      st[k] = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+      if (k === 'plat') {
+        var caja = $('[data-inst-platv]', cont);
+        var paq = st.plat ? paqueteCdn(cat, 'compensar-' + st.plat) : null;
+        caja.hidden = !paq;
+        st.platV = paq ? paq.versiones[0].version : '';
+        if (paq) $('#inst-platv').innerHTML = opcionesVersion(paq, st.platV);
+      }
+      pintar();
+    });
+    pintar();
+  }
+
+  /* Descargas por equipo: una tarjeta y un .zip con todo lo que necesita cada uno.
+     Lo que casi nadie usa queda plegado en «Otros archivos». */
+  function instalarDescargas(cat) {
+    var cont = $('[data-instalar-descargas]');
+    var cdn = cat.cdn || {};
+    var dsDl = dsDe(cat).descargas || [];
+    var maui = dsDl.filter(function (d) { return d.id === 'maui'; })[0];
+    var core = dsDl.filter(function (d) { return d.id === 'core'; })[0];
+    var ICONO_KIT = { drupal: 'icon-globe', zt: 'icon-desktop', maui: 'icon-device-mobile' };
+
+    function boton(url, nombre, secundario) {
+      return '<a class="mp-btn mp-btn--' + (secundario ? 'secundario' : 'primario') + ' mp-btn--icon-right" data-dl-btn href="' + esc(url) + '" download>' +
+        'Descargar<span class="visually-hidden"> ' + esc(nombre) + '</span> <i class="icon icon-download-simple icon-20" aria-hidden="true"></i></a>';
+    }
+    function selector(id, nombre, versiones, actual) {
+      return '<label class="visually-hidden" for="' + id + '">Versión del sistema de diseño para ' + esc(nombre) + '</label>' +
+        '<select id="' + id + '" class="pux-select" data-dl-v>' + versiones.map(function (v, i) {
+          return '<option value="' + esc(v.version) + '"' + (v.version === actual ? ' selected' : '') + '>v' + esc(v.version) + (i === 0 ? ' (más reciente)' : '') + '</option>';
+        }).join('') + '</select>';
+    }
+    function tarjeta(id, nombre, desc, meta, acciones) {
+      return '<li class="pux-panel pux-descarga pux-kit" data-kit="' + esc(id) + '">' +
+        '<div class="pux-descarga__txt">' +
+          '<span class="pux-kit__icono" aria-hidden="true"><i class="icon ' + (ICONO_KIT[id] || 'icon-package') + ' icon-32"></i></span>' +
+          '<h3 class="pux-kit__tit">' + esc(nombre) + '</h3>' +
+          '<p class="pux-descarga__desc">' + esc(desc) + '</p>' +
+          '<p class="pux-descarga__meta" data-dl-meta>' + meta + '</p>' +
+        '</div>' +
+        '<div class="pux-descarga__acciones">' + acciones + '</div>' +
+      '</li>';
+    }
+    function metaKit(v) {
+      return esc(v.zip.archivo) + ' · ' + esc(peso(v.zip.bytes));
+    }
+
+    var kits = (cdn.kits || []).map(function (k) {
+      var v = k.versiones[0];
+      return tarjeta(k.id, k.nombre, k.descripcion, metaKit(v),
+        selector('dl-' + k.id, k.nombre, k.versiones, v.version) + boton(v.zip.url, k.nombre));
+    });
+    if (maui) {
+      kits.push(tarjeta('maui', 'APP · .NET MAUI', 'Colores y medidas del sistema de diseño como diccionarios de recursos XAML, listos para App.xaml.',
+        esc(maui.archivo) + ' · ' + esc(peso(maui.bytes)),
+        '<span class="pux-kit__ver">' + esc(maui.version) + ' (más reciente)</span>' + boton(maui.url, 'recursos .NET MAUI')));
+    }
+
+    var otros = [];
+    var paqDs = paqueteCdn(cat, 'compensar');
+    if (paqDs) otros.push(['Solo el sistema de diseño', 'compensar.min.css y .js con los iconos, sin paquete de plataforma (Angular u otro proyecto web).', paqDs.versiones[0].zip]);
+    ['drupal', 'zt', 'app'].forEach(function (p) {
+      var paq = paqueteCdn(cat, 'compensar-' + p);
+      if (!paq) return;
+      var nom = { drupal: 'Solo el paquete Drupal', zt: 'Solo el paquete ZT', app: 'Paquete APP (web)' }[p];
+      var txt = p === 'app' ? 'Estilos de la representación web de la APP. Solo para verla en el navegador; no es para MAUI.' : 'Sin el sistema de diseño: para quien ya lo tiene instalado.';
+      otros.push([nom, txt, paq.versiones[0].zip]);
+    });
+    if (core) otros.push(['Fuentes sin compilar', 'core.css, themes.css, icons.css y cada JS por separado. Útil si necesitas solo una parte.', { url: core.url, archivo: core.archivo, bytes: core.bytes }]);
+
+    if (!kits.length && !otros.length) { cont.innerHTML = vacio('Todavía no hay paquetes', 'Se generan al publicar el portal.'); return; }
+    cont.innerHTML =
+      '<p class="pux-kit__pregunta">¿En qué trabajas?</p>' +
+      '<ul class="pux-descargas pux-kits" role="list">' + kits.join('') + '</ul>' +
+      (otros.length
+        ? '<details class="pux-otros"><summary>Otros archivos (avanzado)</summary><ul class="pux-otros__lista" role="list">' +
+            otros.map(function (o) {
+              return '<li><div><strong>' + esc(o[0]) + '</strong><span class="pux-muted"> — ' + esc(o[1]) + '</span>' +
+                '<span class="pux-otros__meta">' + esc(o[2].archivo) + ' · ' + esc(peso(o[2].bytes)) + '</span></div>' +
+                '<a class="pux-link" href="' + esc(o[2].url) + '" download>Descargar<span class="visually-hidden"> ' + esc(o[0]) + '</span></a></li>';
+            }).join('') + '</ul></details>'
+        : '');
+
+    cont.addEventListener('change', function (e) {
+      if (!e.target.matches('[data-dl-v]')) return;
+      var li = e.target.closest('[data-kit]');
+      var kit = (cdn.kits || []).filter(function (k) { return k.id === li.getAttribute('data-kit'); })[0];
+      var v = kit.versiones.filter(function (x) { return x.version === e.target.value; })[0] || kit.versiones[0];
+      $('[data-dl-btn]', li).setAttribute('href', v.zip.url);
+      $('[data-dl-meta]', li).innerHTML = metaKit(v);
+    });
+  }
+
+  function instalarFlujos(cat) {
+    var cont = $('[data-instalar-flujos]');
+    var local = dsEnPrototipos(cat);
+    var ultimo = (paqueteCdn(cat, 'compensar') || { versiones: [{}] }).versiones[0].version;
+    var filas = ORDEN_PLATAFORMAS.map(function (pid) {
+      return cat.flujos.filter(function (f) { return f.plataforma === pid; });
+    }).reduce(function (a, b) { return a.concat(b); }, []).map(function (f) {
+      var c = f.consumo || { modo: 'local', ds: [], plataforma: [] };
+      var carga = c.modo === 'local' ? tag('Copia local', 'neutral') : (c.modo === 'cdn' ? tag('Enlace público', 'success') : tag('Mixto', 'warning'));
+      var vds = c.ds.length ? c.ds.map(function (v) { return 'v' + esc(v); }).join(', ') : (local ? esc(local) + ' <span class="pux-muted">(copia)</span>' : '—');
+      var vpl = c.plataforma.length ? c.plataforma.map(function (v) { return 'v' + esc(v); }).join(', ') : '<span class="pux-muted">shared/ local</span>';
+      var alDia = c.ds.length && ultimo && c.ds.indexOf(ultimo) < 0 ? ' ' + tag('Hay v' + ultimo, 'info') : '';
+      return '<tr>' +
+        '<th scope="row"><a class="pux-link" href="flujo.html?id=' + encodeURIComponent(f.id) + '">' + esc(f.nombre) + '</a></th>' +
+        '<td>' + tagPlataforma(f.plataforma, cat) + '</td>' +
+        '<td>' + badgeEstado(f.estado) + '</td>' +
+        '<td>' + carga + '</td>' +
+        '<td>' + vds + alDia + '</td>' +
+        '<td>' + vpl + '</td>' +
+      '</tr>';
+    });
+    cont.innerHTML = '<div class="mp-table-wrap pux-table"><table class="mp-table">' +
+      '<caption class="visually-hidden">Versión del sistema de diseño y del paquete de plataforma que usa cada flujo</caption>' +
+      '<thead><tr><th scope="col">Flujo</th><th scope="col">Plataforma</th><th scope="col">Estado</th><th scope="col">Cómo carga</th><th scope="col">Sistema de diseño</th><th scope="col">Paquete de plataforma</th></tr></thead>' +
+      '<tbody>' + filas.join('') + '</tbody></table></div>';
+  }
+
+  function initInstalar(cat) {
+    // Cada sección de Instalar es una página propia: se inicia solo la que existe.
+    if (!$('[data-instalar-cdn], [data-instalar-descargas], [data-instalar-flujos]')) return;
+    if ($('[data-instalar-cdn]')) instalarCdn(cat);
+    if ($('[data-instalar-descargas]')) instalarDescargas(cat);
+    if ($('[data-instalar-flujos]')) instalarFlujos(cat);
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('[data-copiar]');
+      if (!b) return;
+      var pre = document.getElementById(b.getAttribute('data-copiar'));
+      var listo = function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar'; }, 1600); };
+      if (navigator.clipboard) navigator.clipboard.writeText(pre.textContent).then(listo, function () { b.textContent = 'Selecciona y copia'; });
+    });
+    if (window.location.hash) { var t = $(window.location.hash); if (t) t.scrollIntoView(); }
+  }
+
   /* ---------- Historial: sistema de diseño y plataformas ---------- */
   /** El estado de la copia que los prototipos tienen del sistema de diseño. */
   function bloqueSincronizacion(est) {
@@ -1267,7 +1517,7 @@
     estado().then(initEstado).catch(function () {
       $all('[data-estado-componentes]').forEach(function (el) { errorCarga(el); });
     });
-    var necesita = $('[data-historial], [data-ds-accesos], [data-flujos-inicio], [data-ds-resumen], [data-count], [data-catalogo], [data-detalle], [data-entregables], [data-build-info], [data-ds-info], [data-side-flujos]');
+    var necesita = $('[data-historial], [data-ds-accesos], [data-flujos-inicio], [data-ds-resumen], [data-count], [data-catalogo], [data-detalle], [data-entregables], [data-build-info], [data-ds-info], [data-side-flujos], [data-instalar-cdn], [data-instalar-descargas], [data-instalar-flujos], [data-changelog]');
     if (!necesita) return;
     catalogo().then(function (cat) {
       sidebarFlujos(cat);
@@ -1276,6 +1526,8 @@
       initPrototipos(cat);
       initDetalle(cat);
       initEntregables(cat);
+      initInstalar(cat);
+      initChangelog(cat);
       if ($('[data-historial]')) {
         estado().then(function (est) { initHistorial(cat, est); })
           .catch(function () { initHistorial(cat, null); });
@@ -1285,7 +1537,7 @@
           .catch(function () { initDSPagina(cat, null); });
       }
     }).catch(function () {
-      $all('[data-flujos-inicio], [data-ds-resumen], [data-catalogo], [data-detalle], [data-entregables]').forEach(function (el) {
+      $all('[data-flujos-inicio], [data-ds-resumen], [data-catalogo], [data-detalle], [data-entregables], [data-instalar-cdn], [data-instalar-descargas], [data-instalar-flujos], [data-changelog]').forEach(function (el) {
         var inner = el.matches('[data-detalle]') ? document.createElement('div') : el;
         if (inner !== el) { inner.className = 'pux-container pux-section'; el.innerHTML = ''; el.appendChild(inner); }
         errorCarga(inner);

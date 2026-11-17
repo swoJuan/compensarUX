@@ -114,7 +114,7 @@
 }
 
 /* ═══════════════ ALERTA CONTEXTUAL INLINE ═══════════════ */
-/* La alerta es el componente transversal .zt-alert (alert.css). Va entre la
+/* La alerta es el componente transversal .mp-alert del Design System (render: ZTAlert). Va entre la
    descripción y los campos. Vacío → sin caja ni gap (no rompe el layout). */
 .afi-alert:empty { display: none; }
 
@@ -167,3 +167,6 @@
   .afi-card { padding: var(--space-24); }
   .afi-panel { padding-top: var(--space-20); }
 }
+
+/* Si el campo muestra error, se oculta la ayuda (un solo mensaje bajo el campo). */
+.afi-card__fields .mp-input-group:has(.mp-input-error:not([hidden])) .mp-hint { display: none; }
