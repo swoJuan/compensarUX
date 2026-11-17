@@ -27,6 +27,7 @@ Consulta de conocimiento acotada: `node IA-Central/scripts/conocimiento.mjs cons
 - Componente nuevo: identificar -> proponer -> aprobación -> Figma -> DS código -> QA -> catálogo -> uso en flujo.
 - Toda tarea concluye con evidencia, Git, archivos, decisiones y estado documental.
 - Antes de publicar: autorización explícita, QA, datos ficticios, artefacto completo e inventario central actualizado.
+- Versiones navegables por flujo (`Flujos/versiones/`, inmutables): el commit no publica versión. Al guardar cambios de un flujo el orquestador pregunta «solo commit» o «commit + versión navegable» y pide aprobación (regla en `compensar-orquestador` y `compensar-entregas`). Push y despliegue siempre aparte.
 - Versión nueva del sistema de diseño: la cierra `compensar-entregas`, que genera los paquetes versionados (`dist/`), regenera el portal y actualiza la pantalla Instalar (CDN). Ninguna versión se da por publicada sin ese paso.
 
 ## Orquestación

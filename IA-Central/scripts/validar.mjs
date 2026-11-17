@@ -13,6 +13,19 @@ for(const a of m){test('Fuente '+a.slug,()=>{const f=path.join(root,'IA-Central/
 const reg=read('IA-Central/seguimiento/registro.json');
 test('Registro central',()=>{for(const k of ['flujos','componentes','decisiones','pendientes','entregas','eventos'])if(!Array.isArray(reg[k]))throw Error(k+' no es lista');if(!reg.schemaVersion)throw Error('sin schemaVersion');});
 test('Catálogo DS',()=>{const c=read('IA-Central/componentes/catalogo.json');if(!Array.isArray(c.componentes))throw Error('falta lista');});
+test('Reglas de versiones de flujos (orquestador, entregas y herramientas)',()=>{
+ const orq=fs.readFileSync(path.join(root,'IA-Central/agentes/compensar-orquestador.md'),'utf8');
+ const ent=fs.readFileSync(path.join(root,'IA-Central/agentes/compensar-entregas.md'),'utf8');
+ if(!orq.includes('¿Quieres guardar solamente el commit o también publicar una nueva versión navegable?'))throw Error('el orquestador no formula la pregunta commit/versión');
+ if(!/Sin aprobación explícita/.test(orq)||!/Push y despliegue requieren su propia autorización/.test(orq))throw Error('el orquestador no exige aprobación ni separa push/despliegue');
+ if(!/commits por flujo y versiones navegables/i.test(ent))throw Error('compensar-entregas no tiene la regla de commits y versiones');
+ for(const s of ['guardar.mjs','version-propuesta.mjs','version-flujo.mjs','verificar-version.mjs','registrar-flujo.mjs'])if(!fs.existsSync(path.join(root,'Flujos/portal/scripts',s)))throw Error('falta el script '+s);
+ const entrega=m.find(a=>a.slug==='compensar-entregas').permisos.escritura;
+ if(!entrega.includes('Flujos/versiones/'))throw Error('compensar-entregas no puede escribir Flujos/versiones/');
+ if(m.some(a=>a.slug!=='compensar-entregas'&&a.permisos.escritura.some(r=>r.startsWith('Flujos/versiones'))))throw Error('solo compensar-entregas escribe Flujos/versiones/');
+ const r=spawnSync(process.execPath,[path.join(root,'Flujos/portal/scripts/versiones-verificar.mjs')],{cwd:path.join(root,'Flujos/portal'),encoding:'utf8'});
+ if(r.status!==0)throw Error((r.stderr||r.stdout).trim());
+});
 const s=spawnSync(process.execPath,[path.join(root,'IA-Central/scripts/generar-adaptadores.mjs')],{cwd:root,encoding:'utf8'});
 test('Adaptadores Claude + Kiro y skills',()=>{if(s.status!==0)throw Error((s.stderr||s.stdout).trim());});
 test('Restricciones Figma MCP (nombres reales)',()=>{

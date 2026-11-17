@@ -7,6 +7,7 @@
 - Figma URL exacta y nodo:
 - Ruta local de entrada HTML:
 - Git repo + commit:
+- Versiones publicadas (Flujos/versiones/<id>/): última versión, fecha y quién la aprobó:
 - DS versión o SHA utilizada:
 - Componentes y variantes:
 - Estados cubiertos y navegaciones:

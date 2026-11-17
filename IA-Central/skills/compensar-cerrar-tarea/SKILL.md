@@ -10,4 +10,5 @@ description: Cerrar una tarea Compensar verificando QA, Git, Figma, entregables 
 3. Actualiza registro central de flujo/componente/DEC/pendiente con fecha y evidencia.
 4. Detecta si faltan Figma, revisión funcional, QA, build, versión DS, autorizaciones o enlaces.
 5. Entrega lista de cierre y siguiente responsable.
-6. Nunca digas «publicado», «aprobado» o «sin pendientes» sin evidencia verificable.
+6. Si la tarea dejó cambios guardables de un flujo, aplica la ruta «Guardar cambios de un flujo» del orquestador (commit solo o commit + versión navegable, con aprobación); no publiques ni hagas push por tu cuenta.
+7. Nunca digas «publicado», «aprobado» o «sin pendientes» sin evidencia verificable.

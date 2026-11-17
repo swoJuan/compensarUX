@@ -15,6 +15,17 @@ Para cada solicitud:
 ## Rutas obligatorias
 - **Versión nueva del sistema de diseño** (sube `version` en `Core-Design-System/package.json`, se pide un tag o el usuario dice publicar/lanzar una versión del DS): tras la implementación de `compensar-ingeniero-ds` y el QA, delega SIEMPRE en `compensar-entregas` para que aplique su regla «versión nueva del sistema de diseño → consolidar paquetes y pantalla Instalar» (paquetes `dist/`, commit con aprobación, `npm run publicar` y verificación de `instalar.html`). No des la versión por publicada hasta que `compensar-entregas` reporte la pantalla Instalar actualizada y verificada.
 
+- **Guardar cambios de un flujo** (el usuario pide guardar, confirmar o publicar lo trabajado en un flujo Drupal, ZT o APP, actual o futuro): sigue la ruta «Guardar cambios de un flujo» de abajo. Commit y versión navegable son operaciones distintas; nunca se publica una versión por el simple hecho de hacer un commit.
+## Ruta obligatoria: guardar cambios de un flujo (commit y versiones navegables)
+El procedimiento técnico vive en `compensar-entregas` (regla «Commits por flujo y versiones navegables»); tú conduces la conversación y la aprobación. No repitas ni reinventes sus comandos.
+1. Cuando un especialista termine un trabajo y el usuario pida guardar los cambios, pregunta exactamente: **«¿Quieres guardar solamente el commit o también publicar una nueva versión navegable?»**. Si el usuario ya indicó qué quiere («solo haz el commit», «publica la versión»), no vuelvas a preguntar. Su respuesta es la autorización del commit.
+2. **Solo commit** → delega en `compensar-entregas` el commit del ámbito de ese flujo. No se crea ningún snapshot.
+3. **Publicar versión** → delega en `compensar-entregas`: confirmar primero el commit pendiente del flujo, consultar la última versión y preparar la propuesta (próximo número y su criterio, notas generadas desde los commits, cambios incluidos, impacto en almacenamiento con aviso si es considerable, bloqueos). Muéstrala al usuario y pide aprobación explícita; puede ajustar número o notas.
+4. **Sin aprobación explícita** (rechazo, silencio o duda) → no se ejecuta nada y no se escribe nada en `Flujos/versiones/`.
+5. **Con aprobación** → `compensar-entregas` publica, confirma la versión en su propio commit, regenera el portal y valida que figure en el historial y se abra. Informa el resultado con evidencia.
+6. Commit, publicación de versión, push y despliegue son operaciones independientes. Push y despliegue requieren su propia autorización expresa; la aprobación de la versión no los incluye.
+7. **Flujo nuevo** → tras crearlo el especialista, `compensar-entregas` lo registra en el catálogo (borrador, sin publicar, sin versiones). Su historial independiente nace con la primera versión aprobada.
+8. Un commit = un ámbito. No mezcles flujos ni cambios compartidos en el mismo commit, no confirmes código pendiente como versión, no elimines versiones anteriores y no toques Nara.
 En Claude Code puedes coordinar subagentes con Agent; en Kiro utiliza subagent según compatibilidad de la versión. Si no está disponible la delegación, ejecuta el contrato secuencialmente, sin afirmar que se utilizó un subagente.
 
 ## Contrato transversal

@@ -197,6 +197,8 @@
         "Core-Design-System/dist/",
         "Flujos/prototipos/dist/",
         "Flujos/portal/versiones.json",
+        "Flujos/versiones/",
+        "Flujos/portal/catalogo.json",
         "sitio/"
       ],
       "figma": "ninguna",
