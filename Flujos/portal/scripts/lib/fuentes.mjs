@@ -104,7 +104,14 @@ export class Fuente {
   /** Commits de todo el repositorio. */
   commitsRepo() { return Number(gitTxt(this.raiz, ['rev-list', '--count', 'HEAD']) || 0); }
   firma() {
-    return [gitTxt(this.repo, ['rev-parse', 'HEAD']), gitTxt(this.repo, ['status', '--porcelain', '--', '.'])].join('|');
+    const base = [gitTxt(this.repo, ['rev-parse', 'HEAD']), gitTxt(this.repo, ['status', '--porcelain', '--', '.'])];
+    // En WORKTREE, `git status` no cambia al volver a editar un archivo ya modificado:
+    // se suma la fecha de modificación más reciente para detectar cada guardado.
+    if (this.worktree) {
+      const ult = walk(this.repo).reduce((m, f) => { try { return Math.max(m, fs.statSync(path.join(this.repo, f)).mtimeMs); } catch { return m; } }, 0);
+      base.push(String(ult));
+    }
+    return base.join('|');
   }
   historial(n = 8, rutas = []) {
     const alcance = rutas.length ? rutas : this.alcance;

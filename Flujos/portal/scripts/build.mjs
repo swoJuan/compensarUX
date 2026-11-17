@@ -138,6 +138,9 @@ const infoFl = fl.info();
    los diccionarios de recursos de .NET MAUI, generados de los mismos tokens. Se
    arman en cada build, así que siempre corresponden a la versión publicada. */
 const versionDs = infoDs.version || `commit-${String(infoDs.commit || '').slice(0, 7)}`;
+/* Nombre de los .zip: la versión de package.json del sistema de diseño (v2.4.0), no un commit. */
+const versionPkgDs = (() => { try { return 'v' + JSON.parse(ds.leer('package.json')).version; } catch { return null; } })();
+const versionArchivo = infoDs.version || versionPkgDs || versionDs;
 const fechaDs = infoDs.fecha ? new Date(infoDs.fecha) : new Date();
 const dsDir = path.join(DIST, cfg.designSystem.destino);
 const esDocs = (rel) => /-docs\.js$/.test(rel) || /^js\/(docs-|code-copy\.js$)/.test(rel);
@@ -169,7 +172,7 @@ const leemeCore = [
   `se hacen en el sistema de diseño y vuelven a bajar aquí en la siguiente versión.`,
   ``,
 ].join('\n');
-const raizCore = `compensar-core-${versionDs}`;
+const raizCore = `compensar-core-${versionArchivo}`;
 const zipCore = crearZip([
   ...archivosCore.map((rel) => ({ nombre: `${raizCore}/${rel}`, datos: fs.readFileSync(path.join(dsDir, rel)) })),
   { nombre: `${raizCore}/LEEME.txt`, datos: leemeCore },
@@ -210,7 +213,7 @@ const leemeMaui = [
   `cambios se hacen en los tokens del sistema de diseño.`,
   ``,
 ].join('\n');
-const raizMaui = `compensar-maui-${versionDs}`;
+const raizMaui = `compensar-maui-${versionArchivo}`;
 const zipMaui = crearZip([
   ...maui.archivos.map((a) => ({ nombre: `${raizMaui}/${a.nombre}`, datos: a.datos })),
   { nombre: `${raizMaui}/LEEME.txt`, datos: leemeMaui },
@@ -239,7 +242,7 @@ const descargas = [
   },
 ].map(({ datos, ...meta }) => {
   fs.writeFileSync(path.join(carpetaDescargas, meta.archivo), datos);
-  return { ...meta, version: versionDs, url: `${cfg.designSystem.destino}/descargas/${meta.archivo}` };
+  return { ...meta, version: versionArchivo, url: `${cfg.designSystem.destino}/descargas/${meta.archivo}` };
 });
 
 /* ---------- 6c. paquete de desarrollo por flujo ----------
@@ -350,6 +353,56 @@ const paquetesCdn = (fs.existsSync(cdnDir) ? fs.readdirSync(cdnDir) : []).sort()
   };
 }).filter((p) => p.versiones.length);
 
+/* Kits por equipo: un solo .zip con todo lo que necesita cada plataforma web
+   (sistema de diseño + paquete de su plataforma), uno por versión del sistema de diseño.
+   El paquete de plataforma va en su versión más reciente. */
+const KITS = [
+  { id: 'drupal', nombre: 'Drupal', descripcion: 'Sistema de diseño + paquete Drupal (navegación y estilos del portal web).' },
+  { id: 'zt', nombre: 'Zona Transaccional', descripcion: 'Sistema de diseño + paquete ZT (modal, stepper, dropdown, alert y demás componentes de la oficina virtual).' },
+];
+const paqDs = paquetesCdn.find((p) => p.id === 'compensar');
+const kitsCdn = paqDs ? KITS.map((k) => {
+  const paqP = paquetesCdn.find((p) => p.id === `compensar-${k.id}`);
+  if (!paqP) return null;
+  const vP = paqP.versiones[0];
+  return {
+    ...k,
+    versiones: paqDs.versiones.map((vD) => {
+      const raiz = `compensar-para-${k.id}-v${vD.version}`;
+      const dirD = path.join(cdnDir, 'compensar', `v${vD.version}`);
+      const dirP = path.join(cdnDir, paqP.id, `v${vP.version}`);
+      const enlaces = [
+        `<link rel="stylesheet" href="compensar/v${vD.version}/compensar.min.css">`,
+        `<link rel="stylesheet" href="${paqP.id}/v${vP.version}/${paqP.id}.min.css">`,
+        `<link rel="stylesheet" href="css/mi-pantalla.css">   <!-- el CSS propio va al final -->`,
+        ``,
+        `<script src="compensar/v${vD.version}/compensar.min.js" defer></script>`,
+        `<script src="${paqP.id}/v${vP.version}/${paqP.id}.min.js" defer></script>`,
+      ];
+      const zip = crearZip([
+        ...walk(dirD).sort().map((rel) => ({ nombre: `${raiz}/compensar/v${vD.version}/${rel}`, datos: fs.readFileSync(path.join(dirD, rel)) })),
+        ...walk(dirP).sort().map((rel) => ({ nombre: `${raiz}/${paqP.id}/v${vP.version}/${rel}`, datos: fs.readFileSync(path.join(dirP, rel)) })),
+        { nombre: `${raiz}/LEEME.txt`, datos: [
+          `Compensar para ${k.nombre} — sistema de diseño v${vD.version} + ${paqP.id} v${vP.version}`,
+          ``,
+          `Copia estas dos carpetas en tu proyecto y enlázalas en este orden:`,
+          ``,
+          ...enlaces.map((l) => `  ${l}`),
+          ``,
+          `Conserva la estructura de carpetas. También puedes usar el enlace público`,
+          `(página Instalar del Portal UX) en lugar de los archivos locales.`,
+          ...(k.id === 'zt' ? [``, `Menú lateral de ZT: declara la ruta a la raíz con data-zt-root en`, `<nav class="sidebar" data-zt-root="../../">.`] : []),
+          ``,
+          `Versiones inmutables: no las edites; los cambios llegan como versión nueva.`,
+          ``,
+        ].join('\n') },
+      ], vD.fecha ? new Date(vD.fecha) : new Date());
+      fs.writeFileSync(path.join(carpetaCdnZip, `${raiz}.zip`), zip);
+      return { version: vD.version, plataformaVersion: vP.version, zip: { archivo: `${raiz}.zip`, bytes: zip.length, url: `descargas/cdn/${raiz}.zip` } };
+    }),
+  };
+}).filter(Boolean) : [];
+
 /* Qué consume cada flujo: enlaces a cdn/<paquete>/v<x>/ en su HTML, o la copia local de shared/. */
 const RE_CDN_LINK = /\/(compensar(?:-[a-z]+)?)\/v(\d+\.\d+\.\d+)\/\1\.min\.(?:css|js)/g;
 const todosFl = fl.listar();
@@ -446,6 +499,7 @@ const salida = {
     base: (cdnCfg.base || '').replace(/\/+$/, '') || null,
     ruta: CDN_DESTINO,
     paquetes: paquetesCdn,
+    kits: kitsCdn,
   },
   plataformas,
   flujos: flujos.map((f) => ({

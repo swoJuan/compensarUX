@@ -14,31 +14,25 @@
       <nav class="mp-breadcrumb" aria-label="Ruta de navegación"><ol class="mp-breadcrumb__list"><li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="index.html">Inicio</a></li><li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Instalar</span></li></ol></nav>
       <h1 class="pux-page-head__title">Instalar</h1>
       <p class="mp-body-xl pux-page-head__lead">Un CSS y un JS por versión, como Bootstrap: enlázalos desde la URL pública o descárgalos para trabajar en local. Cada versión es fija y nunca cambia.</p>
-      <nav class="pux-inst-nav" aria-label="Secciones de esta página">
-        <a href="#cdn">Enlace público (CDN)</a>
-        <a href="#descargar">Descargar el core</a>
-        <a href="#flujos">Flujos y versiones</a>
-        <a href="#versiones">Política de versiones</a>
-      </nav>
     </div>
   </section>
 
-  <section class="pux-container pux-block" id="cdn" aria-labelledby="cdn-titulo">
-    <h2 class="mp-h5 pux-block__title" id="cdn-titulo">Enlace público (CDN)</h2>
-    <p class="pux-section__intro">Elige la versión y la plataforma. Copia los enlaces en el <code>&lt;head&gt;</code> y el script antes de cerrar <code>&lt;/body&gt;</code>. El orden importa: primero el sistema de diseño, luego la plataforma y al final el CSS propio del flujo.</p>
-    <div data-instalar-cdn aria-live="polite"><p class="pux-muted">Cargando…</p></div>
-  </section>
-
-  <section class="pux-container pux-block" id="descargar" aria-labelledby="descargar-titulo">
-    <h2 class="mp-h5 pux-block__title" id="descargar-titulo">Descargar el core</h2>
-    <p class="pux-section__intro">Para trabajar sin conexión o integrarlo al repositorio de tu equipo. Son los mismos archivos que sirve el enlace público. Si trabajas en ZT o Drupal, descarga el sistema de diseño y el paquete de tu plataforma.</p>
-    <div data-instalar-descargas aria-live="polite"><p class="pux-muted">Cargando…</p></div>
-  </section>
-
-  <section class="pux-container pux-block" id="flujos" aria-labelledby="flujos-titulo">
-    <h2 class="mp-h5 pux-block__title" id="flujos-titulo">Flujos y versiones</h2>
-    <p class="pux-section__intro">Qué versión consume cada flujo. «Copia local» significa que el flujo carga los archivos desde <code>shared/</code> del repositorio de prototipos; «Enlace público», que ya usa los paquetes versionados.</p>
-    <div data-instalar-flujos aria-live="polite"><p class="pux-muted">Cargando…</p></div>
+  <section class="pux-container pux-block" aria-labelledby="secciones-titulo">
+    <h2 class="mp-h5 pux-block__title" id="secciones-titulo">Elige qué necesitas</h2>
+    <ul class="pux-inst-accesos" role="list">
+      <li class="pux-panel pux-inst-acceso">
+        <h3 class="mp-body-l pux-inst-acceso__titulo"><a href="instalar-cdn.html">Enlace público (CDN)</a></h3>
+        <p class="pux-inst-acceso__texto">Elige la versión y la plataforma. Copia los enlaces en el <code>&lt;head&gt;</code> y el script antes de cerrar <code>&lt;/body&gt;</code>. El orden importa: primero el sistema de diseño, luego la plataforma y al final el CSS propio del flujo.</p>
+      </li>
+      <li class="pux-panel pux-inst-acceso">
+        <h3 class="mp-body-l pux-inst-acceso__titulo"><a href="instalar-descargar.html">Descargar el core</a></h3>
+        <p class="pux-inst-acceso__texto">Para trabajar sin conexión o integrarlo al repositorio de tu equipo. Elige tu equipo: cada descarga trae todo lo que necesitas, con un LEEME que dice cómo enlazarlo.</p>
+      </li>
+      <li class="pux-panel pux-inst-acceso">
+        <h3 class="mp-body-l pux-inst-acceso__titulo"><a href="instalar-flujos.html">Flujos y versiones</a></h3>
+        <p class="pux-inst-acceso__texto">Qué versión consume cada flujo. «Copia local» significa que el flujo carga los archivos desde <code>shared/</code> del repositorio de prototipos; «Enlace público», que ya usa los paquetes versionados.</p>
+      </li>
+    </ul>
   </section>
 
   <section class="pux-container pux-block" id="versiones" aria-labelledby="versiones-titulo">
