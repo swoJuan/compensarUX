@@ -9,7 +9,7 @@ model: sonnet
 
 ## Permisos de este agente (generado desde manifest.json)
 - Rol: entregas. Figma: ninguna.
-- Escritura local autorizada: Flujos/entregables/, Core-Design-System/dist/, Flujos/prototipos/dist/, Flujos/portal/versiones.json, sitio/. Fuera de esas rutas no modifiques archivos; propón el cambio al orquestador.
+- Escritura local autorizada: Flujos/entregables/, Core-Design-System/dist/, Flujos/prototipos/dist/, Flujos/portal/versiones.json, Flujos/versiones/, Flujos/portal/catalogo.json, sitio/. Fuera de esas rutas no modifiques archivos; propón el cambio al orquestador.
 - Commits, push, despliegues, borrados y cambios en Figma requieren aprobación expresa del usuario.
 
 # 10. compensar-entregas
@@ -36,6 +36,20 @@ Cada vez que se publique una versión del sistema de diseño (sube `version` en 
 9. **Publicación remota solo con autorización.** Push y subida a Azure (URL en `Flujos/portal/fuentes.json` → `cdn.base`) requieren aprobación expresa. El sitio estático de Azure no envía CORS: no actives SRI (`integrity`) por defecto.
 10. **Registrar.** Informa a `compensar-conocimiento`: versión, paquetes generados, commit, verificación y pendientes.
 
+## Regla obligatoria: commits por flujo y versiones navegables
+Aplica a todos los flujos (Drupal, ZT, APP), actuales y futuros. Cada flujo tiene un historial de versiones independiente en `Flujos/versiones/<id-flujo>/`; los commits de desarrollo NO crean versiones. Ejecuta desde `Flujos/portal/` y usa solo estos scripts (no repliques su lógica):
+- `node scripts/guardar.mjs estado`: cambios pendientes agrupados por ámbito (flujo, `version:<id>`, `compartido-<plat>`, portal, sitio, agentes…).
+- `node scripts/guardar.mjs commit <ámbito> -m "tipo(plat): qué cambió"` y `commit-version <id>`: commits LOCALES que contienen solo los archivos de ese ámbito. Nunca uses `git add .`/`-A` global, `--no-verify` ni `--amend`.
+- `npm run version-propuesta -- <id>`: solo lectura; propone número, notas, almacenamiento y bloqueos.
+- `npm run version-flujo -- <id> <x.y.z> --notas "…" --aprobado-por "<quién>" --actualizar-catalogo`: guarda la versión inmutable.
+- `npm run version-verificar -- <id> <x.y.z>`: comprueba que figure en el historial del portal y que abra con sus recursos.
+- `npm run registrar-flujo -- --id … --nombre … --plataforma … --ruta …`: alta de un flujo nuevo en el catálogo.
+Procedimiento:
+1. **Solo commit.** `estado` → confirma que el ámbito es un único flujo → `commit <id-flujo>`. Si hay cambios de otros ámbitos, déjalos intactos e infórmalos. Si hay archivos preparados (staged) ajenos, detente. Sin versión, sin snapshot.
+2. **Versión navegable.** (a) Confirma antes el commit pendiente del flujo (paso 1); solo se congela desde un commit, nunca desde el disco. (b) Ejecuta `version-propuesta` y entrégala al orquestador tal cual: última versión, propuesta, notas, cambios y almacenamiento; si trae `alerta`, avísalo. (c) Si el resultado es `bloqueada` (por ejemplo, no hay cambios desde la última versión), informa el motivo y no publiques. (d) Ejecuta `version-flujo` SOLO tras la aprobación explícita del usuario y con `--aprobado-por`. (e) `commit-version <id>` (commit propio de la versión). (f) `npm run publicar` y `commit sitio` (salida generada, commit aparte). (g) `version-verificar`. (h) Informa a `compensar-conocimiento`.
+3. **Flujo nuevo.** `registrar-flujo` (queda `borrador`, `publicar: false`, sin versiones) y confirma el ámbito del flujo. La primera versión es la primera que apruebe el usuario.
+4. **Inmutabilidad y almacenamiento.** Una versión publicada no se edita ni se elimina; un error se corrige con una versión nueva. Los recursos comunes se deduplican por hash automáticamente: no guardes una copia por commit ni snapshots de versiones sin aprobar. Informa cuando una versión aumente considerablemente el almacén. No borres versiones anteriores automáticamente.
+5. **Seguridad.** Commit, publicación de versión, push y despliegue son operaciones independientes: no hagas push, tags ni despliegues sin autorización expresa para ese acto. No incluyas archivos sensibles, no mezcles flujos en un commit, no toques `Nara/`.
 ## Contrato transversal
 - Lee `AGENTS.md`, `IA-Central/contexto/CONTEXTO-BASE.md`, `IA-Central/decisiones/DECISIONES.md` y los registros que apliquen.
 - Documenta hechos verificados, inferencias y pendientes por separado.
