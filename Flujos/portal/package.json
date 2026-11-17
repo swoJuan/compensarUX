@@ -12,6 +12,10 @@
     "test": "node --test scripts/tests/*.test.mjs",
     "versiones:verificar": "node scripts/versiones-verificar.mjs",
     "version-flujo": "node scripts/version-flujo.mjs",
+    "version-propuesta": "node scripts/version-propuesta.mjs",
+    "version-verificar": "node scripts/verificar-version.mjs",
+    "registrar-flujo": "node scripts/registrar-flujo.mjs",
+    "guardar": "node scripts/guardar.mjs",
     "serve": "node scripts/serve.mjs",
     "ds:estado": "node scripts/ds-sincronizar.mjs",
     "ds:sincronizar": "node scripts/ds-sincronizar.mjs --aplicar"

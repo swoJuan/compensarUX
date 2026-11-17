@@ -134,11 +134,19 @@ vercel.json          Configuración para el despliegue (aún no se usa)
 Cada flujo tiene su propio historial de versiones en `Flujos/versiones/` (ver su `LEEME.md`).
 
 ```
-npm run version-flujo -- <id-flujo> <x.y.z> --notas "Qué cambió" [--ref <commit>] [--simular]
-npm run versiones:verificar
+npm run guardar -- estado                              # cambios pendientes por ámbito (flujo, portal, sitio…)
+npm run guardar -- commit <ámbito> -m "tipo(plat): …"  # commit local solo de ese ámbito
+npm run registrar-flujo -- --id … --nombre … --plataforma zt --ruta zt/…/   # flujo nuevo (borrador, sin versiones)
+npm run version-propuesta -- <id>                      # solo lectura: número, notas y almacenamiento propuestos
+npm run version-flujo -- <id> <x.y.z> --notas "…" --aprobado-por "…" --actualizar-catalogo
+npm run guardar -- commit-version <id>                 # commit propio de la versión
+npm run version-verificar -- <id> <x.y.z>              # aparece en el historial y abre
+npm run versiones:verificar                            # integridad de todo el almacén
+npm test                                               # pruebas (versiones y escenarios de extremo a extremo)
 ```
 
-- La versión se congela desde un commit y es inmutable; un commit de desarrollo no la crea.
+- La versión se congela desde un commit y es inmutable; un commit de desarrollo no la crea y requiere aprobación.
 - El build la copia a `versiones/<id>/v<x.y.z>/` (navegable) sin tocar la vigente en `p/`.
-- `catalogo.json → version` no puede quedar por debajo de la última versión publicada.
+- `catalogo.json → version` debe coincidir con la última versión publicada.
 - El detalle de cada flujo en el portal lista sus versiones y permite abrirlas.
+- Los commits solo son locales: push y despliegue requieren autorización aparte.
