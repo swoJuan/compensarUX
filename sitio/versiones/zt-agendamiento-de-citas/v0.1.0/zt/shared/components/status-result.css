@@ -1,0 +1,128 @@
+/* ============================================================
+ * status-result.css — Componente transversal ZT "Status Result"
+ * ------------------------------------------------------------
+ * Bloque de RESULTADO CONTEXTUAL inline (no modal, no overlay).
+ * Comunica el desenlace de una operación dentro del propio contenido:
+ * ícono de estado, título, descripción, datos opcionales, badge de estado
+ * y una acción primaria opcional.
+ *
+ * Variantes: success · warning  (preparado para info · error).
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ * Todo token-first: usa los tokens de estado del Design System.
+ * No redefine componentes del DS; el badge y el botón son del DS (.mp-*).
+ * ============================================================ */
+
+.zt-status-result {
+  /* Tokens por defecto (se sobreescriben por variante) */
+  --zsr-bg:        var(--use-surface-theme-gray-5, #f8f7f7);
+  --zsr-border:    var(--color-border-subtle, #e0e0e0);
+  --zsr-icon-bg:   var(--use-surface-theme-gray-5, #f8f7f7);
+  --zsr-icon-fg:   var(--color-text-primary, #111);
+  --zsr-title:     var(--color-text-primary, #111);
+  --zsr-body:      var(--color-text-secondary, #333);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-12);
+  width: 100%;
+  padding: var(--space-24);
+  background: var(--zsr-bg);
+  border: 1px solid var(--zsr-border);
+  border-radius: var(--radius-12, 0.75rem);
+}
+.zt-status-result[hidden] { display: none; }
+
+/* Ícono circular de estado (badge redondo con borde suave, ref. Figma) */
+.zt-status-result__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--zsr-icon-bg);
+  color: var(--zsr-icon-fg);
+}
+
+/* Título = heading/h4 (28px bold, lh 1.2) */
+.zt-status-result__title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.2;
+  color: var(--zsr-title);
+}
+
+/* Descripción = body XL (18px, lh 1.3) */
+.zt-status-result__desc {
+  margin: 0;
+  font-size: 18px;
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.3;
+  color: var(--zsr-body);
+  max-width: 46ch;
+}
+
+/* Bloque de datos de la persona (nombre + documento) */
+.zt-status-result__person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.zt-status-result__person-name {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--color-text-primary, #111);
+}
+.zt-status-result__person-doc {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--color-text-secondary, #333);
+}
+
+/* El badge es del DS (.mp-badge); solo separación superior */
+.zt-status-result__badge { margin-top: var(--space-4); }
+
+/* Acción primaria (opcional) — el botón es del DS (.mp-btn) */
+.zt-status-result__actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
+/* ── Variante SUCCESS ── */
+.zt-status-result--success {
+  --zsr-bg:      var(--use-state-success-bg, #e6f7e8);
+  --zsr-border:  var(--use-state-success-border, #44bd75);
+  --zsr-icon-bg: var(--use-surface-theme-green-2-60, #95bf1b);
+  --zsr-icon-fg: var(--use-text-on-dark-primary, #fff);
+  --zsr-title:   var(--use-state-success-text, #0d3d1f);
+  --zsr-body:    var(--use-state-success-text, #0d3d1f);
+}
+
+/* ── Variante WARNING (no viable) — amarillo suave, NO error ── */
+.zt-status-result--warning {
+  --zsr-bg:      var(--use-state-warning-bg, #fff2d9);
+  --zsr-border:  var(--use-state-warning-border, #ffc154);
+  --zsr-icon-bg: var(--use-state-warning-icon-bg, #ffc154);
+  --zsr-icon-fg: var(--use-state-warning-text, #111);
+  --zsr-title:   var(--use-state-warning-text, #111);
+  --zsr-body:    var(--use-state-warning-text, #111);
+}
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  .zt-status-result { padding: var(--space-20, 1.25rem); }
+  .zt-status-result__title { font-size: 22px; }
+  .zt-status-result__desc,
+  .zt-status-result__person-name,
+  .zt-status-result__person-doc { font-size: 16px; }
+  .zt-status-result__actions .mp-btn { width: 100%; }
+}

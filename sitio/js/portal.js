@@ -412,7 +412,8 @@
           badgeEstado(f.estado) +
         '</div>' +
         '<p class="pux-row__desc">' + esc(f.descripcion) + '</p>' +
-        '<p class="pux-row__meta">Versión ' + esc(f.version) + ' · actualizado el ' + esc(fecha(f.actualizado)) + '</p>' +
+        '<p class="pux-row__meta">Versión ' + esc(f.version) + ' · actualizado el ' + esc(fecha(f.actualizado)) +
+          ((f.versiones || []).length ? ' · ' + f.versiones.length + (f.versiones.length === 1 ? ' versión publicada' : ' versiones publicadas') : '') + '</p>' +
         historial +
       '</div>' +
       '<div class="pux-row__actions">' + acciones(f) + '</div>' +
@@ -782,6 +783,46 @@
   }
 
   /* ---------- Detalle ---------- */
+  /** Versiones publicadas de un flujo: instantáneas inmutables que se abren sin tocar la vigente. */
+  function versionesFlujo(f) {
+    var vs = f.versiones || [];
+    var cuerpo;
+    if (!vs.length) {
+      cuerpo = vacio('Aún no hay versiones publicadas de este flujo',
+        'Los cambios de desarrollo aparecen en «Últimos cambios». Una versión se publica de forma explícita y queda guardada tal como se veía y funcionaba ese día.');
+    } else {
+      cuerpo = '<ol class="pux-versions" role="list">' + vs.map(function (v) {
+        var etiquetas = (v.vigente ? tag('Versión vigente', 'success') : '');
+        var dsTxt = v.ds ? (v.ds.tag || ('commit ' + v.ds.commit)) : null;
+        var cambios = v.cambiosSinVersion > 0
+          ? '<p class="pux-muted pux-note">Desde esta versión hay ' + v.cambiosSinVersion + (v.cambiosSinVersion === 1 ? ' cambio' : ' cambios') + ' en desarrollo que aún no se publicaron como versión.</p>'
+          : '';
+        return '<li class="pux-version' + (v.vigente ? ' is-publicada' : '') + '">' +
+          '<span class="pux-version__dot" aria-hidden="true"></span>' +
+          '<div class="pux-version__body">' +
+            '<div class="pux-version__head">' +
+              '<h3 class="pux-version__tag">v' + esc(v.version) + '</h3>' +
+              (etiquetas ? '<span class="pux-tags">' + etiquetas + '</span>' : '') +
+              '<time class="pux-version__fecha" datetime="' + esc(v.publicadaEl) + '">Publicada el ' + esc(fecha(v.publicadaEl)) + '</time>' +
+            '</div>' +
+            '<p class="pux-version__titulo">' + esc(v.notas) + '</p>' +
+            '<p class="pux-muted pux-note">Estado UX: ' + esc((ESTADOS[(v.estadoUX || {}).estado] || {}).label || '—') +
+              ' · Sistema de diseño: ' + esc(dsTxt || 'sin registro') + ' · commit <code>' + esc(v.commit) + '</code></p>' +
+            cambios +
+            '<div class="pux-version__acciones">' +
+              '<a class="mp-btn mp-btn--secundario" href="' + esc(v.url) + '" target="_blank" rel="noopener">Abrir la versión ' + esc(v.version) +
+                '<span class="visually-hidden"> de ' + esc(f.nombre) + ' (se abre en una pestaña nueva)</span></a>' +
+            '</div>' +
+          '</div></li>';
+      }).join('') + '</ol>';
+    }
+    return '<section class="pux-section pux-section--tight" aria-labelledby="versiones-flujo"><div class="pux-container"><div class="pux-panel">' +
+      '<h2 class="mp-h6 pux-section__title" id="versiones-flujo">Versiones publicadas' +
+        (vs.length ? ' <span class="pux-count">' + vs.length + '</span>' : '') + '</h2>' +
+      '<p class="pux-muted">Cada versión conserva sus archivos y el sistema de diseño exacto que usó. Abrirla no cambia el prototipo vigente.</p>' +
+      cuerpo +
+    '</div></div></section>';
+  }
   function initDetalle(cat) {
     var cont = $('[data-detalle]');
     if (!cont) return;
@@ -862,6 +903,7 @@
         '<div class="pux-hero__actions">' + abrir + figma + '</div>' +
       '</div></section>' +
       '<section class="pux-section" aria-label="Ficha del flujo"><div class="pux-container">' + ficha + '</div></section>' +
+      versionesFlujo(f) +
       vista +
       '<section class="pux-section pux-section--tight" aria-labelledby="cambios-flujo"><div class="pux-container"><div class="pux-panel">' +
         '<h2 class="mp-h6 pux-section__title" id="cambios-flujo">Últimos cambios en este flujo</h2>' + timeline(f.cambios, false) +

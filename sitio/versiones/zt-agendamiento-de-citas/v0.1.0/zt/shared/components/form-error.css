@@ -1,0 +1,57 @@
+/* ============================================================
+ * form-error.css — Patrón transversal ZT "Form Error" (error de campo)
+ * ------------------------------------------------------------
+ * Mensaje de error inline ASOCIADO A CADA CAMPO (no alerta global).
+ * Reutilizable por cualquier formulario de ZT (afiliación, agendamiento…).
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ * Token-first: usa los tokens de estado de error del DS, sin hex.
+ *
+ * Anatomía (dentro de un .mp-input-group):
+ *   <label class="mp-input-label" for="campo">…</label>
+ *   <div class="mp-input-wrapper"><input class="mp-input-field" …></div>
+ *   <p class="mp-input-error" id="campo-error" role="alert">Mensaje</p>
+ *
+ * Reglas:
+ *   - El campo inválido lleva la clase `.error` (el DS ya pinta borde/sombra
+ *     de error en `.mp-input-field.error`).
+ *   - El mensaje `.mp-input-error` está oculto por defecto y se muestra cuando
+ *     el grupo/campo tiene la clase `.error` (o directamente con [hidden] en JS).
+ *   - Para el Dropdown List transversal (select oculto), el estado de error se
+ *     refleja en el trigger vía `.zt-dropdown.error .zt-dropdown__trigger`.
+ * ============================================================ */
+
+/* ── Mensaje de error del campo ──
+   Oculto mientras el campo no esté en error. Se revela cuando el propio
+   mensaje o su grupo contenedor entran en estado `.error`. */
+.mp-input-error {
+  margin: var(--space-4, 0.25rem) 0 0;
+  font-size: var(--font-size-md, 14px);
+  line-height: var(--line-height-normal, 1.3);
+  color: var(--use-state-error-text-error-field, #b3251e);
+}
+/* Oculto por defecto (sin ocupar espacio). JS quita [hidden] al fallar. */
+.mp-input-error[hidden] { display: none; }
+
+/* Icono opcional a la izquierda del mensaje (font-icon del sistema). */
+.mp-input-error__icon {
+  vertical-align: -0.15em;
+  margin-right: var(--space-4, 0.25rem);
+}
+
+/* ── Estado de error en el Dropdown List transversal ──
+   El <select> real está oculto; el borde/sombra de error debe verse en el
+   trigger. Se activa añadiendo `.error` al contenedor `.zt-dropdown`
+   (mismo criterio que `.mp-input-field.error` del DS). */
+.zt-dropdown.error .zt-dropdown__trigger {
+  border-color: var(--use-state-error-icon, #d13c34);
+  box-shadow: 0 0 0 0.1875rem
+    color-mix(in srgb, var(--use-state-error-icon, #d13c34) 15%, transparent);
+}
+/* Al enfocar el trigger en error, conservar el aro de error (no el naranja). */
+.zt-dropdown.error .zt-dropdown__trigger:focus,
+.zt-dropdown.error .zt-dropdown__trigger:focus-visible {
+  border-color: var(--use-state-error-icon, #d13c34);
+  box-shadow: 0 0 0 0.1875rem
+    color-mix(in srgb, var(--use-state-error-icon, #d13c34) 25%, transparent);
+}

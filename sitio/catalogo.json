@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-17T13:34:46.273Z",
+  "generado": "2026-11-17T16:24:00.124Z",
   "fuentes": {
     "designSystem": {
       "id": "designSystem",
@@ -15,7 +15,7 @@
       "fecha": "2026-11-13T17:50:15-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": 5,
+      "commitsSinSubir": null,
       "cambios": [
         {
           "commit": "63bd56e",
@@ -127,7 +127,7 @@
       "fecha": "2026-11-17T08:29:44-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": 5,
+      "commitsSinSubir": null,
       "cambios": [
         {
           "commit": "50db88b",
@@ -427,6 +427,7 @@
         "ds": [],
         "plataforma": []
       },
+      "versiones": [],
       "actualizado": "2026-11-13T10:18:37-05:00",
       "cambios": [
         {
@@ -489,6 +490,36 @@
         "ds": [],
         "plataforma": []
       },
+      "versiones": [
+        {
+          "version": "0.1.0",
+          "publicadaEl": "2026-11-17T16:23:27.873Z",
+          "commit": "b49f7b7",
+          "fechaCommit": "2026-11-17T11:23:27-05:00",
+          "notas": "Primera versión publicada del flujo de agendamiento de citas médicas y de laboratorio (ZT), con el sistema de diseño v2.4.0.",
+          "estadoUX": {
+            "estado": "en-revision",
+            "aprobacionUX": {
+              "aprobado": false,
+              "por": null,
+              "fecha": null
+            }
+          },
+          "ds": {
+            "tag": "v2.4.0",
+            "commit": "27767a7",
+            "fecha": "2026-11-11T21:29:14+00:00"
+          },
+          "paquetesCdn": {},
+          "recursos": {
+            "hash": "f5922bdadff7",
+            "archivos": 48
+          },
+          "url": "versiones/zt-agendamiento-de-citas/v0.1.0/zt/agendamiento-de-citas/index.html",
+          "vigente": true,
+          "cambiosSinVersion": 0
+        }
+      ],
       "actualizado": "2026-11-13T17:09:29-05:00",
       "cambios": [
         {
@@ -539,6 +570,7 @@
         "ds": [],
         "plataforma": []
       },
+      "versiones": [],
       "actualizado": "2026-11-17T08:29:44-05:00",
       "cambios": [
         {
@@ -588,6 +620,7 @@
         "ds": [],
         "plataforma": []
       },
+      "versiones": [],
       "actualizado": "2026-11-17T08:29:44-05:00",
       "cambios": [
         {
@@ -638,6 +671,7 @@
         "ds": [],
         "plataforma": []
       },
+      "versiones": [],
       "actualizado": "2026-11-13T10:18:37-05:00",
       "cambios": [
         {
@@ -681,6 +715,7 @@
         "ds": [],
         "plataforma": []
       },
+      "versiones": [],
       "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {
@@ -718,6 +753,7 @@
         "ds": [],
         "plataforma": []
       },
+      "versiones": [],
       "actualizado": "2026-11-12T12:33:17-05:00",
       "cambios": [
         {

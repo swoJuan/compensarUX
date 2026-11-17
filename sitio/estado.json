@@ -1,14 +1,14 @@
 {
-  "generado": "2026-11-17T13:34:46.273Z",
+  "generado": "2026-11-17T16:24:00.124Z",
   "repositorio": {
     "unico": true,
     "nombre": "compensarUX",
-    "rama": "main",
+    "rama": "feat/versiones-visuales",
     "remoto": "https://github.com/swoJuan/compensarUX.git",
     "version": "v2.4.0",
-    "commits": 12,
-    "commitsSinSubir": 5,
-    "pendientes": 77,
+    "commits": 20,
+    "commitsSinSubir": null,
+    "pendientes": 11,
     "carpetas": [
       {
         "id": "designSystem",
@@ -33,9 +33,9 @@
         "nombre": "Portal UX",
         "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
         "carpeta": "Flujos/portal",
-        "commit": "b280506",
-        "fecha": "2026-11-13T17:59:02-05:00",
-        "pendientes": 12
+        "commit": "4ea8d82",
+        "fecha": "2026-11-17T11:23:51-05:00",
+        "pendientes": 1
       }
     ]
   },

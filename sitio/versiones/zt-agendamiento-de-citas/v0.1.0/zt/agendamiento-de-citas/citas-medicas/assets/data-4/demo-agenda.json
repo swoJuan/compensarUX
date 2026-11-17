@@ -1,0 +1,1235 @@
+{
+  "meta": {
+    "project": "Demo pruebas de usabilidad - Agendamiento de citas médicas",
+    "client": "Compensar Medicina Prepagada",
+    "version": "2.1.0",
+    "updatedAt": "2026-05-11",
+    "dateRange": {
+      "from": "2026-06-03",
+      "to": "2026-06-27"
+    },
+    "agendaHours": {
+      "from": "07:00",
+      "to": "18:00",
+      "slotDurationMinutes": 20
+    },
+    "notes": [
+      "Demo agenda 3 enfocado en Dermatología para pruebas de reagendamiento.",
+      "Incluye 10 fechas diferentes durante junio de 2026, incluyendo el 20 de junio.",
+      "Cada fecha cuenta con múltiples horarios disponibles en modalidad presencial."
+    ]
+  },
+  "ui": {
+    "labels": {
+      "primaryDoctor": "Médico tratante",
+      "familyDoctor": "Médico familia",
+      "exclusiveCenter": "Sede exclusiva",
+      "modifySearch": "Modificar búsqueda",
+      "moreResults": "Más horarios disponibles"
+    },
+    "emptyStates": {
+      "noAvailability": {
+        "title": "No encontramos citas disponibles",
+        "description": "Intenta modificar la fecha, la sede o el médico para ver nuevas opciones."
+      },
+      "noPrimaryDoctor": {
+        "title": "Aún no tienes médico tratante para esta especialidad",
+        "description": "Puedes continuar buscando con otros médicos disponibles."
+      }
+    }
+  },
+  "userContext": {
+    "userId": "user-demo-001",
+    "name": "Paciente demo",
+    "defaultSearch": {
+      "specialtyId": "dermatologia",
+      "centerIds": [
+        "av68",
+        "calle94",
+        "sanroque"
+      ],
+      "date": "2026-06-03",
+      "modality": "Presencial"
+    },
+    "recentCenters": [
+      "av68",
+      "sanroque",
+      "calle26"
+    ],
+    "appointmentHistory": [
+      {
+        "specialtyId": "dermatologia",
+        "specialty": "Dermatología",
+        "doctorId": "doc-jhon-sarria",
+        "doctorName": "Dr. Jhon Sarria",
+        "centerId": "calle94",
+        "centerName": "Compensar Calle 94",
+        "date": "2026-05-28",
+        "isLastAppointment": true,
+        "relationshipLabel": "Médico tratante"
+      }
+    ]
+  },
+  "specialties": [
+    {
+      "id": "dermatologia",
+      "name": "Dermatología",
+      "hasAvailability": true,
+      "availableDates": [
+        "2026-06-03",
+        "2026-06-05",
+        "2026-06-08",
+        "2026-06-10",
+        "2026-06-12",
+        "2026-06-15",
+        "2026-06-18",
+        "2026-06-20",
+        "2026-06-24",
+        "2026-06-27"
+      ]
+    }
+  ],
+  "modalities": [
+    "Presencial"
+  ],
+  "medicalCenters": [
+    {
+      "id": "av68",
+      "name": "Sede Principal Compensar Avenida 68",
+      "shortName": "Av. 68",
+      "address": "Avenida 68 # 49A-47, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": true,
+      "isExclusive": false
+    },
+    {
+      "id": "calle94",
+      "name": "Compensar Calle 94",
+      "shortName": "Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": false,
+      "isExclusive": true
+    },
+    {
+      "id": "calle26",
+      "name": "Compensar Calle 26",
+      "shortName": "Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": true,
+      "isExclusive": false
+    },
+    {
+      "id": "sanroque",
+      "name": "Compensar San Roque",
+      "shortName": "San Roque",
+      "address": "Km 7 vía Cajicá-Chía, Cundinamarca, Cajicá",
+      "city": "Cajicá, Cundinamarca",
+      "isRecent": true,
+      "isExclusive": true
+    },
+    {
+      "id": "suba139",
+      "name": "Compensar Suba Calle 139",
+      "shortName": "Suba Calle 139",
+      "address": "Calle 139 # 94-55, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": false,
+      "isExclusive": false
+    },
+    {
+      "id": "kennedy",
+      "name": "Unidad de Servicios de Salud Kennedy",
+      "shortName": "Kennedy",
+      "address": "Transversal 78H # 41C-48 Sur, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": false,
+      "isExclusive": false
+    },
+    {
+      "id": "primera_mayo",
+      "name": "Compensar Avenida Primera de Mayo",
+      "shortName": "Primera de Mayo",
+      "address": "Avenida Primero de Mayo # 10 Bis-22 Sur, Bogotá D.C.",
+      "city": "Bogotá D.C.",
+      "isRecent": false,
+      "isExclusive": false
+    }
+  ],
+  "doctors": [
+    {
+      "id": "doc-jhon-sarria",
+      "name": "Dr. Jhon Sarria",
+      "gender": "M",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "av68",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": true,
+      "primaryForSpecialtyIds": [
+        "dermatologia"
+      ],
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-alejandra-sierra",
+      "name": "Dra. Alejandra Sierra",
+      "gender": "F",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "sanroque",
+        "calle94"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-victor-garcia",
+      "name": "Dr. Víctor García",
+      "gender": "M",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "calle26",
+        "av68",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-vanessa-martinez",
+      "name": "Dra. Vanessa Martínez",
+      "gender": "F",
+      "specialtyIds": [
+        "dermatologia"
+      ],
+      "centerIds": [
+        "calle94",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-luciana-restrepo",
+      "name": "Dra. Luciana Restrepo",
+      "gender": "F",
+      "specialtyIds": [
+        "dermatologia",
+        "medicina_general"
+      ],
+      "centerIds": [
+        "suba139",
+        "sanroque"
+      ],
+      "modalities": [
+        "Presencial",
+        "Virtual"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "shared"
+    },
+    {
+      "id": "doc-felipe-castaneda",
+      "name": "Dr. Felipe Castañeda",
+      "gender": "M",
+      "specialtyIds": [
+        "medicina_general",
+        "dermatologia"
+      ],
+      "centerIds": [
+        "av68"
+      ],
+      "modalities": [
+        "Presencial"
+      ],
+      "isPrimaryDoctor": false,
+      "profileType": "exclusive"
+    }
+  ],
+  "availability": [
+    {
+      "id": "derm-jun-001",
+      "date": "2026-06-03",
+      "dayLabel": "Miércoles",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-002",
+      "date": "2026-06-03",
+      "dayLabel": "Miércoles",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-003",
+      "date": "2026-06-03",
+      "dayLabel": "Miércoles",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-004",
+      "date": "2026-06-03",
+      "dayLabel": "Miércoles",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-005",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-006",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-007",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-008",
+      "date": "2026-06-05",
+      "dayLabel": "Viernes",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-009",
+      "date": "2026-06-08",
+      "dayLabel": "Lunes",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-010",
+      "date": "2026-06-08",
+      "dayLabel": "Lunes",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-011",
+      "date": "2026-06-08",
+      "dayLabel": "Lunes",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-012",
+      "date": "2026-06-08",
+      "dayLabel": "Lunes",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-013",
+      "date": "2026-06-10",
+      "dayLabel": "Miércoles",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-014",
+      "date": "2026-06-10",
+      "dayLabel": "Miércoles",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-015",
+      "date": "2026-06-10",
+      "dayLabel": "Miércoles",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-016",
+      "date": "2026-06-10",
+      "dayLabel": "Miércoles",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-017",
+      "date": "2026-06-12",
+      "dayLabel": "Viernes",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-018",
+      "date": "2026-06-12",
+      "dayLabel": "Viernes",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-019",
+      "date": "2026-06-12",
+      "dayLabel": "Viernes",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-020",
+      "date": "2026-06-12",
+      "dayLabel": "Viernes",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-021",
+      "date": "2026-06-15",
+      "dayLabel": "Lunes",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-022",
+      "date": "2026-06-15",
+      "dayLabel": "Lunes",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-023",
+      "date": "2026-06-15",
+      "dayLabel": "Lunes",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-024",
+      "date": "2026-06-15",
+      "dayLabel": "Lunes",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-025",
+      "date": "2026-06-18",
+      "dayLabel": "Jueves",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-026",
+      "date": "2026-06-18",
+      "dayLabel": "Jueves",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-027",
+      "date": "2026-06-18",
+      "dayLabel": "Jueves",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-028",
+      "date": "2026-06-18",
+      "dayLabel": "Jueves",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-029",
+      "date": "2026-06-20",
+      "dayLabel": "Sábado",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-030",
+      "date": "2026-06-20",
+      "dayLabel": "Sábado",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-031",
+      "date": "2026-06-20",
+      "dayLabel": "Sábado",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-032",
+      "date": "2026-06-20",
+      "dayLabel": "Sábado",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-033",
+      "date": "2026-06-24",
+      "dayLabel": "Miércoles",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-034",
+      "date": "2026-06-24",
+      "dayLabel": "Miércoles",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-035",
+      "date": "2026-06-24",
+      "dayLabel": "Miércoles",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-036",
+      "date": "2026-06-24",
+      "dayLabel": "Miércoles",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-037",
+      "date": "2026-06-27",
+      "dayLabel": "Sábado",
+      "startTime": "08:00",
+      "endTime": "08:20",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-038",
+      "date": "2026-06-27",
+      "dayLabel": "Sábado",
+      "startTime": "09:20",
+      "endTime": "09:40",
+      "doctorId": "doc-vanessa-martinez",
+      "doctorName": "Dra. Vanessa Martínez",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    },
+    {
+      "id": "derm-jun-039",
+      "date": "2026-06-27",
+      "dayLabel": "Sábado",
+      "startTime": "10:40",
+      "endTime": "11:00",
+      "doctorId": "doc-felipe-castaneda",
+      "doctorName": "Dr. Felipe Castañeda",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle94",
+      "centerShortName": "Calle 94",
+      "centerName": "Compensar Calle 94",
+      "address": "Calle 94 # 23-43, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": [
+        "Sede exclusiva"
+      ]
+    },
+    {
+      "id": "derm-jun-040",
+      "date": "2026-06-27",
+      "dayLabel": "Sábado",
+      "startTime": "14:20",
+      "endTime": "14:40",
+      "doctorId": "doc-alejandra-sierra",
+      "doctorName": "Dra. Alejandra Sierra",
+      "specialtyId": "dermatologia",
+      "specialty": "Dermatología",
+      "centerId": "calle26",
+      "centerShortName": "Calle 26",
+      "centerName": "Compensar Calle 26",
+      "address": "Avenida Calle 26 # 66A-48, Bogotá D.C.",
+      "modality": "Presencial",
+      "isAvailable": true,
+      "payment": {
+        "bonusRequired": true,
+        "bonusAmountCOP": 55000,
+        "canPayOnline": true
+      },
+      "tags": []
+    }
+  ]
+}

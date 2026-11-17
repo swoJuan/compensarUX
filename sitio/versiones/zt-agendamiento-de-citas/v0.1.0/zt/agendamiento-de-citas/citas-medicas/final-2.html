@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Compensar - Confirmacion de cita</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../../shared/icons/icons.css">
+<link rel="stylesheet" href="../../shared/zt.css">
+<link rel="stylesheet" href="css/custom.css">
+<script>
+(function (m, a, z, e) {
+  var s, t, u, v;
+  try {
+    t = m.sessionStorage.getItem('maze-us');
+  } catch (err) {}
+
+  if (!t) {
+    t = new Date().getTime();
+    try {
+      m.sessionStorage.setItem('maze-us', t);
+    } catch (err) {}
+  }
+
+  u = document.currentScript || (function () {
+    var w = document.getElementsByTagName('script');
+    return w[w.length - 1];
+  })();
+  v = u && u.nonce;
+
+  s = a.createElement('script');
+  s.src = z + '?apiKey=' + e;
+  s.async = true;
+  if (v) s.setAttribute('nonce', v);
+  a.getElementsByTagName('head')[0].appendChild(s);
+  m.mazeUniversalSnippetApiKey = e;
+})(window, document, 'https://snippet.maze.co/maze-universal-loader.js', '91229964-c105-482c-bdda-48610b6c5d69');
+</script>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── HEADER MOBILE ── -->
+  <header class="header-mobile">
+    <button class="icon-btn" aria-label="Menú">
+      <span class="material-icons" aria-hidden="true">menu</span>
+    </button>
+    <img class="brand-logo brand-logo-mobile" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada">
+    <button class="icon-btn" aria-label="Configuración">
+      <span class="icon icon-gear icon-24 gs-inherit" aria-hidden="true"></span>
+    </button>
+  </header>
+
+  <!-- ── HEADER DESKTOP ── -->
+  <header class="header-desktop">
+    <img class="brand-logo brand-logo-desktop" src="../../../shared/assets/logo.svg" alt="Compensar medicina prepagada" >
+    <div class="hd-user">
+      <div class="hd-user-info">
+        <div class="hd-user-name">Margarita López Arenas</div>
+        <div class="hd-user-plan">Plan Familiar</div>
+      </div>
+      <div class="hd-avatar">
+        <span class="icon icon-user icon-20 gs-inherit" aria-hidden="true"></span>
+      </div>
+      <div class="hd-divider"></div>
+      <button class="hd-exit" type="button">
+        <span class="icon icon-sign-out icon-16 gs-inherit" aria-hidden="true"></span>
+        Salida
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <nav class="sidebar" data-active="agendamiento"></nav>
+
+    <main class="main">
+      <div class="screen active">
+        <div class="scroller">
+          <nav class="breadcrumb">
+            <span class="bc-home icon icon-house icon-20 gs-inherit" aria-hidden="true"></span>
+            <a href="javascript:void(0)" id="link-home">Inicio</a>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="bc-muted">Citas medicas</span>
+            <span class="sep icon icon-caret-right icon-16 gs-inherit" aria-hidden="true"></span>
+            <span class="current">Confirmacion</span>
+          </nav>
+
+          <div class="cfm-wrap">
+            <div class="cfm-hero">
+              <span class="mp-modal__icon" style="background-color: #9DC71E; color: #FFF; padding: 16px;">
+                <i class="icon icon-check icon-32" aria-hidden="true"> </i>
+              </span>
+              <h1 class="cfm-hero-title">Cita confirmada</h1>
+            </div>
+
+            <div class="cfm-card">
+              <div class="cfm-doc-row">
+                <div class="cfm-doc-avatar">
+                  <span class="icon icon-user-circle icon-28 gs-inherit" aria-hidden="true"></span>
+                </div>
+                <div class="cfm-doc-info">
+                  <p class="cfm-row-label">DOCTOR</p>
+                  <p class="cfm-doc-name" id="cfm-doc-name">-</p>
+                  <div class="cfm-doc-tags">
+                    <span class="cfm-doc-spec" id="cfm-doc-spec">-</span>
+                  </div>
+                </div>
+              </div>
+              <div class="cfm-doc-row" style="background-color: #efefef; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px">
+                <span class="cfm-auth-label" style="font-size: 12px; text-transform: uppercase; color: #666666; font-weight: 600;">Número de autorizacion</span>
+                <strong class="cfm-auth-num" id="cfm-auth-num" style="font-size: 12px; text-transform: uppercase; color: #666666;">-</strong>
+              </div>
+
+              <div class="cfm-details">
+                <div class="cfm-detail-item">
+                  <div class="cfm-detail-icon">
+                    <span class="icon icon-heartbeat icon-24" aria-hidden="true"></span>
+                  </div>
+                  <div class="cfm-detail-content">
+                    <p class="cfm-row-label">ESPECIALIDAD</p>
+                    <p class="cfm-detail-val" id="cfm-especialidad">-</p>
+                  </div>
+                </div>
+
+                <div class="cfm-detail-item">
+                  <div class="cfm-detail-icon">
+                    <span class="icon icon-calendar-check icon-24" aria-hidden="true"></span>
+                  </div>
+                  <div class="cfm-detail-content">
+                    <p class="cfm-row-label">FECHA Y HORA</p>
+                    <p class="cfm-detail-val" id="cfm-fecha">-</p>
+                  </div>
+                </div>
+
+                <div class="cfm-detail-item">
+                  <div class="cfm-detail-icon">
+                    <span class="icon icon-map-pin icon-24" aria-hidden="true"></span>
+                  </div>
+                  <div class="cfm-detail-content">
+                    <p class="cfm-row-label">UBICACION</p>
+                    <p class="cfm-detail-val cfm-loc-bold" id="cfm-loc-name">-</p>
+                    <p class="cfm-detail-sub" id="cfm-loc-addr"></p>
+                  </div>
+                </div>
+
+                <div class="cfm-detail-item">
+                  <div class="cfm-detail-icon">
+                    <span class="icon icon-tag icon-24" aria-hidden="true"></span>
+                  </div>
+                  <div class="cfm-detail-content">
+                    <p class="cfm-row-label">MODALIDAD</p>
+                    <p class="cfm-detail-val">Cita presencial</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cfm-bono-row">
+                <div class="cfm-bono-info">
+                  <p class="cfm-row-label">VALOR DEL BONO</p>
+                  <p class="cfm-bono-price" id="cfm-price">-</p>
+                  <p class="cfm-bono-sub">Puedes pagar ahora o el dia de tu cita</p>
+                </div>
+                <button class="btn-primary cfm-bono-btn" type="button">Pagar</button>
+              </div>
+            </div>
+
+            <div class="cfm-actions">
+              <button class="btn-outline cfm-download" type="button">
+                <span class="icon icon-download-simple icon-16" aria-hidden="true"></span>
+                Descargar comprobante
+              </button>
+              <button class="cfm-volver" type="button" id="btn-volver-home">Volver al inicio</button>
+            </div>
+          </div>
+
+          <footer class="footer">
+            <div>
+              <div class="footer-col-title">Te puede interesar</div>
+              <a class="footer-link" href="javascript:void(0)">Derechos y deberes</a>
+              <a class="footer-link" href="javascript:void(0)">Notificaciones judiciales</a>
+              <a class="footer-link" href="javascript:void(0)">Políticas de privacidad y condiciones de uso</a>
+              <a class="footer-link" href="javascript:void(0)">Transparencia y acceso a la información pública</a>
+              <a class="footer-link" href="javascript:void(0)">Canal de denuncia</a>
+            </div>
+            <div>
+              <div class="footer-col-title">Conoce más</div>
+              <a class="footer-link" href="javascript:void(0)">Nuestra organización</a>
+              <a class="footer-link" href="javascript:void(0)">Radicar PQRS</a>
+              <a class="footer-link" href="javascript:void(0)">Consultar PQRS</a>
+              <a class="footer-link" href="javascript:void(0)">Proveedores</a>
+              <a class="footer-link" href="javascript:void(0)">Términos y condiciones</a>
+            </div>
+            <div>
+              <div class="footer-col-title">Síguenos</div>
+              <div class="footer-social" aria-label="Redes sociales"><span class="icon icon-facebook-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-x-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-youtube-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-linkedin-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-instagram-logo icon-20 gs-muted" aria-hidden="true"></span><span class="icon icon-tiktok-logo icon-20 gs-muted" aria-hidden="true"></span></div>
+              <div class="footer-address">
+                <strong>Caja de Compensación Familiar Sede Principal</strong><br>
+                Av. 68 # 49A - 47, Bogotá D.C.<br>
+                Bogotá 601 3077001, Línea nacional 01 8000 967070
+              </div>
+            </div>
+          </footer>
+          <div class="footer-bottom">
+            <div class="footer-badge"><img src="../../../shared/assets/logo-supervigilado.svg" alt="" width="140"></div>
+            <div class="footer-badge"><img src="../../../shared/assets/logo-vigilado.svg" alt="" width="180"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="mp-modal-wrap" id="final-task-modal" role="dialog" aria-modal="true" aria-labelledby="final-task-title" onclick="closeFinalTaskModal(event)">
+  <div class="mp-modal mp-modal--success">
+    <div class="mp-modal__content" style="flex-direction:column; text-align:center;">
+      <button class="mp-modal__close" type="button" aria-label="Cerrar" onclick="closeFinalTaskModal()">
+        <span class="icon icon-x icon-24" aria-hidden="true"></span>
+      </button>
+      <span class="mp-modal__icon" aria-hidden="true">
+        <span class="icon icon-check icon-24"></span>
+      </span>
+      <h2 class="mp-modal__title" id="final-task-title">Tarea completada</h2>
+      <p class="mp-modal__body">Has llegado al final de esta tarea. Para continuar con la prueba, haz clic en Finalizar tarea en la ventana de Maze.</p>
+      <p class="mp-modal__body"><strong>¿Dónde está?</strong><br>Lo encontrarás en la barra de Maze, junto al prototipo.</p>
+      <img src="assets/finalizar-tarea.png" alt="Indicación para finalizar tarea en Maze" style="width:100%; max-width:360px; height:auto; border-radius:12px;">
+      <div class="mp-modal__actions">
+        <button class="btn-primary" type="button" onclick="closeFinalTaskModal()">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function hydrateConfirmation() {
+  var defaults = {
+    docName: '-',
+    docSpec: '-',
+    authNum: '-',
+    espDisplay: '-',
+    fechaHora: '-',
+    locName: '-',
+    locAddr: '',
+    docPrice: '-'
+  };
+
+  var data = defaults;
+  try {
+    var raw = window.sessionStorage.getItem('compensarConfirmacionCitaPrueba2');
+    if (raw) {
+      data = Object.assign({}, defaults, JSON.parse(raw));
+    }
+  } catch (error) {
+    data = defaults;
+  }
+
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  setText('cfm-doc-name', data.docName);
+  setText('cfm-doc-spec', data.docSpec);
+  setText('cfm-auth-num', data.authNum);
+  setText('cfm-especialidad', data.espDisplay);
+  setText('cfm-fecha', data.fechaHora);
+  setText('cfm-loc-name', data.locName);
+  setText('cfm-loc-addr', data.locAddr || '');
+  setText('cfm-price', data.docPrice);
+})();
+
+(function setupDynamicRoutes() {
+  var homeTarget = 'prueba-2.html';
+  var homeHref = new URL(homeTarget, window.location.href).toString();
+
+  var linkHome = document.getElementById('link-home');
+  if (linkHome) {
+    linkHome.setAttribute('href', 'javascript:void(0)');
+  }
+
+  var btnBackHome = document.getElementById('btn-volver-home');
+  if (btnBackHome) {
+    btnBackHome.addEventListener('click', function () {
+      window.location.href = homeHref;
+    });
+  }
+
+  var navCitasBtn = document.getElementById('nav-citas-btn');
+  if (navCitasBtn) {
+    navCitasBtn.addEventListener('click', function () {
+      window.location.href = homeHref;
+    });
+  }
+})();
+
+function openFinalTaskModal() {
+  var modal = document.getElementById('final-task-modal');
+  if (!modal) return;
+  modal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFinalTaskModal(event) {
+  if (event && event.target && event.target.id !== 'final-task-modal') return;
+  var modal = document.getElementById('final-task-modal');
+  if (!modal) return;
+  modal.classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+var finalTaskInactivityTimer = null;
+var finalTaskInactivityEvents = ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'];
+
+function resetFinalTaskInactivityTimer() {
+  if (finalTaskInactivityTimer) {
+    window.clearTimeout(finalTaskInactivityTimer);
+  }
+  finalTaskInactivityTimer = window.setTimeout(function () {
+    openFinalTaskModal();
+  }, 30000);
+}
+
+function setupFinalTaskInactivityModal() {
+  finalTaskInactivityEvents.forEach(function (eventName) {
+    window.addEventListener(eventName, resetFinalTaskInactivityTimer);
+  });
+  resetFinalTaskInactivityTimer();
+}
+
+window.addEventListener('load', function () {
+  window.setTimeout(openFinalTaskModal, 5000);
+  setupFinalTaskInactivityModal();
+});
+</script>
+  <script src="../../shared/zt-sidebar.js"></script>
+</body>
+</html>

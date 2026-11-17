@@ -1,0 +1,200 @@
+/* ============================================================
+ * benef-card.css — Componente transversal ZT "Beneficiary / Expandable Person Card"
+ * ------------------------------------------------------------
+ * Card expandible que representa UNA persona en una lista editable. El MISMO
+ * componente rinde el estado colapsado y el expandido/edición. No crear
+ * `.beneficiary1/2/3`: es un componente general parametrizado.
+ *
+ * Nivel 3 de la cascada (tras zt.css). Token-first: sin hex ni medidas mágicas.
+ * ============================================================ */
+
+.zt-benef-card {
+  /* Fondo SIEMPRE blanco (colapsado y expandido): el gris se percibía como
+     "inactivo". Border subtle, radius 12 y padding 24 (transversal). */
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-12, 0.75rem);
+  padding: var(--space-24, 1.5rem);
+}
+
+/* Acento lateral según estado: se lee el estado de un vistazo en la lista. */
+.zt-benef-card { position: relative; overflow: hidden; }
+.zt-benef-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--use-state-warning-border, #fcce72);
+}
+.zt-benef-card.is-complete::before { background: var(--use-state-success-icon, #3c8a3e); }
+
+/* ── Encabezado (común a colapsada y expandida) ──
+   [avatar] Nombre + chip estado          [Eliminar] [Editar ✎]
+            Beneficiario N · Parentesco                          */
+.zt-benef-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16, 1rem);
+}
+/* Avatar circular (mismo lenguaje del resumen del candidato: violeta suave). */
+.zt-benef-card__avatar {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;                                 /* 24px icono + 10px aire por lado */
+  height: 44px;
+  border-radius: 50%;
+  background: var(--use-surface-violet, #efecf9);
+  color: var(--use-text-theme-violet, #4e3199);
+}
+.zt-benef-card.is-complete .zt-benef-card__avatar {
+  background: var(--use-state-success-bg, #e8f5e9);
+  color: var(--use-state-success-icon, #3c8a3e);
+}
+.zt-benef-card__id {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.zt-benef-card__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4, 0.25rem) var(--space-12, 0.75rem);
+}
+.zt-benef-card__title {
+  margin: 0;
+  min-width: 0;
+  font-size: 18px;
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.3;
+  color: var(--use-text-primary, #111);
+  overflow-wrap: anywhere;
+}
+/* Sin nombre todavía: el título se muestra como "Nuevo beneficiario" atenuado. */
+.zt-benef-card__title.is-placeholder { color: var(--use-text-tertiary, #666); }
+/* Línea secundaria: "Beneficiario N · Parentesco". */
+.zt-benef-card__meta {
+  margin: 0;
+  font-size: var(--font-size-md, 0.875rem);
+  line-height: 1.4;
+  color: var(--use-text-tertiary, #666);
+}
+
+/* ── Chip de estado: icono + texto (el color nunca es el único indicador) ── */
+.zt-benef-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4, 0.25rem);
+  padding: 2px var(--space-8, 0.5rem) 2px 6px;   /* chip compacto (Figma badge) */
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: var(--font-size-sm, 0.75rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.zt-benef-card__status--pending {
+  background: var(--use-state-warning-bg, #fff2d9);
+  border-color: var(--use-state-warning-border, #fcce72);
+  color: var(--use-state-warning-text, #111);
+}
+.zt-benef-card__status--complete {
+  background: var(--use-state-success-bg, #e8f5e9);
+  border-color: var(--use-state-success-border, #a5d6a7);
+  color: var(--use-state-success-text, #1e5e20);
+}
+
+/* Microcopy de campos faltantes (colapsada + pendiente): qué falta sin abrir. */
+.zt-benef-card__missing {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8, 0.5rem);
+  margin: var(--space-16, 1rem) 0 0;
+  padding: var(--space-8, 0.5rem) var(--space-12, 0.75rem);
+  margin-left: calc(44px + var(--space-16, 1rem));   /* alinea con el texto, tras el avatar */
+  border-radius: var(--radius-xs, 0.5rem);
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  font-size: var(--font-size-md, 0.875rem);
+  line-height: 1.4;
+  color: var(--use-text-secondary, #333);
+}
+.zt-benef-card__missing[hidden] { display: none; }
+.zt-benef-card__missing .icon { flex: 0 0 auto; margin-top: 1px; color: var(--use-state-warning-icon-color, #b27700); }
+
+/* ── Acciones ── */
+.zt-benef-card__actions {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8, 0.5rem);
+}
+.zt-benef-card__action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4, 0.25rem);
+  min-height: 40px;                         /* área táctil cómoda */
+  padding: var(--space-8, 0.5rem) var(--space-12, 0.75rem);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md, 1.5rem);
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--font-size-md, 0.875rem);
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.zt-benef-card__action:focus-visible {
+  outline: 2px solid var(--use-focus-outline, #ff6600);
+  outline-offset: 2px;
+}
+/* Eliminar: secundaria y discreta; se vuelve roja solo al interactuar. */
+.zt-benef-card__action--delete { color: var(--use-text-tertiary, #666); }
+.zt-benef-card__action--delete:hover,
+.zt-benef-card__action--delete:focus-visible {
+  color: var(--use-state-error-mandatory, #bb4945);
+  background: var(--use-state-error-bg, #fdecea);
+}
+/* Editar / Cerrar: acción principal de la card (pill con borde naranja). */
+.zt-benef-card__action--toggle {
+  color: var(--use-primary-default, #ff6600);
+  border-color: var(--use-primary-default, #ff6600);
+}
+.zt-benef-card__action--toggle:hover {
+  background: var(--use-surface-orange, #fff4ec);
+}
+
+/* ── Cuerpo (formulario) de la vista expandida ── */
+.zt-benef-card__body {
+  margin-top: var(--space-24, 1.5rem);
+  padding-top: var(--space-24, 1.5rem);
+  border-top: 1px solid var(--use-border-subtle, #e0e0e0);   /* separa encabezado y formulario */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24, 1.5rem);
+}
+/* Colapsada → sin body. */
+.zt-benef-card:not(.is-expanded) .zt-benef-card__body { display: none; }
+
+/* Respeto a usuarios sensibles al movimiento: sin transiciones/animaciones. */
+@media (prefers-reduced-motion: reduce) {
+  .zt-benef-card, .zt-benef-card * { transition: none !important; animation: none !important; }
+}
+
+/* ── Responsive: en mobile las acciones bajan bajo el encabezado ──
+   El padding del acordeón se mantiene en 24px (transversal), tanto colapsado
+   como abierto. Solo se reordenan header/acciones para no salir del viewport. */
+@media (max-width: 680px) {
+  .zt-benef-card__head { flex-wrap: wrap; gap: var(--space-12, 0.75rem); }
+  .zt-benef-card__avatar { width: 40px; height: 40px; }
+  .zt-benef-card__id { flex: 1 1 calc(100% - 40px - var(--space-12, 0.75rem)); }
+  .zt-benef-card__actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .zt-benef-card__missing { margin-left: 0; }
+}

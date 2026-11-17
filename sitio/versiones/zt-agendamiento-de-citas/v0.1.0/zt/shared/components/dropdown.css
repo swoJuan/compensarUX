@@ -1,0 +1,208 @@
+/* ============================================================
+ * dropdown.css — Componente transversal ZT "Dropdown List"
+ * ------------------------------------------------------------
+ * Lista desplegable reutilizable (apariencia = Dropdown Menu del DS,
+ * semántica = combobox + listbox para selección de datos).
+ *
+ * Reutilizable en cualquier select/dropdown de ZT:
+ * Tipo de documento, Especialidad, Centro médico, etc.
+ * NO se crean variantes por flujo.
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ * Todo token-first (tokens del sistema de diseño). No inventa colores.
+ *
+ * Anatomía:
+ *   .zt-dropdown                 contenedor posicionador (relative)
+ *     .zt-dropdown__trigger      botón que abre (estilo campo del DS)
+ *     .zt-dropdown__list         listbox (panel de opciones)
+ *       .zt-dropdown__search     buscador opcional
+ *       .zt-dropdown__option     cada opción (role=option)
+ * ============================================================ */
+
+.zt-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Trigger: reutiliza el look del campo del DS (.mp-input-field) ──
+   El componente añade solo layout de contenido + caret. */
+.zt-dropdown__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8, .5rem);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.zt-dropdown__trigger:disabled,
+.zt-dropdown__trigger[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+/* Valor / placeholder del trigger */
+.zt-dropdown__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.zt-dropdown__value.is-placeholder {
+  color: var(--use-text-tertiary, #666);
+}
+/* Caret: gira al abrir */
+.zt-dropdown__caret {
+  flex: 0 0 auto;
+  transition: transform .18s ease-in-out;
+}
+.zt-dropdown__trigger[aria-expanded="true"] .zt-dropdown__caret {
+  transform: rotate(180deg);
+}
+
+/* ── Lista (panel de opciones) ── */
+.zt-dropdown__list {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + var(--space-4, .25rem));
+  left: 0;
+  width: 100%;                       /* hereda el ancho del trigger (>= trigger) */
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--use-surface-white, #fff);
+  border-radius: var(--radius-xs, .5rem);   /* radius 8px */
+  box-shadow: var(--shadow-1, 0.125rem 0.3125rem 1rem rgba(0,0,0,.15));  /* shadow 1 */
+  overflow: hidden;                  /* recorta esquinas; el scroll va en __scroll */
+  /* animación de apertura */
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity .16s ease-in-out, transform .16s ease-in-out;
+}
+.zt-dropdown__list.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.zt-dropdown__list[hidden] { display: none; }
+
+/* Zona con scroll (max-height coherente; ~5 items de 56px) */
+.zt-dropdown__scroll {
+  max-height: 17.5rem;               /* 280px ≈ 5 × 56px */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* Scrollbar discreto (solo cuando hace falta) */
+.zt-dropdown__scroll::-webkit-scrollbar { width: 8px; }
+.zt-dropdown__scroll::-webkit-scrollbar-thumb {
+  background: var(--use-border-default, #ccc);
+  border-radius: var(--radius-full, 2rem);
+}
+.zt-dropdown__scroll::-webkit-scrollbar-track { background: transparent; }
+
+/* ── Buscador opcional (listas largas) ── */
+.zt-dropdown__search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8, .5rem);
+  padding: var(--space-12, .75rem) var(--space-16, 1rem);
+  border-bottom: 1px solid var(--use-border-subtle, #e0e0e0);
+  background: var(--use-surface-white, #fff);
+}
+.zt-dropdown__search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body, 'Roboto', sans-serif);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--use-text-primary, #111);
+}
+.zt-dropdown__search-input::placeholder { color: var(--use-text-tertiary, #666); }
+.zt-dropdown__search .icon { color: var(--use-text-tertiary, #666); flex: 0 0 auto; }
+
+/* ── Opción (item) — DS: 56px, padding 16, gap 10, Roboto 16/150% ls 1% ── */
+.zt-dropdown__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10, .625rem);
+  min-height: 3.5rem;                /* 56px */
+  padding: var(--space-16, 1rem);
+  background: var(--use-surface-white, #fff);
+  color: var(--use-text-primary, #111);
+  font-family: var(--font-body, 'Roboto', sans-serif);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.5;
+  letter-spacing: .01em;             /* 1% */
+  cursor: pointer;
+  /* Evita layout shift en focus: borde transparente por defecto (el focus usa borde) */
+  border: 2px solid transparent;
+  transition: background-color .12s ease-in-out, color .12s ease-in-out;
+}
+.zt-dropdown__option-icon { flex: 0 0 auto; }
+.zt-dropdown__option-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* HOVER — surface theme orange/20 */
+.zt-dropdown__option:hover:not([aria-disabled="true"]):not([aria-selected="true"]) {
+  background: var(--use-surface-theme-orange-20, #ffe5cc);
+}
+/* FOCUS (teclado / activedescendant) — orange/20 + borde 2px, inset, sin shift */
+.zt-dropdown__option.is-focus:not([aria-selected="true"]) {
+  background: var(--use-surface-theme-orange-20, #ffe5cc);
+  border-color: var(--use-focus-outline, #ff6600);
+}
+/* ACTIVE / SELECTED — primary naranja + texto on-dark */
+.zt-dropdown__option[aria-selected="true"] {
+  background: var(--use-primary-default, #ff6600);
+  color: var(--use-text-on-dark-primary, #fff);
+  font-weight: var(--font-weight-bold, 700);
+}
+/* Check de la opción seleccionada (opcional, hereda color on-dark) */
+.zt-dropdown__option-check {
+  flex: 0 0 auto;
+  margin-left: auto;
+  opacity: 0;
+}
+.zt-dropdown__option[aria-selected="true"] .zt-dropdown__option-check { opacity: 1; }
+
+/* DISABLED */
+.zt-dropdown__option[aria-disabled="true"] {
+  color: var(--base-neutral-50, #a4a4a4);
+  background: var(--use-surface-white, #fff);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Variante futura con checkbox (multi-select) — preparada, no activa ──
+   Se activa añadiendo la clase .zt-dropdown--checkbox al contenedor. */
+.zt-dropdown--checkbox .zt-dropdown__option[aria-selected="true"] {
+  background: var(--use-surface-white, #fff);
+  color: var(--use-text-primary, #111);
+  font-weight: var(--font-weight-regular, 400);
+}
+.zt-dropdown--checkbox .zt-dropdown__option-checkbox {
+  flex: 0 0 auto;
+  width: 20px; height: 20px;
+  border: 2px solid var(--use-border-default, #ccc);
+  border-radius: 4px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .zt-dropdown__caret,
+  .zt-dropdown__list { transition: none; }
+}
+
+/* ── Responsive: no salir del viewport, área táctil cómoda ── */
+@media (max-width: 680px) {
+  .zt-dropdown__scroll { max-height: 60vh; }
+}

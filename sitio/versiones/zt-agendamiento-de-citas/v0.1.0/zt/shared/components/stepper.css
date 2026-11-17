@@ -1,0 +1,218 @@
+/* ============================================================
+ * stepper.css — Componente transversal ZT "Process Stepper"
+ * ------------------------------------------------------------
+ * Indicador de progreso vertical para procesos por pasos (afiliación,
+ * onboarding, etc.). Anatomía:
+ *   .zt-stepper-wrap
+ *     .zt-stepper__progress   "Tu progreso · Paso N de M" + barra
+ *     ol.zt-stepper           línea de tiempo de pasos
+ *       .zt-step              badge + texto (label + hint "En curso" si activo)
+ * Estados: completed (check verde + conector verde), active (violeta, destacado),
+ * future (atenuado, badge con borde) y clickable (si el flujo permite navegar).
+ *
+ * Componente GENERAL: no está acoplado a "afiliación". Los flujos definen
+ * los pasos y cuál está activo.
+ *
+ * Incluye además la COMPOSICIÓN TRANSVERSAL del panel lateral de procesos ZT
+ * (aside.pa-side = Person Summary + Stepper) como UNA sola card.
+ *
+ * Cascada: Design System (vendor/core.css) → zt.css → ESTE componente.
+ * Token-first (los fallbacks reflejan los valores del Figma).
+ * ============================================================ */
+
+/* ═══════════════ PANEL LATERAL DE PROCESO (aside.pa-side) ═══════════════
+ * Resumen de la persona + progreso + pasos en una sola card: se lee como un
+ * bloque ("a quién afilio" → "cuánto llevo" → "dónde estoy").
+ * `aside.pa-side` (más específico que `.pa-side` de cada paso) solo agrega la
+ * piel de card; el ancho/flex lo sigue definiendo cada paso. */
+aside.pa-side {
+  gap: 0;
+  background: var(--use-surface-white, #fff);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  border-radius: var(--radius-sm, 1rem);
+  overflow: hidden;
+}
+aside.pa-side .zt-person {
+  border-radius: 0;
+  padding: var(--space-16, 1rem) var(--space-16, 1rem) var(--space-16, 1rem);
+}
+
+/* ═══════════════ CABECERA DE PROGRESO ═══════════════ */
+.zt-stepper__progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8, 0.5rem);
+  padding: var(--space-16, 1rem) var(--space-16, 1rem) var(--space-4, 0.25rem);
+}
+.zt-stepper__progress-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-8, 0.5rem);
+}
+.zt-stepper__progress-title {
+  font-size: var(--font-size-sm, 0.75rem);
+  font-weight: var(--font-weight-semibold, 600);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--use-text-tertiary, #666);
+}
+.zt-stepper__progress-count {
+  font-size: var(--font-size-md, 0.875rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--use-text-primary, #111);
+}
+.zt-stepper__bar {
+  position: relative;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  box-shadow: inset 0 0 0 1px var(--use-border-subtle, #e0e0e0);
+  overflow: hidden;
+}
+.zt-stepper__bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: var(--use-surface-theme-green-2-60, #95bf1b);
+}
+
+/* ═══════════════ LÍNEA DE TIEMPO ═══════════════ */
+.zt-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 0.25rem);
+  width: 100%;
+  padding: var(--space-8, 0.5rem) var(--space-8, 0.5rem) var(--space-12, 0.75rem);
+  list-style: none;
+  margin: 0;
+}
+
+/* Cada paso */
+.zt-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-12, 0.75rem);
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-8, 0.5rem);
+  border: none;
+  border-radius: var(--radius-xs, 0.5rem);
+  background: transparent;
+  text-align: left;
+  cursor: default;
+  font: inherit;
+}
+
+/* Conector vertical entre badges (centro del badge 28px = 8px padding + 14px).
+   Tramo verde si el paso ya se completó. Filas de una línea: 48px. */
+.zt-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--space-8, 0.5rem) + 13px);
+  top: calc(50% + 16px);
+  bottom: calc(-1 * var(--space-4, 0.25rem) - 8px);   /* cruza el gap hasta el siguiente badge */
+  width: 2px;
+  border-radius: 2px;
+  background: var(--use-border-subtle, #e0e0e0);
+}
+.zt-step--completed:not(:last-child)::after {
+  background: var(--use-surface-theme-green-2-60, #95bf1b);
+}
+
+/* Badge numérico (28×28, círculo) */
+.zt-step__badge {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full, 44px);
+  border: 1px solid var(--use-border-subtle, #e0e0e0);
+  background: var(--use-surface-white, #fff);
+  color: var(--use-text-tertiary, #666);
+  font-family: var(--font-family-base, "Roboto", sans-serif);
+  font-size: var(--font-size-sm, 0.75rem);
+  font-weight: var(--font-weight-semibold, 600);
+  line-height: 1;
+}
+
+/* Texto: label + hint */
+.zt-step__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.zt-step__label {
+  font-family: var(--font-family-base, "Roboto", sans-serif);
+  font-size: var(--font-size-md, 0.875rem);
+  font-weight: var(--font-weight-regular, 400);
+  line-height: 1.3;
+  color: var(--use-text-tertiary, #666);
+  overflow-wrap: anywhere;
+}
+.zt-step__hint {
+  font-size: var(--font-size-sm, 0.75rem);
+  line-height: 1.3;
+  color: var(--use-text-theme-violet, #4e3199);
+  opacity: .85;
+}
+
+/* ── COMPLETED: check verde; el texto se lee normal (no "deshabilitado") ── */
+.zt-step--completed .zt-step__badge {
+  border-color: transparent;
+  background: var(--use-surface-theme-green-2-60, #95bf1b);
+  color: var(--use-text-on-dark-primary, #fff);
+}
+.zt-step--completed .zt-step__label { color: var(--use-text-secondary, #333); }
+
+/* ── ACTIVE: fila violeta destacada ── */
+.zt-step--active {
+  background: var(--use-surface-violet, #efecf9);
+}
+.zt-step--active .zt-step__badge {
+  border-color: transparent;
+  background: var(--use-surface-theme-violet-60, #5b3ab4);
+  color: var(--use-text-on-dark-primary, #fff);
+  box-shadow: 0 0 0 4px var(--use-surface-white, #fff);   /* halo que separa del conector */
+}
+.zt-step--active .zt-step__label {
+  color: var(--use-text-theme-violet, #4e3199);
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+/* ── FUTURE / DISABLED: atenuado, sin opacidad global (mejor contraste) ── */
+.zt-step--disabled { cursor: default; }
+
+/* ── Interactivo (cuando el flujo permite navegar a un paso) ── */
+.zt-step--clickable {
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.zt-step--clickable:hover:not(.zt-step--active) {
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+}
+.zt-step--clickable:focus-visible {
+  outline: 2px solid var(--use-focus-outline, #7b61ff);
+  outline-offset: 2px;
+}
+
+/* ══════════════ RESPONSIVE ══════════════ */
+/* En pantallas angostas el panel ocupa todo el ancho y va ARRIBA del formulario:
+   basta con la barra "Paso N de M" + el paso actual (sin lista larga ni scroll
+   horizontal que corte etiquetas). */
+@media (max-width: 900px) {
+  .zt-stepper { padding: var(--space-8, 0.5rem) var(--space-12, 0.75rem) var(--space-12, 0.75rem); }
+  .zt-step:not(.zt-step--active) { display: none; }
+  .zt-step::after { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zt-step, .zt-stepper__bar-fill { transition: none !important; }
+}
