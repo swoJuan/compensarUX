@@ -109,7 +109,8 @@ test('publicar una versión nueva no altera las anteriores y respeta la inmutabi
   const ultima = V.listarVersiones(ID)[0];
   const [a, b, c] = ultima.version.split('.').map(Number);
   const nueva = `${a}.${b}.${c + 1}`;
-  const ok = node('version-flujo.mjs', [ID, nueva, '--notas', 'prueba automatizada']);
+  assert.notEqual(node('version-flujo.mjs', [ID, nueva, '--notas', 'prueba automatizada']).status, 0, 'sin --aprobado-por no se publica');
+  const ok = node('version-flujo.mjs', [ID, nueva, '--notas', 'prueba automatizada', '--aprobado-por', 'Prueba']);
   assert.equal(ok.status, 0, ok.stderr + ok.stdout);
   const despues = foto(ALM);
   for (const [k, h] of Object.entries(antes)) assert.equal(despues[k], h, `cambió ${k}`);
@@ -118,7 +119,7 @@ test('publicar una versión nueva no altera las anteriores y respeta la inmutabi
   assert.equal(recursos.length, 1, 'recursos idénticos se reutilizan, no se duplican');
   assert.notEqual(node('version-flujo.mjs', [ID, nueva, '--notas', 'x']).status, 0, 'no se puede repetir');
   assert.notEqual(node('version-flujo.mjs', [ID, ultima.version, '--notas', 'x']).status, 0, 'no se puede reutilizar una anterior');
-  assert.notEqual(node('version-flujo.mjs', [ID, `${a}.${b}.${c + 2}`]).status, 0, 'exige notas');
+  assert.notEqual(node('version-flujo.mjs', [ID, `${a}.${b}.${c + 2}`, '--aprobado-por', 'Prueba']).status, 0, 'exige notas');
   // El catálogo (0.1.0) ya no coincide con la última publicada: el build debe avisarlo.
   assert.notEqual(node('build.mjs').status, 0, 'catálogo desfasado respecto a la última versión');
 });
