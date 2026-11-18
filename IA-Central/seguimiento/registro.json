@@ -429,6 +429,72 @@
       "responsable": "Juan Carlos Soto",
       "fuente": "Flujos/portal/catalogo.json",
       "verificadoEn": "2026-11-13"
+    },
+    {
+      "id": "INT-CDN-zt-ventas-y-afiliacion",
+      "descripcion": "Integración del CSS compartido compensar.min.css v2.4.0 en 13 páginas (reemplaza core.css + icons.css locales; copias locales conservadas). Resultado aprobado por el director UX; QA parcial.",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "pendiente_qa",
+      "responsable": "Juan Carlos Soto",
+      "evidencia": "13 index.html modificados. QA automatizado con Chrome (13 páginas x 375/768/1440 px x light/dark/high-contrast + zoom 200%): 0 diferencias en 45.090 estilos computados, foco/hover idénticos, CDN cargado 1 vez por página con 200, 0 errores de red o consola. Estados interactivos: 40 de 44 idénticos; los 4 restantes (paso-1, 375 px) varían entre ejecuciones en ambos modos.",
+      "siguientePaso": "Completar los pendientes de QA QA-CDN-* antes de pasar a validado.",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/prototipos/zt/ventas-y-afiliacion/**/index.html"
+    },
+    {
+      "id": "TRZ-CDN-ds-v2.4.0",
+      "descripcion": "Trazabilidad: ds-version.json local (commit 27767a7) difiere del manifest del CDN compensar v2.4.0 (commit f6cdff4); contenido comparado equivalente. compensar-zt v1.0.0 publicado con arbolSucio=true y Flujos/prototipos/dist/compensar-zt/v1.0.0 local difiere en 16 bytes del publicado. No resuelto en esta fase.",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "por_verificar",
+      "responsable": "compensar-entregas",
+      "evidencia": "manifest.json del CDN y shared/vendor/ds-version.json",
+      "siguientePaso": "Revisar con compensar-entregas antes de integrar compensar-zt.min.css.",
+      "verificadoEn": "2026-11-13",
+      "fuente": "https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.4.0/manifest.json"
+    },
+    {
+      "id": "INC-mis-radicados-overflow-768",
+      "descripcion": "Hallazgo independiente de la integración CDN: mis-radicados tiene desborde horizontal a 768 px (scrollWidth 788 > 768). Idéntico antes y después del cambio. No corregido en esta tarea.",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "por_verificar",
+      "responsable": "compensar-qa",
+      "evidencia": "Medición con Chrome headless antes/después",
+      "siguientePaso": "Diagnosticar y corregir en una tarea aparte.",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/prototipos/zt/ventas-y-afiliacion/mis-radicados/"
+    },
+    {
+      "id": "QA-CDN-dropdown-paso-1",
+      "descripcion": "No se pudo probar el estado abierto del dropdown de paso-1: el selector .zt-dropdown__trigger no se encontró en esa pantalla. El dropdown del paso-2 sí se probó y es idéntico antes/después.",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "por_verificar",
+      "responsable": "compensar-qa",
+      "evidencia": "Prueba de estados en Chrome headless (dropdown paso-1 con timeout de selector).",
+      "siguientePaso": "Probar el dropdown de paso-1 con el selector correcto, comparando CSS local y CDN.",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/prototipos/zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/"
+    },
+    {
+      "id": "QA-CDN-accesibilidad",
+      "descripcion": "Accesibilidad no completada: sin lector de pantalla, sin medición de contraste ni auditoría WCAG 2.2 AA. Solo se verificó que foco, orden de tabulación y estilos de foco son idénticos antes/después.",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "pendiente_qa",
+      "responsable": "compensar-qa",
+      "evidencia": "Comparación estructural de 14 pulsaciones de Tab por página.",
+      "siguientePaso": "Ejecutar auditoría de accesibilidad con lector de pantalla y contraste.",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/prototipos/zt/ventas-y-afiliacion/"
+    },
+    {
+      "id": "QA-CDN-navegadores",
+      "descripcion": "Compatibilidad entre navegadores no probada: solo Chrome. Faltan Safari y Firefox. También falta probar el comportamiento sin conexión, ya que las páginas dependen ahora del CDN en Azure.",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "pendiente_qa",
+      "responsable": "compensar-qa",
+      "evidencia": "QA ejecutado únicamente con Google Chrome.",
+      "siguientePaso": "Probar en Safari y Firefox y documentar el comportamiento sin conexión.",
+      "verificadoEn": "2026-11-13",
+      "fuente": "Flujos/prototipos/zt/ventas-y-afiliacion/"
     }
   ],
   "entregas": [],
@@ -439,6 +505,20 @@
       "tipo": "sincronizacion",
       "descripcion": "Registro reconstruido desde fuentes: 7 flujos, 30 componentes, 12 decisiones, 8 pendientes",
       "origen": "conocimiento.mjs"
+    },
+    {
+      "fecha": "2026-11-13",
+      "tipo": "integracion_css_cdn",
+      "flujo": "zt-ventas-y-afiliacion",
+      "resumen": "core.css+icons.css locales reemplazados por compensar.min.css v2.4.0 en 13 páginas; copias locales conservadas; sin commit.",
+      "fuente": "IA-Central/seguimiento/registro.json"
+    },
+    {
+      "fecha": "2026-11-13",
+      "tipo": "cierre_tecnico_integracion_css_cdn",
+      "flujo": "zt-ventas-y-afiliacion",
+      "resumen": "Resultado aprobado por el director UX. Se mantiene pendiente_qa por accesibilidad, navegadores y dropdown de paso-1. Commit local sin push ni versión navegable.",
+      "fuente": "IA-Central/seguimiento/registro.json"
     }
   ]
 }
