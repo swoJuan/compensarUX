@@ -598,7 +598,24 @@
       "fuente": "Flujos/prototipos/app/efecto-swap/"
     }
   ],
-  "entregas": [],
+  "entregas": [
+    {
+      "id": "ENT-app-efecto-swap-dev",
+      "flujo": "app-efecto-swap",
+      "estado": "pendiente_confirmacion",
+      "tipo": "entrega_a_desarrollo",
+      "version": "0.1.0",
+      "descripcion": "Entrega a Desarrollo del prototipo APP Efecto Swap como código de referencia UX, no productivo. Autorizada de palabra por el director UX; falta definir el destino y el paquete (ZIP con LEEME y manifest) y confirmar con el director.",
+      "aprobadoUX": true,
+      "publicadoEnPortalLocal": true,
+      "publicadoEnSitio": false,
+      "despliegue": null,
+      "evidencia": null,
+      "siguientePaso": "Confirmar con el director UX alcance de la etiqueta; luego compensar-entregas arma el paquete.",
+      "verificadoEn": "2026-11-23",
+      "fuente": "Flujos/portal/catalogo.json"
+    }
+  ],
   "eventos": [
     {
       "id": "EV-2026-11-13-sync",
@@ -641,6 +658,13 @@
       "flujo": "app-efecto-swap",
       "resumen": "Aprobado por UX por instrucción del director. Pantalla app/efecto-swap/index.html registrada en Flujos/portal/trazabilidad/app-efecto-swap.json y vinculada a HU-303. Sin commit, versión navegable ni cambios en sitio/.",
       "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "fecha": "2026-11-23",
+      "tipo": "entrega_pendiente",
+      "flujo": "app-efecto-swap",
+      "resumen": "Commits locales del flujo hechos (portal 8319917, flujo 4bc3b2b). Entrega a dev registrada como pendiente_confirmacion; sin versión navegable, push, despliegue ni cambios en sitio/.",
+      "fuente": "IA-Central/seguimiento/registro.json"
     }
   ]
 }
