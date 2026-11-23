@@ -68,6 +68,11 @@ for (const f of flujos) {
   if (ids.has(f.id)) throw new Error(`Id de flujo duplicado en catalogo.json: ${f.id}`);
   ids.add(f.id);
   if (!cfg.plataformas[f.plataforma]) throw new Error(`Plataforma desconocida en ${f.id}: ${f.plataforma}`);
+  /* `categorias` (opcional): lista de etiquetas transversales en minúsculas, p. ej. ["swap"]. */
+  if (f.categorias !== undefined) {
+    if (!Array.isArray(f.categorias) || f.categorias.some((c) => typeof c !== 'string' || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(c)) || new Set(f.categorias).size !== f.categorias.length)
+      throw new Error(`categorias inválidas en ${f.id}: debe ser una lista sin repetidos de etiquetas en minúsculas (a-z, 0-9, guiones), p. ej. ["swap"]`);
+  }
 }
 const publicados = flujos.filter((f) => f.publicar);
 const plataformasUsadas = [...new Set(publicados.map((f) => f.plataforma))];
@@ -622,6 +627,7 @@ const salida = {
     estado: f.estado,
     figma: f.figma || null,
     hu: f.hu || [],
+    categorias: f.categorias || [],
     publicado: !!f.publicar,
     url: f.publicar ? `${cfg.flujos.destino}/${f.ruta.replace(/\/?$/, '/')}${f.entrada || 'index.html'}` : null,
     descarga: descargasFlujos[f.id] || null,

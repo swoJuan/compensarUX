@@ -65,6 +65,10 @@
     var p = cat.plataformas[id] || {};
     return tag(p.nombreCorto || id, PLATAFORMA_TAG[id] || 'neutral');
   }
+  /* Categorías transversales (p. ej. «swap»): etiquetas neutras; el filtro del catálogo las usa. */
+  function tagsCategorias(f) {
+    return (f.categorias || []).map(function (c) { return tag(c, 'neutral'); }).join('');
+  }
   function params() { return new URLSearchParams(window.location.search); }
 
   /* ---------- sistema de diseño: versión legible ---------- */
@@ -428,7 +432,7 @@
   function textoBusqueda(f, cat) {
     var pl = (cat && cat.plataformas && cat.plataformas[f.plataforma]) || {};
     var est = (ESTADOS[f.estado] || {}).label || '';
-    return [f.nombre, f.descripcion, pl.nombre, pl.nombreCorto, f.plataforma, est].concat((f.hu || []).map(textoHu)).join(' ');
+    return [f.nombre, f.descripcion, pl.nombre, pl.nombreCorto, f.plataforma, est].concat(f.categorias || []).concat((f.hu || []).map(textoHu)).join(' ');
   }
   function normalizar(s) {
     return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -673,6 +677,7 @@
     var est = $('[data-filtro-estado]');
     var ord = $('[data-filtro-orden]');
     var pub = $('[data-filtro-publicados]');
+    var catSel = $('[data-filtro-categoria]');
     var tabs = $all('[data-filtro-plataforma] [data-plataforma]');
     var botonesVista = $all('[data-vista-cat]');
     var res = $('[data-resultados]');
@@ -686,12 +691,24 @@
       q: p.get('q') || '',
       estado: ESTADOS[p.get('estado')] ? p.get('estado') : '',
       publicados: p.get('publicados') === '1',
+      categoria: p.get('categoria') || '',
       orden: ORDENES[p.get('orden')] ? p.get('orden') : 'recientes',
       vista: TAM_PAGINA[p.get('vista')] ? p.get('vista') : (TAM_PAGINA[vistaGuardada] ? vistaGuardada : 'lista'),
       pagina: Math.max(1, parseInt(p.get('pagina'), 10) || 1)
     };
     q.value = estado.q; est.value = estado.estado; pub.checked = estado.publicados;
     if (ord) ord.value = estado.orden;
+    if (catSel) {
+      var todasCat = [];
+      cat.flujos.forEach(function (f) { (f.categorias || []).forEach(function (c) { if (todasCat.indexOf(c) < 0) todasCat.push(c); }); });
+      if (!todasCat.length) { var grupoCat = catSel.closest('.mp-input-group'); if (grupoCat) grupoCat.hidden = true; estado.categoria = ''; }
+      else {
+        todasCat.sort().forEach(function (c) { catSel.insertAdjacentHTML('beforeend', '<option value="' + esc(c) + '">' + esc(c) + '</option>'); });
+        if (todasCat.indexOf(estado.categoria) < 0) estado.categoria = '';
+        catSel.value = estado.categoria;
+        catSel.addEventListener('change', function () { estado.categoria = catSel.value; estado.pagina = 1; pintar(true); });
+      }
+    }
 
     tabs.forEach(function (t) {
       var id = t.getAttribute('data-plataforma');
@@ -715,6 +732,7 @@
       if (estado.plataforma && f.plataforma !== estado.plataforma) return false;
       if (estado.estado && f.estado !== estado.estado) return false;
       if (estado.publicados && !f.publicado) return false;
+      if (estado.categoria && (f.categorias || []).indexOf(estado.categoria) < 0) return false;
       if (estado.q) {
         // Cada palabra debe aparecer en nombre, descripción, plataforma, estado o alguna HU
         // (ej. "256", "HU-256", "293917", "menu responsive", "drupal", "aprobado").
@@ -730,6 +748,7 @@
       if (estado.q) u.set('q', estado.q);
       if (estado.estado) u.set('estado', estado.estado);
       if (estado.publicados) u.set('publicados', '1');
+      if (estado.categoria) u.set('categoria', estado.categoria);
       if (estado.orden !== 'recientes') u.set('orden', estado.orden);
       if (estado.vista !== 'lista') u.set('vista', estado.vista);
       if (n > 1) u.set('pagina', n);
@@ -737,7 +756,8 @@
       return s ? '?' + s : window.location.pathname.split('/').pop() || 'prototipos.html';
     }
     function limpiar() {
-      estado.q = ''; estado.estado = ''; estado.publicados = false; estado.pagina = 1;
+      estado.q = ''; estado.estado = ''; estado.publicados = false; estado.categoria = ''; estado.pagina = 1;
+      if (catSel) catSel.value = '';
       if (!fija) estado.plataforma = '';
       q.value = ''; est.value = ''; pub.checked = false;
       pintar(true);
@@ -887,7 +907,8 @@
       vista +
       '<div class="pux-fcard__body">' +
         '<h3 class="pux-fcard__title"><a href="' + detalle + '">' + esc(f.nombre) + '</a></h3>' +
-        '<p class="pux-fcard__desc">' + esc(f.descripcion) + '</p>' + hu +
+        '<p class="pux-fcard__desc">' + esc(f.descripcion) + '</p>' +
+        ((f.categorias || []).length ? '<div class="pux-tags">' + tagsCategorias(f) + '</div>' : '') + hu +
         '<p class="pux-fcard__meta">' + esc(nombrePlataforma(f.plataforma, cat)) + ' · Versión ' + esc(f.version) + ' · actualizado el ' + esc(fecha(f.actualizado)) + '</p>' +
       '</div>' +
       '<div class="pux-fcard__lado">' +
@@ -1056,7 +1077,7 @@
     if (window.PortalFicha) {
       window.PortalFicha.render(cont, f, cat, {
         esc: esc, $: $, $all: $all, fecha: fecha, fechaHora: fechaHora, tag: tag, vacio: vacio, badgeEstado: badgeEstado,
-        tagPlataforma: tagPlataforma, botonVisualizar: botonVisualizar, abrirDrawer: abrirDrawer, cerrarDrawer: cerrarDrawer,
+        tagPlataforma: tagPlataforma, tagsCategorias: tagsCategorias, botonVisualizar: botonVisualizar, abrirDrawer: abrirDrawer, cerrarDrawer: cerrarDrawer,
         initPreview: initPreview, dsEnPrototipos: dsEnPrototipos, sinV: sinV, ESTADOS: ESTADOS, SEP_RUTA: SEP_RUTA, params: params
       });
       return;
@@ -1102,13 +1123,13 @@
       ? '<section class="pux-section pux-section--tight" aria-labelledby="vista-titulo"><div class="pux-container">' +
           '<div class="pux-preview__head">' +
             '<h2 class="mp-h6 pux-section__title" id="vista-titulo">Vista previa</h2>' +
-            '<div class="mp-tabs" role="group" aria-label="Tamaño de la vista previa">' +
+            (f.plataforma === 'app' ? '' : '<div class="mp-tabs" role="group" aria-label="Tamaño de la vista previa">' +
               '<button class="mp-tab is-active" type="button" aria-pressed="true" data-viewport="desktop">Escritorio</button>' +
               '<button class="mp-tab" type="button" aria-pressed="false" data-viewport="mobile">Móvil</button>' +
-            '</div>' +
+            '</div>') +
           '</div>' +
           '<p class="pux-muted">La vista previa es solo para explorar. Para comentar, abre el prototipo completo.</p>' +
-          '<div class="pux-preview" data-preview data-viewport-actual="desktop">' +
+          '<div class="pux-preview" data-preview data-viewport-actual="' + (f.plataforma === 'app' ? 'mobile' : 'desktop') + '">' +
             '<div class="pux-preview__frame"><iframe src="' + esc(f.url) + '" title="Vista previa: ' + esc(f.nombre) + '" loading="lazy"></iframe></div>' +
           '</div>' +
         '</div></section>'
@@ -1123,7 +1144,7 @@
           '<li class="mp-breadcrumb__item">' + SEP_RUTA + '<a class="mp-breadcrumb__link" href="' + esc(f.plataforma) + '.html">Prototipos · ' + esc(pl.nombreCorto || f.plataforma) + '</a></li>' +
           '<li class="mp-breadcrumb__item">' + SEP_RUTA + '<span class="mp-breadcrumb__current" aria-current="page">' + esc(f.nombre) + '</span></li>' +
         '</ol></nav>' +
-        '<div class="pux-tags">' + tagPlataforma(f.plataforma, cat) + badgeEstado(f.estado) + '</div>' +
+        '<div class="pux-tags">' + tagPlataforma(f.plataforma, cat) + badgeEstado(f.estado) + tagsCategorias(f) + '</div>' +
         '<h1 class="pux-page-head__title">' + esc(f.nombre) + '</h1>' +
         '<p class="mp-body-xl pux-page-head__lead">' + esc(f.descripcion) + '</p>' +
         '<div class="pux-hero__actions">' + abrir + figma + '</div>' +

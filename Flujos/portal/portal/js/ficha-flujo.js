@@ -63,7 +63,7 @@
       '</ol></nav>' +
       '<div class="pux-ficha-head__fila">' +
         '<div class="pux-ficha-head__texto">' +
-          '<div class="pux-tags">' + U.tagPlataforma(F.plataforma, CAT) + U.badgeEstado(F.estado) + '</div>' +
+          '<div class="pux-tags">' + U.tagPlataforma(F.plataforma, CAT) + U.badgeEstado(F.estado) + U.tagsCategorias(F) + '</div>' +
           '<h1 class="pux-page-head__title">' + esc(F.nombre) + '</h1>' +
           '<ul class="pux-ficha-meta" role="list">' + meta + '</ul>' +
         '</div>' +
@@ -115,12 +115,12 @@
     var vista = F.publicado
       ? '<section class="pux-ficha-vista" aria-labelledby="vista-titulo">' +
           '<div class="pux-preview__head"><h2 class="mp-h6 pux-section__title" id="vista-titulo">Vista previa</h2>' +
-            '<div class="mp-tabs" role="group" aria-label="Tamaño de la vista previa">' +
+            (F.plataforma === 'app' ? '' : '<div class="mp-tabs" role="group" aria-label="Tamaño de la vista previa">' +
               '<button class="mp-tab is-active" type="button" aria-pressed="true" data-viewport="desktop">Escritorio</button>' +
               '<button class="mp-tab" type="button" aria-pressed="false" data-viewport="mobile">Móvil</button>' +
-            '</div></div>' +
+            '</div>') + '</div>' +
           '<p class="pux-muted">La vista previa es solo para explorar. Para comentar, abre el prototipo completo.</p>' +
-          '<div class="pux-preview" data-preview data-viewport-actual="desktop"><div class="pux-preview__frame"><iframe src="' + esc(F.url) + '" title="Vista previa: ' + esc(F.nombre) + '" loading="lazy"></iframe></div></div>' +
+          '<div class="pux-preview" data-preview data-viewport-actual="' + (F.plataforma === 'app' ? 'mobile' : 'desktop') + '"><div class="pux-preview__frame"><iframe src="' + esc(F.url) + '" title="Vista previa: ' + esc(F.nombre) + '" loading="lazy"></iframe></div></div>' +
         '</section>'
       : U.vacio('Este flujo aún no está publicado', 'Existe en el repositorio de UX, pero no forma parte de esta publicación.');
     return { grid: info + trazab, vista: vista };
