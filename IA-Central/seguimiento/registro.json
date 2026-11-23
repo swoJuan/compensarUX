@@ -113,6 +113,30 @@
       "publicar": true,
       "verificadoEn": "2026-11-13",
       "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "app-efecto-swap",
+      "nombre": "Efecto Swap (APP)",
+      "plataforma": "app",
+      "ruta": "Flujos/prototipos/app/efecto-swap/",
+      "version": "0.1.0",
+      "estado": "aprobado",
+      "aprobadoUX": true,
+      "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8658-24679&m=dev",
+      "hu": [
+        {
+          "codigo": "HU-303",
+          "titulo": "Implementar paginación infinita"
+        }
+      ],
+      "publicar": true,
+      "categorias": [
+        "swap"
+      ],
+      "categoria": "swap (transversal); campo `categorias` soportado en catalogo.json y portal (PI-SWAP-02 aprobado e implementado, sin commit)",
+      "criteriosAceptacion": "PENDIENTE: la HU llegará después; no se inventaron",
+      "verificadoEn": "2026-11-18",
+      "fuente": "Flujos/portal/catalogo.json"
     }
   ],
   "componentes": [
@@ -495,6 +519,83 @@
       "siguientePaso": "Probar en Safari y Firefox y documentar el comportamiento sin conexión.",
       "verificadoEn": "2026-11-13",
       "fuente": "Flujos/prototipos/zt/ventas-y-afiliacion/"
+    },
+    {
+      "id": "PI-SWAP-01",
+      "descripcion": "Efecto Swap: ajustado al Figma revisado por el director UX (4 frames: 8655:24380 reposo, 8657:139 cargando, 8908:24622 fin, 8923:25318 error). Botón terciario «Cargar más solicitudes» (alternativa al swipe y reintento tras error) y alerta de error con título, sin botón interno. Sin commit ni versión navegable. Pendientes: HU y criterios de aceptación; copy real de «Motivo del rechazo»; destino de «Más información» y Notificaciones.",
+      "flujo": "app-efecto-swap",
+      "estado": "aprobado",
+      "responsable": "Juan Carlos Soto",
+      "evidencia": "2026-11-23 QA Chrome headless (CDP) tras ajuste: 7→14→18, Enter/Espacio con foco a la 1.ª tarjeta nueva, error forzado (?error=1) y reintento con el mismo botón, aria-live, reduced-motion, 320/390 sin overflow, 0 errores de consola/red; botón 189×48; npm run build/check del portal y validar.mjs OK.",
+      "siguientePaso": "Pendiente: decidir solo commit o commit + versión navegable; cargar HU; copy real de «Motivo del rechazo».",
+      "verificadoEn": "2026-11-23",
+      "fuente": "Flujos/prototipos/app/efecto-swap/"
+    },
+    {
+      "id": "PI-SWAP-02",
+      "descripcion": "catalogo.json y registrar-flujo.mjs no tienen campo de categoría ni flujos transversales (la categoría «swap» no está modelada). Propuesta: campo opcional «categorias»: [\"swap\"] (lista de cadenas) en cada flujo, que build.mjs/portal muestren como filtro/etiqueta; no se agregó para no inventar esquema.",
+      "flujo": "app-efecto-swap",
+      "estado": "aprobado",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Revisión de Flujos/portal/catalogo.json, scripts/registrar-flujo.mjs y check.mjs",
+      "siguientePaso": "Aprobado por el director UX (2026-11-23) e implementado en build.mjs y portal (sin commit). Pendiente: commit y publicar con aprobación.",
+      "verificadoEn": "2026-11-18",
+      "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "PI-SWAP-03",
+      "descripcion": "Estado final del Swap (propuesta por defecto): sin spinner, «No hay más solicitudes para mostrar», «Mostrando 18 de 18 solicitudes» y botón oculto, porque Figma 8908:24622 es contradictorio (spinner + 'No hay mas...' + sin botón). Pendiente de confirmar con el director UX.",
+      "flujo": "app-efecto-swap",
+      "estado": "propuesta",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Figma dYhOsRYLR8KewcxNAL9Qo1 frames 8655:24380, 8657:139, 8908:24622, 8923:25318",
+      "siguientePaso": "Confirmar con el director UX.",
+      "verificadoEn": "2026-11-23",
+      "fuente": "Flujos/prototipos/app/efecto-swap/"
+    },
+    {
+      "id": "PI-SWAP-04",
+      "descripcion": "Botón «Cargar más solicitudes»: confirmar que en cargando se ve visible pero inactivo (prototipo: aria-disabled) y que el ancho ~189 px (padding horizontal 8 px) sea override local o variante del DS.",
+      "flujo": "app-efecto-swap",
+      "estado": "propuesta",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Figma dYhOsRYLR8KewcxNAL9Qo1 frames 8655:24380, 8657:139, 8908:24622, 8923:25318",
+      "siguientePaso": "Confirmar con el director UX.",
+      "verificadoEn": "2026-11-23",
+      "fuente": "Flujos/prototipos/app/efecto-swap/"
+    },
+    {
+      "id": "PI-SWAP-05",
+      "descripcion": "Estado de error: confirmar que el contador «Mostrando N de 18» y la pista de swipe se omiten (como en Figma 8923:25318) y que el swipe no reintenta tras error (solo el botón).",
+      "flujo": "app-efecto-swap",
+      "estado": "propuesta",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Figma dYhOsRYLR8KewcxNAL9Qo1 frames 8655:24380, 8657:139, 8908:24622, 8923:25318",
+      "siguientePaso": "Confirmar con el director UX.",
+      "verificadoEn": "2026-11-23",
+      "fuente": "Flujos/prototipos/app/efecto-swap/"
+    },
+    {
+      "id": "DIV-FIGMA-app-efecto-swap",
+      "descripcion": "Divergencias Figma/prototipo (releídas 2026-11-23 sobre 8655:24380, 8657:139, 8908:24622, 8923:25318): (1) Frame fin 8908:24622 es contradictorio: muestra spinner + «Cargando más solicitudes…» + «No hay mas solicitudes para mostrar», sin contador ni botón. Decisión por defecto PROPUESTA, pendiente de confirmar con el director UX: estado final sin spinner, «No hay más solicitudes para mostrar» (con tilde), «Mostrando 18 de 18 solicitudes» y botón «Cargar más solicitudes» oculto. (2) Los frames muestran las mismas 7 tarjetas; no hay diseño de la lista de 14 ni de 18 (se repite el patrón; registros 8–18 ficticios). (3) Spinner Figma gris #d9d9d9 de bajo contraste; se usa mp-loading del DS. (4) Chip Rechazado: Figma texto #bb4945 (~3,9:1 sobre #f7eeed); el DS usa #9e3328 (6,22:1). (5) «{Motivo del rechazo}» sustituido por copy ficticio. (6) Pestañas implementadas como enlaces (propuesta aprobada). (7) Error 8923:25318: el pie no muestra barra, pista ni contador, solo alerta + botón; el prototipo lo replica (contador oculto en error). Texto «más tarde». Icono Figma XCircle → icon-x-circle del DS. (8) Botón «Cargar más solicitudes»: Figma lo muestra en reposo, cargando y error; durante la carga el prototipo lo deja visible pero inactivo (aria-disabled) con el aspecto de Figma. Ancho 189 px exige padding horizontal 8 px (el DS trae 32 px): override local en swap.css, sin tocar el DS. (9) «Ver más solicitudes» y «Reintentar» eliminados.",
+      "flujo": "app-efecto-swap",
+      "estado": "por_verificar",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Relectura get_design_context/get_screenshot (solo lectura) de los 4 frames vs capturas del prototipo a 390 px (/tmp/swap-1..4).",
+      "siguientePaso": "Confirmar con el director UX el estado final (propuesta pendiente) y corregir el frame 8908:24622 en Figma; revisar si el botón de ancho 189 (padding 8) debe ser variante del DS.",
+      "verificadoEn": "2026-11-23",
+      "fuente": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8658-24679&m=dev"
+    },
+    {
+      "id": "WCAG-app-efecto-swap",
+      "descripcion": "Riesgos WCAG medidos: «Más información» y pestaña activa en #f60: 2,69:1 sobre gris 5 y 2,94:1 sobre blanco (AA exige 4,5:1 en texto normal). Botones secundarios #f60 sobre blanco ~2,9:1: botón corporativo protegido por DEC-001, no se modifica. Chips: Radicado 17,04:1, Gestionado 11,05:1, Rechazado 6,22:1 (cumplen). No se declara conformidad WCAG. Dark/High Contrast no verificados.",
+      "flujo": "app-efecto-swap",
+      "estado": "por_verificar",
+      "responsable": "compensar-qa",
+      "evidencia": "Cálculo con estilos computados en Chrome, tema claro.",
+      "siguientePaso": "QA en dark/high contrast y zoom 200 %; decisión sobre links/tabs naranja.",
+      "verificadoEn": "2026-11-18",
+      "fuente": "Flujos/prototipos/app/efecto-swap/"
     }
   ],
   "entregas": [],
@@ -519,6 +620,27 @@
       "flujo": "zt-ventas-y-afiliacion",
       "resumen": "Resultado aprobado por el director UX. Se mantiene pendiente_qa por accesibilidad, navegadores y dropdown de paso-1. Commit local sin push ni versión navegable.",
       "fuente": "IA-Central/seguimiento/registro.json"
+    },
+    {
+      "fecha": "2026-11-18",
+      "tipo": "flujo_nuevo",
+      "flujo": "app-efecto-swap",
+      "resumen": "Creado prototipo APP Efecto Swap (borrador, publicar=false) y registrado en catalogo.json. Sin commit, versión navegable ni regeneración de sitio/.",
+      "fuente": "Flujos/prototipos/app/efecto-swap/"
+    },
+    {
+      "fecha": "2026-11-23",
+      "tipo": "flujo_actualizado",
+      "flujo": "app-efecto-swap",
+      "resumen": "Prototipo ajustado al Figma revisado (botón «Cargar más solicitudes», alerta de error con título, estado final propuesto). Sin commit, versión navegable ni cambios en sitio/.",
+      "fuente": "Flujos/prototipos/app/efecto-swap/"
+    },
+    {
+      "fecha": "2026-11-23",
+      "tipo": "aprobacion_ux",
+      "flujo": "app-efecto-swap",
+      "resumen": "Aprobado por UX por instrucción del director. Pantalla app/efecto-swap/index.html registrada en Flujos/portal/trazabilidad/app-efecto-swap.json y vinculada a HU-303. Sin commit, versión navegable ni cambios en sitio/.",
+      "fuente": "Flujos/portal/catalogo.json"
     }
   ]
 }

@@ -170,6 +170,33 @@
         "por": null,
         "fecha": null
       }
+    },
+    {
+      "id": "app-efecto-swap",
+      "nombre": "Efecto Swap (APP)",
+      "descripcion": "Mis solicitudes con carga por swipe: muestra 7 solicitudes y, al deslizar hacia arriba al final, agrega las siguientes 7 hasta completar 18.",
+      "plataforma": "app",
+      "ruta": "app/efecto-swap/",
+      "entrada": "index.html",
+      "version": "0.1.0",
+      "estado": "aprobado",
+      "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8658-24679&m=dev",
+      "hu": [
+        {
+          "codigo": "HU-303",
+          "titulo": "Implementar paginación infinita",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_search?text=infinito*&type=workitem&lp=workitems-Team&filters=Projects%7BMedicina_Prepagada%7D&pageSize=25"
+        }
+      ],
+      "categorias": [
+        "swap"
+      ],
+      "publicar": true,
+      "aprobacionUX": {
+        "aprobado": true,
+        "por": "Equipo UX",
+        "fecha": "2026-11-23"
+      }
     }
   ]
 }

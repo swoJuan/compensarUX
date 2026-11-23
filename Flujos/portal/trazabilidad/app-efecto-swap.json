@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "flujo": "app-efecto-swap",
+  "pantallas": [
+    {
+      "id": "scr-5a17c0de",
+      "flujo": "app-efecto-swap",
+      "nombre": "App 02C — Mis solicitudes (Efecto Swap)",
+      "ruta": "app/efecto-swap/index.html",
+      "registradaEl": "2026-11-23T22:42:18.000Z",
+      "descripcion": "Listado de solicitudes con carga de 7 en 7 por swipe o botón. Estados: reposo, cargando, error y fin."
+    }
+  ],
+  "relaciones": [
+    {
+      "hu": "HU-303",
+      "pantalla": "scr-5a17c0de",
+      "flujo": "app-efecto-swap",
+      "creadaEl": "2026-11-23T22:42:18.000Z"
+    }
+  ]
+}

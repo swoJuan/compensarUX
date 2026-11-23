@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compensar APP – Efecto Swap (Mis solicitudes)</title>
+<link rel="icon" href="../../zt/favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!-- Cascada APP: Design System → iconos → shell APP → custom del flujo -->
+<link rel="stylesheet" href="../../shared/vendor/core.css">
+<link rel="stylesheet" href="../../shared/icons/icons.css">
+<link rel="stylesheet" href="../shared/app.css">
+<link rel="stylesheet" href="css/swap.css">
+</head>
+<body>
+<div class="app-viewer">
+  <!-- ═══ VISOR DEL TELÉFONO ═══ -->
+  <div class="app-stage" data-app-stage>
+    <div class="app-device">
+      <div class="app-screen" id="app-screen">
+        <div class="app-status" aria-hidden="true">
+          <span>9:41</span>
+          <span class="app-status__pills"><i></i><i></i><i></i></span>
+        </div>
+        <div class="app-views">
+          <!-- Figma 8655:24380 · App 02C — Mis solicitudes / Lista 7 (reposo) -->
+          <main class="app-view" id="sw-scroller" aria-label="Mis solicitudes de historia clínica">
+            <header class="app-bar">
+              <a class="app-iconbtn" href="../index.html" aria-label="Volver al inicio">
+                <span class="icon icon-arrow-left icon-24 gs-inherit" aria-hidden="true"></span>
+              </a>
+              <h1 class="app-bar__title">Solicita tu historia clínica</h1>
+              <!-- [PENDIENTE] destino de notificaciones: no definido en Figma ni en la HU -->
+              <button class="app-iconbtn" type="button" aria-label="Notificaciones" aria-disabled="true">
+                <span class="icon icon-bell icon-24 gs-inherit" aria-hidden="true"></span>
+              </button>
+            </header>
+            <!-- [PROPUESTA] Pestañas como enlaces: "Nueva solicitud" lleva al flujo Historia clínica; este flujo solo cubre "Mis solicitudes". -->
+            <nav class="app-tabs" aria-label="Historia clínica">
+              <a class="app-tab sw-tab" href="../historia-clinica/index.html">Nueva solicitud</a>
+              <a class="app-tab sw-tab" href="index.html" aria-current="page">Mis solicitudes</a>
+            </nav>
+
+            <div class="app-content sw-content" id="sw-content">
+              <div class="mp-alert mp-alert--info sw-info" role="note">
+                <i class="icon icon-info icon-32 mp-alert__icon" aria-hidden="true"></i>
+                <div class="mp-alert__content">
+                  <p class="mp-alert__body">Las historias clínicas estarán visibles durante <strong>30 días</strong> desde tu solicitud.</p>
+                </div>
+              </div>
+
+              <ul class="sw-list" id="sw-list" aria-label="Listado de solicitudes"></ul>
+
+              <!-- Pie del listado. Figma: reposo 8655:24380 · cargando 8657:139 · fin 8908:24622 · error 8923:25318.
+                   Estados con el atributo hidden. El botón «Cargar más solicitudes» (terciario) va siempre debajo
+                   (reposo, cargando, error); en el estado final se oculta (nada más que cargar). -->
+              <section class="sw-foot" id="sw-foot" aria-label="Carga de más solicitudes">
+                <!-- Reposo — Figma "Cargar más / Reposo" -->
+                <div class="sw-rest" id="sw-rest">
+                  <span class="sw-rest__bar" aria-hidden="true"></span>
+                  <p class="sw-rest__hint" id="sw-hint">Desliza hacia arriba para cargar más</p>
+                </div>
+                <!-- Cargando — Figma "Cargar más / Cargando" (el anuncio para lectores de pantalla va en #sw-live) -->
+                <div class="sw-loading" id="sw-loading" hidden aria-hidden="true">
+                  <div class="mp-loading mp-loading--sm mp-loading--inline">
+                    <span class="mp-loading__spinner" aria-hidden="true">
+                      <span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span>
+                      <span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span><span class="mp-loading__bar"></span>
+                    </span>
+                    <span class="mp-loading__text">Cargando más solicitudes…</span>
+                  </div>
+                </div>
+                <!-- Error — Figma 8923:25318: mp-alert con título, sin botón interno; el reintento es el botón de abajo. Se anuncia por #sw-live (sin role=alert para no duplicar) -->
+                <div class="sw-error mp-alert mp-alert--error" id="sw-error" hidden>
+                  <i class="icon icon-x-circle icon-32 mp-alert__icon" aria-hidden="true"></i>
+                  <div class="mp-alert__content">
+                    <p class="mp-alert__title">No pudimos cargar más solicitudes</p>
+                    <p class="mp-alert__body">Revisa tu conexión e inténtalo más tarde</p>
+                  </div>
+                </div>
+                <!-- Fin — [DIVERGENCIA / PENDIENTE DE CONFIRMAR CON EL DIRECTOR UX] Figma 8908:24622 mezcla spinner, «Cargando más solicitudes…», «No hay mas solicitudes para mostrar» y sin botón; aquí: sin spinner y botón oculto -->
+                <p class="sw-end" id="sw-end" hidden>No hay más solicitudes para mostrar</p>
+                <p class="sw-count" id="sw-count"></p>
+                <!-- Alternativa accesible al swipe y reintento tras error — Figma: mp-btn terciario «Cargar más solicitudes» -->
+                <button type="button" class="mp-btn mp-btn--terciario sw-more" id="sw-more">Cargar más solicitudes</button>
+              </section>
+
+              <div class="app-help">
+                <span class="icon icon-question icon-20 gs-violet" aria-hidden="true"></span>
+                <span>¿Necesitas ayuda?</span>
+                <!-- [PENDIENTE] destino no definido en Figma -->
+                <button type="button" class="app-help__link" aria-disabled="true">Más información</button>
+              </div>
+            </div>
+          </main>
+        </div>
+        <!-- Anuncios para lectores de pantalla (carga, éxito, error, fin) -->
+        <p class="app-sr" id="sw-live" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="app-toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <!-- ═══ PANEL DE SIMULACIÓN (solo para validar; no es parte de la app) ═══ -->
+  <aside class="app-sim" aria-label="Simulación del prototipo">
+    <h2 class="app-sim__title">Simulación</h2>
+    <p class="app-sim__hint">Desliza hacia arriba al final de la lista (táctil, arrastre con mouse o rueda) o usa “Cargar más solicitudes” (también reintenta tras un error). Puedes abrir la página con <code>?error=1</code> para forzar un fallo en la primera carga. Datos ficticios.</p>
+    <fieldset>
+      <legend>Próxima carga</legend>
+      <label><input type="radio" name="sim-carga" value="ok" checked> Correcta</label>
+      <label><input type="radio" name="sim-carga" value="error"> Falla una vez (error de red)</label>
+    </fieldset>
+    <button type="button" class="app-sim__reset" id="sim-reset">Reiniciar prototipo</button>
+  </aside>
+</div>
+<script src="../shared/app-viewer.js"></script>
+<script src="js/swap-data.js"></script>
+<script src="js/swap-app.js"></script>
+</body>
+</html>
