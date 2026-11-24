@@ -13,7 +13,7 @@
         "zt/index.html"
       ],
       "version": "0.1.0",
-      "estado": "aprobado",
+      "estado": "entregado",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12788-94181",
       "hu": [
         {
@@ -38,7 +38,7 @@
       "ruta": "zt/agendamiento-de-citas/",
       "entrada": "index.html",
       "version": "0.1.0",
-      "estado": "en-revision",
+      "estado": "validacion-ux",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12842-74756",
       "hu": [
         {
@@ -75,7 +75,7 @@
       "ruta": "zt/historia-clinica/",
       "entrada": "index.html",
       "version": "0.1.0",
-      "estado": "en-revision",
+      "estado": "validacion-ux",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=15673-157601",
       "hu": [
         {
@@ -100,7 +100,7 @@
       "ruta": "zt/ventas-y-afiliacion/",
       "entrada": "inicio-comercial/index.html",
       "version": "0.1.0",
-      "estado": "en-revision",
+      "estado": "validacion-ux",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=13542-109534",
       "publicar": true,
       "aprobacionUX": {
@@ -117,7 +117,7 @@
       "ruta": "drupal/navegacion/",
       "entrada": "menu-2.html",
       "version": "0.1.0",
-      "estado": "aprobado",
+      "estado": "entregado",
       "figma": "https://www.figma.com/design/UnZnt99aWWFcQTmGxWDDEU/Compensar-Fase-2?node-id=14882-48334&m=dev",
       "hu": [
         {
@@ -145,7 +145,7 @@
         "app/index.html"
       ],
       "version": "0.1.0",
-      "estado": "aprobado",
+      "estado": "entregado",
       "figma": "",
       "publicar": true,
       "aprobacionUX": {
@@ -162,7 +162,7 @@
       "ruta": "app/historia-clinica/",
       "entrada": "index.html",
       "version": "0.1.0",
-      "estado": "en-revision",
+      "estado": "validacion-ux",
       "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8336-20380",
       "publicar": true,
       "aprobacionUX": {
@@ -179,7 +179,7 @@
       "ruta": "app/efecto-swap/",
       "entrada": "index.html",
       "version": "0.1.0",
-      "estado": "aprobado",
+      "estado": "entregado",
       "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8658-24679&m=dev",
       "hu": [
         {

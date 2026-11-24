@@ -11,8 +11,8 @@
  *   POST /api/trazabilidad/<flujo>/resolver            { url }
  *   POST /api/trazabilidad/<flujo>/pantalla            { url, nombre, descripcion? }
  *   POST /api/trazabilidad/<flujo>/pantalla-editar     { id, nombre?, descripcion?, url? }
- *   POST /api/trazabilidad/<flujo>/vincular            { pantalla:{id|url}, hu:{…}, nota?, registrarPantalla? }
- *   POST /api/trazabilidad/<flujo>/relacion-editar     { hu, pantalla, nota }
+ *   POST /api/trazabilidad/<flujo>/vincular            { pantalla:{id|url}, hu:{…}, nota?, inicio?, registrarPantalla? }
+ *   POST /api/trazabilidad/<flujo>/relacion-editar     { hu, pantalla, nota, inicio? }
  *   POST /api/trazabilidad/<flujo>/desvincular         { hu, pantalla }
  *   POST /api/trazabilidad/<flujo>/hu-editar           { codigo, titulo?, descripcion?, url? }
  * Las escrituras exigen JSON, la cabecera X-Portal-UX y un Host/Origin de loopback.
@@ -66,7 +66,7 @@ export async function manejarApi(req, res, { host, ctx = T.contexto() } = {}) {
         const r = T.resolverPantalla(datos.url, ctx, cat);
         if (r.flujoId !== f.id) throw new T.ErrTraz('otro_flujo', `Esta pantalla pertenece a otro flujo. Solo puedes vincular historias de usuario a pantallas de ${f.nombre}.`, { flujoDetectado: r.flujoId });
         const registrada = T.proyeccion(flujo, ctx, cat).pantallas.find((p) => p.ruta === r.rel) || null;
-        salida = { ruta: r.rel, existe: r.existe, entorno: r.entorno, version: r.version, registrada }; break;
+        salida = { ruta: r.rel, existe: r.existe, entorno: r.entorno, version: r.version, inicio: r.inicio, registrada }; break;
       }
       case 'pantalla': salida = T.registrarPantalla(flujo, datos, ctx); break;
       case 'pantalla-editar': salida = T.editarPantalla(flujo, datos, ctx); break;

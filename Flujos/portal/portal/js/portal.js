@@ -12,13 +12,15 @@
   /* Separador del breadcrumb del sistema de diseño. */
   var SEP_RUTA = '<i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i>';
 
+  /* Cuatro estados, en orden. Los valores antiguos (versiones congeladas, enlaces guardados) se traducen. */
   var ESTADOS = {
-    'borrador':    { label: 'Borrador',    tag: 'neutral' },
-    'en-revision': { label: 'En revisión', tag: 'warning' },
-    'refinado':    { label: 'Refinado',    tag: 'info' },
-    'aprobado':    { label: 'Aprobado UX', tag: 'success' },
-    'obsoleto':    { label: 'Obsoleto',    tag: 'error' }
+    'borrador':      { label: 'Borrador',      tag: 'neutral', desc: 'Recién creado' },
+    'construccion':  { label: 'Construcción',  tag: 'info',    desc: 'En diseño y prototipado' },
+    'validacion-ux': { label: 'Validación UX', tag: 'warning', desc: 'UX lo está revisando' },
+    'entregado':     { label: 'Entregado',     tag: 'success', desc: 'UX terminó: aprobado y entregado, sin más revisiones' }
   };
+  var ESTADOS_LEGADO = { 'en-revision': 'validacion-ux', 'refinado': 'validacion-ux', 'aprobado': 'entregado' };
+  function estadoNormal(e) { return ESTADOS[e] ? e : (ESTADOS_LEGADO[e] || e); }
   var PLATAFORMA_TAG = { drupal: 'info', zt: 'orange', app: 'violet' };
   var ORDEN_PLATAFORMAS = ['drupal', 'zt', 'app'];
   var TONO_PLATAFORMA = { drupal: 'cyan', zt: 'orange', app: 'green' };
@@ -50,13 +52,13 @@
     return '<span class="mp-tag mp-tag--' + variante + ' mp-tag--sm"><span class="mp-tag__label">' + esc(texto) + '</span></span>';
   }
   function tagEstado(estado) {
-    var e = ESTADOS[estado] || { label: estado || 'Sin estado', tag: 'neutral' };
+    var e = ESTADOS[estadoNormal(estado)] || { label: estado || 'Sin estado', tag: 'neutral' };
     return tag(e.label, e.tag);
   }
   /* «Badges: cuando debes comunicar estado, prioridad o conteo» — documentación del
      sistema de diseño. El estado de un flujo es exactamente eso. */
   function badgeEstado(estado) {
-    var e = ESTADOS[estado] || { label: estado || 'Sin estado', tag: 'neutral' };
+    var e = ESTADOS[estadoNormal(estado)] || { label: estado || 'Sin estado', tag: 'neutral' };
     return '<span class="mp-badge mp-badge--' + e.tag + '" role="img" aria-label="Estado: ' + esc(e.label) + '">' +
       '<span class="mp-badge-dot" aria-hidden="true"></span>' +
       '<span class="mp-badge__label">' + esc(e.label) + '</span></span>';
@@ -69,18 +71,9 @@
   function tagsCategorias(f) {
     return (f.categorias || []).map(function (c) { return tag(c, 'neutral'); }).join('');
   }
-  /* Etiquetas de publicación y entrega. Tres hechos distintos, cada uno con su fuente:
-     «Publicado en el portal» = publicar: true en catalogo.json (no implica producción);
-     «Desplegado» = hay un despliegue en estado «publicado» en despliegues.json;
-     «Entregado a dev» = campo entrega declarado por UX (no implica ZIP ni despliegue). */
-  function tagsEntrega(f) {
-    var e = f.entrega || {}; var out = '';
-    if (f.publicado) out += tag('Publicado en el portal', 'info');
-    if ((f.despliegues || []).some(function (d) { return d.estado === 'publicado'; })) out += tag('Desplegado', 'success');
-    if (e.estado === 'entregado') out += tag('Entregado a dev', 'success');
-    else if (e.estado === 'pendiente') out += tag('Entrega a dev pendiente', 'warning');
-    return out;
-  }
+  /* Sin etiquetas extra junto al estado: publicado, aprobado y entregado ya los dice el estado.
+     Se mantiene la función para no tocar las llamadas existentes. */
+  function tagsEntrega() { return ''; }
   function params() { return new URLSearchParams(window.location.search); }
 
   /* ---------- sistema de diseño: versión legible ---------- */
@@ -443,7 +436,7 @@
   /* Texto de búsqueda de un prototipo: nombre, descripción, plataforma, estado e HU (código, número y título). */
   function textoBusqueda(f, cat) {
     var pl = (cat && cat.plataformas && cat.plataformas[f.plataforma]) || {};
-    var est = (ESTADOS[f.estado] || {}).label || '';
+    var est = ((ESTADOS[f.estado] || {}).label || '') + (f.estado === 'entregado' ? ' aprobado' : '');
     return [f.nombre, f.descripcion, pl.nombre, pl.nombreCorto, f.plataforma, est].concat(f.categorias || []).concat((f.hu || []).map(textoHu)).join(' ');
   }
   function normalizar(s) {
@@ -532,8 +525,8 @@
      Una sola fuente (catalogo.json) y un solo cálculo, para que los indicadores del
      inicio y los resultados filtrados del catálogo nunca discrepen. Cada flujo del
      catálogo es UN prototipo; sus versiones publicadas (f.versiones) no se cuentan. */
-  var ESTADO_REVISION = 'en-revision';
-  var ESTADO_APROBADO = 'aprobado';
+  var ESTADO_REVISION = 'validacion-ux';
+  var ESTADO_ENTREGADO = 'entregado';
   function marcaTiempo(f) {
     var t = f.actualizado ? Date.parse(f.actualizado) : NaN;
     return isNaN(t) ? -Infinity : t;
@@ -548,10 +541,10 @@
     var flujos = cat.flujos || [];
     var r = { total: flujos.length, porEstado: {}, porPlataforma: {}, ordenados: flujos.slice().sort(porActualizacion) };
     flujos.forEach(function (f) {
-      r.porEstado[f.estado] = (r.porEstado[f.estado] || 0) + 1;
+      var est = estadoNormal(f.estado); r.porEstado[est] = (r.porEstado[est] || 0) + 1;
       r.porPlataforma[f.plataforma] = (r.porPlataforma[f.plataforma] || 0) + 1;
     });
-    r.pendientes = r.ordenados.filter(function (f) { return f.estado === ESTADO_REVISION; });
+    r.pendientes = r.ordenados.filter(function (f) { return estadoNormal(f.estado) === ESTADO_REVISION; });
     r.recientes = r.ordenados.slice(0, 5);
     return r;
   }
@@ -629,7 +622,7 @@
   function initInicio(cat) {
     if (!$('[data-dash]')) return;
     var r = resumenCatalogo(cat);
-    var valores = { total: r.total, revision: r.porEstado[ESTADO_REVISION] || 0, aprobados: r.porEstado[ESTADO_APROBADO] || 0 };
+    var valores = { total: r.total, revision: r.porEstado[ESTADO_REVISION] || 0, entregados: r.porEstado[ESTADO_ENTREGADO] || 0 };
     $all('[data-kpi]').forEach(function (el) { el.textContent = valores[el.getAttribute('data-kpi')]; });
     $all('[data-kpis]').forEach(function (el) { el.removeAttribute('aria-busy'); });
     var pend = $('[data-pendientes]');
@@ -701,7 +694,7 @@
     var estado = {
       plataforma: fija || (ORDEN_PLATAFORMAS.indexOf(p.get('plataforma')) >= 0 ? p.get('plataforma') : ''),
       q: p.get('q') || '',
-      estado: ESTADOS[p.get('estado')] ? p.get('estado') : '',
+      estado: ESTADOS[estadoNormal(p.get('estado'))] ? estadoNormal(p.get('estado')) : '',
       publicados: p.get('publicados') === '1',
       categoria: p.get('categoria') || '',
       orden: ORDENES[p.get('orden')] ? p.get('orden') : 'recientes',
@@ -1057,7 +1050,7 @@
               '<time class="pux-version__fecha" datetime="' + esc(v.publicadaEl) + '">Publicada el ' + esc(fecha(v.publicadaEl)) + '</time>' +
             '</div>' +
             '<p class="pux-version__titulo">' + esc(v.notas) + '</p>' +
-            '<p class="pux-muted pux-note">Estado UX: ' + esc((ESTADOS[(v.estadoUX || {}).estado] || {}).label || '—') +
+            '<p class="pux-muted pux-note">Estado: ' + esc((ESTADOS[estadoNormal((v.estadoUX || {}).estado)] || {}).label || '—') +
               ' · Sistema de diseño: ' + esc(dsTxt || 'sin registro') + ' · commit <code>' + esc(v.commit) + '</code></p>' +
             cambios +
             '<div class="pux-version__acciones">' +
@@ -1089,7 +1082,7 @@
     /* Ficha completa (resumen, pantallas y HU, versiones, despliegues): js/ficha-flujo.js. */
     if (window.PortalFicha) {
       window.PortalFicha.render(cont, f, cat, {
-        esc: esc, $: $, $all: $all, fecha: fecha, fechaHora: fechaHora, tag: tag, vacio: vacio, badgeEstado: badgeEstado,
+        esc: esc, $: $, $all: $all, estadoNormal: estadoNormal, fecha: fecha, fechaHora: fechaHora, tag: tag, vacio: vacio, badgeEstado: badgeEstado,
         tagPlataforma: tagPlataforma, tagsCategorias: tagsCategorias, tagsEntrega: tagsEntrega, botonVisualizar: botonVisualizar, abrirDrawer: abrirDrawer, cerrarDrawer: cerrarDrawer,
         initPreview: initPreview, dsEnPrototipos: dsEnPrototipos, sinV: sinV, ESTADOS: ESTADOS, SEP_RUTA: SEP_RUTA, params: params
       });
@@ -1987,7 +1980,7 @@
         '<div class="mp-input-group pux-filters__orden"><label class="mp-input-label" for="pv-plat">Plataforma</label>' +
           '<div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="pv-plat" data-pv-plat><option value="">Todas</option>' +
             plats.map(function (p) { return '<option value="' + esc(p) + '">' + esc(nombrePlataforma(p, cat)) + '</option>'; }).join('') + '</select></div></div>' +
-        '<div class="mp-input-group pux-filters__estado"><label class="mp-input-label" for="pv-est">Estado UX</label>' +
+        '<div class="mp-input-group pux-filters__estado"><label class="mp-input-label" for="pv-est">Estado</label>' +
           '<div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="pv-est" data-pv-est><option value="">Todos</option>' +
             ests.map(function (k) { return '<option value="' + esc(k) + '">' + esc(ESTADOS[k].label) + '</option>'; }).join('') + '</select></div></div>' +
       '</div></form>' +
@@ -2012,7 +2005,7 @@
         '<th scope="row" data-label="Flujo"><a class="pux-link" href="' + url + '">' + esc(f.nombre) + '</a></th>' +
         '<td data-label="Plataforma">' + tagPlataforma(f.plataforma, cat) + '</td>' +
         '<td data-label="Versión del sistema de diseño">' + vds + alDia + '</td>' +
-        '<td data-label="Estado UX">' + badgeEstado(f.estado) + '</td>' +
+        '<td data-label="Estado">' + badgeEstado(f.estado) + '</td>' +
         '<td data-label="Acciones"><div class="pux-acciones-fila">' +
           '<button class="mp-btn mp-btn--secundario mp-btn--sm" type="button" aria-expanded="false" aria-controls="' + esc(did) + '" data-pv-toggle>Detalles<span class="visually-hidden"> de ' + esc(f.nombre) + '</span></button>' +
           '<a class="mp-btn mp-btn--terciario mp-btn--sm" href="' + url + '">Abrir<span class="visually-hidden"> ' + esc(f.nombre) + '</span></a>' +
@@ -2022,7 +2015,7 @@
     return filtros +
       '<div class="mp-table-wrap pux-table pux-tabla-resp"><table class="mp-table" data-pv-tabla>' +
       '<caption class="visually-hidden">Versión del sistema de diseño y estado UX de cada flujo</caption>' +
-      '<thead><tr><th scope="col">Flujo</th><th scope="col">Plataforma</th><th scope="col">Versión del sistema de diseño</th><th scope="col">Estado UX</th><th scope="col">Acciones</th></tr></thead>' +
+      '<thead><tr><th scope="col">Flujo</th><th scope="col">Plataforma</th><th scope="col">Versión del sistema de diseño</th><th scope="col">Estado</th><th scope="col">Acciones</th></tr></thead>' +
       '<tbody>' + filas.join('') + '</tbody></table></div>' +
       '<div data-pv-vacio hidden>' + vacio('Sin resultados', 'Ningún flujo coincide con los filtros. Cambia la búsqueda o quita un filtro.') + '</div>';
   }

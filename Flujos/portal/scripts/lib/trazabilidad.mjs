@@ -81,6 +81,22 @@ export const flujosDeRuta = (cat, rel) => cat.flujos.filter((f) => perteneceAlFl
  * barras invertidas, codificaciones de separadores, archivos que no son .html, rutas sin flujo o
  * que coinciden con más de un flujo. No consulta la red.
  */
+/**
+ * Punto de inicio de una HU dentro de su pantalla: la parte «?consulta#ancla» de la URL
+ * (p. ej. «?estado=error#lista»). Acepta solo esa parte o una URL/ruta completa, de la que
+ * se toma lo que va desde «?» o «#». Devuelve '' si no hay punto de inicio.
+ */
+export function normalizarInicio(entrada) {
+  const s = String(entrada ?? '').trim();
+  if (!s) return '';
+  const i = s.search(/[?#]/);
+  if (i < 0) fallo('inicio_invalido', 'El punto de inicio debe empezar por «?» o «#», por ejemplo ?estado=error o #paso-2.');
+  const t = s.slice(i);
+  if (t.length > 300) fallo('inicio_invalido', 'El punto de inicio admite hasta 300 caracteres.');
+  if (/[\u0000-\u001f\u007f\\\s<>"'`]/.test(t)) fallo('inicio_invalido', 'El punto de inicio contiene caracteres no permitidos.');
+  if (t === '?' || t === '#' || t === '?#') return '';
+  return t;
+}
 export function resolverPantalla(entrada, ctx, cat = leerCatalogo(ctx)) {
   const s = String(entrada ?? '').trim();
   if (!s) fallo('url_vacia', 'Indica la URL o la ruta de la pantalla.');
@@ -131,7 +147,7 @@ export function resolverPantalla(entrada, ctx, cat = leerCatalogo(ctx)) {
   if (flujoForzado && dueños[0].id !== flujoForzado) fallo('ruta_ambigua', 'La ruta de la versión no corresponde al flujo indicado.');
   const completa = path.resolve(ctx.protoRoot, rel);
   const existe = completa.startsWith(path.resolve(ctx.protoRoot) + path.sep) && fs.existsSync(completa) && fs.statSync(completa).isFile();
-  return { rel, flujoId: dueños[0].id, entorno: entorno?.id || null, version, existe };
+  return { rel, flujoId: dueños[0].id, entorno: entorno?.id || null, version, existe, inicio: /[?#]/.test(s) ? normalizarInicio(s) : '' };
 }
 function exigirDelFlujo(res, f) {
   if (res.flujoId !== f.id) {
@@ -159,9 +175,11 @@ export function normalizarCodigoHu(s) {
 function prepararHu(cat, f, datos, ctx) {
   const codigo = normalizarCodigoHu(datos.codigo);
   if (!codigo || !RE_HU.test(codigo)) fallo('hu_invalida', 'El identificador debe tener el formato HU-297.');
-  const azure = validarUrlAzure(datos.url, ctx);
+  // Una HU ya registrada en el flujo se reutiliza tal cual: sus datos no se revalidan aquí
+  // (se editan con hu-editar), así un dato heredado no bloquea nuevas vinculaciones.
   const existente = (f.hu || []).find((h) => normalizarCodigoHu(h.codigo) === codigo);
   if (existente) return { hu: existente, nueva: false };
+  const azure = validarUrlAzure(datos.url, ctx);
   const titulo = String(datos.titulo ?? '').trim();
   if (titulo.length < 3 || titulo.length > 200) fallo('titulo_invalido', 'Escribe el nombre de la historia (entre 3 y 200 caracteres).');
   const descripcion = String(datos.descripcion ?? '').trim();
@@ -234,12 +252,12 @@ export function editarPantalla(flujoId, datos, ctx) {
 export function vincular(flujoId, datos, ctx) {
   const cat = leerCatalogo(ctx); const f = flujoDe(cat, flujoId); const reg = leerRegistro(ctx, flujoId);
   const ps = datos.pantalla || {};
-  let pantalla; let registrada = false;
+  let pantalla; let registrada = false; let inicioUrl = '';
   if (ps.id) {
     pantalla = reg.pantallas.find((p) => p.id === ps.id);
     if (!pantalla) fallo('pantalla_inexistente', 'La pantalla no está registrada en este flujo.', {}, 404);
   } else {
-    const res = resolverPantalla(ps.url, ctx, cat); exigirDelFlujo(res, f);
+    const res = resolverPantalla(ps.url, ctx, cat); exigirDelFlujo(res, f); inicioUrl = res.inicio;
     pantalla = reg.pantallas.find((p) => p.ruta === res.rel);
     if (!pantalla) {
       const conf = datos.registrarPantalla;
@@ -251,8 +269,11 @@ export function vincular(flujoId, datos, ctx) {
   if (reg.relaciones.some((r) => r.hu === hu.codigo && r.pantalla === pantalla.id)) fallo('relacion_duplicada', `${hu.codigo} ya está vinculada a «${pantalla.nombre}».`);
   const nota = String(datos.nota ?? '').trim();
   if (nota.length > 600) fallo('nota_larga', 'La nota de la relación admite hasta 600 caracteres.');
+  // El campo explícito manda; si no viene, se usa el «?…#…» de la URL pegada.
+  const inicio = datos.inicio !== undefined && String(datos.inicio).trim() ? normalizarInicio(datos.inicio) : inicioUrl;
   const rel = { hu: hu.codigo, pantalla: pantalla.id, flujo: f.id, creadaEl: ahora() };
   if (nota) rel.nota = nota;
+  if (inicio) rel.inicio = inicio;
   // Todo validado: ahora se escribe (HU primero; si falla la segunda escritura, la HU queda reutilizable).
   if (nueva) { f.hu = [...(f.hu || []), hu]; escribirJson(ctx.catalogoPath, cat); }
   reg.relaciones.push(rel); escribirJson(archivoRegistro(ctx, flujoId), reg);
@@ -265,6 +286,7 @@ export function editarRelacion(flujoId, datos, ctx) {
   const nota = String(datos.nota ?? '').trim();
   if (nota.length > 600) fallo('nota_larga', 'La nota de la relación admite hasta 600 caracteres.');
   if (nota) r.nota = nota; else delete r.nota;
+  if (datos.inicio !== undefined) { const inicio = normalizarInicio(datos.inicio); if (inicio) r.inicio = inicio; else delete r.inicio; }
   r.actualizadaEl = ahora();
   escribirJson(archivoRegistro(ctx, flujoId), reg);
   return { relacion: r, proyeccion: proyeccion(flujoId, ctx) };
@@ -357,6 +379,7 @@ export function validarRegistro(flujoId, ctx, cat = leerCatalogo(ctx)) {
     if (r.flujo !== flujoId) errores.push(`${flujoId}: la relación ${r.hu}↔${r.pantalla} declara el flujo «${r.flujo}»`);
     if (!codigos.has(r.hu)) errores.push(`${flujoId}: la relación apunta a ${r.hu}, que no está entre las HU del flujo`);
     if (!ids.has(r.pantalla)) errores.push(`${flujoId}: la relación apunta a la pantalla ${r.pantalla}, que no está registrada`);
+    if (r.inicio !== undefined) { try { if (normalizarInicio(r.inicio) !== r.inicio) throw 0; } catch { errores.push(`${flujoId}: la relación ${r.hu}↔${r.pantalla} tiene un punto de inicio no válido`); } }
     const k = `${r.hu}|${r.pantalla}`; if (pares.has(k)) errores.push(`${flujoId}: relación duplicada ${r.hu}↔${r.pantalla}`); pares.add(k);
   }
   return errores;

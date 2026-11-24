@@ -91,6 +91,12 @@ const entregaDe = (f) => {
   return { estado: e.estado, fecha: e.fecha ?? null, por: e.por ?? null, nota: e.nota ?? null };
 };
 for (const f of flujos) entregaDe(f);
+/* Estado del flujo: solo cuatro, en este orden. «entregado» = UX terminó; exige aprobación UX o entrega registradas. */
+const ESTADOS_FLUJO = ['borrador', 'construccion', 'validacion-ux', 'entregado'];
+for (const f of flujos) {
+  if (!ESTADOS_FLUJO.includes(f.estado)) throw new Error(`estado «${f.estado}» no válido en ${f.id}. Usa: ${ESTADOS_FLUJO.join(', ')}.`);
+  if (f.estado === 'entregado' && entregaDe(f).estado !== 'entregado' && !(f.aprobacionUX && f.aprobacionUX.aprobado)) throw new Error(`${f.id} está en «entregado» pero no tiene aprobación UX (aprobacionUX.aprobado) ni entrega registrada.`);
+}
 const publicados = flujos.filter((f) => f.publicar);
 const plataformasUsadas = [...new Set(publicados.map((f) => f.plataforma))];
 const flIncluir = matcher([

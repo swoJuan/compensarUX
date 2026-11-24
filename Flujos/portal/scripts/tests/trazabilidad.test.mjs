@@ -107,6 +107,23 @@ test('relaciones: varias HU por pantalla, varias pantallas por HU, sin duplicado
     const nueva = T.vincular(HC, { pantalla: { id: p1.id }, hu: { codigo: 'HU-300', titulo: 'Radicado', url: 'https://dev.azure.com/Org/Proy/_workitems/edit/900/' } }, ctx); // dos HU, una pantalla
     assert.equal(nueva.huNueva, true);
     rechaza(() => T.vincular(HC, { pantalla: { id: p1.id }, hu: { codigo: 'HU-297' } }, ctx), 'relacion_duplicada');
+    // Reutilizar una HU existente no revalida la URL que reenvía el formulario (p. ej. una URL heredada de búsqueda).
+    const reuso = T.vincular(HC, { pantalla: { id: p2.id }, hu: { codigo: 'HU-300', url: 'https://dev.azure.com/Org/_search?text=x' } }, ctx);
+    assert.equal(reuso.huNueva, false);
+    T.desvincular(HC, { hu: 'HU-300', pantalla: p2.id }, ctx);
+    // Punto de inicio: se toma del «?…#…» de la URL pegada, el campo explícito manda y se puede editar o quitar.
+    const conUrl = T.vincular(HC, { pantalla: { url: `${URL_L}historia-clinica/mis-solicitudes.html?estado=error#lista` }, hu: { codigo: 'HU-300' } }, ctx);
+    assert.equal(conUrl.relacion.inicio, '?estado=error#lista');
+    T.editarRelacion(HC, { hu: 'HU-300', pantalla: p2.id, nota: '', inicio: 'https://x/a.html#paso-2' }, ctx);
+    assert.equal(T.proyeccion(HC, ctx).relaciones.find((r) => r.hu === 'HU-300' && r.pantalla === p2.id).inicio, '#paso-2');
+    rechaza(() => T.editarRelacion(HC, { hu: 'HU-300', pantalla: p2.id, inicio: 'estado=error' }, ctx), 'inicio_invalido');
+    rechaza(() => T.editarRelacion(HC, { hu: 'HU-300', pantalla: p2.id, inicio: '#a"onload=x' }, ctx), 'inicio_invalido');
+    T.editarRelacion(HC, { hu: 'HU-300', pantalla: p2.id, inicio: '' }, ctx);
+    assert.equal(T.proyeccion(HC, ctx).relaciones.find((r) => r.hu === 'HU-300' && r.pantalla === p2.id).inicio, undefined);
+    T.desvincular(HC, { hu: 'HU-300', pantalla: p2.id }, ctx);
+    const explicito = T.vincular(HC, { pantalla: { url: `${URL_L}historia-clinica/mis-solicitudes.html?a=1` }, hu: { codigo: 'HU-300' }, inicio: '#b' }, ctx);
+    assert.equal(explicito.relacion.inicio, '#b');
+    T.desvincular(HC, { hu: 'HU-300', pantalla: p2.id }, ctx);
     const cat = T.leerCatalogo(ctx);
     assert.equal(cat.flujos[0].hu.filter((h) => h.codigo === 'HU-297').length, 1, 'la HU no se duplica');
     assert.equal(cat.flujos[0].hu.find((h) => h.codigo === 'HU-300').id, '900');
