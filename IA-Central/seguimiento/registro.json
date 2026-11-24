@@ -135,6 +135,11 @@
       ],
       "categoria": "swap (transversal); campo `categorias` soportado en catalogo.json y portal (PI-SWAP-02 aprobado e implementado, sin commit)",
       "criteriosAceptacion": "PENDIENTE: la HU llegará después; no se inventaron",
+      "handoffMaui": {
+        "carpeta": "Flujos/entregables/maui-handoff/EfectoSwap/",
+        "version": "0.2.0",
+        "entrega": "ENT-app-efecto-swap-maui-v0.2.0"
+      },
       "verificadoEn": "2026-11-18",
       "fuente": "Flujos/portal/catalogo.json"
     }
@@ -596,6 +601,61 @@
       "siguientePaso": "QA en dark/high contrast y zoom 200 %; decisión sobre links/tabs naranja.",
       "verificadoEn": "2026-11-18",
       "fuente": "Flujos/prototipos/app/efecto-swap/"
+    },
+    {
+      "id": "PI-SWAP-06",
+      "descripcion": "MAUI: el swipe se dispara por umbral al llegar a la última tarjeta (comportamiento por confirmar). Pendiente confirmar la UX con Desarrollo.",
+      "flujo": "app-efecto-swap",
+      "estado": "propuesta",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Handoff MAUI v0.2.0 en Flujos/entregables/maui-handoff/EfectoSwap/ (código no compilado, sin pruebas en dispositivo).",
+      "siguientePaso": "Confirmar con UX/Desarrollo.",
+      "verificadoEn": "2026-11-24",
+      "fuente": "Flujos/entregables/maui-handoff/EfectoSwap/"
+    },
+    {
+      "id": "PI-SWAP-07",
+      "descripcion": "MAUI: el error de la primera carga no tiene diseño en Figma; se implementó como supuesto técnico.",
+      "flujo": "app-efecto-swap",
+      "estado": "propuesta",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Handoff MAUI v0.2.0 en Flujos/entregables/maui-handoff/EfectoSwap/ (código no compilado, sin pruebas en dispositivo).",
+      "siguientePaso": "Solicitar diseño o aprobar el supuesto con el director UX.",
+      "verificadoEn": "2026-11-24",
+      "fuente": "Flujos/entregables/maui-handoff/EfectoSwap/"
+    },
+    {
+      "id": "PI-SWAP-08",
+      "descripcion": "MAUI: el icono ic_empty_solicitudes (estado vacío) no está en el DS; se exportó del frame Figma 8954:26680.",
+      "flujo": "app-efecto-swap",
+      "estado": "propuesta",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Handoff MAUI v0.2.0 en Flujos/entregables/maui-handoff/EfectoSwap/ (código no compilado, sin pruebas en dispositivo).",
+      "siguientePaso": "Decidir si se incorpora al DS.",
+      "verificadoEn": "2026-11-24",
+      "fuente": "Flujos/entregables/maui-handoff/EfectoSwap/"
+    },
+    {
+      "id": "PI-SWAP-09",
+      "descripcion": "MAUI: la fuente Roboto no está incluida en el paquete; debe proveerla Desarrollo.",
+      "flujo": "app-efecto-swap",
+      "estado": "propuesta",
+      "responsable": "compensar-entregas",
+      "evidencia": "Handoff MAUI v0.2.0 en Flujos/entregables/maui-handoff/EfectoSwap/ (código no compilado, sin pruebas en dispositivo).",
+      "siguientePaso": "Confirmar con Desarrollo la fuente a usar.",
+      "verificadoEn": "2026-11-24",
+      "fuente": "Flujos/entregables/maui-handoff/EfectoSwap/"
+    },
+    {
+      "id": "PI-SWAP-10",
+      "descripcion": "MAUI: sin pruebas en dispositivo ni compilación (sin dotnet); detección de reducir movimiento no implementada.",
+      "flujo": "app-efecto-swap",
+      "estado": "propuesta",
+      "responsable": "compensar-qa",
+      "evidencia": "Handoff MAUI v0.2.0 en Flujos/entregables/maui-handoff/EfectoSwap/ (código no compilado, sin pruebas en dispositivo).",
+      "siguientePaso": "Compilar y probar en dispositivo; implementar reducir movimiento.",
+      "verificadoEn": "2026-11-24",
+      "fuente": "Flujos/entregables/maui-handoff/EfectoSwap/"
     }
   ],
   "entregas": [
@@ -615,6 +675,25 @@
       "paqueteZip": null,
       "evidencia": "Instrucción textual del director UX: «pon la etiqueta de publicado y entregado para dev». Campo entrega en Flujos/portal/catalogo.json. No hay ZIP de handoff ni despliegue registrado.",
       "siguientePaso": "Si Desarrollo requiere paquete: compensar-entregas arma ZIP con LEEME y manifest. Publicar en sitio/ y desplegar siguen pendientes de autorización.",
+      "verificadoEn": "2026-11-24",
+      "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "id": "ENT-app-efecto-swap-maui-v0.2.0",
+      "flujo": "app-efecto-swap",
+      "estado": "entregado",
+      "tipo": "handoff_maui",
+      "version": "0.2.0",
+      "descripcion": "Paquete de handoff MAUI v0.2.0 de Efecto Swap (25 archivos con SHA-256 en manifest.json, HEAD base 1cae8c1). Código de referencia UX, NO compilado (sin dotnet), no productivo, datos ficticios. Incluye control reutilizable Controls/CargaInfinitaView (estados PrimeraCarga/skeleton, Reposo, Cargando, Error, Fin, Vacío), pantalla MisSolicitudesPage + ViewModel + servicio ficticio, 5 SVG exportados de Figma (ic_arrow_left, ic_bell, ic_info, ic_x_circle, ic_empty_solicitudes; frames vacío 8954:26680 y skeleton 8954:26839) y copias de Compensar.Colors/Sizes.xaml v2.4.0 idénticas al ZIP del DS.",
+      "aprobadoUX": true,
+      "entregadoEl": "2026-11-24",
+      "entregadoPor": "Aprobado por el usuario en chat",
+      "publicadoEnPortalLocal": true,
+      "publicadoEnSitio": false,
+      "despliegue": null,
+      "paqueteZip": "Flujos/portal/dist/descargas/flujos/app-efecto-swap-maui-handoff-v0.2.0.zip",
+      "evidencia": "node tools/verificar-claves.mjs OK (504 claves, XML bien formado, imágenes presentes). Build del portal OK; ZIP de 26 entradas descargable desde flujo.html?id=app-efecto-swap (HTTP 200). catalogo.json handoffMaui.version = 0.2.0. validar.mjs APROBADO. Sin compilación ni pruebas en dispositivo.",
+      "siguientePaso": "Desarrollo confirma recepción y revisa pendientes PI-SWAP-06 a PI-SWAP-10. Commit, regenerar sitio/ y despliegue siguen pendientes de autorización expresa.",
       "verificadoEn": "2026-11-24",
       "fuente": "Flujos/portal/catalogo.json"
     }
@@ -675,6 +754,13 @@
       "flujo": "app-efecto-swap",
       "resumen": "Etiqueta «Entregado a dev» implementada (campo entrega en catalogo.json, build y portal) por instrucción del director UX y marcada en app-efecto-swap. «Publicado en el portal» (publicar: true) se distingue de «Desplegado» (despliegues.json, vacío). Sin ZIP, versión navegable, sitio/, push ni despliegue.",
       "fuente": "Flujos/portal/catalogo.json"
+    },
+    {
+      "fecha": "2026-11-24",
+      "tipo": "handoff_maui_entregado",
+      "flujo": "app-efecto-swap",
+      "resumen": "Paquete de handoff MAUI v0.2.0 aprobado por el usuario en chat y registrado (ENT-app-efecto-swap-maui-v0.2.0). Código de referencia UX no compilado; ZIP en el portal local; catalogo.json handoffMaui 0.2.0. Nota: la doc del DS Core-Design-System/docs/app/components/carga-infinita.html marca como aprobados los estados de PI-SWAP-03/04/05; sin aprobación del usuario en esta tarea, su estado no se cambia. Sin commit, sitio/ ni despliegue.",
+      "fuente": "Flujos/entregables/maui-handoff/EfectoSwap/"
     }
   ]
 }

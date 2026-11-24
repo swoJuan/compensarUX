@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  CargaInfinitaView · control reutilizable de carga infinita. CÓDIGO DE REFERENCIA UX, NO PRODUCTIVO. No compilado.
+  No conoce «solicitudes»: la pantalla aporta ItemTemplate, SkeletonTemplate, CabeceraTemplate y los textos.
+  Estados (EstadoCargaInfinita): PrimeraCarga (skeleton) · Reposo · Cargando · Error · Fin · Vacio.
+  Figma sección Swap 8658:24679. Requiere Resources/Styles/CargaInfinita.Styles.xaml (ver LEEME.txt).
+  Nota de binding: el contexto de la rejilla raíz es el propio control (se asigna en el code-behind); el del control
+  mismo NO se toca, para que Estado="{Binding Estado}" siga resolviéndose contra el ViewModel de la página.
+-->
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Compensar.MedicinaPrepagada.Controls"
+             x:Class="Compensar.MedicinaPrepagada.Controls.CargaInfinitaView">
+
+    <Grid x:Name="Raiz" x:DataType="controls:CargaInfinitaView">
+
+        <!-- ═══ Primera carga y vacío: sin lista ni pie. Cabecera (p. ej. el aviso) + skeleton o tarjeta de vacío ═══ -->
+        <ScrollView IsVisible="{Binding MostrarAreaEstatica}">
+            <VerticalStackLayout>
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding ItemsCabecera}"
+                                     BindableLayout.ItemTemplate="{Binding CabeceraTemplate}" />
+
+                <!-- Skeleton (Figma 8954:26839): solo en la primera carga. Oculto a lectores de pantalla; el anuncio lo da IAnuncios.
+                     El pulso (opacidad 1 → 0,45, 1,4 s) lo anima el code-behind y se desactiva con ReducirMovimiento. -->
+                <VerticalStackLayout x:Name="ContenedorSkeleton"
+                                     IsVisible="{Binding MostrarSkeleton}"
+                                     AutomationProperties.IsInAccessibleTree="False"
+                                     InputTransparent="True"
+                                     BindableLayout.ItemsSource="{Binding ItemsSkeleton}"
+                                     BindableLayout.ItemTemplate="{Binding SkeletonTemplate}" />
+
+                <!-- Vacío (Figma 8954:26680): primera carga sin registros. Sin pie de carga. -->
+                <Border IsVisible="{Binding MostrarVacio}" Style="{StaticResource CargaInfinitaVacio}" Margin="20,0">
+                    <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+                        <Image Source="{Binding VacioIcono}" WidthRequest="96" HeightRequest="96"
+                               HorizontalOptions="Center" AutomationProperties.IsInAccessibleTree="False" />
+                        <Label Text="{Binding VacioTitulo}" Style="{StaticResource CargaInfinitaVacioTitulo}"
+                               SemanticProperties.HeadingLevel="Level2" />
+                        <Label Text="{Binding VacioDescripcion}" Style="{StaticResource CargaInfinitaVacioDescripcion}" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- ═══ Lista con pie: reposo | cargando | error | fin ═══
+             RemainingItemsThreshold="0": el equivalente MAUI del «swipe hacia arriba al final» (se dispara al llegar a la última tarjeta).
+             El code-behind solo ejecuta CargarMasCommand si Estado == Reposo (el error no reintenta por gesto: PI-SWAP-05). -->
+        <CollectionView x:Name="Lista"
+                        IsVisible="{Binding MostrarLista}"
+                        ItemsSource="{Binding ItemsSource}"
+                        ItemTemplate="{Binding ItemTemplate}"
+                        Header="{Binding Cabecera}"
+                        HeaderTemplate="{Binding CabeceraTemplate}"
+                        Footer="{Binding .}"
+                        SelectionMode="None"
+                        RemainingItemsThreshold="0"
+                        RemainingItemsThresholdReached="AlAlcanzarUmbral"
+                        SemanticProperties.Description="{Binding DescripcionLista}">
+
+            <CollectionView.FooterTemplate>
+                <DataTemplate x:DataType="controls:CargaInfinitaView">
+                    <VerticalStackLayout Margin="20,20,20,24" Spacing="8">
+
+                        <!-- Reposo — Figma 8655:24380: indicador 36×4 + texto del gesto -->
+                        <VerticalStackLayout IsVisible="{Binding MostrarReposo}" Spacing="8" HorizontalOptions="Center">
+                            <BoxView Style="{StaticResource CargaInfinitaIndicadorSwipe}" />
+                            <Label Text="{Binding TextoReposo}" Style="{StaticResource CargaInfinitaPieTexto}" />
+                        </VerticalStackLayout>
+
+                        <!-- Cargando — Figma 8657:139: spinner 32 + texto. El anuncio sale por IAnuncios -->
+                        <VerticalStackLayout IsVisible="{Binding MostrarCargando}" Spacing="8" HorizontalOptions="Center">
+                            <ActivityIndicator IsRunning="{Binding MostrarCargando}" Style="{StaticResource CargaInfinitaCargando}"
+                                               SemanticProperties.Description="{Binding TextoCargando}" />
+                            <Label Text="{Binding TextoCargando}" Style="{StaticResource CargaInfinitaPieTexto}" />
+                        </VerticalStackLayout>
+
+                        <!-- Error — Figma 8923:25690 «mp alert»: icono XCircle 32 + título + cuerpo, SIN botón interno (el reintento es el botón de abajo) -->
+                        <Border IsVisible="{Binding MostrarError}" Style="{StaticResource CargaInfinitaAlertaError}">
+                            <Grid ColumnDefinitions="32,*" ColumnSpacing="8">
+                                <Image Grid.Column="0" Source="ic_x_circle.png" WidthRequest="32" HeightRequest="32"
+                                       VerticalOptions="Start" SemanticProperties.Description="Error" />
+                                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                    <Label Text="{Binding ErrorTitulo}" Style="{StaticResource CargaInfinitaAlertaErrorTitulo}" />
+                                    <Label Text="{Binding ErrorMensaje}" Style="{StaticResource CargaInfinitaAlertaErrorCuerpo}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+
+                        <!-- Fin — aprobado en la documentación del DS (carga-infinita.html): sin spinner, texto de fin, botón oculto -->
+                        <Label IsVisible="{Binding MostrarFin}" Text="{Binding TextoFin}" Style="{StaticResource CargaInfinitaPieTexto}" />
+
+                        <!-- Contador: oculto en error (Figma 8923:25318 solo muestra alerta + botón) -->
+                        <Label IsVisible="{Binding MostrarContador}" Text="{Binding TextoContador}" Style="{StaticResource CargaInfinitaPieContador}" />
+
+                        <!-- Terciario (~189×48): visible en reposo, cargando (inactivo por CanExecute) y error; oculto en fin -->
+                        <Button Text="{Binding TextoBoton}" Style="{StaticResource CargaInfinitaBotonTerciario}"
+                                IsVisible="{Binding MostrarBoton}"
+                                Command="{Binding CargarMasCommand}" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.FooterTemplate>
+        </CollectionView>
+    </Grid>
+</ContentView>

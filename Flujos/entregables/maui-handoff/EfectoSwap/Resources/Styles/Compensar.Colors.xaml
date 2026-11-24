@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Colores de Compensar · sistema de diseño commit-b4c8923 -->
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- base/brand -->
+    <Color x:Key="BaseBrand40">#FFE6D6</Color>
+    <Color x:Key="BaseBrand50">#FFC299</Color>
+    <Color x:Key="BaseBrand60">#FFA366</Color>
+    <Color x:Key="BaseBrand70">#FF8533</Color>
+    <Color x:Key="BaseBrand80">#FF6600</Color>
+    <Color x:Key="BaseBrand90">#E63F0C</Color>
+    <Color x:Key="BaseBrand100">#CC5200</Color>
+    <Color x:Key="BaseBrandYellow">#FF980D</Color>
+
+    <!-- base/blue -->
+    <Color x:Key="BaseBlue30">#E6F1FB</Color>
+    <Color x:Key="BaseBlue40">#D4E2FA</Color>
+    <Color x:Key="BaseBlue50">#9FBEF5</Color>
+    <Color x:Key="BaseBlue60">#5C91F2</Color>
+    <Color x:Key="BaseBlue70">#296FF0</Color>
+    <Color x:Key="BaseBlue80">#1F53B5</Color>
+    <Color x:Key="BaseBlue90">#18428F</Color>
+    <Color x:Key="BaseBlue100">#2D4A67</Color>
+
+    <!-- base/cyan blue -->
+    <Color x:Key="BaseCyanBlue10">#EEF5FC</Color>
+    <Color x:Key="BaseCyanBlue20">#D6E6F7</Color>
+    <Color x:Key="BaseCyanBlue30">#B2D0EE</Color>
+    <Color x:Key="BaseCyanBlue40">#8CB8E0</Color>
+    <Color x:Key="BaseCyanBlue50">#6C9FD0</Color>
+    <Color x:Key="BaseCyanBlue60">#5286BC</Color>
+    <Color x:Key="BaseCyanBlue70">#4A74A5</Color>
+    <Color x:Key="BaseCyanBlue80">#3C628C</Color>
+    <Color x:Key="BaseCyanBlue90">#2D4F73</Color>
+    <Color x:Key="BaseCyanBlue100">#1F3D5A</Color>
+
+    <!-- base/green-1 -->
+    <Color x:Key="BaseGreen130">#F7FAF8</Color>
+    <Color x:Key="BaseGreen140">#E6F7E8</Color>
+    <Color x:Key="BaseGreen150">#9FE0B8</Color>
+    <Color x:Key="BaseGreen160">#44BD75</Color>
+    <Color x:Key="BaseGreen170">#22A152</Color>
+    <Color x:Key="BaseGreen180">#0B853D</Color>
+    <Color x:Key="BaseGreen190">#166936</Color>
+    <Color x:Key="BaseGreen1100">#0D3D1F</Color>
+
+    <!-- base/green-2 -->
+    <Color x:Key="BaseGreen210">#ECF7C9</Color>
+    <Color x:Key="BaseGreen220">#D8EE9C</Color>
+    <Color x:Key="BaseGreen230">#C5E270</Color>
+    <Color x:Key="BaseGreen240">#B1D645</Color>
+    <Color x:Key="BaseGreen250">#9DC71E</Color>
+    <Color x:Key="BaseGreen260">#95BF1B</Color>
+    <Color x:Key="BaseGreen270">#84AD16</Color>
+    <Color x:Key="BaseGreen280">#6A8E11</Color>
+    <Color x:Key="BaseGreen290">#516D0D</Color>
+    <Color x:Key="BaseGreen2100">#3F540A</Color>
+
+    <!-- base/neutral -->
+    <Color x:Key="BaseNeutral10">#F5F5F5</Color>
+    <Color x:Key="BaseNeutral20">#E0E0E0</Color>
+    <Color x:Key="BaseNeutral30">#CCCCCC</Color>
+    <Color x:Key="BaseNeutral40">#B8B8B8</Color>
+    <Color x:Key="BaseNeutral50">#A4A4A4</Color>
+    <Color x:Key="BaseNeutral60">#7F7F7F</Color>
+    <Color x:Key="BaseNeutral70">#666666</Color>
+    <Color x:Key="BaseNeutral80">#333333</Color>
+    <Color x:Key="BaseNeutral90">#292929</Color>
+    <Color x:Key="BaseNeutral100Negro">#111111</Color>
+    <Color x:Key="BaseNeutralWhite">#FFFFFF</Color>
+    <Color x:Key="BaseNeutralBlack">#000000</Color>
+
+    <!-- base/red -->
+    <Color x:Key="BaseRed30">#F7EEED</Color>
+    <Color x:Key="BaseRed40">#F2D8D5</Color>
+    <Color x:Key="BaseRed50">#EBADA7</Color>
+    <Color x:Key="BaseRed60">#DB7165</Color>
+    <Color x:Key="BaseRed70">#D14434</Color>
+    <Color x:Key="BaseRed75">#BB4945</Color>
+    <Color x:Key="BaseRed80">#9E3328</Color>
+    <Color x:Key="BaseRed90">#7D291F</Color>
+    <Color x:Key="BaseRed100">#521A14</Color>
+
+    <!-- base/orange -->
+    <Color x:Key="BaseOrange10">#FFF2E3</Color>
+    <Color x:Key="BaseOrange20">#FFE5CC</Color>
+    <Color x:Key="BaseOrange40">#FFB380</Color>
+    <Color x:Key="BaseOrange60">#CC7A33</Color>
+    <Color x:Key="BaseOrange100">#6B4400</Color>
+
+    <!-- base/yellow -->
+    <Color x:Key="BaseYellow30">#FFF9EF</Color>
+    <Color x:Key="BaseYellow40">#FFF2D9</Color>
+    <Color x:Key="BaseYellow50">#FCE1AC</Color>
+    <Color x:Key="BaseYellow60">#FCCE72</Color>
+    <Color x:Key="BaseYellow70">#FFC154</Color>
+    <Color x:Key="BaseYellow80">#BF9034</Color>
+    <Color x:Key="BaseYellow90">#967229</Color>
+    <Color x:Key="BaseYellow100">#634A1A</Color>
+
+    <!-- product/medicina -->
+    <Color x:Key="ProductMedicinaCyan">#00E2DB</Color>
+    <Color x:Key="ProductMedicinaPurple">#8268CB</Color>
+    <Color x:Key="ProductMedicinaGray">#B3ACAB</Color>
+
+    <!-- product/accent -->
+    <Color x:Key="ProductAccent30">#F2FCFF</Color>
+    <Color x:Key="ProductAccent40">#E1F7FE</Color>
+    <Color x:Key="ProductAccent50">#B3D7E0</Color>
+    <Color x:Key="ProductAccent60">#8FC5D0</Color>
+    <Color x:Key="ProductAccent70">#6BB4C0</Color>
+    <Color x:Key="ProductAccent80">#47A4AF</Color>
+    <Color x:Key="ProductAccent90">#24939D</Color>
+    <Color x:Key="ProductAccent100">#03838A</Color>
+
+    <!-- product/gray -->
+    <Color x:Key="ProductGray5">#F8F7F7</Color>
+    <Color x:Key="ProductGray10">#ECEAEA</Color>
+    <Color x:Key="ProductGray20">#D9D5D5</Color>
+    <Color x:Key="ProductGray30">#C6C1C0</Color>
+    <Color x:Key="ProductGray40">#B3ACAB</Color>
+    <Color x:Key="ProductGray50">#A09796</Color>
+    <Color x:Key="ProductGray60">#8C8280</Color>
+    <Color x:Key="ProductGray70">#786E6C</Color>
+    <Color x:Key="ProductGray80">#635A59</Color>
+    <Color x:Key="ProductGray90">#4D4746</Color>
+    <Color x:Key="ProductGray100">#383333</Color>
+
+    <!-- product/violet -->
+    <Color x:Key="ProductViolet5">#EFECF9</Color>
+    <Color x:Key="ProductViolet10">#E0D9F3</Color>
+    <Color x:Key="ProductViolet20">#C1B3E7</Color>
+    <Color x:Key="ProductViolet30">#A28DDA</Color>
+    <Color x:Key="ProductViolet40">#8367CE</Color>
+    <Color x:Key="ProductViolet50">#6D4CC5</Color>
+    <Color x:Key="ProductViolet60">#5B3AB4</Color>
+    <Color x:Key="ProductViolet70">#4E3199</Color>
+    <Color x:Key="ProductViolet80">#40297E</Color>
+    <Color x:Key="ProductViolet90">#322064</Color>
+    <Color x:Key="ProductViolet100">#251749</Color>
+
+    <!-- product/teal -->
+    <Color x:Key="ProductTeal5">#EBFFFE</Color>
+    <Color x:Key="ProductTeal10">#D0FFFD</Color>
+    <Color x:Key="ProductTeal20">#A0FFFC</Color>
+    <Color x:Key="ProductTeal30">#71FFFA</Color>
+    <Color x:Key="ProductTeal40">#41FFF8</Color>
+    <Color x:Key="ProductTeal50">#12FFF7</Color>
+    <Color x:Key="ProductTeal60">#00E1D9</Color>
+    <Color x:Key="ProductTeal70">#00C0B9</Color>
+    <Color x:Key="ProductTeal80">#009F99</Color>
+    <Color x:Key="ProductTeal90">#007D79</Color>
+    <Color x:Key="ProductTeal100">#005C59</Color>
+
+    <!-- use/background -->
+    <Color x:Key="UseBackgroundPage">#FFFFFF</Color>
+
+    <!-- use/primary -->
+    <Color x:Key="UsePrimaryDefault">#FF6600</Color>
+    <Color x:Key="UsePrimaryHover">#E63F0C</Color>
+    <Color x:Key="UsePrimaryActive">#CC5200</Color>
+    <Color x:Key="UsePrimaryDefaultDark">#FF9D5C</Color>
+
+    <!-- use/border -->
+    <Color x:Key="UseBorderDefault">#CCCCCC</Color>
+    <Color x:Key="UseBorderStrong">#666666</Color>
+    <Color x:Key="UseBorderSubtle">#E0E0E0</Color>
+    <Color x:Key="UseBorderHover">#E63F0C</Color>
+    <Color x:Key="UseBorderVioletDark">#40297E</Color>
+    <Color x:Key="UseBorderViolet">#E0D9F3</Color>
+
+    <!-- use/focus -->
+    <Color x:Key="UseFocusBorder">#FFE6D6</Color>
+    <Color x:Key="UseFocusOutline">#FF6600</Color>
+    <Color x:Key="UseFocusBackground">#FFE6D6</Color>
+
+    <!-- use/text -->
+    <Color x:Key="UseTextPrimary">#111111</Color>
+    <Color x:Key="UseTextSecondary">#333333</Color>
+    <Color x:Key="UseTextTertiary">#666666</Color>
+    <Color x:Key="UseTextInverse">#F5F5F5</Color>
+    <Color x:Key="UseTextLink">#FF6600</Color>
+    <Color x:Key="UseTextThemeViolet">#4E3199</Color>
+    <Color x:Key="UseTextThemeYellow">#FFC154</Color>
+    <Color x:Key="UseTextThemeOrange">#CC7A33</Color>
+    <Color x:Key="UseTextThemeBlue">#1F53B5</Color>
+    <Color x:Key="UseTextThemeRed">#BB4945</Color>
+    <Color x:Key="UseTextThemeGreen1">#0B853D</Color>
+    <Color x:Key="UseTextThemeGreen2">#6A8E11</Color>
+    <Color x:Key="UseTextBadgeOrange">#333333</Color>
+    <Color x:Key="UseTextBadgeGreen3">#516D0D</Color>
+    <Color x:Key="UseTextBadgeError">#9E3328</Color>
+    <Color x:Key="UseTextOnDarkPrimary">#FFFFFF</Color>
+    <Color x:Key="UseTextOnDarkSecondary">#F5F5F5</Color>
+
+    <!-- use/tables -->
+    <Color x:Key="UseTablesHead">#A5D7D5</Color>
+    <Color x:Key="UseTablesFilter">#E3E7ED</Color>
+    <Color x:Key="UseTablesStripes">#F5F5F7</Color>
+
+    <!-- use/state -->
+    <Color x:Key="UseStateSuccessBg">#E6F7E8</Color>
+    <Color x:Key="UseStateSuccessText">#0D3D1F</Color>
+    <Color x:Key="UseStateSuccessBorder">#44BD75</Color>
+    <Color x:Key="UseStateSuccessIcon">#0B853D</Color>
+    <Color x:Key="UseStateErrorBg">#F7EEED</Color>
+    <Color x:Key="UseStateErrorText">#521A14</Color>
+    <Color x:Key="UseStateErrorTextErrorField">#9E3328</Color>
+    <Color x:Key="UseStateErrorIcon">#D14434</Color>
+    <Color x:Key="UseStateErrorBorder">#DB7165</Color>
+    <Color x:Key="UseStateErrorMandatory">#BB4945</Color>
+    <Color x:Key="UseStateWarningBg">#FFF2D9</Color>
+    <Color x:Key="UseStateWarningText">#111111</Color>
+    <Color x:Key="UseStateWarningBorder">#FCCE72</Color>
+    <Color x:Key="UseStateWarningIconBg">#967229</Color>
+    <Color x:Key="UseStateWarningIconColor">#111111</Color>
+    <Color x:Key="UseStateInfoBg">#E6F1FB</Color>
+    <Color x:Key="UseStateInfoText">#2D4A67</Color>
+    <Color x:Key="UseStateInfoBorder">#6C9FD0</Color>
+    <Color x:Key="UseStateInfoIcon">#5286BC</Color>
+
+    <!-- use/overlay -->
+    <Color x:Key="UseOverlaySubtle">#000000</Color>
+    <Color x:Key="UseOverlayStrong2">#000000</Color>
+    <Color x:Key="UseOverlayStrong3">#000000</Color>
+
+    <!-- use/surface -->
+    <Color x:Key="UseSurfaceSurface">#F5F5F5</Color>
+    <Color x:Key="UseSurfaceSubtle">#D9D5D5</Color>
+    <Color x:Key="UseSurfaceOrange">#FFF2E3</Color>
+    <Color x:Key="UseSurfaceCyanBlue">#EEF5FC</Color>
+    <Color x:Key="UseSurfaceViolet">#EFECF9</Color>
+    <Color x:Key="UseSurfaceWhite">#FFFFFF</Color>
+    <Color x:Key="UseSurfaceGreen">#F7FAF8</Color>
+    <Color x:Key="UseSurfaceGreen2">#ECF7C9</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark30">#E6F1FB</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark40">#D4E2FA</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark50">#9FBEF5</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark60">#5C91F2</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark90">#18428F</Color>
+    <Color x:Key="UseSurfaceThemeGray5">#F8F7F7</Color>
+    <Color x:Key="UseSurfaceThemeGray10">#ECEAEA</Color>
+    <Color x:Key="UseSurfaceThemeGray20">#D9D5D5</Color>
+    <Color x:Key="UseSurfaceThemeGreen130">#F7FAF8</Color>
+    <Color x:Key="UseSurfaceThemeGreen140">#E6F7E8</Color>
+    <Color x:Key="UseSurfaceThemeGreen150">#9FE0B8</Color>
+    <Color x:Key="UseSurfaceThemeGreen210">#ECF7C9</Color>
+    <Color x:Key="UseSurfaceThemeGreen220">#D8EE9C</Color>
+    <Color x:Key="UseSurfaceThemeGreen240">#B1D645</Color>
+    <Color x:Key="UseSurfaceThemeGreen260">#95BF1B</Color>
+    <Color x:Key="UseSurfaceThemeNeutral30">#CCCCCC</Color>
+    <Color x:Key="UseSurfaceThemeOrange10">#FFF2E3</Color>
+    <Color x:Key="UseSurfaceThemeOrange20">#FFE5CC</Color>
+    <Color x:Key="UseSurfaceThemeOrange40">#FFB380</Color>
+    <Color x:Key="UseSurfaceThemeOrange60">#FFB380</Color>
+    <Color x:Key="UseSurfaceThemeRed30">#F7EEED</Color>
+    <Color x:Key="UseSurfaceThemeRed40">#F2D8D5</Color>
+    <Color x:Key="UseSurfaceThemeRed50">#EBADA7</Color>
+    <Color x:Key="UseSurfaceThemeRed60">#DB7165</Color>
+    <Color x:Key="UseSurfaceThemeViolet5">#EFECF9</Color>
+    <Color x:Key="UseSurfaceThemeViolet10">#E0D9F3</Color>
+    <Color x:Key="UseSurfaceThemeViolet20">#C1B3E7</Color>
+    <Color x:Key="UseSurfaceThemeViolet60">#5B3AB4</Color>
+    <Color x:Key="UseSurfaceThemeViolet70">#4E3199</Color>
+    <Color x:Key="UseSurfaceThemeYellow30">#FFF9EF</Color>
+    <Color x:Key="UseSurfaceThemeYellow50">#FCE1AC</Color>
+    <Color x:Key="UseSurfaceThemeYellow60">#FCCE72</Color>
+    <Color x:Key="UseSurfaceThemeYellow70">#FFC154</Color>
+
+    <!-- Modo oscuro: misma clave + Dark -->
+    <Color x:Key="BaseBrand40_Dark">#FFE6D6</Color>
+    <Color x:Key="BaseBrand50_Dark">#FFC299</Color>
+    <Color x:Key="BaseBrand60_Dark">#FFA366</Color>
+    <Color x:Key="BaseBrand70_Dark">#FF8533</Color>
+    <Color x:Key="BaseBrand80_Dark">#FF9D5C</Color>
+    <Color x:Key="BaseBrand90_Dark">#E65C00</Color>
+    <Color x:Key="BaseBrand100_Dark">#CC5200</Color>
+    <Color x:Key="BaseBrandYellow_Dark">#FFE6D6</Color>
+    <Color x:Key="BaseBlue30_Dark">#EDF2FA</Color>
+    <Color x:Key="BaseBlue40_Dark">#D4E2FA</Color>
+    <Color x:Key="BaseBlue50_Dark">#9FBEF5</Color>
+    <Color x:Key="BaseBlue60_Dark">#5C91F2</Color>
+    <Color x:Key="BaseBlue70_Dark">#296FF0</Color>
+    <Color x:Key="BaseBlue80_Dark">#1F53B5</Color>
+    <Color x:Key="BaseBlue90_Dark">#18428F</Color>
+    <Color x:Key="BaseBlue100_Dark">#102C5E</Color>
+    <Color x:Key="BaseCyanBlue10_Dark">#EEF5FC</Color>
+    <Color x:Key="BaseCyanBlue20_Dark">#D6E6F7</Color>
+    <Color x:Key="BaseCyanBlue30_Dark">#B2D0EE</Color>
+    <Color x:Key="BaseCyanBlue40_Dark">#8CB8E0</Color>
+    <Color x:Key="BaseCyanBlue50_Dark">#6C9FD0</Color>
+    <Color x:Key="BaseCyanBlue60_Dark">#5286BC</Color>
+    <Color x:Key="BaseCyanBlue70_Dark">#4A74A5</Color>
+    <Color x:Key="BaseCyanBlue80_Dark">#3C628C</Color>
+    <Color x:Key="BaseCyanBlue90_Dark">#2D4F73</Color>
+    <Color x:Key="BaseCyanBlue100_Dark">#1F3D5A</Color>
+    <Color x:Key="BaseGreen130_Dark">#F7FAF8</Color>
+    <Color x:Key="BaseGreen140_Dark">#E6F7E8</Color>
+    <Color x:Key="BaseGreen150_Dark">#9FE0B8</Color>
+    <Color x:Key="BaseGreen160_Dark">#44BD75</Color>
+    <Color x:Key="BaseGreen170_Dark">#22A152</Color>
+    <Color x:Key="BaseGreen180_Dark">#0B853D</Color>
+    <Color x:Key="BaseGreen190_Dark">#166936</Color>
+    <Color x:Key="BaseGreen1100_Dark">#0D3D1F</Color>
+    <Color x:Key="BaseGreen210_Dark">#ECF7C9</Color>
+    <Color x:Key="BaseGreen220_Dark">#D8EE9C</Color>
+    <Color x:Key="BaseGreen230_Dark">#C5E270</Color>
+    <Color x:Key="BaseGreen240_Dark">#B1D645</Color>
+    <Color x:Key="BaseGreen250_Dark">#9DC71E</Color>
+    <Color x:Key="BaseGreen260_Dark">#95BF1B</Color>
+    <Color x:Key="BaseGreen270_Dark">#84AD16</Color>
+    <Color x:Key="BaseGreen280_Dark">#6A8E11</Color>
+    <Color x:Key="BaseGreen290_Dark">#516D0D</Color>
+    <Color x:Key="BaseGreen2100_Dark">#3F540A</Color>
+    <Color x:Key="BaseNeutral10_Dark">#F5F5F5</Color>
+    <Color x:Key="BaseNeutral20_Dark">#E0E0E0</Color>
+    <Color x:Key="BaseNeutral30_Dark">#CCCCCC</Color>
+    <Color x:Key="BaseNeutral40_Dark">#B8B8B8</Color>
+    <Color x:Key="BaseNeutral50_Dark">#A4A4A4</Color>
+    <Color x:Key="BaseNeutral60_Dark">#7F7F7F</Color>
+    <Color x:Key="BaseNeutral70_Dark">#666666</Color>
+    <Color x:Key="BaseNeutral80_Dark">#333333</Color>
+    <Color x:Key="BaseNeutral90_Dark">#292929</Color>
+    <Color x:Key="BaseNeutral100Negro_Dark">#111111</Color>
+    <Color x:Key="BaseNeutralWhite_Dark">#FFFFFF</Color>
+    <Color x:Key="BaseNeutralBlack_Dark">#000000</Color>
+    <Color x:Key="BaseRed30_Dark">#F7EEED</Color>
+    <Color x:Key="BaseRed40_Dark">#F2D8D5</Color>
+    <Color x:Key="BaseRed50_Dark">#EBADA7</Color>
+    <Color x:Key="BaseRed60_Dark">#DB7165</Color>
+    <Color x:Key="BaseRed70_Dark">#D14434</Color>
+    <Color x:Key="BaseRed75_Dark">#BB4945</Color>
+    <Color x:Key="BaseRed80_Dark">#9E3328</Color>
+    <Color x:Key="BaseRed90_Dark">#7D291F</Color>
+    <Color x:Key="BaseRed100_Dark">#521A14</Color>
+    <Color x:Key="BaseOrange10_Dark">#FFF2E3</Color>
+    <Color x:Key="BaseOrange20_Dark">#FFE5CC</Color>
+    <Color x:Key="BaseOrange40_Dark">#FFB380</Color>
+    <Color x:Key="BaseOrange60_Dark">#CC7A33</Color>
+    <Color x:Key="BaseOrange100_Dark">#CC7A33</Color>
+    <Color x:Key="BaseYellow30_Dark">#FFF9EF</Color>
+    <Color x:Key="BaseYellow40_Dark">#FFF2D9</Color>
+    <Color x:Key="BaseYellow50_Dark">#FCE1AC</Color>
+    <Color x:Key="BaseYellow60_Dark">#FCCE72</Color>
+    <Color x:Key="BaseYellow70_Dark">#FCBF44</Color>
+    <Color x:Key="BaseYellow80_Dark">#BF9034</Color>
+    <Color x:Key="BaseYellow90_Dark">#967229</Color>
+    <Color x:Key="BaseYellow100_Dark">#634A1A</Color>
+    <Color x:Key="ProductMedicinaCyan_Dark">#00E2DB</Color>
+    <Color x:Key="ProductMedicinaPurple_Dark">#8268CB</Color>
+    <Color x:Key="ProductMedicinaGray_Dark">#B3ACAB</Color>
+    <Color x:Key="ProductAccent30_Dark">#F2FCFF</Color>
+    <Color x:Key="ProductAccent40_Dark">#E1F7FE</Color>
+    <Color x:Key="ProductAccent50_Dark">#B3D7E0</Color>
+    <Color x:Key="ProductAccent60_Dark">#8FC5D0</Color>
+    <Color x:Key="ProductAccent70_Dark">#6BB4C0</Color>
+    <Color x:Key="ProductAccent80_Dark">#47A4AF</Color>
+    <Color x:Key="ProductAccent90_Dark">#24939D</Color>
+    <Color x:Key="ProductAccent100_Dark">#03838A</Color>
+    <Color x:Key="ProductGray5_Dark">#F8F7F7</Color>
+    <Color x:Key="ProductGray10_Dark">#ECEAEA</Color>
+    <Color x:Key="ProductGray20_Dark">#D9D5D5</Color>
+    <Color x:Key="ProductGray30_Dark">#C6C1C0</Color>
+    <Color x:Key="ProductGray40_Dark">#B3ACAB</Color>
+    <Color x:Key="ProductGray50_Dark">#A09796</Color>
+    <Color x:Key="ProductGray60_Dark">#8C8280</Color>
+    <Color x:Key="ProductGray70_Dark">#786E6C</Color>
+    <Color x:Key="ProductGray80_Dark">#635A59</Color>
+    <Color x:Key="ProductGray90_Dark">#4D4746</Color>
+    <Color x:Key="ProductGray100_Dark">#383333</Color>
+    <Color x:Key="ProductViolet5_Dark">#EFECF9</Color>
+    <Color x:Key="ProductViolet10_Dark">#E0D9F3</Color>
+    <Color x:Key="ProductViolet20_Dark">#C1B3E7</Color>
+    <Color x:Key="ProductViolet30_Dark">#A28DDA</Color>
+    <Color x:Key="ProductViolet40_Dark">#8367CE</Color>
+    <Color x:Key="ProductViolet50_Dark">#6D4CC5</Color>
+    <Color x:Key="ProductViolet60_Dark">#5B3AB4</Color>
+    <Color x:Key="ProductViolet70_Dark">#4E3199</Color>
+    <Color x:Key="ProductViolet80_Dark">#40297E</Color>
+    <Color x:Key="ProductViolet90_Dark">#322064</Color>
+    <Color x:Key="ProductViolet100_Dark">#251749</Color>
+    <Color x:Key="ProductTeal5_Dark">#EBFFFE</Color>
+    <Color x:Key="ProductTeal10_Dark">#D0FFFD</Color>
+    <Color x:Key="ProductTeal20_Dark">#A0FFFC</Color>
+    <Color x:Key="ProductTeal30_Dark">#71FFFA</Color>
+    <Color x:Key="ProductTeal40_Dark">#41FFF8</Color>
+    <Color x:Key="ProductTeal50_Dark">#12FFF7</Color>
+    <Color x:Key="ProductTeal60_Dark">#00E1D9</Color>
+    <Color x:Key="ProductTeal70_Dark">#00C0B9</Color>
+    <Color x:Key="ProductTeal80_Dark">#009F99</Color>
+    <Color x:Key="ProductTeal90_Dark">#007D79</Color>
+    <Color x:Key="ProductTeal100_Dark">#005C59</Color>
+    <Color x:Key="UseBackgroundPage_Dark">#111111</Color>
+    <Color x:Key="UsePrimaryDefault_Dark">#FF9D5C</Color>
+    <Color x:Key="UsePrimaryHover_Dark">#E65C00</Color>
+    <Color x:Key="UsePrimaryActive_Dark">#CC5200</Color>
+    <Color x:Key="UsePrimaryDefaultDark_Dark">#FF9D5C</Color>
+    <Color x:Key="UseBorderDefault_Dark">#333333</Color>
+    <Color x:Key="UseBorderStrong_Dark">#E0E0E0</Color>
+    <Color x:Key="UseBorderSubtle_Dark">#7F7F7F</Color>
+    <Color x:Key="UseBorderHover_Dark">#CC5200</Color>
+    <Color x:Key="UseBorderVioletDark_Dark">#E0D9F3</Color>
+    <Color x:Key="UseBorderViolet_Dark">#322064</Color>
+    <Color x:Key="UseFocusBorder_Dark">#FF9D5C</Color>
+    <Color x:Key="UseFocusOutline_Dark">#FF9D5C</Color>
+    <Color x:Key="UseFocusBackground_Dark">#FFE6D6</Color>
+    <Color x:Key="UseTextPrimary_Dark">#F5F5F5</Color>
+    <Color x:Key="UseTextSecondary_Dark">#E0E0E0</Color>
+    <Color x:Key="UseTextTertiary_Dark">#A4A4A4</Color>
+    <Color x:Key="UseTextInverse_Dark">#111111</Color>
+    <Color x:Key="UseTextLink_Dark">#FF9D5C</Color>
+    <Color x:Key="UseTextThemeViolet_Dark">#A28DDA</Color>
+    <Color x:Key="UseTextThemeYellow_Dark">#FFF9EF</Color>
+    <Color x:Key="UseTextThemeOrange_Dark">#FFF2E3</Color>
+    <Color x:Key="UseTextThemeBlue_Dark">#EDF2FA</Color>
+    <Color x:Key="UseTextThemeRed_Dark">#F7EEED</Color>
+    <Color x:Key="UseTextThemeGreen1_Dark">#F7FAF8</Color>
+    <Color x:Key="UseTextThemeGreen2_Dark">#ECF7C9</Color>
+    <Color x:Key="UseTextBadgeOrange_Dark">#111111</Color>
+    <Color x:Key="UseTextBadgeGreen3_Dark">#ECF7C9</Color>
+    <Color x:Key="UseTextBadgeError_Dark">#F7EEED</Color>
+    <Color x:Key="UseTextOnDarkPrimary_Dark">#FFFFFF</Color>
+    <Color x:Key="UseTextOnDarkSecondary_Dark">#E0E0E0</Color>
+    <Color x:Key="UseTablesHead_Dark">#A5D7D5</Color>
+    <Color x:Key="UseTablesFilter_Dark">#E3E7ED</Color>
+    <Color x:Key="UseTablesStripes_Dark">#F5F5F7</Color>
+    <Color x:Key="UseStateSuccessBg_Dark">#166936</Color>
+    <Color x:Key="UseStateSuccessText_Dark">#F5F5F5</Color>
+    <Color x:Key="UseStateSuccessBorder_Dark">#22A152</Color>
+    <Color x:Key="UseStateSuccessIcon_Dark">#E6F7E8</Color>
+    <Color x:Key="UseStateErrorBg_Dark">#7D291F</Color>
+    <Color x:Key="UseStateErrorText_Dark">#F5F5F5</Color>
+    <Color x:Key="UseStateErrorTextErrorField_Dark">#F5F5F5</Color>
+    <Color x:Key="UseStateErrorIcon_Dark">#F5F5F5</Color>
+    <Color x:Key="UseStateErrorBorder_Dark">#D14434</Color>
+    <Color x:Key="UseStateErrorMandatory_Dark">#D14434</Color>
+    <Color x:Key="UseStateWarningBg_Dark">#634A1A</Color>
+    <Color x:Key="UseStateWarningText_Dark">#F5F5F5</Color>
+    <Color x:Key="UseStateWarningBorder_Dark">#FCBF44</Color>
+    <Color x:Key="UseStateWarningIconBg_Dark">#FCBF44</Color>
+    <Color x:Key="UseStateWarningIconColor_Dark">#111111</Color>
+    <Color x:Key="UseStateInfoBg_Dark">#18428F</Color>
+    <Color x:Key="UseStateInfoText_Dark">#F5F5F5</Color>
+    <Color x:Key="UseStateInfoBorder_Dark">#296FF0</Color>
+    <Color x:Key="UseStateInfoIcon_Dark">#296FF0</Color>
+    <Color x:Key="UseOverlaySubtle_Dark">#000000</Color>
+    <Color x:Key="UseOverlayStrong2_Dark">#000000</Color>
+    <Color x:Key="UseOverlayStrong3_Dark">#000000</Color>
+    <Color x:Key="UseSurfaceSurface_Dark">#666666</Color>
+    <Color x:Key="UseSurfaceSubtle_Dark">#635A59</Color>
+    <Color x:Key="UseSurfaceOrange_Dark">#CC7A33</Color>
+    <Color x:Key="UseSurfaceCyanBlue_Dark">#3C628C</Color>
+    <Color x:Key="UseSurfaceViolet_Dark">#40297E</Color>
+    <Color x:Key="UseSurfaceWhite_Dark">#292929</Color>
+    <Color x:Key="UseSurfaceGreen_Dark">#166936</Color>
+    <Color x:Key="UseSurfaceGreen2_Dark">#166936</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark30_Dark">#1F53B5</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark40_Dark">#9FBEF5</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark50_Dark">#5C91F2</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark60_Dark">#5C91F2</Color>
+    <Color x:Key="UseSurfaceThemeBlueDark90_Dark">#EDF2FA</Color>
+    <Color x:Key="UseSurfaceThemeGray5_Dark">#4D4746</Color>
+    <Color x:Key="UseSurfaceThemeGray10_Dark">#635A59</Color>
+    <Color x:Key="UseSurfaceThemeGray20_Dark">#786E6C</Color>
+    <Color x:Key="UseSurfaceThemeGreen130_Dark">#0B853D</Color>
+    <Color x:Key="UseSurfaceThemeGreen140_Dark">#9FE0B8</Color>
+    <Color x:Key="UseSurfaceThemeGreen150_Dark">#44BD75</Color>
+    <Color x:Key="UseSurfaceThemeGreen210_Dark">#3F540A</Color>
+    <Color x:Key="UseSurfaceThemeGreen220_Dark">#95BF1B</Color>
+    <Color x:Key="UseSurfaceThemeGreen240_Dark">#95BF1B</Color>
+    <Color x:Key="UseSurfaceThemeGreen260_Dark">#D8EE9C</Color>
+    <Color x:Key="UseSurfaceThemeNeutral30_Dark">#666666</Color>
+    <Color x:Key="UseSurfaceThemeOrange10_Dark">#CC7A33</Color>
+    <Color x:Key="UseSurfaceThemeOrange20_Dark">#FFB380</Color>
+    <Color x:Key="UseSurfaceThemeOrange40_Dark">#CC7A33</Color>
+    <Color x:Key="UseSurfaceThemeOrange60_Dark">#FFF2E3</Color>
+    <Color x:Key="UseSurfaceThemeRed30_Dark">#9E3328</Color>
+    <Color x:Key="UseSurfaceThemeRed40_Dark">#EBADA7</Color>
+    <Color x:Key="UseSurfaceThemeRed50_Dark">#DB7165</Color>
+    <Color x:Key="UseSurfaceThemeRed60_Dark">#DB7165</Color>
+    <Color x:Key="UseSurfaceThemeViolet5_Dark">#322064</Color>
+    <Color x:Key="UseSurfaceThemeViolet10_Dark">#40297E</Color>
+    <Color x:Key="UseSurfaceThemeViolet20_Dark">#4E3199</Color>
+    <Color x:Key="UseSurfaceThemeViolet60_Dark">#E0D9F3</Color>
+    <Color x:Key="UseSurfaceThemeViolet70_Dark">#C1B3E7</Color>
+    <Color x:Key="UseSurfaceThemeYellow30_Dark">#967229</Color>
+    <Color x:Key="UseSurfaceThemeYellow50_Dark">#FCCE72</Color>
+    <Color x:Key="UseSurfaceThemeYellow60_Dark">#FCBF44</Color>
+    <Color x:Key="UseSurfaceThemeYellow70_Dark">#FCBF44</Color>
+</ResourceDictionary>

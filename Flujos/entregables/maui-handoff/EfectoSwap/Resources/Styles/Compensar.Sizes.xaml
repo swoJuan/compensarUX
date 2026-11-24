@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Espaciados y medidas de Compensar · sistema de diseño commit-b4c8923 -->
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <x:Double x:Key="Spacing2px">2</x:Double>
+    <x:Double x:Key="Spacing4px">4</x:Double>
+    <x:Double x:Key="Spacing8px">8</x:Double>
+    <x:Double x:Key="Spacing12px">12</x:Double>
+    <x:Double x:Key="Spacing16px">16</x:Double>
+    <x:Double x:Key="Spacing24px">24</x:Double>
+    <x:Double x:Key="Spacing32px">32</x:Double>
+    <x:Double x:Key="Spacing40px">40</x:Double>
+    <x:Double x:Key="Spacing48px">48</x:Double>
+    <x:Double x:Key="Spacing56px">56</x:Double>
+    <x:Double x:Key="Spacing64px">64</x:Double>
+    <x:Double x:Key="Spacing72px">72</x:Double>
+    <x:Double x:Key="Spacing80px">80</x:Double>
+    <x:Double x:Key="Spacing96px">96</x:Double>
+    <x:Double x:Key="Spacing128px">128</x:Double>
+    <x:Double x:Key="BorderRadiusXs">8</x:Double>
+    <x:Double x:Key="BorderRadiusSm">16</x:Double>
+    <x:Double x:Key="BorderRadiusMd">24</x:Double>
+    <x:Double x:Key="BorderRadiusLg">32</x:Double>
+</ResourceDictionary>

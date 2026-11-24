@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  CÓDIGO DE REFERENCIA UX, NO PRODUCTIVO. No compilado (sin dotnet en el entorno de generación).
+  Pantalla: «App 02C — Mis solicitudes» (Efecto Swap · HU-303 como referencia)
+  Figma: APP-Medicina-Prepagada · sección Swap 8658:24679
+         8655:24380 reposo · 8657:139 cargando · 8923:25318 error · 8908:24622 fin · 8954:26839 skeleton · 8954:26680 vacío
+  Prototipo: Flujos/prototipos/app/efecto-swap/index.html
+  Requiere (App.xaml → MergedDictionaries, en este orden):
+    Resources/Styles/Compensar.Colors.xaml · Compensar.Sizes.xaml · CargaInfinita.Styles.xaml · EfectoSwap.Styles.xaml
+  Iconos (SVG incluidos en Resources/Images/): ic_arrow_left, ic_bell, ic_info, ic_x_circle, ic_empty_solicitudes.
+  Control reutilizable: Controls/CargaInfinitaView.xaml(.cs).
+-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Compensar.MedicinaPrepagada.ViewModels"
+             xmlns:models="clr-namespace:Compensar.MedicinaPrepagada.Models"
+             xmlns:controls="clr-namespace:Compensar.MedicinaPrepagada.Controls"
+             x:Class="Compensar.MedicinaPrepagada.Views.MisSolicitudesPage"
+             x:DataType="vm:MisSolicitudesViewModel"
+             Style="{StaticResource SwapPagina}"
+             Shell.NavBarIsVisible="False"
+             Title="Mis solicitudes">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <!-- ═══ Cabezote (Figma 8655:24382): alto 64, fondo primario, icono 32 en zona táctil 44 ═══ -->
+        <Grid Grid.Row="0" Style="{StaticResource SwapBarraSuperior}"
+              HeightRequest="64" Padding="12,0"
+              ColumnDefinitions="Auto,*,Auto" ColumnSpacing="4">
+            <ImageButton Grid.Column="0" Source="ic_arrow_left.png"
+                         Style="{StaticResource SwapBotonIconoBarra}"
+                         Command="{Binding VolverCommand}"
+                         SemanticProperties.Description="Volver al inicio" />
+            <Label Grid.Column="1" Text="Solicita tu historia clínica"
+                   Style="{StaticResource SwapTituloBarra}" LineBreakMode="TailTruncation"
+                   SemanticProperties.HeadingLevel="Level1" />
+            <ImageButton Grid.Column="2" Source="ic_bell.png"
+                         Style="{StaticResource SwapBotonIconoBarra}"
+                         Command="{Binding NotificacionesCommand}"
+                         SemanticProperties.Description="Notificaciones" />
+        </Grid>
+
+        <!-- ═══ Pestañas (Figma 8655:24387 topBar, alto 48): «Nueva solicitud» navega; «Mis solicitudes» activa ═══ -->
+        <Grid Grid.Row="1" Style="{StaticResource SwapBarraPestanas}" HeightRequest="49" ColumnDefinitions="*,*">
+            <BoxView Grid.ColumnSpan="2" Style="{StaticResource SwapSeparador}" VerticalOptions="End" />
+            <Button Grid.Column="0" Text="Nueva solicitud"
+                    Style="{StaticResource SwapPestana}"
+                    Command="{Binding NuevaSolicitudCommand}" />
+            <Grid Grid.Column="1">
+                <Button Text="Mis solicitudes"
+                        Style="{StaticResource SwapPestanaActiva}"
+                        SemanticProperties.Description="Mis solicitudes, pestaña seleccionada" />
+                <Border Style="{StaticResource SwapIndicadorPestana}" InputTransparent="True" />
+            </Grid>
+        </Grid>
+
+        <!-- ═══ Listado: control reutilizable CargaInfinitaView (Controls/). Estados: PrimeraCarga (skeleton) · Reposo · Cargando · Error · Fin · Vacio.
+             La pantalla solo aporta: tarjeta, skeleton, aviso (cabecera) y textos. El pie, el vacío y el umbral viven en el control.
+             Figma: skeleton 8954:26839 · vacío 8954:26680 · reposo 8655:24380 · cargando 8657:139 · error 8923:25318 · fin 8908:24622. -->
+        <controls:CargaInfinitaView Grid.Row="2"
+                                    Estado="{Binding Estado}"
+                                    ItemsSource="{Binding Solicitudes}"
+                                    CargarMasCommand="{Binding CargarMasCommand}"
+                                    ReducirMovimiento="{Binding ReducirMovimiento}"
+                                    TextoContador="{Binding TextoContador}"
+                                    DescripcionLista="Listado de solicitudes"
+                                    TextoCargando="Cargando más solicitudes…"
+                                    TextoFin="No hay más solicitudes para mostrar"
+                                    TextoBoton="Cargar más solicitudes"
+                                    ErrorTitulo="No pudimos cargar más solicitudes"
+                                    ErrorMensaje="Revisa tu conexión e inténtalo más tarde"
+                                    VacioTitulo="Aún no tienes solicitudes"
+                                    VacioDescripcion="Cuando radiques una solicitud de historia clínica la verás aquí."
+                                    VacioIcono="ic_empty_solicitudes.png"
+                                    CantidadSkeleton="3">
+
+            <!-- Aviso informativo (Figma 8655:24391, ancho 350, margen superior 24). Se muestra en todos los estados. -->
+            <controls:CargaInfinitaView.CabeceraTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource SwapAlertaInfo}" Margin="20,24,20,20">
+                        <Grid ColumnDefinitions="18,*" ColumnSpacing="8">
+                            <Image Grid.Column="0" Source="ic_info.png" WidthRequest="18" HeightRequest="18"
+                                   VerticalOptions="Start" Margin="0,3,0,0"
+                                   SemanticProperties.Description="Información" />
+                            <Label Grid.Column="1" Style="{StaticResource SwapAlertaInfoTexto}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Las historias clínicas estarán visibles durante " />
+                                        <Span Text="30 días" FontFamily="RobotoBold" />
+                                        <Span Text=" desde tu solicitud." />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </controls:CargaInfinitaView.CabeceraTemplate>
+
+            <!-- Skeleton de UNA tarjeta (Figma 8954:26990, 350×163, padding 16, gap 14). El control la repite 3 veces con pulso y oculta a lectores de pantalla.
+                 Mismas medidas que la tarjeta real: encabezado (dos barras 112×12 y 94×18 + chip 83×29), separador, tres filas 128 + (120 | 150 | 120). -->
+            <controls:CargaInfinitaView.SkeletonTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource SwapTarjeta}" Margin="20,0">
+                        <VerticalStackLayout Spacing="14">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="8">
+                                    <Border Style="{StaticResource CargaInfinitaEsqueletoBarra}" WidthRequest="112" />
+                                    <Border Style="{StaticResource CargaInfinitaEsqueletoBarra}" WidthRequest="94" HeightRequest="18" />
+                                </VerticalStackLayout>
+                                <Border Grid.Column="1" Style="{StaticResource CargaInfinitaEsqueletoBarra}" StrokeShape="RoundRectangle 16"
+                                        WidthRequest="83" HeightRequest="29" VerticalOptions="Center" />
+                            </Grid>
+                            <BoxView Style="{StaticResource SwapSeparador}" />
+                            <VerticalStackLayout Spacing="14">
+                                <HorizontalStackLayout Spacing="12">
+                                    <Border Style="{StaticResource CargaInfinitaEsqueletoBarra}" WidthRequest="128" />
+                                    <Border Style="{StaticResource CargaInfinitaEsqueletoBarra}" WidthRequest="120" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="12">
+                                    <Border Style="{StaticResource CargaInfinitaEsqueletoBarra}" WidthRequest="128" />
+                                    <Border Style="{StaticResource CargaInfinitaEsqueletoBarra}" WidthRequest="150" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="12">
+                                    <Border Style="{StaticResource CargaInfinitaEsqueletoBarra}" WidthRequest="128" />
+                                    <Border Style="{StaticResource CargaInfinitaEsqueletoBarra}" WidthRequest="120" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </controls:CargaInfinitaView.SkeletonTemplate>
+
+            <!-- Tarjeta de solicitud (Figma «Solicitud - …», ancho 350). -->
+            <controls:CargaInfinitaView.ItemTemplate>
+                <DataTemplate x:DataType="models:Solicitud">
+                    <Border Style="{StaticResource SwapTarjeta}" Margin="20,0">
+                        <VerticalStackLayout Spacing="14">
+
+                            <!-- Encabezado: radicado + chip de estado -->
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                    <Label Text="N.º de radicado" Style="{StaticResource SwapEtiquetaRadicado}" />
+                                    <Label Text="{Binding Radicado}" Style="{StaticResource SwapNumeroRadicado}" />
+                                </VerticalStackLayout>
+
+                                <!-- Un chip por estado. Texto + color (no solo color) y descripción para lectores de pantalla. -->
+                                <Border Grid.Column="1" Style="{StaticResource SwapChipRadicado}"
+                                        IsVisible="{Binding EsRadicado}"
+                                        SemanticProperties.Description="{Binding EstadoDescripcion}">
+                                    <Label Text="Radicado" Style="{StaticResource SwapChipTextoRadicado}" />
+                                </Border>
+                                <Border Grid.Column="1" Style="{StaticResource SwapChipGestionado}"
+                                        IsVisible="{Binding EsGestionado}"
+                                        SemanticProperties.Description="{Binding EstadoDescripcion}">
+                                    <Label Text="Gestionado" Style="{StaticResource SwapChipTextoGestionado}" />
+                                </Border>
+                                <Border Grid.Column="1" Style="{StaticResource SwapChipRechazado}"
+                                        IsVisible="{Binding EsRechazado}"
+                                        SemanticProperties.Description="{Binding EstadoDescripcion}">
+                                    <Label Text="Rechazado" Style="{StaticResource SwapChipTextoRechazado}" />
+                                </Border>
+                            </Grid>
+
+                            <BoxView Style="{StaticResource SwapSeparador}" />
+
+                            <!-- Detalle: etiqueta 128 + valor (columnas 128 / * con 12 de separación; Figma 8655:24401) -->
+                            <VerticalStackLayout Spacing="10">
+                                <Grid ColumnDefinitions="128,*" ColumnSpacing="12">
+                                    <Label Grid.Column="0" Text="Fecha de radicación" Style="{StaticResource SwapDetalleEtiqueta}" />
+                                    <Label Grid.Column="1" Text="{Binding FechaRadicacionTexto}" Style="{StaticResource SwapDetalleValor}" />
+                                </Grid>
+                                <Grid ColumnDefinitions="128,*" ColumnSpacing="12">
+                                    <Label Grid.Column="0" Text="Servicios" Style="{StaticResource SwapDetalleEtiqueta}" />
+                                    <Label Grid.Column="1" Text="{Binding Servicios}" Style="{StaticResource SwapDetalleValor}" />
+                                </Grid>
+                                <Grid ColumnDefinitions="128,*" ColumnSpacing="12">
+                                    <Label Grid.Column="0" Text="Periodo solicitado" Style="{StaticResource SwapDetalleEtiqueta}" />
+                                    <Label Grid.Column="1" Text="{Binding PeriodoTexto}" Style="{StaticResource SwapDetalleValor}" />
+                                </Grid>
+                            </VerticalStackLayout>
+
+                            <!-- Gestionado: «Descargar historia clínica» (botón del DS ancho completo, 48 de alto) -->
+                            <Button Text="Descargar historia clínica"
+                                    Style="{StaticResource SwapBotonSecundario}"
+                                    IsVisible="{Binding PuedeDescargar}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MisSolicitudesViewModel}}, Path=DescargarCommand}"
+                                    CommandParameter="{Binding .}"
+                                    SemanticProperties.Hint="{Binding DescargaAyuda}" />
+
+                            <!-- Rechazado: «Motivo» (copy ficticio hasta que negocio defina los motivos reales) -->
+                            <Border Style="{StaticResource SwapMotivo}" IsVisible="{Binding TieneMotivo}">
+                                <Label Text="{Binding MotivoRechazo}" Style="{StaticResource SwapMotivoTexto}" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </controls:CargaInfinitaView.ItemTemplate>
+        </controls:CargaInfinitaView>
+    </Grid>
+</ContentPage>

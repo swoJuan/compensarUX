@@ -103,7 +103,7 @@
     var enlaces = [];
     if (F.publicado) enlaces.push('<a class="pux-link" href="' + esc(F.url) + '" target="_blank" rel="noopener">Prototipo<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>');
     if (/^https:\/\//.test(F.figma || '')) enlaces.push(enlaceExterno(F.figma, 'Figma'));
-    if (F.descarga && F.descarga.url) enlaces.push('<a class="pux-link" href="' + esc(F.descarga.url) + '" download>Descargar ZIP</a>');
+    if (F.descarga && F.descarga.url) enlaces.push('<a class="pux-link" href="' + esc(F.descarga.url) + '" download>' + esc(F.descarga.etiqueta || 'Descargar ZIP') + '</a>');
     var d = function (k, v) { return '<div><dt>' + esc(k) + '</dt><dd>' + v + '</dd></div>'; };
     var np = (F.pantallas || []).length; var nh = (F.hu || []).length;
     var info = '<section class="pux-panel pux-ficha-card" aria-labelledby="fr-info"><h2 class="mp-h6 pux-ficha__titulo" id="fr-info">Detalles</h2>' +

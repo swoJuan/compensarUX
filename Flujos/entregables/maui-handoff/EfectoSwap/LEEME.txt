@@ -1,0 +1,94 @@
+EFECTO SWAP (APP) · Mis solicitudes — Paquete de handoff para .NET MAUI
+Versión del paquete 0.2.0 (reemplaza a la 0.1.0) · flujo app-efecto-swap
+
+CÓDIGO DE REFERENCIA UX, NO PRODUCTIVO.
+NO COMPILADO: el entorno donde se generó no tiene dotnet. Solo se verificó que los XAML son XML bien
+formado, que cada {StaticResource} existe en los recursos y que cada imagen referenciada tiene su SVG
+(tools/verificar-claves.mjs). Pueden existir errores de compilación o de binding. Datos FICTICIOS: no hay personas
+ni radicados reales.
+
+NOVEDADES DE LA 0.2.0
+  - Control reutilizable Controls/CargaInfinitaView: carga infinita con seis estados (skeleton de primera carga,
+    reposo, cargando más, error con reintento, fin y vacío). Sin «solicitudes» adentro; la página lo usa.
+  - ViewModel con el estado completo (EstadoCargaInfinita, incluye PrimeraCarga y Vacio).
+  - Iconos SVG exportados de Figma en Resources/Images/ (más ic_empty_solicitudes, nuevo).
+  - Copias de Compensar.Colors.xaml y Compensar.Sizes.xaml v2.4.0 en Resources/Styles/ (el paquete funciona solo).
+  - Estilos del pie movidos a Resources/Styles/CargaInfinita.Styles.xaml (+ skeleton y vacío).
+
+QUÉ ES
+Pantalla «App 02C — Mis solicitudes»: skeleton de primera carga y luego tandas 7 → 14 → 18 (swipe hacia arriba al final
+del listado o botón «Cargar más solicitudes»); si no hay registros, estado vacío. La HU-303 «Implementar paginación
+infinita» es referencia: sus criterios de aceptación no se cargaron ni se inventaron.
+
+FUENTES (todo verificable)
+  Figma       APP-Medicina-Prepagada, sección Swap 8658:24679
+              https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8658-24679&m=dev
+              Frames: 8655:24380 reposo · 8657:139 cargando · 8908:24622 fin · 8923:25318 error
+                      8954:26680 vacío · 8954:26839 skeleton
+  Prototipo   Flujos/prototipos/app/efecto-swap/ (index.html, css/swap.css, js/swap-app.js, js/swap-data.js)
+  DS          Core-Design-System/docs/app/components/carga-infinita.html (seis estados aprobados)
+  Tokens      Core-Design-System/tokens/compensar.tokens.json → paquete compensar-maui-v2.4.0.zip
+  Commits     ver manifest.json (commits reales del repositorio, checksums SHA-256 de cada archivo y origen de las copias del DS)
+
+ARCHIVOS
+  Controls/CargaInfinitaView.xaml(.cs)          Control reutilizable (bindable): skeleton, vacío, lista, pie, umbral, pulso
+  Controls/EstadoCargaInfinita.cs               Enum: PrimeraCarga, Reposo, Cargando, Error, Fin, Vacio
+  Views/MisSolicitudesPage.xaml(.cs)            Pantalla: cabezote, pestañas y el control con tarjeta, skeleton y aviso
+  ViewModels/MisSolicitudesViewModel.cs         Estado completo del control y lógica primera carga → 7 → 14 → 18
+  Models/Solicitud.cs                           Modelo y textos formateados (fechas, periodo)
+  Services/ISolicitudesService.cs               Contrato mínimo propuesto + IAnuncios (SemanticScreenReader)
+  Services/IPreferenciasMovimiento.cs           «Reducir movimiento» (implementación por defecto: no detecta nada)
+  Services/SolicitudesFicticiasService.cs       18 solicitudes FICTICIAS; latencias; FallarProximaVez; SinRegistros
+  Resources/Styles/Compensar.Colors.xaml        COPIA TAL CUAL del DS v2.4.0 (compensar-maui-v2.4.0.zip)
+  Resources/Styles/Compensar.Sizes.xaml         COPIA TAL CUAL del DS v2.4.0 (origen y SHA-256 en manifest.json)
+  Resources/Styles/CargaInfinita.Styles.xaml    Estilos del control (pie, alerta de error, skeleton, vacío)
+  Resources/Styles/EfectoSwap.Styles.xaml       Estilos de la pantalla; SOLO claves de Compensar.Colors/Sizes (sin hexadecimales)
+  Resources/Images/*.svg                        ic_arrow_left, ic_bell, ic_info, ic_x_circle, ic_empty_solicitudes (Figma, sin editar)
+  docs/MAPEO-PROTOTIPO-MAUI.md                  Prototipo → MAUI: arquitectura, componentes, tokens, estados, interacción, integración
+  docs/ACCESIBILIDAD.md                         SemanticProperties, anuncios, 44 px, movimiento reducido, contraste
+  docs/DIVERGENCIAS-PENDIENTES.md               Divergencias Figma/prototipo/código: resueltas y pendientes
+  tools/verificar-claves.mjs                    Verificación estática de claves, XML e imágenes (Node)
+  tools/generar-manifest.mjs                    Regenera manifest.json (commits, origen del DS y SHA-256)
+  manifest.json                                 Commits reales, origen/checksums de las copias del DS y SHA-256 por archivo
+
+NO INCLUIDOS (hay que tomarlos de otro lado)
+  Fuentes Roboto Regular, Medium y Bold.
+  Implementación de IPreferenciasMovimiento por plataforma (iOS/Android; ver docs/ACCESIBILIDAD.md).
+  Servicio real de solicitudes y destinos de navegación (volver, notificaciones, nueva solicitud, descarga).
+
+INTEGRACIÓN (resumen; detalle en docs/MAPEO-PROTOTIPO-MAUI.md §6)
+  1. App.xaml → MergedDictionaries, en este orden: Compensar.Colors.xaml, Compensar.Sizes.xaml,
+     CargaInfinita.Styles.xaml, EfectoSwap.Styles.xaml. (Si el proyecto ya tiene los del DS, usar los suyos.)
+  2. Fuentes en MauiProgram.cs: RobotoRegular, RobotoMedium, RobotoBold.
+  3. DI: ISolicitudesService (reemplazar el ficticio por el real), IAnuncios, IPreferenciasMovimiento,
+     MisSolicitudesViewModel, MisSolicitudesPage.
+  4. Ajustar el namespace Compensar.MedicinaPrepagada al del proyecto.
+  5. Verificación:  node tools/verificar-claves.mjs   (usa las copias incluidas; o pasa otra carpeta con
+     Compensar.Colors.xaml y Compensar.Sizes.xaml)
+
+USAR EL CONTROL EN OTRA PANTALLA
+  <controls:CargaInfinitaView Estado="{Binding Estado}" ItemsSource="{Binding Items}" CargarMasCommand="{Binding CargarMasCommand}"
+        TextoContador="..." ReducirMovimiento="..." VacioTitulo="..." ...>
+     CabeceraTemplate (opcional), SkeletonTemplate (forma de UNA tarjeta), ItemTemplate (la tarjeta real)
+  El ViewModel cambia Estado y agrega a Items; el control NO carga datos. Reglas: el umbral de scroll solo actúa en
+  Reposo; en Error reintenta solo el botón; en Fin no hay botón ni spinner.
+
+PARA PROBAR LOS ESTADOS
+  SolicitudesFicticiasService.FallarProximaVez = true : la siguiente carga falla una vez (el botón reintenta).
+  SolicitudesFicticiasService.SinRegistros = true     : la primera carga devuelve 0 registros → estado vacío.
+  Skeleton: 900 ms al abrir (LatenciaPrimeraCarga).
+
+LIMITACIONES Y PENDIENTES PRINCIPALES (detalle en docs/DIVERGENCIAS-PENDIENTES.md)
+  - ESTADO FINAL: resuelto según la documentación del DS (carga-infinita.html: sin spinner, botón oculto). El registro
+    IA-Central (PI-SWAP-03/04/05) sigue en «propuesta»; falta alinearlo.
+  - El «swipe» de MAUI es RemainingItemsThreshold: se dispara al llegar a la última tarjeta, no al arrastrar más
+    allá del final (48 px) como en el prototipo. Por confirmar con UX y Desarrollo.
+  - Error de la PRIMERA carga: Figma y el DS no lo diseñan; se reutiliza la alerta del pie (supuesto técnico).
+  - Pulso del skeleton: viene del prototipo, no de Figma. Se detiene con «reducir movimiento», pero la detección
+    por plataforma NO está implementada.
+  - SVG de Figma con colores fijos: no siguen el modo oscuro. ic_empty_solicitudes es un añadido de esta versión.
+  - Contraste del naranja #FF6600 en texto: 2,94:1 sobre blanco (AA pide 4,5:1). Botón corporativo protegido por
+    DEC-001: riesgo documentado, no corregido. No se declara conformidad WCAG.
+  - «Motivo del rechazo»: copy ficticio hasta que negocio defina los motivos reales.
+  - Sin probar con TalkBack/VoiceOver, ni en modo oscuro, ni con fuente grande.
+  - Este paquete no está publicado ni desplegado; no tiene versión navegable ni commit propio.

@@ -1,0 +1,284 @@
+{
+  "paquete": "efecto-swap-maui-handoff",
+  "version": "0.2.0",
+  "versionAnterior": "0.1.0",
+  "cambiosRespectoAnterior": "Control reutilizable Controls/CargaInfinitaView (skeleton de primera carga, vacío, cargando, error, fin); ViewModel con estado completo; SVG exportados de Figma; copias de Compensar.Colors/Sizes v2.4.0; estilos del pie movidos a CargaInfinita.Styles.xaml.",
+  "flujo": "app-efecto-swap",
+  "flujoVersion": "0.1.0",
+  "tipo": "codigo-de-referencia-ux-no-productivo",
+  "compilado": false,
+  "nota": "No compilado: el entorno de generación no tiene dotnet. Datos ficticios. No publicado ni desplegado.",
+  "generadoEn": "2026-11-24T20:12:36.517Z",
+  "figma": {
+    "archivo": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8658-24679&m=dev",
+    "frames": {
+      "reposo": "8655:24380",
+      "cargando": "8657:139",
+      "fin": "8908:24622",
+      "error": "8923:25318",
+      "vacio": "8954:26680",
+      "skeleton": "8954:26839"
+    },
+    "iconos": {
+      "ic_arrow_left": "8655:24383",
+      "ic_bell": "8655:24386",
+      "ic_info": "8655:24392",
+      "ic_x_circle": "I8923:25690;2284:4964",
+      "ic_empty_solicitudes": "8954:26836"
+    },
+    "iconosNota": "SVG tal como los entrega el MCP de Figma (get_design_context); no se editaron. Traen colores fijos (blanco, #2D4A67, #D14434, #FF6600): no siguen el modo oscuro.",
+    "leidoEn": "2026-11-24",
+    "modo": "solo lectura"
+  },
+  "historiaUsuario": {
+    "codigo": "HU-303",
+    "titulo": "Implementar paginación infinita",
+    "uso": "referencia; sin criterios de aceptación cargados"
+  },
+  "designSystem": {
+    "version": "2.4.0",
+    "paqueteMaui": "compensar-maui-v2.4.0.zip",
+    "incluidosEnEstePaquete": true,
+    "copias": [
+      {
+        "archivo": "Resources/Styles/Compensar.Colors.xaml",
+        "origen": "Flujos/portal/dist/ds/descargas/compensar-maui-v2.4.0.zip!compensar-maui-v2.4.0/Resources/Styles/Compensar.Colors.xaml",
+        "sha256": "dab902ba5ace7345e1bff540ca82734af170d9628de89e0254522ce8001dd3b3",
+        "sha256EnElZip": "dab902ba5ace7345e1bff540ca82734af170d9628de89e0254522ce8001dd3b3",
+        "identicoAlZip": true
+      },
+      {
+        "archivo": "Resources/Styles/Compensar.Sizes.xaml",
+        "origen": "Flujos/portal/dist/ds/descargas/compensar-maui-v2.4.0.zip!compensar-maui-v2.4.0/Resources/Styles/Compensar.Sizes.xaml",
+        "sha256": "2d8c2c074751b44ca9a8a59c7ad8f7b47905a2b344164fdf90c71e7eebfa7b09",
+        "sha256EnElZip": "2d8c2c074751b44ca9a8a59c7ad8f7b47905a2b344164fdf90c71e7eebfa7b09",
+        "identicoAlZip": true
+      }
+    ]
+  },
+  "repositorio": {
+    "head": "1cae8c18404232da5f5c9f8e3c3074e2296e7410",
+    "rama": "main"
+  },
+  "commitsFuente": [
+    {
+      "ruta": "Flujos/prototipos/app/efecto-swap/index.html",
+      "sha256": "94ff0d4b8f19c4a08ffa8d7420b4735f3aa372912b2fc0e268e21882d02c0387",
+      "commit": "c857a5d6bf7dd4eeceb1ffdd1296f73c0289c005",
+      "corto": "c857a5d",
+      "fecha": "2026-11-24T14:56:09-05:00",
+      "asunto": "feat(app/efecto-swap): skeleton de primera carga y estado vacío",
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Flujos/prototipos/app/efecto-swap/css/swap.css",
+      "sha256": "da175ea98bf86a1c9c2a244df0c4ac83647c4599260e82de9212c8fed4704c94",
+      "commit": "c857a5d6bf7dd4eeceb1ffdd1296f73c0289c005",
+      "corto": "c857a5d",
+      "fecha": "2026-11-24T14:56:09-05:00",
+      "asunto": "feat(app/efecto-swap): skeleton de primera carga y estado vacío",
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Flujos/prototipos/app/efecto-swap/js/swap-app.js",
+      "sha256": "28d0564e5b1a72ef2891450abdae43195d5c410240d5dd316e5305ed3addbae8",
+      "commit": "c857a5d6bf7dd4eeceb1ffdd1296f73c0289c005",
+      "corto": "c857a5d",
+      "fecha": "2026-11-24T14:56:09-05:00",
+      "asunto": "feat(app/efecto-swap): skeleton de primera carga y estado vacío",
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Flujos/prototipos/app/efecto-swap/js/swap-data.js",
+      "sha256": "8208380607788fed96e93a0ba4f92a3ca0c9b04d783537bc33925d176067d5f0",
+      "commit": "4bc3b2b2b478deb3ff8bb6a27eed542a5f36176b",
+      "corto": "4bc3b2b",
+      "fecha": "2026-11-23T18:14:30-05:00",
+      "asunto": "feat(app-efecto-swap): prototipo APP Mis solicitudes con carga por swipe (HU-303), aprobado UX",
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Flujos/portal/trazabilidad/app-efecto-swap.json",
+      "sha256": "6b1ecbf0a55bcf1b67cc08d590fa1f17669923ebbee37ef60c2135ebfe6cad22",
+      "commit": "4bc3b2b2b478deb3ff8bb6a27eed542a5f36176b",
+      "corto": "4bc3b2b",
+      "fecha": "2026-11-23T18:14:30-05:00",
+      "asunto": "feat(app-efecto-swap): prototipo APP Mis solicitudes con carga por swipe (HU-303), aprobado UX",
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Core-Design-System/tokens/compensar.tokens.json",
+      "sha256": "2368bad81466a885baf636b09a6ca95aa0d533b0e0e79cf1381a0b862ebbf0bb",
+      "commit": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+      "corto": "d4cefd3",
+      "fecha": "2026-11-12T12:33:17-05:00",
+      "asunto": "Commit inicial",
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Core-Design-System/docs/app/components/carga-infinita.html",
+      "sha256": "798e8827ffa056c4eedba081066877d6f8ce367e3e4d838546e3922a1c89b094",
+      "commit": "b4c8923573c2815c2fa7696915074bdfbdba9cad",
+      "corto": "b4c8923",
+      "fecha": "2026-11-24T14:56:08-05:00",
+      "asunto": "docs(app): quita sección de decisiones de carga infinita",
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Flujos/portal/scripts/lib/maui.mjs",
+      "sha256": "4ff74430aedf720a0307a6d3a62b4f1a3a85e8a6a85011c184b433e2471a8913",
+      "commit": "d983b20d9d03c1fc43914056146c29521efccede",
+      "corto": "d983b20",
+      "fecha": "2026-11-13T10:18:37-05:00",
+      "asunto": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Flujos/portal/dist/ds/descargas/compensar-maui-v2.4.0.zip",
+      "sha256": "3188e2d2c94c3594048383467746ed84f5eff73eafa4e6f768261af7135c9cb5",
+      "commit": null,
+      "corto": null,
+      "fecha": null,
+      "asunto": null,
+      "sinCommitar": false
+    },
+    {
+      "ruta": "Flujos/entregables/maui-handoff/Agendamiento",
+      "sha256": null,
+      "commit": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+      "corto": "d4cefd3",
+      "fecha": "2026-11-12T12:33:17-05:00",
+      "asunto": "Commit inicial",
+      "sinCommitar": false
+    }
+  ],
+  "commitDelPaquete": null,
+  "commitDelPaqueteNota": "El paquete se generó sin commit: aún no existe en el historial de Git.",
+  "archivos": [
+    {
+      "ruta": "Controls/CargaInfinitaView.xaml",
+      "bytes": 7625,
+      "sha256": "63ddd58a0ae758f0351e2b86f72714f67ee9c0b321fcfc6b409ac160c30ab3c1"
+    },
+    {
+      "ruta": "Controls/CargaInfinitaView.xaml.cs",
+      "bytes": 10794,
+      "sha256": "1c7709d1aea3862a4a5021edb05adca52b85ede5a8fe3851dcfc89e3e3a5756b"
+    },
+    {
+      "ruta": "Controls/EstadoCargaInfinita.cs",
+      "bytes": 1158,
+      "sha256": "d307aa6294846a8945ab36a69de922a14d2e5a41c50eff98baed7566a935911f"
+    },
+    {
+      "ruta": "LEEME.txt",
+      "bytes": 7737,
+      "sha256": "e3f19ca7b13064bf088661e820ef40b0424c7b46db6d5ba5d6b86211143ba0cd"
+    },
+    {
+      "ruta": "Models/Solicitud.cs",
+      "bytes": 2096,
+      "sha256": "6739a0f5f6d8c05d7b4639cecdb2a5df82b16e89479414f1e8ee609fcad11a3c"
+    },
+    {
+      "ruta": "Resources/Images/ic_arrow_left.svg",
+      "bytes": 817,
+      "sha256": "4babfd0e3ffc637df932b6d9c0be6753928ea9e3b5893ae681a09930350223bb"
+    },
+    {
+      "ruta": "Resources/Images/ic_bell.svg",
+      "bytes": 1490,
+      "sha256": "30e76165887430422d6b89346710ecf68c4a6cbbd90aec6221a443e3c1c6c2d5"
+    },
+    {
+      "ruta": "Resources/Images/ic_empty_solicitudes.svg",
+      "bytes": 607,
+      "sha256": "f7e9b015a37532e9fc869efc1c1d735ca00e3b9fb8d6385b84f200c9e86b5519"
+    },
+    {
+      "ruta": "Resources/Images/ic_info.svg",
+      "bytes": 1245,
+      "sha256": "b461a8cd33276412f81aa2ba1abbfcca7b23f4d30675170af611c81f2c90e53c"
+    },
+    {
+      "ruta": "Resources/Images/ic_x_circle.svg",
+      "bytes": 1189,
+      "sha256": "6a8ade6f9073e98ac35173d370481871707da049e5faf44131d3ac1253bf5c8d"
+    },
+    {
+      "ruta": "Resources/Styles/CargaInfinita.Styles.xaml",
+      "bytes": 8715,
+      "sha256": "3eae6ed4da16af984c8ab7c975112a2828af4167d4091a227a5c8f7122a111b3"
+    },
+    {
+      "ruta": "Resources/Styles/Compensar.Colors.xaml",
+      "bytes": 24657,
+      "sha256": "dab902ba5ace7345e1bff540ca82734af170d9628de89e0254522ce8001dd3b3"
+    },
+    {
+      "ruta": "Resources/Styles/Compensar.Sizes.xaml",
+      "bytes": 1242,
+      "sha256": "2d8c2c074751b44ca9a8a59c7ad8f7b47905a2b344164fdf90c71e7eebfa7b09"
+    },
+    {
+      "ruta": "Resources/Styles/EfectoSwap.Styles.xaml",
+      "bytes": 14451,
+      "sha256": "f82acd3096f5bf3bd60cba9148b4f6562285921a56d16c87dbe99a6121987b79"
+    },
+    {
+      "ruta": "Services/IPreferenciasMovimiento.cs",
+      "bytes": 809,
+      "sha256": "3ac7f9aadf462c279866b163881fb9f882dca66fd7ee0d1196ff9abb0962bb99"
+    },
+    {
+      "ruta": "Services/ISolicitudesService.cs",
+      "bytes": 1199,
+      "sha256": "81e8e2cdfd886f4c1ce5ffaf8b9b7a19cf9cf97ad3136484b9f43fb88464a316"
+    },
+    {
+      "ruta": "Services/SolicitudesFicticiasService.cs",
+      "bytes": 5007,
+      "sha256": "0de687234a9aa2f5f217c58d8e8fde5f551d8b90f94fadee9f161e20241165b7"
+    },
+    {
+      "ruta": "ViewModels/MisSolicitudesViewModel.cs",
+      "bytes": 7151,
+      "sha256": "82437cdad0fc6bd2bd100c613ac7a24c05dfdc4c26dfac5be766a8a07866888b"
+    },
+    {
+      "ruta": "Views/MisSolicitudesPage.xaml",
+      "bytes": 14466,
+      "sha256": "a818ca1debc5889811566e8cfffeefb361b81732ad362ebbc860e95ae6a83052"
+    },
+    {
+      "ruta": "Views/MisSolicitudesPage.xaml.cs",
+      "bytes": 558,
+      "sha256": "5d6f1a697ded26049960321c73ffc0dd5dd298b36a2cbfc71fa0c008993e8bc9"
+    },
+    {
+      "ruta": "docs/ACCESIBILIDAD.md",
+      "bytes": 6654,
+      "sha256": "3b1db8f7371e576c14222dc68e95504d7a5b21184534f83bef8e7def2b767f14"
+    },
+    {
+      "ruta": "docs/DIVERGENCIAS-PENDIENTES.md",
+      "bytes": 7881,
+      "sha256": "707ed718b3bf8f3f5297db0942d53ebff54e48d84830ae275a898268d92910ab"
+    },
+    {
+      "ruta": "docs/MAPEO-PROTOTIPO-MAUI.md",
+      "bytes": 11863,
+      "sha256": "59727bb0226eb8084441aa1f1e338622719e59ea580e58c5bb8afb21fcac5935"
+    },
+    {
+      "ruta": "tools/generar-manifest.mjs",
+      "bytes": 5567,
+      "sha256": "e291a42cc31d809c1f3d82e5a30dbede67bd3ff82bacad997b395356a85be281"
+    },
+    {
+      "ruta": "tools/verificar-claves.mjs",
+      "bytes": 3317,
+      "sha256": "6d7588bd3227a79c3171f93909b9f85114524b9aee1be4d422b06df5581f0c3e"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Estilos de la pantalla «Mis solicitudes» (Efecto Swap). CÓDIGO DE REFERENCIA UX, NO PRODUCTIVO. No compilado.
+
+  NO define colores ni medidas del sistema de diseño: los toma por clave de
+    Resources/Styles/Compensar.Colors.xaml   (clave clara + misma clave con sufijo _Dark)
+    Resources/Styles/Compensar.Sizes.xaml
+  que genera el portal en el paquete compensar-maui-<versión>.zip (Core-Design-System/tokens/compensar.tokens.json
+  → Flujos/portal/scripts/lib/maui.mjs). Registrar ESE diccionario ANTES de este en App.xaml.
+
+  Orden en App.xaml → MergedDictionaries:
+    1. Resources/Styles/Compensar.Colors.xaml
+    2. Resources/Styles/Compensar.Sizes.xaml
+    3. Resources/Styles/CargaInfinita.Styles.xaml   (estilos del control Controls/CargaInfinitaView)
+    4. Resources/Styles/EfectoSwap.Styles.xaml   (este archivo)
+
+  Los modos claro/oscuro se resuelven con {AppThemeBinding Light=…, Dark=…_Dark}. MAUI no tiene modo de alto contraste.
+  Fuentes (alias de MauiProgram.cs): RobotoRegular, RobotoMedium, RobotoBold.
+
+  Medidas de Figma que NO son token del sistema (se dejan como números locales, con su nodo):
+    20 (margen lateral y separación entre tarjetas), 18 (icono del aviso), 12 (radio de la alerta), 10 (radio del motivo
+    y padding vertical del aviso), 29 (alto del chip), 44 (zona táctil mínima), 48 (alto de botón). Los del pie, el vacío y el skeleton viven en CargaInfinita.Styles.xaml.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- ═══ Medidas locales (sin token en Compensar.Sizes.xaml) ═══ -->
+    <x:Double x:Key="SwapMargenLateral">20</x:Double>
+    <x:Double x:Key="SwapSeparacionTarjetas">20</x:Double>
+    <x:Double x:Key="SwapZonaTactil">44</x:Double>
+    <x:Double x:Key="SwapAltoBoton">48</x:Double>
+    <x:Double x:Key="SwapAltoChip">29</x:Double>
+    <x:Double x:Key="SwapAnchoEtiquetaDetalle">128</x:Double>
+
+    <!-- ═══ Superficies ═══ -->
+    <Style x:Key="SwapPagina" TargetType="ContentPage">
+        <!-- Figma: variable use/surface/surface (#F5F5F5). El prototipo usa use/surface/theme/gray/5 (#F8F7F7): ver docs/DIVERGENCIAS-PENDIENTES.md -->
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UseSurfaceSurface}, Dark={StaticResource UseSurfaceSurface_Dark}}" />
+    </Style>
+
+    <Style x:Key="SwapBarraSuperior" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UsePrimaryDefault}, Dark={StaticResource UsePrimaryDefault_Dark}}" />
+    </Style>
+
+    <Style x:Key="SwapBarraPestanas" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UseSurfaceWhite}, Dark={StaticResource UseSurfaceWhite_Dark}}" />
+    </Style>
+
+    <Style x:Key="SwapSeparador" TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="1" />
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource UseBorderSubtle}, Dark={StaticResource UseBorderSubtle_Dark}}" />
+    </Style>
+
+    <!-- ═══ Tarjeta de solicitud (Figma «Solicitud - …»: ancho 350, padding 16, radio 16 = BorderRadiusSm) ═══ -->
+    <Style x:Key="SwapTarjeta" TargetType="Border">
+        <Setter Property="Padding" Value="{StaticResource Spacing16px}" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UseSurfaceWhite}, Dark={StaticResource UseSurfaceWhite_Dark}}" />
+    </Style>
+
+    <!-- «N.º DE RADICADO»: Roboto Regular 14 / 1.5, mayúsculas, use/text/tertiary -->
+    <Style x:Key="SwapEtiquetaRadicado" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.5" />
+        <Setter Property="TextTransform" Value="Uppercase" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseTextTertiary}, Dark={StaticResource UseTextTertiary_Dark}}" />
+    </Style>
+
+    <!-- Número de radicado: heading/h5 (Figma SemiBold 600, 18, 1.2, tracking 0.8 %). Roboto no trae 600 estático: se usa RobotoBold,
+         igual que renderiza el prototipo web. Tracking 0.8 % de 18 = 0.144. -->
+    <Style x:Key="SwapNumeroRadicado" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoBold" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="LineHeight" Value="1.2" />
+        <Setter Property="CharacterSpacing" Value="0.144" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseTextPrimary}, Dark={StaticResource UseTextPrimary_Dark}}" />
+    </Style>
+
+    <!-- Detalle: body/M (Roboto Regular 14 / 1.5). Etiqueta en tertiary, valor en primary -->
+    <Style x:Key="SwapDetalleEtiqueta" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.5" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseTextTertiary}, Dark={StaticResource UseTextTertiary_Dark}}" />
+    </Style>
+    <Style x:Key="SwapDetalleValor" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.5" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseTextPrimary}, Dark={StaticResource UseTextPrimary_Dark}}" />
+    </Style>
+
+    <!-- «Motivo» del rechazo (Figma 8655:24446: 318×41, padding 10/12). Fondo inferido del prototipo (superficie de página): ver divergencias -->
+    <Style x:Key="SwapMotivo" TargetType="Border">
+        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 10" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UseSurfaceSurface}, Dark={StaticResource UseSurfaceSurface_Dark}}" />
+    </Style>
+    <Style x:Key="SwapMotivoTexto" TargetType="Label" BasedOn="{StaticResource SwapDetalleValor}">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseTextSecondary}, Dark={StaticResource UseTextSecondary_Dark}}" />
+    </Style>
+
+    <!-- ═══ Chips de estado (Mp Badges: alto 29, padding 4/12, radio 16 = BorderRadiusSm, texto 14) ═══
+         Radicado → badge warning · Gestionado → badge green-1 · Rechazado → badge error (texto use/text/badge-error, DEC-006) -->
+    <Style x:Key="SwapChip" TargetType="Border">
+        <Setter Property="Padding" Value="12,4" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="MinimumHeightRequest" Value="{StaticResource SwapAltoChip}" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="End" />
+    </Style>
+    <Style x:Key="SwapChipRadicado" TargetType="Border" BasedOn="{StaticResource SwapChip}">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UseStateWarningBg}, Dark={StaticResource UseStateWarningBg_Dark}}" />
+    </Style>
+    <Style x:Key="SwapChipGestionado" TargetType="Border" BasedOn="{StaticResource SwapChip}">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UseStateSuccessBg}, Dark={StaticResource UseStateSuccessBg_Dark}}" />
+    </Style>
+    <Style x:Key="SwapChipRechazado" TargetType="Border" BasedOn="{StaticResource SwapChip}">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UseStateErrorBg}, Dark={StaticResource UseStateErrorBg_Dark}}" />
+    </Style>
+
+    <Style x:Key="SwapChipTexto" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.5" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="SwapChipTextoRadicado" TargetType="Label" BasedOn="{StaticResource SwapChipTexto}">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseStateWarningText}, Dark={StaticResource UseStateWarningText_Dark}}" />
+    </Style>
+    <Style x:Key="SwapChipTextoGestionado" TargetType="Label" BasedOn="{StaticResource SwapChipTexto}">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseStateSuccessText}, Dark={StaticResource UseStateSuccessText_Dark}}" />
+    </Style>
+    <Style x:Key="SwapChipTextoRechazado" TargetType="Label" BasedOn="{StaticResource SwapChipTexto}">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseTextBadgeError}, Dark={StaticResource UseTextBadgeError_Dark}}" />
+    </Style>
+
+    <!-- ═══ Alerta informativa (Figma 8655:24391 «Aviso 30 días»: SIN borde, radio 12, padding 10/12, gap 8, icono 18, texto 14/1.5) ═══ -->
+    <Style x:Key="SwapAlertaInfo" TargetType="Border">
+        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 12" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UseStateInfoBg}, Dark={StaticResource UseStateInfoBg_Dark}}" />
+    </Style>
+    <Style x:Key="SwapAlertaInfoTexto" TargetType="Label">
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.5" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseStateInfoText}, Dark={StaticResource UseStateInfoText_Dark}}" />
+    </Style>
+
+
+
+    <!-- ═══ Botones ═══ -->
+    <!-- Terciario «Cargar más solicitudes»: alto 48, ancho ~189 (padding horizontal 8), radio 24 (border-radius/md), texto comun/Boton
+         (Roboto Bold 16, tracking 2.2 % = 0.352), color use/primary/default, fondo transparente.
+         Deshabilitado (cargando): se ve igual que en reposo (Figma 8657:139) pero no actúa; TalkBack/VoiceOver lo anuncian como no disponible. -->
+
+    <!-- Secundario «Descargar historia clínica» (botón del DS, ancho completo de la tarjeta, alto 48, radio 24). Borde y texto primarios, fondo transparente. -->
+    <Style x:Key="SwapBotonSecundario" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="CornerRadius" Value="24" />
+        <Setter Property="MinimumHeightRequest" Value="{StaticResource SwapAltoBoton}" />
+        <Setter Property="HeightRequest" Value="{StaticResource SwapAltoBoton}" />
+        <Setter Property="FontFamily" Value="RobotoBold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CharacterSpacing" Value="0.352" />
+        <Setter Property="TextTransform" Value="None" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource UsePrimaryDefault}, Dark={StaticResource UsePrimaryDefault_Dark}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UsePrimaryDefault}, Dark={StaticResource UsePrimaryDefault_Dark}}" />
+    </Style>
+
+    <!-- Botones de icono de la barra superior: zona táctil 44×44 (el glifo mide 32 en Figma) -->
+    <Style x:Key="SwapBotonIconoBarra" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="{StaticResource SwapZonaTactil}" />
+        <Setter Property="HeightRequest" Value="{StaticResource SwapZonaTactil}" />
+        <Setter Property="Padding" Value="6" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <!-- ═══ Barra superior y pestañas ═══ -->
+    <Style x:Key="SwapTituloBarra" TargetType="Label">
+        <!-- Figma body/XL: Roboto Regular 18 / 1.3, texto use/text/on-dark/primary -->
+        <Setter Property="FontFamily" Value="RobotoRegular" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="LineHeight" Value="1.3" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseTextOnDarkPrimary}, Dark={StaticResource UseTextOnDarkPrimary_Dark}}" />
+    </Style>
+    <!-- Pestañas: M3 Title Small (Roboto Medium 14 / 20, tracking 0.1) -->
+    <Style x:Key="SwapPestana" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="MinimumHeightRequest" Value="{StaticResource SwapAltoBoton}" />
+        <Setter Property="FontFamily" Value="RobotoMedium" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="CharacterSpacing" Value="0.1" />
+        <Setter Property="TextTransform" Value="None" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UseTextSecondary}, Dark={StaticResource UseTextSecondary_Dark}}" />
+    </Style>
+    <Style x:Key="SwapPestanaActiva" TargetType="Button" BasedOn="{StaticResource SwapPestana}">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource UsePrimaryDefault}, Dark={StaticResource UsePrimaryDefault_Dark}}" />
+    </Style>
+    <Style x:Key="SwapIndicadorPestana" TargetType="Border">
+        <!-- 3 px, esquinas superiores redondeadas, inset 2 px (igual que el handoff de Agendamiento) -->
+        <Setter Property="HeightRequest" Value="3" />
+        <Setter Property="Margin" Value="2,0,2,0" />
+        <Setter Property="VerticalOptions" Value="End" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 100,100,0,0" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource UsePrimaryDefault}, Dark={StaticResource UsePrimaryDefault_Dark}}" />
+    </Style>
+</ResourceDictionary>

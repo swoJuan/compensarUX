@@ -24,6 +24,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { ROOT, readJson, matcher, walk, Fuente, estadoSincronizacion, mapaComponentes } from './lib/fuentes.mjs';
 import { crearZip } from './lib/zip.mjs';
 import { generarPaqueteIA } from './lib/ia-docs.mjs';
@@ -91,6 +92,39 @@ const entregaDe = (f) => {
   return { estado: e.estado, fecha: e.fecha ?? null, por: e.por ?? null, nota: e.nota ?? null };
 };
 for (const f of flujos) entregaDe(f);
+/* `handoffMaui` (opcional): paquete de handoff para .NET MAUI de un flujo. { carpeta, version }.
+   `carpeta` es una ruta del repositorio bajo Flujos/entregables/maui-handoff/ con LEEME.txt y manifest.json.
+   Si existe, la descarga del flujo es ESE paquete (no el ZIP del prototipo web). El build comprueba que cada
+   archivo coincida con el SHA-256 del manifest y se detiene si no. */
+const REPO_RAIZ = path.resolve(ROOT, '..', '..');
+const HANDOFF_BASE = path.join(REPO_RAIZ, 'Flujos', 'entregables', 'maui-handoff');
+const handoffMauiDe = (f) => {
+  if (f.handoffMaui === undefined) return null;
+  const h = f.handoffMaui;
+  const mal = (m) => { throw new Error(`handoffMaui inválido en ${f.id}: ${m}`); };
+  if (!h || typeof h !== 'object' || Array.isArray(h)) mal('debe ser un objeto { carpeta, version }');
+  const extra = Object.keys(h).filter((k) => !['carpeta', 'version'].includes(k));
+  if (extra.length) mal(`campos desconocidos: ${extra.join(', ')}`);
+  if (typeof h.carpeta !== 'string' || !h.carpeta.trim()) mal('carpeta debe ser un texto no vacío');
+  if (!/^\d+\.\d+\.\d+$/.test(h.version || '')) mal('version debe ser x.y.z');
+  const dir = path.resolve(REPO_RAIZ, h.carpeta);
+  const rel = path.relative(HANDOFF_BASE, dir);
+  if (!rel || rel.startsWith('..') || path.isAbsolute(rel)) mal('carpeta debe estar dentro de Flujos/entregables/maui-handoff/');
+  for (const obligatorio of ['LEEME.txt', 'manifest.json']) if (!fs.existsSync(path.join(dir, obligatorio))) mal(`falta ${obligatorio} en ${h.carpeta}`);
+  const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8'));
+  if (manifest.flujo !== f.id) mal(`el manifest es del flujo «${manifest.flujo}»`);
+  if (manifest.version !== h.version) mal(`la versión del manifest (${manifest.version}) no coincide con ${h.version}`);
+  const enDisco = walk(dir).filter((r) => r !== 'manifest.json' && !r.endsWith('.DS_Store')).sort();
+  const enManifest = manifest.archivos.map((a) => a.ruta).sort();
+  if (JSON.stringify(enDisco) !== JSON.stringify(enManifest))
+    mal(`los archivos de la carpeta no coinciden con manifest.json (regenéralo con tools/generar-manifest.mjs). Disco: ${enDisco.length}, manifest: ${enManifest.length}`);
+  for (const a of manifest.archivos) {
+    const sha = crypto.createHash('sha256').update(fs.readFileSync(path.join(dir, a.ruta))).digest('hex');
+    if (sha !== a.sha256) mal(`SHA-256 distinto en ${a.ruta} (regenera manifest.json)`);
+  }
+  return { dir, archivos: [...enDisco, 'manifest.json'].sort(), version: h.version, generadoEn: manifest.generadoEn };
+};
+const handoffsMaui = new Map(flujos.filter((f) => f.handoffMaui !== undefined).map((f) => [f.id, handoffMauiDe(f)]));
 /* Estado del flujo: solo cuatro, en este orden. «entregado» = UX terminó; exige aprobación UX o entrega registradas. */
 const ESTADOS_FLUJO = ['borrador', 'construccion', 'validacion-ux', 'entregado'];
 for (const f of flujos) {
@@ -328,6 +362,18 @@ const carpetaFlujosZip = path.join(DIST, 'descargas', 'flujos');
 const fechaFl = infoFl.fecha ? new Date(infoFl.fecha) : new Date();
 const descargasFlujos = {};
 for (const f of publicados) {
+  if (handoffsMaui.has(f.id)) {
+    /* Este flujo se descarga como paquete de handoff MAUI; no se genera el ZIP del prototipo web. */
+    const hm = handoffsMaui.get(f.id);
+    const raizHm = `${f.id}-maui-handoff-v${hm.version}`;
+    const datosHm = crearZip(
+      hm.archivos.map((rel) => ({ nombre: `${raizHm}/${rel}`, datos: fs.readFileSync(path.join(hm.dir, rel)) })),
+      new Date(hm.generadoEn));
+    fs.mkdirSync(carpetaFlujosZip, { recursive: true });
+    fs.writeFileSync(path.join(carpetaFlujosZip, `${raizHm}.zip`), datosHm);
+    descargasFlujos[f.id] = { tipo: 'maui', etiqueta: 'Descarga MAUI', version: hm.version, archivo: `${raizHm}.zip`, bytes: datosHm.length, url: `descargas/flujos/${raizHm}.zip` };
+    continue;
+  }
   const incluye = matcher([
     ...(cfg.flujos.comun || []),
     ...(cfg.plataformas[f.plataforma].comun || []),

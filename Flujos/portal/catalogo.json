@@ -201,7 +201,11 @@
         "estado": "entregado",
         "fecha": "2026-11-24",
         "por": "Director UX (instrucción directa)",
-        "nota": "Marcado por instrucción del director UX; sin paquete ZIP de handoff ni despliegue registrado"
+        "nota": "Paquete de handoff MAUI v0.2.0 (código de referencia UX, no compilado, no productivo) en Flujos/entregables/maui-handoff/EfectoSwap/ y su ZIP descargable desde el portal. Incluye control reutilizable de carga infinita (Controls/CargaInfinitaView: skeleton de primera carga, cargando, error, fin y vacío), iconos SVG de Figma y tokens MAUI v2.4.0. Sin despliegue registrado."
+      },
+      "handoffMaui": {
+        "carpeta": "Flujos/entregables/maui-handoff/EfectoSwap",
+        "version": "0.2.0"
       }
     }
   ]
