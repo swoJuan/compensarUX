@@ -74,6 +74,23 @@ for (const f of flujos) {
       throw new Error(`categorias inválidas en ${f.id}: debe ser una lista sin repetidos de etiquetas en minúsculas (a-z, 0-9, guiones), p. ej. ["swap"]`);
   }
 }
+/* `entrega` (opcional): entrega a Desarrollo. { estado: 'ninguna'|'pendiente'|'entregado', fecha, por, nota }.
+   Es un dato declarado por UX: no implica ZIP de handoff, publicación en el portal ni despliegue. */
+const ENTREGA_ESTADOS = ['ninguna', 'pendiente', 'entregado'];
+const entregaDe = (f) => {
+  if (f.entrega === undefined) return { estado: 'ninguna', fecha: null, por: null, nota: null };
+  const e = f.entrega;
+  const mal = (m) => { throw new Error(`entrega inválida en ${f.id}: ${m}`); };
+  if (!e || typeof e !== 'object' || Array.isArray(e)) mal('debe ser un objeto { estado, fecha, por, nota }');
+  const extra = Object.keys(e).filter((k) => !['estado', 'fecha', 'por', 'nota'].includes(k));
+  if (extra.length) mal(`campos desconocidos: ${extra.join(', ')}`);
+  if (!ENTREGA_ESTADOS.includes(e.estado)) mal(`estado debe ser uno de ${ENTREGA_ESTADOS.join(', ')}`);
+  if (e.fecha != null && !(/^\d{4}-\d{2}-\d{2}$/.test(e.fecha) && !isNaN(new Date(e.fecha)))) mal('fecha debe ser AAAA-MM-DD');
+  for (const k of ['por', 'nota']) if (e[k] != null && (typeof e[k] !== 'string' || !e[k].trim())) mal(`${k} debe ser un texto no vacío`);
+  if (e.estado === 'entregado' && (!e.fecha || !e.por)) mal("'entregado' exige fecha y por");
+  return { estado: e.estado, fecha: e.fecha ?? null, por: e.por ?? null, nota: e.nota ?? null };
+};
+for (const f of flujos) entregaDe(f);
 const publicados = flujos.filter((f) => f.publicar);
 const plataformasUsadas = [...new Set(publicados.map((f) => f.plataforma))];
 const flIncluir = matcher([
@@ -629,6 +646,7 @@ const salida = {
     hu: f.hu || [],
     categorias: f.categorias || [],
     publicado: !!f.publicar,
+    entrega: entregaDe(f),
     url: f.publicar ? `${cfg.flujos.destino}/${f.ruta.replace(/\/?$/, '/')}${f.entrada || 'index.html'}` : null,
     descarga: descargasFlujos[f.id] || null,
     consumo: consumoFlujo(f),

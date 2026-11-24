@@ -69,6 +69,18 @@
   function tagsCategorias(f) {
     return (f.categorias || []).map(function (c) { return tag(c, 'neutral'); }).join('');
   }
+  /* Etiquetas de publicación y entrega. Tres hechos distintos, cada uno con su fuente:
+     «Publicado en el portal» = publicar: true en catalogo.json (no implica producción);
+     «Desplegado» = hay un despliegue en estado «publicado» en despliegues.json;
+     «Entregado a dev» = campo entrega declarado por UX (no implica ZIP ni despliegue). */
+  function tagsEntrega(f) {
+    var e = f.entrega || {}; var out = '';
+    if (f.publicado) out += tag('Publicado en el portal', 'info');
+    if ((f.despliegues || []).some(function (d) { return d.estado === 'publicado'; })) out += tag('Desplegado', 'success');
+    if (e.estado === 'entregado') out += tag('Entregado a dev', 'success');
+    else if (e.estado === 'pendiente') out += tag('Entrega a dev pendiente', 'warning');
+    return out;
+  }
   function params() { return new URLSearchParams(window.location.search); }
 
   /* ---------- sistema de diseño: versión legible ---------- */
@@ -908,7 +920,7 @@
       '<div class="pux-fcard__body">' +
         '<h3 class="pux-fcard__title"><a href="' + detalle + '">' + esc(f.nombre) + '</a></h3>' +
         '<p class="pux-fcard__desc">' + esc(f.descripcion) + '</p>' +
-        ((f.categorias || []).length ? '<div class="pux-tags">' + tagsCategorias(f) + '</div>' : '') + hu +
+        '<div class="pux-tags">' + tagsCategorias(f) + tagsEntrega(f) + '</div>' + hu +
         '<p class="pux-fcard__meta">' + esc(nombrePlataforma(f.plataforma, cat)) + ' · Versión ' + esc(f.version) + ' · actualizado el ' + esc(fecha(f.actualizado)) + '</p>' +
       '</div>' +
       '<div class="pux-fcard__lado">' +
@@ -1011,7 +1023,8 @@
       items.map(function (f) {
         return '<tr' + (f.publicado ? '' : ' class="is-unpublished"') + '>' +
           '<th scope="row"><a class="pux-catalogo__nombre" href="flujo.html?id=' + encodeURIComponent(f.id) + '">' + esc(f.nombre) + '</a>' +
-            '<span class="pux-catalogo__desc">' + esc(f.descripcion) + '</span></th>' +
+            '<span class="pux-catalogo__desc">' + esc(f.descripcion) + '</span>' +
+            '<span class="pux-tags">' + tagsEntrega(f) + '</span></th>' +
           '<td data-label="Plataforma">' + tagPlataforma(f.plataforma, cat) + '</td>' +
           '<td data-label="Estado">' + badgeEstado(f.estado) + '</td>' +
           '<td data-label="Actualizado" class="pux-catalogo__fecha">' + (f.actualizado ? '<time datetime="' + esc(f.actualizado) + '">' + esc(fecha(f.actualizado)) + '</time>' : 'Sin fecha') + '</td>' +
@@ -1077,7 +1090,7 @@
     if (window.PortalFicha) {
       window.PortalFicha.render(cont, f, cat, {
         esc: esc, $: $, $all: $all, fecha: fecha, fechaHora: fechaHora, tag: tag, vacio: vacio, badgeEstado: badgeEstado,
-        tagPlataforma: tagPlataforma, tagsCategorias: tagsCategorias, botonVisualizar: botonVisualizar, abrirDrawer: abrirDrawer, cerrarDrawer: cerrarDrawer,
+        tagPlataforma: tagPlataforma, tagsCategorias: tagsCategorias, tagsEntrega: tagsEntrega, botonVisualizar: botonVisualizar, abrirDrawer: abrirDrawer, cerrarDrawer: cerrarDrawer,
         initPreview: initPreview, dsEnPrototipos: dsEnPrototipos, sinV: sinV, ESTADOS: ESTADOS, SEP_RUTA: SEP_RUTA, params: params
       });
       return;
@@ -1144,7 +1157,7 @@
           '<li class="mp-breadcrumb__item">' + SEP_RUTA + '<a class="mp-breadcrumb__link" href="' + esc(f.plataforma) + '.html">Prototipos · ' + esc(pl.nombreCorto || f.plataforma) + '</a></li>' +
           '<li class="mp-breadcrumb__item">' + SEP_RUTA + '<span class="mp-breadcrumb__current" aria-current="page">' + esc(f.nombre) + '</span></li>' +
         '</ol></nav>' +
-        '<div class="pux-tags">' + tagPlataforma(f.plataforma, cat) + badgeEstado(f.estado) + tagsCategorias(f) + '</div>' +
+        '<div class="pux-tags">' + tagPlataforma(f.plataforma, cat) + badgeEstado(f.estado) + tagsCategorias(f) + tagsEntrega(f) + '</div>' +
         '<h1 class="pux-page-head__title">' + esc(f.nombre) + '</h1>' +
         '<p class="mp-body-xl pux-page-head__lead">' + esc(f.descripcion) + '</p>' +
         '<div class="pux-hero__actions">' + abrir + figma + '</div>' +

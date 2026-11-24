@@ -196,6 +196,12 @@
         "aprobado": true,
         "por": "Equipo UX",
         "fecha": "2026-11-23"
+      },
+      "entrega": {
+        "estado": "entregado",
+        "fecha": "2026-11-24",
+        "por": "Director UX (instrucción directa)",
+        "nota": "Marcado por instrucción del director UX; sin paquete ZIP de handoff ni despliegue registrado"
       }
     }
   ]

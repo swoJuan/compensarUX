@@ -63,7 +63,7 @@
       '</ol></nav>' +
       '<div class="pux-ficha-head__fila">' +
         '<div class="pux-ficha-head__texto">' +
-          '<div class="pux-tags">' + U.tagPlataforma(F.plataforma, CAT) + U.badgeEstado(F.estado) + U.tagsCategorias(F) + '</div>' +
+          '<div class="pux-tags">' + U.tagPlataforma(F.plataforma, CAT) + U.badgeEstado(F.estado) + U.tagsCategorias(F) + U.tagsEntrega(F) + '</div>' +
           '<h1 class="pux-page-head__title">' + esc(F.nombre) + '</h1>' +
           '<ul class="pux-ficha-meta" role="list">' + meta + '</ul>' +
         '</div>' +
@@ -75,6 +75,19 @@
   /* ---------- Resumen ---------- */
   function ultimoDespliegue() {
     return (F.despliegues || []).filter(function (d) { return d.estado === 'publicado'; })[0] || null;
+  }
+  /* Entrega a Desarrollo (campo `entrega` del catálogo) y publicación: tres hechos distintos, cada uno con su propia fuente. */
+  function entregaTexto(f) {
+    var e = f.entrega || {};
+    if (e.estado === 'entregado') return U.tag('Entregado a dev', 'success') + '<span class="pux-datos__sub">' + esc(U.fecha(e.fecha)) + (e.por ? ' · ' + esc(e.por) : '') + '</span>' + (e.nota ? '<span class="pux-datos__sub">' + esc(e.nota) + '</span>' : '');
+    if (e.estado === 'pendiente') return U.tag('Entrega a dev pendiente', 'warning') + (e.nota ? '<span class="pux-datos__sub">' + esc(e.nota) + '</span>' : '');
+    return sinDato('Sin entrega registrada');
+  }
+  function publicacionTexto(f) {
+    var dep = ultimoDespliegue();
+    return (f.publicado ? U.tag('Publicado en el portal', 'info') : sinDato('No publicado en el portal')) +
+      (dep ? ' ' + U.tag('Desplegado', 'success') : '') +
+      '<span class="pux-datos__sub">' + (dep ? 'Despliegue registrado: ' + esc(dep.entorno || '') : 'Sin despliegue registrado: «Publicado en el portal» no implica producción.') + '</span>';
   }
   function resumenPartes() {
     var ap = F.aprobacionUX || {};
@@ -95,6 +108,8 @@
         d('Descripción', F.descripcion ? esc(F.descripcion) : sinDato('Sin descripción')) +
         d('Versión del flujo', 'v' + esc(U.sinV(F.version))) +
         d('Estado UX', U.badgeEstado(F.estado) + '<span class="pux-datos__sub">' + aprob + '</span>') +
+        d('Entrega a Desarrollo', entregaTexto(F)) +
+        d('Publicación', publicacionTexto(F)) +
         d('Última actualización', F.actualizado ? esc(U.fecha(F.actualizado)) : sinDato('Sin fecha')) +
         d('Sistema de diseño', ds ? esc(ds) : sinDato('Sin registro')) +
         d('Enlaces', enlaces.length ? '<span class="pux-ficha-enlaces">' + enlaces.join('') + '</span>' : sinDato('Sin enlaces')) +
