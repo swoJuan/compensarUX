@@ -119,7 +119,7 @@
   <section class="component-section" aria-labelledby="app-il-states">
     <div class="component-section__header">
       <h2 id="app-il-states" class="mp-h2">4. Estados</h2>
-      <p class="mp-body-m">Reposo, cargando, error y fin tienen diseño en Figma. Vacío y skeleton están aprobados y pendientes de diseño en Figma.</p>
+      <p class="mp-body-m">Los seis estados están aprobados y diseñados en Figma (sección Swap).</p>
     </div>
     <div class="app-il-grid app-il-grid--2">
       <article class="app-il-card">
@@ -143,13 +143,13 @@
         <div class="app-il-device" data-app-il-static="end" data-app-il-count="18"></div>
       </article>
       <article class="app-il-card">
-        <h3 class="mp-h3">Vacío <span class="component-chip">Aprobado · en diseño</span></h3>
-        <p class="mp-body-s">Primera carga sin registros. Usa <code>mp-empty-state</code> y no muestra pie de carga.</p>
+        <h3 class="mp-h3">Vacío <span class="component-chip component-chip--success">Estable</span></h3>
+        <p class="mp-body-s">Figma 8954:26680. Primera carga sin registros. Usa <code>mp-empty-state</code> y no muestra pie de carga.</p>
         <div class="app-il-device" data-app-il-static="empty" data-app-il-count="0"></div>
       </article>
       <article class="app-il-card">
-        <h3 class="mp-h3">Ítem skeleton <span class="component-chip">Aprobado · en diseño</span></h3>
-        <p class="mp-body-s">Solo para la primera carga de la pantalla. En las tandas siguientes se usa el spinner del pie.</p>
+        <h3 class="mp-h3">Ítem skeleton <span class="component-chip component-chip--success">Estable</span></h3>
+        <p class="mp-body-s">Figma 8954:26839. Solo para la primera carga de la pantalla. En las tandas siguientes se usa el spinner del pie.</p>
         <div class="app-il-device" data-app-il-static="skeleton" data-app-il-count="0"></div>
       </article>
     </div>
@@ -245,15 +245,15 @@
       </div>
     </div>
   </section>
-  <!-- 9. DECISIONES Y PENDIENTES -->
+  <!-- 9. DECISIONES -->
   <section class="component-section" aria-labelledby="app-il-open">
     <div class="component-section__header">
-      <h2 id="app-il-open" class="mp-h2">9. Decisiones y pendientes</h2>
+      <h2 id="app-il-open" class="mp-h2">9. Decisiones aprobadas</h2>
     </div>
     <ul class="component-list">
       <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span><strong>Fin de lista (aprobado):</strong> sin spinner y con el botón oculto. El Figma 8908:24622 mezclaba spinner y texto de fin.</span></li>
       <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span><strong>Tamaño de tanda (aprobado):</strong> 7 registros. El equipo técnico valida el rendimiento con datos reales.</span></li>
-      <li><i class="icon icon-warning icon-16" aria-hidden="true"></i><span><strong>Vacío y skeleton (aprobados, pendientes):</strong> falta el diseño en Figma, el componente en el código del sistema, QA y catálogo.</span></li>
+      <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span><strong>Vacío y skeleton (aprobados):</strong> diseñados en Figma (8954:26680 y 8954:26839). El vacío usa <code>mp-empty-state</code>; el skeleton se arma con barras neutras y se anima con opacidad de 1 a 0.45 en 1.4 s.</span></li>
     </ul>
   </section>
   <!-- 10. VISUALIZADOR -->
