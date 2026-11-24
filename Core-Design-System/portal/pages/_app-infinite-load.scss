@@ -1,0 +1,151 @@
+@use '../../core/abstracts' as *;
+// Documentación de Carga infinita (APP). Estilos solo de documentación: el core no define este patrón.
+.app-il-doc {
+  --app-il-border: var(--use-border-subtle, #e0e0e0);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-48);
+}
+.app-il-preview-shell,
+.app-il-card {
+  border: rem(1px) solid var(--app-il-border);
+  border-radius: rem(10px);
+  background: var(--use-surface-theme-gray-5);
+}
+.app-il-preview-shell {
+  display: grid;
+  place-items: center;
+  padding: var(--space-24);
+}
+.app-il-card {
+  display: grid;
+  gap: var(--space-12);
+  align-content: start;
+  padding: var(--space-16);
+}
+.app-il-grid {
+  display: grid;
+  gap: var(--space-16);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.app-il-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.app-il-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.app-il-card .app-il-content { overflow: visible; flex: none; }
+.app-il-anatomy {
+  display: grid;
+  grid-template-columns: minmax(0, rem(390px)) minmax(0, 1fr);
+  gap: var(--space-32);
+  align-items: start;
+}
+.app-il-legend {
+  display: grid;
+  gap: var(--space-12);
+  margin: 0;
+  padding-left: var(--space-24);
+  color: var(--use-text-secondary);
+}
+// Marco del teléfono
+.app-il-device {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, rem(390px));
+  height: rem(560px);
+  overflow: hidden;
+  border: rem(1px) solid var(--app-il-border);
+  border-radius: rem(28px);
+  background: var(--use-surface-theme-gray-5, #f5f5f5);
+  box-shadow: var(--shadow-1);
+}
+.app-il-card .app-il-device { width: 100%; height: auto; min-height: rem(280px); box-shadow: none; border-radius: rem(20px); }
+.app-il-device--live { height: rem(640px); }
+.app-il-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-16);
+  background: var(--use-surface-white);
+  color: var(--use-text-primary);
+}
+.app-il-bar__title { margin: 0; font-size: rem(16px); font-weight: 700; line-height: 1.3; }
+.app-il-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: var(--space-16);
+  overflow-y: auto;
+  user-select: none;
+}
+.app-il-scroller:focus-visible { outline: rem(2px) solid var(--use-primary-default); outline-offset: rem(-2px); }
+.app-il-list { display: flex; flex-direction: column; gap: var(--space-16); margin: 0; padding: 0; list-style: none; }
+// Tarjeta de solicitud
+.app-il-req {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-16);
+  border-radius: rem(16px);
+  background: var(--use-surface-white);
+  color: var(--use-text-primary);
+  &:focus { outline: none; }
+  &:focus-visible { outline: rem(2px) solid var(--use-primary-default); outline-offset: rem(2px); }
+  &.is-new { animation: app-il-in .28s ease-out both; }
+}
+.app-il-req__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-12); }
+.app-il-req__label { margin: 0; font-size: rem(13px); line-height: 1.5; text-transform: uppercase; color: var(--use-text-tertiary); }
+.app-il-req__id { margin: rem(2px) 0 0; font-size: rem(18px); font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.app-il-req__sep { height: rem(1px); background: var(--use-border-subtle); }
+.app-il-req__rows { display: flex; flex-direction: column; gap: var(--space-8); margin: 0; }
+.app-il-req__row { display: flex; gap: var(--space-12); font-size: rem(14px); line-height: 1.5; }
+.app-il-req__row dt { flex: none; width: rem(128px); color: var(--use-text-tertiary); }
+.app-il-req__row dd { flex: 1 1 0; min-width: 0; margin: 0; }
+// Pie del listado
+.app-il-foot { display: flex; flex-direction: column; align-items: center; gap: var(--space-8); padding: var(--space-8) 0; text-align: center; }
+.app-il-rest { display: flex; flex-direction: column; align-items: center; gap: var(--space-8); width: 100%; }
+.app-il-rest__bar { width: rem(36px); height: rem(4px); border-radius: rem(2px); background: var(--use-text-tertiary); opacity: .4; animation: app-il-nudge 1.8s ease-in-out infinite; }
+.app-il-rest__hint, .app-il-end { margin: 0; font-size: rem(14px); line-height: 1.5; color: var(--use-text-primary); }
+.app-il-count { margin: 0; font-size: rem(14px); line-height: 1.5; color: var(--use-text-tertiary); font-variant-numeric: tabular-nums; }
+.app-il-loading { display: flex; align-items: center; justify-content: center; width: 100%; min-height: rem(56px); }
+.app-il-error { width: 100%; text-align: left; align-items: flex-start; }
+.app-il-more { min-height: rem(48px); padding-inline: var(--space-8); justify-content: center; }
+.app-il-more.is-busy { cursor: default; }
+// Skeleton (propuesta)
+.app-il-skel { gap: var(--space-12); }
+.app-il-skel__line {
+  display: block;
+  width: 70%;
+  height: rem(14px);
+  border-radius: rem(6px);
+  background: var(--use-border-subtle);
+  animation: app-il-pulse 1.4s ease-in-out infinite;
+}
+.app-il-skel__line--lg { width: 45%; height: rem(20px); }
+.app-il-skel__line--sm { width: 55%; }
+.app-il-sr { position: absolute; width: rem(1px); height: rem(1px); overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@keyframes app-il-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes app-il-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes app-il-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) {
+  .app-il-req.is-new, .app-il-rest__bar, .app-il-skel__line { animation: none; }
+}
+[data-theme='dark'] .app-il-card { background: var(--use-surface-white); }
+[data-theme='high-contrast'] .app-il-preview-shell,
+[data-theme='high-contrast'] .app-il-card,
+[data-theme='high-contrast'] .app-il-device,
+[data-theme='high-contrast'] .app-il-req {
+  border-color: var(--base-neutral-white);
+  box-shadow: none;
+}
+[data-theme='high-contrast'] .app-il-req { border: rem(1px) solid var(--base-neutral-white); }
+@include lg-down {
+  .app-il-grid, .app-il-grid--2, .app-il-grid--3, .app-il-anatomy { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 360px) {
+  .app-il-req__row { flex-direction: column; gap: rem(2px); }
+  .app-il-req__row dt { width: auto; }
+}
+.app-il-doc > .component-section > .mp-alert { margin-top: var(--space-16); }
