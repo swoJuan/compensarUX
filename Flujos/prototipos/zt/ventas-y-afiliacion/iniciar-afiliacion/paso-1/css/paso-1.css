@@ -7,20 +7,19 @@
  *
  * Aquí SOLO vive lo que NO cubren el DS ni los componentes:
  *   - layout de 2 columnas (panel de pasos + card del paso)
- *   - resumen del candidato (cabecera del panel)
- *   - composición interna de la card (badge, filas de campos, CTA)
- *   - variante readonly de los campos de documento
+ *   - composición interna de la card (badge, barra de fecha, filas, paneles)
+ *   - CTA bajo la card (Atrás + Guardar y continuar)
  * Los componentes (inputs, radios, dropdown, alert, botones, stepper)
  * son del DS (.mp-*) o transversales ZT (.zt-*). Aquí NO se redefinen.
  * Token-first: sin hex ni medidas mágicas fuera del sistema.
  * ============================================================ */
 
 /* ═══════════════ LAYOUT DEL PROCESO ═══════════════ */
-/* Figma: panel 280px + card 800px, gap 10px, alineados arriba. */
+/* Figma (Fase 2): panel 280px + columna 800px, gap 24px, alineados arriba. */
 .pa-layout {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-12, 0.75rem);
+  gap: var(--space-24, 1.5rem);
   width: 100%;
   margin-top: var(--space-24);
 }
@@ -36,11 +35,23 @@
   gap: var(--space-12, 0.75rem);
 }
 
+/* Columna derecha: card del paso + CTA debajo (Figma: los botones van FUERA de la card). */
+.pa-main {
+  flex: 1 1 800px;
+  max-width: 800px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32, 2rem);
+}
+
+/* Resumen del contratante (Figma Paso 1): el documento va en texto principal, no violeta. */
+#pa-cand-summary .zt-person__name { color: var(--use-text-primary, #111); }
+
 /* ═══════════════ CARD DEL PASO ═══════════════ */
 /* Figma: white, border subtle, radius 12, pt 28 / pb 32 / px 24, gap 28. */
 .pa-card {
-  flex: 1 1 800px;
-  max-width: 800px;
+  width: 100%;
   background: var(--use-surface-white, #fff);
   border: 1px solid var(--use-border-subtle, #e0e0e0);
   border-radius: var(--radius-12, 0.75rem);
@@ -88,12 +99,71 @@
 .pa-row > .mp-input-group { flex: 1 1 0; min-width: 0; }
 .pa-row[hidden] { display: none; }
 
-/* Campo Novedades condicional (full width). Oculto → sin caja ni gap. */
-.pa-novelty { width: 100%; }
+/* Barra "Fecha de inicio del plan" (Figma): superficie gris, radius 12, padding 24.
+   Izquierda: icono + etiqueta/valor. Derecha: icono info + nota. Solo informativa. */
+.pa-startbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24, 1.5rem);
+  padding: var(--space-24, 1.5rem);
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  border-radius: var(--radius-12, 0.75rem);
+}
+.pa-startbar__date,
+.pa-startbar__note {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16, 1rem);
+  min-width: 0;
+}
+.pa-startbar__date { flex: 0 0 252px; }
+.pa-startbar__note { flex: 1 1 auto; }
+.pa-startbar__text { display: flex; flex-direction: column; }
+.pa-startbar p { margin: 0; }
+.pa-startbar__label {
+  font-size: var(--font-size-sm, 0.75rem);
+  line-height: 1.3;
+  font-weight: var(--font-weight-medium, 500);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--use-text-secondary, #333);
+}
+.pa-startbar__value {
+  font-size: var(--font-size-lg, 1rem);
+  line-height: 1.3;
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--use-text-primary, #111);
+}
+.pa-startbar__note p {
+  font-size: var(--font-size-md, 0.875rem);
+  line-height: 1.5;
+  color: var(--use-text-primary, #111);
+}
+.pa-startbar .icon { flex: 0 0 auto; color: var(--use-text-theme-violet, #4e3199); }  /* Figma: ambos iconos violeta */
+/* El DS fuerza .icon-info con !important (color de estado "info"); en esta barra Figma lo pide violeta. */
+.pa-startbar__note .icon { color: var(--use-text-theme-violet, #4e3199) !important; }
+
+/* Campo Novedades condicional (Figma): panel gris con etiqueta a la izquierda y
+   dropdown a la derecha en la misma fila. Oculto → sin caja ni gap. */
+.pa-novelty {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--space-24, 1.5rem);
+  padding: var(--space-24, 1.5rem);
+  background: var(--use-surface-theme-gray-5, #f8f7f7);
+  border-radius: var(--radius-12, 0.75rem);
+}
+.pa-novelty > .mp-input-label { margin: 0; padding: 0; white-space: nowrap; }
+.pa-novelty > .mp-input-error { grid-column: 2; margin: var(--space-4, 0.25rem) 0 0; }
 .pa-novelty[hidden] { display: none; }
 
-/* Bloque contextual "Datos de la empresa" (mismo patrón visual que los bloques
-   condicionales del Paso 3): superficie gris suave, border subtle, radius 8. */
+/* Plan: campo único a ancho completo (Figma). */
+.pa-plan { width: 100%; }
+.pa-plan[hidden] { display: none; }
+
+/* Bloque contextual "Datos de la empresa" (Figma): superficie gris suave, sin borde, radius 12. */
 .pa-context {
   display: flex;
   flex-direction: column;
@@ -101,14 +171,13 @@
   width: 100%;
   padding: var(--space-24);
   background: var(--use-surface-theme-gray-5, #f8f7f7);
-  border: 1px solid var(--use-border-subtle, #e0e0e0);
-  border-radius: var(--radius-xs, 0.5rem);
+  border-radius: var(--radius-12, 0.75rem);
 }
 .pa-context[hidden] { display: none; }
 .pa-context__title {
   margin: 0;
   font-size: var(--font-size-lg, 1rem);
-  font-weight: var(--font-weight-semibold, 600);
+  font-weight: var(--font-weight-bold, 700);
   line-height: 1.3;
   color: var(--use-text-primary, #111);
 }
@@ -151,34 +220,17 @@
 /* Opción no disponible por otra elección (p. ej. Colectivo → solo empresa) */
 .pa-radios .mp-choice:has(input:disabled) { opacity: .5; cursor: not-allowed; }
 
-/* ═══════════════ CAMPOS READ ONLY (documento) ═══════════════ */
-/* Tipo y Número de documento vienen de la consulta previa: no editables.
-   El tratamiento visual del estado readonly/disabled (superficie use/surface/surface,
-   borde use/border/default, texto use/text/tertiary, sin hover/foco de edición y sin
-   caret) lo aplica el componente transversal Text Field del DS a través de
-   `.mp-input-field[readonly]`. Aquí NO se redefine para evitar divergencias. */
-
-/* Tipo de documento muestra caret como en Figma, pero NO abre nada (solo lectura).
-   La variante con caret vive en el componente transversal readonly-field.css. */
-
-/* ═══════════════ ALERTA INFO ═══════════════ */
-.pa-alert:empty { display: none; }
-
 /* ═══════════════ CTA ═══════════════ */
-/* Atrás (izquierda) + Guardar y continuar (derecha). */
+/* Bajo la card (Figma): Atrás (botón de texto, izquierda) + Guardar y continuar (derecha). */
 .pa-cta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-16);
   width: 100%;
-  margin-top: var(--space-4);
 }
-.pa-back {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-4);
-}
+/* "Atrás" = botón de texto (terciario). Figma: el texto queda casi al borde izquierdo de la card. */
+.pa-back { padding-inline: var(--space-8, 0.5rem); }
 
 /* ═══════════════ RESPONSIVE ═══════════════ */
 /* Tablet/mobile: el panel deja de ser una columna de 280px; el resumen y el
@@ -186,7 +238,7 @@
 @media (max-width: 900px) {
   .pa-layout { flex-direction: column; }
   .pa-side { flex: 1 1 auto; width: 100%; }
-  .pa-card { flex: 1 1 auto; max-width: 100%; width: 100%; }
+  .pa-main { flex: 1 1 auto; max-width: 100%; width: 100%; }
 }
 
 /* Mobile: las filas de 2 columnas colapsan a una; sin overflow horizontal. */
@@ -194,6 +246,10 @@
   .pa-row { flex-direction: column; gap: var(--space-16); }
   .pa-radios { gap: var(--space-12); }
   .pa-context { padding: var(--space-16); }
+  .pa-startbar { flex-direction: column; align-items: flex-start; gap: var(--space-16); padding: var(--space-16); }
+  .pa-startbar__date { flex: 0 0 auto; }
+  .pa-novelty { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-8); padding: var(--space-16); }
+  .pa-novelty > .mp-input-error { grid-column: 1; }
   .pa-cta { flex-direction: column-reverse; align-items: stretch; }
   .pa-cta .mp-btn { width: 100%; justify-content: center; }
 }

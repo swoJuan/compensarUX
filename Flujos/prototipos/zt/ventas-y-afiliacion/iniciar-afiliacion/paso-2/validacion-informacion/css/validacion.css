@@ -152,3 +152,11 @@
   .pa-cta { flex-direction: column-reverse; align-items: stretch; }
   .pa-cta .mp-btn { width: 100%; justify-content: center; }
 }
+
+/* Stepper del proceso (Figma Fase 2): sin línea vertical que conecte los pasos.
+   Se oculta aquí y no en el componente compartido stepper.css, que no se modifica. */
+.zt-step:not(:last-child)::after,
+.zt-step--completed:not(:last-child)::after { display: none; }
+
+/* Regla del flujo (Figma): el contenido ocupa siempre todo el ancho disponible. */
+.pa-card { flex: 1 1 auto; max-width: none; min-width: 0; }

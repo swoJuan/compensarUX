@@ -110,7 +110,9 @@
               <div id="pa-stepper"></div>
             </aside>
 
-            <!-- CARD DERECHA: Paso 1 — Datos generales -->
+            <!-- COLUMNA DERECHA: card del paso + CTA -->
+            <div class="pa-main">
+            <!-- CARD: Paso 1 — Datos generales -->
             <section class="pa-card" aria-labelledby="pa-card-title">
               <form id="pa-form" novalidate>
 
@@ -120,28 +122,23 @@
                   <h2 class="pa-card__title" id="pa-card-title">Datos generales</h2>
                 </header>
 
-                <!-- Row: Tipo y Número de documento (READ ONLY, vienen de la consulta) -->
-                <div class="pa-row">
-                  <div class="mp-input-group">
-                    <label class="mp-input-label" for="pa-tipo">
-                      <span class="mp-input-required" aria-hidden="true">*</span> Tipo de documento
-                    </label>
-                    <div class="mp-input-wrapper">
-                      <input class="mp-input-field pa-readonly" id="pa-tipo" type="text"
-                             readonly aria-readonly="true" tabindex="-1" value="">
+                <!-- Fecha de inicio del plan (informativa, no editable): primer día del mes
+                     siguiente. Figma: barra gris con icono + etiqueta/valor y nota. El valor real
+                     viaja en el input oculto #pa-vigencia (paso-1.js lo calcula y lo muestra). -->
+                <div class="pa-startbar" role="group" aria-labelledby="pa-start-title">
+                  <div class="pa-startbar__date">
+                    <span class="icon icon-calendar-blank icon-32 gs-violet" aria-hidden="true"></span>
+                    <div class="pa-startbar__text">
+                      <p class="pa-startbar__label" id="pa-start-title">Fecha de inicio del plan</p>
+                      <p class="pa-startbar__value" id="pa-start-label"></p>
                     </div>
                   </div>
-                  <div class="mp-input-group">
-                    <label class="mp-input-label" for="pa-numero">
-                      <span class="mp-input-required" aria-hidden="true">*</span> Número de documento
-                    </label>
-                    <div class="mp-input-wrapper">
-                      <input class="mp-input-field pa-readonly" id="pa-numero" type="text"
-                             readonly aria-readonly="true" tabindex="-1" value="">
-                    </div>
+                  <div class="pa-startbar__note">
+                    <span class="icon icon-info icon-32 gs-violet" aria-hidden="true"></span>
+                    <p>La vigencia de tu plan comienza el primer día del mes siguiente.</p>
                   </div>
+                  <input id="pa-vigencia" name="startDate" type="hidden">
                 </div>
-
                 <!-- Modalidad (radios) -->
                 <fieldset class="pa-field">
                   <legend class="mp-input-label"><span class="mp-input-required" aria-hidden="true">*</span> Modalidad</legend>
@@ -253,8 +250,19 @@
                   <p class="pa-context__title">Datos de la empresa</p>
                   <div class="pa-row" id="pa-company-row">
                     <div class="mp-input-group">
+                      <label class="mp-input-label" for="pa-nit">
+                        <span class="mp-input-required" aria-hidden="true">*</span> Nit
+                      </label>
+                      <div class="mp-input-wrapper">
+                        <input class="mp-input-field" id="pa-nit" name="nit" type="text"
+                               inputmode="numeric" autocomplete="off" placeholder="Escribir" maxlength="15"
+                               aria-describedby="pa-nit-error">
+                      </div>
+                      <p class="mp-input-error" id="pa-nit-error" role="alert" hidden>Ingresa un NIT válido.</p>
+                    </div>
+                    <div class="mp-input-group">
                       <label class="mp-input-label" for="pa-empresa">
-                        <span class="mp-input-required" aria-hidden="true">*</span> Nombre de la empresa
+                        <span class="mp-input-required" aria-hidden="true">*</span> Nombre de empresa
                       </label>
                       <div class="mp-input-wrapper">
                         <input class="mp-input-field" id="pa-empresa" name="companyName" type="text"
@@ -262,23 +270,10 @@
                       </div>
                       <p class="mp-input-error" id="pa-empresa-error" role="alert" hidden>Este campo es obligatorio.</p>
                     </div>
-                    <div class="mp-input-group">
-                      <label class="mp-input-label" for="pa-nit">
-                        <span class="mp-input-required" aria-hidden="true">*</span> NIT
-                      </label>
-                      <div class="mp-input-wrapper">
-                        <input class="mp-input-field" id="pa-nit" name="nit" type="text"
-                               inputmode="numeric" autocomplete="off" placeholder="Escribir" maxlength="15"
-                               aria-describedby="pa-nit-hint pa-nit-error">
-                      </div>
-                      <p class="mp-hint" id="pa-nit-hint">Sin puntos, guiones ni dígito de verificación</p>
-                      <p class="mp-input-error" id="pa-nit-error" role="alert" hidden>Ingresa un NIT válido.</p>
-                    </div>
                   </div>
                 </div>
-
-                <!-- Row: Plan (dropdown) + Fecha de inicio de vigencia -->
-                <div class="pa-row" id="pa-plan-row">
+                <!-- Plan (dropdown, ancho completo) -->
+                <div class="pa-plan" id="pa-plan-row">
                   <div class="mp-input-group">
                     <label class="mp-input-label" for="pa-plan">
                       <span class="mp-input-required" aria-hidden="true">*</span> Plan
@@ -293,39 +288,18 @@
                     </div>
                     <p class="mp-input-error" id="pa-plan-error" role="alert" hidden>Selecciona una opción.</p>
                   </div>
-                  <div class="mp-input-group">
-                    <label class="mp-input-label" for="pa-vigencia">
-                      <span class="mp-input-required" aria-hidden="true">*</span> Fecha de inicio de vigencia
-                    </label>
-                    <div class="mp-input-wrapper">
-                      <!-- Fecha de vigencia: Date Field transversal ZT en modo READONLY.
-                           Regla de negocio (prototipo): la vigencia inicia el primer día
-                           del mes siguiente y NO la edita el usuario → readonly, no abre
-                           calendario. Reutiliza el estilo del campo, no la interacción. -->
-                      <input class="mp-input-field pa-readonly" id="pa-vigencia" name="startDate" type="date"
-                             required aria-required="true" readonly aria-readonly="true"
-                             data-zt-datepicker aria-describedby="pa-vigencia-error">
-                    </div>
-                    <p class="mp-input-error" id="pa-vigencia-error" role="alert" hidden>Este campo es obligatorio.</p>
-                  </div>
                 </div>
-
-                <!-- Alerta informativa (componente transversal Alert, variante info) -->
-                <div class="pa-alert" id="pa-alert" aria-live="polite"></div>
-
-                <!-- CTA: Atrás + Guardar y continuar -->
-                <div class="pa-cta">
-                  <button class="mp-btn mp-btn--secundario pa-back" id="pa-back" type="button">
-                    <span class="icon icon-caret-left icon-20 gs-inherit" aria-hidden="true"></span>
-                    Atrás
-                  </button>
-                  <button class="mp-btn mp-btn--primario pa-next" id="pa-next" type="submit">
-                    Guardar y continuar
-                  </button>
-                </div>
-
               </form>
             </section>
+            <!-- CTA fuera de la card (Figma): Atrás (texto) + Guardar y continuar.
+                 El botón principal pertenece al formulario vía form="pa-form". -->
+            <div class="pa-cta">
+              <button class="mp-btn mp-btn--terciario pa-back" id="pa-back" type="button">Atrás</button>
+              <button class="mp-btn mp-btn--primario pa-next" id="pa-next" type="submit" form="pa-form">
+                Guardar y continuar
+              </button>
+            </div>
+            </div>
 
           </div>
 

@@ -526,6 +526,28 @@
       "fuente": "Flujos/prototipos/zt/ventas-y-afiliacion/"
     },
     {
+      "id": "AJ-FIGMA-zt-ventas-paso-1",
+      "descripcion": "Paso 1 (Datos generales) ajustado a los nodos Figma 16872-194132 (por defecto), 13877-118616 (empresa) y 13555-91755 (novedades). Implementado en paso-1/index.html, css/paso-1.css y js/paso-1.js; sin commit.",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "pendiente_aprobacion",
+      "responsable": "Juan Carlos Soto",
+      "evidencia": "QA con Chrome: 21 comprobaciones funcionales OK (validación, restauración, empresa/novedades, Atrás, teclado, sin overflow a 375 y 768 px, 0 errores de consola/red); revisión visual en light, dark y mobile.",
+      "siguientePaso": "Revisión del director UX; decidir solo commit o commit + versión navegable.",
+      "verificadoEn": "2026-11-18",
+      "fuente": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=16872-194132"
+    },
+    {
+      "id": "DIV-FIGMA-zt-ventas-paso-1",
+      "descripcion": "Diferencias Figma/prototipo NO aplicadas en el paso 1: (1) stepper compartido muestra Paso 1 de 8 y En curso, Figma no; separación entre pasos 52 px vs 64 px; (2) Figma muestra en estado Novedades el canal, el Plan y el botón Guardar y continuar, el prototipo los oculta y usa Registrar novedad; (3) el aviso de Novedades/Inclusión no existe en Figma; (4) placeholder del Nit en Figma 1.111.111.222 vs Escribir (el campo acepta solo dígitos); (5) Plan Ideal en gris en Figma vs texto principal; (6) cabecera, usuario, pie de página y botón de accesibilidad del Figma son del shell ZT compartido.",
+      "flujo": "zt-ventas-y-afiliacion",
+      "estado": "por_verificar",
+      "responsable": "compensar-ux-ui",
+      "evidencia": "Comparación de capturas Figma vs prototipo en 1366 px.",
+      "siguientePaso": "Decidir con el director UX cuáles se aplican; (1) y (6) requieren aprobar cambios en componentes compartidos.",
+      "verificadoEn": "2026-11-18",
+      "fuente": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2"
+    },
+    {
       "id": "PI-SWAP-01",
       "descripcion": "Efecto Swap: ajustado al Figma revisado por el director UX (4 frames: 8655:24380 reposo, 8657:139 cargando, 8908:24622 fin, 8923:25318 error). Botón terciario «Cargar más solicitudes» (alternativa al swipe y reintento tras error) y alerta de error con título, sin botón interno. Sin commit ni versión navegable. Pendientes: HU y criterios de aceptación; copy real de «Motivo del rechazo»; destino de «Más información» y Notificaciones.",
       "flujo": "app-efecto-swap",
@@ -719,6 +741,20 @@
       "flujo": "zt-ventas-y-afiliacion",
       "resumen": "Resultado aprobado por el director UX. Se mantiene pendiente_qa por accesibilidad, navegadores y dropdown de paso-1. Commit local sin push ni versión navegable.",
       "fuente": "IA-Central/seguimiento/registro.json"
+    },
+    {
+      "fecha": "2026-11-18",
+      "tipo": "ajuste_figma_paso_1",
+      "flujo": "zt-ventas-y-afiliacion",
+      "resumen": "Paso 1 ajustado a Figma (barra de fecha, sin campos de documento, Nit/Nombre, panel Novedades, CTA bajo la card). Sin commit.",
+      "fuente": "IA-Central/seguimiento/registro.json"
+    },
+    {
+      "fecha": "2026-11-18",
+      "tipo": "ajuste_layout_proceso",
+      "flujo": "zt-ventas-y-afiliacion",
+      "resumen": "Stepper sin línea conectora y contenido a ancho completo (sin topes ni centrado) en pasos 1-8 y validación; separación panel/card unificada a 24 px. Sin commit.",
+      "fuente": "Flujos/prototipos/zt/ventas-y-afiliacion/iniciar-afiliacion/css/proceso-layout.css"
     },
     {
       "fecha": "2026-11-18",
