@@ -49,6 +49,16 @@
                 </div>
               </div>
 
+              <!-- Primera carga — Figma 8954:26839 · Skeleton (3 tarjetas, solo en la primera carga) -->
+              <ul class="sw-list sw-skel" id="sw-skel" hidden aria-hidden="true">
+                <li class="sw-req sw-skel__card"><span class="sw-skel__row sw-skel__row--head"><span class="sw-skel__col"><span class="sw-skel__bar" style="width:112px;height:12px"></span><span class="sw-skel__bar" style="width:94px;height:18px"></span></span><span class="sw-skel__bar" style="width:83px;height:29px;border-radius:16px"></span></span><span class="sw-req__sep"></span><span class="sw-skel__rows"><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:120px"></span></span><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:150px"></span></span><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:120px"></span></span></span></li><li class="sw-req sw-skel__card"><span class="sw-skel__row sw-skel__row--head"><span class="sw-skel__col"><span class="sw-skel__bar" style="width:112px;height:12px"></span><span class="sw-skel__bar" style="width:94px;height:18px"></span></span><span class="sw-skel__bar" style="width:83px;height:29px;border-radius:16px"></span></span><span class="sw-req__sep"></span><span class="sw-skel__rows"><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:120px"></span></span><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:150px"></span></span><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:120px"></span></span></span></li><li class="sw-req sw-skel__card"><span class="sw-skel__row sw-skel__row--head"><span class="sw-skel__col"><span class="sw-skel__bar" style="width:112px;height:12px"></span><span class="sw-skel__bar" style="width:94px;height:18px"></span></span><span class="sw-skel__bar" style="width:83px;height:29px;border-radius:16px"></span></span><span class="sw-req__sep"></span><span class="sw-skel__rows"><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:120px"></span></span><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:150px"></span></span><span class="sw-skel__row"><span class="sw-skel__bar" style="width:128px"></span><span class="sw-skel__bar" style="width:120px"></span></span></span></li>
+              </ul>
+              <!-- Vacío — Figma 8954:26680 · primera carga sin registros -->
+              <section class="sw-empty" id="sw-empty" hidden aria-label="Sin solicitudes">
+                <span class="sw-empty__icon" aria-hidden="true"><span class="icon icon-article icon-48 gs-inherit"></span></span>
+                <h2 class="sw-empty__title">Aún no tienes solicitudes</h2>
+                <p class="sw-empty__desc">Cuando radiques una solicitud de historia clínica la verás aquí.</p>
+              </section>
               <ul class="sw-list" id="sw-list" aria-label="Listado de solicitudes"></ul>
 
               <!-- Pie del listado. Figma: reposo 8655:24380 · cargando 8657:139 · fin 8908:24622 · error 8923:25318.
@@ -103,7 +113,12 @@
   <!-- ═══ PANEL DE SIMULACIÓN (solo para validar; no es parte de la app) ═══ -->
   <aside class="app-sim" aria-label="Simulación del prototipo">
     <h2 class="app-sim__title">Simulación</h2>
-    <p class="app-sim__hint">Desliza hacia arriba al final de la lista (táctil, arrastre con mouse o rueda) o usa “Cargar más solicitudes” (también reintenta tras un error). Puedes abrir la página con <code>?error=1</code> para forzar un fallo en la primera carga. Datos ficticios.</p>
+    <p class="app-sim__hint">Desliza hacia arriba al final de la lista (táctil, arrastre con mouse o rueda) o usa “Cargar más solicitudes” (también reintenta tras un error). Puedes abrir la página con <code>?error=1</code> para forzar un fallo en la primera carga, o con <code>?vacio=1</code> para ver el estado vacío. Al abrir la página se ve el skeleton unos instantes. Datos ficticios.</p>
+    <fieldset>
+      <legend>Primera carga</legend>
+      <label><input type="radio" name="sim-inicio" value="datos" checked> Con solicitudes</label>
+      <label><input type="radio" name="sim-inicio" value="vacio"> Sin solicitudes (vacío)</label>
+    </fieldset>
     <fieldset>
       <legend>Próxima carga</legend>
       <label><input type="radio" name="sim-carga" value="ok" checked> Correcta</label>

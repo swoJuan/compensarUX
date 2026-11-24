@@ -69,3 +69,20 @@
 @media (prefers-reduced-motion: reduce) {
   .sw-req.is-new, .sw-rest__bar { animation: none; }
 }
+
+/* ═══════════════ PRIMERA CARGA: SKELETON Y VACÍO (Figma 8954:26839 · 8954:26680) ═══════════════ */
+.sw-skel { margin: 0; }
+.sw-skel[hidden], .sw-empty[hidden] { display: none; }
+.sw-skel__card { gap: 14px; }
+.sw-skel__row { display: flex; align-items: center; gap: 12px; }
+.sw-skel__row--head { justify-content: space-between; }
+.sw-skel__col { display: flex; flex-direction: column; gap: 8px; }
+.sw-skel__rows { display: flex; flex-direction: column; gap: 14px; }
+.sw-skel__bar { display: block; height: 12px; border-radius: 6px; background: var(--app-border-s); animation: sw-pulse 1.4s ease-in-out infinite; }
+@keyframes sw-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+.sw-empty { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 40px 24px; text-align: center; background: var(--use-surface-white, #fff); border-radius: 16px; }
+.sw-empty__icon { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--app-orange) 12%, transparent); color: var(--app-orange); }
+.sw-empty__title { margin: 0; font-size: 18px; font-weight: 700; line-height: 1.3; color: var(--app-text); }
+.sw-empty__desc { margin: 0; font-size: 14px; line-height: 1.5; color: var(--app-text-3); }
+@media (prefers-reduced-motion: reduce) { .sw-skel__bar { animation: none; } }
+.sw-list[hidden] { display: none; }

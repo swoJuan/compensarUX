@@ -174,8 +174,30 @@
   });
   $('sim-reset').addEventListener('click', function () { window.location.href = window.location.pathname; });
 
-  /* ── Init: primera tanda (7) ── */
-  appendNext();
-  renderFoot();
-  live.textContent = '';
+  /* ── Init: primera carga ──
+     Skeleton unos instantes (Figma 8954:26839) y luego la primera tanda (7) o el vacío (Figma 8954:26680, ?vacio=1). */
+  var SKEL_DELAY = 900;
+  var skel = $('sw-skel'), emptyBox = $('sw-empty'), foot = $('sw-foot');
+  var wantEmpty = /[?&]vacio=1\b/.test(window.location.search);
+  if (wantEmpty) document.querySelector('input[name="sim-inicio"][value="vacio"]').checked = true;
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="sim-inicio"]'), function (r) {
+    r.addEventListener('change', function () { window.location.href = window.location.pathname + (r.value === 'vacio' ? '?vacio=1' : ''); });
+  });
+  var content = $('sw-content');
+  list.hidden = true; foot.hidden = true; skel.hidden = false;
+  content.setAttribute('aria-busy', 'true');
+  live.textContent = 'Cargando solicitudes…';
+  window.setTimeout(function () {
+    skel.hidden = true;
+    content.removeAttribute('aria-busy');
+    if (wantEmpty) {
+      emptyBox.hidden = false;
+      live.textContent = 'Aún no tienes solicitudes.';
+      return;
+    }
+    list.hidden = false; foot.hidden = false;
+    appendNext();
+    renderFoot();
+    live.textContent = 'Se cargaron ' + Math.min(PAGE, total) + ' solicitudes. Mostrando ' + shown + ' de ' + total + ' solicitudes.';
+  }, SKEL_DELAY);
 })();
