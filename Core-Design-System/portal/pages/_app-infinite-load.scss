@@ -149,3 +149,7 @@
   .app-il-req__row dt { width: auto; }
 }
 .app-il-doc > .component-section > .mp-alert { margin-top: var(--space-16); }
+
+.app-il-controls { display: grid; gap: var(--space-24); align-content: start; }
+.app-il-controls > div { display: grid; gap: var(--space-8); }
+.app-il-controls .mp-label { margin-bottom: var(--space-4); }
