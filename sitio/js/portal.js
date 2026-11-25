@@ -477,10 +477,6 @@
         '</div>' +
         '<p class="pux-dsres__fecha">Último despliegue el <strong>' + esc(fecha(actual.fecha)) + '</strong></p>' +
         '<p class="pux-dsres__titulo">' + esc(tituloVersion(actual)) + '</p>' +
-        (actual.revisar
-          ? '<p class="pux-version__revisar"><i class="icon icon-eye icon-20" aria-hidden="true"></i>' +
-            '<span><strong>Qué revisar:</strong> ' + esc(actual.revisar) + '</span></p>'
-          : '') +
         '<div class="pux-actions">' +
           '<a class="mp-btn mp-btn--primario" href="historial.html">Ver todas las versiones</a>' +
         '</div>' +
@@ -1253,16 +1249,15 @@
       }
       var cambios = v.cambios && v.cambios.length
         ? '<ul class="pux-version__commits" role="list">' + v.cambios.map(function (c) { return '<li><span>' + esc(mensajeCambio(c.mensaje)) + '</span> <code>' + esc(c.commit) + '</code></li>'; }).join('') + '</ul>'
-        : '<p class="pux-muted pux-note">' + (anterior ? 'No hay commits registrados entre v' + esc(anterior.ver) + ' y v' + esc(e.ver) + '.' : 'Es la primera versión registrada.') + '</p>';
+        : '';
       var acc = acciones ? acciones(e, ia) : '';
       var f = v.fecha || (cdnV && cdnV.fecha);
       return '<li class="pux-version' + (cdnV ? ' is-publicada' : '') + '"><span class="pux-version__dot" aria-hidden="true"></span><div class="pux-version__body">' +
         '<div class="pux-version__head"><h3 class="pux-version__tag">v' + esc(e.ver) + '</h3><span class="pux-tags">' + etq + '</span>' +
           (f ? '<time class="pux-version__fecha" datetime="' + esc(f) + '">' + esc(fecha(f)) + '</time>' : '') + '</div>' +
         (v.titulo ? '<p class="pux-version__titulo">' + esc(tituloVersion(v)) + '</p>' : '') +
-        (v.revisar ? '<p class="pux-version__revisar"><i class="icon icon-eye icon-20" aria-hidden="true"></i><span><strong>Qué revisar:</strong> ' + esc(v.revisar) + '</span></p>' : '') +
         '<details class="pux-version__det"><summary>Ver detalles<span class="visually-hidden"> de la versión ' + esc(e.ver) + '</span></summary>' + compat +
-          '<p class="pux-version__cuerpo"><strong>Cambios respecto a ' + (anterior ? 'v' + esc(anterior.ver) : 'la versión anterior') + ':</strong></p>' + cambios + '</details>' +
+          (cambios ? '<p class="pux-version__cuerpo"><strong>Cambios respecto a ' + (anterior ? 'v' + esc(anterior.ver) : 'la versión anterior') + ':</strong></p>' + cambios : '') + '</details>' +
         (acc ? '<div class="pux-version__acciones">' + acc + '</div>' : '') +
       '</div></li>';
     }).join('') + '</ol>';
@@ -1905,16 +1900,6 @@
     '</section>';
   }
 
-  /** Validación UX de una versión: solo lo que está registrado en el repositorio (campo «revisar»). */
-  function validacionUX(v, actual) {
-    if (!v.revisar) return '';
-    return '<div class="pux-valid"><p class="pux-valid__tit"><i class="icon icon-eye icon-20" aria-hidden="true"></i>Validación UX requerida</p>' +
-      '<dl class="pux-valid__lista">' +
-        (v.titulo ? '<div><dt>Cambio a evaluar</dt><dd>' + esc(tituloVersion(v)) + '</dd></div>' : '') +
-        '<div><dt>Flujo o componente y comportamiento esperado</dt><dd>' + esc(v.revisar) + '</dd></div>' +
-      '</dl></div>';
-  }
-
   /** Historial cronológico: la versión actual abierta, las anteriores contraídas. */
   function historialVersiones(cat, acciones) {
     var todas = entradasVersiones(cat);
@@ -1928,19 +1913,19 @@
       var anterior = todas[i + 1];
       var actual = hayVigente ? e.ver === vigente : i === 0;
       var f = v.fecha || (cdnV && cdnV.fecha);
-      var compat = '';
-      if (cdnV) {
-        var iguales = ORDEN_PLATAFORMAS.map(function (p) {
-          var pq = paqueteCdn(cat, 'compensar-' + p);
-          return pq && pq.versiones[0].commit && pq.versiones[0].commit === cdnV.commit ? nombrePlataforma(p, cat) + ' v' + pq.versiones[0].version : null;
-        }).filter(Boolean);
-        compat = '<p class="pux-version__cuerpo"><strong>Compatibilidad:</strong> ' + (iguales.length ? 'paquetes generados con el mismo commit: ' + esc(iguales.join(', ')) + '.' : 'no hay paquetes de plataforma generados con el mismo commit.') + '</p>';
-      }
-      var cambios = v.cambios && v.cambios.length
-        ? '<ul class="pux-version__commits" role="list">' + v.cambios.map(function (c) { return '<li><span>' + esc(mensajeCambio(c.mensaje)) + '</span> <code>' + esc(c.commit) + '</code></li>'; }).join('') + '</ul>'
-        : '<p class="pux-muted pux-note">' + (anterior ? 'No hay commits registrados entre v' + esc(anterior.ver) + ' y v' + esc(e.ver) + '.' : 'Es la primera versión registrada.') + '</p>';
-      var estados = [cdnV ? 'Publicada en el CDN' : 'Sin paquete publicado en el CDN'];
-      if (v.enPrototipos) estados.push('copia registrada en los prototipos');
+      /* Regla «desplegar = aprobado»: toda versión publicada ya está aprobada por UX; no se muestran avisos de validación. */
+      var disponible = [];
+      if (cdnV) disponible.push(tag('CDN', 'success'));
+      if (v.enPrototipos) disponible.push(tag('Prototipos', 'success'));
+      var plataformas = cdnV ? ORDEN_PLATAFORMAS.map(function (p) {
+        var pq = paqueteCdn(cat, 'compensar-' + p);
+        return pq && pq.versiones[0].commit && pq.versiones[0].commit === cdnV.commit ? tag(nombrePlataforma(p, cat) + ' v' + pq.versiones[0].version, 'info') : null;
+      }).filter(Boolean) : [];
+      var datos = '<dl class="pux-vh__datos">' +
+        '<div><dt>Disponible en</dt><dd>' + (disponible.length ? disponible.join('') : '<span class="pux-muted">Sin publicar</span>') + '</dd></div>' +
+        (cdnV ? '<div><dt>Paquetes de plataforma</dt><dd>' + (plataformas.length ? plataformas.join('') : '<span class="pux-muted">Aún no generados con esta versión</span>') + '</dd></div>' : '') +
+      '</dl>';
+      var cambios = '';
       var acc = acciones ? acciones(e, ia) : '';
       return '<li class="pux-version' + (actual ? ' is-actual' : '') + (cdnV ? ' is-publicada' : '') + '"><span class="pux-version__dot" aria-hidden="true"></span>' +
         '<details class="pux-vh"' + (actual ? ' open' : '') + '>' +
@@ -1953,10 +1938,7 @@
           '<span class="visually-hidden">' + (actual ? ' Versión actual.' : '') + ' Mostrar u ocultar los detalles de la versión ' + esc(e.ver) + '.</span>' +
         '</summary>' +
         '<div class="pux-vh__cuerpo">' +
-          validacionUX(v, actual) +
-          '<p class="pux-version__cuerpo pux-vh__estado">' + esc(estados.join(' · ')) + '.</p>' +
-          compat +
-          '<p class="pux-version__cuerpo"><strong>Cambios respecto a ' + (anterior ? 'v' + esc(anterior.ver) : 'la versión anterior') + ':</strong></p>' + cambios +
+          datos + cambios +
           (acc ? '<div class="pux-version__acciones">' + acc + '</div>' : '') +
         '</div></details></li>';
     }).join('') + '</ol>';
@@ -2055,12 +2037,49 @@
   function initHistorial(cat, est) {
     var cont = $('[data-historial]');
     if (!cont) return;
-    function accionesPagina(e, ia) {
-      var q = '?v=' + encodeURIComponent(e.ver);
-      return (e.cdn ? '<a class="mp-btn mp-btn--secundario mp-btn--sm" href="centro-de-recursos.html' + q + '#cdn">Ver CDN<span class="visually-hidden"> de la versión ' + esc(e.ver) + '</span></a>' +
-        '<a class="mp-btn mp-btn--secundario mp-btn--sm" href="centro-de-recursos.html' + q + '#descargas">Descargar recursos<span class="visually-hidden"> de la versión ' + esc(e.ver) + '</span></a>' : '') +
-        (ia && ia.version === e.ver ? '<a class="mp-btn mp-btn--secundario mp-btn--sm" href="centro-de-recursos.html#ia">Documentación para IA</a>' : '');
+    /* Aquí se revisan cambios; las descargas viven en el Centro de recursos. */
+    function accionesPagina(e) {
+      var n = (e.t && e.t.cambios || []).length;
+      return '<button type="button" class="mp-btn mp-btn--secundario mp-btn--sm" data-ver-cambios="' + esc(e.ver) + '">' +
+        'Ver cambios' + (n ? ' (' + n + (n === 1 ? ' commit' : ' commits') + ')' : '') +
+        '<span class="visually-hidden"> de la versión ' + esc(e.ver) + '</span></button>';
     }
+    var ESTADO_ARCHIVO = { A: ['Nuevo', 'success'], M: ['Modificado', 'info'], D: ['Eliminado', 'error'], R: ['Renombrado', 'neutral'], C: ['Copiado', 'neutral'] };
+    function detalleCambios(e, anterior) {
+      var v = e.t || {};
+      var lista = v.cambios || [];
+      var totalArch = lista.reduce(function (s, c) { return s + (c.totalArchivos || 0); }, 0);
+      var cab = (v.titulo ? '<p class="pux-cl__titulo">' + esc(tituloVersion(v)) + '</p>' : '') +
+        (v.cuerpo ? '<p class="pux-cl__cuerpo">' + esc(v.cuerpo) + '</p>' : '') +
+        '<p class="pux-cl__meta">' + (anterior ? 'Cambios respecto a v' + esc(anterior.ver) : 'Primera versión registrada') +
+          (lista.length ? ' · ' + lista.length + (lista.length === 1 ? ' commit' : ' commits') + ' · ' + totalArch + (totalArch === 1 ? ' archivo' : ' archivos') : '') + '</p>';
+      if (!lista.length) {
+        return cab + '<p class="pux-muted pux-note">El detalle de commits de esta versión no está en este repositorio: quedó en el repositorio original del sistema de diseño (respaldo en <code>_respaldo-repos/Core-Design-System.bundle</code>).</p>';
+      }
+      return cab + '<ol class="pux-cl" role="list">' + lista.map(function (c) {
+        var archivos = c.archivos || [];
+        var resto = (c.totalArchivos || 0) - archivos.length;
+        return '<li class="pux-cl__item">' +
+          '<p class="pux-cl__msg">' + esc(mensajeCambio(c.mensaje)) + '</p>' +
+          '<p class="pux-cl__dato"><time datetime="' + esc(c.fecha) + '">' + esc(fechaHora(c.fecha) || fecha(c.fecha)) + '</time>' +
+            (c.autor ? ' · ' + esc(c.autor) : '') + ' · <code>' + esc(c.commit) + '</code></p>' +
+          (c.cuerpo ? '<p class="pux-cl__cuerpo">' + esc(c.cuerpo.replace(/([^\n])\n(?!\n)/g, '$1 ')) + '</p>' : '') +
+          (archivos.length ? '<details class="pux-cl__arch"><summary>' + c.totalArchivos + (c.totalArchivos === 1 ? ' archivo' : ' archivos') + '</summary>' +
+            '<ul role="list">' + archivos.map(function (a) {
+              var t = ESTADO_ARCHIVO[a.estado] || [a.estado, 'neutral'];
+              return '<li>' + tag(t[0], t[1]) + ' <code>' + esc(a.ruta) + '</code></li>';
+            }).join('') + (resto > 0 ? '<li class="pux-muted">y ' + resto + ' más</li>' : '') + '</ul></details>' : '') +
+        '</li>';
+      }).join('') + '</ol>';
+    }
+    cont.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-ver-cambios]');
+      if (!b) return;
+      var todas = entradasVersiones(cat);
+      var i = todas.map(function (x) { return x.ver; }).indexOf(b.getAttribute('data-ver-cambios'));
+      if (i < 0) return;
+      abrirDrawer({ sup: 'Historial de cambios', titulo: 'v' + todas[i].ver, html: detalleCambios(todas[i], todas[i + 1]) }, b);
+    });
     cont.innerHTML =
       resumenSincronizacion(cat, est) +
       '<section class="pux-block" id="versiones" aria-labelledby="hist-vers"><h2 class="mp-h6 pux-section__title" id="hist-vers">Historial de versiones</h2>' +

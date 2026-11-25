@@ -1,48 +1,37 @@
 /* ============================================================
  * proceso-layout.css — Ancho del layout del Proceso de afiliación
- *                      en pantallas grandes (Pasos 1–8 + OTP)
+ *                      (Pasos 1–8 + OTP)
  * ------------------------------------------------------------
  * Se enlaza DESPUÉS del CSS de cada paso para sobrescribir el shell .pa-*.
  *
- * Hasta 1279px el layout se queda como en el Figma (card de 800px).
- * Desde 1280px la card crece con la pantalla en lugar de quedar fija en
- * 800px con un gran espacio vacío a la derecha, con topes para que las
- * líneas de texto y los formularios no se estiren de más.
- *
- *   ≥1280px  card flexible, tope 1040px
- *   ≥1600px  panel de pasos 320px, más aire (gap 24px), card tope 1120px
- *   ≥1920px  card tope 1200px; todo el bloque queda centrado bajo el título
+ * Regla del flujo (Figma): el contenido ocupa SIEMPRE todo el ancho
+ * disponible. La card del paso crece con la pantalla: sin tope de
+ * ancho y sin centrar el bloque. Solo el panel de pasos tiene ancho
+ * fijo (280px; 320px desde 1600px).
  * ============================================================ */
-
+/* Separación panel de pasos / card: 24px (Figma Fase 2) en todos los pasos */
+.pa-layout { gap: var(--space-24, 1.5rem); }
+.pa-main,
+.pa-card {
+  flex: 1 1 auto;
+  max-width: none;
+  min-width: 0;
+}
 @media (min-width: 1280px) {
-  .pa-card {
-    flex: 1 1 auto;
-    max-width: 1040px;
-  }
-  /* Textos largos: ancho de lectura cómodo aunque la card crezca */
+  /* Textos largos: ancho de lectura cómodo aunque la card ocupe todo el ancho */
   .pa-card__desc { max-width: 80ch; }
-  /* Paso 4: la pregunta usa el ancho ganado (antes 500px dejaba un hueco
-     grande antes de Sí / No) */
+  /* Paso 4: la pregunta usa el ancho ganado */
   .p4-q__text { max-width: 72ch; }
 }
-
 @media (min-width: 1600px) {
   .pa-layout { gap: var(--space-24, 1.5rem); }
   .pa-side { flex-basis: 320px; width: 320px; }
-  .pa-card {
-    max-width: 1120px;
-    padding: var(--space-32, 2rem) var(--space-40, 2.5rem) var(--space-40, 2.5rem);
-  }
+  .pa-card { padding: var(--space-32, 2rem) var(--space-40, 2.5rem) var(--space-40, 2.5rem); }
   /* Paso 4: el encabezado fijo de la persona va de borde a borde de la card */
   .p4-person-title { margin: 0 calc(-1 * var(--space-40, 2.5rem)); padding-left: var(--space-40, 2.5rem); padding-right: var(--space-40, 2.5rem); }
 }
 
-@media (min-width: 1920px) {
-  .pa-card { max-width: 1200px; }
-  /* Breadcrumb, título y layout comparten el mismo eje, centrados en la
-     zona de contenido, para no pegarse al menú lateral en monitores anchos. */
-  .zt-page:has(.pa-layout) {
-    max-width: calc(320px + 1200px + var(--space-24, 1.5rem) + 2 * var(--space-24, 1.5rem));
-    margin-inline: auto;
-  }
-}
+/* Stepper del proceso (Figma Fase 2): sin línea vertical que conecte los pasos.
+   Se oculta aquí y no en el componente compartido stepper.css, que no se modifica. */
+.zt-step:not(:last-child)::after,
+.zt-step--completed:not(:last-child)::after { display: none; }

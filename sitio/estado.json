@@ -1,14 +1,14 @@
 {
-  "generado": "2026-11-25T14:35:54.421Z",
+  "generado": "2026-11-25T18:34:03.736Z",
   "repositorio": {
     "unico": true,
     "nombre": "compensarUX",
     "rama": "main",
     "remoto": "https://github.com/swoJuan/compensarUX.git",
     "version": "v2.5.0",
-    "commits": 51,
-    "commitsSinSubir": 1,
-    "pendientes": 62,
+    "commits": 53,
+    "commitsSinSubir": 0,
+    "pendientes": 31,
     "carpetas": [
       {
         "id": "designSystem",
@@ -35,7 +35,7 @@
         "carpeta": "Flujos/portal",
         "commit": "21fa41a",
         "fecha": "2026-11-25T09:16:25-05:00",
-        "pendientes": 0
+        "pendientes": 4
       }
     ]
   },
@@ -78,7 +78,7 @@
     ],
     "version": null,
     "versionPrototipos": "v2.4.0",
-    "verificado": "2026-11-25T14:35:54.421Z",
+    "verificado": "2026-11-25T18:34:03.736Z",
     "comando": "npm run ds:sincronizar"
   },
   "componentes": {

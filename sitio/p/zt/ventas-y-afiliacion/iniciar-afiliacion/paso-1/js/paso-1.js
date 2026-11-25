@@ -5,17 +5,17 @@
  *   - CONTROL DE ACCESO: la pantalla solo es válida si existe un candidato
  *     VIABLE persistido (sessionStorage vía ZTAfiliacion). Si no, redirige
  *     a "Iniciar afiliación". Esto es control de prototipo, no seguridad.
- *   - Hidratar el resumen del candidato (nombre + tipo/número doc) desde la
- *     consulta previa. NO se vuelven a pedir esos datos (campos read only).
+ *   - Hidratar el resumen del contratante (tipo/número de documento) desde la
+ *     consulta previa. NO se vuelven a pedir esos datos (Figma: sin campos de documento).
  *   - Renderizar el stepper transversal (8 pasos, activo = Paso 1).
- *   - Renderizar la alerta informativa (componente Alert, variante info).
- *   - Precalcular la fecha de inicio de vigencia = primer día del mes siguiente.
+ *   - Precalcular la fecha de inicio de vigencia = primer día del mes siguiente
+ *     y mostrarla en la barra informativa ("01 Agosto 2026").
  *   - Lógica condicional: el campo "Novedades" solo aparece (y es obligatorio)
  *     cuando Tipo de transacción / vinculación = Novedades; al cambiar a otra
  *     transacción se oculta, se limpia su valor y se quita su required.
  *   - "¿Cómo se afilia el contratante?" (obligatorio): "Como independiente" o
  *     "A través de una empresa". Solo en el segundo caso aparece el bloque
- *     "Datos de la empresa" (Nombre + NIT, obligatorios). Al volver a
+ *     "Datos de la empresa" (Nit + Nombre de empresa, obligatorios). Al volver a
  *     independiente el bloque se oculta y sus valores se limpian.
  *   - Validar los campos editables obligatorios y guardar el Paso 1
  *     (sessionStorage, separado de los datos del candidato) antes de avanzar.
@@ -38,9 +38,6 @@
   var form        = document.getElementById('pa-form');
   var candSummary = document.getElementById('pa-cand-summary');
   var stepperEl   = document.getElementById('pa-stepper');
-  var alertEl    = document.getElementById('pa-alert');
-  var tipoEl     = document.getElementById('pa-tipo');
-  var numeroEl   = document.getElementById('pa-numero');
   var empresaEl  = document.getElementById('pa-empresa');
   var nitEl      = document.getElementById('pa-nit');
   var companyBlk = document.getElementById('pa-company-block');
@@ -49,6 +46,7 @@
   var noveltyEl  = document.getElementById('pa-novedad');
   var planEl     = document.getElementById('pa-plan');
   var vigenciaEl = document.getElementById('pa-vigencia');
+  var vigenciaLbl = document.getElementById('pa-start-label');
   var backBtn    = document.getElementById('pa-back');
   var nextBtn    = document.getElementById('pa-next');
   var txHint     = document.getElementById('pa-tx-hint');
@@ -58,31 +56,18 @@
   /* ─────────── Resumen del candidato (Person Summary compact) ───────────
    * Mismo componente y MISMO objeto candidato que usa el Paso 2. El componente
    * formatea el documento (C.C. 1.234.567); el valor limpio queda en candidate. */
+  // Figma (Paso 1): eyebrow "Contratante" + solo el documento ("CC 1234567890"); sin nombre.
+  // El componente exige `name`, así que se le pasa la línea de documento como texto principal.
   ZTPersonSummary.render(candSummary, {
-    eyebrow: 'Persona a afiliar',
+    eyebrow: 'Contratante',
     variant: 'compact',
     icon: 'icon-user-plus',
-    name: candidate.name || '',
-    documentType: candidate.documentType,
-    documentNumber: candidate.documentNumber
+    name: (candidate.documentType || '') + ' ' + (candidate.documentNumber || '')
   });
-
-  /* ─────────── Campos READ ONLY (documento) ─────────── */
-  // Tipo: label completo + apariencia de select (caret), pero solo lectura.
-  tipoEl.value = Z.tipoLabel(candidate.documentType);
-  tipoEl.classList.add('pa-readonly--select');
-  // Número: formateado para presentación; el valor real limpio queda en el candidato.
-  numeroEl.value = Z.formatDoc(candidate.documentNumber);
 
   /* ─────────── Stepper transversal ─────────── */
   // Pasos completados clicables (config compartida en ZTAfiliacion).
   ZTStepper.render(stepperEl, Z.stepperConfig(1));
-
-  /* ─────────── Alerta informativa (componente Alert, variante info) ─────────── */
-  ZTAlert.render(alertEl, {
-    type: 'info',
-    description: 'La vigencia del plan inicia el primer día del mes después de diligenciar este formulario.'
-  });
 
   /* ─────────── Fecha de vigencia = primer día del mes siguiente ─────────── */
   function primerDiaMesSiguiente() {
@@ -92,10 +77,14 @@
     var m = String(d.getMonth() + 1).padStart(2, '0');
     return y + '-' + m + '-01';   // formato input[type=date]
   }
+  // Presentación Figma: "01 Agosto 2026" (el valor real queda en el input oculto, AAAA-MM-DD).
+  var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  function mostrarVigencia() {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(vigenciaEl.value || '');
+    vigenciaLbl.textContent = m ? m[3] + ' ' + MESES[parseInt(m[2], 10) - 1] + ' ' + m[1] : '';
+  }
   vigenciaEl.value = primerDiaMesSiguiente();
-  vigenciaEl.min = primerDiaMesSiguiente();  // no permitir meses anteriores
-  // Reflejar el valor calculado en el Date Field transversal (trigger dd/mm/aaaa).
-  vigenciaEl.dispatchEvent(new Event('change', { bubbles: true }));
+  mostrarVigencia();
 
   /* ─────────── Selección actual de cada grupo ─────────── */
   function modalidadActual() {
@@ -128,8 +117,8 @@
       empresaEl.value = ''; nitEl.value = '';
       clearError(empresaEl); clearError(nitEl);
     } else if (fromUser) {
-      // Al revelar el bloque, llevar el foco al primer campo.
-      try { empresaEl.focus({ preventScroll: true }); } catch (e) { empresaEl.focus(); }
+      // Al revelar el bloque, llevar el foco al primer campo (Nit).
+      try { nitEl.focus({ preventScroll: true }); } catch (e) { nitEl.focus(); }
     }
   }
   form.querySelectorAll('input[name="affiliationChannel"]').forEach(function (r) {
@@ -176,7 +165,7 @@
     txHint.className = 'pa-choice-hint' + (esNovedad ? ' is-warning' : '');
     txHint.innerHTML = hintHTML(TX_HINT[tx], esNovedad);
     // Novedades: se ocultan los datos de afiliación que no aplican.
-    [channelFld, planRow, alertEl].forEach(function (el) { el.hidden = esNovedad; });
+    [channelFld, planRow].forEach(function (el) { el.hidden = esNovedad; });
     if (esNovedad) companyBlk.hidden = true;
     else companyBlk.hidden = canalActual() !== 'company';
     nextBtn.textContent = esNovedad ? 'Registrar novedad' : 'Guardar y continuar';
@@ -209,7 +198,7 @@
     if (prev.plan) { planEl.value = prev.plan; planEl.dispatchEvent(new Event('change', { bubbles: true })); }
     if (prev.startDate) {
       vigenciaEl.value = prev.startDate;
-      vigenciaEl.dispatchEvent(new Event('change', { bubbles: true }));  // reflejar en el Date Field
+      mostrarVigencia();
     }
     if (prev.noveltyType) {
       noveltyEl.value = prev.noveltyType;
@@ -233,10 +222,8 @@
     clearError(nitEl);
   });
   empresaEl.addEventListener('input', function () { clearError(empresaEl); });
-  // Limpiar el error conforme el usuario corrige plan / fecha de vigencia.
+  // Limpiar el error conforme el usuario corrige el plan.
   planEl.addEventListener('change', function () { clearError(planEl); });
-  vigenciaEl.addEventListener('input', function () { clearError(vigenciaEl); });
-  vigenciaEl.addEventListener('change', function () { clearError(vigenciaEl); });
 
   /* ─────────── Validación de campos editables obligatorios ───────────
    * Cada error se muestra INLINE, asociado a su campo (patrón transversal
