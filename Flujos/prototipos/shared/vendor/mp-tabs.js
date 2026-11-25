@@ -7,6 +7,8 @@
  * Patrón: WAI-ARIA APG "Tabs", ACTIVACIÓN AUTOMÁTICA (el panel cambia al mover el foco;
  * los paneles de este sistema son contenido inmediato, no cargas costosas).
  *
+ * Compatible con Tabs v2: .mp-tab-xl (pill) y .mp-tab-card (tarjeta) con role="tab" dentro de <div class="mp-tabs mp-tabs--v2" role="tablist">.
+ *
  * Marcado esperado
  *   <div class="mp-tabs" role="tablist" aria-label="…" [aria-orientation="vertical"]>
  *     <button class="mp-tab is-active" role="tab" id="t1" aria-selected="true"  aria-controls="p1">…</button>
@@ -167,8 +169,10 @@
     return 0;
   }
 
+  /* Texto de la opción del desplegable. En Tabs v2 la tarjeta tiene título y descripción: solo el título es la etiqueta. */
   function labelOf(tab) {
-    return (tab.textContent || '').replace(/\s+/g, ' ').trim();
+    var main = tab.querySelector('.mp-tab-card__title, .mp-tab-xl__label');
+    return ((main || tab).textContent || '').replace(/\s+/g, ' ').trim();
   }
 
   function selectOf(list) {
