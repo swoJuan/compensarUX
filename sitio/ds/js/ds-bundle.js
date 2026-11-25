@@ -5040,7 +5040,7 @@
 
   /* ── onSectionReady ──────────────────────────────────── */
   function onSectionReady(sectionId) {
-    document.body.classList.toggle('component-doc-full', sectionId === 'botones' || sectionId === 'inputs' || sectionId === 'dropdown' || sectionId === 'bottom-sheet' || sectionId === 'seleccion' || sectionId === 'alertas' || sectionId === 'toast' || sectionId === 'modales' || sectionId === 'cards' || sectionId === 'tables' || sectionId === 'badges' || sectionId === 'tabs' || sectionId === 'header' || sectionId === 'loading' || sectionId === 'breadcrumb' || sectionId === 'accordion' || sectionId === 'demo/core' || sectionId === 'guidelines/high-contrast' || sectionId === 'guidelines/dark-mode' || sectionId === 'guidelines/form-patterns' || sectionId === 'guidelines/motion-animation' || sectionId === 'guidelines/responsive-breakpoints' || sectionId === 'guidelines/search-filters' || sectionId === 'sidebar' || sectionId === 'stepper');
+    document.body.classList.toggle('component-doc-full', sectionId === 'botones' || sectionId === 'inputs' || sectionId === 'dropdown' || sectionId === 'bottom-sheet' || sectionId === 'carga-infinita' || sectionId === 'seleccion' || sectionId === 'alertas' || sectionId === 'toast' || sectionId === 'modales' || sectionId === 'cards' || sectionId === 'tables' || sectionId === 'badges' || sectionId === 'tabs' || sectionId === 'header' || sectionId === 'loading' || sectionId === 'breadcrumb' || sectionId === 'accordion' || sectionId === 'demo/core' || sectionId === 'guidelines/high-contrast' || sectionId === 'guidelines/dark-mode' || sectionId === 'guidelines/form-patterns' || sectionId === 'guidelines/motion-animation' || sectionId === 'guidelines/responsive-breakpoints' || sectionId === 'guidelines/search-filters' || sectionId === 'sidebar' || sectionId === 'stepper');
     openAccordionFor(sectionId);
     // Re-exponer globals para onclick inline en fragmentos
     window.showToast       = showToast;
@@ -5169,6 +5169,11 @@
         window.tabsDocs.initTabsDoc(document);
       });
     }
+    if (window.tabsV2Docs) {
+      requestAnimationFrame(function() {
+        window.tabsV2Docs.initTabsV2Doc(document);
+      });
+    }
     if (window.emptyStateDocs) {
       requestAnimationFrame(function() {
         window.emptyStateDocs.initEmptyStateDoc(document);
@@ -5284,6 +5289,7 @@
     'tabs':               'docs/app/components/tabs.html',
     'header':             'docs/app/components/header.html',
     'bottom-sheet':       'docs/app/components/bottom-sheet.html',
+    'carga-infinita':     'docs/app/components/carga-infinita.html',
     'dropdown':           'docs/app/components/dropdown.html',
     'accordion':          'docs/transversales/components/accordion.html',
     'badges':             'docs/transversales/components/badges.html',

@@ -13,8 +13,7 @@
   var TABS = [
     { id: 'resumen', nombre: 'Resumen' },
     { id: 'pantallas', nombre: 'Pantallas y HU' },
-    { id: 'versiones', nombre: 'Versiones' },
-    { id: 'despliegues', nombre: 'Despliegues' }
+    { id: 'versiones', nombre: 'Versiones' }
   ];
   var ESTADO_DESPLIEGUE = {
     'publicado': { label: 'Publicado', tag: 'success' },
@@ -63,7 +62,7 @@
       '</ol></nav>' +
       '<div class="pux-ficha-head__fila">' +
         '<div class="pux-ficha-head__texto">' +
-          '<div class="pux-tags">' + U.tagPlataforma(F.plataforma, CAT) + U.badgeEstado(F.estado) + '</div>' +
+          '<div class="pux-tags">' + U.tagPlataforma(F.plataforma, CAT) + U.badgeEstado(F.estado) + U.tagsCategorias(F) + U.tagsEntrega(F) + '</div>' +
           '<h1 class="pux-page-head__title">' + esc(F.nombre) + '</h1>' +
           '<ul class="pux-ficha-meta" role="list">' + meta + '</ul>' +
         '</div>' +
@@ -72,86 +71,103 @@
     '</div></section>';
   }
 
-  /* ---------- Resumen ---------- */
-  function ultimoDespliegue() {
-    return (F.despliegues || []).filter(function (d) { return d.estado === 'publicado'; })[0] || null;
+  /* ---------- Resumen: estado en 4 pasos + datos básicos ---------- */
+  var PASOS = ['borrador', 'construccion', 'validacion-ux', 'entregado'];
+  function detalleEstado() {
+    var est = U.estadoNormal(F.estado); var ap = F.aprobacionUX || {}; var e = F.entrega || {};
+    if (est === 'entregado') {
+      var quien = e.estado === 'entregado' ? e.por : ap.por; var cuando = e.estado === 'entregado' ? e.fecha : ap.fecha;
+      return '<span class="pux-ok"><i class="icon icon-check-circle icon-20" aria-hidden="true"></i> UX terminó: aprobado y entregado' +
+        (cuando ? ' el ' + esc(U.fecha(cuando)) : '') + (quien ? ' · ' + esc(quien) : '') + '. Ya no está en revisión.</span>';
+    }
+    if (est === 'validacion-ux') return 'UX está revisando el prototipo.';
+    if (est === 'construccion') return 'El prototipo se está diseñando y construyendo.';
+    return 'Recién creado. Aún no se ha empezado a construir.';
+  }
+  function tarjetaEstado() {
+    var est = U.estadoNormal(F.estado); var k = PASOS.indexOf(est);
+    var fin = k === PASOS.length - 1; /* «Entregado» es el final: se muestra completado, no en curso */
+    var pasos = PASOS.map(function (id, n) {
+      var e = U.ESTADOS[id]; var hecho = n < k || (fin && n === k);
+      var cls = (hecho ? ' is-hecho' : '') + (n === k ? ' is-actual' : '');
+      return '<li class="pux-pasos__paso' + cls + '"' + (n === k ? ' aria-current="step"' : '') + '><span class="pux-pasos__marca" aria-hidden="true">' +
+        (hecho ? '<i class="icon icon-check icon-16"></i>' : (n + 1)) + '</span><span class="pux-pasos__txt">' + esc(e.label) +
+        (hecho ? '<span class="visually-hidden"> (completado)</span>' : '') + '</span></li>';
+    }).join('');
+    return '<section class="pux-panel pux-ficha-card" aria-labelledby="fr-estado"><h2 class="mp-h6 pux-ficha__titulo" id="fr-estado">Estado</h2>' +
+      '<ol class="pux-pasos" role="list">' + pasos + '</ol><p class="pux-pasos__detalle">' + detalleEstado() + '</p></section>';
   }
   function resumenPartes() {
-    var ap = F.aprobacionUX || {};
-    var aprob = ap.aprobado
-      ? '<span class="pux-ok"><i class="icon icon-check-circle icon-20" aria-hidden="true"></i> Aprobado por ' + esc(ap.por || 'UX') + '</span><span class="pux-datos__sub">' + esc(U.fecha(ap.fecha)) + '</span>'
-      : 'Pendiente de aprobación';
     var pl = CAT.plataformas[F.plataforma] || {};
+    var ds = dsTexto();
     var enlaces = [];
     if (F.publicado) enlaces.push('<a class="pux-link" href="' + esc(F.url) + '" target="_blank" rel="noopener">Prototipo<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>');
     if (/^https:\/\//.test(F.figma || '')) enlaces.push(enlaceExterno(F.figma, 'Figma'));
-    if (F.descarga && F.descarga.url) enlaces.push('<a class="pux-link" href="' + esc(F.descarga.url) + '" download>Descargar ZIP</a>');
+    if (F.descarga && F.descarga.url) enlaces.push('<a class="pux-link" href="' + esc(F.descarga.url) + '" download>' + esc(F.descarga.etiqueta || 'Descargar ZIP') + '</a>');
     var d = function (k, v) { return '<div><dt>' + esc(k) + '</dt><dd>' + v + '</dd></div>'; };
-    var ds = dsTexto();
-    var info = '<section class="pux-panel pux-ficha-card" aria-labelledby="fr-info"><h2 class="mp-h6 pux-ficha__titulo" id="fr-info">Información general</h2>' +
+    var np = (F.pantallas || []).length; var nh = (F.hu || []).length;
+    var info = '<section class="pux-panel pux-ficha-card" aria-labelledby="fr-info"><h2 class="mp-h6 pux-ficha__titulo" id="fr-info">Detalles</h2>' +
       '<dl class="pux-datos">' +
-        d('Nombre', esc(F.nombre)) +
+        (F.descripcion ? d('Descripción', esc(F.descripcion)) : '') +
         d('Plataforma', esc(pl.nombre || F.plataforma)) +
-        d('Descripción', F.descripcion ? esc(F.descripcion) : sinDato('Sin descripción')) +
-        d('Versión del flujo', 'v' + esc(U.sinV(F.version))) +
-        d('Estado UX', U.badgeEstado(F.estado) + '<span class="pux-datos__sub">' + aprob + '</span>') +
-        d('Última actualización', F.actualizado ? esc(U.fecha(F.actualizado)) : sinDato('Sin fecha')) +
+        d('Versión', 'v' + esc(U.sinV(F.version)) + ' · <a class="pux-link" href="#versiones" data-ir-ftab="versiones">ver historial</a>') +
         d('Sistema de diseño', ds ? esc(ds) : sinDato('Sin registro')) +
-        d('Enlaces', enlaces.length ? '<span class="pux-ficha-enlaces">' + enlaces.join('') + '</span>' : sinDato('Sin enlaces')) +
-        d('Identificador', '<code>' + esc(F.id) + '</code>') +
-      '</dl></section>';
-    var vinc = (F.hu || []).filter(function (h) { return (h.pantallas || []).length; }).length;
-    var ud = ultimoDespliegue();
-    var kpi = function (k, v, sub, tab) {
-      return '<div class="pux-kpi"><dt>' + esc(k) + '</dt><dd><a class="pux-kpi__valor" href="#' + tab + '" data-ir-ftab="' + tab + '">' + v + '</a>' + (sub ? '<span class="pux-datos__sub">' + sub + '</span>' : '') + '</dd></div>';
-    };
-    var trazab = '<section class="pux-panel pux-ficha-card" aria-labelledby="fr-traz"><h2 class="mp-h6 pux-ficha__titulo" id="fr-traz">Trazabilidad</h2>' +
-      '<dl class="pux-kpis">' +
-        kpi('Pantallas registradas', (F.pantallas || []).length, (F.pantallasDetectadas || []).length ? plural(F.pantallasDetectadas.length, 'detectada sin registrar', 'detectadas sin registrar') : '', 'pantallas') +
-        kpi('HU asociadas', (F.hu || []).length, vinc + ' vinculadas a pantallas', 'pantallas') +
-        kpi('Versiones publicadas', (F.versiones || []).length, (F.versiones || []).length ? '' : 'Ninguna versión congelada', 'versiones') +
-        (ud ? kpi('Último despliegue confirmado', esc(U.fecha(ud.fecha)), esc(ud.entorno) + (ud.version ? ' · v' + esc(ud.version) : ''), 'despliegues') : '') +
+        d('Pantallas e historias', '<a class="pux-link" href="#pantallas" data-ir-ftab="pantallas">' + plural(np, 'pantalla', 'pantallas') + ' · ' + plural(nh, 'historia', 'historias') + '</a>') +
+        d('Última actualización', F.actualizado ? esc(U.fecha(F.actualizado)) : sinDato('Sin fecha')) +
+        (enlaces.length ? d('Enlaces', '<span class="pux-ficha-enlaces">' + enlaces.join('') + '</span>') : '') +
       '</dl></section>';
     var vista = F.publicado
       ? '<section class="pux-ficha-vista" aria-labelledby="vista-titulo">' +
           '<div class="pux-preview__head"><h2 class="mp-h6 pux-section__title" id="vista-titulo">Vista previa</h2>' +
-            '<div class="mp-tabs" role="group" aria-label="Tamaño de la vista previa">' +
+            (F.plataforma === 'app' ? '' : '<div class="mp-tabs" role="group" aria-label="Tamaño de la vista previa">' +
               '<button class="mp-tab is-active" type="button" aria-pressed="true" data-viewport="desktop">Escritorio</button>' +
               '<button class="mp-tab" type="button" aria-pressed="false" data-viewport="mobile">Móvil</button>' +
-            '</div></div>' +
+            '</div>') + '</div>' +
           '<p class="pux-muted">La vista previa es solo para explorar. Para comentar, abre el prototipo completo.</p>' +
-          '<div class="pux-preview" data-preview data-viewport-actual="desktop"><div class="pux-preview__frame"><iframe src="' + esc(F.url) + '" title="Vista previa: ' + esc(F.nombre) + '" loading="lazy"></iframe></div></div>' +
+          '<div class="pux-preview" data-preview data-viewport-actual="' + (F.plataforma === 'app' ? 'mobile' : 'desktop') + '"><div class="pux-preview__frame"><iframe src="' + esc(F.url) + '" title="Vista previa: ' + esc(F.nombre) + '" loading="lazy"></iframe></div></div>' +
         '</section>'
       : U.vacio('Este flujo aún no está publicado', 'Existe en el repositorio de UX, pero no forma parte de esta publicación.');
-    return { grid: info + trazab, vista: vista };
+    return { grid: tarjetaEstado() + info, vista: vista };
   }
   function panelResumen() { var r = resumenPartes(); return '<div class="pux-ficha-grid" data-ficha-grid>' + r.grid + '</div>' + r.vista; }
 
   /* ---------- Pantallas y HU ---------- */
   function chipHu(codigo) { return U.tag(codigo, 'info'); }
+  function enlaceAzure(h) {
+    return /^https:\/\//.test((h && h.url) || '')
+      ? '<a class="pux-icon-btn pux-ficha-hu__azure" href="' + esc(h.url) + '" target="_blank" rel="noopener" title="Abrir en Azure DevOps"><i class="icon icon-arrow-square-out icon-20" aria-hidden="true"></i><span class="visually-hidden">Abrir ' + esc(h.codigo) + ' en Azure DevOps (se abre en una pestaña nueva)</span></a>' : '';
+  }
   function huDePantalla(p) {
     var rels = (F.relaciones || []).filter(function (r) { return r.pantalla === p.id; });
-    if (!rels.length) return '<span class="pux-muted">Sin historias</span>';
-    return '<details class="pux-ficha-det"><summary>Ver historias <span class="pux-count">' + rels.length + '</span></summary><ul class="pux-ficha-rel" role="list">' +
-      rels.map(function (r) {
-        var h = huPorCodigo(r.hu) || { codigo: r.hu };
-        return '<li><span>' + chipHu(r.hu) + '</span><span class="pux-ficha-rel__t">' + esc(h.titulo || '') + (r.nota ? '<span class="pux-datos__sub">' + esc(r.nota) + '</span>' : '') + '</span>' +
-          (api.escritura ? '<button class="mp-btn mp-btn--terciario" type="button" data-relacion="' + esc(r.hu) + '|' + esc(p.id) + '">Editar<span class="visually-hidden"> la relación de ' + esc(r.hu) + ' con ' + esc(p.nombre) + '</span></button>' : '') + '</li>';
-      }).join('') + '</ul></details>';
+    var agregar = api.escritura
+      ? '<button class="mp-btn mp-btn--terciario pux-ficha-hu__agregar" type="button" data-vincular-pantalla="' + esc(p.id) + '">+ Agregar historia<span class="visually-hidden"> a ' + esc(p.nombre) + '</span></button>' : '';
+    var lista = rels.length
+      ? '<ul class="pux-ficha-hu" role="list">' + rels.map(function (r) {
+          var h = huPorCodigo(r.hu) || { codigo: r.hu };
+          var u = urlPantalla(p.ruta);
+          var inicio = r.inicio
+            ? (u && p.existe
+              ? '<a class="pux-ficha-hu__inicio" href="' + esc(u + r.inicio) + '" target="_blank" rel="noopener" title="Abrir la pantalla en el punto de inicio de ' + esc(r.hu) + '"><i class="icon icon-play-circle icon-16" aria-hidden="true"></i> Inicia en <code>' + esc(r.inicio) + '</code><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>'
+              : '<span class="pux-ficha-hu__inicio">Inicia en <code>' + esc(r.inicio) + '</code></span>')
+            : '';
+          return '<li><span>' + chipHu(r.hu) + '</span><span class="pux-ficha-hu__t">' + esc(h.titulo || '') + inicio + (r.nota ? '<span class="pux-datos__sub">' + esc(r.nota) + '</span>' : '') + '</span>' +
+            '<span class="pux-ficha-hu__acc">' + enlaceAzure(h) +
+            (api.escritura ? '<button class="pux-icon-btn" type="button" data-relacion="' + esc(r.hu) + '|' + esc(p.id) + '" title="Editar punto de inicio, nota o desvincular"><i class="icon icon-pencil-simple icon-20" aria-hidden="true"></i><span class="visually-hidden">Editar la relación de ' + esc(r.hu) + ' con ' + esc(p.nombre) + '</span></button>' : '') +
+            '</span></li>';
+        }).join('') + '</ul>'
+      : '<p class="pux-muted pux-ficha-hu__vacio">Sin historias</p>';
+    return lista + agregar;
   }
   function filaPantalla(p) {
     var u = urlPantalla(p.ruta);
     var abrir = u && p.existe
       ? '<a class="mp-btn mp-btn--terciario" href="' + esc(u) + '" target="_blank" rel="noopener">Abrir pantalla<span class="visually-hidden"> ' + esc(p.nombre) + ' (se abre en una pestaña nueva)</span></a>'
       : '<span class="pux-muted">' + (p.existe ? 'No publicada' : 'Archivo no encontrado') + '</span>';
-    var vincular = api.escritura
-      ? '<button class="mp-btn mp-btn--terciario" type="button" data-vincular-pantalla="' + esc(p.id) + '">Vincular HU<span class="visually-hidden"> a ' + esc(p.nombre) + '</span></button>' : '';
     var busca = [p.nombre, p.ruta, p.descripcion].concat(p.hu || []).join(' ');
     return '<tr data-fila-pantalla data-busca="' + esc(busca.toLowerCase()) + '">' +
-      '<th scope="row">' + esc(p.nombre) + (p.descripcion ? '<span class="pux-catalogo__desc">' + esc(p.descripcion) + '</span>' : '') + '</th>' +
-      '<td data-label="Ruta"><code>' + esc(p.ruta) + '</code></td>' +
+      '<th scope="row">' + esc(p.nombre) + (p.descripcion ? '<span class="pux-catalogo__desc">' + esc(p.descripcion) + '</span>' : '') + '<code class="pux-ficha-ruta">' + esc(p.ruta) + '</code></th>' +
       '<td data-label="Historias">' + huDePantalla(p) + '</td>' +
-      '<td class="mp-table__actions" data-label="Acciones"><span class="pux-ficha-acc">' + abrir + vincular + '</span></td></tr>';
+      '<td class="mp-table__actions" data-label="Acciones"><span class="pux-ficha-acc">' + abrir + '</span></td></tr>';
   }
   function tablaPantallas() {
     var ps = F.pantallas || [];
@@ -165,8 +181,8 @@
       ? '<div class="mp-input-group pux-ficha-buscar"><label class="mp-input-label" for="fp-q">Buscar pantalla o HU</label><div class="mp-input-wrapper">' +
         '<i class="icon icon-magnifying-glass icon-20 mp-input-icon mp-input-icon--left" aria-hidden="true"></i>' +
         '<input class="mp-input-field has-icon-left" type="search" id="fp-q" placeholder="Nombre, ruta o HU-000" autocomplete="off" data-ficha-q></div></div>' : '';
-    return buscador + '<div class="mp-table-wrap pux-table"><table class="mp-table mp-table--hover pux-ficha-tabla"><caption class="visually-hidden">Pantallas registradas de ' + esc(F.nombre) + '</caption>' +
-      '<thead><tr><th scope="col">Pantalla</th><th scope="col">Ruta</th><th scope="col">Historias</th><th scope="col" class="mp-table__actions"><span class="visually-hidden">Acciones</span></th></tr></thead><tbody>' +
+    return buscador + '<div class="mp-table-wrap pux-table pux-ficha-tabla-wrap"><table class="mp-table mp-table--hover pux-ficha-tabla"><caption class="visually-hidden">Pantallas registradas de ' + esc(F.nombre) + '</caption>' +
+      '<thead><tr><th scope="col">Pantalla</th><th scope="col">Historias de usuario</th><th scope="col" class="mp-table__actions"><span class="visually-hidden">Acciones</span></th></tr></thead><tbody>' +
       ps.map(filaPantalla).join('') + '</tbody></table></div>' +
       '<p class="pux-muted pux-note" data-ficha-sin-resultados hidden>Ninguna pantalla coincide con la búsqueda.</p>';
   }
@@ -179,9 +195,7 @@
         return '<li><code>' + esc(r) + '</code>' + (api.escritura ? '<button class="mp-btn mp-btn--terciario" type="button" data-registrar-ruta="' + esc(r) + '">Registrar<span class="visually-hidden"> ' + esc(r) + '</span></button>' : '') + '</li>';
       }).join('') + '</ul></details>';
   }
-  function listaHu() {
-    var hus = F.hu || [];
-    if (!hus.length) return '<p class="pux-muted pux-hu-vacio">Este flujo aún no tiene historias de usuario asociadas.</p>';
+  function listaHu(hus) {
     return '<ul class="pux-hu-lista" role="list">' + hus.map(function (h) {
       var azure = /^https:\/\//.test(h.url || '')
         ? '<a class="mp-btn mp-btn--terciario mp-btn--icon-right pux-hu-item__accion" href="' + esc(h.url) + '" target="_blank" rel="noopener">Abrir en Azure DevOps<span class="visually-hidden"> ' + esc(h.codigo || h.id) + ' (se abre en una pestaña nueva)</span> <i class="icon icon-arrow-square-out icon-20" aria-hidden="true"></i></a>' : '';
@@ -198,131 +212,80 @@
   }
   function panelPantallas() {
     var aviso = api.escritura ? '' : '<div class="mp-alert mp-alert--info" role="status"><i class="icon icon-info icon-32 mp-alert__icon" aria-hidden="true"></i><div class="mp-alert__content"><p class="mp-alert__title">Solo lectura</p><p class="mp-alert__body">Para registrar pantallas o vincular historias abre el portal local (<code>npm run dev</code>). Los cambios quedan en archivos del repositorio.</p></div></div>';
+    var hayPantallas = (F.pantallas || []).length > 0;
+    var sueltas = (F.hu || []).filter(function (h) { return !(h.pantallas || []).length; });
+    var boton = !hayPantallas
+      ? '<button class="mp-btn mp-btn--primario" type="button" data-abrir-vincular' + (api.escritura ? '' : ' disabled aria-disabled="true"') + '>+ Vincular historia de usuario</button>' : '';
     return aviso +
       '<section class="pux-panel pux-ficha-card" aria-labelledby="fp-pant"><div class="pux-ficha-barra">' +
-        '<h2 class="mp-h6 pux-ficha__titulo" id="fp-pant">Pantallas' + ((F.pantallas || []).length ? ' <span class="pux-count">' + F.pantallas.length + '</span>' : '') + '</h2>' +
-        '<button class="mp-btn mp-btn--primario" type="button" data-abrir-vincular' + (api.escritura ? '' : ' disabled aria-disabled="true"') + '>+ Vincular historia de usuario</button></div>' +
-        '<p class="pux-muted">Una historia puede estar en varias pantallas y una pantalla puede tener varias historias. Solo se aceptan pantallas de este flujo.</p>' +
-        tablaPantallas() + detectadas() + '</section>' +
-      '<section class="pux-panel pux-ficha-card" aria-labelledby="fp-hu"><h2 class="mp-h6 pux-ficha__titulo" id="fp-hu">Historias de usuario' + ((F.hu || []).length ? ' <span class="pux-count">' + F.hu.length + '</span>' : '') + '</h2>' + listaHu() + '</section>';
+        '<h2 class="mp-h6 pux-ficha__titulo" id="fp-pant" tabindex="-1">Pantallas e historias de usuario' + (hayPantallas ? ' <span class="pux-count">' + F.pantallas.length + '</span>' : '') + '</h2>' + boton + '</div>' +
+        (hayPantallas ? '<p class="pux-muted">Cada pantalla muestra sus historias. Una misma historia puede estar en varias pantallas.</p>' : '') +
+        tablaPantallas() + detectadas() +
+        (sueltas.length ? '<div class="pux-ficha-sueltas"><h3 class="mp-h6">Historias sin pantalla <span class="pux-count">' + sueltas.length + '</span></h3>' + listaHu(sueltas) + '</div>' : '') +
+      '</section>';
   }
 
-  /* ---------- Versiones ---------- */
-  function mapaPantallas(v) { var m = {}; (v.pantallas || []).forEach(function (p) { m[p.ruta] = p.huella; }); return m; }
-  function comparar(a, b) {
-    var ma = mapaPantallas(a); var mb = mapaPantallas(b); var r = { agregadas: [], eliminadas: [], modificadas: [] };
-    Object.keys(mb).forEach(function (k) { if (!(k in ma)) r.agregadas.push(k); else if (ma[k] !== mb[k]) r.modificadas.push(k); });
-    Object.keys(ma).forEach(function (k) { if (!(k in mb)) r.eliminadas.push(k); });
-    return r;
-  }
-  function huDeRuta(ruta) {
-    var p = (F.pantallas || []).filter(function (x) { return x.ruta === ruta; })[0];
-    return p ? (p.hu || []) : [];
-  }
-  function resultadoComparacion(a, b) {
-    var c = comparar(a, b);
-    var grupo = function (titulo, lista) {
-      return '<div class="pux-cmp__grupo"><h4 class="pux-cmp__t">' + esc(titulo) + ' <span class="pux-count">' + lista.length + '</span></h4>' +
-        (lista.length ? '<ul class="pux-ficha-rel" role="list">' + lista.map(function (r) {
-          var hu = huDeRuta(r);
-          return '<li><code>' + esc(r) + '</code>' + (hu.length ? '<span class="pux-datos__sub">HU vinculadas en el registro actual: ' + esc(hu.join(', ')) + '</span>' : '') + '</li>';
-        }).join('') + '</ul>' : '<p class="pux-muted pux-note">Ninguna</p>') + '</div>';
-    };
-    if (!(a.pantallas || []).length || !(b.pantallas || []).length) return '<p class="pux-muted">No hay pantallas registradas en una de las versiones: no se puede comparar.</p>';
-    return '<p class="pux-muted pux-note">Comparación por huella SHA-256 de las pantallas HTML publicadas en cada versión. No evalúa cambios en CSS, JavaScript ni imágenes.</p>' +
-      grupo('Pantallas añadidas', c.agregadas) + grupo('Pantallas modificadas', c.modificadas) + grupo('Pantallas eliminadas', c.eliminadas) +
-      '<div class="pux-cmp__grupo"><h4 class="pux-cmp__t">Cambios documentados en v' + esc(b.version) + '</h4><p>' + (b.notas ? esc(b.notas) : sinDato('Sin notas')) + '</p></div>';
-  }
-  function itemVersion(v) {
-    var ds = v.ds ? (v.ds.tag || ('commit ' + v.ds.commit)) : null;
-    var est = ((v.estadoUX || {}).estado);
-    var commit = '<code>' + esc(v.commit) + '</code>' + (v.commitEnlace && v.commitEnlace.url ? ' ' + enlaceExterno(v.commitEnlace.url, 'Ver commit') : (v.commitEnlace && v.commitEnlace.subido === false ? ' ' + U.tag('Solo local', 'neutral') : ''));
-    var pant = (v.pantallas || []).length
-      ? '<details class="pux-ficha-det"><summary>Pantallas de esta versión <span class="pux-count">' + v.pantallas.length + '</span></summary><ul class="pux-ficha-rel" role="list">' +
-        v.pantallas.map(function (p) { return '<li><a class="pux-link" href="' + esc(urlPantallaVersion(v, p.ruta)) + '" target="_blank" rel="noopener"><code>' + esc(p.ruta) + '</code><span class="visually-hidden"> (se abre en una pestaña nueva)</span></a></li>'; }).join('') + '</ul></details>' : '';
-    return '<li class="pux-version' + (v.vigente ? ' is-publicada' : '') + '"><span class="pux-version__dot" aria-hidden="true"></span><div class="pux-version__body">' +
-      '<div class="pux-version__head"><h3 class="pux-version__tag">v' + esc(v.version) + '</h3>' + (v.vigente ? '<span class="pux-tags">' + U.tag('Versión actual', 'success') + '</span>' : '') +
-        '<time class="pux-version__fecha" datetime="' + esc(v.publicadaEl) + '">Publicada el ' + esc(U.fecha(v.publicadaEl)) + '</time></div>' +
-      '<p class="pux-version__titulo">' + esc(v.notas || 'Sin resumen de cambios') + '</p>' +
-      '<dl class="pux-datos pux-datos--linea">' +
-        '<div><dt>Estado UX</dt><dd>' + esc((U.ESTADOS[est] || {}).label || '—') + '</dd></div>' +
-        '<div><dt>Sistema de diseño</dt><dd>' + (ds ? esc(ds) : sinDato('Sin registro')) + '</dd></div>' +
-        '<div><dt>Commit</dt><dd>' + commit + '</dd></div>' +
-        '<div><dt>Artefacto</dt><dd><code>' + esc(v.artefacto || '—') + '</code></dd></div></dl>' +
-      (v.cambiosSinVersion > 0 ? '<p class="pux-muted pux-note">Desde esta versión hay ' + plural(v.cambiosSinVersion, 'cambio', 'cambios') + ' en desarrollo que aún no se publicaron como versión.</p>' : '') + pant +
-      '<div class="pux-version__acciones">' + (v.url
-        ? '<a class="mp-btn mp-btn--secundario" href="' + esc(v.url) + '" target="_blank" rel="noopener">Ver versión ' + esc(v.version) + '<span class="visually-hidden"> de ' + esc(F.nombre) + ' (se abre en una pestaña nueva)</span></a>'
-        : '<p class="pux-muted">Esta versión está registrada, pero no hay una copia publicada disponible para visualizar.</p>') + '</div>' +
-    '</div></li>';
-  }
-  function panelVersiones() {
-    var vs = F.versiones || [];
-    var hayActual = vs.some(function (v) { return v.vigente; });
-    var actualSinCopia = '';
-    if (!hayActual) {
-      actualSinCopia = '<li class="pux-version is-publicada"><span class="pux-version__dot" aria-hidden="true"></span><div class="pux-version__body">' +
-        '<div class="pux-version__head"><h3 class="pux-version__tag">v' + esc(U.sinV(F.version)) + '</h3><span class="pux-tags">' + U.tag('Versión actual', 'success') + '</span></div>' +
-        '<p class="pux-version__titulo">Versión registrada en el catálogo. Aún no tiene una copia congelada.</p>' +
-        '<p class="pux-muted">Esta versión está registrada, pero no hay una copia publicada disponible para visualizar.</p>' +
-        (F.publicado ? '<div class="pux-version__acciones"><a class="mp-btn mp-btn--secundario" href="' + esc(F.url) + '" target="_blank" rel="noopener">Abrir el prototipo vigente<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>' +
-          '<span class="pux-muted pux-note">El prototipo vigente sigue cambiando; no es una copia histórica.</span></div>' : '') + '</div></li>';
-    }
-    var cmp = '';
-    if (vs.length >= 2) {
-      var op = function (sel) { return vs.map(function (v, i) { return '<option value="' + i + '"' + (i === sel ? ' selected' : '') + '>v' + esc(v.version) + '</option>'; }).join(''); };
-      cmp = '<section class="pux-panel pux-ficha-card" aria-labelledby="fv-cmp"><h2 class="mp-h6 pux-ficha__titulo" id="fv-cmp">Comparar versiones</h2>' +
-        '<div class="pux-ficha-cmp"><div class="mp-input-group"><label class="mp-input-label" for="cmp-a">Versión base</label><div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="cmp-a" data-cmp="a">' + op(1) + '</select></div></div>' +
-        '<div class="mp-input-group"><label class="mp-input-label" for="cmp-b">Comparar con</label><div class="mp-input-wrapper"><select class="mp-input-field mp-select" id="cmp-b" data-cmp="b">' + op(0) + '</select></div></div></div>' +
-        '<div data-cmp-res aria-live="polite"></div></section>';
-    }
-    return '<section class="pux-panel pux-ficha-card" aria-labelledby="fv-lista"><h2 class="mp-h6 pux-ficha__titulo" id="fv-lista">Versiones' + (vs.length ? ' <span class="pux-count">' + vs.length + '</span>' : '') + '</h2>' +
-      '<p class="pux-muted">Cada versión publicada conserva sus archivos y el sistema de diseño que usó. Abrirla no cambia el prototipo vigente.</p>' +
-      '<ol class="pux-versions" role="list">' + actualSinCopia + vs.map(itemVersion).join('') + '</ol>' +
-      (vs.length ? '' : '<p class="pux-muted pux-note">Las versiones se publican de forma explícita, con aprobación. Los commits de desarrollo no crean versiones.</p>') + '</section>' + cmp;
-  }
-
-  /* ---------- Despliegues ---------- */
+  /* ---------- Versiones: versión actual + historial (incluye despliegues) ---------- */
   function badgeDespliegue(estado) {
     var e = ESTADO_DESPLIEGUE[estado] || { label: estado, tag: 'neutral' };
     return '<span class="mp-badge mp-badge--' + e.tag + '" role="img" aria-label="Estado: ' + esc(e.label) + '"><span class="mp-badge-dot" aria-hidden="true"></span><span class="mp-badge__label">' + esc(e.label) + '</span></span>';
   }
-  function commitHtml(c) {
-    var hash = c.url ? enlaceExterno(c.url, '<code>' + esc(c.corto) + '</code>') : '<code>' + esc(c.corto) + '</code>' + (c.subido === false ? ' ' + U.tag('Solo local', 'neutral') : '');
-    var arch = (c.archivos || []).length
-      ? '<details class="pux-ficha-det"><summary>' + plural(c.totalArchivos, 'archivo', 'archivos') + (c.alcance === 'transversal' ? ' que usa este flujo' : '') + '</summary><ul class="pux-ficha-rel" role="list">' +
-        c.archivos.map(function (a) { return '<li><code>' + esc(a) + '</code></li>'; }).join('') + (c.totalArchivos > c.archivos.length ? '<li class="pux-muted">… y ' + (c.totalArchivos - c.archivos.length) + ' más</li>' : '') + '</ul></details>' : '';
-    return '<li class="pux-commit"><p class="pux-commit__msg">' + esc(c.mensaje) + '</p>' +
-      '<p class="pux-commit__meta">' + hash + ' · ' + esc(c.autor || 'Autor no registrado') + ' · <time datetime="' + esc(c.fecha) + '">' + esc(U.fechaHora(c.fecha) || U.fecha(c.fecha)) + '</time></p>' + arch + '</li>';
-  }
-  function filaDespliegue(d, i) {
-    var url = /^https:\/\//.test(d.urlPublicada || '') ? '<a class="mp-btn mp-btn--terciario" href="' + esc(d.urlPublicada) + '" target="_blank" rel="noopener">Abrir prototipo publicado<span class="visually-hidden"> (' + esc(d.entorno) + ', se abre en una pestaña nueva)</span></a>' : '';
-    var ci = d.commitInfo;
-    return '<tr><th scope="row"><time datetime="' + esc(d.fecha) + '">' + esc(U.fechaHora(d.fecha) || U.fecha(d.fecha)) + '</time></th>' +
-      '<td data-label="Entorno">' + esc(d.entorno) + '</td><td data-label="Estado">' + badgeDespliegue(d.estado) + '</td>' +
-      '<td data-label="Versión">' + (d.version ? 'v' + esc(d.version) : sinDato('Sin versión')) + '</td>' +
-      '<td data-label="Commit"><code>' + esc((ci && ci.corto) || String(d.commit).slice(0, 7)) + '</code></td>' +
-      '<td data-label="Responsable">' + (d.responsable ? esc(d.responsable) : sinDato('Sin registro')) + '</td>' +
-      '<td class="mp-table__actions" data-label="Acciones"><span class="pux-ficha-acc">' + url + '<button class="mp-btn mp-btn--terciario" type="button" data-despliegue="' + i + '">Ver detalle<span class="visually-hidden"> del despliegue ' + esc(d.id) + '</span></button></span></td></tr>';
-  }
-  function panelDespliegues() {
+  /* «feat(app-x): texto» → «Texto»: el tipo y el ámbito de Conventional Commits no aportan aquí. */
+  function mensajeLimpio(m) { var t = String(m || '').replace(/^[a-z]+(\([^)]*\))?!?:\s*/i, ''); return t.charAt(0).toUpperCase() + t.slice(1); }
+  function hashHtml(corto, url) { return url ? enlaceExterno(url, '<code>' + esc(corto) + '</code>') : '<code>' + esc(corto) + '</code>'; }
+  function despliegueDe(v) {
     var ds = F.despliegues || [];
-    var cm = F.commits || { propios: [], transversales: [] };
-    var conceptos = '<details class="pux-ficha-det pux-ficha-conceptos"><summary>Versión, commit y despliegue: qué es cada uno</summary><dl class="pux-datos">' +
-      '<div><dt>Versión</dt><dd>Identifica una versión funcional del flujo (por ejemplo v0.1.0).</dd></div>' +
-      '<div><dt>Commit</dt><dd>Un cambio registrado en Git. Un commit no significa que esté publicado.</dd></div>' +
-      '<div><dt>Despliegue</dt><dd>Publicación efectiva de archivos en un entorno, con evidencia.</dd></div></dl></details>';
-    var hist = ds.length
-      ? '<div class="mp-table-wrap pux-table"><table class="mp-table mp-table--hover"><caption class="visually-hidden">Historial de despliegues de ' + esc(F.nombre) + '</caption><thead><tr><th scope="col">Fecha y hora</th><th scope="col">Entorno</th><th scope="col">Estado</th><th scope="col">Versión</th><th scope="col">Commit</th><th scope="col">Responsable</th><th scope="col" class="mp-table__actions"><span class="visually-hidden">Acciones</span></th></tr></thead><tbody>' + ds.map(filaDespliegue).join('') + '</tbody></table></div>'
-      : U.vacio('No hay despliegues verificados para este flujo',
-          'Un despliegue se registra solo cuando existe evidencia de que se publicó en un entorno. Los commits de abajo son cambios en Git; no implican publicación.');
-    var lista = function (arr, vacioTxt) { return arr.length ? '<ol class="pux-commits" role="list">' + arr.map(commitHtml).join('') + '</ol>' : '<p class="pux-muted">' + esc(vacioTxt) + '</p>'; };
-    return conceptos +
-      '<section class="pux-panel pux-ficha-card" aria-labelledby="fd-hist"><h2 class="mp-h6 pux-ficha__titulo" id="fd-hist">Historial de despliegues' + (ds.length ? ' <span class="pux-count">' + ds.length + '</span>' : '') + '</h2>' + hist + '</section>' +
-      '<section class="pux-panel pux-ficha-card" aria-labelledby="fd-prop"><h2 class="mp-h6 pux-ficha__titulo" id="fd-prop">Commits propios del flujo' + (cm.propios.length ? ' <span class="pux-count">' + cm.propios.length + '</span>' : '') + '</h2>' +
-        '<p class="pux-muted">Cambios en los archivos de este flujo. Muestran el desarrollo, no lo publicado.</p>' + lista(cm.propios, 'No se encontraron commits que toquen los archivos de este flujo.') + '</section>' +
-      '<section class="pux-panel pux-ficha-card" aria-labelledby="fd-trans"><h2 class="mp-h6 pux-ficha__titulo" id="fd-trans">Cambios transversales que usa este flujo' + (cm.transversales.length ? ' <span class="pux-count">' + cm.transversales.length + '</span>' : '') + '</h2>' +
-        '<p class="pux-muted">Cambios en recursos compartidos (<code>shared/</code>) que las pantallas de este flujo referencian. No son cambios propios del flujo.</p>' +
-        lista(cm.transversales, 'Ningún commit reciente cambió recursos compartidos que este flujo use.') + '</section>';
+    for (var i = 0; i < ds.length; i++) if (ds[i].version === v.version) return { d: ds[i], i: i };
+    return null;
+  }
+  function lineaDespliegue(v) {
+    var x = despliegueDe(v); if (!x) return '';
+    return '<p class="pux-vact__desp">' + badgeDespliegue(x.d.estado) + ' <span>en ' + esc(x.d.entorno) + ' · ' + esc(U.fecha(x.d.fecha)) + '</span> ' +
+      '<button class="mp-btn mp-btn--terciario" type="button" data-despliegue="' + x.i + '">Ver despliegue</button></p>';
+  }
+  function tarjetaActual() {
+    var vs = F.versiones || [];
+    var v = vs.filter(function (x) { return x.vigente; })[0];
+    var numero = v ? v.version : U.sinV(F.version);
+    var ds = v && v.ds ? (v.ds.tag || ('commit ' + v.ds.commit)) : null;
+    var meta = v
+      ? [ 'Publicada el ' + esc(U.fecha(v.publicadaEl)), ds ? 'Sistema de diseño ' + esc(ds) : '', v.commit ? 'Commit ' + hashHtml(v.commit, v.commitEnlace && v.commitEnlace.url) : '' ].filter(Boolean).join(' · ')
+      : 'Aún no se ha publicado una copia de esta versión.';
+    var abrir = v && v.url ? v.url : (F.publicado ? F.url : null);
+    var boton = abrir ? '<a class="mp-btn mp-btn--primario mp-btn--icon-right" href="' + esc(abrir) + '" target="_blank" rel="noopener">Abrir v' + esc(numero) + '<span class="visually-hidden"> (se abre en una pestaña nueva)</span> <i class="icon icon-arrow-square-out icon-20" aria-hidden="true"></i></a>' : '';
+    var pendientes = v && v.cambiosSinVersion > 0
+      ? '<p class="pux-vact__aviso"><i class="icon icon-info icon-20" aria-hidden="true"></i> Hay ' + plural(v.cambiosSinVersion, 'cambio posterior', 'cambios posteriores') + ' que todavía no forman parte de una versión.</p>' : '';
+    return '<section class="pux-panel pux-ficha-card pux-vact" aria-labelledby="fv-act">' +
+      '<div class="pux-vact__cab"><div><h2 class="mp-h6 pux-ficha__titulo" id="fv-act">Versión actual</h2>' +
+        '<p class="pux-vact__num">v' + esc(numero) + '</p></div>' + boton + '</div>' +
+      (v && v.notas ? '<p class="pux-vact__notas">' + esc(v.notas) + '</p>' : '') +
+      '<p class="pux-muted pux-vact__meta">' + meta + '</p>' + (v ? lineaDespliegue(v) : '') + pendientes + '</section>';
+  }
+  function historial() {
+    var vs = F.versiones || [];
+    var porCommit = {}; vs.forEach(function (v) { if (v.commit) porCommit[String(v.commit).slice(0, 7)] = v; });
+    var items = ((F.commits || {}).propios || []).map(function (c) { return { fecha: c.fecha, c: c, v: porCommit[c.corto] || null }; });
+    /* Versiones cuyo commit no está en la lista de commits del flujo: se muestran igual. */
+    vs.forEach(function (v) { if (!items.some(function (it) { return it.v === v; })) items.push({ fecha: v.publicadaEl, c: null, v: v }); });
+    items.sort(function (a, b) { return String(b.fecha).localeCompare(String(a.fecha)); });
+    if (!items.length) return '<p class="pux-muted">Todavía no hay cambios registrados para este flujo.</p>';
+    return '<ol class="pux-hist" role="list">' + items.map(function (it) {
+      var c = it.c; var v = it.v;
+      var marca = v ? '<span class="pux-tags">' + U.tag('v' + v.version + (v.vigente ? ' · actual' : ''), v.vigente ? 'success' : 'info') + '</span>' : '';
+      var titulo = c ? esc(mensajeLimpio(c.mensaje)) : 'Se publicó la versión ' + esc(v.version);
+      var meta = c
+        ? hashHtml(c.corto, c.url) + ' · ' + esc(c.autor || 'Autor no registrado') + ' · <time datetime="' + esc(c.fecha) + '">' + esc(U.fecha(c.fecha)) + '</time>' + (c.subido === false ? ' · ' + U.tag('Solo local', 'neutral') : '')
+        : 'Publicada el ' + esc(U.fecha(v.publicadaEl));
+      var abrir = v && !v.vigente && v.url ? '<a class="mp-btn mp-btn--terciario" href="' + esc(v.url) + '" target="_blank" rel="noopener">Abrir v' + esc(v.version) + '<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>' : '';
+      return '<li class="pux-hist__item' + (v ? ' is-version' : '') + '"><span class="pux-hist__dot" aria-hidden="true"></span><div class="pux-hist__cuerpo">' +
+        '<p class="pux-hist__t">' + titulo + ' ' + marca + '</p><p class="pux-hist__meta">' + meta + '</p></div>' + abrir + '</li>';
+    }).join('') + '</ol>';
+  }
+  function panelVersiones() {
+    var h = historial(); var n = (h.match(/class="pux-hist__item/g) || []).length;
+    return tarjetaActual() +
+      '<section class="pux-panel pux-ficha-card" aria-labelledby="fv-hist"><h2 class="mp-h6 pux-ficha__titulo" id="fv-hist">Historial' + (n ? ' <span class="pux-count">' + n + '</span>' : '') + '</h2>' +
+        '<p class="pux-muted">Cambios del flujo, del más reciente al más antiguo. Las versiones publicadas aparecen marcadas.</p>' + h + '</section>';
   }
   function detalleDespliegue(d, disparador) {
     var ci = d.commitInfo; var f = function (k, v) { return '<div class="pux-det__fila"><dt>' + esc(k) + '</dt><dd>' + v + '</dd></div>'; };
@@ -346,20 +309,23 @@
       '<div class="mp-input-wrapper">' + control + '</div><span class="mp-input-helper" id="vh-' + id + '-ayuda">' + (ayuda || '') + '</span></div>';
   }
   function formVincular(pre) {
-    pre = pre || {};
+    pre = pre || {}; var fija = pre.pantalla ? pantallaPorId(pre.pantalla) : null;
     var opciones = '<option value="">Elige una pantalla registrada…</option>' + (F.pantallas || []).map(function (p) {
       return '<option value="' + esc(p.id) + '"' + (pre.pantalla === p.id ? ' selected' : '') + '>' + esc(p.nombre) + ' — ' + esc(p.ruta) + '</option>'; }).join('');
     return '<form class="pux-form" data-form-vincular novalidate>' +
       '<div class="mp-alert mp-alert--error" role="alert" data-form-error hidden><i class="icon icon-warning-circle icon-32 mp-alert__icon" aria-hidden="true"></i><div class="mp-alert__content"><p class="mp-alert__title">No se pudo vincular</p><p class="mp-alert__body" data-form-error-txt></p></div></div>' +
-      campo('flujo', 'Flujo', '<input class="mp-input-field" id="vh-flujo" type="text" value="' + esc(F.nombre) + '" readonly aria-readonly="true">', 'Las historias solo se vinculan a pantallas de este flujo.', true) +
-      '<fieldset class="pux-form__grupo"><legend class="mp-input-label">Pantalla</legend>' +
+      (fija
+        ? '<dl class="pux-det"><div class="pux-det__fila"><dt>Pantalla</dt><dd>' + esc(fija.nombre) + '<span class="pux-datos__sub"><code>' + esc(fija.ruta) + '</code></span></dd></div></dl>' +
+          '<input type="hidden" id="vh-pantalla" value="' + esc(fija.id) + '"><input type="hidden" id="vh-url" value=""><div hidden data-registrar></div><div hidden id="vh-estado"></div>'
+        : '<fieldset class="pux-form__grupo"><legend class="mp-input-label">Pantalla</legend>' +
         campo('pantalla', 'Pantalla registrada', '<select class="mp-input-field mp-select" id="vh-pantalla" aria-describedby="vh-pantalla-ayuda">' + opciones + '</select>', (F.pantallas || []).length ? '' : 'Aún no hay pantallas registradas: pega una URL para registrar la primera.', true) +
         campo('url', 'O pega la URL de la pantalla', '<input class="mp-input-field" id="vh-url" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="http://localhost:4173/p/zt/…/pantalla.html" aria-describedby="vh-url-ayuda">', 'Se valida que pertenezca a este flujo.', false) +
         '<div class="pux-form__estado" id="vh-estado" role="status" aria-live="polite"></div>' +
         '<div class="pux-form__registrar" data-registrar hidden>' +
           campo('pnombre', 'Nombre de la pantalla', '<input class="mp-input-field" id="vh-pnombre" type="text" maxlength="120" aria-describedby="vh-pnombre-ayuda">', 'Pertenece a este flujo y todavía no está registrada.', true) +
           '<label class="pux-form__check"><input type="checkbox" id="vh-confirmar"> Confirmo que quiero registrar esta pantalla en el flujo</label></div>' +
-      '</fieldset>' +
+      '</fieldset>') +
+      campo('inicio', 'Punto de inicio', '<input class="mp-input-field" id="vh-inicio" type="text" autocomplete="off" spellcheck="false" maxlength="300" placeholder="?estado=error o #paso-2" aria-describedby="vh-inicio-ayuda">', 'Dónde empieza esta historia dentro de la pantalla. Si pegas la URL completa, se toma de ahí.', false) +
       campo('codigo', 'Identificador HU', '<input class="mp-input-field" id="vh-codigo" type="text" autocomplete="off" placeholder="HU-297" aria-describedby="vh-codigo-ayuda">', 'Ejemplo: HU-297. Si ya existe en este flujo se reutiliza.', true) +
       campo('titulo', 'Nombre de la historia', '<input class="mp-input-field" id="vh-titulo" type="text" maxlength="200" aria-describedby="vh-titulo-ayuda">', '', true) +
       campo('azure', 'URL de Azure DevOps', '<input class="mp-input-field" id="vh-azure" type="url" autocomplete="off" placeholder="https://dev.azure.com/…/_workitems/edit/000000" aria-describedby="vh-azure-ayuda">', 'Es el enlace del work item, no de la pantalla.', false) +
@@ -384,7 +350,7 @@
     $all('.mp-input-helper.error', form).forEach(function (a) { a.classList.remove('error'); a.removeAttribute('role'); a.innerHTML = a.getAttribute('data-original') || ''; });
     var e = $('[data-form-error]', form); if (e) e.hidden = true;
   }
-  var MAPA_CAMPO = { hu_invalida: 'codigo', hu_conflicto: 'codigo', titulo_invalido: 'titulo', azure_invalida: 'azure', descripcion_larga: 'descripcion', nota_larga: 'nota', nombre_invalido: 'pnombre',
+  var MAPA_CAMPO = { hu_invalida: 'codigo', hu_conflicto: 'codigo', titulo_invalido: 'titulo', azure_invalida: 'azure', descripcion_larga: 'descripcion', nota_larga: 'nota', inicio_invalido: 'inicio', nombre_invalido: 'pnombre',
     otro_flujo: 'url', url_invalida: 'url', url_vacia: 'url', protocolo_no_permitido: 'url', origen_no_permitido: 'url', ruta_ambigua: 'url', ruta_no_prototipo: 'url', no_es_pantalla: 'url', sin_flujo: 'url', pantalla_inexistente: 'url', pantalla_duplicada: 'url', relacion_duplicada: 'pantalla' };
   function mostrarError(form, err) {
     limpiarErrores(form);
@@ -392,7 +358,9 @@
     if (err.codigo === 'pantalla_no_registrada') { var r = $('[data-registrar]', form); r.hidden = false; $('#vh-pnombre', form).focus(); }
     var enCampo = campoId && !(campoId === 'url' && !$('#vh-url', form).value.trim()) ? marcarError(form, campoId, err.mensaje) : false;
     var caja = $('[data-form-error]', form); $('[data-form-error-txt]', form).textContent = err.mensaje; caja.hidden = false;
-    if (enCampo) { var inp = $('#vh-' + (campoId === 'pantalla' ? 'pantalla' : campoId), form); if (inp) inp.focus(); } else caja.scrollIntoView({ block: 'nearest' });
+    /* El resumen siempre queda a la vista (el formulario suele estar desplazado al enviar). */
+    caja.scrollIntoView({ block: 'start' });
+    if (enCampo) { var inp = $('#vh-' + campoId, form); if (inp) inp.focus({ preventScroll: true }); }
   }
   function llamar(accion, cuerpo) {
     return fetch(RAIZ + encodeURIComponent(F.id) + '/' + accion, {
@@ -411,6 +379,7 @@
     $('#vh-pantalla', form).value = '';
     estado.textContent = 'Comprobando la URL…';
     return llamar('resolver', { url: url }).then(function (r) {
+      var ini = $('#vh-inicio', form); if (ini && r.inicio && !ini.value.trim()) ini.value = r.inicio;
       if (r.registrada) estado.innerHTML = '<span class="pux-ok"><i class="icon icon-check-circle icon-20" aria-hidden="true"></i> Pantalla identificada: «' + esc(r.registrada.nombre) + '»</span> <code>' + esc(r.ruta) + '</code>';
       else { estado.innerHTML = '<i class="icon icon-info icon-20" aria-hidden="true"></i> La pantalla <code>' + esc(r.ruta) + '</code> es de este flujo, pero todavía no está registrada.'; reg.hidden = false; }
     }).catch(function (e) { estado.textContent = ''; mostrarError(form, e); });
@@ -421,8 +390,12 @@
     if (!url && !sel) { mostrarError(form, { codigo: 'pantalla_vacia', mensaje: 'Elige una pantalla registrada o pega su URL.' }); marcarError(form, 'pantalla', 'Elige una pantalla registrada o pega su URL.'); $('#vh-pantalla', form).focus(); return; }
     var cuerpo = {
       pantalla: url ? { url: url } : { id: sel },
-      hu: { codigo: $('#vh-codigo', form).value, titulo: $('#vh-titulo', form).value, url: $('#vh-azure', form).value, descripcion: $('#vh-descripcion', form).value },
-      nota: $('#vh-nota', form).value
+      /* Si la HU ya existe en el flujo solo se envía el código: se reutiliza tal cual. */
+      hu: huPorCodigo(normalizaCodigo($('#vh-codigo', form).value))
+        ? { codigo: $('#vh-codigo', form).value }
+        : { codigo: $('#vh-codigo', form).value, titulo: $('#vh-titulo', form).value, url: $('#vh-azure', form).value, descripcion: $('#vh-descripcion', form).value },
+      nota: $('#vh-nota', form).value,
+      inicio: $('#vh-inicio', form).value
     };
     var reg = $('[data-registrar]', form);
     if (!reg.hidden) cuerpo.registrarPantalla = { nombre: $('#vh-pnombre', form).value, confirmar: $('#vh-confirmar', form).checked };
@@ -430,7 +403,7 @@
     llamar('vincular', cuerpo).then(function (r) {
       aplicarProyeccion(r.proyeccion); U.cerrarDrawer();
       anunciar(r.relacion.hu + ' vinculada a la pantalla.' + (r.pantallaRegistrada ? ' La pantalla se registró.' : ''));
-      var b = $('[data-abrir-vincular]'); if (b) b.focus();
+      enfocarPanel();
     }).catch(function (e) {
       if (e.codigo === 'pantalla_no_registrada') { reg.hidden = false; $('#vh-estado', form).innerHTML = '<i class="icon icon-info icon-20" aria-hidden="true"></i> La pantalla <code>' + esc((e.propuesta || {}).ruta || '') + '</code> es de este flujo, pero no está registrada. Nómbrala y confirma para registrarla.'; }
       mostrarError(form, e);
@@ -438,15 +411,10 @@
   }
   function prellenarHu(form) {
     var codigo = normalizaCodigo($('#vh-codigo', form).value); var h = codigo && huPorCodigo(codigo); var ay = $('[data-campo="codigo"] .mp-input-helper', form);
-    var campos = ['titulo', 'azure', 'descripcion'].map(function (c) { return $('#vh-' + c, form); });
-    if (h) {
-      campos[0].value = h.titulo || ''; campos[1].value = h.url || ''; campos[2].value = h.descripcion || '';
-      campos.forEach(function (c) { c.readOnly = true; });
-      ay.innerHTML = '<i class="icon icon-info icon-16" aria-hidden="true"></i> ' + esc(codigo) + ' ya existe en este flujo: se reutiliza, no se duplica.';
-    } else {
-      campos.forEach(function (c) { c.readOnly = false; });
-      ay.textContent = ay.getAttribute('data-original') || '';
-    }
+    /* HU existente: se ocultan sus datos (no se editan aquí) y se muestra cuál es. */
+    ['titulo', 'azure', 'descripcion'].forEach(function (c) { var w = $('[data-campo="' + c + '"]', form); if (w) w.hidden = !!h; });
+    if (h) ay.innerHTML = '<i class="icon icon-check-circle icon-16" aria-hidden="true"></i> Ya existe en este flujo: «' + esc(h.titulo || codigo) + '». Se reutiliza, no se duplica.';
+    else ay.textContent = ay.getAttribute('data-original') || '';
   }
 
   /* ---------- Drawers: registrar pantalla y editar relación ---------- */
@@ -467,8 +435,9 @@
       '<form class="pux-form" data-form-relacion data-hu="' + esc(codigo) + '" data-pantalla="' + esc(pid) + '" novalidate>' +
       '<div class="mp-alert mp-alert--error" role="alert" data-form-error hidden><i class="icon icon-warning-circle icon-32 mp-alert__icon" aria-hidden="true"></i><div class="mp-alert__content"><p class="mp-alert__title">No se pudo guardar</p><p class="mp-alert__body" data-form-error-txt></p></div></div>' +
       '<dl class="pux-det"><div class="pux-det__fila"><dt>Historia</dt><dd>' + esc(codigo) + ' · ' + esc((h && h.titulo) || '') + '</dd></div><div class="pux-det__fila"><dt>Pantalla</dt><dd>' + esc(p.nombre) + '<span class="pux-datos__sub"><code>' + esc(p.ruta) + '</code></span></dd></div></dl>' +
+      campo('inicio', 'Punto de inicio', '<input class="mp-input-field" id="vh-inicio" type="text" autocomplete="off" spellcheck="false" maxlength="300" value="' + esc(r.inicio || '') + '" placeholder="?estado=error o #paso-2" aria-describedby="vh-inicio-ayuda">', 'Dónde empieza esta historia dentro de la pantalla. Déjalo vacío para abrirla desde el principio.', false) +
       campo('nota', 'Nota de la relación', '<input class="mp-input-field" id="vh-nota" type="text" maxlength="600" value="' + esc(r.nota || '') + '" aria-describedby="vh-nota-ayuda">', 'Qué parte de la historia cubre esta pantalla.', false) +
-      '<div class="pux-form__acciones"><button class="mp-btn mp-btn--primario" type="submit">Guardar nota</button>' +
+      '<div class="pux-form__acciones"><button class="mp-btn mp-btn--primario" type="submit">Guardar</button>' +
       '<button class="mp-btn mp-btn--secundario" type="button" data-desvincular>Desvincular</button><button class="mp-btn mp-btn--terciario" type="button" data-drawer-cerrar>Cancelar</button></div>' +
       '<p class="pux-muted pux-note">Desvincular quita la relación; la historia y la pantalla se conservan.</p></form>' }, disparador);
     guardarAyudas($('[data-form-relacion]'));
@@ -478,20 +447,12 @@
   function pintarPanel(id) {
     var el = $('#fp-' + id); if (!el) return;
     var abiertos = $all('details[open]', el).map(function (d) { return $('summary', d).textContent; });
-    el.innerHTML = { resumen: panelResumen, pantallas: panelPantallas, versiones: panelVersiones, despliegues: panelDespliegues }[id]();
+    el.innerHTML = { resumen: panelResumen, pantallas: panelPantallas, versiones: panelVersiones }[id]();
     $all('details', el).forEach(function (d) { if (abiertos.indexOf($('summary', d).textContent) >= 0) d.open = true; });
     if (id === 'resumen') { var prev = $('[data-preview]', el); if (prev) U.initPreview(prev); }
-    if (id === 'versiones') comparacion();
-  }
-  function comparacion() {
-    var a = $('[data-cmp="a"]'); var b = $('[data-cmp="b"]'); var res = $('[data-cmp-res]'); if (!a || !b) return;
-    function pintar() {
-      var va = F.versiones[Number(a.value)]; var vb = F.versiones[Number(b.value)];
-      res.innerHTML = va === vb ? '<p class="pux-muted">Elige dos versiones distintas.</p>' : resultadoComparacion(va, vb);
-    }
-    a.onchange = pintar; b.onchange = pintar; pintar();
   }
   function mostrarTab(id, enfocar, sinUrl) {
+    if (id === 'despliegues') id = 'versiones'; /* pestaña fusionada: los enlaces antiguos siguen funcionando */
     if (!TABS.some(function (t) { return t.id === id; })) id = 'resumen';
     $all('.pux-ficha-tabs .pux-tab').forEach(function (b) {
       var on = b.getAttribute('data-ftab') === id;
@@ -532,12 +493,12 @@
       else if (form.matches('[data-form-registrar]')) {
         e.preventDefault(); limpiarErrores(form);
         llamar('pantalla', { url: form.getAttribute('data-ruta'), nombre: $('#vh-pnombre', form).value, descripcion: $('#vh-pdesc', form).value })
-          .then(function (r) { aplicarProyeccion(r.proyeccion); U.cerrarDrawer(); anunciar('Pantalla «' + r.pantalla.nombre + '» registrada.'); var b = $('[data-abrir-vincular]'); if (b) b.focus(); })
+          .then(function (r) { aplicarProyeccion(r.proyeccion); U.cerrarDrawer(); anunciar('Pantalla «' + r.pantalla.nombre + '» registrada.'); enfocarPanel(); })
           .catch(function (er) { mostrarError(form, er); });
       } else if (form.matches('[data-form-relacion]')) {
         e.preventDefault(); limpiarErrores(form);
-        llamar('relacion-editar', { hu: form.getAttribute('data-hu'), pantalla: form.getAttribute('data-pantalla'), nota: $('#vh-nota', form).value })
-          .then(function (r) { aplicarProyeccion(r.proyeccion); U.cerrarDrawer(); anunciar('Relación actualizada.'); var b = $('[data-abrir-vincular]'); if (b) b.focus(); })
+        llamar('relacion-editar', { hu: form.getAttribute('data-hu'), pantalla: form.getAttribute('data-pantalla'), nota: $('#vh-nota', form).value, inicio: $('#vh-inicio', form).value })
+          .then(function (r) { aplicarProyeccion(r.proyeccion); U.cerrarDrawer(); anunciar('Relación actualizada.'); enfocarPanel(); })
           .catch(function (er) { mostrarError(form, er); });
       }
     });
@@ -556,10 +517,11 @@
       var form = d.closest('[data-form-relacion]');
       if (d.getAttribute('data-confirmar') !== '1') { d.setAttribute('data-confirmar', '1'); d.textContent = 'Confirmar desvinculación'; return; }
       llamar('desvincular', { hu: form.getAttribute('data-hu'), pantalla: form.getAttribute('data-pantalla') })
-        .then(function (r) { aplicarProyeccion(r.proyeccion); U.cerrarDrawer(); anunciar('Historia desvinculada. La historia y la pantalla se conservan.'); var b = $('[data-abrir-vincular]'); if (b) b.focus(); })
+        .then(function (r) { aplicarProyeccion(r.proyeccion); U.cerrarDrawer(); anunciar('Historia desvinculada. La historia y la pantalla se conservan.'); enfocarPanel(); })
         .catch(function (er) { mostrarError(form, er); });
     });
   }
+  function enfocarPanel() { var h = $('#fp-pant'); if (h) h.focus(); }
   function guardarAyudas(form) { $all('.mp-input-helper', form).forEach(function (a) { a.setAttribute('data-original', a.textContent); }); }
 
   window.PortalFicha = {
@@ -572,7 +534,7 @@
         '</div></section>';
       eventos(cont);
       var inicial = (location.hash || '#resumen').slice(1);
-      ['resumen', 'pantallas', 'versiones', 'despliegues'].forEach(pintarPanel);
+      ['resumen', 'pantallas', 'versiones'].forEach(pintarPanel);
       mostrarTab(inicial, false, true);
       fetch(RAIZ + 'estado', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : { escritura: false }; }).catch(function () { return { escritura: false }; })
         .then(function (j) { api.escritura = !!j.escritura; pintarPanel('pantallas'); });

@@ -1,22 +1,22 @@
 {
-  "generado": "2026-11-17T21:30:51.984Z",
+  "generado": "2026-11-25T14:35:54.421Z",
   "repositorio": {
     "unico": true,
     "nombre": "compensarUX",
     "rama": "main",
     "remoto": "https://github.com/swoJuan/compensarUX.git",
-    "version": "v2.4.0",
-    "commits": 32,
-    "commitsSinSubir": 0,
-    "pendientes": 27,
+    "version": "v2.5.0",
+    "commits": 51,
+    "commitsSinSubir": 1,
+    "pendientes": 62,
     "carpetas": [
       {
         "id": "designSystem",
         "nombre": "Sistema de diseño",
         "rol": "Fuente de verdad visual: tokens, estilos y componentes de Compensar.",
         "carpeta": "Core-Design-System",
-        "commit": "63bd56e",
-        "fecha": "2026-11-13T17:50:15-05:00",
+        "commit": "21fa41a",
+        "fecha": "2026-11-25T09:16:25-05:00",
         "pendientes": 0
       },
       {
@@ -24,8 +24,8 @@
         "nombre": "Prototipos",
         "rol": "Flujos navegables de Drupal, ZT y APP. Consumen una copia controlada del sistema de diseño en shared/.",
         "carpeta": "Flujos/prototipos",
-        "commit": "50db88b",
-        "fecha": "2026-11-17T08:29:44-05:00",
+        "commit": "e01d4d1",
+        "fecha": "2026-11-25T09:35:13-05:00",
         "pendientes": 0
       },
       {
@@ -33,31 +33,31 @@
         "nombre": "Portal UX",
         "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
         "carpeta": "Flujos/portal",
-        "commit": "d33be4d",
-        "fecha": "2026-11-17T16:29:18-05:00",
+        "commit": "21fa41a",
+        "fecha": "2026-11-25T09:16:25-05:00",
         "pendientes": 0
       }
     ]
   },
   "sincronizacion": {
     "estado": "al-dia",
-    "dsCommit": "63bd56e",
+    "dsCommit": "21fa41a",
     "archivos": [
       {
         "ds": "css/core.css",
         "flujos": "shared/vendor/core.css",
         "estado": "al-dia",
         "versionUsada": null,
-        "refDs": "2b3b4bb",
-        "refFlujos": "2b3b4bb"
+        "refDs": "3294ad5",
+        "refFlujos": "3294ad5"
       },
       {
         "ds": "css/portal.css",
         "flujos": "shared/vendor/portal.css",
         "estado": "al-dia",
         "versionUsada": null,
-        "refDs": "db660ac",
-        "refFlujos": "db660ac"
+        "refDs": "c3e8cd9",
+        "refFlujos": "c3e8cd9"
       },
       {
         "ds": "icons/icons.css",
@@ -72,19 +72,23 @@
         "flujos": "shared/vendor/mp-tabs.js",
         "estado": "al-dia",
         "versionUsada": null,
-        "refDs": "e82a0b6",
-        "refFlujos": "e82a0b6"
+        "refDs": "2d81bba",
+        "refFlujos": "2d81bba"
       }
     ],
     "version": null,
     "versionPrototipos": "v2.4.0",
-    "verificado": "2026-11-17T21:30:51.984Z",
+    "verificado": "2026-11-25T14:35:54.421Z",
     "comando": "npm run ds:sincronizar"
   },
   "componentes": {
     "ds": [
       {
         "id": "bottom-sheet",
+        "ambito": "app"
+      },
+      {
+        "id": "carga-infinita",
         "ambito": "app"
       },
       {
@@ -207,8 +211,9 @@
     "usoDs": [
       {
         "bloque": "mp-btn",
-        "archivos": 40,
+        "archivos": 42,
         "flujos": [
+          "app/efecto-swap",
           "app/historia-clinica",
           "drupal/navegacion",
           "zt/agendamiento-de-citas",
@@ -229,8 +234,9 @@
       },
       {
         "bloque": "mp-alert",
-        "archivos": 16,
+        "archivos": 18,
         "flujos": [
+          "app/efecto-swap",
           "app/historia-clinica",
           "zt/agendamiento-de-citas",
           "zt/historia-clinica",
@@ -239,8 +245,9 @@
       },
       {
         "bloque": "mp-badge",
-        "archivos": 15,
+        "archivos": 16,
         "flujos": [
+          "app/efecto-swap",
           "app/historia-clinica",
           "zt/agendamiento-de-citas",
           "zt/historia-clinica"
@@ -380,7 +387,7 @@
       },
       {
         "bloque": "tipografía (mp-h*, mp-body-*)",
-        "archivos": 6,
+        "archivos": 5,
         "flujos": [
           "drupal/navegacion",
           "zt/ventas-y-afiliacion"
@@ -401,6 +408,14 @@
         ]
       },
       {
+        "bloque": "mp-loading",
+        "archivos": 2,
+        "flujos": [
+          "app/efecto-swap",
+          "app/historia-clinica"
+        ]
+      },
+      {
         "bloque": "mp-tabs",
         "archivos": 2,
         "flujos": [
@@ -412,13 +427,6 @@
         "archivos": 2,
         "flujos": [
           "zt/historia-clinica"
-        ]
-      },
-      {
-        "bloque": "mp-loading",
-        "archivos": 1,
-        "flujos": [
-          "app/historia-clinica"
         ]
       },
       {

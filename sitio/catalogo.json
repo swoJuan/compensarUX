@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-17T21:30:51.984Z",
+  "generado": "2026-11-25T14:35:54.421Z",
   "fuentes": {
     "designSystem": {
       "id": "designSystem",
@@ -9,29 +9,78 @@
       "repositorioPropuesto": "compensar-ux-design-system",
       "remoto": "https://github.com/swoJuan/compensarUX.git",
       "ref": "HEAD",
-      "commit": "63bd56e",
-      "version": "v2.4.0",
+      "commit": "21fa41a",
+      "version": "v2.5.0",
       "cambiosDesdeVersion": 0,
-      "fecha": "2026-11-13T17:50:15-05:00",
+      "fecha": "2026-11-25T09:16:25-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": 0,
+      "commitsSinSubir": 1,
       "cambios": [
+        {
+          "commit": "21fa41a",
+          "fecha": "2026-11-25T09:16:25-05:00",
+          "mensaje": "feat(ds): paquete dist v2.5.0 y notas de versión (Tabs v2)",
+          "archivos": 6
+        },
+        {
+          "commit": "62e78d4",
+          "fecha": "2026-11-25T09:16:02-05:00",
+          "mensaje": "chore(ds): versión 2.5.0 con Tabs v2 aprobado por UX",
+          "archivos": 4
+        },
+        {
+          "commit": "f6a3152",
+          "fecha": "2026-11-25T09:05:14-05:00",
+          "mensaje": "feat(ds): Tabs v2 (mp-tab-xl, mp-tab-card) para Drupal y ZT",
+          "archivos": 11
+        },
+        {
+          "commit": "b4c8923",
+          "fecha": "2026-11-24T14:56:08-05:00",
+          "mensaje": "docs(app): quita sección de decisiones de carga infinita",
+          "archivos": 1
+        },
+        {
+          "commit": "861c664",
+          "fecha": "2026-11-24T14:48:48-05:00",
+          "mensaje": "docs(app): carga infinita estable (vacío y skeleton aprobados con Figma)",
+          "archivos": 1
+        },
+        {
+          "commit": "217701d",
+          "fecha": "2026-11-24T14:44:26-05:00",
+          "mensaje": "docs(app): carga infinita, espaciado del demo y decisiones aprobadas (fin, tanda, vacío, skeleton)",
+          "archivos": 3
+        },
+        {
+          "commit": "2b8a723",
+          "fecha": "2026-11-24T14:22:20-05:00",
+          "mensaje": "docs(app): agrega Carga infinita (efecto swap) al sistema de diseño APP",
+          "archivos": 7
+        },
         {
           "commit": "63bd56e",
           "fecha": "2026-11-13T17:50:15-05:00",
           "mensaje": "feat(ds): paquetes CSS/JS versionados y página Instalar en el portal",
           "archivos": 9
-        },
-        {
-          "commit": "d4cefd3",
-          "fecha": "2026-11-12T12:33:17-05:00",
-          "mensaje": "Commit inicial",
-          "archivos": 3602
         }
       ],
-      "versionPaquete": "v2.4.0",
+      "versionPaquete": "v2.5.0",
       "versiones": [
+        {
+          "tag": "v2.5.0",
+          "fecha": "2026-11-25T09:16:02-05:00",
+          "commit": "62e78d4",
+          "titulo": "Core Design System v2.5.0 — Tabs v2: Pill XL y Tarjeta con ícono (mp-tab-xl, mp-tab-card), color Violeta, Light/Dark/Alto contraste",
+          "cuerpo": "",
+          "publicada": true,
+          "cambios": [],
+          "totalCambios": 0,
+          "primera": false,
+          "enPrototipos": false,
+          "revisar": "Tabs v2 (aprobado por UX): Pill XL y Tarjeta con ícono en Naranja y Violeta, sin sombra en Active. Verificar contraste de texto de 4,5:1, foco de 3 px (4 px en Alto contraste), navegación por teclado y el desplegable por debajo de 768 px. El mp-tab base no cambia."
+        },
         {
           "tag": "v2.4.0",
           "fecha": "2026-11-11T21:29:32+00:00",
@@ -96,21 +145,21 @@
           "id": "core",
           "nombre": "Core del sistema de diseño",
           "descripcion": "CSS, iconos y JS tal como los usan los prototipos y el portal. Para Drupal, Angular o cualquier proyecto web.",
-          "archivo": "compensar-core-v2.4.0.zip",
+          "archivo": "compensar-core-v2.5.0.zip",
           "contenido": 15,
-          "bytes": 676799,
-          "version": "v2.4.0",
-          "url": "ds/descargas/compensar-core-v2.4.0.zip"
+          "bytes": 678096,
+          "version": "v2.5.0",
+          "url": "ds/descargas/compensar-core-v2.5.0.zip"
         },
         {
           "id": "maui",
           "nombre": "Recursos para .NET MAUI",
           "descripcion": "Colores y medidas como diccionarios de recursos XAML, generados de los tokens de esta misma versión.",
-          "archivo": "compensar-maui-v2.4.0.zip",
+          "archivo": "compensar-maui-v2.5.0.zip",
           "contenido": 3,
-          "bytes": 4828,
-          "version": "v2.4.0",
-          "url": "ds/descargas/compensar-maui-v2.4.0.zip"
+          "bytes": 4827,
+          "version": "v2.5.0",
+          "url": "ds/descargas/compensar-maui-v2.5.0.zip"
         }
       ]
     },
@@ -122,14 +171,50 @@
       "repositorioPropuesto": "compensar-ux-prototipos",
       "remoto": "https://github.com/swoJuan/compensarUX.git",
       "ref": "WORKTREE",
-      "commit": "50db88b",
+      "commit": "e01d4d1",
       "version": null,
       "cambiosDesdeVersion": 0,
-      "fecha": "2026-11-17T08:29:44-05:00",
+      "fecha": "2026-11-25T09:35:13-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": 0,
+      "commitsSinSubir": 1,
       "cambios": [
+        {
+          "commit": "e01d4d1",
+          "fecha": "2026-11-25T09:35:13-05:00",
+          "mensaje": "chore(prototipos): sincronizar shared/vendor con DS 21fa41a (v2.5.0, Tabs v2)",
+          "archivos": 3
+        },
+        {
+          "commit": "8d19294",
+          "fecha": "2026-11-24T16:01:23-05:00",
+          "mensaje": "feat(zt-ventas): paso 1 ajustado a Figma y layout del proceso a ancho completo",
+          "archivos": 5
+        },
+        {
+          "commit": "1cae8c1",
+          "fecha": "2026-11-24T14:59:43-05:00",
+          "mensaje": "DS · Sincronizar con sistema de diseño b4c8923",
+          "archivos": 1
+        },
+        {
+          "commit": "c857a5d",
+          "fecha": "2026-11-24T14:56:09-05:00",
+          "mensaje": "feat(app/efecto-swap): skeleton de primera carga y estado vacío",
+          "archivos": 3
+        },
+        {
+          "commit": "4bc3b2b",
+          "fecha": "2026-11-23T18:14:30-05:00",
+          "mensaje": "feat(app-efecto-swap): prototipo APP Mis solicitudes con carga por swipe (HU-303), aprobado UX",
+          "archivos": 4
+        },
+        {
+          "commit": "c5fbf7a",
+          "fecha": "2026-11-18T16:43:52-05:00",
+          "mensaje": "feat(zt-ventas): integrar Design System CDN v2.4.0",
+          "archivos": 13
+        },
         {
           "commit": "50db88b",
           "fecha": "2026-11-17T08:29:44-05:00",
@@ -141,24 +226,6 @@
           "fecha": "2026-11-13T17:50:15-05:00",
           "mensaje": "feat(ds): paquetes CSS/JS versionados y página Instalar en el portal",
           "archivos": 16
-        },
-        {
-          "commit": "f6cdff4",
-          "fecha": "2026-11-13T17:09:29-05:00",
-          "mensaje": "feat(zt): actualizar Action Card transversal según Figma",
-          "archivos": 4
-        },
-        {
-          "commit": "d983b20",
-          "fecha": "2026-11-13T10:18:37-05:00",
-          "mensaje": "Portal UX: estados, HU y Figma por flujo; Inicio ZT Fase 2 y menú Drupal",
-          "archivos": 18
-        },
-        {
-          "commit": "d4cefd3",
-          "fecha": "2026-11-12T12:33:17-05:00",
-          "mensaje": "Commit inicial",
-          "archivos": 179
         }
       ]
     }
@@ -173,6 +240,54 @@
         "plataforma": null,
         "nombre": "Sistema de diseño",
         "versiones": [
+          {
+            "version": "2.5.0",
+            "fecha": "2026-11-25T14:16:02.980Z",
+            "commit": "62e78d4",
+            "ruta": "cdn/compensar/v2.5.0",
+            "css": {
+              "nombre": "compensar.min.css",
+              "bytes": 626222,
+              "integrity": "sha384-jU3TktthzrIf7IosCaO6ylGCq+c0B19zdlJGTtQE6b0n4HMD9E2yHzbO90gQsid5"
+            },
+            "js": {
+              "nombre": "compensar.min.js",
+              "bytes": 24433,
+              "integrity": "sha384-ZyrH79ITFOgpSjwFpm599DUvkQ9bWK8o3ccKzI2ViGfv/DK4koxFllTZcOLRjR4F"
+            },
+            "archivos": [
+              {
+                "nombre": "compensar.min.css",
+                "bytes": 626222,
+                "integrity": "sha384-jU3TktthzrIf7IosCaO6ylGCq+c0B19zdlJGTtQE6b0n4HMD9E2yHzbO90gQsid5"
+              },
+              {
+                "nombre": "compensar.min.js",
+                "bytes": 24433,
+                "integrity": "sha384-ZyrH79ITFOgpSjwFpm599DUvkQ9bWK8o3ccKzI2ViGfv/DK4koxFllTZcOLRjR4F"
+              },
+              {
+                "nombre": "fonts/compensar-icons.woff2",
+                "bytes": 113980,
+                "integrity": "sha384-1VnsDBZI/cgOHeHpr+tBMdgvO3oIPy9depx0dqDKJQKxl+Ul0AcThEaAve9GMN4B"
+              },
+              {
+                "nombre": "fonts/compensar-icons.woff",
+                "bytes": 261056,
+                "integrity": "sha384-bZT2yTe08OwAzcg3inAUx8QRPgXzCV7ZKDymjW2JHIdckvG4FFM3qJRgnsA1I7Dy"
+              },
+              {
+                "nombre": "fonts/compensar-icons.ttf",
+                "bytes": 432028,
+                "integrity": "sha384-jA1cA1s21YsrqTG9C6q+VZ9aBjRYn5CLjMJMUE5lOv07r38a37I7hEHHnfWr3y7M"
+              }
+            ],
+            "zip": {
+              "archivo": "compensar-v2.5.0.zip",
+              "bytes": 619791,
+              "url": "descargas/cdn/compensar-v2.5.0.zip"
+            }
+          },
           {
             "version": "2.4.0",
             "fecha": "2026-11-13T22:44:56.474Z",
@@ -351,6 +466,15 @@
         "descripcion": "Sistema de diseño + paquete Drupal (navegación y estilos del portal web).",
         "versiones": [
           {
+            "version": "2.5.0",
+            "plataformaVersion": "1.0.0",
+            "zip": {
+              "archivo": "compensar-para-drupal-v2.5.0.zip",
+              "bytes": 628765,
+              "url": "descargas/cdn/compensar-para-drupal-v2.5.0.zip"
+            }
+          },
+          {
             "version": "2.4.0",
             "plataformaVersion": "1.0.0",
             "zip": {
@@ -367,6 +491,15 @@
         "descripcion": "Sistema de diseño + paquete ZT (modal, stepper, dropdown, alert y demás componentes de la oficina virtual).",
         "versiones": [
           {
+            "version": "2.5.0",
+            "plataformaVersion": "1.0.0",
+            "zip": {
+              "archivo": "compensar-para-zt-v2.5.0.zip",
+              "bytes": 645519,
+              "url": "descargas/cdn/compensar-para-zt-v2.5.0.zip"
+            }
+          },
+          {
             "version": "2.4.0",
             "plataformaVersion": "1.0.0",
             "zip": {
@@ -380,26 +513,27 @@
     ]
   },
   "ia": {
-    "version": "2.4.0",
-    "generado": "2026-11-13T22:50:15.000Z",
-    "commit": "63bd56e",
-    "componentes": 29,
+    "version": "2.5.0",
+    "generado": "2026-11-25T14:16:25.000Z",
+    "commit": "21fa41a",
+    "componentes": 30,
     "tokens": 238,
     "completo": {
-      "archivo": "compensar-design-system-ia-v2.4.0.md",
-      "bytes": 230536,
-      "url": "descargas/ia/compensar-design-system-ia-v2.4.0.md"
+      "archivo": "compensar-design-system-ia-v2.5.0.md",
+      "bytes": 239483,
+      "url": "descargas/ia/compensar-design-system-ia-v2.5.0.md"
     },
     "paquete": {
-      "archivo": "compensar-design-system-ia-v2.4.0.zip",
-      "bytes": 106935,
-      "url": "descargas/ia/compensar-design-system-ia-v2.4.0.zip"
+      "archivo": "compensar-design-system-ia-v2.5.0.zip",
+      "bytes": 110988,
+      "url": "descargas/ia/compensar-design-system-ia-v2.5.0.zip"
     },
     "arbol": [
       "INSTRUCCIONES-IA.md",
       "README.md",
       "accessibility/accessibility.md",
       "components/app/bottom-sheet.md",
+      "components/app/carga-infinita.md",
       "components/app/dropdown.md",
       "components/app/header.md",
       "components/app/tabs.md",
@@ -461,9 +595,9 @@
     "avisos": [
       "tokens.json declara --spacing-Npx (15) pero core.css publica --space-N: se documenta el CSS.",
       "Sin sección de accesibilidad: Avatar / User chip, Paginación, Cómo conectarlo, Sistema de iconos, Header App, Tabs App.",
-      "23 de 29 componentes tienen secciones pendientes de documentación (ver components/index.md)."
+      "24 de 30 componentes tienen secciones pendientes de documentación (ver components/index.md)."
     ],
-    "instrucciones": "Eres un agente que construye interfaces para Compensar. Usa el sistema de diseño de Compensar v2.4.0 y respeta estas reglas:\n\n1. Antes de escribir código, consulta la documentación del sistema de diseño v2.4.0 (archivo README.md y manifest.json del paquete). Si el usuario indica otra versión, pídele el paquete de esa versión.\n2. Reutiliza los componentes existentes (components/index.md). Antes de crear uno nuevo, verifica que no haya uno equivalente; si no existe, propónlo en lugar de inventarlo.\n3. Usa solo los tokens oficiales (tokens/). No escribas colores, espaciados, radios ni sombras con valores sueltos.\n4. Mantén la accesibilidad: WCAG 2.2 AA, foco visible, navegación por teclado, contraste en modo claro, oscuro y alto contraste, zoom al 200 %.\n5. Respeta los patrones de navegación y de formularios (patterns/).\n6. Considera la plataforma de destino (platforms/): Drupal, Zona Transaccional (ZT) y App no cargan los recursos de la misma manera. No las mezcles.\n7. No sobrescribas estilos globales ni modifiques el CSS del sistema de diseño; añade CSS propio del flujo al final.\n8. Si algo no está documentado, dilo explícitamente («no está documentado en el sistema de diseño») en lugar de suponerlo.\n9. Usa datos ficticios en ejemplos; nunca datos personales reales."
+    "instrucciones": "Eres un agente que construye interfaces para Compensar. Usa el sistema de diseño de Compensar v2.5.0 y respeta estas reglas:\n\n1. Antes de escribir código, consulta la documentación del sistema de diseño v2.5.0 (archivo README.md y manifest.json del paquete). Si el usuario indica otra versión, pídele el paquete de esa versión.\n2. Reutiliza los componentes existentes (components/index.md). Antes de crear uno nuevo, verifica que no haya uno equivalente; si no existe, propónlo en lugar de inventarlo.\n3. Usa solo los tokens oficiales (tokens/). No escribas colores, espaciados, radios ni sombras con valores sueltos.\n4. Mantén la accesibilidad: WCAG 2.2 AA, foco visible, navegación por teclado, contraste en modo claro, oscuro y alto contraste, zoom al 200 %.\n5. Respeta los patrones de navegación y de formularios (patterns/).\n6. Considera la plataforma de destino (platforms/): Drupal, Zona Transaccional (ZT) y App no cargan los recursos de la misma manera. No las mezcles.\n7. No sobrescribas estilos globales ni modifiques el CSS del sistema de diseño; añade CSS propio del flujo al final.\n8. Si algo no está documentado, dilo explícitamente («no está documentado en el sistema de diseño») en lugar de suponerlo.\n9. Usa datos ficticios en ejemplos; nunca datos personales reales."
   },
   "plataformas": {
     "drupal": {
@@ -492,7 +626,7 @@
       "descripcion": "Inicio de la Oficina virtual: bienvenida, accesos a los servicios y la red de atención. Es la entrada a todos los flujos de ZT.",
       "plataforma": "zt",
       "version": "0.1.0",
-      "estado": "aprobado",
+      "estado": "entregado",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12788-94181",
       "hu": [
         {
@@ -503,11 +637,18 @@
           "pantallas": []
         }
       ],
+      "categorias": [],
       "publicado": true,
+      "entrega": {
+        "estado": "ninguna",
+        "fecha": null,
+        "por": null,
+        "nota": null
+      },
       "url": "p/zt/inicio/index.html",
       "descarga": {
         "archivo": "zt-oficina-virtual-v0.1.0.zip",
-        "bytes": 5798176,
+        "bytes": 5800737,
         "url": "descargas/flujos/zt-oficina-virtual-v0.1.0.zip"
       },
       "consumo": {
@@ -558,6 +699,20 @@
         ],
         "transversales": [
           {
+            "hash": "e01d4d18e00e3c5efe5eeb13ec715b0319dab265",
+            "corto": "e01d4d1",
+            "autor": "swoJuan",
+            "fecha": "2026-11-25T09:35:13-05:00",
+            "mensaje": "chore(prototipos): sincronizar shared/vendor con DS 21fa41a (v2.5.0, Tabs v2)",
+            "alcance": "transversal",
+            "archivos": [
+              "shared/vendor/core.css"
+            ],
+            "totalArchivos": 1,
+            "subido": false,
+            "url": null
+          },
+          {
             "hash": "63bd56e4bd8be6325e0040291a2972fd70f3ef10",
             "corto": "63bd56e",
             "autor": "swoJuan",
@@ -602,7 +757,7 @@
       "descripcion": "Agendamiento de citas médicas: búsqueda, selección de agenda, confirmación y variantes de prueba. Incluye el esqueleto de laboratorio clínico.",
       "plataforma": "zt",
       "version": "0.1.0",
-      "estado": "en-revision",
+      "estado": "validacion-ux",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=12842-74756",
       "hu": [
         {
@@ -627,11 +782,18 @@
           "pantallas": []
         }
       ],
+      "categorias": [],
       "publicado": true,
+      "entrega": {
+        "estado": "ninguna",
+        "fecha": null,
+        "por": null,
+        "nota": null
+      },
       "url": "p/zt/agendamiento-de-citas/index.html",
       "descarga": {
         "archivo": "zt-agendamiento-de-citas-v0.1.0.zip",
-        "bytes": 6820736,
+        "bytes": 6823297,
         "url": "descargas/flujos/zt-agendamiento-de-citas-v0.1.0.zip"
       },
       "consumo": {
@@ -870,6 +1032,20 @@
         ],
         "transversales": [
           {
+            "hash": "e01d4d18e00e3c5efe5eeb13ec715b0319dab265",
+            "corto": "e01d4d1",
+            "autor": "swoJuan",
+            "fecha": "2026-11-25T09:35:13-05:00",
+            "mensaje": "chore(prototipos): sincronizar shared/vendor con DS 21fa41a (v2.5.0, Tabs v2)",
+            "alcance": "transversal",
+            "archivos": [
+              "shared/vendor/core.css"
+            ],
+            "totalArchivos": 1,
+            "subido": false,
+            "url": null
+          },
+          {
             "hash": "63bd56e4bd8be6325e0040291a2972fd70f3ef10",
             "corto": "63bd56e",
             "autor": "swoJuan",
@@ -928,7 +1104,7 @@
       "descripcion": "Solicitud de copia de historia clínica, seguimiento en mis solicitudes y confirmación de radicado.",
       "plataforma": "zt",
       "version": "0.1.0",
-      "estado": "en-revision",
+      "estado": "validacion-ux",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=15673-157601",
       "hu": [
         {
@@ -939,11 +1115,18 @@
           "pantallas": []
         }
       ],
+      "categorias": [],
       "publicado": true,
+      "entrega": {
+        "estado": "ninguna",
+        "fecha": null,
+        "por": null,
+        "nota": null
+      },
       "url": "p/zt/historia-clinica/index.html",
       "descarga": {
         "archivo": "zt-historia-clinica-v0.1.0.zip",
-        "bytes": 5816043,
+        "bytes": 5818603,
         "url": "descargas/flujos/zt-historia-clinica-v0.1.0.zip"
       },
       "consumo": {
@@ -1020,6 +1203,21 @@
         ],
         "transversales": [
           {
+            "hash": "e01d4d18e00e3c5efe5eeb13ec715b0319dab265",
+            "corto": "e01d4d1",
+            "autor": "swoJuan",
+            "fecha": "2026-11-25T09:35:13-05:00",
+            "mensaje": "chore(prototipos): sincronizar shared/vendor con DS 21fa41a (v2.5.0, Tabs v2)",
+            "alcance": "transversal",
+            "archivos": [
+              "shared/vendor/core.css",
+              "shared/vendor/mp-tabs.js"
+            ],
+            "totalArchivos": 2,
+            "subido": false,
+            "url": null
+          },
+          {
             "hash": "63bd56e4bd8be6325e0040291a2972fd70f3ef10",
             "corto": "63bd56e",
             "autor": "swoJuan",
@@ -1070,20 +1268,29 @@
       "descripcion": "Proceso de afiliación en ocho pasos con validación de información y consulta de mis radicados.",
       "plataforma": "zt",
       "version": "0.1.0",
-      "estado": "en-revision",
+      "estado": "validacion-ux",
       "figma": "https://www.figma.com/design/u4bXqFvoAf9re85YN3yfB8/Compensar-ZT---Fase-2?node-id=13542-109534",
       "hu": [],
+      "categorias": [],
       "publicado": true,
+      "entrega": {
+        "estado": "ninguna",
+        "fecha": null,
+        "por": null,
+        "nota": null
+      },
       "url": "p/zt/ventas-y-afiliacion/inicio-comercial/index.html",
       "descarga": {
         "archivo": "zt-ventas-y-afiliacion-v0.1.0.zip",
-        "bytes": 5982957,
+        "bytes": 5986380,
         "url": "descargas/flujos/zt-ventas-y-afiliacion-v0.1.0.zip"
       },
       "consumo": {
-        "modo": "local",
+        "modo": "cdn",
         "pantallas": 21,
-        "ds": [],
+        "ds": [
+          "2.4.0"
+        ],
         "plataforma": []
       },
       "versiones": [],
@@ -1114,6 +1321,50 @@
       "relaciones": [],
       "commits": {
         "propios": [
+          {
+            "hash": "8d19294a6995d67cdc4b5338646551ba794cf946",
+            "corto": "8d19294",
+            "autor": "swoJuan",
+            "fecha": "2026-11-24T16:01:23-05:00",
+            "mensaje": "feat(zt-ventas): paso 1 ajustado a Figma y layout del proceso a ancho completo",
+            "alcance": "propio",
+            "archivos": [
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/css/proceso-layout.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/css/paso-1.css",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/js/paso-1.js",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/css/validacion.css"
+            ],
+            "totalArchivos": 5,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/8d19294a6995d67cdc4b5338646551ba794cf946"
+          },
+          {
+            "hash": "c5fbf7abaef0925fb7522c97574f2ea59532ff41",
+            "corto": "c5fbf7a",
+            "autor": "swoJuan",
+            "fecha": "2026-11-18T16:43:52-05:00",
+            "mensaje": "feat(zt-ventas): integrar Design System CDN v2.4.0",
+            "alcance": "propio",
+            "archivos": [
+              "zt/ventas-y-afiliacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-1/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-2/validacion-informacion/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-3/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-4/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-5/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-6/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-7/index.html",
+              "zt/ventas-y-afiliacion/iniciar-afiliacion/paso-8/index.html",
+              "zt/ventas-y-afiliacion/inicio-comercial/index.html",
+              "zt/ventas-y-afiliacion/mis-radicados/index.html"
+            ],
+            "totalArchivos": 13,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/c5fbf7abaef0925fb7522c97574f2ea59532ff41"
+          },
           {
             "hash": "50db88ba32a1da2fb1c35438ad9eee1df1601c2c",
             "corto": "50db88b",
@@ -1241,11 +1492,23 @@
             "url": "https://github.com/swoJuan/compensarUX/commit/d983b20d9d03c1fc43914056146c29521efccede"
           }
         ],
-        "recursosCompartidosUsados": 33
+        "recursosCompartidosUsados": 31
       },
       "despliegues": [],
-      "actualizado": "2026-11-17T08:29:44-05:00",
+      "actualizado": "2026-11-24T16:01:23-05:00",
       "cambios": [
+        {
+          "commit": "8d19294",
+          "fecha": "2026-11-24T16:01:23-05:00",
+          "mensaje": "feat(zt-ventas): paso 1 ajustado a Figma y layout del proceso a ancho completo",
+          "archivos": 5
+        },
+        {
+          "commit": "c5fbf7a",
+          "fecha": "2026-11-18T16:43:52-05:00",
+          "mensaje": "feat(zt-ventas): integrar Design System CDN v2.4.0",
+          "archivos": 13
+        },
         {
           "commit": "50db88b",
           "fecha": "2026-11-17T08:29:44-05:00",
@@ -1271,7 +1534,7 @@
       "descripcion": "Menú principal del portal web con navegación progresiva por niveles.",
       "plataforma": "drupal",
       "version": "0.1.0",
-      "estado": "aprobado",
+      "estado": "entregado",
       "figma": "https://www.figma.com/design/UnZnt99aWWFcQTmGxWDDEU/Compensar-Fase-2?node-id=14882-48334&m=dev",
       "hu": [
         {
@@ -1282,11 +1545,18 @@
           "pantallas": []
         }
       ],
+      "categorias": [],
       "publicado": true,
+      "entrega": {
+        "estado": "ninguna",
+        "fecha": null,
+        "por": null,
+        "nota": null
+      },
       "url": "p/drupal/navegacion/menu-2.html",
       "descarga": {
         "archivo": "drupal-navegacion-v0.1.0.zip",
-        "bytes": 836488,
+        "bytes": 839048,
         "url": "descargas/flujos/drupal-navegacion-v0.1.0.zip"
       },
       "consumo": {
@@ -1346,7 +1616,22 @@
             "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
           }
         ],
-        "transversales": [],
+        "transversales": [
+          {
+            "hash": "e01d4d18e00e3c5efe5eeb13ec715b0319dab265",
+            "corto": "e01d4d1",
+            "autor": "swoJuan",
+            "fecha": "2026-11-25T09:35:13-05:00",
+            "mensaje": "chore(prototipos): sincronizar shared/vendor con DS 21fa41a (v2.5.0, Tabs v2)",
+            "alcance": "transversal",
+            "archivos": [
+              "shared/vendor/core.css"
+            ],
+            "totalArchivos": 1,
+            "subido": false,
+            "url": null
+          }
+        ],
         "recursosCompartidosUsados": 9
       },
       "despliegues": [],
@@ -1377,25 +1662,33 @@
       "descripcion": "Pantalla de inicio de la aplicación móvil dentro del marco de dispositivo.",
       "plataforma": "app",
       "version": "0.1.0",
-      "estado": "aprobado",
+      "estado": "entregado",
       "figma": null,
       "hu": [],
+      "categorias": [],
       "publicado": true,
+      "entrega": {
+        "estado": "ninguna",
+        "fecha": null,
+        "por": null,
+        "nota": null
+      },
       "url": "p/app/index.html",
       "descarga": {
         "archivo": "app-inicio-v0.1.0.zip",
-        "bytes": 818192,
+        "bytes": 820753,
         "url": "descargas/flujos/app-inicio-v0.1.0.zip"
       },
       "consumo": {
         "modo": "local",
-        "pantallas": 2,
+        "pantallas": 3,
         "ds": [],
         "plataforma": []
       },
       "versiones": [],
       "pantallas": [],
       "pantallasDetectadas": [
+        "app/efecto-swap/index.html",
         "app/historia-clinica/index.html",
         "app/index.html"
       ],
@@ -1417,7 +1710,22 @@
             "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
           }
         ],
-        "transversales": [],
+        "transversales": [
+          {
+            "hash": "e01d4d18e00e3c5efe5eeb13ec715b0319dab265",
+            "corto": "e01d4d1",
+            "autor": "swoJuan",
+            "fecha": "2026-11-25T09:35:13-05:00",
+            "mensaje": "chore(prototipos): sincronizar shared/vendor con DS 21fa41a (v2.5.0, Tabs v2)",
+            "alcance": "transversal",
+            "archivos": [
+              "shared/vendor/core.css"
+            ],
+            "totalArchivos": 1,
+            "subido": false,
+            "url": null
+          }
+        ],
         "recursosCompartidosUsados": 5
       },
       "despliegues": [],
@@ -1442,14 +1750,21 @@
       "descripcion": "Solicitud de historia clínica en la aplicación móvil.",
       "plataforma": "app",
       "version": "0.1.0",
-      "estado": "en-revision",
+      "estado": "validacion-ux",
       "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8336-20380",
       "hu": [],
+      "categorias": [],
       "publicado": true,
+      "entrega": {
+        "estado": "ninguna",
+        "fecha": null,
+        "por": null,
+        "nota": null
+      },
       "url": "p/app/historia-clinica/index.html",
       "descarga": {
         "archivo": "app-historia-clinica-v0.1.0.zip",
-        "bytes": 837217,
+        "bytes": 839777,
         "url": "descargas/flujos/app-historia-clinica-v0.1.0.zip"
       },
       "consumo": {
@@ -1484,7 +1799,22 @@
             "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
           }
         ],
-        "transversales": [],
+        "transversales": [
+          {
+            "hash": "e01d4d18e00e3c5efe5eeb13ec715b0319dab265",
+            "corto": "e01d4d1",
+            "autor": "swoJuan",
+            "fecha": "2026-11-25T09:35:13-05:00",
+            "mensaje": "chore(prototipos): sincronizar shared/vendor con DS 21fa41a (v2.5.0, Tabs v2)",
+            "alcance": "transversal",
+            "archivos": [
+              "shared/vendor/core.css"
+            ],
+            "totalArchivos": 1,
+            "subido": false,
+            "url": null
+          }
+        ],
         "recursosCompartidosUsados": 4
       },
       "despliegues": [],
@@ -1501,6 +1831,166 @@
         "aprobado": false,
         "por": null,
         "fecha": null
+      }
+    },
+    {
+      "id": "app-efecto-swap",
+      "nombre": "Efecto Swap (APP)",
+      "descripcion": "Mis solicitudes con carga por swipe: muestra 7 solicitudes y, al deslizar hacia arriba al final, agrega las siguientes 7 hasta completar 18.",
+      "plataforma": "app",
+      "version": "0.1.0",
+      "estado": "entregado",
+      "figma": "https://www.figma.com/design/dYhOsRYLR8KewcxNAL9Qo1/APP-Medicina-Prepagada?node-id=8658-24679&m=dev",
+      "hu": [
+        {
+          "codigo": "HU-303",
+          "titulo": "Implementar paginación infinita",
+          "url": "https://dev.azure.com/CompensarSaludALM/Medicina_Prepagada/_search?text=infinito*&type=workitem&lp=workitems-Team&filters=Projects%7BMedicina_Prepagada%7D&pageSize=25",
+          "pantallas": [
+            "scr-5a17c0de"
+          ]
+        }
+      ],
+      "categorias": [
+        "swap"
+      ],
+      "publicado": true,
+      "entrega": {
+        "estado": "entregado",
+        "fecha": "2026-11-24",
+        "por": "Director UX (instrucción directa)",
+        "nota": "Paquete de handoff MAUI v0.2.0 (código de referencia UX, no compilado, no productivo) en Flujos/entregables/maui-handoff/EfectoSwap/ y su ZIP descargable desde el portal. Incluye control reutilizable de carga infinita (Controls/CargaInfinitaView: skeleton de primera carga, cargando, error, fin y vacío), iconos SVG de Figma y tokens MAUI v2.4.0. Sin despliegue registrado."
+      },
+      "url": "p/app/efecto-swap/index.html",
+      "descarga": {
+        "tipo": "maui",
+        "etiqueta": "Descarga MAUI",
+        "version": "0.2.0",
+        "archivo": "app-efecto-swap-maui-handoff-v0.2.0.zip",
+        "bytes": 54903,
+        "url": "descargas/flujos/app-efecto-swap-maui-handoff-v0.2.0.zip"
+      },
+      "consumo": {
+        "modo": "local",
+        "pantallas": 1,
+        "ds": [],
+        "plataforma": []
+      },
+      "versiones": [],
+      "pantallas": [
+        {
+          "id": "scr-5a17c0de",
+          "flujo": "app-efecto-swap",
+          "nombre": "App 02C — Mis solicitudes (Efecto Swap)",
+          "ruta": "app/efecto-swap/index.html",
+          "registradaEl": "2026-11-23T22:42:18.000Z",
+          "descripcion": "Listado de solicitudes con carga de 7 en 7 por swipe o botón. Estados: reposo, cargando, error y fin.",
+          "existe": true,
+          "hu": [
+            "HU-303"
+          ]
+        }
+      ],
+      "pantallasDetectadas": [],
+      "relaciones": [
+        {
+          "hu": "HU-303",
+          "pantalla": "scr-5a17c0de",
+          "flujo": "app-efecto-swap",
+          "creadaEl": "2026-11-23T22:42:18.000Z"
+        }
+      ],
+      "commits": {
+        "propios": [
+          {
+            "hash": "c857a5d6bf7dd4eeceb1ffdd1296f73c0289c005",
+            "corto": "c857a5d",
+            "autor": "swoJuan",
+            "fecha": "2026-11-24T14:56:09-05:00",
+            "mensaje": "feat(app/efecto-swap): skeleton de primera carga y estado vacío",
+            "alcance": "propio",
+            "archivos": [
+              "app/efecto-swap/css/swap.css",
+              "app/efecto-swap/index.html",
+              "app/efecto-swap/js/swap-app.js"
+            ],
+            "totalArchivos": 3,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/c857a5d6bf7dd4eeceb1ffdd1296f73c0289c005"
+          },
+          {
+            "hash": "4bc3b2b2b478deb3ff8bb6a27eed542a5f36176b",
+            "corto": "4bc3b2b",
+            "autor": "swoJuan",
+            "fecha": "2026-11-23T18:14:30-05:00",
+            "mensaje": "feat(app-efecto-swap): prototipo APP Mis solicitudes con carga por swipe (HU-303), aprobado UX",
+            "alcance": "propio",
+            "archivos": [
+              "app/efecto-swap/css/swap.css",
+              "app/efecto-swap/index.html",
+              "app/efecto-swap/js/swap-app.js",
+              "app/efecto-swap/js/swap-data.js"
+            ],
+            "totalArchivos": 4,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/4bc3b2b2b478deb3ff8bb6a27eed542a5f36176b"
+          }
+        ],
+        "transversales": [
+          {
+            "hash": "e01d4d18e00e3c5efe5eeb13ec715b0319dab265",
+            "corto": "e01d4d1",
+            "autor": "swoJuan",
+            "fecha": "2026-11-25T09:35:13-05:00",
+            "mensaje": "chore(prototipos): sincronizar shared/vendor con DS 21fa41a (v2.5.0, Tabs v2)",
+            "alcance": "transversal",
+            "archivos": [
+              "shared/vendor/core.css"
+            ],
+            "totalArchivos": 1,
+            "subido": false,
+            "url": null
+          },
+          {
+            "hash": "d4cefd313152dea41aa4bd5bda2731d7eac5a920",
+            "corto": "d4cefd3",
+            "autor": "swoJuan",
+            "fecha": "2026-11-12T12:28:42-05:00",
+            "mensaje": "Commit inicial",
+            "alcance": "transversal",
+            "archivos": [
+              "app/shared/app-viewer.js",
+              "app/shared/app.css",
+              "shared/icons/icons.css",
+              "shared/vendor/core.css"
+            ],
+            "totalArchivos": 4,
+            "subido": true,
+            "url": "https://github.com/swoJuan/compensarUX/commit/d4cefd313152dea41aa4bd5bda2731d7eac5a920"
+          }
+        ],
+        "recursosCompartidosUsados": 4
+      },
+      "despliegues": [],
+      "actualizado": "2026-11-24T14:56:09-05:00",
+      "cambios": [
+        {
+          "commit": "c857a5d",
+          "fecha": "2026-11-24T14:56:09-05:00",
+          "mensaje": "feat(app/efecto-swap): skeleton de primera carga y estado vacío",
+          "archivos": 3
+        },
+        {
+          "commit": "4bc3b2b",
+          "fecha": "2026-11-23T18:14:30-05:00",
+          "mensaje": "feat(app-efecto-swap): prototipo APP Mis solicitudes con carga por swipe (HU-303), aprobado UX",
+          "archivos": 4
+        }
+      ],
+      "aprobacionUX": {
+        "aprobado": true,
+        "por": "Equipo UX",
+        "fecha": "2026-11-23"
       }
     }
   ]

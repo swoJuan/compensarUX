@@ -1,0 +1,266 @@
+<article class="component-doc-page app-il-doc" data-component-doc="app-infinite-load">
+  <nav class="mp-breadcrumb component-doc-nav" aria-label="Breadcrumb">
+    <ol class="mp-breadcrumb__list">
+      <li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="#introduccion"><i class="icon icon-house mp-breadcrumb__home" aria-hidden="true"></i><span class="visually-hidden">Inicio</span></a></li>
+      <li class="mp-breadcrumb__item"><a class="mp-breadcrumb__link" href="#introduccion">Sistema de diseño</a></li>
+      <li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><a class="mp-breadcrumb__link" href="#">App</a></li>
+      <li class="mp-breadcrumb__item"><i class="icon icon-caret-right mp-breadcrumb__separator" aria-hidden="true"></i><span class="mp-breadcrumb__current" aria-current="page">Carga infinita</span></li>
+    </ol>
+  </nav>
+  <section class="component-hero" aria-labelledby="app-il-title">
+    <h1 id="app-il-title" class="mp-h1">Carga infinita</h1>
+    <p class="mp-body-l">Patrón para listados largos en móvil. Se muestra una primera tanda y el usuario carga la siguiente con el gesto de deslizar hacia arriba al llegar al final de la lista (efecto swap) o con el botón «Cargar más». Cada tanda se agrega debajo de las anteriores.</p>
+    <div class="component-meta" aria-label="Metadatos del patrón">
+      <span class="component-chip component-chip--success">Estado: estable</span>
+      <span class="component-chip">App · .NET MAUI</span>
+      <span class="component-chip">Figma: 8658:24679</span>
+      <span class="component-chip">Flujo: Efecto swap</span>
+    </div>
+  </section>
+  <!-- 1. RESUMEN -->
+  <section class="component-section" aria-labelledby="app-il-summary">
+    <div class="component-section__header">
+      <h2 id="app-il-summary" class="mp-h2">1. Resumen</h2>
+    </div>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-12 col-lg-6">
+        <h3 class="mp-h3">Cuándo usarlo</h3>
+        <ul class="component-list">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Listados que crecen con el tiempo y se consultan en orden: solicitudes, citas, resultados, historial.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Cuando el usuario suele revisar los primeros registros y solo a veces necesita los anteriores.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Cuando cargar todo de una vez afecta el rendimiento de la app o el consumo de datos.</span></li>
+        </ul>
+        <h3 class="mp-h3">Disparadores de carga</h3>
+        <ul class="component-list">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span><strong>Gesto swap:</strong> deslizar hacia arriba (empujar) estando al final de la lista.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span><strong>Botón «Cargar más»:</strong> siempre disponible como alternativa sin gesto. También reintenta tras un error.</span></li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card component-example-card--split h-100">
+          <div>
+            <h3 class="mp-h3">Do</h3>
+            <p class="mp-body-m">Lotes de 7 registros, indicador del avance («Mostrando 7 de 18») y botón visible como alternativa al gesto.</p>
+          </div>
+          <span class="component-divider" aria-hidden="true"></span>
+          <div>
+            <h3 class="mp-h3">Don't</h3>
+            <p class="mp-body-m">No cargues solo al gesto, no reemplaces las tarjetas ya cargadas y no uses el patrón para listas cortas (hasta 10 registros).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mp-alert mp-alert--warning" role="note">
+      <i class="icon icon-warning icon-32 mp-alert__icon" aria-hidden="true"></i>
+      <div class="mp-alert__content"><p class="mp-alert__body">Si el usuario necesita saltar a una posición concreta o buscar, usa filtros o búsqueda; la carga infinita no permite ir a «la página 5».</p></div>
+    </div>
+  </section>
+  <!-- 2. ANATOMÍA -->
+  <section class="component-section" aria-labelledby="app-il-anatomy">
+    <div class="component-section__header">
+      <h2 id="app-il-anatomy" class="mp-h2">2. Anatomía</h2>
+      <p class="mp-body-m">El pie del listado muestra un solo estado a la vez. El botón terciario se mantiene debajo en reposo, cargando y error.</p>
+    </div>
+    <div class="app-il-anatomy">
+      <div class="app-il-device" id="app-il-anatomy-preview" data-app-il-static="rest" data-app-il-count="7"></div>
+      <ol class="app-il-legend">
+        <li><strong>Lista de tarjetas.</strong> Cada tanda se agrega debajo de la anterior; las tarjetas ya cargadas no se reemplazan.</li>
+        <li><strong>Indicador del gesto.</strong> Barra de 36 × 4 px con opacidad 40 % y el texto «Desliza hacia arriba para cargar más».</li>
+        <li><strong>Contador.</strong> «Mostrando X de Y solicitudes». Se oculta en el estado de error.</li>
+        <li><strong>Botón «Cargar más».</strong> <code>mp-btn mp-btn--terciario</code>, alto mínimo 48 px. Alternativa al gesto y reintento tras error. Se oculta cuando no hay más registros.</li>
+      </ol>
+    </div>
+  </section>
+  <!-- 3. DEMO INTERACTIVO -->
+  <section class="component-section" aria-labelledby="app-il-playground">
+    <div class="component-section__header">
+      <div>
+        <h2 id="app-il-playground" class="mp-h2">3. Demo interactivo</h2>
+        <p class="mp-body-m">Lista ficticia de 18 solicitudes en tandas de 7. Desliza hacia arriba al final (rueda, arrastre con mouse o táctil) o usa el botón. Datos ficticios.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-12 col-xl-5">
+        <div class="component-control-panel app-il-controls">
+          <div>
+            <label class="mp-label" for="app-il-batch">Registros por tanda</label>
+            <select class="mp-input-field mp-select" id="app-il-batch" data-app-il-control="batch">
+              <option value="5">5</option>
+              <option value="7" selected>7 (recomendado)</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <div>
+            <label class="mp-label" for="app-il-next">Próxima carga</label>
+            <select class="mp-input-field mp-select" id="app-il-next" data-app-il-control="next">
+              <option value="ok">Correcta</option>
+              <option value="error">Falla una vez (error de red)</option>
+            </select>
+          </div>
+          <div>
+            <label class="mp-label" for="app-il-theme">Modo</label>
+            <select class="mp-input-field mp-select" id="app-il-theme" data-app-il-control="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="high-contrast">Alto contraste</option>
+            </select>
+          </div>
+          <button type="button" class="mp-btn mp-btn--secundario" data-app-il-reset>Reiniciar demo</button>
+        </div>
+      </div>
+      <div class="col-12 col-xl-7">
+        <div class="app-il-preview-shell" id="app-il-preview-shell" data-theme="light">
+          <div class="app-il-device app-il-device--live" id="app-il-live" role="region" aria-label="Demo de carga infinita"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 4. ESTADOS -->
+  <section class="component-section" aria-labelledby="app-il-states">
+    <div class="component-section__header">
+      <h2 id="app-il-states" class="mp-h2">4. Estados</h2>
+      <p class="mp-body-m">Los seis estados están aprobados y diseñados en Figma (sección Swap).</p>
+    </div>
+    <div class="app-il-grid app-il-grid--2">
+      <article class="app-il-card">
+        <h3 class="mp-h3">Reposo</h3>
+        <p class="mp-body-s">Figma 8655:24380. Indicador del gesto, contador y botón.</p>
+        <div class="app-il-device" data-app-il-static="rest" data-app-il-count="7"></div>
+      </article>
+      <article class="app-il-card">
+        <h3 class="mp-h3">Cargando</h3>
+        <p class="mp-body-s">Figma 8657:139. Spinner del DS con «Cargando más solicitudes…». El botón se ve inactivo y no actúa.</p>
+        <div class="app-il-device" data-app-il-static="loading" data-app-il-count="7"></div>
+      </article>
+      <article class="app-il-card">
+        <h3 class="mp-h3">Error con reintento</h3>
+        <p class="mp-body-s">Figma 8923:25318. <code>mp-alert--error</code> con título y mensaje. El reintento es el botón «Cargar más». El gesto no reintenta.</p>
+        <div class="app-il-device" data-app-il-static="error" data-app-il-count="7"></div>
+      </article>
+      <article class="app-il-card">
+        <h3 class="mp-h3">Fin de lista</h3>
+        <p class="mp-body-s">Figma 8908:24622. Texto «No hay más solicitudes para mostrar» y sin botón.</p>
+        <div class="app-il-device" data-app-il-static="end" data-app-il-count="18"></div>
+      </article>
+      <article class="app-il-card">
+        <h3 class="mp-h3">Vacío <span class="component-chip component-chip--success">Estable</span></h3>
+        <p class="mp-body-s">Figma 8954:26680. Primera carga sin registros. Usa <code>mp-empty-state</code> y no muestra pie de carga.</p>
+        <div class="app-il-device" data-app-il-static="empty" data-app-il-count="0"></div>
+      </article>
+      <article class="app-il-card">
+        <h3 class="mp-h3">Ítem skeleton <span class="component-chip component-chip--success">Estable</span></h3>
+        <p class="mp-body-s">Figma 8954:26839. Solo para la primera carga de la pantalla. En las tandas siguientes se usa el spinner del pie.</p>
+        <div class="app-il-device" data-app-il-static="skeleton" data-app-il-count="0"></div>
+      </article>
+    </div>
+  </section>
+  <!-- 5. REGLAS DE COMPORTAMIENTO -->
+  <section class="component-section" aria-labelledby="app-il-rules">
+    <div class="component-section__header">
+      <h2 id="app-il-rules" class="mp-h2">5. Reglas de comportamiento</h2>
+      <p class="mp-body-m">Valores tomados del flujo «Efecto swap». Los valores de rendimiento deben validarse con datos reales.</p>
+    </div>
+    <div class="component-spec-table" role="table" aria-label="Reglas de comportamiento de carga infinita">
+      <div class="component-spec-table__head" role="row"><span role="columnheader">Regla</span><span role="columnheader">Valor</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Registros por tanda</code><span role="cell">7 (Figma, aprobado). Rango recomendado de 5 a 10; el equipo técnico lo ajusta según rendimiento.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Gesto swap</code><span role="cell">Solo cuenta si la lista ya está al final y el arrastre hacia arriba supera 48 px.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Rueda / trackpad</code><span role="cell">Acumula 80 px de desplazamiento tras 700 ms de haber llegado al final, para ignorar la inercia.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Botón «Cargar más»</code><span role="cell">Siempre visible mientras haya registros. Durante la carga se ve inactivo y no actúa.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Cargas simultáneas</code><span role="cell">Una sola. Se ignora cualquier disparador mientras carga.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Error</code><span role="cell">Alerta de error en el pie. El gesto queda deshabilitado; el usuario reintenta con el botón.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Fin de lista</code><span role="cell">Se oculta el botón y se muestra el texto de fin, sin spinner. Decisión aprobada sobre el Figma 8908:24622.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Foco</code><span role="cell">Si la carga viene del botón, el foco pasa a la primera tarjeta nueva. Si falla, el foco vuelve al botón.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Animación de entrada</code><span role="cell">Tarjetas nuevas: 280 ms, desplazamiento de 12 px. Se desactiva con <code>prefers-reduced-motion</code>.</span></div>
+    </div>
+    <div class="mp-alert mp-alert--warning" role="note">
+      <i class="icon icon-warning icon-32 mp-alert__icon" aria-hidden="true"></i>
+      <div class="mp-alert__content"><p class="mp-alert__body">Rendimiento: con más de 100 registros cargados, el equipo técnico debe evaluar virtualización de la lista (reciclar vistas) para no degradar la app.</p></div>
+    </div>
+  </section>
+  <!-- 6. MODOS -->
+  <section class="component-section" aria-labelledby="app-il-modes">
+    <div class="component-section__header">
+      <h2 id="app-il-modes" class="mp-h2">6. Modos</h2>
+      <p class="mp-body-m">El patrón usa solo tokens semánticos del sistema; no define colores propios.</p>
+    </div>
+    <div class="app-il-grid app-il-grid--3">
+      <article class="app-il-card" data-theme="light">
+        <h3 class="mp-h3">Light</h3>
+        <div class="app-il-device" data-app-il-static="error" data-app-il-count="2"></div>
+      </article>
+      <article class="app-il-card" data-theme="dark">
+        <h3 class="mp-h3">Dark</h3>
+        <div class="app-il-device" data-app-il-static="error" data-app-il-count="2"></div>
+      </article>
+      <article class="app-il-card" data-theme="high-contrast">
+        <h3 class="mp-h3">Alto contraste</h3>
+        <div class="app-il-device" data-app-il-static="error" data-app-il-count="2"></div>
+      </article>
+    </div>
+  </section>
+  <!-- 7. IMPLEMENTACIÓN .NET MAUI -->
+  <section class="component-section" aria-labelledby="app-il-maui">
+    <div class="component-section__header">
+      <h2 id="app-il-maui" class="mp-h2">7. Implementación en .NET MAUI</h2>
+      <p class="mp-body-m">Este patrón no agrega componentes nuevos al core: se arma con la alerta, el loading, el botón terciario y el empty state existentes. La tabla orienta al equipo de desarrollo y debe validarse en la implementación.</p>
+    </div>
+    <div class="component-spec-table" role="table" aria-label="Equivalencias para .NET MAUI">
+      <div class="component-spec-table__head" role="row"><span role="columnheader">Necesidad</span><span role="columnheader">Referencia sugerida</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Lista</code><span role="cell"><code>CollectionView</code> con <code>ItemsSource</code> incremental.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Carga por cercanía al final</code><span role="cell"><code>RemainingItemsThreshold</code> y <code>RemainingItemsThresholdReachedCommand</code> sirven si se acepta carga automática. Este patrón carga con gesto o botón, por lo que el comando se invoca solo desde ellos.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Gesto swap</code><span role="cell"><code>PanGestureRecognizer</code> o <code>SwipeGestureRecognizer</code> sobre el pie, activo solo con la lista al final. Umbral de 48 px.</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Pie de lista</code><span role="cell"><code>Footer</code> / <code>FooterTemplate</code> con el estado actual (reposo, cargando, error o fin).</span></div>
+      <div class="component-spec-table__row" role="row"><code role="cell">Anuncios accesibles</code><span role="cell"><code>SemanticScreenReader.Announce</code> para carga, éxito, error y fin.</span></div>
+    </div>
+  </section>
+  <!-- 8. ACCESIBILIDAD + CHECKLIST QA -->
+  <section class="component-section" aria-labelledby="app-il-a11y">
+    <div class="component-section__header">
+      <h2 id="app-il-a11y" class="mp-h2">8. Accesibilidad</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-12 col-lg-6">
+        <h3 class="mp-h3">Roles y atributos</h3>
+        <ul class="component-list">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>El gesto no es la única vía: el botón «Cargar más» es la alternativa para teclado, lector de pantalla y control por switch.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Región con <code>role="status"</code> y <code>aria-live="polite"</code> que anuncia: «Cargando más solicitudes…», «Se cargaron 7 solicitudes más. Mostrando 14 de 18», el error y el fin de la lista.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>La alerta de error no usa <code>role="alert"</code>; se anuncia por la región en vivo para no duplicar el mensaje.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>La lista usa <code>&lt;ul&gt;</code> con <code>aria-label</code>; cada tarjeta incluye número de radicado y estado en su etiqueta.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>El indicador del gesto y el spinner son decorativos (<code>aria-hidden="true"</code>).</span></li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6">
+        <h3 class="mp-h3">Checklist QA</h3>
+        <ul class="component-list">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Carga con gesto y con botón; ambas agregan la misma cantidad de registros.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Con la lista fuera del final, el gesto no dispara la carga.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Durante la carga no se inicia otra carga.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Tras el error, el botón reintenta y el gesto no.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>En fin de lista se oculta el botón y no hay más peticiones.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Foco visible y orden lógico; el foco pasa a la primera tarjeta nueva al cargar con el botón.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Contraste ≥ 4.5:1 en Light, Dark y Alto contraste.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Zoom de texto al 200 % sin solapamientos ni texto cortado.</span></li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><span>Con movimiento reducido no hay animación de entrada ni rebote del indicador.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- 9. VISUALIZADOR -->
+  <section class="component-section" aria-labelledby="app-il-code">
+    <div class="component-section__header">
+      <div>
+        <h2 id="app-il-code" class="mp-h2">9. Visualizador</h2>
+        <p class="mp-body-m">Estructura HTML del pie de lista de referencia. Las clases <code>mp-*</code> son del core; el contenedor <code>app-il-*</code> es solo de esta documentación.</p>
+      </div>
+    </div>
+    <div class="code-block">
+      <div class="code-tabs" role="tablist" aria-label="Código carga infinita">
+        <button role="tab" class="mp-btn mp-btn--terciario code-tab active" type="button" aria-selected="true">HTML</button>
+        <button class="mp-btn mp-btn--secundario mp-btn--icon-left copy-btn" type="button" data-app-il-copy-code><i class="icon icon-share icon-16" aria-hidden="true"></i> Copiar</button>
+      </div>
+      <div class="code-content">
+        <pre id="app-il-code-html" class="active"></pre>
+      </div>
+    </div>
+  </section>
+</article>

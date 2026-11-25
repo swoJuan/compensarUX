@@ -1,11 +1,11 @@
-# Sistema de diseño de Compensar v2.4.0 — documentación completa para IA
+# Sistema de diseño de Compensar v2.5.0 — documentación completa para IA
 
-Generado el 2026-11-13 · commit `63bd56e`. Documento consolidado: cada sección corresponde a un archivo del paquete modular.
+Generado el 2026-11-25 · commit `21fa41a`. Documento consolidado: cada sección corresponde a un archivo del paquete modular.
 
 <!-- archivo: README.md -->
-## Sistema de diseño de Compensar — documentación para IA (v2.4.0)
+## Sistema de diseño de Compensar — documentación para IA (v2.5.0)
 
-Generado el 2026-11-13 desde el commit `63bd56e` del sistema de diseño. Este paquete se regenera con cada publicación del portal; no se edita a mano.
+Generado el 2026-11-25 desde el commit `21fa41a` del sistema de diseño. Este paquete se regenera con cada publicación del portal; no se edita a mano.
 
 ### Cómo usarlo
 
@@ -17,7 +17,7 @@ Generado el 2026-11-13 desde el commit `63bd56e` del sistema de diseño. Este pa
 
 - `manifest.json`: versión, fuentes, archivos con hash y pendientes.
 - `tokens/`: colores, tipografía, espaciado, radios y sombras, breakpoints y `tokens.json`.
-- `components/`: 29 componentes (índice en `components/index.md`).
+- `components/`: 30 componentes (índice en `components/index.md`).
 - `foundations/`: principios, tipografía, espaciado, radios, sombras y layout.
 - `patterns/`: navegación y formularios, búsqueda, responsive, movimiento, modo oscuro y alto contraste.
 - `accessibility/`: criterios de accesibilidad reunidos de cada componente.
@@ -34,9 +34,9 @@ Generado el 2026-11-13 desde el commit `63bd56e` del sistema de diseño. Este pa
 <!-- archivo: INSTRUCCIONES-IA.md -->
 ## Instrucciones para agentes de IA
 
-Eres un agente que construye interfaces para Compensar. Usa el sistema de diseño de Compensar v2.4.0 y respeta estas reglas:
+Eres un agente que construye interfaces para Compensar. Usa el sistema de diseño de Compensar v2.5.0 y respeta estas reglas:
 
-1. Antes de escribir código, consulta la documentación del sistema de diseño v2.4.0 (archivo README.md y manifest.json del paquete). Si el usuario indica otra versión, pídele el paquete de esa versión.
+1. Antes de escribir código, consulta la documentación del sistema de diseño v2.5.0 (archivo README.md y manifest.json del paquete). Si el usuario indica otra versión, pídele el paquete de esa versión.
 2. Reutiliza los componentes existentes (components/index.md). Antes de crear uno nuevo, verifica que no haya uno equivalente; si no existe, propónlo en lugar de inventarlo.
 3. Usa solo los tokens oficiales (tokens/). No escribas colores, espaciados, radios ni sombras con valores sueltos.
 4. Mantén la accesibilidad: WCAG 2.2 AA, foco visible, navegación por teclado, contraste en modo claro, oscuro y alto contraste, zoom al 200 %.
@@ -69,7 +69,7 @@ Reglas de uso: ver `patterns/responsive-breakpoints.md`.
 <!-- archivo: tokens/colors.md -->
 ## Colores
 
-Fuente: `tokens/compensar.tokens.json` del sistema de diseño v2.4.0. Cada color tiene valor por modo (claro, oscuro y alto contraste). Usa siempre la variable CSS, nunca el valor.
+Fuente: `tokens/compensar.tokens.json` del sistema de diseño v2.5.0. Cada color tiene valor por modo (claro, oscuro y alto contraste). Usa siempre la variable CSS, nunca el valor.
 
 ### base/brand
 
@@ -443,7 +443,7 @@ Fuente: `core/abstracts/_tokens-shadows.scss`.
 <!-- archivo: tokens/spacing.md -->
 ## Espaciado
 
-Variables CSS publicadas en `css/core.css` v2.4.0: `--space-N` (N en píxeles). Base de 8 px; también hay pasos de 2, 4 y 10 px.
+Variables CSS publicadas en `css/core.css` v2.5.0: `--space-N` (N en píxeles). Base de 8 px; también hay pasos de 2, 4 y 10 px.
 
 | Variable CSS | Valor |
 | --- | --- |
@@ -528,7 +528,7 @@ Clases tipográficas del sistema (`mp-h1`…`mp-h6`, `mp-body-*`): ver `foundati
 <!-- archivo: components/index.md -->
 ## Componentes
 
-Componentes documentados del sistema de diseño v2.4.0: 29. Plataforma «Web y App» son componentes transversales.
+Componentes documentados del sistema de diseño v2.5.0: 30. Plataforma «Web y App» son componentes transversales.
 
 | Componente | Plataforma | Resumen / cuándo usarlo | Variantes | Estados | Propiedades / API | Responsive | Accesibilidad | Tokens usados |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -558,6 +558,7 @@ Componentes documentados del sistema de diseño v2.4.0: 29. Plataforma «Web y A
 | [Sidebar / Overlay](web/sidebar.md) | Web | sí | sí | pendiente | sí | sí | sí | pendiente |
 | [Stepper](web/stepper.md) | Web | sí | sí | pendiente | pendiente | pendiente | sí | pendiente |
 | [Bottom Sheet](app/bottom-sheet.md) | App | sí | sí | sí | sí | pendiente | sí | pendiente |
+| [Carga infinita](app/carga-infinita.md) | App | sí | pendiente | sí | sí | sí | sí | pendiente |
 | [Dropdown / Select App](app/dropdown.md) | App | sí | pendiente | sí | pendiente | sí | sí | sí |
 | [Header App](app/header.md) | App | sí | sí | sí | sí | pendiente | pendiente | pendiente |
 | [Tabs App](app/tabs.md) | App | sí | sí | sí | sí | pendiente | pendiente | pendiente |
@@ -569,7 +570,7 @@ Componentes documentados del sistema de diseño v2.4.0: 29. Plataforma «Web y A
 <!-- archivo: components/app/bottom-sheet.md -->
 ## Bottom Sheet
 
-> Fuente: `docs/app/components/bottom-sheet.html` · Plataforma: App · Sistema de diseño v2.4.0
+> Fuente: `docs/app/components/bottom-sheet.html` · Plataforma: App · Sistema de diseño v2.5.0
 
 Panel inferior móvil para listas, filtros y selecciones contextuales. Se ancla al borde inferior de la pantalla, mantiene el foco en la tarea y evita navegar a otra pantalla cuando la decisión es breve.
 
@@ -667,10 +668,149 @@ La página de origen no trae contenido para: Responsive, Tokens usados. No se co
 
 ---
 
+<!-- archivo: components/app/carga-infinita.md -->
+## Carga infinita
+
+> Fuente: `docs/app/components/carga-infinita.html` · Plataforma: App · Sistema de diseño v2.5.0
+
+Patrón para listados largos en móvil. Se muestra una primera tanda y el usuario carga la siguiente con el gesto de deslizar hacia arriba al llegar al final de la lista (efecto swap) o con el botón «Cargar más». Cada tanda se agrega debajo de las anteriores.
+
+Estado: estable App · .NET MAUI Figma: 8658:24679 Flujo: Efecto swap
+
+### Resumen
+
+#### Cuándo usarlo
+
+- Listados que crecen con el tiempo y se consultan en orden: solicitudes, citas, resultados, historial.
+- Cuando el usuario suele revisar los primeros registros y solo a veces necesita los anteriores.
+- Cuando cargar todo de una vez afecta el rendimiento de la app o el consumo de datos.
+
+#### Disparadores de carga
+
+- **Gesto swap:** deslizar hacia arriba (empujar) estando al final de la lista.
+- **Botón «Cargar más»:** siempre disponible como alternativa sin gesto. También reintenta tras un error.
+
+#### Do
+
+Lotes de 7 registros, indicador del avance («Mostrando 7 de 18») y botón visible como alternativa al gesto.
+
+#### Don't
+
+No cargues solo al gesto, no reemplaces las tarjetas ya cargadas y no uses el patrón para listas cortas (hasta 10 registros).
+
+Si el usuario necesita saltar a una posición concreta o buscar, usa filtros o búsqueda; la carga infinita no permite ir a «la página 5».
+
+### Anatomía
+
+El pie del listado muestra un solo estado a la vez. El botón terciario se mantiene debajo en reposo, cargando y error.
+
+1. **Lista de tarjetas.** Cada tanda se agrega debajo de la anterior; las tarjetas ya cargadas no se reemplazan.
+2. **Indicador del gesto.** Barra de 36 × 4 px con opacidad 40 % y el texto «Desliza hacia arriba para cargar más».
+3. **Contador.** «Mostrando X de Y solicitudes». Se oculta en el estado de error.
+4. **Botón «Cargar más».** `mp-btn mp-btn--terciario`, alto mínimo 48 px. Alternativa al gesto y reintento tras error. Se oculta cuando no hay más registros.
+
+### Demo interactivo
+
+Lista ficticia de 18 solicitudes en tandas de 7. Desliza hacia arriba al final (rueda, arrastre con mouse o táctil) o usa el botón. Datos ficticios.
+
+### Estados
+
+Los seis estados están aprobados y diseñados en Figma (sección Swap).
+
+#### Reposo
+
+Figma 8655:24380. Indicador del gesto, contador y botón.
+
+#### Cargando
+
+Figma 8657:139. Spinner del DS con «Cargando más solicitudes…». El botón se ve inactivo y no actúa.
+
+#### Error con reintento
+
+Figma 8923:25318. `mp-alert--error` con título y mensaje. El reintento es el botón «Cargar más». El gesto no reintenta.
+
+#### Fin de lista
+
+Figma 8908:24622. Texto «No hay más solicitudes para mostrar» y sin botón.
+
+#### Vacío Estable
+
+Figma 8954:26680. Primera carga sin registros. Usa `mp-empty-state` y no muestra pie de carga.
+
+#### Ítem skeleton Estable
+
+Figma 8954:26839. Solo para la primera carga de la pantalla. En las tandas siguientes se usa el spinner del pie.
+
+### Reglas de comportamiento
+
+Valores tomados del flujo «Efecto swap». Los valores de rendimiento deben validarse con datos reales.
+
+ReglaValor
+`Registros por tanda`7 (Figma, aprobado). Rango recomendado de 5 a 10; el equipo técnico lo ajusta según rendimiento.
+`Gesto swap`Solo cuenta si la lista ya está al final y el arrastre hacia arriba supera 48 px.
+`Rueda / trackpad`Acumula 80 px de desplazamiento tras 700 ms de haber llegado al final, para ignorar la inercia.
+`Botón «Cargar más»`Siempre visible mientras haya registros. Durante la carga se ve inactivo y no actúa.
+`Cargas simultáneas`Una sola. Se ignora cualquier disparador mientras carga.
+`Error`Alerta de error en el pie. El gesto queda deshabilitado; el usuario reintenta con el botón.
+`Fin de lista`Se oculta el botón y se muestra el texto de fin, sin spinner. Decisión aprobada sobre el Figma 8908:24622.
+`Foco`Si la carga viene del botón, el foco pasa a la primera tarjeta nueva. Si falla, el foco vuelve al botón.
+`Animación de entrada`Tarjetas nuevas: 280 ms, desplazamiento de 12 px. Se desactiva con `prefers-reduced-motion`.
+
+Rendimiento: con más de 100 registros cargados, el equipo técnico debe evaluar virtualización de la lista (reciclar vistas) para no degradar la app.
+
+### Modos
+
+El patrón usa solo tokens semánticos del sistema; no define colores propios.
+
+#### Light
+
+#### Dark
+
+#### Alto contraste
+
+### Implementación en .NET MAUI
+
+Este patrón no agrega componentes nuevos al core: se arma con la alerta, el loading, el botón terciario y el empty state existentes. La tabla orienta al equipo de desarrollo y debe validarse en la implementación.
+
+NecesidadReferencia sugerida
+`ListaCollectionView` con `ItemsSource` incremental.
+`Carga por cercanía al finalRemainingItemsThreshold` y `RemainingItemsThresholdReachedCommand` sirven si se acepta carga automática. Este patrón carga con gesto o botón, por lo que el comando se invoca solo desde ellos.
+`Gesto swapPanGestureRecognizer` o `SwipeGestureRecognizer` sobre el pie, activo solo con la lista al final. Umbral de 48 px.
+`Pie de listaFooter` / `FooterTemplate` con el estado actual (reposo, cargando, error o fin).
+`Anuncios accesiblesSemanticScreenReader.Announce` para carga, éxito, error y fin.
+
+### Accesibilidad
+
+#### Roles y atributos
+
+- El gesto no es la única vía: el botón «Cargar más» es la alternativa para teclado, lector de pantalla y control por switch.
+- Región con `role="status"` y `aria-live="polite"` que anuncia: «Cargando más solicitudes…», «Se cargaron 7 solicitudes más. Mostrando 14 de 18», el error y el fin de la lista.
+- La alerta de error no usa `role="alert"`; se anuncia por la región en vivo para no duplicar el mensaje.
+- La lista usa `<ul>` con `aria-label`; cada tarjeta incluye número de radicado y estado en su etiqueta.
+- El indicador del gesto y el spinner son decorativos (`aria-hidden="true"`).
+
+#### Checklist QA
+
+- Carga con gesto y con botón; ambas agregan la misma cantidad de registros.
+- Con la lista fuera del final, el gesto no dispara la carga.
+- Durante la carga no se inicia otra carga.
+- Tras el error, el botón reintenta y el gesto no.
+- En fin de lista se oculta el botón y no hay más peticiones.
+- Foco visible y orden lógico; el foco pasa a la primera tarjeta nueva al cargar con el botón.
+- Contraste ≥ 4.5:1 en Light, Dark y Alto contraste.
+- Zoom de texto al 200 % sin solapamientos ni texto cortado.
+- Con movimiento reducido no hay animación de entrada ni rebote del indicador.
+
+### Pendiente de documentación
+
+La página de origen no trae contenido para: Variantes, Tokens usados. No se completa con suposiciones.
+
+---
+
 <!-- archivo: components/app/dropdown.md -->
 ## Dropdown / Select App
 
-> Fuente: `docs/app/components/dropdown.html` · Plataforma: App · Sistema de diseño v2.4.0
+> Fuente: `docs/app/components/dropdown.html` · Plataforma: App · Sistema de diseño v2.5.0
 
 Permite seleccionar una o varias opciones dentro de una lista. En App conserva el dropdown base y suma una variante móvil tipo bottom sheet para listas largas o con búsqueda.
 
@@ -859,7 +999,7 @@ La página de origen no trae contenido para: Variantes, Propiedades / API. No se
 <!-- archivo: components/app/header.md -->
 ## Header App
 
-> Fuente: `docs/app/components/header.html` · Plataforma: App · Sistema de diseño v2.4.0
+> Fuente: `docs/app/components/header.html` · Plataforma: App · Sistema de diseño v2.5.0
 
 Barra superior móvil para pantallas App. Incluye zona segura, navegación contextual, marca o título y acciones rápidas.
 
@@ -914,7 +1054,7 @@ La página de origen no trae contenido para: Responsive, Accesibilidad, Tokens u
 <!-- archivo: components/app/tabs.md -->
 ## Tabs App
 
-> Fuente: `docs/app/components/tabs.html` · Plataforma: App · Sistema de diseño v2.4.0
+> Fuente: `docs/app/components/tabs.html` · Plataforma: App · Sistema de diseño v2.5.0
 
 Navegación móvil para alternar entre vistas del mismo nivel. Basado en el componente App de Figma y orientado a implementación .NET MAUI.
 
@@ -968,7 +1108,7 @@ La página de origen no trae contenido para: Responsive, Accesibilidad, Tokens u
 <!-- archivo: components/transversales/accordion.md -->
 ## Accordion
 
-> Fuente: `docs/transversales/components/accordion.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/accordion.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Organiza contenido en paneles colapsables para reducir carga visual y permitir que el usuario consulte detalles solo cuando los necesita.
 
@@ -1048,7 +1188,7 @@ La página de origen no trae contenido para: Variantes, Tokens usados. No se com
 <!-- archivo: components/transversales/alerts.md -->
 ## Alertas
 
-> Fuente: `docs/transversales/components/alerts.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/alerts.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Comunican información relevante sobre el estado de una acción o del sistema. Esta página documenta la alerta contextual integrada en el contenido.
 
@@ -1164,7 +1304,7 @@ Sin pendientes detectados automáticamente. Las secciones interactivas (anatomí
 <!-- archivo: components/transversales/avatar.md -->
 ## Avatar / User chip
 
-> Fuente: `docs/transversales/components/avatar.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/avatar.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Representa una persona mediante foto, iniciales o icono, y puede combinarse con nombre y metadata en headers, cards, listas y menús de usuario.
 
@@ -1220,7 +1360,7 @@ La página de origen no trae contenido para: Responsive, Accesibilidad, Tokens u
 <!-- archivo: components/transversales/badges.md -->
 ## Chips / Tags / Badges
 
-> Fuente: `docs/transversales/components/badges.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/badges.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Familia de pastillas compactas para filtrar, categorizar o comunicar estados. Comparten estructura visual, pero cada una tiene una intención distinta.
 
@@ -1345,7 +1485,7 @@ La página de origen no trae contenido para: Variantes, Tokens usados. No se com
 <!-- archivo: components/transversales/buttons.md -->
 ## Botón
 
-> Fuente: `docs/transversales/components/buttons.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/buttons.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Permite ejecutar acciones principales, secundarias o de apoyo dentro de la interfaz. Guía la interacción, la toma de decisiones y la jerarquía visual de cada pantalla.
 
@@ -1473,7 +1613,7 @@ Sin pendientes detectados automáticamente. Las secciones interactivas (anatomí
 <!-- archivo: components/transversales/cards.md -->
 ## Cards
 
-> Fuente: `docs/transversales/components/cards.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/cards.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Contenedores que agrupan información relacionada dentro de una interfaz. Organizan contenido, facilitan la lectura y permiten acciones dentro de un mismo bloque.
 
@@ -1622,7 +1762,7 @@ La página de origen no trae contenido para: Tokens usados. No se completa con s
 <!-- archivo: components/transversales/dropdown.md -->
 ## Dropdown / Select
 
-> Fuente: `docs/transversales/components/dropdown.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/dropdown.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Permite seleccionar una o varias opciones dentro de una lista. Se usa cuando las opciones están predefinidas y se quiere evitar errores de entrada. Soporta selección simple, múltiple, búsqueda y grupos de opciones.
 
@@ -1803,7 +1943,7 @@ La página de origen no trae contenido para: Variantes, Propiedades / API. No se
 <!-- archivo: components/transversales/inputs.md -->
 ## Input / Campo de texto
 
-> Fuente: `docs/transversales/components/inputs.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/inputs.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Captura información del usuario en formularios. Soporta texto, email, número, contraseña, teléfono, textarea y select con estados interactivos completos y soporte para íconos decorativos y accionables.
 
@@ -1939,7 +2079,7 @@ Sin pendientes detectados automáticamente. Las secciones interactivas (anatomí
 <!-- archivo: components/transversales/loading.md -->
 ## Loading
 
-> Fuente: `docs/transversales/components/loading.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/loading.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Representa el estado en el que la información aún no ha cargado. Ayuda a reducir la incertidumbre del usuario y mejora la percepción de rendimiento del sistema.
 
@@ -2015,7 +2155,7 @@ La página de origen no trae contenido para: Tokens usados. No se completa con s
 <!-- archivo: components/transversales/modals.md -->
 ## Modal
 
-> Fuente: `docs/transversales/components/modals.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/modals.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Componente que interrumpe el flujo para presentar información importante o solicitar una decisión del usuario.
 
@@ -2175,7 +2315,7 @@ Sin pendientes detectados automáticamente. Las secciones interactivas (anatomí
 <!-- archivo: components/transversales/pagination.md -->
 ## Paginación
 
-> Fuente: `docs/transversales/components/pagination.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/pagination.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Permite navegar entre múltiples páginas de contenido cuando la información es extensa. Facilita la exploración de datos sin sobrecargar la interfaz.
 
@@ -2245,7 +2385,7 @@ La página de origen no trae contenido para: Variantes, Propiedades / API, Acces
 <!-- archivo: components/transversales/selection-controls.md -->
 ## Checkbox / Radio / Switch
 
-> Fuente: `docs/transversales/components/selection-controls.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/selection-controls.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Permiten al usuario tomar decisiones dentro de la interfaz: selección múltiple, selección única y activación inmediata de opciones binarias.
 
@@ -2335,7 +2475,7 @@ Sin pendientes detectados automáticamente. Las secciones interactivas (anatomí
 <!-- archivo: components/transversales/tables.md -->
 ## Tables
 
-> Fuente: `docs/transversales/components/tables.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/tables.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Permiten mostrar información estructurada en filas y columnas, facilitando la lectura, comparación y gestión de datos.
 
@@ -2445,11 +2585,13 @@ La página de origen no trae contenido para: Tokens usados. No se completa con s
 <!-- archivo: components/transversales/tabs.md -->
 ## Tabs
 
-> Fuente: `docs/transversales/components/tabs.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/tabs.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
-Organizan contenido relacionado en secciones de una misma vista. Permiten alternar entre paneles sin recargar la página y mantienen el contexto de la tarea.
+Organizan contenido relacionado en secciones de una misma vista. Permiten alternar entre paneles sin recargar la página y mantienen el contexto de la tarea. Disponible en tres formatos: Texto, Pill XL y Tarjeta con ícono.
 
-Estado: estable Versión 1.0 Web Bootstrap compatible Categoría: navegación
+Estado: estable Versión 1.0 · formatos XL desde DS v2.5.0 Web Bootstrap compatible Categoría: navegación
+
+Elige el formato para ver su documentación. Pill XL y Tarjeta con ícono (v2, color Naranja o Violeta) están aprobados por UX y disponibles desde la versión 2.5.0 del sistema de diseño.
 
 ### Resumen
 
@@ -2594,7 +2736,7 @@ La página de origen no trae contenido para: Tokens usados. No se completa con s
 <!-- archivo: components/transversales/toasts.md -->
 ## Toast
 
-> Fuente: `docs/transversales/components/toasts.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/transversales/components/toasts.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Mensaje breve y flotante que aparece temporalmente para confirmar una acción o informar un estado del sistema.
 
@@ -2711,7 +2853,7 @@ Sin pendientes detectados automáticamente. Las secciones interactivas (anatomí
 <!-- archivo: components/web/accordion.md -->
 ## Accordion
 
-> Fuente: `docs/web/components/accordion.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/accordion.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 Organiza contenido en paneles colapsables para reducir carga visual y permitir que el usuario consulte detalles solo cuando los necesita.
 
@@ -2791,7 +2933,7 @@ La página de origen no trae contenido para: Variantes, Tokens usados. No se com
 <!-- archivo: components/web/badges.md -->
 ## Chips / Tags / Badges
 
-> Fuente: `docs/web/components/badges.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/badges.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 Familia de pastillas compactas para filtrar, categorizar o comunicar estados. Comparten estructura visual, pero cada una tiene una intención distinta.
 
@@ -2916,7 +3058,7 @@ La página de origen no trae contenido para: Variantes, Tokens usados. No se com
 <!-- archivo: components/web/breadcrumb.md -->
 ## Breadcrumb
 
-> Fuente: `docs/web/components/breadcrumb.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/breadcrumb.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 Muestra la ubicación del usuario dentro de la estructura del sitio y permite navegar fácilmente entre niveles jerárquicos.
 
@@ -2990,7 +3132,7 @@ La página de origen no trae contenido para: Variantes, Tokens usados. No se com
 <!-- archivo: components/web/empty-state.md -->
 ## Empty State
 
-> Fuente: `docs/web/components/empty-state.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/empty-state.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 Comunica a los usuarios que no hay contenido disponible en una sección. Orienta sobre qué ocurrió y, cuando es posible, ofrece una acción para resolverlo.
 
@@ -3229,7 +3371,7 @@ La página de origen no trae contenido para: Estados, Responsive, Tokens usados.
 <!-- archivo: components/web/header.md -->
 ## Navigation patterns
 
-> Fuente: `docs/web/components/header.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/header.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 3.3 — Patrones de navegación
 
@@ -3404,7 +3546,7 @@ La página de origen no trae contenido para: Resumen / cuándo usarlo, Variantes
 <!-- archivo: components/web/icons-connect.md -->
 ## Cómo conectarlo
 
-> Fuente: `docs/web/components/icons-connect.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/icons-connect.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 1.8.2
 
@@ -3592,7 +3734,7 @@ La página de origen no trae contenido para: Resumen / cuándo usarlo, Variantes
 <!-- archivo: components/web/icons-intro.md -->
 ## Sistema de iconos
 
-> Fuente: `docs/web/components/icons-intro.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/icons-intro.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 1.8.1
 
@@ -3728,7 +3870,7 @@ La página de origen no trae contenido para: Resumen / cuándo usarlo, Variantes
 <!-- archivo: components/web/loading.md -->
 ## Loading
 
-> Fuente: `docs/web/components/loading.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/loading.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 Representa el estado en el que la información aún no ha cargado. Ayuda a reducir la incertidumbre del usuario y mejora la percepción de rendimiento del sistema.
 
@@ -3804,7 +3946,7 @@ La página de origen no trae contenido para: Tokens usados. No se completa con s
 <!-- archivo: components/web/sidebar.md -->
 ## Sidebar / Overlay
 
-> Fuente: `docs/web/components/sidebar.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/sidebar.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 Panel lateral que emerge desde la derecha de la pantalla para mostrar detalles, confirmar acciones o presentar flujos secundarios sin abandonar la página actual. En móvil se convierte en bottom sheet.
 
@@ -3951,7 +4093,7 @@ La página de origen no trae contenido para: Estados, Tokens usados. No se compl
 <!-- archivo: components/web/stepper.md -->
 ## Stepper
 
-> Fuente: `docs/web/components/stepper.html` · Plataforma: Web · Sistema de diseño v2.4.0
+> Fuente: `docs/web/components/stepper.html` · Plataforma: Web · Sistema de diseño v2.5.0
 
 Indica el progreso del usuario a través de un flujo de pasos secuenciales. Muestra cuántos pasos tiene el proceso, cuál es el actual y cuántos han sido completados.
 
@@ -4205,7 +4347,7 @@ protected override void OnSizeAllocated(double width, double height)
 // QA: registrar capturas en compact/medium/expanded y ambos temas
 ```
 
-> Fuente: `docs/app/fundamentos/layout.html` · v2.4.0
+> Fuente: `docs/app/fundamentos/layout.html` · v2.5.0
 
 ---
 
@@ -4312,7 +4454,7 @@ html
 // Nunca usar valores arbitrarios como border-radius: 10px
 ```
 
-> Fuente: `docs/transversales/fundamentos/border-radius.html` · v2.4.0
+> Fuente: `docs/transversales/fundamentos/border-radius.html` · v2.5.0
 
 ---
 
@@ -4483,7 +4625,7 @@ html
 </main>
 ```
 
-> Fuente: `docs/transversales/fundamentos/layout.html` · v2.4.0
+> Fuente: `docs/transversales/fundamentos/layout.html` · v2.5.0
 
 ---
 
@@ -4532,7 +4674,7 @@ Los mensajes críticos deben orientar y ofrecer acción siguiente.
 
 Estos principios son obligatorios para diseño, desarrollo y QA. Cualquier excepción **debe ser validada por UX.**
 
-> Fuente: `docs/foundations/principles.html` · v2.4.0
+> Fuente: `docs/foundations/principles.html` · v2.5.0
 
 ---
 
@@ -4651,7 +4793,7 @@ html
 }
 ```
 
-> Fuente: `docs/transversales/fundamentos/shadows.html` · v2.4.0
+> Fuente: `docs/transversales/fundamentos/shadows.html` · v2.5.0
 
 ---
 
@@ -4795,7 +4937,7 @@ Dark / High Contrast
 - Mantener separación clara para evitar bloques densos.
 - Priorizar aire visual en interfaces críticas.
 
-> Fuente: `docs/transversales/fundamentos/spacing.html` · v2.4.0
+> Fuente: `docs/transversales/fundamentos/spacing.html` · v2.5.0
 
 ---
 
@@ -4916,14 +5058,14 @@ Cada clase aplica las 3 propiedades tipográficas del token. ──────�
 
 ', css: 'font-size: var(--mp-h1-size);', sass: '@include mp-h1;', rule: 'Nunca usar valores hardcoded (font-size: 32px). Siempre token o clase .mp-*.' } }, categories, utilities: utilsScss ? tyParseUtilitiesFromScss(utilsScss) : { type: [], color: [], behavior: [] } }; tyDownloadFile('typography-tokens.json', JSON.stringify(out,null,2), 'application/json'); } window.tyDownloadCSS = tyDownloadCSS; window.tyDownloadSCSS = tyDownloadSCSS; window.tyDownloadJSON = tyDownloadJSON; window.tyDownloadMAUI = tyDownloadMAUI; if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', tyRenderUtilitiesFromSource); } else { tyRenderUtilitiesFromSource(); } })();
 
-> Fuente: `docs/transversales/fundamentos/typography.html` · v2.4.0
+> Fuente: `docs/transversales/fundamentos/typography.html` · v2.5.0
 
 ---
 
 <!-- archivo: patterns/dark-mode.md -->
 ## Dark Mode — Reglas de uso
 
-> Fuente: `docs/guidelines/dark-mode.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/guidelines/dark-mode.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 El modo oscuro reduce la fatiga visual, respeta la preferencia del sistema del usuario y mantiene la identidad de marca. Su implementación correcta depende exclusivamente de tokens semánticos `--use-*` — nunca de colores hardcodeados.
 
@@ -5040,7 +5182,7 @@ La página de origen no trae contenido para: Resumen / cuándo usarlo, Variantes
 <!-- archivo: patterns/form-patterns.md -->
 ## Form Patterns
 
-> Fuente: `docs/guidelines/form-patterns.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/guidelines/form-patterns.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Guía de estructura, layout y componentes para construir formularios accesibles y de alta conversión. Incluye el componente `mp-stepper` para flujos multi-paso.
 
@@ -5264,7 +5406,7 @@ La página de origen no trae contenido para: Estados, Propiedades / API, Tokens 
 <!-- archivo: patterns/high-contrast.md -->
 ## High Contrast — Reglas de uso
 
-> Fuente: `docs/guidelines/high-contrast.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/guidelines/high-contrast.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Modo enfocado en maximizar la legibilidad y facilitar la interacción para todos los usuarios, especialmente en condiciones de baja visión.
 
@@ -5349,7 +5491,7 @@ La página de origen no trae contenido para: Resumen / cuándo usarlo, Variantes
 <!-- archivo: patterns/motion-animation.md -->
 ## Motion / Animación
 
-> Fuente: `docs/guidelines/motion-animation.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/guidelines/motion-animation.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Guía transversal para definir duraciones, curvas de easing y criterios de uso de animación en Web, ZT Drupal y App. La animación debe orientar, confirmar y reducir fricción, no decorar sin propósito.
 
@@ -5465,7 +5607,7 @@ Patrones de navegación, formularios, búsqueda, responsive, movimiento y modos 
 <!-- archivo: patterns/responsive-breakpoints.md -->
 ## Responsive / Breakpoints
 
-> Fuente: `docs/guidelines/responsive-breakpoints.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/guidelines/responsive-breakpoints.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 Guía transversal para definir breakpoints, uso de grilla y adaptación de componentes en Web, ZT Drupal y App. El objetivo es mantener layouts consistentes sin crear reglas aisladas por página.
 
@@ -5570,7 +5712,7 @@ La página de origen no trae contenido para: Variantes, Estados, Propiedades / A
 <!-- archivo: patterns/search-filters.md -->
 ## Search & Filters
 
-> Fuente: `docs/guidelines/search-filters.html` · Plataforma: Web y App · Sistema de diseño v2.4.0
+> Fuente: `docs/guidelines/search-filters.html` · Plataforma: Web y App · Sistema de diseño v2.5.0
 
 3.2 — Patrones de interacción
 
@@ -6055,6 +6197,32 @@ _Fuente: [components/app/bottom-sheet.md](../components/app/bottom-sheet.md)_
 - Contraste de texto ≥ 4.5:1 en todos los modos.
 - Chips de filtro activos (#775ebb/#fff): contraste verificado ≥ 4.5:1.
 
+### Carga infinita
+
+_Fuente: [components/app/carga-infinita.md](../components/app/carga-infinita.md)_
+
+#### Accesibilidad
+
+#### Roles y atributos
+
+- El gesto no es la única vía: el botón «Cargar más» es la alternativa para teclado, lector de pantalla y control por switch.
+- Región con `role="status"` y `aria-live="polite"` que anuncia: «Cargando más solicitudes…», «Se cargaron 7 solicitudes más. Mostrando 14 de 18», el error y el fin de la lista.
+- La alerta de error no usa `role="alert"`; se anuncia por la región en vivo para no duplicar el mensaje.
+- La lista usa `<ul>` con `aria-label`; cada tarjeta incluye número de radicado y estado en su etiqueta.
+- El indicador del gesto y el spinner son decorativos (`aria-hidden="true"`).
+
+#### Checklist QA
+
+- Carga con gesto y con botón; ambas agregan la misma cantidad de registros.
+- Con la lista fuera del final, el gesto no dispara la carga.
+- Durante la carga no se inicia otra carga.
+- Tras el error, el botón reintenta y el gesto no.
+- En fin de lista se oculta el botón y no hay más peticiones.
+- Foco visible y orden lógico; el foco pasa a la primera tarjeta nueva al cargar con el botón.
+- Contraste ≥ 4.5:1 en Light, Dark y Alto contraste.
+- Zoom de texto al 200 % sin solapamientos ni texto cortado.
+- Con movimiento reducido no hay animación de entrada ni rebote del indicador.
+
 ### Dropdown / Select App
 
 _Fuente: [components/app/dropdown.md](../components/app/dropdown.md)_
@@ -6094,11 +6262,11 @@ Sin sección de accesibilidad en su página de origen: Avatar / User chip, Pagin
 Representación web navegable de la aplicación móvil.
 
 - Tecnología: Referencia para .NET MAUI
-- Sistema de diseño de referencia: v2.4.0
+- Sistema de diseño de referencia: v2.5.0
 
 ### Paquete web `compensar-app`
 
-Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Compatibilidad registrada con el sistema de diseño: no hay una matriz registrada; se publica junto a v2.4.0.
+Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Compatibilidad registrada con el sistema de diseño: no hay una matriz registrada; se publica junto a v2.5.0.
 
 | Archivo | Tamaño (bytes) | integrity (SRI) |
 | --- | --- | --- |
@@ -6109,12 +6277,12 @@ Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Co
 
 ```html
 <!-- 1. Sistema de diseño -->
-<link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.4.0/compensar.min.css">
+<link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.5.0/compensar.min.css">
 <!-- 2. Paquete APP -->
 <link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar-app/v1.0.0/compensar-app.min.css">
 <!-- 3. CSS propio del flujo -->
 <link rel="stylesheet" href="css/mi-pantalla.css">
-<script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.4.0/compensar.min.js" defer></script>
+<script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.5.0/compensar.min.js" defer></script>
 <script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar-app/v1.0.0/compensar-app.min.js" defer></script>
 ```
 
@@ -6127,7 +6295,7 @@ La aplicación móvil no consume CSS ni JavaScript. Los recursos nativos son dic
 
 ```
 Sistema de diseño de Compensar — .NET MAUI
-commit-63bd56e · generado de tokens/compensar.tokens.json
+commit-21fa41a · generado de tokens/compensar.tokens.json
 
 Qué trae
   Resources/Styles/Compensar.Colors.xaml  Los colores del sistema.
@@ -6159,6 +6327,7 @@ cambios se hacen en los tokens del sistema de diseño.
 
 - Inicio de la APP
 - Historia clínica (APP)
+- Efecto Swap (APP)
 
 ---
 
@@ -6168,11 +6337,11 @@ cambios se hacen en los tokens del sistema de diseño.
 Prototipos del portal web institucional.
 
 - Tecnología: HTML, CSS y JavaScript
-- Sistema de diseño de referencia: v2.4.0
+- Sistema de diseño de referencia: v2.5.0
 
 ### Paquete web `compensar-drupal`
 
-Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Compatibilidad registrada con el sistema de diseño: no hay una matriz registrada; se publica junto a v2.4.0.
+Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Compatibilidad registrada con el sistema de diseño: no hay una matriz registrada; se publica junto a v2.5.0.
 
 | Archivo | Tamaño (bytes) | integrity (SRI) |
 | --- | --- | --- |
@@ -6183,12 +6352,12 @@ Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Co
 
 ```html
 <!-- 1. Sistema de diseño -->
-<link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.4.0/compensar.min.css">
+<link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.5.0/compensar.min.css">
 <!-- 2. Paquete DRUPAL -->
 <link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar-drupal/v1.0.0/compensar-drupal.min.css">
 <!-- 3. CSS propio del flujo -->
 <link rel="stylesheet" href="css/mi-pantalla.css">
-<script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.4.0/compensar.min.js" defer></script>
+<script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.5.0/compensar.min.js" defer></script>
 <script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar-drupal/v1.0.0/compensar-drupal.min.js" defer></script>
 ```
 
@@ -6204,11 +6373,11 @@ Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Co
 Flujos y pantallas de la oficina virtual.
 
 - Tecnología: Referencia para Angular
-- Sistema de diseño de referencia: v2.4.0
+- Sistema de diseño de referencia: v2.5.0
 
 ### Paquete web `compensar-zt`
 
-Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Compatibilidad registrada con el sistema de diseño: no hay una matriz registrada; se publica junto a v2.4.0.
+Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Compatibilidad registrada con el sistema de diseño: no hay una matriz registrada; se publica junto a v2.5.0.
 
 | Archivo | Tamaño (bytes) | integrity (SRI) |
 | --- | --- | --- |
@@ -6219,12 +6388,12 @@ Versión publicada: v1.0.0. No incluye el sistema de diseño: cárgalo antes. Co
 
 ```html
 <!-- 1. Sistema de diseño -->
-<link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.4.0/compensar.min.css">
+<link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.5.0/compensar.min.css">
 <!-- 2. Paquete ZT -->
 <link rel="stylesheet" href="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar-zt/v1.0.0/compensar-zt.min.css">
 <!-- 3. CSS propio del flujo -->
 <link rel="stylesheet" href="css/mi-pantalla.css">
-<script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.4.0/compensar.min.js" defer></script>
+<script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar/v2.5.0/compensar.min.js" defer></script>
 <script src="https://stappmedprepdeveus2.z20.web.core.windows.net/sitio/cdn/compensar-zt/v1.0.0/compensar-zt.min.js" defer></script>
 ```
 
@@ -6242,7 +6411,13 @@ El menú lateral de ZT necesita declarar la ruta a la raíz del flujo: `<nav cla
 <!-- archivo: versions/changelog.md -->
 ## Historial de versiones
 
-Versión de este paquete: v2.4.0.
+Versión de este paquete: v2.5.0.
+
+### v2.5.0 — 2026-11-25
+
+Core Design System v2.5.0 — Tabs v2: Pill XL y Tarjeta con ícono (mp-tab-xl, mp-tab-card), color Violeta, Light/Dark/Alto contraste
+
+**Qué revisar:** Tabs v2 (aprobado por UX): Pill XL y Tarjeta con ícono en Naranja y Violeta, sin sombra en Active. Verificar contraste de texto de 4,5:1, foco de 3 px (4 px en Alto contraste), navegación por teclado y el desplegable por debajo de 768 px. El mp-tab base no cambia.
 
 ### v2.4.0 — 2026-11-11
 
