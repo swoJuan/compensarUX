@@ -1,22 +1,22 @@
 {
-  "generado": "2026-11-25T18:34:03.736Z",
+  "generado": "2026-11-25T19:11:53.309Z",
   "repositorio": {
     "unico": true,
     "nombre": "compensarUX",
     "rama": "main",
     "remoto": "https://github.com/swoJuan/compensarUX.git",
     "version": "v2.5.0",
-    "commits": 53,
-    "commitsSinSubir": 0,
-    "pendientes": 31,
+    "commits": 56,
+    "commitsSinSubir": 3,
+    "pendientes": 11,
     "carpetas": [
       {
         "id": "designSystem",
         "nombre": "Sistema de diseño",
         "rol": "Fuente de verdad visual: tokens, estilos y componentes de Compensar.",
         "carpeta": "Core-Design-System",
-        "commit": "21fa41a",
-        "fecha": "2026-11-25T09:16:25-05:00",
+        "commit": "8a4b4cb",
+        "fecha": "2026-11-25T14:11:41-05:00",
         "pendientes": 0
       },
       {
@@ -33,15 +33,15 @@
         "nombre": "Portal UX",
         "rol": "Centralizador: reúne el sistema de diseño y los prototipos, controla qué versión se publica y genera el sitio. No contiene diseño ni flujos.",
         "carpeta": "Flujos/portal",
-        "commit": "21fa41a",
-        "fecha": "2026-11-25T09:16:25-05:00",
-        "pendientes": 4
+        "commit": "71b9261",
+        "fecha": "2026-11-25T14:06:55-05:00",
+        "pendientes": 1
       }
     ]
   },
   "sincronizacion": {
-    "estado": "al-dia",
-    "dsCommit": "21fa41a",
+    "estado": "desactualizado",
+    "dsCommit": "8a4b4cb",
     "archivos": [
       {
         "ds": "css/core.css",
@@ -54,9 +54,12 @@
       {
         "ds": "css/portal.css",
         "flujos": "shared/vendor/portal.css",
-        "estado": "al-dia",
-        "versionUsada": null,
-        "refDs": "c3e8cd9",
+        "estado": "desactualizado",
+        "versionUsada": {
+          "commit": "f6a3152",
+          "fecha": "2026-11-25T09:05:14-05:00"
+        },
+        "refDs": "6d1a4cc",
         "refFlujos": "c3e8cd9"
       },
       {
@@ -78,7 +81,7 @@
     ],
     "version": null,
     "versionPrototipos": "v2.4.0",
-    "verificado": "2026-11-25T18:34:03.736Z",
+    "verificado": "2026-11-25T19:11:53.309Z",
     "comando": "npm run ds:sincronizar"
   },
   "componentes": {

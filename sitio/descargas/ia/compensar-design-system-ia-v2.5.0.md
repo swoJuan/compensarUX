@@ -1,11 +1,11 @@
 # Sistema de diseño de Compensar v2.5.0 — documentación completa para IA
 
-Generado el 2026-11-25 · commit `21fa41a`. Documento consolidado: cada sección corresponde a un archivo del paquete modular.
+Generado el 2026-11-25 · commit `8a4b4cb`. Documento consolidado: cada sección corresponde a un archivo del paquete modular.
 
 <!-- archivo: README.md -->
 ## Sistema de diseño de Compensar — documentación para IA (v2.5.0)
 
-Generado el 2026-11-25 desde el commit `21fa41a` del sistema de diseño. Este paquete se regenera con cada publicación del portal; no se edita a mano.
+Generado el 2026-11-25 desde el commit `8a4b4cb` del sistema de diseño. Este paquete se regenera con cada publicación del portal; no se edita a mano.
 
 ### Cómo usarlo
 
@@ -4860,6 +4860,28 @@ Uso en Web / App
 }
 ```
 
+Cómo se usa el espaciado
+
+Los tokens definen cuánto espacio hay. Estas reglas definen dónde se aplica cada uno. Primero identifica si el espacio queda dentro o fuera del elemento, y después elige el valor de la escala.
+
+Padding
+
+Espacio **dentro** de un contenedor, entre su borde y su contenido.
+
+Ej.: el borde de una card y su texto. `.p-16` · `padding: var(--space-16)`
+
+Margin
+
+Espacio **fuera** de un elemento, entre él y sus vecinos o el borde de la pantalla.
+
+Ej.: un título y el bloque que le sigue. `.mb-24` · `margin-bottom: var(--space-24)`
+
+Gap
+
+Separación **entre hermanos** de un mismo contenedor flex o grid. Se define una vez en el padre, sin márgenes en cada hijo.
+
+Ej.: una fila de botones. `gap: var(--space-24)`
+
 Uso en código
 
 ```html
@@ -6295,7 +6317,7 @@ La aplicación móvil no consume CSS ni JavaScript. Los recursos nativos son dic
 
 ```
 Sistema de diseño de Compensar — .NET MAUI
-commit-21fa41a · generado de tokens/compensar.tokens.json
+commit-8a4b4cb · generado de tokens/compensar.tokens.json
 
 Qué trae
   Resources/Styles/Compensar.Colors.xaml  Los colores del sistema.

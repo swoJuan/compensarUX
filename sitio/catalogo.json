@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-25T18:34:03.736Z",
+  "generado": "2026-11-25T19:11:53.309Z",
   "fuentes": {
     "designSystem": {
       "id": "designSystem",
@@ -9,14 +9,20 @@
       "repositorioPropuesto": "compensar-ux-design-system",
       "remoto": "https://github.com/swoJuan/compensarUX.git",
       "ref": "HEAD",
-      "commit": "21fa41a",
+      "commit": "8a4b4cb",
       "version": "v2.5.0",
       "cambiosDesdeVersion": 0,
-      "fecha": "2026-11-25T09:16:25-05:00",
+      "fecha": "2026-11-25T14:11:41-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": 0,
+      "commitsSinSubir": 3,
       "cambios": [
+        {
+          "commit": "8a4b4cb",
+          "fecha": "2026-11-25T14:11:41-05:00",
+          "mensaje": "docs(ds): guía de uso del espaciado, patrón APP entre botones y tamaño mínimo 14px en la documentación",
+          "archivos": 47
+        },
         {
           "commit": "21fa41a",
           "fecha": "2026-11-25T09:16:25-05:00",
@@ -58,12 +64,6 @@
           "fecha": "2026-11-24T14:22:20-05:00",
           "mensaje": "docs(app): agrega Carga infinita (efecto swap) al sistema de diseño APP",
           "archivos": 7
-        },
-        {
-          "commit": "63bd56e",
-          "fecha": "2026-11-13T17:50:15-05:00",
-          "mensaje": "feat(ds): paquetes CSS/JS versionados y página Instalar en el portal",
-          "archivos": 9
         }
       ],
       "versionPaquete": "v2.5.0",
@@ -362,7 +362,7 @@
           "descripcion": "CSS, iconos y JS tal como los usan los prototipos y el portal. Para Drupal, Angular o cualquier proyecto web.",
           "archivo": "compensar-core-v2.5.0.zip",
           "contenido": 15,
-          "bytes": 678096,
+          "bytes": 678097,
           "version": "v2.5.0",
           "url": "ds/descargas/compensar-core-v2.5.0.zip"
         },
@@ -372,7 +372,7 @@
           "descripcion": "Colores y medidas como diccionarios de recursos XAML, generados de los tokens de esta misma versión.",
           "archivo": "compensar-maui-v2.5.0.zip",
           "contenido": 3,
-          "bytes": 4827,
+          "bytes": 4829,
           "version": "v2.5.0",
           "url": "ds/descargas/compensar-maui-v2.5.0.zip"
         }
@@ -392,7 +392,7 @@
       "fecha": "2026-11-25T09:35:13-05:00",
       "cambiosSinCommit": false,
       "pendientesSinPublicar": 0,
-      "commitsSinSubir": 0,
+      "commitsSinSubir": 3,
       "cambios": [
         {
           "commit": "e01d4d1",
@@ -729,18 +729,18 @@
   },
   "ia": {
     "version": "2.5.0",
-    "generado": "2026-11-25T14:16:25.000Z",
-    "commit": "21fa41a",
+    "generado": "2026-11-25T19:11:41.000Z",
+    "commit": "8a4b4cb",
     "componentes": 30,
     "tokens": 238,
     "completo": {
       "archivo": "compensar-design-system-ia-v2.5.0.md",
-      "bytes": 239483,
+      "bytes": 240226,
       "url": "descargas/ia/compensar-design-system-ia-v2.5.0.md"
     },
     "paquete": {
       "archivo": "compensar-design-system-ia-v2.5.0.zip",
-      "bytes": 110988,
+      "bytes": 111299,
       "url": "descargas/ia/compensar-design-system-ia-v2.5.0.zip"
     },
     "arbol": [

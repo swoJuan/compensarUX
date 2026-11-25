@@ -66,15 +66,15 @@ const semanticTokenDocs = (() => {
       <tbody>
         ${tokens.map(([name, cssVar, value, desc = '']) => `
           <tr>
-            <td><span style="font-family:var(--font-code);font-size:12px">${escape(name)}</span></td>
+            <td><span style="font-family:var(--font-code);font-size:14px">${escape(name)}</span></td>
             <td>
               <div class="token-name-cell">
                 ${swatch(value)}
-                <code style="font-family:var(--font-code);font-size:12px;color:var(--ui-accent)">${escape(cssVar)}</code>
+                <code style="font-family:var(--font-code);font-size:14px;color:var(--ui-accent)">${escape(cssVar)}</code>
               </div>
             </td>
-            <td><code style="font-family:var(--font-code);font-size:12px">${escape(value)}</code></td>
-            <td style="color:var(--ui-text-muted);font-size:12px">${escape(desc)}</td>
+            <td><code style="font-family:var(--font-code);font-size:14px">${escape(value)}</code></td>
+            <td style="color:var(--ui-text-muted);font-size:14px">${escape(desc)}</td>
             <td><button class="copy-token-btn" type="button" data-semantic-token-copy="${escape(cssVar)}">Copiar</button></td>
           </tr>
         `).join('')}
