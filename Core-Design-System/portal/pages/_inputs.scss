@@ -63,7 +63,7 @@
   border-radius: rem(8px);
   background: var(--use-surface-white);
   box-shadow: var(--shadow-sm, 0 4px 12px rgba(17,17,17,.08));
-  font-size: rem(12px);
+  font-size: rem(14px);
   line-height: 1.35;
   pointer-events: none;
 }
@@ -96,7 +96,7 @@
   border-radius: rem(4px);
   background: var(--doc-accent);
   color: var(--use-text-on-dark-primary);
-  font-size: rem(11px);
+  font-size: rem(14px);
   font-weight: 700;
   line-height: 1;
   z-index: 4;
@@ -148,7 +148,7 @@
   border-radius: rem(4px);
   background: var(--doc-accent);
   color: var(--use-text-on-dark-primary);
-  font-size: rem(10px);
+  font-size: rem(14px);
   font-weight: 800;
   line-height: 1;
   white-space: nowrap;
@@ -222,7 +222,7 @@
 
 .inp-field label {
   color: var(--use-text-secondary);
-  font-size: rem(12px);
+  font-size: rem(14px);
   font-weight: 800;
 }
 
@@ -255,7 +255,7 @@
   border-bottom: rem(2px) solid transparent;
   background: transparent;
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 800;
   cursor: pointer;
 }
@@ -276,7 +276,7 @@
   border-radius: rem(8px);
   background: transparent;
   color: var(--use-text-primary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
@@ -294,7 +294,7 @@
   background: var(--use-surface-theme-gray-5);
   color: var(--use-text-primary);
   font-family: var(--font-code);
-  font-size: rem(13px);
+  font-size: rem(14px);
   line-height: 1.6;
 }
 
@@ -318,7 +318,7 @@
 }
 
 .inp-state-card__label {
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 700;
   color: var(--use-text-secondary);
   text-align: center;
@@ -345,14 +345,14 @@
 
 .inp-token-item code {
   font-family: var(--font-code);
-  font-size: rem(12px);
+  font-size: rem(14px);
   color: var(--doc-accent);
   word-break: break-all;
 }
 
 .inp-token-item span {
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   line-height: 1.45;
 }
 
@@ -383,7 +383,7 @@
   border-radius: rem(10px);
   background: var(--doc-muted-bg);
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   line-height: 1.5;
 }
 
@@ -430,7 +430,7 @@
 }
 
 .inp-modo-label {
-  font-size: rem(12px);
+  font-size: rem(14px);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;

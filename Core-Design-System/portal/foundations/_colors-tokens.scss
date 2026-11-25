@@ -25,7 +25,7 @@
 .color-info { padding: var(--space-4) var(--space-8); }
 
 .color-name {
-  font-size: rem(11px);
+  font-size: rem(14px);
   font-weight: 600;
   color: var(--ui-text);
   display: block;
@@ -35,7 +35,7 @@
 }
 
 .color-var {
-  font-size: rem(10px);
+  font-size: rem(14px);
   font-family: var(--font-code);
   color: var(--ui-text-muted);
   display: block;
@@ -44,16 +44,16 @@
   text-overflow: ellipsis;
 }
 
-.color-hex { font-size: rem(10px); font-family: var(--font-code); color: var(--ui-text-muted); margin-top: rem(2px); }
+.color-hex { font-size: rem(14px); font-family: var(--font-code); color: var(--ui-text-muted); margin-top: rem(2px); }
 
 /* ══════════════════════════════════════════════════════════
    TOKEN TABLE
    ══════════════════════════════════════════════════════════ */
-.token-table { width: 100%; border-collapse: collapse; font-size: rem(13px); }
+.token-table { width: 100%; border-collapse: collapse; font-size: rem(14px); }
 
 .token-table th {
   text-align: left;
-  font-size: rem(10.5px);
+  font-size: rem(14px);
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;

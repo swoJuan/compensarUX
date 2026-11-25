@@ -176,7 +176,7 @@ body {
   align-items: center;
   padding: 0 rem(11px);
   border-radius: rem(999px);
-  font-size: rem(11px);
+  font-size: rem(14px);
   background: color-mix(in srgb, var(--use-primary-default) 8%, var(--ui-surface));
   border-color: color-mix(in srgb, var(--use-primary-default) 28%, transparent);
 }
@@ -192,7 +192,7 @@ body {
   border-color: var(--ui-border);
   border-radius: rem(8px);
   padding: 0 rem(12px) 0 rem(36px);
-  font-size: rem(13px);
+  font-size: rem(14px);
 }
 
 .search-box input:focus {
@@ -214,7 +214,7 @@ body {
 .portal-theme button {
   height: 100%;
   padding: 0 rem(13px);
-  font-size: rem(12px);
+  font-size: rem(14px);
   color: var(--ui-text-muted);
 }
 
@@ -248,7 +248,7 @@ body {
 
 .sidebar-section-label {
   padding: 0 rem(6px) rem(8px);
-  font-size: rem(10px);
+  font-size: rem(14px);
   letter-spacing: .12em;
   color: var(--ui-text-muted);
 }
@@ -259,7 +259,7 @@ body {
   gap: rem(10px);
   border-radius: rem(8px);
   color: var(--ui-text-muted);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 600;
 }
 
@@ -291,7 +291,7 @@ body {
 .sidebar-sublink {
   min-height: rem(32px);
   padding-left: rem(36px) !important;
-  font-size: rem(12px) !important;
+  font-size: rem(14px) !important;
   font-weight: 500;
 }
 
@@ -348,7 +348,7 @@ body {
 .intro-version-badge {
   padding: rem(7px) rem(14px);
   margin-bottom: rem(18px);
-  font-size: rem(12px);
+  font-size: rem(14px);
 }
 
 .intro-title {
@@ -399,7 +399,7 @@ body {
 
 .intro-cards-title {
   margin-bottom: rem(18px);
-  font-size: rem(13px);
+  font-size: rem(14px);
   letter-spacing: .08em;
 }
 
@@ -431,7 +431,7 @@ body {
 }
 
 .intro-card p {
-  font-size: rem(13px);
+  font-size: rem(14px);
   line-height: 1.55;
 }
 

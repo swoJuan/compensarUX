@@ -112,7 +112,7 @@
   border-radius: rem(5px);
   background: var(--use-state-info-bg, #e6f1fb);
   color: var(--use-state-info-text, #2d4a67);
-  font-size: rem(9px);
+  font-size: rem(14px);
   line-height: 1.2;
 }
 
@@ -133,13 +133,13 @@
 
 .alert-context-diagram__alert strong {
   color: inherit;
-  font-size: rem(8px);
+  font-size: rem(14px);
   font-weight: 800;
 }
 
 .alert-context-diagram__alert small {
   color: inherit;
-  font-size: rem(7px);
+  font-size: rem(14px);
   font-weight: 500;
 }
 
@@ -169,7 +169,7 @@
   border-radius: rem(8px);
   background: var(--use-surface-white);
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   line-height: 1.45;
 }
 
@@ -228,7 +228,7 @@
   border-radius: rem(8px);
   background: var(--use-surface-white);
   box-shadow: var(--shadow-sm, 0 4px 12px rgba(17, 17, 17, .08));
-  font-size: rem(12px);
+  font-size: rem(14px);
   line-height: 1.35;
 }
 
@@ -281,7 +281,7 @@
   border-radius: rem(4px);
   background: var(--doc-accent);
   color: var(--use-text-on-dark-primary);
-  font-size: rem(11px);
+  font-size: rem(14px);
   font-weight: 800;
   line-height: 1;
 }
@@ -356,7 +356,7 @@
 
 .alert-field label {
   color: var(--use-text-primary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 800;
 }
 
@@ -387,13 +387,13 @@
 .alert-state-card > span,
 .alert-token-item code {
   color: var(--use-text-primary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 800;
 }
 
 .alert-token-item span {
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   line-height: 1.45;
 }
 

@@ -21,7 +21,7 @@
 }
 
 .preview-label {
-  font-size: rem(11.5px);
+  font-size: rem(14px);
   font-weight: 600;
   color: var(--ui-text-muted);
   display: flex;
@@ -59,7 +59,7 @@
 
 .code-tab {
   padding: rem(9px) var(--space-16);
-  font-size: rem(12px);
+  font-size: rem(14px);
   font-weight: 600;
   color: var(--ui-text-muted);
   cursor: pointer;
@@ -82,7 +82,7 @@
   background: var(--ui-code-bg);
   color: var(--ui-code-text);
   font-family: var(--font-code);
-  font-size: rem(12.5px);
+  font-size: rem(14px);
   line-height: 1.75;
   overflow-x: auto;
   display: none;
@@ -109,7 +109,7 @@
   border: rem(1px) solid rgba(255,255,255,.12);
   border-radius: rem(6px);
   color: var(--ui-code-text);
-  font-size: rem(11px);
+  font-size: rem(14px);
   font-family: var(--font-body);
   font-weight: 600;
   padding: rem(4px) rem(10px);

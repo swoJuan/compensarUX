@@ -48,7 +48,7 @@
 }
 
 .brand-tag {
-  font-size: rem(10.5px);
+  font-size: rem(14px);
   background: var(--ui-tag-bg);
   color: var(--ui-tag-text);
   padding: rem(2px) rem(9px);
@@ -74,7 +74,7 @@
   border: rem(1px) solid var(--ui-border);
   border-radius: rem(8px);
   padding: rem(7px) rem(12px) rem(7px) rem(34px);
-  font-size: rem(13px);
+  font-size: rem(14px);
   color: var(--ui-text);
   font-family: var(--font-body);
   width: rem(220px);
@@ -113,7 +113,7 @@
   border: none;
   background: transparent;
   padding: rem(6px) rem(12px);
-  font-size: rem(11.5px);
+  font-size: rem(14px);
   font-family: var(--font-body);
   cursor: pointer;
   color: var(--ui-text-muted);
@@ -168,7 +168,7 @@
 }
 
 .sidebar-section-label {
-  font-size: rem(10px);
+  font-size: rem(14px);
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -185,7 +185,7 @@
   border-radius: rem(7px);
   text-decoration: none;
   color: var(--ui-text-muted);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 500;
   transition: background .15s, color .15s;
   position: relative;
@@ -262,11 +262,11 @@
 /* Sub-ítems */
 .sidebar-sublink {
   padding-left: rem(32px) !important;
-  font-size: rem(12.5px) !important;
+  font-size: rem(14px) !important;
 }
 
 .sidebar-sublink .icon {
-  font-size: rem(8px) !important;
+  font-size: rem(14px) !important;
   opacity: .45;
 }
 

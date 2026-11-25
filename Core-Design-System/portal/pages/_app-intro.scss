@@ -40,7 +40,7 @@
   background: color-mix(in srgb, var(--ui-accent) 10%, transparent);
   color: var(--ui-accent);
   font-weight: 700;
-  font-size: rem(13px);
+  font-size: rem(14px);
   padding: var(--space-8) var(--space-16);
   border-radius: var(--radius-full);
   margin-bottom: var(--space-16);
@@ -78,7 +78,7 @@
   background: var(--use-surface-white);
   border: rem(1px) solid var(--ui-border);
   color: var(--ui-text);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 600;
   padding: var(--space-8) var(--space-16);
   border-radius: var(--radius-xs);
@@ -165,7 +165,7 @@
   color: var(--ui-text-muted);
   strong { color: var(--ui-text); }
   code {
-    font-size: rem(13px);
+    font-size: rem(14px);
     background: var(--use-surface-white);
     border: rem(1px) solid var(--ui-border);
     padding: 0 var(--space-4);
@@ -178,7 +178,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-8);
-  font-size: rem(11px);
+  font-size: rem(14px);
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;

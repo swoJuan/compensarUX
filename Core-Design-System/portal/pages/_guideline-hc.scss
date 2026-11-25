@@ -44,7 +44,7 @@
   margin: 0;
   padding: 0 0 0 var(--space-16);
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   line-height: 1.6;
 
   li {
@@ -62,7 +62,7 @@
 
 .ghc-demo__label {
   padding: 5px var(--space-12);
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -182,7 +182,7 @@
   margin: 0;
   padding: 0 0 0 var(--space-16);
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   line-height: 1.6;
 
   li {
@@ -226,13 +226,13 @@
 }
 
 .ghc-a11y__label {
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 700;
   color: var(--use-text-primary);
 }
 
 .ghc-a11y__desc {
-  font-size: rem(13px);
+  font-size: rem(14px);
   color: var(--use-text-secondary);
   line-height: 1.5;
 }

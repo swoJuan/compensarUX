@@ -58,14 +58,14 @@
   color: var(--use-text-primary);
 
   strong {
-    font-size: rem(12px);
+    font-size: rem(14px);
     font-weight: 700;
     color: var(--use-text-primary);
     line-height: 1.25;
   }
 
   span {
-    font-size: rem(11px);
+    font-size: rem(14px);
     color: var(--use-text-secondary);
     line-height: 1.4;
   }
@@ -120,7 +120,7 @@
 .component-spec-table__label {
   font-weight: 700;
   color: var(--use-text-primary);
-  font-size: 13px;
+  font-size: 14px;
   flex-shrink: 0;
 }
 
@@ -129,7 +129,7 @@
   line-height: 1.5;
 
   code, kbd {
-    font-size: 12px;
+    font-size: 14px;
     font-family: var(--font-code, 'Roboto Mono', monospace);
     background: color-mix(in srgb, var(--use-primary-default) 10%, transparent);
     color: var(--use-primary-default);

@@ -16,7 +16,7 @@
 }
 .lys-pills { display: flex; gap: rem(8px); flex-wrap: wrap; }
 .lys-pill {
-  font-size: 0.75rem; font-weight: 600;
+  font-size: 0.875rem; font-weight: 600;
   padding: rem(4px) rem(12px); border-radius: rem(100px);
 }
 .lys-pill--blue   { background: var(--use-state-info-bg); color: var(--use-text-theme-blue); }
@@ -73,7 +73,7 @@
   color: var(--use-primary-default); line-height: 1;
 }
 .lys-fact-label {
-  display: block; font-size: 0.75rem;
+  display: block; font-size: 0.875rem;
   color: var(--use-text-secondary); margin-top: rem(2px);
 }
 .lys-fact-divider {
@@ -173,7 +173,7 @@
 }
 .lys-col-nums.visible { opacity: 1; }
 .lys-col-nums span {
-  font-size: 0.6rem; font-weight: 700;
+  font-size: 0.875rem; font-weight: 700;
   color: color-mix(in srgb, var(--use-text-theme-violet) 90%, transparent);
   text-align: center; line-height: 1;
 }
@@ -239,7 +239,7 @@
 
 .lys-compare-header { padding: rem(20px) rem(20px) 0; }
 .lys-compare-badge {
-  font-size: 0.7rem; font-weight: 700;
+  font-size: 0.875rem; font-weight: 700;
   padding: rem(3px) rem(10px); border-radius: rem(100px);
   display: inline-block; margin-bottom: rem(8px);
 }
@@ -272,17 +272,17 @@
   border: rem(2px) dashed color-mix(in srgb, var(--use-text-theme-orange) 50%, transparent);
 }
 .lys-cv-label {
-  font-family: 'Roboto Mono',monospace; font-size: 0.72rem;
+  font-family: 'Roboto Mono',monospace; font-size: 0.875rem;
   font-weight: 700; color: var(--use-text-theme-violet);
 }
 .lys-cv-box--fluid .lys-cv-label { color: var(--use-text-theme-orange); }
-.lys-cv-arrows { display: flex; align-items: center; gap: rem(4px); font-size: 0.75rem; }
+.lys-cv-arrows { display: flex; align-items: center; gap: rem(4px); font-size: 0.875rem; }
 .lys-cv-margin { flex: 1; height: rem(2px); background: var(--use-border-subtle); }
 .lys-cv-content-bar {
   flex: 3; text-align: center;
   background: color-mix(in srgb, var(--product-violet-60) 12%, transparent);
   border-radius: rem(4px); padding: rem(3px) rem(6px);
-  font-size: 0.72rem; font-weight: 600; color: var(--use-text-theme-violet);
+  font-size: 0.875rem; font-weight: 600; color: var(--use-text-theme-violet);
 }
 .lys-cv-content-bar--full {
   flex: 1;
@@ -299,18 +299,18 @@
   border-top: rem(1px) solid var(--use-surface-theme-gray-10);
 }
 .lys-compare-label-small {
-  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  font-size: 0.875rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.06em; color: var(--use-text-tertiary);
   display: block; margin-bottom: rem(10px);
 }
 .lys-bpw-list { display: flex; gap: rem(8px); flex-wrap: wrap; }
 .lys-bpw { display: flex; flex-direction: column; align-items: center; gap: rem(2px); }
-.lys-bpw span { font-size: 0.7rem; font-weight: 700; color: var(--use-text-tertiary); }
-.lys-bpw code { font-size: 0.72rem; background: var(--use-surface-theme-violet-10); color: var(--use-text-theme-violet); padding: rem(2px) rem(6px); border-radius: rem(4px); }
+.lys-bpw span { font-size: 0.875rem; font-weight: 700; color: var(--use-text-tertiary); }
+.lys-bpw code { font-size: 0.875rem; background: var(--use-surface-theme-violet-10); color: var(--use-text-theme-violet); padding: rem(2px) rem(6px); border-radius: rem(4px); }
 .lys-compare-note {
   padding: rem(10px) rem(16px); background: var(--use-surface-theme-orange-10);
   border-top: rem(1px) solid var(--use-surface-theme-orange-20);
-  font-size: 0.8125rem; color: var(--base-yellow-100);
+  font-size: 0.875rem; color: var(--base-yellow-100);
   display: flex; gap: rem(6px); align-items: flex-start;
 }
 
@@ -349,8 +349,8 @@
 }
 .lys-use-icon--purple { background: var(--use-surface-theme-violet-5); color: var(--use-text-theme-violet); }
 .lys-use-icon--orange { background: var(--use-surface-theme-orange-10); color: var(--use-text-theme-orange); }
-.lys-use-label { font-size: 0.8125rem; font-weight: 600; color: var(--use-text-primary); line-height: 1.3; }
-.lys-use-token { font-family: 'Roboto Mono',monospace; font-size: 0.7rem; color: var(--use-text-tertiary); background: var(--ui-surface-theme-gray-5); padding: rem(2px) rem(6px); border-radius: rem(4px); }
+.lys-use-label { font-size: 0.875rem; font-weight: 600; color: var(--use-text-primary); line-height: 1.3; }
+.lys-use-token { font-family: 'Roboto Mono',monospace; font-size: 0.875rem; color: var(--use-text-tertiary); background: var(--ui-surface-theme-gray-5); padding: rem(2px) rem(6px); border-radius: rem(4px); }
 
 /* ── Do / Don't ──────────────────────────────── */
 .lys-rules-grid {
@@ -404,8 +404,8 @@
 .lys-bp-xxl .lys-bp-bar { height: rem(130px); background: var(--product-violet-80); }
 
 .lys-bp-name  { font-size: 0.875rem; font-weight: 800; color: var(--use-text-primary); }
-.lys-bp-range { font-size: 0.7rem; font-family: 'Roboto Mono',monospace; color: var(--use-text-secondary); }
-.lys-bp-uso   { font-size: 0.75rem; color: var(--use-text-tertiary); text-align: center; }
+.lys-bp-range { font-size: 0.875rem; font-family: 'Roboto Mono',monospace; color: var(--use-text-secondary); }
+.lys-bp-uso   { font-size: 0.875rem; color: var(--use-text-tertiary); text-align: center; }
 
 /* ── Adapt (mobile → tablet → desktop) ──────── */
 .lys-adapt-grid {
@@ -435,8 +435,8 @@
 .lys-ad-col--sm   { height: rem(12px); }
 
 .lys-adapt-label { font-weight: 700; font-size: 0.9rem; color: var(--use-text-primary); }
-.lys-adapt-sub   { font-size: 0.8rem; color: var(--use-text-secondary); }
-.lys-adapt-code  { font-family: 'Roboto Mono',monospace; font-size: 0.72rem; background: var(--use-surface-theme-violet-5); color: var(--use-text-theme-violet); padding: rem(2px) rem(7px); border-radius: rem(4px); }
+.lys-adapt-sub   { font-size: 0.875rem; color: var(--use-text-secondary); }
+.lys-adapt-code  { font-family: 'Roboto Mono',monospace; font-size: 0.875rem; background: var(--use-surface-theme-violet-5); color: var(--use-text-theme-violet); padding: rem(2px) rem(7px); border-radius: rem(4px); }
 
 /* ── QA block ────────────────────────────────── */
 .lys-qa-block {
@@ -470,13 +470,13 @@
 .lys-qa-num {
   width: rem(26px); height: rem(26px); border-radius: 50%;
   background: var(--use-primary-default); color: var(--base-neutral-white);
-  font-weight: 800; font-size: 0.8rem;
+  font-weight: 800; font-size: 0.875rem;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
 .lys-qa-item div { display: flex; flex-direction: column; gap: rem(2px); }
 .lys-qa-item strong { font-size: 0.9rem; color: var(--use-text-primary); }
-.lys-qa-item span   { font-size: 0.8125rem; color: var(--use-text-secondary); line-height: 1.4; }
+.lys-qa-item span   { font-size: 0.875rem; color: var(--use-text-secondary); line-height: 1.4; }
 
 /* Device chips */
 .lys-devices-row {
@@ -486,7 +486,7 @@
 }
 .lys-dev-chip {
   display: inline-flex; align-items: center; gap: rem(5px);
-  font-size: 0.78rem; font-weight: 600;
+  font-size: 0.875rem; font-weight: 600;
   padding: rem(5px) rem(11px); border-radius: rem(100px);
 }
 .lys-dev-chip--p1 { background: var(--use-state-success-bg); color: var(--use-state-success-text); border: rem(1px) solid var(--use-state-success-border); }

@@ -128,6 +128,80 @@ $spacers: (
     </div>
   </div>
 
+  <!-- CÓMO SE USA -->
+  <div class="sp-section-label"><span class="material-symbols-rounded">rule</span> Cómo se usa el espaciado</div>
+  <p class="sp-use-intro">Los tokens definen cuánto espacio hay. Estas reglas definen dónde se aplica cada uno. Primero identifica si el espacio queda dentro o fuera del elemento, y después elige el valor de la escala.</p>
+  <div class="sp-use-grid">
+    <div class="sp-use-card">
+      <div class="sp-use-card-title"><span class="material-symbols-rounded">padding</span> Padding</div>
+      <p>Espacio <strong>dentro</strong> de un contenedor, entre su borde y su contenido.</p>
+      <p class="sp-use-eg">Ej.: el borde de una card y su texto. <code>.p-16</code> · <code>padding: var(--space-16)</code></p>
+    </div>
+    <div class="sp-use-card">
+      <div class="sp-use-card-title"><span class="material-symbols-rounded">margin</span> Margin</div>
+      <p>Espacio <strong>fuera</strong> de un elemento, entre él y sus vecinos o el borde de la pantalla.</p>
+      <p class="sp-use-eg">Ej.: un título y el bloque que le sigue. <code>.mb-24</code> · <code>margin-bottom: var(--space-24)</code></p>
+    </div>
+    <div class="sp-use-card">
+      <div class="sp-use-card-title"><span class="material-symbols-rounded">space_bar</span> Gap</div>
+      <p>Separación <strong>entre hermanos</strong> de un mismo contenedor flex o grid. Se define una vez en el padre, sin márgenes en cada hijo.</p>
+      <p class="sp-use-eg">Ej.: una fila de botones. <code>gap: var(--space-24)</code></p>
+    </div>
+  </div>
+
+  <!-- PATRÓN APP: ENTRE BOTONES (solo plataforma APP) -->
+  <div id="sp-pattern-buttons" hidden>
+    <div class="sp-section-label"><span class="material-symbols-rounded">smartphone</span> Patrón APP · Separación entre botones</div>
+    <div class="sp-pattern-card">
+      <div class="sp-pattern-rule">
+        <span class="sp-pattern-value">24<span class="sp-base-unit">px</span></span>
+        <p>Cuando haya <strong>dos o más botones juntos</strong>, la separación entre ellos es siempre <code>space-24</code> (24px). Aplica igual si están en fila (horizontal) o apilados (vertical).</p>
+      </div>
+      <div class="sp-pattern-demos">
+        <figure class="sp-pattern-demo">
+          <div class="sp-pattern-stage sp-pattern-stage--row">
+            <button type="button" class="mp-btn mp-btn--secundario">Cancelar</button>
+            <span class="sp-pattern-dim sp-pattern-dim--h" aria-hidden="true"><span>24</span></span>
+            <button type="button" class="mp-btn mp-btn--primario">Continuar</button>
+          </div>
+          <figcaption>Horizontal · 24px entre botones</figcaption>
+        </figure>
+        <figure class="sp-pattern-demo">
+          <div class="sp-pattern-stage sp-pattern-stage--col">
+            <button type="button" class="mp-btn mp-btn--primario">Continuar</button>
+            <span class="sp-pattern-dim sp-pattern-dim--v" aria-hidden="true"><span>24</span></span>
+            <button type="button" class="mp-btn mp-btn--secundario">Cancelar</button>
+          </div>
+          <figcaption>Vertical · 24px entre botones</figcaption>
+        </figure>
+      </div>
+      <ul class="sp-pattern-list">
+        <li><strong>Hazlo con gap, no con margen por botón.</strong> El contenedor define la separación y evita que se sume o falte un margen al añadir o quitar un botón.</li>
+        <li>Los 24px son solo <strong>entre</strong> botones. La distancia a otros elementos de la pantalla sigue la escala normal.</li>
+        <li>No uses 8, 12 ni 16px entre botones, aunque el espacio se vea justo.</li>
+      </ul>
+      <div class="sp-code-block">
+        <button class="sp-code-copy" onclick="spCopyCode('sp-pattern-code',this)"><span class="material-symbols-rounded">content_copy</span> Copiar</button>
+        <pre class="sp-code-pre sp-code-active" id="sp-pattern-code">&lt;!-- MAUI · botones apilados (vertical) --&gt;
+&lt;VerticalStackLayout Spacing="{StaticResource MpSpace24}"&gt;
+    &lt;Button Text="Continuar" /&gt;
+    &lt;Button Text="Cancelar" /&gt;
+&lt;/VerticalStackLayout&gt;
+
+&lt;!-- MAUI · botones en fila (horizontal) --&gt;
+&lt;HorizontalStackLayout Spacing="{StaticResource MpSpace24}"&gt;
+    &lt;Button Text="Cancelar" /&gt;
+    &lt;Button Text="Continuar" /&gt;
+&lt;/HorizontalStackLayout&gt;
+
+/* Referencia web / prototipos HTML */
+.button-group { display: flex; gap: var(--space-24); }
+.button-group--vertical { flex-direction: column; }</pre>
+      </div>
+    </div>
+  </div>
+  <script>if (window.DS_PLATFORM === 'app') { var spPb = document.getElementById('sp-pattern-buttons'); if (spPb) spPb.hidden = false; }</script>
+
   <!-- USO EN CÓDIGO -->
   <div class="sp-section-label"><span class="material-symbols-rounded">code</span> Uso en código</div>
   <div class="sp-code-tabs-bar">

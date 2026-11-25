@@ -82,7 +82,7 @@
   padding: rem(4px) var(--space-8);
   background: var(--loading-doc-accent);
   color: var(--use-text-on-dark-primary);
-  font-size: rem(12px);
+  font-size: rem(14px);
   font-weight: 800;
   line-height: 1;
 }
@@ -117,12 +117,12 @@
 
 .loading-doc-callout strong {
   color: var(--use-text-primary);
-  font-size: rem(13px);
+  font-size: rem(14px);
 }
 
 .loading-doc-callout span {
   color: var(--use-text-secondary);
-  font-size: rem(12px);
+  font-size: rem(14px);
   line-height: 1.35;
 }
 

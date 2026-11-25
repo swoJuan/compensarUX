@@ -18,7 +18,7 @@
   background: var(--ui-surface-alt);
   border: rem(1px) solid var(--ui-border);
   border-radius: rem(8px);
-  font-size: rem(13px);
+  font-size: rem(14px);
   transition: box-shadow .15s;
 }
 
@@ -35,14 +35,14 @@
 
 .spacing-val {
   font-family: var(--font-code);
-  font-size: rem(12px);
+  font-size: rem(14px);
   font-weight: 600;
   color: var(--ui-text);
 }
 
 .spacing-token {
   font-family: var(--font-code);
-  font-size: rem(11px);
+  font-size: rem(14px);
   color: var(--ui-text-muted);
 }
 
@@ -245,19 +245,20 @@
 .sp-section-label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 11px;
+  gap: 10px;
+  font-size: 22px;
   font-weight: 700;
-  color: var(--ui-text-muted);
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--ui-text);
+  letter-spacing: 0;
+  text-transform: none;
   margin: var(--space-48) 0 var(--space-24);
   border-bottom: 1px solid var(--ui-border);
   padding-bottom: var(--space-12);
 }
 
 .sp-section-label .material-symbols-rounded {
-  font-size: 15px;
+  font-size: 24px;
   color: var(--ui-accent)
 }
 
@@ -270,7 +271,7 @@
   border-left: 3px solid var(--ui-accent);
   border-radius: 0 8px 8px 0;
   padding: var(--space-12) var(--space-24);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--ui-text);
   margin-bottom: var(--space-24);
   flex-wrap: wrap;
@@ -283,7 +284,7 @@
 
 #espaciado .ty-figma-bar code {
   font-family: var(--font-code);
-  font-size: 11.5px;
+  font-size: 14px;
   background: var(--ui-surface-alt);
   padding: 1px 5px;
   border-radius: 4px;
@@ -302,7 +303,7 @@
 /* ── Badge restricted ─────────────────────────────────── */
 .sp-badge-restricted {
   display: inline-block;
-  font-size: 9.5px;
+  font-size: 14px;
   font-weight: 700;
   background: var(--ui-surface-alt);
   color: #a0620f;
@@ -315,7 +316,7 @@
 
 .sp-badge-standard {
   display: inline-block;
-  font-size: 9.5px;
+  font-size: 14px;
   font-weight: 700;
   background: #e6f7e8;
   color: #1a7a3c;
@@ -362,7 +363,7 @@
 }
 
 .sp-base-label {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ui-text-muted);
   letter-spacing: .05em;
@@ -370,7 +371,7 @@
 }
 
 .sp-base-desc {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ui-text-muted);
   line-height: 1.6;
   text-align: left
@@ -391,7 +392,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--ui-text)
 }
 
@@ -407,7 +408,7 @@
 
 .sp-base-info-row code {
   font-family: var(--font-code);
-  font-size: 11px;
+  font-size: 14px;
   background: var(--ui-surface-alt);
   padding: 1px 5px;
   border-radius: 4px;
@@ -425,12 +426,12 @@
 .sp-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px
+  font-size: 14px
 }
 
 .sp-table thead th {
   background: var(--ui-surface-alt);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
@@ -475,7 +476,7 @@
 }
 
 .sp-group-lbl {
-  font-size: 10.5px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .08em;
@@ -530,7 +531,7 @@
 }
 
 .sp-bar-px {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--ui-text);
   font-family: var(--font-code);
@@ -539,13 +540,13 @@
 
 .sp-px-strong {
   font-family: var(--font-code);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /* Token chip */
 .sp-token-chip {
   font-family: var(--font-code);
-  font-size: 11px;
+  font-size: 14px;
   background: var(--ui-surface-alt);
   border: 1px solid var(--ui-border);
   border-radius: 5px;
@@ -564,7 +565,7 @@
 
 .sp-var-chip {
   font-family: var(--font-code);
-  font-size: 11px;
+  font-size: 14px;
   background: var(--ui-tag-bg);
   border: 1px solid transparent;
   border-radius: 5px;
@@ -589,7 +590,7 @@
 
 .sp-cls-chip {
   font-family: var(--font-code);
-  font-size: 10.5px;
+  font-size: 14px;
   background: var(--ui-surface-alt);
   border: 1px solid var(--ui-border);
   border-radius: 4px;
@@ -605,7 +606,7 @@
 }
 
 .sp-empty-cell {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--ui-text-muted);
 }
 
@@ -629,7 +630,7 @@
 }
 
 .sp-row-copy .material-symbols-rounded {
-  font-size: 13px
+  font-size: 14px
 }
 
 /* ── Utility panels ───────────────────────────────────── */
@@ -650,16 +651,16 @@
   background: none;
   border: none;
   border-radius: 7px;
-  padding: 6px 14px;
-  font-size: 12px;
-  font-weight: 500;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--ui-text-muted);
   cursor: pointer;
   transition: background .15s, color .15s;
 }
 
 .sp-util-tab .material-symbols-rounded {
-  font-size: 14px
+  font-size: 18px
 }
 
 .sp-util-tab.active {
@@ -699,7 +700,7 @@
 
 .sp-util-class {
   font-family: var(--font-code);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--product-violet-50);
   cursor: pointer
@@ -710,14 +711,14 @@
 }
 
 .sp-util-prop {
-  font-size: 11.5px;
+  font-size: 14px;
   color: var(--ui-text);
   font-family: var(--font-code);
   line-height: 1.45
 }
 
 .sp-util-val {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--ui-text-muted)
 }
 
@@ -737,7 +738,7 @@
 }
 
 .sp-stack-demo-label {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ui-accent);
   letter-spacing: .06em;
@@ -750,7 +751,7 @@
   border: 1px solid var(--ui-border);
   border-radius: 6px;
   padding: 8px 12px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ui-text);
   position: relative
 }
@@ -759,7 +760,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 10px;
+  font-size: 14px;
   color: var(--ui-accent);
   padding: 2px 0;
   font-family: var(--font-code)
@@ -772,14 +773,14 @@
 }
 
 .sp-stack-intro {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--ui-text-muted);
   margin-bottom: var(--space-16);
 }
 
 .sp-stack-intro code {
   font-family: var(--font-code);
-  font-size: 11px;
+  font-size: 14px;
   background: var(--ui-surface-alt);
   padding: 1px 5px;
   border-radius: 4px;
@@ -808,14 +809,14 @@
   background: var(--ui-surface-alt);
   border-bottom: 1px solid var(--ui-border);
   padding: var(--space-12) var(--space-24);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ui-text);
 }
 
 .sp-bs-card-head code {
   font-family: var(--font-code);
-  font-size: 11px;
+  font-size: 14px;
   color: var(--ui-accent)
 }
 
@@ -838,7 +839,7 @@
   border: 1px solid rgba(255, 255, 255, .12);
   border-radius: 5px;
   padding: 2px 8px;
-  font-size: 10px;
+  font-size: 14px;
   color: var(--ui-text-muted);
   cursor: pointer;
   transition: background .12s, color .12s;
@@ -850,12 +851,12 @@
 }
 
 .sp-code-copy .material-symbols-rounded {
-  font-size: 11px
+  font-size: 14px
 }
 
 .sp-code-pre {
   font-family: var(--font-code);
-  font-size: 12.5px;
+  font-size: 14px;
   line-height: 1.72;
   color: var(--ui-code-text);
   padding: 28px 16px 14px;
@@ -893,7 +894,7 @@
   border: none;
   border-radius: 7px;
   padding: 6px 14px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--ui-text-muted);
   cursor: pointer;
@@ -945,7 +946,7 @@
 }
 
 .sp-access-sub {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--ui-text-muted);
   text-transform: uppercase;
@@ -962,7 +963,7 @@
 }
 
 .sp-access-list li {
-  font-size: 12.5px;
+  font-size: 14px;
   color: var(--ui-text)
 }
 
@@ -1008,4 +1009,126 @@
 
 [data-theme="high-contrast"] .sp-code-copy:hover {
   background: var(--ui-tag-bg);
+}
+
+/* ── Cómo se usa + patrón entre botones ───────────────── */
+.sp-use-intro {
+  margin: 0 0 var(--space-16);
+  font-size: 14px;
+  color: var(--ui-text-muted);
+  max-width: 720px;
+}
+
+.sp-use-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+}
+
+.sp-use-card {
+  background: var(--ui-surface-alt);
+  border: 1px solid var(--ui-border);
+  border-radius: 14px;
+  padding: var(--space-24);
+  font-size: 14px;
+  color: var(--ui-text);
+
+  p { margin: 0 0 var(--space-8); }
+  code { font-family: var(--font-code); font-size: 14px; color: var(--ui-accent); }
+}
+
+.sp-use-card-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-weight: 700;
+  margin-bottom: var(--space-8);
+
+  .material-symbols-rounded { font-size: 18px; color: var(--ui-accent); }
+}
+
+.sp-use-eg { color: var(--ui-text-muted); font-size: 14px; }
+
+.sp-pattern-card {
+  background: var(--ui-surface-alt);
+  border: 1px solid var(--ui-border);
+  border-radius: 14px;
+  padding: var(--space-24);
+  margin-bottom: var(--space-32);
+  color: var(--ui-text);
+}
+
+.sp-pattern-rule {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  margin-bottom: var(--space-24);
+
+  p { margin: 0; font-size: 14px; }
+  code { font-family: var(--font-code); font-size: 14px; color: var(--ui-accent); }
+}
+
+.sp-pattern-value {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ui-accent);
+}
+
+.sp-pattern-demos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-16);
+  margin-bottom: var(--space-24);
+}
+
+.sp-pattern-demo {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  figcaption {
+    margin-top: var(--space-8);
+    font-size: 14px;
+    color: var(--ui-text-muted);
+    text-align: center;
+  }
+}
+
+.sp-pattern-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+  background: var(--ui-surface);
+  border: 1px dashed var(--ui-border);
+  border-radius: 12px;
+  flex: 1;
+}
+
+.sp-pattern-stage--col { flex-direction: column; }
+
+/* Cota de 24px: el propio espacio entre botones, resaltado */
+.sp-pattern-dim {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--ui-accent) 18%, transparent);
+  color: var(--ui-accent);
+  font-size: 14px;
+  font-weight: 700;
+  align-self: stretch;
+}
+
+.sp-pattern-dim--h { width: 24px; height: 48px; align-self: center; }
+.sp-pattern-dim--v { height: 24px; align-self: center; width: 120px; }
+
+.sp-pattern-list {
+  margin: 0 0 var(--space-24);
+  padding-left: var(--space-24);
+  list-style: disc;
+  font-size: 14px;
+
+  li { margin-bottom: var(--space-8); }
 }

@@ -11,7 +11,7 @@
   border-left: rem(3px) solid var(--ui-accent);
   border-radius: 0 rem(8px) rem(8px) 0;
   padding: var(--space-8) var(--space-24);
-  font-size: rem(13px);
+  font-size: rem(14px);
   color: var(--ui-text);
   margin-bottom: var(--space-32);
   flex-wrap: wrap;
@@ -24,7 +24,7 @@
 
 .sh-figma-bar code {
   font-family: var(--font-code);
-  font-size: rem(11.5px);
+  font-size: rem(14px);
   background: var(--ui-surface-alt);
   padding: rem(1px) rem(5px);
   border-radius: rem(4px);
@@ -40,11 +40,11 @@
   display: flex;
   align-items: center;
   gap: rem(8px);
-  font-size: rem(11px);
+  font-size: 18px;
   font-weight: 700;
-  color: var(--ui-text-muted);
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  color: var(--ui-text);
+  letter-spacing: 0;
+  text-transform: none;
   margin: 0 0 var(--space-8);
   border-bottom: rem(1px) solid var(--ui-border);
   padding-bottom: var(--space-8);
@@ -56,7 +56,7 @@
 }
 
 .sh-group-desc {
-  font-size: rem(13px);
+  font-size: rem(14px);
   color: var(--ui-text-muted);
   margin: 0 0 var(--space-24);
 }
@@ -93,7 +93,7 @@
   background: var(--ui-surface-alt);
   border-radius: rem(10px);
   padding: var(--space-4) var(--space-32);
-  font-size: rem(12px);
+  font-size: rem(14px);
   font-weight: 500;
   color: var(--ui-text-muted);
   text-align: center;
@@ -104,7 +104,7 @@
 }
 
 .sh-card-level {
-  font-size: rem(10px);
+  font-size: rem(14px);
   font-weight: 700;
   color: var(--ui-accent);
   letter-spacing: .1em;
@@ -120,7 +120,7 @@
 }
 
 .sh-card-use {
-  font-size: rem(11.5px);
+  font-size: rem(14px);
   color: var(--ui-text-muted);
   margin-bottom: var(--space-8);
   line-height: 1.4;
@@ -128,7 +128,7 @@
 
 .sh-alias-badge {
   display: inline-block;
-  font-size: rem(9px);
+  font-size: rem(14px);
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -149,7 +149,7 @@
 
 .sh-chip {
   font-family: var(--font-code);
-  font-size: rem(10.5px);
+  font-size: rem(14px);
   background: var(--ui-surface-alt);
   color: var(--ui-accent);
   padding: rem(2px) rem(7px);
@@ -189,12 +189,12 @@
 }
 
 .sh-copy-val .material-symbols-rounded {
-  font-size: rem(13px);
+  font-size: rem(14px);
 }
 
 .sh-value {
   font-family: var(--font-code);
-  font-size: rem(10px);
+  font-size: rem(14px);
   color: var(--ui-text-muted);
   display: block;
   white-space: nowrap;
@@ -245,13 +245,13 @@
 }
 
 .sh-list-use {
-  font-size: rem(11.5px);
+  font-size: rem(14px);
   color: var(--ui-text-muted);
 }
 
 .sh-list-use code {
   font-family: var(--font-code);
-  font-size: rem(10.5px);
+  font-size: rem(14px);
   background: var(--ui-surface-alt);
   padding: rem(1px) rem(4px);
   border-radius: rem(3px);
@@ -289,7 +289,7 @@
 .sh-btn-demo {
   padding: rem(10px) rem(22px);
   border-radius: rem(8px);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 500;
   font-family: var(--font-body);
   cursor: default;

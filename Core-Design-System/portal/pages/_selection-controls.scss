@@ -43,7 +43,7 @@
   border-radius: rem(4px);
   background: var(--doc-accent);
   color: var(--use-text-on-dark-primary);
-  font-size: rem(11px);
+  font-size: rem(14px);
   font-weight: 800;
   line-height: 1;
 }
@@ -92,7 +92,7 @@
   border-radius: rem(8px);
   background: var(--use-surface-white);
   box-shadow: var(--shadow-sm, 0 4px 12px rgba(17, 17, 17, .08));
-  font-size: rem(12px);
+  font-size: rem(14px);
   line-height: 1.35;
 }
 
@@ -183,7 +183,7 @@
 
 .selection-field label {
   color: var(--use-text-primary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 800;
 }
 
@@ -207,7 +207,7 @@
 
 .selection-state-card > span {
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
   font-weight: 800;
 }
 
@@ -235,12 +235,12 @@
 
 .selection-token-item code {
   font-family: var(--font-code);
-  font-size: rem(12px);
+  font-size: rem(14px);
 }
 
 .selection-token-item span {
   color: var(--use-text-secondary);
-  font-size: rem(13px);
+  font-size: rem(14px);
 }
 
 @media (max-width: rem(1024px)) {

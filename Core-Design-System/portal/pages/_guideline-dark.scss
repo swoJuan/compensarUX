@@ -44,7 +44,7 @@
 }
 
 .gdm-rule__desc {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--use-text-secondary);
   margin: 0;
@@ -58,13 +58,13 @@
   gap: var(--space-8);
 
   li {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
     color: var(--use-text-secondary);
   }
 
   code {
-    font-size: 11px;
+    font-size: 14px;
     font-family: var(--font-code, 'Roboto Mono', monospace);
     color: var(--gdm-accent);
     background: color-mix(in srgb, var(--gdm-accent) 10%, transparent);
@@ -86,7 +86,7 @@
 }
 
 .gdm-demo__label {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -175,13 +175,13 @@
 }
 
 .gdm-surface__name {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--use-text-primary);
 }
 
 .gdm-surface code {
-  font-size: 10px;
+  font-size: 14px;
   font-family: var(--font-code, 'Roboto Mono', monospace);
   color: var(--gdm-accent);
   white-space: nowrap;
@@ -284,7 +284,7 @@
 }
 
 .gdm-a11y__desc {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--use-text-secondary);
   line-height: 1.4;
   margin: 0;
@@ -298,13 +298,13 @@
   gap: var(--space-8);
 
   li {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
     color: var(--use-text-secondary);
   }
 
   code {
-    font-size: 11px;
+    font-size: 14px;
     font-family: var(--font-code, 'Roboto Mono', monospace);
     color: var(--gdm-accent);
     background: color-mix(in srgb, var(--gdm-accent) 10%, transparent);

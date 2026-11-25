@@ -96,7 +96,7 @@
   &.is-new { animation: app-il-in .28s ease-out both; }
 }
 .app-il-req__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-12); }
-.app-il-req__label { margin: 0; font-size: rem(13px); line-height: 1.5; text-transform: uppercase; color: var(--use-text-tertiary); }
+.app-il-req__label { margin: 0; font-size: rem(14px); line-height: 1.5; text-transform: uppercase; color: var(--use-text-tertiary); }
 .app-il-req__id { margin: rem(2px) 0 0; font-size: rem(18px); font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
 .app-il-req__sep { height: rem(1px); background: var(--use-border-subtle); }
 .app-il-req__rows { display: flex; flex-direction: column; gap: var(--space-8); margin: 0; }
