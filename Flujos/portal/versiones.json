@@ -2,6 +2,7 @@
   "$comentario": "Notas por versión del sistema de diseño, escritas por UX. La lista de versiones sale de los tags del repositorio; aquí solo se agrega qué debería mirar quien revisa. Una versión sin nota se publica igual, con el mensaje de su tag. La clave es el tag exacto. RESPALDO: al unir los repos en el monorepo (Commit inicial d4cefd3) se perdieron los tags. Por eso 'historico' guarda tag, fecha, commit original y título de cada versión, recuperados de _respaldo-repos/Core-Design-System.bundle. El build lo usa SOLO cuando el repositorio no tiene tags; si hay tags reales, prevalecen. Los commits listados son los del repositorio original y ya no existen en este historial.",
 
   "historico": [
+    { "tag": "v2.5.0", "fecha": "2026-11-25T09:16:02-05:00", "commit": "62e78d4", "titulo": "Core Design System v2.5.0 — Tabs v2: Pill XL y Tarjeta con ícono (mp-tab-xl, mp-tab-card), color Violeta, Light/Dark/Alto contraste" },
     { "tag": "v2.4.0", "fecha": "2026-11-11T21:29:32+00:00", "commit": "27767a7", "titulo": "Core Design System v2.4.0 — Tabs: menú desplegable por debajo de 768 px (informe 32)" },
     { "tag": "v2.3.0", "fecha": "2026-11-11T15:13:15-05:00", "commit": "b256a39", "titulo": "v2.3.0: cierre técnico de la estabilización. Verificaciones diferidas: Safari, VoiceOver y revisión visual del equipo." },
     { "tag": "v2.2.1", "fecha": "2026-11-06T18:35:45-05:00", "commit": "19f23ff", "titulo": "Core Design System v2.2.1 — DEC-003 estados de Inputs (Error, Focus, Disabled, Readonly) conforme a Figma" },
@@ -9,6 +10,9 @@
   ],
 
 
+  "v2.5.0": {
+    "revisar": "Tabs v2 (aprobado por UX): Pill XL y Tarjeta con ícono en Naranja y Violeta, sin sombra en Active. Verificar contraste de texto de 4,5:1, foco de 3 px (4 px en Alto contraste), navegación por teclado y el desplegable por debajo de 768 px. El mp-tab base no cambia."
+  },
   "v2.3.0": {
     "revisar": "Cambios de color en badges e íconos de advertencia, y títulos de tarjeta en negrita. Pendientes de revisión visual del equipo, Safari y VoiceOver."
   }
