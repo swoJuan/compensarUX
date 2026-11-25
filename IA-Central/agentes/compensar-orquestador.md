@@ -9,6 +9,7 @@ Para cada solicitud:
 4. Delega exclusivamente al conjunto mínimo de especialistas. El intérprete Figma NO sustituye al diseñador; el arquitecto DS NO sustituye al ingeniero DS. Usa dependencias: Figma -> revisión de componentes -> implementación -> QA -> documentación -> entrega.
 5. Exige CONTRATO-TAREA, evidencias y handoffs, y evita que dos agentes editen el mismo archivo simultáneamente.
 6. Nunca des por aprobada una propuesta, un componente nuevo o una publicación sin aprobación explícita del director UX. Usa el registro central para estados verificables.
+   **Regla «desplegar = aprobado»:** cuando el usuario pide desplegar, publicar o liberar una versión (del sistema de diseño o de un flujo), esa petición ES la aprobación UX de su contenido. No la marques como «pendiente de validación UX», no muestres avisos de «Validación UX requerida» en el portal ni en las notas, y registra la aprobación a su nombre (`--aprobado-por`, `aprobacionUX`). Esto no autoriza push ni despliegue remoto: siguen requiriendo su propia autorización (punto 6 de «Guardar cambios de un flujo»).
 7. Ordena al Gestor de Conocimiento actualizar registros después de cada avance, aunque la entrega esté pendiente.
 8. Entrega un resumen conciso: hecho, evidencia, pendientes, siguiente acción, archivos cambiados, Git y publicaciones (si existieron).
 

@@ -569,7 +569,21 @@ const versionesGit = ds.versiones();
 const historico = Array.isArray(notasVersiones.historico) ? notasVersiones.historico : [];
 const versionesBase = versionesGit.length ? versionesGit : [...historico]
   .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
-  .map((h) => ({ tag: h.tag, fecha: h.fecha, commit: h.commit, titulo: h.titulo || '', cuerpo: '', publicada: true, cambios: [], totalCambios: 0 }));
+  .map((h) => ({ tag: h.tag, fecha: h.fecha, commit: h.commit, titulo: h.titulo || '', cuerpo: h.cuerpo || '', publicada: true, cambios: h.cambios || [], totalCambios: (h.cambios || []).length }));
+/* Commits entre versiones del histórico: solo se pueden calcular si el commit de la versión
+   existe en este repositorio. Si la versión anterior es del repositorio original, la base es
+   el primer commit del monorepo (que ya contiene todo lo anterior). */
+if (!versionesGit.length) {
+  const raizDs = ds.commitRaiz();
+  versionesBase.forEach((v, i, todas) => {
+    if (v.cambios.length || !ds.existe(v.commit)) return;
+    const previa = todas[i + 1];
+    const base = previa && ds.existe(previa.commit) ? previa.commit : raizDs;
+    if (!base || base.startsWith(v.commit) || v.commit.startsWith(base.slice(0, 7))) return;
+    v.cambios = ds.detalleRango(base, v.commit);
+    v.totalCambios = v.cambios.length;
+  });
+}
 const versionesDs = versionesBase.map((v, i, todas) => ({
   ...v,
   primera: i === todas.length - 1,

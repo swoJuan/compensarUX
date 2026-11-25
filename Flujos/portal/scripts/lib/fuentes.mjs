@@ -157,6 +157,33 @@ export class Fuente {
     });
     return { total, lista };
   }
+  /** ¿El commit existe en este repositorio? (los del repositorio original se perdieron al unir los repos) */
+  existe(commit) {
+    return !!commit && gitTxt(this.repo, ['cat-file', '-e', `${commit}^{commit}`]) !== null;
+  }
+  /** Primer commit del historial (base cuando la versión anterior no existe en este repositorio). */
+  commitRaiz() {
+    return (gitTxt(this.repo, ['rev-list', '--max-parents=0', this.gitRef]) || '').split('\n')[0] || null;
+  }
+  /**
+   * Commits de un rango con detalle para el changelog: autor, cuerpo y archivos tocados
+   * dentro de la carpeta de esta fuente. Los archivos se recortan a `maxArchivos` por commit.
+   */
+  detalleRango(desde, hasta, n = 200, maxArchivos = 40) {
+    const rango = desde ? `${desde}..${hasta}` : hasta;
+    const out = gitTxt(this.repo, ['log', `-n${n}`, '--format=%x1e%h%x1f%cI%x1f%an%x1f%s%x1f%b%x1d', '--name-status', rango, '--', '.']) || '';
+    const prefijo = (gitTxt(this.repo, ['rev-parse', '--show-prefix']) || '');
+    return out.split('\x1e').filter((b) => b.trim()).map((bloque) => {
+      const [cab, resto = ''] = bloque.split('\x1d');
+      const [commit, fecha, autor, mensaje, cuerpo] = cab.split('\x1f');
+      const archivos = resto.split('\n').map((l) => l.trim()).filter(Boolean).map((l) => {
+        const partes = l.split('\t');
+        const ruta = partes[partes.length - 1];
+        return { estado: partes[0][0], ruta: prefijo && ruta.startsWith(prefijo) ? ruta.slice(prefijo.length) : ruta };
+      });
+      return { commit, fecha, autor, mensaje, cuerpo: (cuerpo || '').trim(), totalArchivos: archivos.length, archivos: archivos.slice(0, maxArchivos) };
+    });
+  }
   /**
    * Versiones del repositorio a partir de los tags, de la más reciente a la más antigua.
    * Cada versión trae su mensaje, si el portal la publica y los commits que incluye.
@@ -176,10 +203,10 @@ export class Fuente {
     }).slice(0, n);
     for (let i = 0; i < lista.length; i++) {
       const anterior = lista[i + 1];
-      const cambios = this.commitsDe(anterior ? `${anterior.tag}..${lista[i].tag}` : lista[i].tag);
+      const cambios = this.detalleRango(anterior ? anterior.tag : null, lista[i].tag);
       lista[i].publicada = this.contiene(lista[i].commit);
-      lista[i].cambios = cambios.lista;
-      lista[i].totalCambios = cambios.total;
+      lista[i].cambios = cambios;
+      lista[i].totalCambios = cambios.length;
     }
     return lista;
   }
