@@ -1,0 +1,110 @@
+@use '../../core/abstracts' as *;
+// ============================================================
+//  Estilos de documentación — Tabs v2 (mp-tab-xl / mp-tab-card)
+//  Solo documentación. El componente vive en core/components/web/_tabs-v2.scss.
+//  Reutiliza .tab-doc-sample, .tab-doc-panel y .tab-mode-box de _tabs.scss.
+// ============================================================
+.tabv2-doc-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.tabv2-doc-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.tabv2-doc-row__label {
+  margin: 0;
+  font-size: rem(14px);
+  font-weight: 700;
+  color: var(--use-text-secondary);
+}
+
+.tabv2-doc-states {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+
+.tabv2-doc-state {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  align-items: flex-start;
+}
+
+.tabv2-doc-state__name {
+  margin: 0;
+  font-size: rem(12px);
+  line-height: 1.2;
+  color: var(--use-text-secondary);
+}
+
+.tabv2-doc-spec {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: rem(14px);
+}
+
+.tabv2-doc-spec th,
+.tabv2-doc-spec td {
+  padding: var(--space-8) var(--space-12);
+  border-bottom: rem(1px) solid var(--doc-card-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.tabv2-doc-spec th {
+  width: 34%;
+  font-weight: 700;
+  color: var(--use-text-primary);
+}
+
+.tab-doc-sample--wide {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+
+// Los bloques con [hidden] deben ocultarse aunque su clase defina display (flex, grid).
+[data-tabs-format-panel][hidden],
+[data-component-doc='tabs-v2'] [hidden] {
+  display: none !important;
+}
+
+// ── Anatomía interactiva ──────────────────────────────────────
+.tabv2-stage {
+  min-height: rem(380px);
+}
+
+.tabv2-callout--a { left: 4%; top: 12%; }
+.tabv2-callout--b { right: 4%; top: 12%; }
+.tabv2-callout--c { left: 4%; bottom: 10%; }
+.tabv2-callout--d { right: 4%; bottom: 10%; }
+
+.tabv2-stage--xl {
+  .tabv2-measure--width   { left: 50%; top: calc(50% - #{rem(52px)}); transform: translateX(-50%); }
+  .tabv2-measure--height  { left: calc(50% + #{rem(120px)}); top: calc(50% - #{rem(10px)}); }
+  .tabv2-measure--padding { left: calc(50% - #{rem(70px)}); top: calc(50% + #{rem(42px)}); }
+  .tabv2-measure--gap     { left: calc(50% - #{rem(92px)}); top: calc(50% - #{rem(52px)}); }
+}
+
+.tabv2-stage--card {
+  .tabv2-measure--width   { left: 50%; top: calc(50% - #{rem(112px)}); transform: translateX(-50%); }
+  .tabv2-measure--height  { left: calc(50% + #{rem(112px)}); top: calc(50% - #{rem(10px)}); }
+  .tabv2-measure--padding { left: calc(50% - #{rem(58px)}); top: calc(50% + #{rem(92px)}); }
+  .tabv2-measure--gap     { left: calc(50% + #{rem(112px)}); top: calc(50% + #{rem(30px)}); }
+}
+
+@media (max-width: rem(900px)) {
+  .tabv2-measure,
+  .tabv2-callout {
+    position: static;
+    transform: none;
+    width: fit-content;
+  }
+}

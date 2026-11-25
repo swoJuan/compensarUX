@@ -10,16 +10,23 @@
 
   <section class="component-hero" aria-labelledby="tabs-title">
     <h1 id="tabs-title" class="text-primary">Tabs</h1>
-    <p class="text-secondary">Organizan contenido relacionado en secciones de una misma vista. Permiten alternar entre paneles sin recargar la página y mantienen el contexto de la tarea.</p>
+    <p class="text-secondary">Organizan contenido relacionado en secciones de una misma vista. Permiten alternar entre paneles sin recargar la página y mantienen el contexto de la tarea. Disponible en tres formatos: Texto, Pill XL y Tarjeta con ícono.</p>
     <div class="component-meta" aria-label="Metadatos del componente">
       <span class="component-chip component-chip--success">Estado: estable</span>
-      <span class="component-chip">Versión 1.0</span>
+      <span class="component-chip">Versión 1.0 · formatos XL: propuesta v2</span>
       <span class="component-chip">Web</span>
       <span class="component-chip">Bootstrap compatible</span>
       <span class="component-chip">Categoría: navegación</span>
     </div>
   </section>
 
+  <div class="segmented-control" role="group" aria-label="Formato de tabs" data-tabs-format-switch>
+    <button type="button" class="mp-btn mp-btn--terciario" data-tabs-format="text" aria-pressed="true">Texto</button>
+    <button type="button" class="mp-btn mp-btn--terciario" data-tabs-format="xl" aria-pressed="false">Pill XL</button>
+    <button type="button" class="mp-btn mp-btn--terciario" data-tabs-format="card" aria-pressed="false">Tarjeta con ícono</button>
+  </div>
+  <p class="text-secondary mt-2">Elige el formato para ver su documentación. Pill XL y Tarjeta con ícono (v2, color Naranja o Violeta) están en estado de propuesta, pendiente de aprobación UX.</p>
+  <div data-tabs-format-panel="text">
   <section class="component-section" aria-labelledby="tabs-summary">
     <div class="component-section__header">
       <h2 id="tabs-summary">1. Resumen</h2>
@@ -516,4 +523,408 @@
       </div>
     </div>
   </section>
+  </div>
+  <div data-component-doc="tabs-v2" data-tabs-format-panel="v2" hidden>
+  <section class="component-section" aria-labelledby="tabsv2-summary">
+    <div class="component-section__header"><h2 id="tabsv2-summary">1. Resumen</h2></div>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-12 col-lg-6">
+        <h3 class="text-primary">Cuándo usarlo</h3>
+        <ul class="component-list">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Agrupar contenido relacionado dentro de una misma vista.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Alternar entre vistas sin cambiar de página.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Mejorar la organización de la información cuando se necesita un objetivo táctil amplio.</li>
+        </ul>
+        <h3 class="text-primary mt-3">Tipos</h3>
+        <ul class="component-list">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><strong>Pill XL</strong> (<code>mp-tab-xl</code>): alto 56 px, uso principal dentro de vistas.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i><strong>Tarjeta con ícono</strong> (<code>mp-tab-card</code>): 200 × 164 px, objetivo táctil amplio.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Ambos con color <strong>Naranja</strong> (por defecto) o <strong>Violeta</strong>.</li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Vista rápida</h3>
+          <div class="tab-doc-sample tab-doc-sample--wide">
+<div class="mp-tabs mp-tabs--v2" role="tablist" aria-label="Ejemplo Pill XL" data-mp-tabs-responsive="off">
+  <button type="button" class="mp-tab-xl is-active" role="tab" id="sum-xl-t0" aria-selected="true" aria-controls="sum-xl-p0"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button>
+  <button type="button" class="mp-tab-xl" role="tab" id="sum-xl-t1" aria-selected="false" aria-controls="sum-xl-p1" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">favorite</span><span class="mp-tab-xl__label">Mis servicios</span></button>
+</div>
+<div class="mp-tab-panel tab-doc-panel" role="tabpanel" id="sum-xl-p0" aria-labelledby="sum-xl-t0">Contenido de Paga tu plan.</div>
+<div class="mp-tab-panel tab-doc-panel" role="tabpanel" id="sum-xl-p1" aria-labelledby="sum-xl-t1" hidden>Contenido de Mis servicios.</div>
+
+          </div>
+          <p class="text-secondary">El <code>mp-tab</code> base no se reemplaza: Tabs v2 convive con él.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-anatomy">
+    <div class="component-section__header">
+      <div>
+        <h2 id="tabsv2-anatomy">2. Anatomía interactiva</h2>
+        <p class="text-secondary">La estructura usa los componentes productivos <code>mp-tab-xl</code> y <code>mp-tab-card</code> con tokens semánticos. Cambia el estado y el color para ver cómo responde cada parte.</p>
+      </div>
+    </div>
+    <div class="tab-doc-controls">
+      <div class="segmented-control" role="group" aria-label="Estado del tab">
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-anatomy-state="default" aria-pressed="true">Default</button>
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-anatomy-state="active" aria-pressed="false">Active</button>
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-anatomy-state="hover" aria-pressed="false">Hover</button>
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-anatomy-state="focus" aria-pressed="false">Focus</button>
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-anatomy-state="disabled" aria-pressed="false">Disabled</button>
+      </div>
+      <div class="segmented-control" role="group" aria-label="Color del tab">
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-anatomy-color="orange" aria-pressed="true">Naranja</button>
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-anatomy-color="violet" aria-pressed="false">Violeta</button>
+      </div>
+      <label class="button-doc-toggle"><input type="checkbox" data-tabsv2-anatomy-toggle="labels" checked> Etiquetas</label>
+      <label class="button-doc-toggle"><input type="checkbox" data-tabsv2-anatomy-toggle="measures" checked> Medidas</label>
+    </div>
+    <div class="tab-anatomy-stage tabv2-stage tabv2-stage--xl" data-tabsv2-only="xl" aria-label="Anatomía del Pill XL">
+      <span class="tab-anatomy-measure tabv2-measure tabv2-measure--width">Hug</span>
+      <span class="tab-anatomy-measure tabv2-measure tabv2-measure--height">56 px</span>
+      <span class="tab-anatomy-measure tabv2-measure tabv2-measure--padding">Padding 16 × 24</span>
+      <span class="tab-anatomy-measure tabv2-measure tabv2-measure--gap">Gap 12 px</span>
+      <div class="tab-doc-callout tabv2-callout tabv2-callout--a"><strong>Contenedor</strong><span>Hug content, radio 16 px y borde de 2 px interior. Área táctil de 56 px de alto.</span></div>
+      <div class="tab-doc-callout tabv2-callout tabv2-callout--b"><strong>Label</strong><span>Roboto 18 px. Bold en Active, SemiBold en el resto.</span></div>
+      <div class="tab-doc-callout tabv2-callout tabv2-callout--c"><strong>Ícono</strong><span>24 px, antes del label, con <code>aria-hidden</code>.</span></div>
+      <div class="tab-doc-callout tabv2-callout tabv2-callout--d"><strong>Estado</strong><span>Se resuelve con tokens <code>use-*</code>; Active no depende solo del color.</span></div>
+      <div class="tab-anatomy-preview" id="tabsv2-anatomy-xl"><button type="button" class="mp-tab-xl" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div>
+    </div>
+    <div class="tab-anatomy-stage tabv2-stage tabv2-stage--card" data-tabsv2-only="card" aria-label="Anatomía de la Tarjeta con ícono">
+      <span class="tab-anatomy-measure tabv2-measure tabv2-measure--width">200 px</span>
+      <span class="tab-anatomy-measure tabv2-measure tabv2-measure--height">164 px</span>
+      <span class="tab-anatomy-measure tabv2-measure tabv2-measure--padding">Padding 20 × 16</span>
+      <span class="tab-anatomy-measure tabv2-measure tabv2-measure--gap">Gap 12 px</span>
+      <div class="tab-doc-callout tabv2-callout tabv2-callout--a"><strong>Contenedor</strong><span>200 × 164 px, vertical centrado, radio 20 px.</span></div>
+      <div class="tab-doc-callout tabv2-callout tabv2-callout--b"><strong>Título y descripción</strong><span>Título Roboto Bold 18 px. Descripción Roboto Regular 14 px.</span></div>
+      <div class="tab-doc-callout tabv2-callout tabv2-callout--c"><strong>Badge</strong><span>Circular de 56 px con ícono de 32 px (<code>aria-hidden</code>).</span></div>
+      <div class="tab-doc-callout tabv2-callout tabv2-callout--d"><strong>Estado</strong><span>Se resuelve con tokens <code>use-*</code>; Active no depende solo del color.</span></div>
+      <div class="tab-anatomy-preview" id="tabsv2-anatomy-card"><button type="button" class="mp-tab-card" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div>
+    </div>
+    <div class="row g-4 mt-1">
+      <div class="col-12 col-lg-6" data-tabsv2-only="xl">
+        <h3 class="text-primary">Pill XL · <code>mp-tab-xl</code></h3>
+        <div class="tab-doc-sample tab-doc-sample--wide"><button type="button" class="mp-tab-xl is-active" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button><button type="button" class="mp-tab-xl" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">favorite</span><span class="mp-tab-xl__label">Mis servicios</span></button></div>
+        <table class="tabv2-doc-spec">
+          <tbody>
+            <tr><th>Alto</th><td>56 px</td></tr>
+            <tr><th>Ancho</th><td>Hug (se ajusta al contenido)</td></tr>
+            <tr><th>Dirección</th><td>Horizontal, hijos centrados</td></tr>
+            <tr><th>Padding</th><td>16 px vertical · 24 px horizontal (<code>--space-16</code> / <code>--space-24</code>)</td></tr>
+            <tr><th>Gap</th><td>12 px (<code>--space-12</code>)</td></tr>
+            <tr><th>Radio</th><td>16 px</td></tr>
+            <tr><th>Ícono</th><td>24 px</td></tr>
+            <tr><th>Label</th><td>Roboto 18 px · Bold en Active, SemiBold en el resto</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-lg-6" data-tabsv2-only="card">
+        <h3 class="text-primary">Tarjeta · <code>mp-tab-card</code></h3>
+        <div class="tab-doc-sample tab-doc-sample--wide"><button type="button" class="mp-tab-card is-active" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button><button type="button" class="mp-tab-card" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">favorite</span></span><span class="mp-tab-card__title">Mis servicios</span><span class="mp-tab-card__desc">Citas y autorizaciones</span></button></div>
+        <table class="tabv2-doc-spec">
+          <tbody>
+            <tr><th>Tamaño</th><td>200 × 164 px</td></tr>
+            <tr><th>Dirección</th><td>Vertical, hijos centrados</td></tr>
+            <tr><th>Padding</th><td>20 px vertical · 16 px horizontal</td></tr>
+            <tr><th>Gap</th><td>12 px</td></tr>
+            <tr><th>Radio</th><td>20 px</td></tr>
+            <tr><th>Badge</th><td>Circular de 56 px con ícono de 32 px (<code>mp-tab-card__badge</code>)</td></tr>
+            <tr><th>Título</th><td>Roboto Bold 18 px (<code>mp-tab-card__title</code>)</td></tr>
+            <tr><th>Descripción</th><td>Roboto Regular 14 px (<code>mp-tab-card__desc</code>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-states">
+    <div class="component-section__header"><h2 id="tabsv2-states">3. Estados</h2></div>
+    <div class="tabv2-doc-matrix">
+      <div class="tabv2-doc-row" data-tabsv2-only="xl"><p class="tabv2-doc-row__label">Pill XL · Naranja</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-xl" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-xl is-active" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-xl is-hover" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-xl" tabindex="-1" disabled><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-xl is-focus" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div></div></div>
+      <div class="tabv2-doc-row" data-tabsv2-only="card"><p class="tabv2-doc-row__label">Tarjeta · Naranja</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-card" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-card is-active" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-card is-hover" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-card" tabindex="-1" disabled><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-card is-focus" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div></div></div>
+    </div>
+    <div class="row g-3 mt-2">
+      <div class="col-12 col-md-6 col-xl-3"><div class="component-example-card h-100"><h3 class="text-primary">Default</h3><p class="text-secondary">Estado base. Opción disponible no seleccionada.</p></div></div>
+      <div class="col-12 col-md-6 col-xl-3"><div class="component-example-card h-100"><h3 class="text-primary">Active</h3><p class="text-secondary">Relleno de color, sombra y peso Bold. Se marca con <code>aria-selected="true"</code>.</p></div></div>
+      <div class="col-12 col-md-6 col-xl-3"><div class="component-example-card h-100"><h3 class="text-primary">Hover</h3><p class="text-secondary">Borde de 2 px y texto de enlace. Indica que el tab es interactivo.</p></div></div>
+      <div class="col-12 col-md-6 col-xl-3"><div class="component-example-card h-100"><h3 class="text-primary">Disabled</h3><p class="text-secondary">Texto atenuado. No permite interacción ni selección.</p></div></div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-playground-title">
+    <div class="component-section__header"><h2 id="tabsv2-playground-title">4. Variantes / Playground</h2></div>
+    <div class="row g-4">
+      <div class="col-12 col-lg-7">
+        <h3 class="text-primary">Vista previa</h3>
+        <div class="tab-doc-preview" id="tabsv2-preview-area" role="region" aria-label="Vista previa de Tabs v2"></div>
+        <div class="tab-doc-panel" id="tabsv2-preview-panel" aria-live="polite">Selecciona una pestaña para ver su contenido.</div>
+      </div>
+      <div class="col-12 col-lg-5">
+        <h3 class="text-primary">Controles</h3>
+        <div class="row g-3">
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="tabsv2-ctrl-format">Formato</label>
+            <select class="mp-input-field mp-select" id="tabsv2-ctrl-format" data-tabsv2-control="format">
+              <option value="xl" selected>Pill XL</option>
+              <option value="card">Tarjeta con ícono</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="tabsv2-ctrl-color">Color</label>
+            <select class="mp-input-field mp-select" id="tabsv2-ctrl-color" data-tabsv2-control="color">
+              <option value="orange" selected>Naranja</option>
+              <option value="violet">Violeta</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="tabsv2-ctrl-count">Número de tabs</label>
+            <select class="mp-input-field mp-select" id="tabsv2-ctrl-count" data-tabsv2-control="count">
+              <option value="2">2</option>
+              <option value="3" selected>3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6">
+            <label class="mp-input-label" for="tabsv2-ctrl-disabled">Tab deshabilitado</label>
+            <select class="mp-input-field mp-select" id="tabsv2-ctrl-disabled" data-tabsv2-control="disabled">
+              <option value="none">Ninguno</option>
+              <option value="last">Último tab</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-code-panel mt-3">
+      <div class="button-code-tabs" role="group" aria-label="Código del playground">
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left button-copy" data-tabsv2-copy-playground>
+          <i class="icon icon-share icon-16" aria-hidden="true"></i>
+          Copiar código
+        </button>
+      </div>
+      <pre class="active"><code id="tabsv2-playground-code"></code></pre>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-modes">
+    <div class="component-section__header">
+      <div>
+        <h2 id="tabsv2-modes">5. Modos de color y variantes</h2>
+        <p class="text-secondary">Cada panel compara Naranja (por defecto) y Violeta en los cinco estados, en Light, Dark y Alto contraste. La variante se elige con el modificador <code>--violet</code>; el tema lo resuelve <code>data-theme</code> con los tokens <code>use-*</code>.</p>
+      </div>
+    </div>
+    <div class="d-flex flex-column gap-3">
+      <div class="tab-mode-box" data-theme="light" data-tabsv2-only="xl">
+          <h3>Pills XL · Light</h3>
+          <div class="tabv2-doc-matrix">
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Naranja (por defecto)</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-xl" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-xl is-active" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-xl is-hover" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-xl" tabindex="-1" disabled><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-xl is-focus" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div></div></div>
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Violeta</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-xl mp-tab-xl--violet" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-active" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-hover" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-xl mp-tab-xl--violet" tabindex="-1" disabled><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-focus" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div></div></div>
+          </div>
+        </div>
+      <div class="tab-mode-box" data-theme="dark" data-tabsv2-only="xl">
+          <h3>Pills XL · Dark</h3>
+          <div class="tabv2-doc-matrix">
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Naranja (por defecto)</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-xl" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-xl is-active" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-xl is-hover" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-xl" tabindex="-1" disabled><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-xl is-focus" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div></div></div>
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Violeta</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-xl mp-tab-xl--violet" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-active" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-hover" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-xl mp-tab-xl--violet" tabindex="-1" disabled><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-focus" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div></div></div>
+          </div>
+        </div>
+      <div class="tab-mode-box" data-theme="high-contrast" data-tabsv2-only="xl">
+          <h3>Pills XL · Alto contraste</h3>
+          <div class="tabv2-doc-matrix">
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Naranja (por defecto)</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-xl" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-xl is-active" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-xl is-hover" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-xl" tabindex="-1" disabled><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-xl is-focus" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div></div></div>
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Violeta</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-xl mp-tab-xl--violet" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-active" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-hover" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-xl mp-tab-xl--violet" tabindex="-1" disabled><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-xl mp-tab-xl--violet is-focus" tabindex="-1"><span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true">folder</span><span class="mp-tab-xl__label">Paga tu plan</span></button></div></div></div>
+          </div>
+        </div>
+      <div class="tab-mode-box" data-theme="light" data-tabsv2-only="card">
+          <h3>Tarjetas con icono · Light</h3>
+          <div class="tabv2-doc-matrix">
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Naranja (por defecto)</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-card" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-card is-active" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-card is-hover" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-card" tabindex="-1" disabled><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-card is-focus" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div></div></div>
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Violeta</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-card mp-tab-card--violet" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-card mp-tab-card--violet is-active" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-card mp-tab-card--violet is-hover" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-card mp-tab-card--violet" tabindex="-1" disabled><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-card mp-tab-card--violet is-focus" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div></div></div>
+          </div>
+        </div>
+      <div class="tab-mode-box" data-theme="dark" data-tabsv2-only="card">
+          <h3>Tarjetas con icono · Dark</h3>
+          <div class="tabv2-doc-matrix">
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Naranja (por defecto)</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-card" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-card is-active" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-card is-hover" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-card" tabindex="-1" disabled><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-card is-focus" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div></div></div>
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Violeta</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-card mp-tab-card--violet" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-card mp-tab-card--violet is-active" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-card mp-tab-card--violet is-hover" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-card mp-tab-card--violet" tabindex="-1" disabled><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-card mp-tab-card--violet is-focus" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div></div></div>
+          </div>
+        </div>
+      <div class="tab-mode-box" data-theme="high-contrast" data-tabsv2-only="card">
+          <h3>Tarjetas con icono · Alto contraste</h3>
+          <div class="tabv2-doc-matrix">
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Naranja (por defecto)</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-card" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-card is-active" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-card is-hover" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-card" tabindex="-1" disabled><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-card is-focus" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div></div></div>
+            <div class="tabv2-doc-row"><p class="tabv2-doc-row__label">Violeta</p><div class="tabv2-doc-states"><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Default</p><button type="button" class="mp-tab-card mp-tab-card--violet" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Active</p><button type="button" class="mp-tab-card mp-tab-card--violet is-active" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Hover</p><button type="button" class="mp-tab-card mp-tab-card--violet is-hover" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Disabled</p><button type="button" class="mp-tab-card mp-tab-card--violet" tabindex="-1" disabled><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div><div class="tabv2-doc-state"><p class="tabv2-doc-state__name">Focus</p><button type="button" class="mp-tab-card mp-tab-card--violet is-focus" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button></div></div></div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-responsive">
+    <div class="component-section__header"><h2 id="tabsv2-responsive">6. Responsive</h2></div>
+    <div class="row g-4 align-items-center">
+      <div class="col-12 col-lg-6">
+        <p class="text-secondary">Por debajo de <strong>768&nbsp;px</strong> la tira se presenta como <strong>menú desplegable</strong> y mantiene visible la selección. Lo hace <code>js/mp-tabs.js</code> sin cambiar el marcado: oculta la tira y, en su lugar, inserta un <code>&lt;select&gt;</code> con el título de cada pestaña (en la tarjeta, solo el título, sin la descripción).</p>
+        <ul class="component-list mt-3">
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Transformarse en menú desplegable.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Mantener la selección visible.</li>
+          <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Facilitar la navegación en espacios reducidos.</li>
+        </ul>
+        <p class="text-secondary mt-3"><strong>Sin JavaScript</strong> la tira no se parte en líneas: se desplaza en horizontal. Carga siempre <code>js/mp-tabs.js</code>.</p>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card">
+          <p class="text-secondary mb-3">Ejemplo en vivo: reduce la ventana por debajo de 768&nbsp;px y la tira se convierte en desplegable.</p>
+<div class="mp-tabs mp-tabs--v2" role="tablist" aria-label="Ejemplo responsive Tabs v2">
+  <button type="button" class="mp-tab-card is-active" role="tab" id="rsp-t0" aria-selected="true" aria-controls="rsp-p0"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">folder</span></span><span class="mp-tab-card__title">Paga tu plan</span><span class="mp-tab-card__desc">Cuota mensual y saldo</span></button>
+  <button type="button" class="mp-tab-card" role="tab" id="rsp-t1" aria-selected="false" aria-controls="rsp-p1" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">favorite</span></span><span class="mp-tab-card__title">Mis servicios</span><span class="mp-tab-card__desc">Citas y autorizaciones</span></button>
+  <button type="button" class="mp-tab-card" role="tab" id="rsp-t2" aria-selected="false" aria-controls="rsp-p2" tabindex="-1"><span class="mp-tab-card__badge"><span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true">description</span></span><span class="mp-tab-card__title">Documentos</span><span class="mp-tab-card__desc">Certificados y facturas</span></button>
+</div>
+<div class="mp-tab-panel tab-doc-panel" role="tabpanel" id="rsp-p0" aria-labelledby="rsp-t0">Contenido de Paga tu plan.</div>
+<div class="mp-tab-panel tab-doc-panel" role="tabpanel" id="rsp-p1" aria-labelledby="rsp-t1" hidden>Contenido de Mis servicios.</div>
+<div class="mp-tab-panel tab-doc-panel" role="tabpanel" id="rsp-p2" aria-labelledby="rsp-t2" hidden>Contenido de Documentos.</div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-rules">
+    <div class="component-section__header"><h2 id="tabsv2-rules">7. Comportamiento y reglas de uso</h2></div>
+    <div class="row g-3">
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Comportamiento</h3>
+          <ul class="component-list">
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Seleccionar: solo un tab activo a la vez.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Teclado: flechas, Inicio y Fin cambian el foco y activan (activación automática).</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Las pestañas deshabilitadas se omiten.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="component-example-card h-100">
+          <h3 class="text-primary">Reglas de uso</h3>
+          <ul class="component-list">
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Usar máximo 4–5 tabs.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Labels cortos y claros.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Indicar claramente el tab activo.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Mantener consistencia en estilo.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Usar Pills XL o Tarjetas con ícono cuando se necesite un objetivo táctil amplio.</li>
+            <li><i class="icon icon-check icon-16" aria-hidden="true"></i>No usar para navegación principal global.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-code">
+    <div class="component-section__header"><h2 id="tabsv2-code">8. Código</h2></div>
+    <div class="button-code-panel">
+      <div class="button-code-tabs" role="group" aria-label="Código de Tabs v2">
+        <button type="button" class="mp-btn mp-btn--terciario active" data-tabsv2-code-tab="xl" aria-pressed="true">Pill XL</button>
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-code-tab="card" aria-pressed="false">Tarjeta</button>
+        <button type="button" class="mp-btn mp-btn--terciario" data-tabsv2-code-tab="drupal" aria-pressed="false">Drupal (Twig)</button>
+        <button type="button" class="mp-btn mp-btn--secundario mp-btn--icon-left button-copy" data-tabsv2-copy-code>
+          <i class="icon icon-share icon-16" aria-hidden="true"></i>
+          Copiar código
+        </button>
+      </div>
+      <pre id="tabsv2-code-xl" class="active"><code>&lt;div class="mp-tabs mp-tabs--v2" role="tablist" aria-label="Gestiones del plan"&gt;
+  &lt;button type="button" class="mp-tab-xl is-active" role="tab" id="t-pago"
+          aria-selected="true" aria-controls="p-pago"&gt;
+    &lt;span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true"&gt;folder&lt;/span&gt;
+    &lt;span class="mp-tab-xl__label"&gt;Paga tu plan&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button type="button" class="mp-tab-xl" role="tab" id="t-servicios"
+          aria-selected="false" aria-controls="p-servicios" tabindex="-1"&gt;
+    &lt;span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true"&gt;favorite&lt;/span&gt;
+    &lt;span class="mp-tab-xl__label"&gt;Mis servicios&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="mp-tab-panel" role="tabpanel" id="p-pago" aria-labelledby="t-pago"&gt;Contenido de pago.&lt;/div&gt;
+&lt;div class="mp-tab-panel" role="tabpanel" id="p-servicios" aria-labelledby="t-servicios" hidden&gt;Contenido de servicios.&lt;/div&gt;
+
+&lt;!-- Violeta: agrega mp-tab-xl--violet / mp-tab-card--violet a cada tab --&gt;</code></pre>
+      <pre id="tabsv2-code-card"><code>&lt;div class="mp-tabs mp-tabs--v2" role="tablist" aria-label="Gestiones del plan"&gt;
+  &lt;button type="button" class="mp-tab-card is-active" role="tab" id="c-pago"
+          aria-selected="true" aria-controls="cp-pago"&gt;
+    &lt;span class="mp-tab-card__badge"&gt;
+      &lt;span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true"&gt;folder&lt;/span&gt;
+    &lt;/span&gt;
+    &lt;span class="mp-tab-card__title"&gt;Paga tu plan&lt;/span&gt;
+    &lt;span class="mp-tab-card__desc"&gt;Cuota mensual y saldo&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button type="button" class="mp-tab-card" role="tab" id="c-servicios"
+          aria-selected="false" aria-controls="cp-servicios" tabindex="-1"&gt;
+    &lt;span class="mp-tab-card__badge"&gt;
+      &lt;span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true"&gt;favorite&lt;/span&gt;
+    &lt;/span&gt;
+    &lt;span class="mp-tab-card__title"&gt;Mis servicios&lt;/span&gt;
+    &lt;span class="mp-tab-card__desc"&gt;Citas y autorizaciones&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="mp-tab-panel" role="tabpanel" id="cp-pago" aria-labelledby="c-pago"&gt;Contenido de pago.&lt;/div&gt;
+&lt;div class="mp-tab-panel" role="tabpanel" id="cp-servicios" aria-labelledby="c-servicios" hidden&gt;Contenido de servicios.&lt;/div&gt;</code></pre>
+      <pre id="tabsv2-code-drupal"><code>{# Variables: tabs (title, description, icon, disabled), format ('xl'|'card'), color ('violet'|''), aria_label #}
+{% set base = format == 'card' ? 'mp-tab-card' : 'mp-tab-xl' %}
+&lt;div class="mp-tabs mp-tabs--v2" role="tablist" aria-label="{{ aria_label }}"&gt;
+  {% for tab in tabs %}
+    &lt;button type="button"
+            class="{{ base }}{{ color == 'violet' ? ' ' ~ base ~ '--violet' }}{{ loop.first ? ' is-active' }}"
+            role="tab" id="tab-{{ loop.index }}"
+            aria-selected="{{ loop.first ? 'true' : 'false' }}"
+            aria-controls="tab-panel-{{ loop.index }}"
+            {{ not loop.first ? 'tabindex="-1"' }}
+            {{ tab.disabled ? 'disabled' }}&gt;
+      {% if format == 'card' %}
+        &lt;span class="mp-tab-card__badge"&gt;&lt;span class="material-symbols-rounded mp-tab-card__icon" aria-hidden="true"&gt;{{ tab.icon }}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class="mp-tab-card__title"&gt;{{ tab.title }}&lt;/span&gt;
+        &lt;span class="mp-tab-card__desc"&gt;{{ tab.description }}&lt;/span&gt;
+      {% else %}
+        &lt;span class="material-symbols-rounded mp-tab-xl__icon" aria-hidden="true"&gt;{{ tab.icon }}&lt;/span&gt;
+        &lt;span class="mp-tab-xl__label"&gt;{{ tab.title }}&lt;/span&gt;
+      {% endif %}
+    &lt;/button&gt;
+  {% endfor %}
+&lt;/div&gt;
+{# Un &lt;div class="mp-tab-panel" role="tabpanel" id="tab-panel-N" aria-labelledby="tab-N"&gt; por pestaña; carga css/core.css y js/mp-tabs.js #}</code></pre>
+    </div>
+    <p class="text-secondary mt-3">Las mismas clases sirven para Drupal y ZT (HTML). El CSS vive en <code>css/core.css</code> (parcial <code>core/components/web/_tabs-v2.scss</code>) y el comportamiento en <code>js/mp-tabs.js</code>.</p>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-api">
+    <div class="component-section__header"><h2 id="tabsv2-api">9. API del componente</h2></div>
+    <table class="mp-api-table">
+      <thead><tr><th>Clase / atributo</th><th>Aplica a</th><th>Descripción</th></tr></thead>
+      <tbody>
+        <tr><td><code>.mp-tabs.mp-tabs--v2</code></td><td>Contenedor</td><td>Tira con <code>role="tablist"</code> y <code>aria-label</code>. Gap 12 px.</td></tr>
+        <tr><td><code>.mp-tab-xl</code></td><td>Tab</td><td>Pill XL. Hijos: <code>.mp-tab-xl__icon</code> y <code>.mp-tab-xl__label</code>.</td></tr>
+        <tr><td><code>.mp-tab-card</code></td><td>Tab</td><td>Tarjeta con ícono. Hijos: <code>.mp-tab-card__badge</code> (con <code>.mp-tab-card__icon</code>), <code>.mp-tab-card__title</code> y <code>.mp-tab-card__desc</code>.</td></tr>
+        <tr><td><code>--violet</code></td><td>Tab</td><td><code>.mp-tab-xl--violet</code> / <code>.mp-tab-card--violet</code>. Sin modificador, el color es Naranja.</td></tr>
+        <tr><td><code>aria-selected="true"</code> o <code>.is-active</code></td><td>Tab</td><td>Estado Active.</td></tr>
+        <tr><td><code>disabled</code> o <code>.is-disabled</code></td><td>Tab</td><td>Estado Disabled.</td></tr>
+        <tr><td><code>.is-hover</code> / <code>.is-focus</code></td><td>Tab</td><td>Fuerzan Hover o Focus. Solo para especímenes de documentación y QA.</td></tr>
+        <tr><td><code>data-mp-tabs-responsive="off"</code></td><td>Contenedor</td><td>Deja la tira fuera del desplegable de móvil (solo muestras visuales).</td></tr>
+        <tr><td><code>data-theme</code></td><td>Ancestro</td><td><code>dark</code> o <code>high-contrast</code>. Sin atributo, Light.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="component-section" aria-labelledby="tabsv2-accessibility">
+    <div class="component-section__header"><h2 id="tabsv2-accessibility">10. Accesibilidad</h2></div>
+    <div class="row g-3">
+      <div class="col-12 col-md-6 col-xl-3"><div class="a11y-card h-100"><i class="icon icon-keyboard icon-24 a11y-card__icon" aria-hidden="true"></i><div class="a11y-card__title text-primary">Foco visible</div><div class="a11y-card__desc text-secondary">Anillo de 3 px (4 px en Alto contraste) en cada tab, activo o inactivo.</div></div></div>
+      <div class="col-12 col-md-6 col-xl-3"><div class="a11y-card h-100"><i class="icon icon-cursor icon-24 a11y-card__icon" aria-hidden="true"></i><div class="a11y-card__title text-primary">Teclado</div><div class="a11y-card__desc text-secondary">Flechas, Inicio y Fin cambian el foco; <code>Tab</code> avanza al panel activo.</div></div></div>
+      <div class="col-12 col-md-6 col-xl-3"><div class="a11y-card h-100"><i class="icon icon-check-square icon-24 a11y-card__icon" aria-hidden="true"></i><div class="a11y-card__title text-primary">ARIA</div><div class="a11y-card__desc text-secondary">Usa <code>tablist</code>, <code>tab</code>, <code>tabpanel</code>, <code>aria-controls</code> y <code>aria-labelledby</code>. Los íconos llevan <code>aria-hidden</code>.</div></div></div>
+      <div class="col-12 col-md-6 col-xl-3"><div class="a11y-card h-100"><i class="icon icon-eye icon-24 a11y-card__icon" aria-hidden="true"></i><div class="a11y-card__title text-primary">No solo color</div><div class="a11y-card__desc text-secondary">Active añade borde (Violeta y Alto contraste) y peso de fuente; Disabled usa texto atenuado y, en Alto contraste, borde discontinuo.</div></div></div>
+    </div>
+    <ul class="component-list mt-3">
+      <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Contraste de texto ≥ 4,5:1 en Active, Hover, Default y Focus de Naranja y Violeta (por verificar en QA con el CSS compilado).</li>
+      <li><i class="icon icon-check icon-16" aria-hidden="true"></i>Objetivo táctil: Pills XL 56 px de alto; Tarjetas 164 px de alto.</li>
+    </ul>
+  </section>
+  </div>
 </article>

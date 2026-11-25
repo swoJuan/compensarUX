@@ -5169,6 +5169,11 @@
         window.tabsDocs.initTabsDoc(document);
       });
     }
+    if (window.tabsV2Docs) {
+      requestAnimationFrame(function() {
+        window.tabsV2Docs.initTabsV2Doc(document);
+      });
+    }
     if (window.emptyStateDocs) {
       requestAnimationFrame(function() {
         window.emptyStateDocs.initEmptyStateDoc(document);

@@ -1,0 +1,364 @@
+// ============================================================
+//  mp-tab-xl / mp-tab-card  ·  Tabs v2 (formatos XL)
+//  Componente transversal Web (Drupal y ZT). El mp-tab base (_tabs.scss) se conserva sin cambios.
+//  Fuente Figma: 1zVGMpzqBgiBUqhmfFEAoT / 6055:509 (2.16 — Tabs v2). Estado: propuesta pendiente de aprobación UX.
+//
+//  Formatos
+//    .mp-tab-xl    Pill XL: alto 56 px, ícono 24 px, label 18 px.
+//    .mp-tab-card  Tarjeta con ícono: 200 × 164 px, badge circular 56 px con ícono 32 px, título 18 px y descripción 14 px.
+//  Color
+//    Naranja por defecto. Violeta con el modificador --violet (.mp-tab-xl--violet / .mp-tab-card--violet).
+//  Estados
+//    Default · Active (aria-selected="true" o .is-active) · Hover (:hover o .is-hover) · Disabled (:disabled / .is-disabled)
+//    Focus (:focus-visible o .is-focus). Light / Dark / Alto contraste los resuelve el tema (data-theme) con los tokens use-*.
+//  Contenedor y comportamiento: .mp-tabs.mp-tabs--v2 + js/mp-tabs.js (teclado, ARIA y desplegable por debajo de 768 px).
+// ============================================================
+@use '../../abstracts' as *;
+
+// ── Contenedor ────────────────────────────────────────────────
+// Reutiliza .mp-tabs (flex + wrap). La variante --v2 sube la separación a 12 px para que los objetivos táctiles amplios no se toquen.
+.mp-tabs--v2 {
+  gap: var(--space-12);
+  align-items: stretch;
+}
+
+// ── Base compartida por Pill XL y Tarjeta ─────────────────────
+// Los estados solo cambian variables (--mp-tabv2-*); la geometría no se mueve entre estados porque el borde de 2 px existe siempre
+// (transparente en Default/Active sin borde) y el anillo de foco se dibuja con outline.
+.mp-tab-xl,
+.mp-tab-card {
+  // Naranja (por defecto) · Light
+  --mp-tabv2-bg: var(--use-surface-theme-gray-5);
+  --mp-tabv2-bd: transparent;
+  --mp-tabv2-bd-style: solid;
+  --mp-tabv2-bd-extra: 0px; // grosor adicional (hover en Alto contraste = 3 px)
+  --mp-tabv2-fg: var(--use-text-primary);
+  --mp-tabv2-fg-2: var(--use-text-secondary);
+  --mp-tabv2-shadow: none;
+  --mp-tabv2-badge-bg: var(--use-surface-white);
+  --mp-tabv2-badge-bd: transparent;
+  --mp-tabv2-ring: var(--use-focus-outline);
+  --mp-tabv2-ring-w: 3px;
+  --mp-tabv2-ring-offset: 0px;
+  --mp-tabv2-bw: #{rem(2px)};
+
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: var(--mp-tabv2-bw) var(--mp-tabv2-bd-style) var(--mp-tabv2-bd);
+  background: var(--mp-tabv2-bg);
+  color: var(--mp-tabv2-fg);
+  box-shadow: var(--mp-tabv2-shadow);
+  font-family: var(--font-body);
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+// Violeta · Light
+.mp-tab-xl--violet,
+.mp-tab-card--violet {
+  --mp-tabv2-ring: var(--use-border-violet-dark);
+}
+
+// ── Estado Active ─────────────────────────────────────────────
+.mp-tab-xl[aria-selected='true'],
+.mp-tab-xl.is-active,
+.mp-tab-card[aria-selected='true'],
+.mp-tab-card.is-active {
+  --mp-tabv2-bg: var(--use-primary-default);
+  --mp-tabv2-bd: transparent;
+  --mp-tabv2-fg: var(--use-text-on-dark-primary);
+  --mp-tabv2-fg-2: var(--use-text-on-dark-secondary);
+  --mp-tabv2-shadow: none;
+  --mp-tabv2-badge-bg: rgba(255, 255, 255, 0.2);
+  --mp-tabv2-ring-offset: #{rem(2px)};
+}
+
+.mp-tab-xl--violet[aria-selected='true'],
+.mp-tab-xl--violet.is-active,
+.mp-tab-card--violet[aria-selected='true'],
+.mp-tab-card--violet.is-active {
+  --mp-tabv2-bg: var(--use-surface-violet);
+  --mp-tabv2-bd: var(--use-border-violet-dark);
+  --mp-tabv2-fg: var(--use-text-theme-violet);
+  --mp-tabv2-fg-2: var(--use-text-theme-violet);
+  --mp-tabv2-shadow: none;
+  --mp-tabv2-badge-bg: var(--use-surface-white);
+}
+
+.mp-tab-card[aria-selected='true'],
+.mp-tab-card.is-active {
+  --mp-tabv2-shadow: none;
+}
+
+.mp-tab-card--violet[aria-selected='true'],
+.mp-tab-card--violet.is-active {
+  --mp-tabv2-shadow: none;
+}
+
+// ── Estado Hover (no activo, no disabled) ─────────────────────
+.mp-tab-xl:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+.mp-tab-xl.is-hover,
+.mp-tab-card:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+.mp-tab-card.is-hover {
+  --mp-tabv2-bg: var(--use-surface-theme-orange-10);
+  --mp-tabv2-bd: var(--use-primary-default);
+  --mp-tabv2-fg: var(--use-text-link);
+}
+
+.mp-tab-xl--violet:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+.mp-tab-xl--violet.is-hover,
+.mp-tab-card--violet:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+.mp-tab-card--violet.is-hover {
+  --mp-tabv2-bg: var(--use-surface-theme-gray-5);
+  --mp-tabv2-bd: var(--use-border-violet-dark);
+  --mp-tabv2-fg: var(--use-text-theme-violet);
+}
+
+// ── Estado Disabled ───────────────────────────────────────────
+.mp-tab-xl:disabled,
+.mp-tab-xl.is-disabled,
+.mp-tab-xl[aria-disabled='true'],
+.mp-tab-card:disabled,
+.mp-tab-card.is-disabled,
+.mp-tab-card[aria-disabled='true'] {
+  --mp-tabv2-bg: var(--use-surface-theme-gray-5);
+  --mp-tabv2-bd: transparent;
+  --mp-tabv2-fg: var(--use-text-tertiary);
+  --mp-tabv2-fg-2: var(--use-text-tertiary);
+  --mp-tabv2-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+// ── Foco visible ──────────────────────────────────────────────
+// Anillo de 3 px (4 px en Alto contraste). Va con outline para no mover el contenido y se ve igual en Default y en Active.
+.mp-tab-xl:focus-visible,
+.mp-tab-xl.is-focus,
+.mp-tab-card:focus-visible,
+.mp-tab-card.is-focus {
+  outline: var(--mp-tabv2-ring-w) solid var(--mp-tabv2-ring);
+  outline-offset: var(--mp-tabv2-ring-offset);
+}
+
+// ── Pill XL ───────────────────────────────────────────────────
+// Figma: alto 56, padding 16 × 24, gap 12, radio 16, ícono 24, label 18 (Bold en Active, SemiBold en el resto).
+// El padding descuenta el borde de 2 px para que el área total sea la de Figma (el borde de Figma es interior).
+.mp-tab-xl {
+  min-height: #{rem(56px)};
+  gap: var(--space-12);
+  padding: calc(var(--space-16) - var(--mp-tabv2-bw)) calc(var(--space-24) - var(--mp-tabv2-bw));
+  border-radius: #{rem(16px)};
+  font-size: #{rem(18px)};
+  font-weight: 600;
+  line-height: #{rem(24px)};
+  white-space: nowrap;
+}
+
+.mp-tab-xl[aria-selected='true'],
+.mp-tab-xl.is-active {
+  font-weight: 700;
+}
+
+.mp-tab-xl__icon {
+  flex-shrink: 0;
+  width: #{rem(24px)};
+  height: #{rem(24px)};
+  font-size: #{rem(24px)};
+  line-height: 1;
+}
+
+.mp-tab-xl__label {
+  display: block;
+}
+
+// ── Tarjeta con ícono ─────────────────────────────────────────
+// Figma: 200 × 164, vertical centrado, padding 20 × 16, gap 12, radio 20, badge circular 56 con ícono 32, título 18 Bold, descripción 14.
+.mp-tab-card {
+  flex-direction: column;
+  width: #{rem(200px)};
+  max-width: 100%;
+  min-height: #{rem(164px)};
+  gap: var(--space-12);
+  padding: calc(#{rem(20px)} - var(--mp-tabv2-bw)) calc(var(--space-16) - var(--mp-tabv2-bw));
+  border-radius: #{rem(20px)};
+}
+
+.mp-tab-card__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: #{rem(56px)};
+  height: #{rem(56px)};
+  border: #{rem(2px)} solid var(--mp-tabv2-badge-bd);
+  border-radius: 50%;
+  background: var(--mp-tabv2-badge-bg);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.mp-tab-card__icon {
+  width: #{rem(32px)};
+  height: #{rem(32px)};
+  font-size: #{rem(32px)};
+  line-height: 1;
+  color: inherit;
+}
+
+.mp-tab-card__title {
+  display: block;
+  width: 100%;
+  font-size: #{rem(18px)};
+  font-weight: 700;
+  line-height: #{rem(24px)};
+  color: var(--mp-tabv2-fg);
+}
+
+.mp-tab-card__desc {
+  display: block;
+  width: 100%;
+  font-size: #{rem(14px)};
+  font-weight: 400;
+  line-height: #{rem(20px)};
+  color: var(--mp-tabv2-fg-2);
+}
+
+// El ícono del badge sigue el color del título salvo en Active naranja, donde el badge es translúcido y el ícono usa el color del título.
+.mp-tab-card__badge .mp-tab-card__icon {
+  color: var(--mp-tabv2-fg);
+}
+
+// ── Tema Dark ─────────────────────────────────────────────────
+// Los tokens use-* ya cambian de valor; aquí solo se corrige lo que Figma define distinto.
+[data-theme='dark'] {
+  .mp-tab-xl[aria-selected='true'],
+  .mp-tab-xl.is-active,
+  .mp-tab-card[aria-selected='true'],
+  .mp-tab-card.is-active {
+    --mp-tabv2-fg: var(--use-surface-white);
+    --mp-tabv2-fg-2: var(--use-surface-white);
+    --mp-tabv2-shadow: none;
+    --mp-tabv2-badge-bg: rgba(0, 0, 0, 0.15);
+  }
+
+  .mp-tab-xl--violet[aria-selected='true'],
+  .mp-tab-xl--violet.is-active,
+  .mp-tab-card--violet[aria-selected='true'],
+  .mp-tab-card--violet.is-active {
+    --mp-tabv2-fg: var(--use-text-on-dark-primary);
+    --mp-tabv2-fg-2: var(--use-text-on-dark-secondary);
+    --mp-tabv2-shadow: none;
+    --mp-tabv2-badge-bg: var(--use-surface-white);
+  }
+
+  .mp-tab-xl:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+  .mp-tab-xl.is-hover,
+  .mp-tab-card:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+  .mp-tab-card.is-hover {
+    --mp-tabv2-bg: var(--use-surface-theme-gray-5);
+    --mp-tabv2-fg-2: var(--use-text-primary);
+  }
+
+  .mp-tab-xl--violet:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+  .mp-tab-xl--violet.is-hover,
+  .mp-tab-card--violet:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+  .mp-tab-card--violet.is-hover {
+    --mp-tabv2-fg: var(--product-violet-10);
+  }
+}
+
+// ── Tema Alto contraste ───────────────────────────────────────
+// Figma: Default con borde 2 px, Active con borde del color del texto y sin sombra, Hover con borde de 3 px, Disabled con borde discontinuo
+// y foco de 4 px. No depende solo del color: cambian grosor y trazo del borde.
+[data-theme='high-contrast'] {
+  .mp-tab-xl,
+  .mp-tab-card {
+    --mp-tabv2-bd: var(--use-border-default);
+    --mp-tabv2-badge-bd: var(--use-border-default);
+    --mp-tabv2-ring-w: 4px;
+    --mp-tabv2-ring: var(--use-focus-outline);
+  }
+
+  .mp-tab-xl--violet,
+  .mp-tab-card--violet {
+    --mp-tabv2-ring: var(--use-border-violet-dark);
+  }
+
+  .mp-tab-xl[aria-selected='true'],
+  .mp-tab-xl.is-active,
+  .mp-tab-card[aria-selected='true'],
+  .mp-tab-card.is-active {
+    --mp-tabv2-bd: var(--use-text-primary);
+    --mp-tabv2-fg: var(--use-surface-white);
+    --mp-tabv2-fg-2: var(--use-surface-white);
+    --mp-tabv2-shadow: none;
+    --mp-tabv2-badge-bg: rgba(0, 0, 0, 0.15);
+    --mp-tabv2-badge-bd: transparent;
+  }
+
+  .mp-tab-xl--violet[aria-selected='true'],
+  .mp-tab-xl--violet.is-active,
+  .mp-tab-card--violet[aria-selected='true'],
+  .mp-tab-card--violet.is-active {
+    --mp-tabv2-bg: var(--use-text-theme-violet);
+    --mp-tabv2-bd: var(--use-border-violet-dark);
+    --mp-tabv2-fg: var(--use-surface-violet);
+    --mp-tabv2-fg-2: var(--use-surface-violet);
+    --mp-tabv2-badge-bg: var(--use-surface-violet);
+  }
+
+  .mp-tab-xl:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+  .mp-tab-xl.is-hover,
+  .mp-tab-card:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+  .mp-tab-card.is-hover {
+    --mp-tabv2-bg: var(--use-surface-theme-gray-5);
+    --mp-tabv2-bd: var(--use-primary-default);
+    --mp-tabv2-fg-2: var(--use-text-primary);
+    --mp-tabv2-badge-bd: var(--use-primary-default);
+    box-shadow: inset 0 0 0 #{rem(1px)} var(--mp-tabv2-bd);
+  }
+
+  .mp-tab-xl--violet:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+  .mp-tab-xl--violet.is-hover,
+  .mp-tab-card--violet:hover:not([aria-selected='true']):not(.is-active):not(:disabled):not(.is-disabled),
+  .mp-tab-card--violet.is-hover {
+    --mp-tabv2-bd: var(--use-border-violet-dark);
+    --mp-tabv2-badge-bd: var(--use-border-violet-dark);
+  }
+
+  .mp-tab-xl:disabled,
+  .mp-tab-xl.is-disabled,
+  .mp-tab-xl[aria-disabled='true'],
+  .mp-tab-card:disabled,
+  .mp-tab-card.is-disabled,
+  .mp-tab-card[aria-disabled='true'] {
+    --mp-tabv2-bd: var(--use-text-tertiary);
+    --mp-tabv2-bd-style: dashed;
+    --mp-tabv2-badge-bd: var(--use-text-tertiary);
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────
+// Por debajo de 768 px js/mp-tabs.js oculta la tira (.mp-tabs--collapsed) y muestra un desplegable con las mismas opciones
+// (reglas de .mp-tabs en _tabs.scss). Sin JavaScript la tira se desplaza en horizontal y cada tab conserva su tamaño.
+@include md-down {
+  .mp-tabs--v2 .mp-tab-xl,
+  .mp-tabs--v2 .mp-tab-card {
+    flex: 0 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mp-tab-xl,
+  .mp-tab-card,
+  .mp-tab-card__badge {
+    transition: none;
+  }
+}
